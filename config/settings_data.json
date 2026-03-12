@@ -11,10 +11,10 @@
   "current": {
     "logo_height": 36,
     "logo_height_mobile": 28,
-    "type_body_font": "inter_n4",
-    "type_subheading_font": "inter_n5",
-    "type_heading_font": "inter_n7",
-    "type_accent_font": "inter_n7",
+    "type_body_font": "poppins_n4",
+    "type_subheading_font": "poppins_n4",
+    "type_heading_font": "poppins_n6",
+    "type_accent_font": "poppins_n4",
     "type_size_paragraph": "14",
     "type_line_height_paragraph": "body-loose",
     "type_font_h1": "heading",
@@ -88,7 +88,7 @@
           "primary_hover": "#000000",
           "border": "#0000000f",
           "shadow": "#000000",
-          "primary_button_background": "#00b30a",
+          "primary_button_background": "#2e5bff",
           "primary_button_text": "#ffffff",
           "primary_button_border": "#000000",
           "primary_button_hover_background": "#333333",
@@ -120,7 +120,7 @@
       },
       "scheme-2": {
         "settings": {
-          "background": "#00b30a",
+          "background": "#2e5bff",
           "foreground_heading": "#ffffff",
           "foreground": "#ffffff",
           "primary": "#000000cf",
