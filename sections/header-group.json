@@ -8,144 +8,141 @@
  * ------------------------------------------------------------
  */
 {
+  "name": "t:sections.header.name",
   "type": "header",
-  "name": "t:names.header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
+    "ticker_bar": {
+      "type": "ticker-bar",
       "blocks": {
-        "announcement_BxgCk9": {
-          "type": "_announcement",
+        "ticker_item_1": {
+          "type": "ticker_item",
           "settings": {
-            "text": "Field 1",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Subscribe & Save",
+            "icon_name": "loyalty"
+          }
         },
-        "announcement_TycfND": {
-          "type": "_announcement",
+        "ticker_item_2": {
+          "type": "ticker_item",
           "settings": {
-            "text": "Field 2",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Buy 2 Get 1 Free",
+            "icon_name": "card_giftcard"
+          }
         },
-        "announcement_zLpNf6": {
-          "type": "_announcement",
+        "ticker_item_3": {
+          "type": "ticker_item",
           "settings": {
-            "text": "Field 3",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
+            "text": "Up To 70% Off",
+            "icon_name": "sell"
+          }
         }
       },
       "block_order": [
-        "announcement_BxgCk9",
-        "announcement_TycfND",
-        "announcement_zLpNf6"
+        "ticker_item_1",
+        "ticker_item_2",
+        "ticker_item_3"
       ],
-      "name": "t:names.announcement_bar",
       "settings": {
-        "speed": 5,
-        "section_width": "full-width",
-        "color_scheme": "scheme-2",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15
+        "background_color": "#9f3f3f",
+        "text_color": "#ffffff",
+        "border_position": "none",
+        "border_thickness": 1,
+        "border_color": "#ffffff",
+        "font_size": 14,
+        "font_weight": "600",
+        "spacing": 40,
+        "icon_size": 18,
+        "speed": 20,
+        "padding_top": 8,
+        "padding_bottom": 8,
+        "aria_label": "Scrolling announcements"
       }
     },
-    "header_section": {
-      "type": "header",
+    "announcement-bar": {
+      "type": "announcement-bar",
       "blocks": {
-        "header-logo": {
-          "type": "_header-logo",
-          "static": true,
+        "announcement-bar-0": {
+          "type": "announcement",
           "settings": {
-            "hide_logo_on_home_page": false,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "text": "Announcement bar field 1",
+            "link": ""
+          }
         },
-        "header-menu": {
-          "type": "_header-menu",
-          "static": true,
+        "announcement_Pw4tkU": {
+          "type": "announcement",
           "settings": {
-            "menu": "main-menu",
-            "color_scheme": "",
-            "type_font_primary_size": "0.875rem",
-            "menu_font_style": "inverse",
-            "type_font_primary_link": "body",
-            "type_case_primary_link": "none",
-            "menu_style": "featured_products",
-            "featured_products_aspect_ratio": "4 / 5",
-            "featured_collections_aspect_ratio": "16 / 9",
-            "image_border_radius": 0,
-            "navigation_bar": false,
-            "color_scheme_navigation_bar": "",
-            "drawer_accordion": false,
-            "drawer_accordion_expand_first": false,
-            "drawer_dividers": false
-          },
-          "blocks": {}
+            "text": "Announcement bar field 2",
+            "link": ""
+          }
+        },
+        "announcement_iUDbje": {
+          "type": "announcement",
+          "settings": {
+            "text": "Announcement bar field 3",
+            "link": ""
+          }
         }
       },
+      "block_order": [
+        "announcement-bar-0",
+        "announcement_Pw4tkU",
+        "announcement_iUDbje"
+      ],
+      "disabled": true,
       "settings": {
-        "logo_position": "center",
-        "menu_position": "left",
-        "menu_row": "top",
-        "customer_account_menu": "customer-account-main-menu",
-        "show_search": false,
-        "search_position": "right",
-        "search_row": "top",
-        "show_country": false,
-        "country_selector_style": false,
-        "show_language": false,
-        "localization_font": "heading",
-        "localization_font_size": "0.875rem",
-        "localization_position": "right",
-        "localization_row": "top",
-        "section_width": "page-width",
-        "section_height": "standard",
-        "enable_sticky_header": "always",
-        "divider_width": 0,
-        "divider_size": "page-width",
-        "border_width": 0,
-        "actions_display_style": "icon",
-        "actions_font_size": "0.875rem",
-        "actions_font": "body",
-        "actions_text_case": "none",
-        "color_scheme_top": "scheme-1",
-        "color_scheme_bottom": "",
-        "color_scheme_transparent": "scheme-6",
-        "enable_transparent_header_home": false,
-        "home_color_scheme": "inverse",
-        "enable_transparent_header_product": false,
-        "product_color_scheme": "default",
-        "enable_transparent_header_collection": false,
-        "collection_color_scheme": "default"
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-4",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-center",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "drawer",
+        "sticky_header_type": "always",
+        "show_line_separator": false,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "",
+        "enable_country_selector": false,
+        "enable_language_selector": false,
+        "enable_customer_avatar": true,
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
+    "sale_banner": {
+      "type": "sale-banner",
+      "settings": {
+        "heading": "ST PATRICK'S DAY SALE",
+        "heading_color": "#ffffff",
+        "heading_font_size": 20,
+        "heading_font_weight": "700",
+        "heading_letter_spacing": 1,
+        "heading_transform": "uppercase",
+        "subtext": "Shop Now and Get Up To 70% Off",
+        "subtext_color": "#ffffffe6",
+        "subtext_font_size": 14,
+        "subtext_font_weight": "400",
+        "show_timer": true,
+        "timer_hours": 2,
+        "timer_color": "#ffffff",
+        "background_color": "#9f3f3f",
+        "padding_top": 10,
+        "padding_bottom": 10
       }
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
-    "header_section"
+    "ticker_bar",
+    "announcement-bar",
+    "header",
+    "sale_banner"
   ]
 }

@@ -10,410 +10,953 @@
 {
   "sections": {
     "main": {
-      "type": "product-information",
+      "type": "main-product",
       "blocks": {
-        "media-gallery": {
-          "type": "_product-media-gallery",
-          "static": true,
+        "star_rating": {
+          "type": "star_rating",
           "settings": {
-            "media_presentation": "carousel",
-            "media_columns": "two",
-            "image_gap": 4,
-            "large_first_image": false,
-            "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "thumbnail_radius": 0,
-            "aspect_ratio": "adapt",
-            "constrain_to_viewport": true,
-            "media_fit": "contain",
-            "media_radius": 0,
-            "extend_media": false,
-            "zoom": true,
-            "video_loop": false,
-            "hide_variants": true,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "rating": 4.8,
+            "text": "Rated <strong>4.8 Excellent</strong> 50,312+ Reviews",
+            "star_color": "#ffcc00",
+            "star_bg_color": "#ececec",
+            "star_size": 1.3,
+            "star_gap": 0.4,
+            "alignment": "flex-start"
+          }
         },
-        "product-details": {
-          "type": "_product-details",
-          "static": true,
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "benefits_list": {
+          "type": "benefits_list",
           "settings": {
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "details_position": "flex-start",
-            "gap": 28,
-            "sticky_details_desktop": true,
-            "inherit_color_scheme": true,
+            "icon_color": "#9f3f3f",
+            "benefit_1": "Promotes cardiovascular wellness and vitality",
+            "benefit_2": "24-month aged - completely odorless",
+            "benefit_3": "Supports Heart Health and Arterial Function",
+            "benefit_4": "Supports Immune System Naturally",
+            "benefit_5": "",
+            "benefit_6": ""
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "price_color": "#9f3f3f",
+            "compare_price_color": "",
+            "sale_badge_text": "St Patrick's Day Sale - Save 69%",
+            "sale_badge_weight": "600",
+            "price_font_size": 2,
+            "price_font_weight": "700",
+            "compare_font_size": 1.8
+          }
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": false,
+            "show_gift_card_recipient": false,
+            "button_font_size": 1.8,
+            "button_font_weight": "700",
+            "button_text_transform": "uppercase"
+          }
+        },
+        "sticky_cart": {
+          "type": "sticky_cart",
+          "settings": {
+            "function": "add_to_cart",
+            "display_when": "after_scroll",
+            "button_label": "ADD TO CART",
+            "enable_custom_btn_color": false,
+            "custom_btn_color": "#dd1d1d",
             "color_scheme": "scheme-1",
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 24,
-            "padding-block-end": 24,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "Header",
-              "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "inherit_color_scheme": true,
-                "color_scheme": "",
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_xpVMaM": {
-                  "type": "text",
-                  "name": "t:names.title",
-                  "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "color": "var(--color-foreground)",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_tVjtKg": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": false,
-                    "show_tax_info": false,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "color": "var(--color-foreground)",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
-              ]
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
-              },
-              "blocks": {}
-            },
-            "variant_picker_R3rGDr": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": false,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "buy_buttons_eYQEYi": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": true,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
-            "text_aEtTtq": {
-              "type": "text",
-              "name": "Product description",
-              "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-primary--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
-          ]
-        }
-      },
-      "settings": {
-        "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
-        "equal_columns": false,
-        "limit_details_width": false,
-        "gap": 48,
-        "enable_sticky_add_to_cart": true,
-        "color_scheme": "",
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
-      "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
-          "settings": {
-            "text": "<h3>You may also like </h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "star_color": "#ffcc00",
+            "stars_label": "Rated 4.8 Excellent - 50,312+ Reviews",
+            "button_font_size": 1.8,
+            "button_font_weight": "700",
+            "button_text_transform": "uppercase",
+            "desktop_show_image": true,
+            "desktop_show_title": true,
+            "desktop_rating_stars": true,
+            "desktop_show_price": false,
+            "desktop_show_sale_badge": false,
+            "desktop_variant_picker": true,
+            "desktop_full_button_width": false,
+            "desktop_show_price_in_button": false,
+            "desktop_transparent_bg": false,
+            "mobile_show_image": true,
+            "mobile_show_title": true,
+            "mobile_rating_stars": true,
+            "mobile_show_price": false,
+            "mobile_show_sale_badge": false,
+            "mobile_variant_picker": true,
+            "mobile_full_button_width": false,
+            "mobile_show_price_in_button": false,
+            "mobile_transparent_bg": false
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "trust_microcopy": {
+          "type": "trust_microcopy",
           "settings": {
-            "product_card_gap": 8,
-            "inherit_color_scheme": true,
-            "color_scheme": "",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "color": "var(--color-foreground)",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "color": "var(--color-foreground)",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
-          ]
+            "font_size": 1.6,
+            "font_size_2_items": 1.4,
+            "bg_color": "",
+            "text_color": "",
+            "text_1": "30-day money-back guarantee",
+            "icon_name_1": "verified_user",
+            "text_2": "Free Shipping",
+            "icon_name_2": "local_shipping"
+          }
+        },
+        "social_proof_banner": {
+          "type": "social_proof_banner",
+          "settings": {
+            "bg_color": "#f5f5f5",
+            "border_radius": 50,
+            "title": "<strong>Trusted by thousands</strong>",
+            "subtitle": "who choose [BRAND] for consistent, long-term wellness support.",
+            "badge_color": "#51af6f",
+            "image_1": "shopify://shop_images/AVNA_NT6_0320655c-43de-402d-8d42-1f35bd87f6b6.png",
+            "image_2": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "image_3": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "urgency_notice": {
+          "type": "urgency_notice",
+          "settings": {
+            "line_1": "<p><strong>WARNING: Low Stock Notice</strong></p>",
+            "line_2": "<p>This product sold out <span style=\"text-decoration:underline\">12 times</span> last year. We encourage you to take advantage of the <strong>limited sale</strong> and buy now. Subscribing protects you against future stockouts. <strong>PS:</strong> Only available here, don't buy <span style=\"text-decoration:underline\">fakes on Amazon/eBay</span></p>",
+            "font_size": 1.2,
+            "bg_color": "#fef2f2",
+            "text_color": "#9f3f3f",
+            "border_width": 2,
+            "border_style": "dashed",
+            "border_color": "#fca5a5",
+            "border_radius": 3,
+            "icon_name": "error",
+            "icon_color": "#d61717",
+            "icon_scale": 1.2
+          }
+        },
+        "collapsible_tab_mjEF8T": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Clinically proven benefits",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_gBgAbF": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Key ingredients",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_akEwJj": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How it works",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_MTCgw9": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "How long before I see results?",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible_tab_FPPE7p": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Money Back Guarantee",
+            "icon": "none",
+            "content": "",
+            "page": ""
+          }
+        },
+        "trust_card": {
+          "type": "trust_card",
+          "settings": {
+            "heading": "<strong>Why Trust [BRAND]®</strong> as Your Wellness Partner?",
+            "item_1": "Odorless Formula",
+            "item_2": "Non-GMO",
+            "item_3": "No Artificial Additives",
+            "item_4": "Gluten-Free",
+            "item_5": "Gentle on the Stomach",
+            "item_6": "Easy-to-Swallow Softgels",
+            "icon_name": "verified",
+            "tagline": "<strong>Clean, High-Quality Formula</strong>",
+            "text_color": "#ffffff",
+            "gradient_start": "#08000c",
+            "gradient_end": "#9f3f3f",
+            "bg_image": "shopify://shop_images/hf_20260304_083031_ec4a2338-ce8d-479b-86cc-bc542fa9b598.png",
+            "image_opacity": 15,
+            "border_radius": 12
+          }
         }
       },
       "block_order": [
-        "text_cbcgyb"
+        "star_rating",
+        "title",
+        "benefits_list",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "sticky_cart",
+        "trust_microcopy",
+        "social_proof_banner",
+        "urgency_notice",
+        "collapsible_tab_mjEF8T",
+        "collapsible_tab_gBgAbF",
+        "collapsible_tab_akEwJj",
+        "collapsible_tab_MTCgw9",
+        "collapsible_tab_FPPE7p",
+        "trust_card"
       ],
-      "name": "t:names.product_recommendations",
       "settings": {
-        "product": "{{ closest.product }}",
-        "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 28,
+        "enable_sticky_info": true,
+        "color_scheme": "",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "mobile_thumbnails": "show",
+        "media_position": "left",
+        "image_zoom": "none",
+        "hide_variants": true,
+        "enable_video_looping": true,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "feature_cards": {
+      "type": "feature-cards",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260304_083031_ec4a2338-ce8d-479b-86cc-bc542fa9b598.png",
+            "title": "Feature title",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "card_bg_color": ""
+          }
+        },
+        "card_bYRYEb": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260304_083031_ec4a2338-ce8d-479b-86cc-bc542fa9b598.png",
+            "title": "Feature title",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "card_bg_color": ""
+          }
+        },
+        "card_GPx6MR": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260304_083031_ec4a2338-ce8d-479b-86cc-bc542fa9b598.png",
+            "title": "Feature title",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "card_bg_color": ""
+          }
+        },
+        "card_xANGWn": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260304_083031_ec4a2338-ce8d-479b-86cc-bc542fa9b598.png",
+            "title": "Feature title",
+            "text": "Pair text with an image to focus on your chosen product, collection, or blog post.",
+            "card_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_bYRYEb",
+        "card_GPx6MR",
+        "card_xANGWn"
+      ],
+      "settings": {
+        "heading": "4 Clinically Studied Benefits of <strong>Aged Garlic</strong>",
+        "highlight_color": "#9f3f3f",
+        "section_bg_color": "",
+        "text_alignment": "center",
+        "card_border_radius": 12,
+        "image_border_radius": 0.8,
+        "mobile_layout": "slider",
+        "pagination_type": "both",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "testimonial_slider": {
+      "type": "testimonial-slider",
+      "blocks": {
+        "ticker_1": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_H9Y4a7": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_JK8Qhh": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_XK3GPq": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_MgAHQF": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_q7zrKC": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_3Aje4U": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_CbaWPY": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "ticker_image_pGm3ig": {
+          "type": "ticker_image",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": "4.9",
+            "quote": "\"Haven't been sick in months!\"",
+            "details": "I started taking [BRAND] daily at the start of cold season and haven't gotten sick once. Normally I catch everything, but this year my immune system feels bulletproof. Easy to take and zero aftertaste.",
+            "author_name": "HAILEY A.",
+            "author_image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "tag_1": "Immunity Boost",
+            "tag_2": "Prevention",
+            "card_bg_color": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": "5.0",
+            "quote": "\"Helped my digestion more than probiotics.\"",
+            "details": "I've struggled with bloating and irregular digestion for years. [BRAND] made a noticeable difference in less than two weeks. My gut feels calm, and I feel way more regular now.",
+            "author_name": "DANA H.",
+            "author_image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "tag_1": "Gut Support",
+            "tag_2": "Bloat Relief",
+            "card_bg_color": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": "4.9",
+            "quote": "\"A clean product that actually works.\"",
+            "details": "I love that it's just oregano and black seed oil—nothing else. Most supplements are full of junk. [BRAND] is simple, pure, and powerful. I feel better overall and trust what I'm putting in my body.",
+            "author_name": "MIKE M.",
+            "author_image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "tag_1": "Clean Ingredients",
+            "tag_2": "Whole-Body Health",
+            "card_bg_color": ""
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "rating": "5.0",
+            "quote": "\"My go-to during flu season.\"",
+            "details": "Every time I feel something coming on, I take [BRAND] and it usually stops it in its tracks. It's become a staple in my wellness routine, especially during fall and winter.",
+            "author_name": "NELSON A.",
+            "author_image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "tag_1": "Cold Prevention",
+            "tag_2": "Daily Defense",
+            "card_bg_color": ""
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "rating": "4.8",
+            "quote": "\"Finally, a supplement I can actually feel working.\"",
+            "details": "I've tried so many supplements that promise results but never deliver. [BRAND] is different. Within the first week I noticed more energy and less bloating. I'm a customer for life.",
+            "author_name": "JESSICA R.",
+            "author_image": "shopify://shop_images/hf_20260302_081452_a175dc1f-3072-4dc9-b87f-87431d9253f1.png",
+            "tag_1": "Energy",
+            "tag_2": "Digestive Health",
+            "card_bg_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "ticker_1",
+        "ticker_image_H9Y4a7",
+        "ticker_image_JK8Qhh",
+        "ticker_image_XK3GPq",
+        "ticker_image_MgAHQF",
+        "ticker_image_q7zrKC",
+        "ticker_image_3Aje4U",
+        "ticker_image_CbaWPY",
+        "ticker_image_pGm3ig",
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5"
+      ],
+      "settings": {
+        "heading": "Real Stories, <strong>Real Results</strong>",
+        "subheading": "See what our customers are saying about [BRAND]",
+        "highlight_color": "#9f3f3f",
+        "star_color": "#9f3f3f",
+        "verified_color": "#9f3f3f",
+        "tag_color": "#9f3f3f",
+        "tag_bg_color": "#ffe6e6",
+        "ticker_speed": 30,
+        "section_bg_color": "#f1f5ff",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "benefits_showcase": {
+      "type": "benefits-showcase",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon_name": "health_and_safety",
+            "title": "Daily Immune Defense"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon_name": "science",
+            "title": "Gut Health & Digestion Support"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon_name": "bolt",
+            "title": "Boosts Energy & Clarity"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon_name": "spa",
+            "title": "Soothes Inflammation"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "heading": "Feel Better. Every Day.",
+        "subheading": "From fewer sick days to smoother digestion, here's what makes [BRAND] different.",
+        "product_image": "shopify://shop_images/product.png",
+        "bg_color": "#9f3f3f",
+        "text_color": "#ffffff",
+        "highlight_color": "#ffafaf",
+        "subheading_color": "",
+        "heading_size": 3,
+        "subheading_size": 1.5,
+        "benefit_size": 1.8,
+        "padding_top": 48,
+        "padding_bottom": 0
+      }
+    },
+    "proven_benefits": {
+      "type": "proven-benefits",
+      "blocks": {
+        "pb_1": {
+          "type": "benefit",
+          "settings": {
+            "title": "Immunity",
+            "description": "Strengthen your body",
+            "answer": "Oregano oil is packed with carvacrol, a powerful compound shown to fight off bacteria and viruses—supporting your immune system every single day."
+          }
+        },
+        "pb_2": {
+          "type": "benefit",
+          "settings": {
+            "title": "Inflammation",
+            "description": "Soothe it at the source",
+            "answer": "Black seed oil helps calm inflammation, restore gut balance, and reduce bloating—so you feel lighter, more regular, and at ease."
+          }
+        },
+        "pb_3": {
+          "type": "benefit",
+          "settings": {
+            "title": "Digestion",
+            "description": "Gut health without bloat",
+            "answer": "Both oregano and black seed oils contain antioxidants that help reduce chronic inflammation, promoting long-term joint, gut, and immune health."
+          }
+        },
+        "pb_4": {
+          "type": "benefit",
+          "settings": {
+            "title": "Clarity",
+            "description": "Feel focused, not foggy",
+            "answer": "By supporting gut and immune balance, Resilia® helps you feel sharper and more energized—without relying on caffeine or stimulants."
+          }
+        }
+      },
+      "block_order": [
+        "pb_1",
+        "pb_2",
+        "pb_3",
+        "pb_4"
+      ],
+      "settings": {
+        "heading": "<strong>Proven Benefits.</strong> Backed by Science.",
+        "subheading": "Your body deserves more than empty claims. <strong>Resilia® delivers real, measurable results</strong> using ingredients with decades of clinical research.",
+        "highlight_color": "#9f3f3f",
+        "bg_color": "#fbf9f7",
+        "cta_text": "Try Risk-Free Today",
+        "cta_link": "",
+        "cta_note": "30-day money back guarantee",
+        "cta_note_icon_name": "verified_user",
+        "cta_height": 40,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "ticker_bar_E76PpF": {
+      "type": "ticker-bar",
+      "blocks": {
+        "ticker_item_wmgTKE": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Gluten-Free",
+            "icon_name": "verified"
+          }
+        },
+        "ticker_item_YCN9GG": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "No additives",
+            "icon_name": "verified"
+          }
+        },
+        "ticker_item_HqnLzq": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Non-GMO",
+            "icon_name": "verified"
+          }
+        }
+      },
+      "block_order": [
+        "ticker_item_wmgTKE",
+        "ticker_item_YCN9GG",
+        "ticker_item_HqnLzq"
+      ],
+      "name": "Ticker bar",
+      "settings": {
+        "background_color": "#9f3f3f",
+        "text_color": "#ffffff",
+        "border_position": "none",
+        "border_thickness": 1,
+        "border_color": "#ffffff",
+        "font_size": 14,
+        "font_weight": "500",
+        "spacing": 60,
+        "icon_size": 20,
+        "speed": 20,
+        "padding_top": 8,
+        "padding_bottom": 8,
+        "aria_label": "Scrolling announcements"
+      }
+    },
+    "wellness_journey": {
+      "type": "wellness-journey",
+      "blocks": {
+        "wj_1": {
+          "type": "milestone",
+          "settings": {
+            "week_label": "Week 1: Relief Begins",
+            "bullets": "<ul><li>Digestion starts to feel lighter</li><li>Bloating begins to calm</li><li>Breathing feels clearer, especially in the mornings</li></ul>"
+          }
+        },
+        "wj_2": {
+          "type": "milestone",
+          "settings": {
+            "week_label": "Week 2: Energy Returns",
+            "bullets": "<ul><li>More stable daily energy</li><li>Less brain fog and fatigue</li><li>Immune system feels stronger and more responsive</li></ul>"
+          }
+        },
+        "wj_3": {
+          "type": "milestone",
+          "settings": {
+            "week_label": "Week 3: Gut + Immune Sync",
+            "bullets": "<ul><li>Improved regularity and gut comfort</li><li>Fewer signs of inflammation (skin, joints, sinuses)</li><li>You feel more \"in control\" of your health</li></ul>"
+          }
+        },
+        "wj_4": {
+          "type": "milestone",
+          "settings": {
+            "week_label": "Week 4+: Long-Term Balance",
+            "bullets": "<ul><li>Resilience through seasonal changes</li><li>Clearer mind, steady energy, fewer sick days</li><li>Your body feels lighter, calmer, and stronger from the inside out</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "wj_1",
+        "wj_2",
+        "wj_3",
+        "wj_4"
+      ],
+      "settings": {
+        "brand_image": "shopify://shop_images/weekly.png",
+        "heading": "<strong>Your Wellness</strong> Journey with [BRAND]®",
+        "description": "[BRAND]® is designed to deliver real, lasting results—not just quick fixes. Here's how your body begins to shift once you start taking it daily:",
+        "highlight_color": "#9f3f3f",
+        "button_color": "#9f3f3f",
+        "bg_color": "",
+        "cta_text": "Start My Journey →",
+        "cta_link": "",
+        "cta_note": "30-day money-back guarantee",
+        "cta_note_icon_name": "verified_user",
+        "cta_height": 40,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "customer_results": {
+      "type": "customer-results",
+      "blocks": {
+        "cr_1": {
+          "type": "result",
+          "settings": {
+            "percentage": 88,
+            "text": "<p>Said they would continue using <strong>[BRAND]®</strong> as part of their wellness routine</p>"
+          }
+        },
+        "cr_2": {
+          "type": "result",
+          "settings": {
+            "percentage": 70,
+            "text": "<p>Felt the product supported their heart health and overall wellness goals*</p>"
+          }
+        },
+        "cr_3": {
+          "type": "result",
+          "settings": {
+            "percentage": 91,
+            "text": "<p>Noticed better tolerance compared to other supplements, with no discomfort*</p>"
+          }
+        },
+        "cr_4": {
+          "type": "result",
+          "settings": {
+            "percentage": 79,
+            "text": "<p>Said they were satisfied with the <strong>overall product quality</strong> and would recommend it to others*</p>"
+          }
+        }
+      },
+      "block_order": [
+        "cr_1",
+        "cr_2",
+        "cr_3",
+        "cr_4"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/results.png",
+        "image_radius": 12,
+        "heading": "What Customers Report After Using [BRAND]®",
+        "heading_size": 32,
+        "highlight_color": "#ffffff",
+        "text_color": "#121212",
+        "percentage_color": "#121212",
+        "bg_color": "#ffffff",
+        "caption": "<p>*Based on customer feedback and post-purchase surveys. Individual results may vary.</p>",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "brand_comparison": {
+      "type": "brand-comparison",
+      "blocks": {
+        "bc_1": {
+          "type": "feature",
+          "settings": {
+            "brand_text": "Clinically Backed",
+            "competitor_text": "Trend-Based Blends"
+          }
+        },
+        "bc_2": {
+          "type": "feature",
+          "settings": {
+            "brand_text": "3rd-Party Tested",
+            "competitor_text": "No Test Proof"
+          }
+        },
+        "bc_3": {
+          "type": "feature",
+          "settings": {
+            "brand_text": "Allergen-Free & Clean",
+            "competitor_text": "Fillers & Additives"
+          }
+        },
+        "bc_4": {
+          "type": "feature",
+          "settings": {
+            "brand_text": "High-Quality Formula",
+            "competitor_text": "Inconsistent Quality"
+          }
+        },
+        "bc_5": {
+          "type": "feature",
+          "settings": {
+            "brand_text": "Vegan & Gluten-Free",
+            "competitor_text": "Sugar, Flavors, Binders"
+          }
+        }
+      },
+      "block_order": [
+        "bc_1",
+        "bc_2",
+        "bc_3",
+        "bc_4",
+        "bc_5"
+      ],
+      "settings": {
+        "heading": "<strong>[BRAND]® vs. Other Brands</strong>",
+        "heading_size": 36,
+        "bg_gradient_start": "#8a2b2b",
+        "bg_gradient_end": "#690e0e",
+        "text_color": "#ffffff",
+        "highlight_color": "#ffffff",
+        "brand_name": "<strong>[BRAND]</strong>",
+        "brand_name_color": "#ffffff",
+        "brand_image": "shopify://shop_images/generated-1772392286962.png",
+        "brand_col_color": "#9f3f3f",
+        "brand_icon_color": "#ffffff",
+        "competitor_label": "<strong>Other Brands</strong>",
+        "competitor_image": "shopify://shop_images/comparison.png",
+        "comp_col_color": "#ffffff",
+        "comp_text_color": "#000000",
+        "comp_icon_color": "#999999",
+        "icons_filled": true,
+        "checklist_1": "<strong>Clinically Backed Ingredients</strong> - Ingredients proven to work",
+        "checklist_2": "<strong>Visible Results in Weeks</strong> - Feel a difference in weeks",
+        "checklist_3": "<strong>Long-Term Health, Not Quick Fixes</strong> - Not just symptom relief",
+        "checklist_4": "<strong>Clean & Pure Ingredients</strong> - made without fillers, GMOs, or unnecessary additives",
+        "cta_text": "Try Risk-Free Today",
+        "cta_link": "",
+        "cta_height": 46,
+        "cta_bg_color": "#ffffff",
+        "cta_text_color": "#121212",
+        "cta_font_weight": "700",
+        "note_text": "30-day money back guarantee",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "risk_free_trial": {
+      "type": "risk-free-trial",
+      "settings": {
+        "badge_image": "shopify://shop_images/guarantee_badge.png",
+        "badge_number": "30",
+        "badge_label": "DAYS",
+        "subtitle": "FEEL THE DIFFERENCE",
+        "heading": "<strong>30-Day Risk-Free Trial</strong>",
+        "heading_size": 23,
+        "description": "If you don't experience noticeable improvements within 30 days, simply return your order for a full refund—no questions asked.",
+        "image": "shopify://shop_images/guarantee.png",
+        "bg_color": "#f1f3ea",
+        "accent_color": "#095946",
+        "text_color": "",
+        "cta_text": "Try Risk-Free Today",
+        "cta_link": "",
+        "cta_height": 50,
+        "cta_bg_color": "",
+        "cta_text_color": "",
+        "padding_top": 28
+      }
+    },
+    "1773377171b98d1ae1": {
+      "type": "apps",
+      "blocks": {
+        "kaching_bundles_app_block_C9PxPR": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{product}}",
+            "manual_deal_block_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_C9PxPR"
+      ],
+      "disabled": true,
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "collapsible_content_TCEeNz": {
+      "type": "collapsible-content",
+      "blocks": {
+        "collapsible_row_kP7dka": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Is this really odorless? I've tried other 'odorless' garlic supplements that still made me burp garlic all day.",
+            "icon": "none",
+            "row_content": "<p>Yes, Elaré is truly odorless because of our unique 24-month aging process. Unlike regular garlic supplements that just add enteric coating (which often fails), our fermentation completely transforms the harsh compounds that cause odor and burping.</p><p>The aging converts allicin into gentle S-allyl-cysteine molecules that are absorbed without any digestive upset or smell. Thousands of customers confirm zero garlic breath or burping - even their spouses don't know they're taking it.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_jgAFHc": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How long before I see results with my blood pressure? I need something that actually works.",
+            "icon": "none",
+            "row_content": "<p>Most customers notice improvements within 2-4 weeks, with significant changes by 6-8 weeks. Clinical studies show aged garlic can help support healthy blood pressure levels over time. However, results vary by individual. We recommend taking consistently for at least 8 weeks while monitoring your numbers. Many customers see 10-20 point improvements in systolic readings, but always consult your doctor before making any changes to medications.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_qUEDkw": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Why is aged garlic better than fresh garlic or regular garlic pills?",
+            "icon": "none",
+            "row_content": "<p>Fresh garlic and regular pills contain allicin, which is harsh on your stomach and gets destroyed by stomach acid - up to 85% is wasted. Our 24-month aging process converts these unstable compounds into bioavailable S-allyl-cysteine that's 30 times gentler and actually gets absorbed. One Elaré capsule provides the equivalent of 7500mg of aged garlic - more heart-supporting power than eating a whole bulb of raw garlic, without any digestive issues.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_FCYENr": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I take this with my current blood pressure medications?",
+            "icon": "none",
+            "row_content": "<p>Many customers take Elaré alongside their medications without issues, but you should always consult your doctor first. Aged garlic is generally well-tolerated, but your healthcare provider needs to monitor your numbers as they may improve and require medication adjustments. Some customers have been able to reduce medications under medical supervision. Never stop or change prescriptions without your doctor's approval.</p>",
+            "page": ""
+          }
+        },
+        "collapsible_row_JXE9KX": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What's your money-back guarantee? I've wasted money on supplements that didn't work before.",
+            "icon": "none",
+            "row_content": "<p>We offer a 30-day money-back guarantee because we're confident in our 24-month aged garlic. If you don't see improvements in your energy, well-being, or cardiovascular markers within 30 days, simply return the bottles (even if empty) for a full refund. No questions asked.</p><p>We've helped over 50,000 customers and our return rate is under 3% because the aging process really works. Most customers reorder before their first bottle is finished.</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "collapsible_row_kP7dka",
+        "collapsible_row_jgAFHc",
+        "collapsible_row_qUEDkw",
+        "collapsible_row_FCYENr",
+        "collapsible_row_JXE9KX"
+      ],
+      "name": "t:sections.collapsible_content.presets.name",
+      "settings": {
+        "caption": "",
+        "heading": "We’re serious about clean health, ask away",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "container_color_scheme": "",
+        "color_scheme": "",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "1773377263ad90805a": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
         "color_scheme": "scheme-1",
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
       }
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "feature_cards",
+    "testimonial_slider",
+    "benefits_showcase",
+    "proven_benefits",
+    "ticker_bar_E76PpF",
+    "wellness_journey",
+    "customer_results",
+    "brand_comparison",
+    "risk_free_trial",
+    "1773377171b98d1ae1",
+    "collapsible_content_TCEeNz",
+    "1773377263ad90805a",
+    "related-products"
   ]
 }
