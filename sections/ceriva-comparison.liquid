@@ -62,17 +62,18 @@
 
     {%- if section.settings.button_label != blank -%}
       <div class="cv-cmp__cta cv-reveal">
-        <a
-          class="cv-btn"
-          href="#MainContent"
-          data-cv-to-buy
-        >
-          {{- section.settings.button_label -}}
-        </a>
+        {% render 'ceriva-cta',
+          label: section.settings.button_label,
+          action: section.settings.button_action,
+          url: section.settings.button_link,
+          style: section.settings.button_style
+        %}
       </div>
     {%- endif -%}
   </div>
 </div>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-cmp__table {
@@ -212,7 +213,30 @@
     { "type": "text", "id": "col_us", "label": "En-tête colonne Ceriva", "default": "Ceriva" },
     { "type": "image_picker", "id": "logo", "label": "Logo Ceriva (version blanche)" },
     { "type": "text", "id": "col_them", "label": "En-tête colonne concurrente", "default": "Coton-tige" },
-    { "type": "text", "id": "button_label", "label": "Bouton" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Action du bouton",
+      "options": [
+        { "value": "offer", "label": "Remonter au choix de l'offre" },
+        { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "url", "label": "Lien personnalisé" }
+      ],
+      "default": "offer"
+    },
+    { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "primary", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "primary"
+    },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }

@@ -32,6 +32,40 @@
             dims: 'Vidéo 1080 × 1920',
             sizes: '(min-width: 990px) 220px, 60vw'
           %}
+          {%- if block.settings.video != blank or block.settings.video_url != blank -%}
+            <button
+              type="button"
+              class="cv-ugc__sound"
+              data-cv-sound
+              aria-pressed="false"
+              aria-label="Activer ou couper le son"
+            >
+              <svg
+                class="cv-ugc__icon-muted"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m22 9-6 6M16 9l6 6"/>
+              </svg>
+              <svg
+                class="cv-ugc__icon-sound"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/>
+              </svg>
+            </button>
+          {%- endif -%}
           {%- if block.settings.caption != blank -%}
             <figcaption class="cv-ugc__caption">{{ block.settings.caption }}</figcaption>
           {%- endif -%}
@@ -55,8 +89,21 @@
         <p class="cv-ugc__proof-title">{{ section.settings.proof_title }}</p>
       </div>
     {%- endif -%}
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="cv__cta cv-reveal">
+        {% render 'ceriva-cta',
+          label: section.settings.button_label,
+          action: section.settings.button_action,
+          url: section.settings.button_link,
+          style: section.settings.button_style
+        %}
+      </div>
+    {%- endif -%}
   </div>
 </div>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-ugc__rail {
@@ -85,8 +132,48 @@
   }
 
   .cv-ugc__card {
+    position: relative;
     margin: 0;
     scroll-snap-align: start;
+  }
+
+  .cv-ugc__sound {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(var(--cv-navy-rgb) / 0.72);
+    color: var(--cv-white);
+    cursor: pointer;
+  }
+
+  .cv-ugc__sound:focus-visible {
+    outline: 2px solid var(--cv-white);
+    outline-offset: 2px;
+  }
+
+  .cv-ugc__sound svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .cv-ugc__icon-sound,
+  .cv-ugc__card.is-unmuted .cv-ugc__icon-muted {
+    display: none;
+  }
+
+  .cv-ugc__card.is-unmuted .cv-ugc__icon-sound {
+    display: block;
+  }
+
+  .cv-ugc__card.is-unmuted .cv-media {
+    box-shadow: 0 0 0 3px var(--cv-blue), 0 10px 24px rgb(var(--cv-navy-rgb) / 0.12);
   }
 
   .cv-ugc__card .cv-media {
@@ -160,6 +247,30 @@
     { "type": "header", "content": "Preuve sociale" },
     { "type": "text", "id": "proof_line", "label": "Ligne de note", "default": "Noté 4,8/5 par nos clients" },
     { "type": "text", "id": "proof_title", "label": "Titre de preuve", "default": "Ils ont rangé leurs cotons-tiges" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Action du bouton",
+      "options": [
+        { "value": "offer", "label": "Remonter au choix de l'offre" },
+        { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "url", "label": "Lien personnalisé" }
+      ],
+      "default": "offer"
+    },
+    { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "primary", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "primary"
+    },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }

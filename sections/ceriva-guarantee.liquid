@@ -25,13 +25,13 @@
       {%- endif -%}
 
       {%- if section.settings.button_label != blank -%}
-        <a
-          class="cv-btn cv-guar__btn"
-          href="#MainContent"
-          data-cv-to-buy
-        >
-          {{- section.settings.button_label -}}
-        </a>
+        {% render 'ceriva-cta',
+          label: section.settings.button_label,
+          action: section.settings.button_action,
+          url: section.settings.button_link,
+          style: section.settings.button_style,
+          class: 'cv-guar__btn'
+        %}
       {%- endif -%}
 
       {%- if section.settings.ticks != blank -%}
@@ -48,6 +48,8 @@
     </div>
   </div>
 </div>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-guar__card {
@@ -135,7 +137,30 @@
     { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "Essai sans risque" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Satisfait ou remboursé" },
     { "type": "richtext", "id": "text", "label": "Texte" },
-    { "type": "text", "id": "button_label", "label": "Bouton", "default": "J'essaie Ceriva" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton", "default": "J'essaie Ceriva" },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Action du bouton",
+      "options": [
+        { "value": "offer", "label": "Remonter au choix de l'offre" },
+        { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "url", "label": "Lien personnalisé" }
+      ],
+      "default": "offer"
+    },
+    { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "primary", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "primary"
+    },
     { "type": "text", "id": "ticks", "label": "Réassurances", "info": "Séparées par |", "default": "Livraison offerte | Remboursement intégral | Service client en France" },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },

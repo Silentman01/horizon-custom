@@ -591,6 +591,10 @@
         "swipe_hint": "Glissez pour voir la suite →",
         "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
         "proof_title": "Ils ont rangé leurs cotons-tiges pour de bon",
+        "button_label": "Je veux ce résultat",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
       },
@@ -697,7 +701,9 @@
         "title": "Pourquoi ils passent à Ceriva",
         "text": "<p>Le geste que vous faites depuis toujours. Enfin fait correctement.</p>",
         "button_label": "Je choisis mon offre",
+        "button_action": "offer",
         "button_link": "",
+        "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
       },
@@ -838,7 +844,9 @@
         "title": "Ceriva, en détail",
         "text": "",
         "button_label": "",
+        "button_action": "offer",
         "button_link": "",
+        "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
       },
@@ -906,6 +914,9 @@
         "col_us": "Ceriva",
         "col_them": "Coton-tige",
         "button_label": "Je passe à Ceriva",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
       },
@@ -976,6 +987,10 @@
         "share_1": 1,
         "visible_count": 6,
         "more_label": "Voir plus d'avis",
+        "button_label": "Je rejoins les clients Ceriva",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
       },
@@ -1158,6 +1173,9 @@
         "title": "30 jours pour sentir la différence",
         "text": "<p>Essayez Ceriva pendant 30 jours. Si vos oreilles ne vous semblent pas plus nettes et plus légères, écrivez-nous : nous vous remboursons intégralement. Sans justificatif, sans discussion.</p>",
         "button_label": "J'essaie Ceriva sans risque",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
         "ticks": "Livraison offerte | Remboursement intégral | Paiement sécurisé",
         "padding_top": 48,
         "padding_bottom": 80

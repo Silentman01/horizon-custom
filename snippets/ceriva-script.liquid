@@ -1,0 +1,12 @@
+{% doc %}
+  Loads the shared Ceriva behaviour (CTA actions, scroll reveal, video autoplay and sound).
+  Module scripts with the same URL run once, so every Ceriva section can render this safely.
+
+  @example
+  {% render 'ceriva-script' %}
+{% enddoc %}
+<script
+  src="{{ 'ceriva.js' | asset_url }}"
+  type="module"
+  fetchpriority="low"
+></script>

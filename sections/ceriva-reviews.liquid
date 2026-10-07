@@ -120,7 +120,7 @@
         <div class="cv-rev__more">
           <button
             type="button"
-            class="cv-btn cv-rev__more-btn"
+            class="cv-btn cv-btn--outline cv-rev__more-btn"
             data-more
           >
             {{ ss.more_label }}
@@ -128,8 +128,21 @@
         </div>
       {%- endif -%}
     </ceriva-reviews>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="cv__cta cv-reveal">
+        {% render 'ceriva-cta',
+          label: section.settings.button_label,
+          action: section.settings.button_action,
+          url: section.settings.button_link,
+          style: section.settings.button_style
+        %}
+      </div>
+    {%- endif -%}
   </div>
 </div>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-rev__notice {
@@ -366,6 +379,30 @@
     { "type": "header", "content": "Liste" },
     { "type": "range", "id": "visible_count", "label": "Avis visibles au départ", "min": 3, "max": 12, "step": 3, "default": 6 },
     { "type": "text", "id": "more_label", "label": "Bouton « plus d'avis »", "default": "Voir plus d'avis" },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Action du bouton",
+      "options": [
+        { "value": "offer", "label": "Remonter au choix de l'offre" },
+        { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "url", "label": "Lien personnalisé" }
+      ],
+      "default": "offer"
+    },
+    { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "primary", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "primary"
+    },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }

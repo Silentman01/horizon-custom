@@ -71,21 +71,20 @@
 
         {%- if ss.button_label != blank -%}
           <div class="cv-ml__cta cv-reveal">
-            <a
-              class="cv-btn"
-              href="{{ ss.button_link | default: '#MainContent' }}"
-              {% if ss.button_link == blank %}
-                data-cv-to-buy
-              {% endif %}
-            >
-              {{- ss.button_label -}}
-            </a>
+            {% render 'ceriva-cta',
+              label: ss.button_label,
+              action: ss.button_action,
+              url: ss.button_link,
+              style: ss.button_style
+            %}
           </div>
         {%- endif -%}
       </div>
     </div>
   </div>
 </div>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-ml__grid {
@@ -248,8 +247,30 @@
     { "type": "text", "id": "eyebrow", "label": "Surtitre" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
     { "type": "richtext", "id": "text", "label": "Texte" },
-    { "type": "text", "id": "button_label", "label": "Bouton" },
-    { "type": "url", "id": "button_link", "label": "Lien du bouton", "info": "Vide = retour au bloc d'achat." },
+    { "type": "header", "content": "Bouton" },
+    { "type": "text", "id": "button_label", "label": "Texte du bouton" },
+    {
+      "type": "select",
+      "id": "button_action",
+      "label": "Action du bouton",
+      "options": [
+        { "value": "offer", "label": "Remonter au choix de l'offre" },
+        { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "url", "label": "Lien personnalisé" }
+      ],
+      "default": "offer"
+    },
+    { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Style du bouton",
+      "options": [
+        { "value": "primary", "label": "Plein" },
+        { "value": "outline", "label": "Contour" }
+      ],
+      "default": "primary"
+    },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }

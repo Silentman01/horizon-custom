@@ -17,6 +17,7 @@
       {%- for block in section.blocks -%}
         <details
           class="cv-faq__item"
+          name="cv-faq-{{ section.id }}"
           {% if section.settings.open_first and forloop.first %}
             open
           {% endif %}
@@ -55,6 +56,8 @@
     ]
   }
 </script>
+
+{% render 'ceriva-script' %}
 
 {% stylesheet %}
   .cv-faq__list {

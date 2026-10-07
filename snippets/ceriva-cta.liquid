@@ -1,0 +1,48 @@
+{% doc %}
+  Renders a Ceriva call-to-action button with a merchant-selected action.
+
+  @param {string} label - Button text; nothing renders when blank
+  @param {string} [action] - 'offer' (scroll to the offer selector), 'cart' (add the selected offer to cart) or 'url'
+  @param {string} [url] - Destination when action is 'url'
+  @param {string} [style] - 'primary' (default) or 'outline'
+  @param {string} [class] - Extra classes
+
+  @example
+  {% render 'ceriva-cta', label: section.settings.button_label, action: section.settings.button_action, url: section.settings.button_link %}
+{% enddoc %}
+{%- if label != blank -%}
+  {%- liquid
+    assign btn_class = 'cv-btn'
+    if style == 'outline'
+      assign btn_class = btn_class | append: ' cv-btn--outline'
+    endif
+    if class
+      assign btn_class = btn_class | append: ' ' | append: class
+    endif
+  -%}
+  {%- case action -%}
+    {%- when 'cart' -%}
+      <button
+        type="button"
+        class="{{ btn_class }}"
+        data-cv-action="cart"
+      >
+        {{- label -}}
+      </button>
+    {%- when 'url' -%}
+      <a
+        class="{{ btn_class }}"
+        href="{{ url | default: '#MainContent' }}"
+      >
+        {{- label -}}
+      </a>
+    {%- else -%}
+      <a
+        class="{{ btn_class }}"
+        href="#MainContent"
+        data-cv-action="offer"
+      >
+        {{- label -}}
+      </a>
+  {%- endcase -%}
+{%- endif -%}
