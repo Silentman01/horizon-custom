@@ -11,10 +11,6 @@
   "sections": {
     "cv_marquee": {
       "type": "ceriva-marquee",
-      "settings": {
-        "tone": "navy",
-        "speed": 36
-      },
       "blocks": {
         "item_1": {
           "type": "item",
@@ -46,7 +42,11 @@
         "item_2",
         "item_3",
         "item_4"
-      ]
+      ],
+      "settings": {
+        "tone": "navy",
+        "speed": 36
+      }
     },
     "main": {
       "type": "product-information",
@@ -569,7 +569,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -583,55 +582,44 @@
     },
     "cv_ugc": {
       "type": "ceriva-ugc-videos",
-      "settings": {
-        "tone": "ice",
-        "eyebrow": "De vrais gens · De vrais résultats",
-        "title": "Regardez ce qui sort",
-        "text": "<p>Un quart de tour, et le résultat reste sur l'embout. Sans filtre, sans retouche.</p>",
-        "swipe_hint": "Glissez pour voir la suite →",
-        "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
-        "proof_title": "Ils ont rangé leurs cotons-tiges pour de bon",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "video_1": {
           "type": "video",
           "settings": {
-            "caption": "",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/9d29a9058ac04ca9889036508bfbf293.mp4",
+            "caption": "",
             "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout"
           }
         },
         "video_2": {
           "type": "video",
           "settings": {
-            "caption": "",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/874d8b109e604ccf8c46c25b83012f64.mp4",
+            "caption": "",
             "placeholder_label": "UGC : réaction « je n'en revenais pas »"
           }
         },
         "video_3": {
           "type": "video",
           "settings": {
-            "caption": "",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/df08141d93404df98f14dffca9b463a8.mp4",
+            "caption": "",
             "placeholder_label": "UGC : rinçage du stick sous l'eau tiède"
           }
         },
         "video_4": {
           "type": "video",
           "settings": {
-            "caption": "",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/b04764ee1a6a4e6ea979b14151a50fd6.mp4",
+            "caption": "",
             "placeholder_label": "UGC : utilisateur d'écouteurs intra"
           }
         },
         "video_5": {
           "type": "video",
           "settings": {
-            "caption": "",
             "video_url": "https://cdn.shopify.com/videos/c/o/v/f108ea46c3014acdb2d55e690fcbf0ee.mp4",
+            "caption": "",
             "placeholder_label": "UGC : ouverture de la boîte Ceriva"
           }
         }
@@ -642,19 +630,21 @@
         "video_3",
         "video_4",
         "video_5"
-      ]
+      ],
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "De vrais gens · De vrais résultats",
+        "title": "Regardez ce qui sort",
+        "text": "<p>Un quart de tour, et le résultat reste sur l'embout. Sans filtre, sans retouche.</p>",
+        "swipe_hint": "Glissez pour voir la suite →",
+        "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
+        "proof_title": "Ils ont rangé leurs cotons-tiges pour de bon",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_problem": {
       "type": "ceriva-problem",
-      "settings": {
-        "tone": "white",
-        "eyebrow": "Le vrai problème",
-        "image_asset": "ceriva-problem.jpg",
-        "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
-        "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "point_1": {
           "type": "point",
@@ -682,25 +672,19 @@
         "point_1",
         "point_2",
         "point_3"
-      ]
+      ],
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Le vrai problème",
+        "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
+        "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
+        "image_asset": "ceriva-problem.jpg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_solution": {
       "type": "ceriva-media-list",
-      "settings": {
-        "tone": "ice",
-        "list_style": "checks",
-        "media_position": "left",
-        "ratio": "square",
-        "image_asset": "ceriva-switch.jpg",
-        "placeholder_label": "Lifestyle : utilisatrice souriante, stick Ceriva en main, fond clair",
-        "eyebrow": "La différence Ceriva",
-        "title": "Pourquoi ils passent à Ceriva",
-        "text": "<p>Le geste que vous faites depuis toujours. Enfin fait correctement.</p>",
-        "button_label": "Je choisis mon offre",
-        "button_link": "",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "item_1": {
           "type": "item",
@@ -736,20 +720,25 @@
         "item_2",
         "item_3",
         "item_4"
-      ]
+      ],
+      "settings": {
+        "tone": "ice",
+        "list_style": "checks",
+        "media_position": "left",
+        "ratio": "square",
+        "image_asset": "ceriva-switch.jpg",
+        "placeholder_label": "Lifestyle : utilisatrice souriante, stick Ceriva en main, fond clair",
+        "eyebrow": "La différence Ceriva",
+        "title": "Pourquoi ils passent à Ceriva",
+        "text": "<p>Le geste que vous faites depuis toujours. Enfin fait correctement.</p>",
+        "button_label": "Je choisis mon offre",
+        "button_link": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_steps": {
       "type": "ceriva-steps",
-      "settings": {
-        "tone": "white",
-        "eyebrow": "Mode d'emploi",
-        "title": "Des oreilles nettes en 3 gestes",
-        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
-        "step_label": "Étape",
-        "note": "Usage externe uniquement : n'insérez jamais le stick au-delà de l'entrée du conduit. En cas de douleur, d'infection ou de tympan perforé, demandez l'avis d'un professionnel de santé.",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "step_1": {
           "type": "step",
@@ -783,19 +772,20 @@
         "step_1",
         "step_2",
         "step_3"
-      ]
+      ],
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Mode d'emploi",
+        "title": "Des oreilles nettes en 3 gestes",
+        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
+        "step_label": "Étape",
+        "note": "Usage externe uniquement : n'insérez jamais le stick au-delà de l'entrée du conduit. En cas de douleur, d'infection ou de tympan perforé, demandez l'avis d'un professionnel de santé.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_value": {
       "type": "ceriva-value",
-      "settings": {
-        "tone": "navy",
-        "eyebrow": "Réutilisable",
-        "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
-        "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
-        "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "stat_1": {
           "type": "stat",
@@ -823,25 +813,19 @@
         "stat_1",
         "stat_2",
         "stat_3"
-      ]
+      ],
+      "settings": {
+        "tone": "navy",
+        "eyebrow": "Réutilisable",
+        "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
+        "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
+        "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_specs": {
       "type": "ceriva-media-list",
-      "settings": {
-        "tone": "white",
-        "list_style": "rows",
-        "media_position": "right",
-        "ratio": "square",
-        "image_asset": "ceriva-packshot.jpg",
-        "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
-        "eyebrow": "En bref",
-        "title": "Ceriva, en détail",
-        "text": "",
-        "button_label": "",
-        "button_link": "",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "item_1": {
           "type": "item",
@@ -893,22 +877,25 @@
         "item_4",
         "item_5",
         "item_6"
-      ]
+      ],
+      "settings": {
+        "tone": "white",
+        "list_style": "rows",
+        "media_position": "right",
+        "ratio": "square",
+        "image_asset": "ceriva-packshot.jpg",
+        "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
+        "eyebrow": "En bref",
+        "title": "Ceriva, en détail",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_comparison": {
       "type": "ceriva-comparison",
-      "settings": {
-        "tone": "ice",
-        "eyebrow": "Comparatif",
-        "title": "Ceriva ou coton-tige ?",
-        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
-        "col_benefit": "Critère",
-        "col_us": "Ceriva",
-        "col_them": "Coton-tige",
-        "button_label": "Je passe à Ceriva",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "row_1": {
           "type": "row",
@@ -957,28 +944,22 @@
         "row_3",
         "row_4",
         "row_5"
-      ]
+      ],
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "Comparatif",
+        "title": "Ceriva ou coton-tige ?",
+        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
+        "col_benefit": "Critère",
+        "col_us": "Ceriva",
+        "col_them": "Coton-tige",
+        "button_label": "Je passe à Ceriva",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_reviews": {
       "type": "ceriva-reviews",
-      "settings": {
-        "sample_notice": true,
-        "tone": "white",
-        "eyebrow": "Avis vérifiés",
-        "title": "Ce qu'en disent nos clients",
-        "show_summary": true,
-        "score": "4,8",
-        "count_label": "1 200+ avis vérifiés",
-        "share_5": 82,
-        "share_4": 12,
-        "share_3": 4,
-        "share_2": 1,
-        "share_1": 1,
-        "visible_count": 6,
-        "more_label": "Voir plus d'avis",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "review_1": {
           "type": "review",
@@ -1057,20 +1038,28 @@
         "review_4",
         "review_5",
         "review_6"
-      ]
+      ],
+      "settings": {
+        "sample_notice": true,
+        "tone": "white",
+        "eyebrow": "Avis vérifiés",
+        "title": "Ce qu'en disent nos clients",
+        "show_summary": true,
+        "score": "4,8",
+        "count_label": "1 200+ avis vérifiés",
+        "share_5": 82,
+        "share_4": 12,
+        "share_3": 4,
+        "share_2": 1,
+        "share_1": 1,
+        "visible_count": 6,
+        "more_label": "Voir plus d'avis",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_faq": {
       "type": "ceriva-faq",
-      "settings": {
-        "tone": "ice",
-        "eyebrow": "FAQ",
-        "title": "Vos questions, nos réponses",
-        "text": "",
-        "open_first": true,
-        "contact": "<p>Une autre question ? <a href=\"/pages/contact\">Écrivez-nous</a>, nous vous répondons rapidement.</p>",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -1146,7 +1135,17 @@
         "question_7",
         "question_8",
         "question_9"
-      ]
+      ],
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "FAQ",
+        "title": "Vos questions, nos réponses",
+        "text": "",
+        "open_first": true,
+        "contact": "<p>Une autre question ? <a href=\"/pages/contact\">Écrivez-nous</a>, nous vous répondons rapidement.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_guarantee": {
       "type": "ceriva-guarantee",
