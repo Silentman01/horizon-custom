@@ -599,6 +599,7 @@
           "type": "video",
           "settings": {
             "caption": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/9d29a9058ac04ca9889036508bfbf293.mp4",
             "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout"
           }
         },
@@ -606,6 +607,7 @@
           "type": "video",
           "settings": {
             "caption": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/874d8b109e604ccf8c46c25b83012f64.mp4",
             "placeholder_label": "UGC : réaction « je n'en revenais pas »"
           }
         },
@@ -613,6 +615,7 @@
           "type": "video",
           "settings": {
             "caption": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/df08141d93404df98f14dffca9b463a8.mp4",
             "placeholder_label": "UGC : rinçage du stick sous l'eau tiède"
           }
         },
@@ -620,6 +623,7 @@
           "type": "video",
           "settings": {
             "caption": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b04764ee1a6a4e6ea979b14151a50fd6.mp4",
             "placeholder_label": "UGC : utilisateur d'écouteurs intra"
           }
         },
@@ -627,6 +631,7 @@
           "type": "video",
           "settings": {
             "caption": "",
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/f108ea46c3014acdb2d55e690fcbf0ee.mp4",
             "placeholder_label": "UGC : ouverture de la boîte Ceriva"
           }
         }
@@ -644,6 +649,7 @@
       "settings": {
         "tone": "white",
         "eyebrow": "Le vrai problème",
+        "image_asset": "ceriva-problem.jpg",
         "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
         "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
         "padding_top": 64,
@@ -684,7 +690,8 @@
         "tone": "ice",
         "list_style": "checks",
         "media_position": "left",
-        "ratio": "portrait",
+        "ratio": "square",
+        "image_asset": "ceriva-switch.jpg",
         "placeholder_label": "Lifestyle : utilisatrice souriante, stick Ceriva en main, fond clair",
         "eyebrow": "La différence Ceriva",
         "title": "Pourquoi ils passent à Ceriva",
@@ -747,6 +754,7 @@
         "step_1": {
           "type": "step",
           "settings": {
+            "image_asset": "ceriva-step-1.jpg",
             "placeholder_label": "Étape 1 : embout posé à l'entrée du conduit (gros plan)",
             "title": "Placez",
             "text": "<p>Posez délicatement l'embout à l'entrée du conduit. Jamais en profondeur, jamais en forçant.</p>"
@@ -755,6 +763,7 @@
         "step_2": {
           "type": "step",
           "settings": {
+            "image_asset": "ceriva-step-2.jpg",
             "placeholder_label": "Étape 2 : main qui fait tourner le stick d'un quart de tour",
             "title": "Tournez",
             "text": "<p>Un quart de tour, avec une pression légère : l'embout capte le cérumen au contact.</p>"
@@ -763,6 +772,7 @@
         "step_3": {
           "type": "step",
           "settings": {
+            "image_asset": "ceriva-step-3.jpg",
             "placeholder_label": "Étape 3 : embout avec résidus visibles, puis rinçage",
             "title": "Retirez & rincez",
             "text": "<p>Sortez le stick, constatez le résultat, puis rincez-le à l'eau tiède. Il est prêt pour la prochaine fois.</p>"
@@ -822,6 +832,7 @@
         "list_style": "rows",
         "media_position": "right",
         "ratio": "square",
+        "image_asset": "ceriva-packshot.jpg",
         "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
         "eyebrow": "En bref",
         "title": "Ceriva, en détail",
@@ -972,6 +983,7 @@
         "review_1": {
           "type": "review",
           "settings": {
+            "image_asset": "ceriva-review-1.jpg",
             "placeholder_label": "Photo client : embout après usage",
             "title": "Je ne pensais pas en avoir autant",
             "text": "<p>J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu.</p>",
@@ -983,6 +995,7 @@
         "review_2": {
           "type": "review",
           "settings": {
+            "image_asset": "ceriva-review-2.jpg",
             "placeholder_label": "Photo client : boîte Ceriva sur un bureau, écouteurs à côté",
             "title": "Indispensable avec mes écouteurs",
             "text": "<p>Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva une fois par semaine, plus aucune gêne, et mes écouteurs restent propres.</p>",
@@ -994,6 +1007,7 @@
         "review_3": {
           "type": "review",
           "settings": {
+            "image_asset": "ceriva-review-3.jpg",
             "placeholder_label": "Photo client : stick en main",
             "title": "Très doux, aucune douleur",
             "text": "<p>J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini.</p>",

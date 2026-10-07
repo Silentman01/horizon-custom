@@ -25,6 +25,7 @@
         >
           {% render 'ceriva-media',
             video: block.settings.video,
+            video_url: block.settings.video_url,
             image: block.settings.poster,
             ratio: '9 / 16',
             label: block.settings.placeholder_label,
@@ -169,6 +170,7 @@
       "name": "Vidéo",
       "settings": [
         { "type": "video", "id": "video", "label": "Vidéo (format vertical 9:16)" },
+        { "type": "url", "id": "video_url", "label": "Ou lien direct MP4", "info": "Utilisé si aucune vidéo n'est choisie." },
         { "type": "image_picker", "id": "poster", "label": "Image (si pas de vidéo)" },
         { "type": "text", "id": "caption", "label": "Légende" },
         { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "UGC : gros plan sur l'embout après usage" }

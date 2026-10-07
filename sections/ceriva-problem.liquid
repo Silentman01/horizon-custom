@@ -17,6 +17,7 @@
       <div class="cv-problem__media cv-reveal">
         {% render 'ceriva-media',
           image: section.settings.image,
+          asset: section.settings.image_asset,
           ratio: '1',
           label: 'Illustration en coupe : coton-tige qui tasse le cérumen dans le conduit',
           dims: '1200 × 1200',
@@ -123,6 +124,7 @@
     { "type": "text", "id": "title", "label": "Titre", "default": "Pourquoi le coton-tige aggrave les choses" },
     { "type": "richtext", "id": "text", "label": "Texte" },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Image du thème (fichier)", "info": "Utilisée si aucune image n'est choisie, ex. ceriva-step-1.jpg (dossier assets du thème)." },
     { "type": "header", "content": "Espacement" },
     { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
     { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }

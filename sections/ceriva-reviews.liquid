@@ -71,9 +71,11 @@
               {% endif %}
               {{ block.shopify_attributes }}
             >
-              {%- if block.settings.image or block.settings.placeholder_label != blank -%}
+              {%- if block.settings.image or block.settings.image_asset != blank or block.settings.placeholder_label != blank -%}
                 {% render 'ceriva-media',
                   image: block.settings.image,
+                  asset: block.settings.image_asset,
+                  position: '50% 35%',
                   ratio: '4 / 3',
                   label: block.settings.placeholder_label,
                   dims: '1200 × 900',
@@ -375,6 +377,7 @@
       "name": "Avis",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Photo client" },
+        { "type": "text", "id": "image_asset", "label": "Image du thème (fichier)", "info": "Utilisée si aucune image n'est choisie, ex. ceriva-step-1.jpg (dossier assets du thème)." },
         { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement photo", "info": "Laissez vide pour un avis sans photo." },
         { "type": "text", "id": "title", "label": "Titre" },
         { "type": "richtext", "id": "text", "label": "Avis", "default": "<p>Texte de l'avis.</p>" },

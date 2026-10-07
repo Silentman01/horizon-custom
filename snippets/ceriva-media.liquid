@@ -4,6 +4,9 @@
 
   @param {image} [image] - Image picked in the editor
   @param {video} [video] - Shopify-hosted video, played muted on loop while in view, instead of the image
+  @param {string} [video_url] - Direct MP4 URL, used when no video is picked
+  @param {string} [asset] - Theme asset filename (e.g. 'ceriva-step-1.jpg'), used when no image is picked
+  @param {string} [position] - CSS object-position for the image, e.g. '50% 30%'
   @param {string} ratio - CSS aspect ratio, e.g. '1', '4 / 5', '9 / 16'
   @param {string} label - Placeholder description of the expected image
   @param {string} dims - Recommended export size, e.g. '1080 × 1350'
@@ -16,8 +19,14 @@
 {% enddoc %}
 <div
   class="cv-media{% if class %} {{ class }}{% endif %}"
-  style="--cv-ratio: {{ ratio | default: '1' }};"
+  style="--cv-ratio: {{ ratio | default: '1' }};{% if position != blank %} --cv-pos: {{ position }};{% endif %}"
 >
+  {%- liquid
+    assign loading = 'lazy'
+    if eager
+      assign loading = 'eager'
+    endif
+  -%}
   {%- if video != blank -%}
     {{
       video
@@ -29,18 +38,33 @@
         preload: 'metadata',
         class: 'cv-autoplay'
     }}
+  {%- elsif video_url != blank -%}
+    <video
+      class="cv-autoplay"
+      src="{{ video_url }}"
+      {% if image %}
+        poster="{{ image | image_url: width: 720 }}"
+      {% endif %}
+      muted
+      loop
+      playsinline
+      preload="metadata"
+    ></video>
   {%- elsif image -%}
-    {%- liquid
-      assign loading = 'lazy'
-      if eager
-        assign loading = 'eager'
-      endif
-    -%}
     {{
       image
       | image_url: width: 1600
       | image_tag: loading: loading, sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', alt: image.alt
     }}
+  {%- elsif asset != blank -%}
+    <img
+      src="{{ asset | asset_url }}"
+      alt="{{ label | escape }}"
+      width="1200"
+      height="1200"
+      loading="{{ loading }}"
+      decoding="async"
+    >
   {%- else -%}
     <div
       class="cv-ph"

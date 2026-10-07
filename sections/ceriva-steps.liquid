@@ -22,6 +22,7 @@
         >
           {% render 'ceriva-media',
             image: block.settings.image,
+            asset: block.settings.image_asset,
             ratio: '1',
             label: block.settings.placeholder_label,
             dims: '1080 × 1080',
@@ -145,6 +146,7 @@
       "limit": 6,
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_asset", "label": "Image du thème (fichier)", "info": "Utilisée si aucune image n'est choisie, ex. ceriva-step-1.jpg (dossier assets du thème)." },
         { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "Photo de l'étape" },
         { "type": "text", "id": "title", "label": "Titre", "default": "Étape" },
         { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Description</p>" }

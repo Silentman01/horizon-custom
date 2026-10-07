@@ -21,6 +21,7 @@
       <div class="cv-ml__media cv-reveal">
         {% render 'ceriva-media',
           image: ss.image,
+          asset: ss.image_asset,
           ratio: ratio,
           label: ss.placeholder_label,
           dims: dims,
@@ -242,6 +243,7 @@
       "default": "square"
     },
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Image du thème (fichier)", "info": "Utilisée si aucune image n'est choisie, ex. ceriva-step-1.jpg (dossier assets du thème)." },
     { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "Photo produit Ceriva" },
     { "type": "text", "id": "eyebrow", "label": "Surtitre" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
