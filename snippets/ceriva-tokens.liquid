@@ -1,0 +1,343 @@
+{% doc %}
+  Outputs the Ceriva brand tokens as inline CSS custom properties, mapped from the theme color palette:
+  background = Ice White, foreground = Deep Navy, color1 = Trust Blue, color2 = pure white (product photography).
+  Also holds the shared Ceriva base styles (containers, headings, buttons, stars, placeholders).
+
+  @example
+  <section style="{% render 'ceriva-tokens' %}">
+{% enddoc %}
+{%- liquid
+  assign cv_ice = settings.color_palette.background | default: '#F8F9FC'
+  assign cv_navy = settings.color_palette.foreground | default: '#0D2847'
+  assign cv_blue = settings.color_palette.color1 | default: '#2E8FDB'
+-%}
+--cv-ice: {{ cv_ice }}; --cv-navy: {{ cv_navy }}; --cv-navy-rgb: {{ cv_navy.rgb }}; --cv-blue: {{ cv_blue }}; --cv-white: #ffffff;
+
+{%- stylesheet -%}
+  .cv {
+    --cv-radius: 8px;
+    --cv-radius-lg: 12px;
+    --cv-line: rgb(var(--cv-navy-rgb) / 0.12);
+    --cv-gutter: 16px;
+
+    font-family: var(--font-body--family);
+    color: var(--cv-fg);
+    background: var(--cv-bg);
+  }
+
+  .cv *,
+  .cv *::before,
+  .cv *::after {
+    box-sizing: border-box;
+  }
+
+  .cv--ice {
+    --cv-bg: var(--cv-ice);
+    --cv-fg: var(--cv-navy);
+    --cv-card: var(--cv-white);
+  }
+
+  .cv--white {
+    --cv-bg: var(--cv-white);
+    --cv-fg: var(--cv-navy);
+    --cv-card: var(--cv-ice);
+  }
+
+  .cv--navy {
+    --cv-bg: var(--cv-navy);
+    --cv-fg: var(--cv-white);
+    --cv-card: rgb(255 255 255 / 0.06);
+    --cv-line: rgb(255 255 255 / 0.16);
+  }
+
+  .cv__inner {
+    width: 100%;
+    max-width: var(--cv-max, 1120px);
+    margin-inline: auto;
+    padding-inline: var(--cv-gutter);
+    padding-block: var(--cv-pt, 64px) var(--cv-pb, 64px);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv {
+      --cv-gutter: 32px;
+    }
+  }
+
+  .cv__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+
+  .cv__eyebrow {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cv__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-weight: 700;
+    font-size: clamp(26px, 4.2vw, 38px);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--cv-fg);
+    text-wrap: balance;
+  }
+
+  .cv__title em {
+    font-style: normal;
+    color: var(--cv-blue);
+  }
+
+  .cv__sub {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--cv-fg);
+    text-wrap: pretty;
+  }
+
+  .cv__sub p,
+  .cv__rte p {
+    margin: 0 0 0.6em;
+  }
+
+  .cv__sub p:last-child,
+  .cv__rte p:last-child {
+    margin-bottom: 0;
+  }
+
+  .cv__rte a {
+    color: var(--cv-blue);
+  }
+
+  .cv-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 54px;
+    padding: 14px 32px;
+    border: 0;
+    border-radius: var(--cv-radius);
+    background: var(--cv-blue);
+    color: var(--cv-white);
+    font-family: var(--font-body--family);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cv-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgb(46 143 219 / 0.3);
+  }
+
+  .cv-btn:focus-visible {
+    outline: 2px solid var(--cv-fg);
+    outline-offset: 3px;
+  }
+
+  .cv-stars {
+    display: inline-flex;
+    gap: 2px;
+    color: var(--cv-blue);
+    line-height: 1;
+  }
+
+  .cv-stars svg {
+    width: var(--cv-star, 16px);
+    height: var(--cv-star, 16px);
+  }
+
+  .cv-check {
+    flex: none;
+    display: inline-grid;
+    place-items: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--cv-blue);
+    color: var(--cv-white);
+  }
+
+  .cv-check svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* Ratio-correct, labelled image placeholder (replaced by the real image once one is picked) */
+  .cv-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--cv-ratio, 1);
+    overflow: hidden;
+    border-radius: var(--cv-media-radius, var(--cv-radius-lg));
+    background: var(--cv-white);
+  }
+
+  .cv-media > img,
+  .cv-media > video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cv-ph {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px;
+    text-align: center;
+    color: var(--cv-navy);
+    background:
+      repeating-linear-gradient(135deg, rgb(var(--cv-navy-rgb) / 0.035) 0 12px, transparent 12px 24px),
+      var(--cv-ice);
+    border: 1.5px dashed rgb(var(--cv-navy-rgb) / 0.25);
+    border-radius: inherit;
+  }
+
+  .cv-ph svg {
+    width: 28px;
+    height: 28px;
+    color: var(--cv-blue);
+  }
+
+  .cv-ph__label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: 26ch;
+  }
+
+  .cv-ph__dims {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  /* Scroll reveal */
+  /* Hidden only once the script is running, so content never stays invisible without JS */
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-reveal-on .cv-reveal {
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .cv-reveal-on .cv-reveal:not(.is-visible) {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+{%- endstylesheet -%}
+
+{%- javascript -%}
+  (() => {
+    if (window.__cvReveal) return;
+    window.__cvReveal = true;
+
+    const reveal = () => {
+      document.documentElement.classList.add('cv-reveal-on');
+      const items = document.querySelectorAll('.cv-reveal:not(.is-visible)');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: '0px 0px -10% 0px' }
+      );
+      items.forEach((el) => io.observe(el));
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', reveal);
+    } else {
+      reveal();
+    }
+    document.addEventListener('shopify:section:load', reveal);
+  })();
+
+  (() => {
+    if (window.__cvAutoplay) return;
+    window.__cvAutoplay = true;
+
+    // Muted loops only play while on screen, to save battery and bandwidth on mobile.
+    const io =
+      'IntersectionObserver' in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach(({ target, isIntersecting }) => {
+                if (isIntersecting) target.play().catch(() => {});
+                else target.pause();
+              });
+            },
+            { threshold: 0.4 }
+          )
+        : null;
+
+    const watch = () => {
+      document.querySelectorAll('video.cv-autoplay:not([data-cv-watched])').forEach((video) => {
+        video.dataset.cvWatched = '';
+        video.muted = true;
+        if (io) io.observe(video);
+        else video.play().catch(() => {});
+      });
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', watch);
+    } else {
+      watch();
+    }
+    document.addEventListener('shopify:section:load', watch);
+  })();
+
+  (() => {
+    if (window.__cvToBuy) return;
+    window.__cvToBuy = true;
+
+    // CTAs marked data-cv-to-buy scroll back to the offer selector (or buy buttons) instead of leaving the page.
+    document.addEventListener('click', (event) => {
+      const trigger = event.target instanceof Element && event.target.closest('[data-cv-to-buy]');
+      if (!trigger) return;
+      const target =
+        document.querySelector('.cvb') ||
+        document.querySelector('.buy-buttons-block') ||
+        document.querySelector('[id^="ProductInformation-"]');
+      if (!target) return;
+      event.preventDefault();
+      const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const top = target.getBoundingClientRect().top + window.scrollY - 96;
+      window.scrollTo({ top, behavior: smooth ? 'smooth' : 'auto' });
+    });
+  })();
+{%- endjavascript -%}

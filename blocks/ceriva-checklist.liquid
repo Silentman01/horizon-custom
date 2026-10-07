@@ -1,0 +1,47 @@
+<ul
+  class="cv cv-checklist"
+  style="{% render 'ceriva-tokens' %} --cv-bg: transparent; --cv-fg: currentColor;"
+  {{ block.shopify_attributes }}
+>
+  {%- content_for 'blocks' -%}
+</ul>
+
+{% stylesheet %}
+  .cv-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Liste à cocher",
+  "tag": null,
+  "blocks": [{ "type": "_ceriva-check-item" }],
+  "presets": [
+    {
+      "name": "Ceriva — Liste à cocher",
+      "category": "t:categories.product",
+      "blocks": {
+        "item-1": {
+          "type": "_ceriva-check-item",
+          "settings": { "text": "<p><strong>Des oreilles nettes et légères</strong>, dès le premier passage</p>" }
+        },
+        "item-2": {
+          "type": "_ceriva-check-item",
+          "settings": { "text": "<p><strong>Vous voyez ce qui sort</strong> : le résultat reste sur l'embout</p>" }
+        },
+        "item-3": {
+          "type": "_ceriva-check-item",
+          "settings": { "text": "<p><strong>Embout souple</strong>, pensé pour les oreilles sensibles</p>" }
+        }
+      },
+      "block_order": ["item-1", "item-2", "item-3"]
+    }
+  ]
+}
+{% endschema %}

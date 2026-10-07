@@ -1,0 +1,1167 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "cv_marquee": {
+      "type": "ceriva-marquee",
+      "settings": {
+        "tone": "navy",
+        "speed": 36
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Livraison offerte en France"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Satisfait ou remboursé 30 jours"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Rinçable et réutilisable"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Expédié sous 24/48 h"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 8,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "contain",
+            "media_radius": 12,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": true,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 18,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "rating": {
+              "type": "ceriva-rating",
+              "settings": {
+                "score": "4,8/5",
+                "count": "1 200+ avis clients",
+                "link": "#avis"
+              }
+            },
+            "title": {
+              "type": "text",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "subtitle": {
+              "type": "text",
+              "settings": {
+                "text": "<p>La sensation d'oreilles nettes et légères. Sans rien enfoncer.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "checklist": {
+              "type": "ceriva-checklist",
+              "settings": {},
+              "blocks": {
+                "check_1": {
+                  "type": "_ceriva-check-item",
+                  "settings": {
+                    "text": "<p><strong>Des oreilles qui respirent</strong> : fini cette sensation de bouchon</p>"
+                  }
+                },
+                "check_2": {
+                  "type": "_ceriva-check-item",
+                  "settings": {
+                    "text": "<p><strong>Il retire au lieu d'enfoncer</strong> : l'embout adhésif capte le cérumen au contact</p>"
+                  }
+                },
+                "check_3": {
+                  "type": "_ceriva-check-item",
+                  "settings": {
+                    "text": "<p><strong>Vous voyez le résultat</strong>, directement sur l'embout</p>"
+                  }
+                },
+                "check_4": {
+                  "type": "_ceriva-check-item",
+                  "settings": {
+                    "text": "<p><strong>Rinçable et réutilisable</strong> : un stick remplace des dizaines de cotons-tiges</p>"
+                  }
+                }
+              },
+              "block_order": [
+                "check_1",
+                "check_2",
+                "check_3",
+                "check_4"
+              ]
+            },
+            "stock": {
+              "type": "ceriva-stock-bar",
+              "settings": {
+                "label": "En stock — expédié sous 24/48 h",
+                "right_label": "Offre de lancement",
+                "show_bar": false,
+                "fill": 80,
+                "use_inventory": true,
+                "low_threshold": 20,
+                "low_label": "Plus que [n] en stock"
+              }
+            },
+            "bundles": {
+              "type": "ceriva-bundle-picker",
+              "settings": {
+                "heading": "Offre de lancement",
+                "subheading": "Dans la limite des stocks disponibles",
+                "hide_native_picker": true,
+                "hide_quantity": true
+              },
+              "blocks": {
+                "tier_1": {
+                  "type": "_ceriva-bundle-tier",
+                  "settings": {
+                    "option_value": "1 boîte",
+                    "variant_position": 1,
+                    "title": "1 boîte",
+                    "caption": "24 sticks",
+                    "gift": "",
+                    "badge": "",
+                    "preselect": false,
+                    "boxes": 1,
+                    "show_per_box": true,
+                    "show_savings": true
+                  }
+                },
+                "tier_2": {
+                  "type": "_ceriva-bundle-tier",
+                  "settings": {
+                    "option_value": "1 achetée + 1 offerte",
+                    "variant_position": 2,
+                    "title": "1 achetée + 1 offerte",
+                    "caption": "48 sticks",
+                    "gift": "",
+                    "badge": "Le plus choisi",
+                    "preselect": true,
+                    "boxes": 2,
+                    "show_per_box": true,
+                    "show_savings": true
+                  }
+                },
+                "tier_3": {
+                  "type": "_ceriva-bundle-tier",
+                  "settings": {
+                    "option_value": "2 achetées + 2 offertes",
+                    "variant_position": 3,
+                    "title": "2 achetées + 2 offertes",
+                    "caption": "96 sticks · une boîte pour chacun",
+                    "gift": "",
+                    "badge": "Meilleure valeur",
+                    "preselect": false,
+                    "boxes": 4,
+                    "show_per_box": true,
+                    "show_savings": true
+                  }
+                }
+              },
+              "block_order": [
+                "tier_1",
+                "tier_2",
+                "tier_3"
+              ]
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "trust": {
+              "type": "ceriva-trust-row",
+              "settings": {
+                "item_1": "Satisfait ou remboursé 30 jours",
+                "item_2": "Livraison offerte",
+                "item_3": "Paiement sécurisé"
+              }
+            },
+            "payment_icons": {
+              "type": "payment-icons",
+              "settings": {
+                "horizontal_alignment": "center",
+                "gap": 8,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "h6",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "row_description": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Description",
+                    "open_by_default": true,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Ceriva est un stick auriculaire à embout adhésif, pensé pour nettoyer l'entrée du conduit en douceur. Au contact, l'embout souple capte le cérumen et les résidus, puis les ramène vers l'extérieur, là où le coton-tige a tendance à les tasser.</p><p>Un quart de tour, vous retirez, et vous voyez exactement ce qui est sorti. Ensuite ? Un rinçage à l'eau tiède, et le stick est prêt pour la prochaine fois.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_vs": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Pourquoi c'est mieux qu'un coton-tige",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Le coton-tige donne l'impression de nettoyer, mais il repousse souvent une partie du cérumen plus loin. Résultat : ça s'accumule. Ceriva fait l'inverse :</p><ul><li><strong>Il retire</strong> au lieu de tasser</li><li><strong>Aucune fibre</strong> laissée dans l'oreille</li><li><strong>Plus doux</strong> pour les peaux sensibles : pas de frottement</li><li><strong>Vous voyez le résultat</strong> sur l'embout, à chaque fois</li><li><strong>Moins d'encombrement</strong> au fil du temps, des oreilles plus légères</li></ul>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_box": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Contenu de la boîte",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<ul><li>24 sticks adhésifs réutilisables</li><li>Jusqu'à 30 utilisations par stick, rincé après chaque usage</li><li>Une boîte de rangement hygiénique</li></ul>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_guarantee": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Satisfait ou remboursé 30 jours",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Essayez Ceriva pendant <strong>30 jours</strong>. Si vous n'êtes pas convaincu, écrivez-nous dans les 30 jours suivant la réception : nous vous remboursons <strong>intégralement</strong>. Sans justificatif, sans discussion.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_shipping": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Livraison & retours",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>Livraison :</strong> offerte en France. Commandes expédiées sous 24 à 48 h, livrées en 3 à 5 jours ouvrés. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p><p><strong>Retours :</strong> contactez-nous via la page Contact (ou en répondant à votre e-mail de confirmation) avec votre numéro de commande, dans les 30 jours suivant la réception. Une fois le retour validé, le remboursement est effectué sur votre moyen de paiement d'origine.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_description",
+                "row_vs",
+                "row_box",
+                "row_guarantee",
+                "row_shipping"
+              ]
+            }
+          },
+          "block_order": [
+            "rating",
+            "title",
+            "subtitle",
+            "checklist",
+            "stock",
+            "bundles",
+            "variant_picker",
+            "buy_buttons",
+            "trust",
+            "payment_icons",
+            "accordion"
+          ]
+        }
+      },
+      "block_order": [],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": true,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "padding-block-start": 24,
+        "padding-block-end": 48
+      }
+    },
+    "cv_ugc": {
+      "type": "ceriva-ugc-videos",
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "De vrais gens · De vrais résultats",
+        "title": "Regardez ce qui sort",
+        "text": "<p>Un quart de tour, et le résultat reste sur l'embout. Sans filtre, sans retouche.</p>",
+        "swipe_hint": "Glissez pour voir la suite →",
+        "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
+        "proof_title": "Ils ont rangé leurs cotons-tiges pour de bon",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "caption": "",
+            "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout"
+          }
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {
+            "caption": "",
+            "placeholder_label": "UGC : réaction « je n'en revenais pas »"
+          }
+        },
+        "video_3": {
+          "type": "video",
+          "settings": {
+            "caption": "",
+            "placeholder_label": "UGC : rinçage du stick sous l'eau tiède"
+          }
+        },
+        "video_4": {
+          "type": "video",
+          "settings": {
+            "caption": "",
+            "placeholder_label": "UGC : utilisateur d'écouteurs intra"
+          }
+        },
+        "video_5": {
+          "type": "video",
+          "settings": {
+            "caption": "",
+            "placeholder_label": "UGC : ouverture de la boîte Ceriva"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3",
+        "video_4",
+        "video_5"
+      ]
+    },
+    "cv_problem": {
+      "type": "ceriva-problem",
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Le vrai problème",
+        "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
+        "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "point_1": {
+          "type": "point",
+          "settings": {
+            "title": "Il tasse au lieu de retirer",
+            "text": "<p>Le coton-tige agit comme un piston : il repousse une partie du cérumen vers le fond du conduit, là où il s'accumule et donne cette impression d'oreille pleine.</p>"
+          }
+        },
+        "point_2": {
+          "type": "point",
+          "settings": {
+            "title": "Il laisse des fibres derrière lui",
+            "text": "<p>Le coton s'effiloche. Ces fibres restent dans l'oreille, se mêlent au cérumen et entretiennent l'encombrement.</p>"
+          }
+        },
+        "point_3": {
+          "type": "point",
+          "settings": {
+            "title": "Il entretient les démangeaisons",
+            "text": "<p>Frotter irrite une peau très fine. Une peau irritée gratte davantage… alors on recommence. Et le cercle continue.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3"
+      ]
+    },
+    "cv_solution": {
+      "type": "ceriva-media-list",
+      "settings": {
+        "tone": "ice",
+        "list_style": "checks",
+        "media_position": "left",
+        "ratio": "portrait",
+        "placeholder_label": "Lifestyle : utilisatrice souriante, stick Ceriva en main, fond clair",
+        "eyebrow": "La différence Ceriva",
+        "title": "Pourquoi ils passent à Ceriva",
+        "text": "<p>Le geste que vous faites depuis toujours. Enfin fait correctement.</p>",
+        "button_label": "Je choisis mon offre",
+        "button_link": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Il capte, il ne pousse pas",
+            "text": "<p>L'embout adhésif accroche le cérumen au contact et le ramène avec lui. Rien n'est repoussé plus loin.</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Souple, jamais agressif",
+            "text": "<p>L'embout épouse la forme de l'oreille. Pas de raclage, pas de grattage : un geste doux et maîtrisé.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Le résultat sous vos yeux",
+            "text": "<p>Après chaque passage, vous voyez ce qui est sorti. Étrangement satisfaisant, et surtout rassurant.</p>"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "title": "Rincé, il repart à neuf",
+            "text": "<p>Un passage sous l'eau tiède et l'adhérence revient. Un seul stick vous accompagne pendant des semaines.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
+    },
+    "cv_steps": {
+      "type": "ceriva-steps",
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Mode d'emploi",
+        "title": "Des oreilles nettes en 3 gestes",
+        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
+        "step_label": "Étape",
+        "note": "Usage externe uniquement : n'insérez jamais le stick au-delà de l'entrée du conduit. En cas de douleur, d'infection ou de tympan perforé, demandez l'avis d'un professionnel de santé.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "placeholder_label": "Étape 1 : embout posé à l'entrée du conduit (gros plan)",
+            "title": "Placez",
+            "text": "<p>Posez délicatement l'embout à l'entrée du conduit. Jamais en profondeur, jamais en forçant.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "placeholder_label": "Étape 2 : main qui fait tourner le stick d'un quart de tour",
+            "title": "Tournez",
+            "text": "<p>Un quart de tour, avec une pression légère : l'embout capte le cérumen au contact.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "placeholder_label": "Étape 3 : embout avec résidus visibles, puis rinçage",
+            "title": "Retirez & rincez",
+            "text": "<p>Sortez le stick, constatez le résultat, puis rincez-le à l'eau tiède. Il est prêt pour la prochaine fois.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "cv_value": {
+      "type": "ceriva-value",
+      "settings": {
+        "tone": "navy",
+        "eyebrow": "Réutilisable",
+        "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
+        "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
+        "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "24",
+            "label": "sticks par boîte"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "30*",
+            "label": "utilisations par stick"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "720*",
+            "label": "utilisations par boîte"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ]
+    },
+    "cv_specs": {
+      "type": "ceriva-media-list",
+      "settings": {
+        "tone": "white",
+        "list_style": "rows",
+        "media_position": "right",
+        "ratio": "square",
+        "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
+        "eyebrow": "En bref",
+        "title": "Ceriva, en détail",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Pour qui",
+            "text": "<p>Oreilles qui grattent ou se sentent bouchées, porteurs d'écouteurs, et tous ceux qui veulent arrêter le coton-tige.</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Sensation",
+            "text": "<p>Un embout souple qui épouse l'oreille. Ni raclage, ni frottement.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Comment ça agit",
+            "text": "<p>L'embout adhésif capte cérumen et résidus au contact, et les ramène vers l'extérieur.</p>"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "title": "Prise en main",
+            "text": "<p>Une tige fine et une prise ferme, pour un geste précis à l'entrée du conduit.</p>"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "title": "Entretien",
+            "text": "<p>Rinçage à l'eau tiède, séchage à l'air libre.</p>"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "title": "Sans",
+            "text": "<p>Fibres de coton, bords métalliques, gouttes ni liquides.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6"
+      ]
+    },
+    "cv_comparison": {
+      "type": "ceriva-comparison",
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "Comparatif",
+        "title": "Ceriva ou coton-tige ?",
+        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
+        "col_benefit": "Critère",
+        "col_us": "Ceriva",
+        "col_them": "Coton-tige",
+        "button_label": "Je passe à Ceriva",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Retire le cérumen au lieu de le tasser",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Ne laisse aucune fibre dans l'oreille",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Embout souple qui épouse l'oreille",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Vous montre ce qui a été retiré",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Réutilisable après rinçage",
+            "us": true,
+            "them": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "cv_reviews": {
+      "type": "ceriva-reviews",
+      "settings": {
+        "sample_notice": true,
+        "tone": "white",
+        "eyebrow": "Avis vérifiés",
+        "title": "Ce qu'en disent nos clients",
+        "show_summary": true,
+        "score": "4,8",
+        "count_label": "1 200+ avis vérifiés",
+        "share_5": 82,
+        "share_4": 12,
+        "share_3": 4,
+        "share_2": 1,
+        "share_1": 1,
+        "visible_count": 6,
+        "more_label": "Voir plus d'avis",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "Photo client : embout après usage",
+            "title": "Je ne pensais pas en avoir autant",
+            "text": "<p>J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu.</p>",
+            "author": "Camille R.",
+            "detail": "Lyon",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "Photo client : boîte Ceriva sur un bureau, écouteurs à côté",
+            "title": "Indispensable avec mes écouteurs",
+            "text": "<p>Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva une fois par semaine, plus aucune gêne, et mes écouteurs restent propres.</p>",
+            "author": "Thomas L.",
+            "detail": "Nantes",
+            "verified": true
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "Photo client : stick en main",
+            "title": "Très doux, aucune douleur",
+            "text": "<p>J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini.</p>",
+            "author": "Nadia B.",
+            "detail": "Marseille",
+            "verified": true
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "",
+            "title": "Le rinçage marche vraiment",
+            "text": "<p>J'étais sceptique sur le côté réutilisable. Un coup d'eau tiède, on laisse sécher, et il accroche comme au premier jour. Je n'ai plus racheté de cotons-tiges.</p>",
+            "author": "Julien M.",
+            "detail": "Bordeaux",
+            "verified": true
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "",
+            "title": "Toute la famille a adopté",
+            "text": "<p>Une boîte, un stick chacun. Mon mari, qui ne jurait que par les cotons-tiges, ne veut plus revenir en arrière.</p>",
+            "author": "Sophie D.",
+            "detail": "Lille",
+            "verified": true
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "placeholder_label": "",
+            "title": "Simple et efficace",
+            "text": "<p>Livré rapidement, facile à utiliser dès la première fois. Le genre de produit dont on se demande comment on faisait avant.</p>",
+            "author": "Marc P.",
+            "detail": "Toulouse",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6"
+      ]
+    },
+    "cv_faq": {
+      "type": "ceriva-faq",
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "FAQ",
+        "title": "Vos questions, nos réponses",
+        "text": "",
+        "open_first": true,
+        "contact": "<p>Une autre question ? <a href=\"/pages/contact\">Écrivez-nous</a>, nous vous répondons rapidement.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce que ça fait mal ?",
+            "answer": "<p>Non. L'embout est souple et le geste ne demande aucune pression : vous le placez à l'entrée du conduit, vous tournez doucement, vous retirez. Si vous ressentez la moindre gêne, arrêtez.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "Est-ce que je risque d'aller trop loin ?",
+            "answer": "<p>Ceriva s'utilise uniquement à l'entrée du conduit auditif. La tige est pensée pour un geste en surface : n'insérez jamais au-delà de ce qui entre naturellement, et ne forcez jamais.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "En quoi est-ce différent d'un coton-tige ?",
+            "answer": "<p>Le coton-tige a tendance à repousser le cérumen et peut laisser des fibres. L'embout adhésif de Ceriva capte les résidus au contact et les ramène vers l'extérieur. En prime, vous voyez ce qui a été retiré.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Comment réutiliser un stick ?",
+            "answer": "<p>Rincez l'embout à l'eau tiède jusqu'à ce que l'adhérence revienne, puis laissez sécher à l'air libre. Il est prêt pour la prochaine fois. Comme une brosse à dents, un stick reste personnel.</p>"
+          }
+        },
+        "question_5": {
+          "type": "question",
+          "settings": {
+            "question": "À quelle fréquence l'utiliser ?",
+            "answer": "<p>Une à deux fois par semaine suffit pour la plupart des gens. L'oreille se nettoie aussi naturellement : inutile d'en faire trop.</p>"
+          }
+        },
+        "question_6": {
+          "type": "question",
+          "settings": {
+            "question": "Convient-il aux enfants ?",
+            "answer": "<p>Ceriva est conçu pour les adultes. Pour un enfant, demandez d'abord l'avis d'un professionnel de santé.</p>"
+          }
+        },
+        "question_7": {
+          "type": "question",
+          "settings": {
+            "question": "Dans quels cas ne pas l'utiliser ?",
+            "answer": "<p>En cas de douleur, d'infection, d'écoulement, de tympan perforé ou d'opération récente de l'oreille, n'utilisez pas Ceriva et consultez un professionnel de santé.</p>"
+          }
+        },
+        "question_8": {
+          "type": "question",
+          "settings": {
+            "question": "Quand vais-je recevoir ma commande ?",
+            "answer": "<p>Les commandes sont expédiées sous 24 à 48 h, puis livrées en 3 à 5 jours ouvrés en France. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p>"
+          }
+        },
+        "question_9": {
+          "type": "question",
+          "settings": {
+            "question": "Et si ça ne me convient pas ?",
+            "answer": "<p>Vous avez 30 jours après réception pour nous écrire. Nous vous remboursons intégralement, sans justificatif.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4",
+        "question_5",
+        "question_6",
+        "question_7",
+        "question_8",
+        "question_9"
+      ]
+    },
+    "cv_guarantee": {
+      "type": "ceriva-guarantee",
+      "settings": {
+        "tone": "white",
+        "seal_number": "30",
+        "seal_label": "jours",
+        "eyebrow": "Essai sans risque",
+        "title": "30 jours pour sentir la différence",
+        "text": "<p>Essayez Ceriva pendant 30 jours. Si vos oreilles ne vous semblent pas plus nettes et plus légères, écrivez-nous : nous vous remboursons intégralement. Sans justificatif, sans discussion.</p>",
+        "button_label": "J'essaie Ceriva sans risque",
+        "ticks": "Livraison offerte | Remboursement intégral | Paiement sécurisé",
+        "padding_top": 48,
+        "padding_bottom": 80
+      }
+    }
+  },
+  "order": [
+    "cv_marquee",
+    "main",
+    "cv_ugc",
+    "cv_problem",
+    "cv_solution",
+    "cv_steps",
+    "cv_value",
+    "cv_specs",
+    "cv_comparison",
+    "cv_reviews",
+    "cv_faq",
+    "cv_guarantee"
+  ]
+}

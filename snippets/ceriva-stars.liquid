@@ -1,0 +1,24 @@
+{% doc %}
+  Renders five Ceriva star icons.
+
+  @param {string} [size] - Star size in px, e.g. '16'
+
+  @example
+  {% render 'ceriva-stars', size: '18' %}
+{% enddoc %}
+<span
+  class="cv-stars"
+  {% if size %}
+    style="--cv-star: {{ size }}px;"
+  {% endif %}
+  aria-hidden="true"
+>
+  {%- for i in (1..5) -%}
+    <svg
+      viewBox="0 0 20 20"
+      fill="currentColor"
+    >
+      <path d="M10 1.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L10 14.9l-5.2 2.8 1-5.9L1.5 7.7l5.9-.8L10 1.5z"/>
+    </svg>
+  {%- endfor -%}
+</span>

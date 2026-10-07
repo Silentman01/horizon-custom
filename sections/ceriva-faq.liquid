@@ -1,0 +1,176 @@
+<div
+  class="cv cv--{{ section.settings.tone }} cv-faq"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px; --cv-max: 820px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="cv-faq__list cv-reveal">
+      {%- for block in section.blocks -%}
+        <details
+          class="cv-faq__item"
+          {% if section.settings.open_first and forloop.first %}
+            open
+          {% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <summary class="cv-faq__q">
+            <span>{{ block.settings.question }}</span>
+            <span
+              class="cv-faq__icon"
+              aria-hidden="true"
+            ></span>
+          </summary>
+          <div class="cv-faq__a cv__rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.contact != blank -%}
+      <div class="cv-faq__contact cv__rte">{{ section.settings.contact }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {%- for block in section.blocks -%}
+        {
+          "@type": "Question",
+          "name": {{ block.settings.question | json }},
+          "acceptedAnswer": { "@type": "Answer", "text": {{ block.settings.answer | strip_html | json }} }
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% stylesheet %}
+  .cv-faq__list {
+    border-top: 1px solid var(--cv-line);
+  }
+
+  .cv-faq__item {
+    border-bottom: 1px solid var(--cv-line);
+  }
+
+  .cv-faq__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .cv-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .cv-faq__q:focus-visible {
+    outline: 2px solid var(--cv-blue);
+    outline-offset: 4px;
+  }
+
+  .cv-faq__icon {
+    position: relative;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--cv-blue);
+  }
+
+  .cv-faq__icon::before,
+  .cv-faq__icon::after {
+    content: '';
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 12px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--cv-white);
+    transform: translate(-50%, -50%);
+    transition: transform 0.2s ease;
+  }
+
+  .cv-faq__icon::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+  }
+
+  .cv-faq__item[open] .cv-faq__icon::after {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  .cv-faq__a {
+    padding: 0 44px 22px 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cv-faq__contact {
+    margin-top: 28px;
+    font-size: 14px;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — FAQ",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "ice"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Vos questions, nos réponses" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "checkbox", "id": "open_first", "label": "Ouvrir la première question", "default": false },
+    { "type": "richtext", "id": "contact", "label": "Ligne contact" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question ?" },
+        { "type": "richtext", "id": "answer", "label": "Réponse", "default": "<p>Réponse.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — FAQ",
+      "blocks": [{ "type": "question" }, { "type": "question" }, { "type": "question" }]
+    }
+  ]
+}
+{% endschema %}

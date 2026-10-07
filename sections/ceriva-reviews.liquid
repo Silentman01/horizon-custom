@@ -1,0 +1,394 @@
+{%- liquid
+  assign ss = section.settings
+  assign review_count = 0
+  for block in section.blocks
+    if block.type == 'review'
+      assign review_count = review_count | plus: 1
+    endif
+  endfor
+-%}
+<div
+  id="avis"
+  class="cv cv--{{ ss.tone }} cv-rev"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ ss.padding_top }}px; --cv-pb: {{ ss.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    {%- if request.design_mode and ss.sample_notice -%}
+      <p class="cv-rev__notice">
+        Avis d'exemple : remplacez-les par de vrais avis clients vérifiés (ou une app d'avis) avant publication, puis
+        décochez « Avis d'exemple ».
+      </p>
+    {%- endif -%}
+
+    <div class="cv__head cv-reveal">
+      {%- if ss.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ ss.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ ss.title }}</h2>
+    </div>
+
+    {%- if ss.show_summary -%}
+      <div class="cv-rev__summary cv-reveal">
+        <div class="cv-rev__score">
+          <span class="cv-rev__score-num">{{ ss.score }}</span>
+          {% render 'ceriva-stars', size: '20' %}
+          <span class="cv-rev__score-count">{{ ss.count_label }}</span>
+        </div>
+        <ul class="cv-rev__bars">
+          {%- assign shares = ss.share_5 | append: ',' | append: ss.share_4 | append: ',' | append: ss.share_3 | append: ',' | append: ss.share_2 | append: ',' | append: ss.share_1 | split: ',' -%}
+          {%- for share in shares -%}
+            {%- assign stars = 6 | minus: forloop.index -%}
+            <li class="cv-rev__bar">
+              <span>{{ stars }} ★</span>
+              <span
+                class="cv-rev__track"
+                aria-hidden="true"
+              >
+                <span style="width: {{ share }}%;"></span>
+              </span>
+              <span>{{ share }} %</span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    <ceriva-reviews
+      class="cv-rev__grid"
+      data-step="{{ ss.visible_count }}"
+    >
+      {%- assign index = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when '@app' -%}
+            <div class="cv-rev__app">{% render block %}</div>
+          {%- when 'review' -%}
+            {%- assign index = index | plus: 1 -%}
+            <article
+              class="cv-rev__card"
+              {% if index > ss.visible_count and request.design_mode == false %}
+                hidden
+              {% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if block.settings.image or block.settings.placeholder_label != blank -%}
+                {% render 'ceriva-media',
+                  image: block.settings.image,
+                  ratio: '4 / 3',
+                  label: block.settings.placeholder_label,
+                  dims: '1200 × 900',
+                  sizes: '(min-width: 990px) 360px, 100vw',
+                  class: 'cv-rev__media'
+                %}
+              {%- endif -%}
+              <div class="cv-rev__body">
+                <div class="cv-rev__meta">
+                  {% render 'ceriva-stars', size: '15' %}
+                  {%- if block.settings.verified -%}
+                    <span class="cv-rev__verified">
+                      <svg
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        aria-hidden="true"
+                      >
+                        <path d="M2.5 6.2l2.3 2.3 4.7-5"/>
+                      </svg>
+                      Achat vérifié
+                    </span>
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.title != blank -%}
+                  <h3 class="cv-rev__title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                <div class="cv-rev__text cv__rte">{{ block.settings.text }}</div>
+                <p class="cv-rev__author">
+                  <strong>{{ block.settings.author }}</strong>
+                  {%- if block.settings.detail != blank %} · {{ block.settings.detail }}{% endif -%}
+                </p>
+              </div>
+            </article>
+        {%- endcase -%}
+      {%- endfor -%}
+
+      {%- if review_count > ss.visible_count -%}
+        <div class="cv-rev__more">
+          <button
+            type="button"
+            class="cv-btn cv-rev__more-btn"
+            data-more
+          >
+            {{ ss.more_label }}
+          </button>
+        </div>
+      {%- endif -%}
+    </ceriva-reviews>
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-rev__notice {
+    margin: 0 0 24px;
+    padding: 12px 16px;
+    border: 1.5px dashed var(--cv-blue);
+    border-radius: var(--cv-radius);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cv-rev__summary {
+    display: grid;
+    gap: 24px;
+    align-items: center;
+    max-width: 720px;
+    margin: 0 auto 36px;
+    padding: 24px;
+    border-radius: var(--cv-radius-lg);
+    background: var(--cv-card);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-rev__summary {
+      grid-template-columns: 220px 1fr;
+      gap: 40px;
+      padding: 28px 36px;
+    }
+  }
+
+  .cv-rev__score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  .cv-rev__score-num {
+    font-family: var(--font-heading--family);
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .cv-rev__score-count {
+    font-size: 14px;
+  }
+
+  .cv-rev__bars {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-rev__bar {
+    display: grid;
+    grid-template-columns: 36px 1fr 44px;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .cv-rev__bar > span:last-child {
+    text-align: right;
+  }
+
+  .cv-rev__track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(var(--cv-navy-rgb) / 0.1);
+    overflow: hidden;
+  }
+
+  .cv--navy .cv-rev__track {
+    background: rgb(255 255 255 / 0.15);
+  }
+
+  .cv-rev__track > span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cv-blue);
+  }
+
+  .cv-rev__grid {
+    display: grid;
+    gap: 16px;
+    align-items: start;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-rev__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+
+  .cv-rev__app,
+  .cv-rev__more {
+    grid-column: 1 / -1;
+  }
+
+  .cv-rev__more {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .cv-rev__card {
+    overflow: hidden;
+    border: 1px solid var(--cv-line);
+    border-radius: var(--cv-radius-lg);
+    background: var(--cv-card);
+  }
+
+  .cv-rev__card[hidden] {
+    display: none;
+  }
+
+  .cv-rev__media {
+    --cv-media-radius: 0;
+  }
+
+  .cv-rev__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 18px;
+  }
+
+  .cv-rev__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cv-rev__verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--cv-blue);
+    color: var(--cv-white);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .cv-rev__verified svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .cv-rev__title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--cv-fg);
+  }
+
+  .cv-rev__text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .cv-rev__author {
+    margin: 4px 0 0;
+    font-size: 13px;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('ceriva-reviews')) {
+    customElements.define(
+      'ceriva-reviews',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.querySelector('[data-more]')?.addEventListener('click', (event) => {
+            const step = Number(this.dataset.step) || 6;
+            const hidden = [...this.querySelectorAll('.cv-rev__card[hidden]')];
+            hidden.slice(0, step).forEach((card) => card.removeAttribute('hidden'));
+            if (hidden.length <= step) event.currentTarget.closest('.cv-rev__more')?.remove();
+          });
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Ceriva — Avis clients",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "sample_notice",
+      "label": "Avis d'exemple",
+      "info": "Affiche un rappel dans l'éditeur tant que les avis ne sont pas réels. Publier de faux avis est interdit (Code de la consommation).",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "ice"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ce qu'en disent nos clients" },
+    { "type": "header", "content": "Résumé" },
+    { "type": "checkbox", "id": "show_summary", "label": "Afficher le résumé", "default": true },
+    { "type": "text", "id": "score", "label": "Note moyenne", "default": "4,8" },
+    { "type": "text", "id": "count_label", "label": "Nombre d'avis", "default": "1 200+ avis vérifiés" },
+    { "type": "range", "id": "share_5", "label": "% 5 étoiles", "min": 0, "max": 100, "step": 1, "default": 82 },
+    { "type": "range", "id": "share_4", "label": "% 4 étoiles", "min": 0, "max": 100, "step": 1, "default": 12 },
+    { "type": "range", "id": "share_3", "label": "% 3 étoiles", "min": 0, "max": 100, "step": 1, "default": 4 },
+    { "type": "range", "id": "share_2", "label": "% 2 étoiles", "min": 0, "max": 100, "step": 1, "default": 1 },
+    { "type": "range", "id": "share_1", "label": "% 1 étoile", "min": 0, "max": 100, "step": 1, "default": 1 },
+    { "type": "header", "content": "Liste" },
+    { "type": "range", "id": "visible_count", "label": "Avis visibles au départ", "min": 3, "max": 12, "step": 3, "default": 6 },
+    { "type": "text", "id": "more_label", "label": "Bouton « plus d'avis »", "default": "Voir plus d'avis" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    { "type": "@app" },
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo client" },
+        { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement photo", "info": "Laissez vide pour un avis sans photo." },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "richtext", "id": "text", "label": "Avis", "default": "<p>Texte de l'avis.</p>" },
+        { "type": "text", "id": "author", "label": "Prénom + initiale", "default": "Prénom N." },
+        { "type": "text", "id": "detail", "label": "Détail", "info": "Ex. ville ou date." },
+        { "type": "checkbox", "id": "verified", "label": "Achat vérifié", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Avis clients",
+      "blocks": [{ "type": "review" }, { "type": "review" }, { "type": "review" }]
+    }
+  ]
+}
+{% endschema %}

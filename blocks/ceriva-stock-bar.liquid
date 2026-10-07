@@ -1,0 +1,185 @@
+{%- liquid
+  assign product_resource = closest.product
+  assign variant = product_resource.selected_or_first_available_variant
+  assign fill = block.settings.fill
+  assign label = block.settings.label
+
+  # Real inventory takes over when tracked and low, so the message is never invented.
+  if block.settings.use_inventory and variant.inventory_management == 'shopify' and variant.inventory_quantity > 0
+    if variant.inventory_quantity <= block.settings.low_threshold
+      assign label = block.settings.low_label | replace: '[n]', variant.inventory_quantity
+    endif
+  endif
+-%}
+<div
+  class="cv cv-stock"
+  style="{% render 'ceriva-tokens' %} --cv-bg: transparent; --cv-fg: currentColor; --cv-fill: {{ fill }}%;"
+  {{ block.shopify_attributes }}
+>
+  <div class="cv-stock__row">
+    <span class="cv-stock__label">
+      <span
+        class="cv-stock__dot"
+        aria-hidden="true"
+      ></span>
+      {{ label }}
+    </span>
+    {%- if block.settings.right_label != blank -%}
+      <span class="cv-stock__right">{{ block.settings.right_label }}</span>
+    {%- endif -%}
+  </div>
+  {%- if block.settings.show_bar -%}
+    <div
+      class="cv-stock__track"
+      aria-hidden="true"
+    >
+      <span class="cv-stock__fill"></span>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .cv-stock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .cv-stock__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .cv-stock__label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cv-stock__dot {
+    position: relative;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cv-blue);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-stock__dot::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--cv-blue);
+      animation: cv-pulse 1.8s ease-out infinite;
+    }
+  }
+
+  @keyframes cv-pulse {
+    to {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+
+  .cv-stock__right {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cv-stock__track {
+    height: 8px;
+    border-radius: 999px;
+    background: rgb(var(--cv-navy-rgb) / 0.1);
+    overflow: hidden;
+  }
+
+  .cv-stock__fill {
+    display: block;
+    width: var(--cv-fill);
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cv-blue);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Stock",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Restez factuel : un compte à rebours ou un stock fictif est une pratique commerciale trompeuse en France."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Message",
+      "default": "En stock — expédié sous 24/48 h"
+    },
+    {
+      "type": "text",
+      "id": "right_label",
+      "label": "Message à droite",
+      "default": "Offre de lancement"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bar",
+      "label": "Afficher la barre",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "fill",
+      "label": "Remplissage de la barre",
+      "min": 5,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Stock réel"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_inventory",
+      "label": "Utiliser le stock Shopify quand il est bas",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "low_threshold",
+      "label": "Seuil de stock bas",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "text",
+      "id": "low_label",
+      "label": "Message stock bas",
+      "info": "[n] = quantité restante.",
+      "default": "Plus que [n] en stock"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Stock",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

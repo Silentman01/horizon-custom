@@ -1,0 +1,272 @@
+{%- liquid
+  assign ss = section.settings
+  case ss.ratio
+    when 'portrait'
+      assign ratio = '4 / 5'
+      assign dims = '1080 × 1350'
+    when 'landscape'
+      assign ratio = '4 / 3'
+      assign dims = '1600 × 1200'
+    else
+      assign ratio = '1'
+      assign dims = '1200 × 1200'
+  endcase
+-%}
+<div
+  class="cv cv--{{ ss.tone }} cv-ml cv-ml--{{ ss.list_style }}{% if ss.media_position == 'right' %} cv-ml--media-right{% endif %}"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ ss.padding_top }}px; --cv-pb: {{ ss.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    <div class="cv-ml__grid">
+      <div class="cv-ml__media cv-reveal">
+        {% render 'ceriva-media',
+          image: ss.image,
+          ratio: ratio,
+          label: ss.placeholder_label,
+          dims: dims,
+          sizes: '(min-width: 990px) 520px, 100vw'
+        %}
+      </div>
+
+      <div class="cv-ml__content">
+        <div class="cv-ml__head cv-reveal">
+          {%- if ss.eyebrow != blank -%}
+            <p class="cv__eyebrow">{{ ss.eyebrow }}</p>
+          {%- endif -%}
+          <h2 class="cv__title">{{ ss.title }}</h2>
+          {%- if ss.text != blank -%}
+            <div class="cv__sub">{{ ss.text }}</div>
+          {%- endif -%}
+        </div>
+
+        {%- if ss.list_style == 'rows' -%}
+          <dl class="cv-ml__rows cv-reveal">
+            {%- for block in section.blocks -%}
+              <div
+                class="cv-ml__row"
+                {{ block.shopify_attributes }}
+              >
+                <dt>{{ block.settings.title }}</dt>
+                <dd class="cv__rte">{{ block.settings.text }}</dd>
+              </div>
+            {%- endfor -%}
+          </dl>
+        {%- else -%}
+          <ul class="cv-ml__checks">
+            {%- for block in section.blocks -%}
+              <li
+                class="cv-ml__check cv-reveal"
+                {{ block.shopify_attributes }}
+              >
+                {% render 'ceriva-check-icon' %}
+                <div>
+                  <h3 class="cv-ml__check-title">{{ block.settings.title }}</h3>
+                  <div class="cv-ml__check-text cv__rte">{{ block.settings.text }}</div>
+                </div>
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endif -%}
+
+        {%- if ss.button_label != blank -%}
+          <div class="cv-ml__cta cv-reveal">
+            <a
+              class="cv-btn"
+              href="{{ ss.button_link | default: '#MainContent' }}"
+              {% if ss.button_link == blank %}
+                data-cv-to-buy
+              {% endif %}
+            >
+              {{- ss.button_label -}}
+            </a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-ml__grid {
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-ml__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+
+    .cv-ml--media-right .cv-ml__media {
+      order: 2;
+    }
+  }
+
+  .cv-ml__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .cv-ml__head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cv-ml__head {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+  .cv-ml__checks {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-ml__check {
+    display: flex;
+    gap: 14px;
+  }
+
+  .cv-ml__check .cv-check {
+    width: 26px;
+    height: 26px;
+  }
+
+  .cv-ml__check-title {
+    margin: 2px 0 4px;
+    font-family: var(--font-heading--family);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--cv-fg);
+  }
+
+  .cv-ml__check-text {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .cv-ml__rows {
+    margin: 0;
+    border-top: 1px solid var(--cv-line);
+  }
+
+  .cv-ml__row {
+    display: grid;
+    grid-template-columns: minmax(110px, 34%) 1fr;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--cv-line);
+  }
+
+  .cv-ml__row dt {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .cv-ml__row dd {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cv-ml__cta {
+      display: flex;
+      justify-content: center;
+    }
+
+    .cv-ml__cta .cv-btn {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Image + liste",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "ice"
+    },
+    {
+      "type": "select",
+      "id": "list_style",
+      "label": "Style de liste",
+      "options": [
+        { "value": "checks", "label": "Coches + titre" },
+        { "value": "rows", "label": "Fiche (libellé / texte)" }
+      ],
+      "default": "checks"
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "label": "Position de l'image (ordinateur)",
+      "options": [
+        { "value": "left", "label": "Gauche" },
+        { "value": "right", "label": "Droite" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Format de l'image",
+      "options": [
+        { "value": "square", "label": "Carré" },
+        { "value": "portrait", "label": "Portrait 4:5" },
+        { "value": "landscape", "label": "Paysage 4:3" }
+      ],
+      "default": "square"
+    },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "Photo produit Ceriva" },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "button_label", "label": "Bouton" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton", "info": "Vide = retour au bloc d'achat." },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Élément",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre / libellé", "default": "Élément" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Description</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Image + liste",
+      "blocks": [{ "type": "item" }, { "type": "item" }, { "type": "item" }]
+    }
+  ]
+}
+{% endschema %}

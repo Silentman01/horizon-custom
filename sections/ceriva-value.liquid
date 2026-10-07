@@ -1,0 +1,126 @@
+<div
+  class="cv cv--{{ section.settings.tone }} cv-value"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <ul class="cv-value__stats">
+      {%- for block in section.blocks -%}
+        <li
+          class="cv-value__stat cv-reveal"
+          {{ block.shopify_attributes }}
+        >
+          <span class="cv-value__number">{{ block.settings.number }}</span>
+          <span class="cv-value__label">{{ block.settings.label }}</span>
+        </li>
+      {%- endfor -%}
+    </ul>
+
+    {%- if section.settings.footnote != blank -%}
+      <p class="cv-value__footnote">{{ section.settings.footnote }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-value__stats {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-value__stats {
+      grid-auto-columns: 1fr;
+      grid-auto-flow: column;
+      gap: 20px;
+    }
+  }
+
+  .cv-value__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 24px 16px;
+    border: 1px solid var(--cv-line);
+    border-radius: var(--cv-radius-lg);
+    background: var(--cv-card);
+    text-align: center;
+  }
+
+  .cv-value__number {
+    font-family: var(--font-heading--family);
+    font-size: clamp(34px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--cv-blue);
+  }
+
+  .cv-value__label {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .cv-value__footnote {
+    margin: 20px 0 0;
+    font-size: 12px;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Valeur",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "navy", "label": "Bleu nuit" },
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" }
+      ],
+      "default": "navy"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Un stick. Des dizaines d'utilisations." },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "footnote", "label": "Note de bas" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Chiffre",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Chiffre", "default": "24" },
+        { "type": "text", "id": "label", "label": "Libellé", "default": "sticks par boîte" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Valeur",
+      "blocks": [{ "type": "stat" }, { "type": "stat" }, { "type": "stat" }]
+    }
+  ]
+}
+{% endschema %}

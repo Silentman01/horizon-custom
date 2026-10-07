@@ -1,0 +1,36 @@
+<li
+  class="cv-check-item"
+  {{ block.shopify_attributes }}
+>
+  {% render 'ceriva-check-icon' %}
+  <div class="cv-check-item__text cv__rte">{{ block.settings.text }}</div>
+</li>
+
+{% stylesheet %}
+  .cv-check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 1.45;
+  }
+
+  .cv-check-item .cv-check {
+    margin-top: 1px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Point",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p><strong>Bénéfice</strong> et sa preuve</p>"
+    }
+  ]
+}
+{% endschema %}

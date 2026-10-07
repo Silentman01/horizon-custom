@@ -1,0 +1,151 @@
+<div
+  class="cv cv--{{ section.settings.tone }} cv-problem"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="cv-problem__grid">
+      <div class="cv-problem__media cv-reveal">
+        {% render 'ceriva-media',
+          image: section.settings.image,
+          ratio: '1',
+          label: 'Illustration en coupe : coton-tige qui tasse le cérumen dans le conduit',
+          dims: '1200 × 1200',
+          sizes: '(min-width: 990px) 520px, 100vw'
+        %}
+      </div>
+
+      <ol class="cv-problem__list">
+        {%- for block in section.blocks -%}
+          <li
+            class="cv-problem__item cv-reveal"
+            {{ block.shopify_attributes }}
+          >
+            <span
+              class="cv-problem__num"
+              aria-hidden="true"
+            >
+              {{- forloop.index | prepend: '0' | slice: -2, 2 -}}
+            </span>
+            <div>
+              <h3 class="cv-problem__item-title">{{ block.settings.title }}</h3>
+              <div class="cv-problem__item-text cv__rte">{{ block.settings.text }}</div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-problem__grid {
+    display: grid;
+    gap: 28px;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-problem__grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+    }
+  }
+
+  .cv-problem__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-problem__item {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    border-radius: var(--cv-radius-lg);
+    background: var(--cv-card);
+  }
+
+  .cv-problem__num {
+    flex: none;
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--cv-blue);
+  }
+
+  .cv-problem__item-title {
+    margin: 2px 0 6px;
+    font-family: var(--font-heading--family);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--cv-fg);
+  }
+
+  .cv-problem__item-text {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Problème",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Pourquoi le coton-tige aggrave les choses" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "point",
+      "name": "Point",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Point" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Explication</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Problème",
+      "blocks": [
+        { "type": "point" },
+        { "type": "point" },
+        { "type": "point" }
+      ]
+    }
+  ]
+}
+{% endschema %}

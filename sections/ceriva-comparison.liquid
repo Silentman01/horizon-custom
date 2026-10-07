@@ -1,0 +1,238 @@
+{%- capture icon_yes -%}
+  <span class="cv-cmp__mark cv-cmp__mark--yes">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.2l2.3 2.3 4.7-5"/></svg>
+    <span class="visually-hidden">Oui</span>
+  </span>
+{%- endcapture -%}
+{%- capture icon_no -%}
+  <span class="cv-cmp__mark cv-cmp__mark--no">
+    <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l6 6M9 3l-6 6"/></svg>
+    <span class="visually-hidden">Non</span>
+  </span>
+{%- endcapture -%}
+
+<div
+  class="cv cv--{{ section.settings.tone }} cv-cmp"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px; --cv-max: 820px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <table class="cv-cmp__table cv-reveal">
+      <thead>
+        <tr>
+          <th scope="col">
+            <span class="visually-hidden">{{ section.settings.col_benefit }}</span>
+          </th>
+          <th
+            scope="col"
+            class="cv-cmp__us"
+          >
+            {%- if section.settings.logo -%}
+              {{ section.settings.logo | image_url: width: 240 | image_tag: alt: section.settings.col_us, class: 'cv-cmp__logo' }}
+            {%- else -%}
+              {{ section.settings.col_us }}
+            {%- endif -%}
+          </th>
+          <th scope="col">{{ section.settings.col_them }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row">{{ block.settings.label }}</th>
+            <td class="cv-cmp__us">
+              {%- if block.settings.us -%}{{ icon_yes }}{%- else -%}{{ icon_no }}{%- endif -%}
+            </td>
+            <td>
+              {%- if block.settings.them -%}{{ icon_yes }}{%- else -%}{{ icon_no }}{%- endif -%}
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="cv-cmp__cta cv-reveal">
+        <a
+          class="cv-btn"
+          href="#MainContent"
+          data-cv-to-buy
+        >
+          {{- section.settings.button_label -}}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-cmp__table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 15px;
+  }
+
+  .cv-cmp__table th,
+  .cv-cmp__table td {
+    padding: 16px 12px;
+    border-bottom: 1px solid var(--cv-line);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .cv-cmp__table tbody th {
+    font-weight: 600;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .cv-cmp__table thead th {
+    padding-block: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-bottom: 0;
+  }
+
+  .cv-cmp__table thead th:first-child {
+    width: 52%;
+  }
+
+  /* Highlighted Ceriva column reads as one raised card */
+  .cv-cmp__table .cv-cmp__us {
+    width: 24%;
+    background: var(--cv-navy);
+    color: var(--cv-white);
+    border-bottom-color: rgb(255 255 255 / 0.14);
+  }
+
+  .cv-cmp__table thead .cv-cmp__us {
+    border-radius: var(--cv-radius-lg) var(--cv-radius-lg) 0 0;
+  }
+
+  .cv-cmp__table tbody tr:last-child .cv-cmp__us {
+    border-bottom: 0;
+    border-radius: 0 0 var(--cv-radius-lg) var(--cv-radius-lg);
+  }
+
+  .cv--navy .cv-cmp__table .cv-cmp__us {
+    background: var(--cv-blue);
+  }
+
+  .cv-cmp__logo {
+    display: block;
+    max-width: 100px;
+    height: auto;
+    margin-inline: auto;
+  }
+
+  .cv-cmp__mark {
+    display: inline-grid;
+    place-items: center;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+  }
+
+  .cv-cmp__mark svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .cv-cmp__mark--yes {
+    background: var(--cv-blue);
+    color: var(--cv-white);
+  }
+
+  .cv-cmp__mark--no {
+    border: 1.5px solid currentColor;
+    opacity: 0.55;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cv-cmp__table {
+      font-size: 14px;
+    }
+
+    .cv-cmp__table th,
+    .cv-cmp__table td {
+      padding: 14px 8px;
+    }
+
+    .cv-cmp__table thead th {
+      font-size: 12px;
+    }
+  }
+
+  .cv-cmp__cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+  }
+
+  @media screen and (max-width: 749px) {
+    .cv-cmp__cta .cv-btn {
+      width: 100%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Comparatif",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "white", "label": "Blanc" },
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "white"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Ceriva ou coton-tige ?" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "col_benefit", "label": "En-tête colonne critères", "default": "Critère" },
+    { "type": "text", "id": "col_us", "label": "En-tête colonne Ceriva", "default": "Ceriva" },
+    { "type": "image_picker", "id": "logo", "label": "Logo Ceriva (version blanche)" },
+    { "type": "text", "id": "col_them", "label": "En-tête colonne concurrente", "default": "Coton-tige" },
+    { "type": "text", "id": "button_label", "label": "Bouton" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Ligne",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Critère", "default": "Critère" },
+        { "type": "checkbox", "id": "us", "label": "Ceriva : oui", "default": true },
+        { "type": "checkbox", "id": "them", "label": "Concurrent : oui", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Comparatif",
+      "blocks": [{ "type": "row" }, { "type": "row" }, { "type": "row" }]
+    }
+  ]
+}
+{% endschema %}

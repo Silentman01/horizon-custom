@@ -1,0 +1,191 @@
+<div
+  class="cv cv--{{ section.settings.tone }} cv-ugc"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div
+      class="cv-ugc__rail"
+      tabindex="0"
+      aria-label="{{ section.settings.title | strip_html | escape }}"
+    >
+      {%- for block in section.blocks -%}
+        <figure
+          class="cv-ugc__card"
+          {{ block.shopify_attributes }}
+        >
+          {% render 'ceriva-media',
+            video: block.settings.video,
+            image: block.settings.poster,
+            ratio: '9 / 16',
+            label: block.settings.placeholder_label,
+            dims: 'Vidéo 1080 × 1920',
+            sizes: '(min-width: 990px) 220px, 60vw'
+          %}
+          {%- if block.settings.caption != blank -%}
+            <figcaption class="cv-ugc__caption">{{ block.settings.caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.swipe_hint != blank -%}
+      <p
+        class="cv-ugc__hint"
+        aria-hidden="true"
+      >
+        {{ section.settings.swipe_hint }}
+      </p>
+    {%- endif -%}
+
+    {%- if section.settings.proof_title != blank -%}
+      <div class="cv-ugc__proof cv-reveal">
+        {% render 'ceriva-stars', size: '20' %}
+        <p class="cv-ugc__proof-line">{{ section.settings.proof_line }}</p>
+        <p class="cv-ugc__proof-title">{{ section.settings.proof_title }}</p>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-ugc__rail {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 62%;
+    gap: 12px;
+    margin-inline: calc(var(--cv-gutter) * -1);
+    padding-inline: var(--cv-gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--cv-gutter);
+    scrollbar-width: none;
+  }
+
+  .cv-ugc__rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-ugc__rail {
+      grid-auto-columns: calc((100% - 48px) / 5);
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+  }
+
+  .cv-ugc__card {
+    margin: 0;
+    scroll-snap-align: start;
+  }
+
+  .cv-ugc__card .cv-media {
+    box-shadow: 0 10px 24px rgb(var(--cv-navy-rgb) / 0.12);
+  }
+
+  .cv-ugc__caption {
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .cv-ugc__hint {
+    margin: 14px 0 0;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: var(--cv-blue);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-ugc__hint {
+      display: none;
+    }
+  }
+
+  .cv-ugc__proof {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin-top: 36px;
+    text-align: center;
+  }
+
+  .cv-ugc__proof-line {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .cv-ugc__proof-title {
+    margin: 0;
+    font-family: var(--font-heading--family);
+    font-size: clamp(20px, 3vw, 26px);
+    font-weight: 700;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Vidéos clients",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "ice"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "De vrais gens · De vrais résultats" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Regardez ce qui sort" },
+    { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un quart de tour, et le résultat est là, sur l'embout.</p>" },
+    { "type": "text", "id": "swipe_hint", "label": "Indication mobile", "default": "Glissez pour voir la suite →" },
+    { "type": "header", "content": "Preuve sociale" },
+    { "type": "text", "id": "proof_line", "label": "Ligne de note", "default": "Noté 4,8/5 par nos clients" },
+    { "type": "text", "id": "proof_title", "label": "Titre de preuve", "default": "Ils ont rangé leurs cotons-tiges" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Vidéo",
+      "settings": [
+        { "type": "video", "id": "video", "label": "Vidéo (format vertical 9:16)" },
+        { "type": "image_picker", "id": "poster", "label": "Image (si pas de vidéo)" },
+        { "type": "text", "id": "caption", "label": "Légende" },
+        { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "UGC : gros plan sur l'embout après usage" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Vidéos clients",
+      "blocks": [
+        { "type": "video", "settings": { "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout" } },
+        { "type": "video", "settings": { "placeholder_label": "UGC : réaction « je n'y croyais pas »" } },
+        { "type": "video", "settings": { "placeholder_label": "UGC : rinçage du stick sous l'eau" } },
+        { "type": "video", "settings": { "placeholder_label": "UGC : utilisatrice avec écouteurs" } },
+        { "type": "video", "settings": { "placeholder_label": "UGC : ouverture de la boîte Ceriva" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

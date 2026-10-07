@@ -1,0 +1,134 @@
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    <span
+      class="cv-marquee__item"
+      {{ block.shopify_attributes }}
+    >
+      {{- block.settings.text -}}
+    </span>
+    <span
+      class="cv-marquee__sep"
+      aria-hidden="true"
+    >✦</span>
+  {%- endfor -%}
+{%- endcapture -%}
+
+<div
+  class="cv cv--{{ section.settings.tone }} cv-marquee"
+  style="{% render 'ceriva-tokens' %} --cv-speed: {{ section.settings.speed }}s;"
+>
+  <div class="cv-marquee__track">
+    {%- for i in (1..4) -%}
+      <div
+        class="cv-marquee__group"
+        {% unless forloop.first %}
+          aria-hidden="true"
+        {% endunless %}
+      >
+        {{ items }}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-marquee {
+    overflow: hidden;
+    padding-block: 10px;
+  }
+
+  .cv-marquee__track {
+    display: flex;
+    width: max-content;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cv-marquee__track {
+      animation: cv-marquee var(--cv-speed, 30s) linear infinite;
+    }
+
+    .cv-marquee:hover .cv-marquee__track {
+      animation-play-state: paused;
+    }
+  }
+
+  .cv-marquee__group {
+    display: flex;
+    align-items: center;
+    flex: none;
+  }
+
+  .cv-marquee__item {
+    padding-inline: 18px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .cv-marquee__sep {
+    font-size: 10px;
+    color: var(--cv-blue);
+  }
+
+  @keyframes cv-marquee {
+    to {
+      transform: translateX(-25%);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Bandeau défilant",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "navy", "label": "Bleu nuit" },
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" }
+      ],
+      "default": "navy"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Durée d'un cycle",
+      "min": 10,
+      "max": 80,
+      "step": 2,
+      "unit": "s",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Message",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texte",
+          "default": "Livraison offerte"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Bandeau défilant",
+      "blocks": [
+        { "type": "item", "settings": { "text": "Livraison offerte en France" } },
+        { "type": "item", "settings": { "text": "Satisfait ou remboursé 30 jours" } },
+        { "type": "item", "settings": { "text": "Rinçable et réutilisable" } },
+        { "type": "item", "settings": { "text": "Expédié sous 24/48 h" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

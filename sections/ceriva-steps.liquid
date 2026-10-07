@@ -1,0 +1,161 @@
+<div
+  class="cv cv--{{ section.settings.tone }} cv-steps"
+  style="{% render 'ceriva-tokens' %} --cv-pt: {{ section.settings.padding_top }}px; --cv-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="cv__inner">
+    <div class="cv__head cv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="cv__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h2 class="cv__title">{{ section.settings.title }}</h2>
+      {%- if section.settings.text != blank -%}
+        <div class="cv__sub">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    <ol class="cv-steps__grid">
+      {%- for block in section.blocks -%}
+        <li
+          class="cv-steps__card cv-reveal"
+          style="transition-delay: {{ forloop.index0 | times: 90 }}ms;"
+          {{ block.shopify_attributes }}
+        >
+          {% render 'ceriva-media',
+            image: block.settings.image,
+            ratio: '1',
+            label: block.settings.placeholder_label,
+            dims: '1080 × 1080',
+            sizes: '(min-width: 990px) 340px, 100vw',
+            class: 'cv-steps__media'
+          %}
+          <div class="cv-steps__body">
+            <span class="cv-steps__label">{{ section.settings.step_label }} {{ forloop.index }}</span>
+            <h3 class="cv-steps__title">{{ block.settings.title }}</h3>
+            <div class="cv-steps__text cv__rte">{{ block.settings.text }}</div>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+
+    {%- if section.settings.note != blank -%}
+      <p class="cv-steps__note cv-reveal">{{ section.settings.note }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .cv-steps__grid {
+    display: grid;
+    gap: 16px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-steps__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+  }
+
+  .cv-steps__card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: var(--cv-radius-lg);
+    background: var(--cv-card);
+  }
+
+  .cv-steps__media {
+    --cv-media-radius: 0;
+  }
+
+  .cv-steps__body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+  }
+
+  .cv-steps__label {
+    align-self: flex-start;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--cv-blue);
+    color: var(--cv-white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cv-steps__title {
+    margin: 4px 0 0;
+    font-family: var(--font-heading--family);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--cv-fg);
+  }
+
+  .cv-steps__text {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .cv-steps__note {
+    max-width: 640px;
+    margin: 24px auto 0;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Étapes",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Fond",
+      "options": [
+        { "value": "ice", "label": "Blanc glacé" },
+        { "value": "white", "label": "Blanc" },
+        { "value": "navy", "label": "Bleu nuit" }
+      ],
+      "default": "ice"
+    },
+    { "type": "text", "id": "eyebrow", "label": "Surtitre" },
+    { "type": "text", "id": "title", "label": "Titre", "default": "Des oreilles nettes en 3 gestes" },
+    { "type": "richtext", "id": "text", "label": "Texte" },
+    { "type": "text", "id": "step_label", "label": "Libellé d'étape", "default": "Étape" },
+    { "type": "text", "id": "note", "label": "Note de sécurité" },
+    { "type": "header", "content": "Espacement" },
+    { "type": "range", "id": "padding_top", "label": "Haut", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bas", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "limit": 6,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "Photo de l'étape" },
+        { "type": "text", "id": "title", "label": "Titre", "default": "Étape" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Description</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Étapes",
+      "blocks": [{ "type": "step" }, { "type": "step" }, { "type": "step" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,103 @@
+{%- liquid
+  assign items = ''
+  if block.settings.item_1 != blank
+    assign items = items | append: 'shield|' | append: block.settings.item_1 | append: '~~'
+  endif
+  if block.settings.item_2 != blank
+    assign items = items | append: 'truck|' | append: block.settings.item_2 | append: '~~'
+  endif
+  if block.settings.item_3 != blank
+    assign items = items | append: 'lock|' | append: block.settings.item_3 | append: '~~'
+  endif
+  assign items = items | split: '~~'
+-%}
+<ul
+  class="cv cv-trust"
+  style="{% render 'ceriva-tokens' %} --cv-bg: transparent; --cv-fg: currentColor;"
+  {{ block.shopify_attributes }}
+>
+  {%- for item in items -%}
+    {%- assign parts = item | split: '|' -%}
+    <li class="cv-trust__item">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        {%- case parts[0] -%}
+          {%- when 'shield' -%}
+            <path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/>
+          {%- when 'truck' -%}
+            <path d="M3 6h11v9H3zM14 9h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/>
+          {%- else -%}
+            <rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>
+        {%- endcase -%}
+      </svg>
+      <span>{{ parts[1] }}</span>
+    </li>
+  {%- endfor -%}
+</ul>
+
+{% stylesheet %}
+  .cv-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 18px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-trust__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .cv-trust__item svg {
+    width: 18px;
+    height: 18px;
+    color: var(--cv-blue);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Ceriva — Réassurance",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Garantie",
+      "default": "Satisfait ou remboursé 30 jours"
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Livraison",
+      "default": "Livraison offerte"
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Paiement",
+      "default": "Paiement sécurisé"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Réassurance",
+      "category": "t:categories.product"
+    }
+  ]
+}
+{% endschema %}

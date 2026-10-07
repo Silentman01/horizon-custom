@@ -1,0 +1,242 @@
+{%- liquid
+  assign product_resource = closest.product
+  if request.visual_preview_mode and product_resource == blank
+    assign product_resource = collections.all.products.first
+  endif
+-%}
+
+{%- unless product_resource == blank -%}
+  <ceriva-bundle-picker
+    class="cv cvb"
+    style="{% render 'ceriva-tokens' %}"
+    {% if block.settings.hide_native_picker %}
+      data-hide-native
+    {% endif %}
+    {% if block.settings.hide_quantity %}
+      data-hide-quantity
+    {% endif %}
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.heading != blank -%}
+      <div class="cvb__head">
+        <p class="cvb__heading">{{ block.settings.heading }}</p>
+        {%- if block.settings.subheading != blank -%}
+          <p class="cvb__subheading">{{ block.settings.subheading }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div
+      class="cvb__tiers"
+      role="radiogroup"
+      aria-label="{{ block.settings.heading | default: 'Choisissez votre offre' | escape }}"
+    >
+      {% content_for 'blocks', closest.product: product_resource %}
+    </div>
+  </ceriva-bundle-picker>
+{%- endunless -%}
+
+{% stylesheet %}
+  .cvb {
+    --cv-bg: transparent;
+    --cv-fg: var(--cv-navy);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .cvb__head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .cvb__heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .cvb__heading::before,
+  .cvb__heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--cv-line);
+  }
+
+  .cvb__subheading {
+    margin: 0;
+    font-size: 12px;
+  }
+
+  .cvb__tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  /* The native picker and quantity stay in the DOM: the bundle cards drive them */
+  .product-details:has(.cvb[data-hide-native]) variant-picker,
+  .product-details:has(.cvb[data-hide-quantity]) .buy-buttons-block .quantity-selector-wrapper {
+    display: none;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('ceriva-bundle-picker')) {
+    class CerivaBundlePicker extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener('change', this.onChange);
+        customElements.whenDefined('variant-picker').then(() => this.syncInitialState());
+      }
+
+      /** Applies the default offer on first load, or mirrors the variant already in the URL. */
+      syncInitialState() {
+        const inputs = [...this.querySelectorAll('.cvb-tier__input')];
+        const checked = inputs.find((input) => input.checked);
+        const hasUrlVariant = new URL(window.location.href).searchParams.has('variant');
+
+        if (checked && checked.dataset.preselect !== undefined && !hasUrlVariant && checked.dataset.variantId) {
+          this.selectNativeVariant(checked.dataset.variantId);
+          return;
+        }
+
+        if (!checked) {
+          const current = this.currentNativeVariantId();
+          const match = inputs.find((input) => input.dataset.variantId === current) || inputs[0];
+          if (match) {
+            match.checked = true;
+            match.closest('.cvb-tier')?.classList.add('is-selected');
+          }
+        }
+      }
+
+      currentNativeVariantId() {
+        const picker = (this.closest('.shopify-section') || document).querySelector('variant-picker');
+        const radio = picker?.querySelector('input[type="radio"]:checked');
+        const option = picker?.querySelector('select option:checked');
+        return radio?.dataset.variantId || option?.dataset.variantId || '';
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener('change', this.onChange);
+      }
+
+      onChange = (event) => {
+        const input = event.target;
+        if (!(input instanceof HTMLInputElement) || !input.dataset.variantId) return;
+
+        this.querySelectorAll('.cvb-tier').forEach((tier) => {
+          tier.classList.toggle('is-selected', tier.contains(input));
+        });
+
+        this.selectNativeVariant(input.dataset.variantId);
+      };
+
+      /** Forwards the choice to Horizon's own variant picker so price, form, media and sticky bar update natively. */
+      selectNativeVariant(variantId) {
+        const scope = this.closest('.shopify-section') || document;
+        const picker = scope.querySelector('variant-picker');
+        if (!picker) return;
+
+        const radio = picker.querySelector(`input[type="radio"][data-variant-id="${variantId}"]`);
+        if (radio) {
+          if (!radio.checked) radio.click();
+          return;
+        }
+
+        const option = picker.querySelector(`option[data-variant-id="${variantId}"]`);
+        const select = option?.closest('select');
+        if (option && select && select.value !== option.value) {
+          select.value = option.value;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      }
+    }
+
+    customElements.define('ceriva-bundle-picker', CerivaBundlePicker);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Ceriva — Offres groupées",
+  "tag": null,
+  "blocks": [{ "type": "_ceriva-bundle-tier" }],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Chaque offre correspond à une variante du produit (ex. option « Offre » : 1 boîte / 1 achetée + 1 offerte / 2 achetées + 2 offertes). Les prix et prix barrés viennent des variantes. Ajoutez aussi le bloc « Sélecteur de variante » en style Boutons : il est masqué et piloté par ces cartes."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Offre de lancement"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "Dans la limite des stocks disponibles"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_native_picker",
+      "label": "Masquer le sélecteur de variante natif",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_quantity",
+      "label": "Masquer le sélecteur de quantité",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ceriva — Offres groupées",
+      "category": "t:categories.product",
+      "blocks": {
+        "tier-1": {
+          "type": "_ceriva-bundle-tier",
+          "settings": { "option_value": "1 boîte", "variant_position": 1, "title": "1 boîte", "boxes": 1 }
+        },
+        "tier-2": {
+          "type": "_ceriva-bundle-tier",
+          "settings": {
+            "option_value": "1 achetée + 1 offerte",
+            "variant_position": 2,
+            "title": "1 achetée + 1 offerte",
+            "boxes": 2,
+            "badge": "Le plus choisi",
+            "preselect": true
+          }
+        },
+        "tier-3": {
+          "type": "_ceriva-bundle-tier",
+          "settings": {
+            "option_value": "2 achetées + 2 offertes",
+            "variant_position": 3,
+            "title": "2 achetées + 2 offertes",
+            "boxes": 4,
+            "badge": "Meilleure valeur"
+          }
+        }
+      },
+      "block_order": ["tier-1", "tier-2", "tier-3"]
+    }
+  ]
+}
+{% endschema %}

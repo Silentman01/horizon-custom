@@ -1,0 +1,332 @@
+{%- liquid
+  assign product_resource = closest.product
+  assign bs = block.settings
+  assign tier_variant = null
+
+  if bs.option_value != blank
+    assign wanted = bs.option_value | strip | downcase
+    for v in product_resource.variants
+      assign v_title = v.title | strip | downcase
+      if v_title == wanted
+        assign tier_variant = v
+        break
+      endif
+    endfor
+  endif
+
+  if tier_variant == null
+    assign idx = bs.variant_position | minus: 1
+    if product_resource.variants.size > idx
+      assign tier_variant = product_resource.variants[idx]
+    endif
+  endif
+
+  assign is_matched = true
+  if tier_variant == null or product_resource.has_only_default_variant
+    assign is_matched = false
+    assign tier_variant = product_resource.selected_or_first_available_variant
+  endif
+
+  assign boxes = bs.boxes | at_least: 1
+  assign price = tier_variant.price
+  assign compare = tier_variant.compare_at_price | default: 0
+  assign per_box = price | divided_by: boxes
+
+  assign savings = 0
+  if compare > price
+    assign savings = compare | minus: price | times: 100 | divided_by: compare
+  endif
+
+  # With ?variant= in the URL that variant wins; otherwise the tier flagged "preselect" is the default offer.
+  assign is_selected = false
+  if product_resource.selected_variant
+    if is_matched and tier_variant.id == product_resource.selected_variant.id
+      assign is_selected = true
+    endif
+  elsif bs.preselect
+    assign is_selected = true
+  endif
+-%}
+
+<label
+  class="cvb-tier{% if is_selected %} is-selected{% endif %}{% if bs.badge != blank %} cvb-tier--badged{% endif %}{% unless tier_variant.available %} is-unavailable{% endunless %}"
+  {{ block.shopify_attributes }}
+>
+  <input
+    class="cvb-tier__input visually-hidden"
+    type="radio"
+    name="cvb-{{ section.id }}"
+    value="{{ tier_variant.id }}"
+    {% if is_matched %}
+      data-variant-id="{{ tier_variant.id }}"
+    {% endif %}
+    {% if is_selected %}
+      checked
+    {% endif %}
+    {% if bs.preselect %}
+      data-preselect
+    {% endif %}
+    {% unless tier_variant.available %}
+      disabled
+    {% endunless %}
+  >
+
+  {%- if bs.badge != blank -%}
+    <span class="cvb-tier__badge">{{ bs.badge }}</span>
+  {%- endif -%}
+
+  <span
+    class="cvb-tier__radio"
+    aria-hidden="true"
+  ></span>
+
+  <span class="cvb-tier__body">
+    <span class="cvb-tier__title">
+      {{ bs.title | default: tier_variant.title }}
+      {%- if bs.show_savings and savings > 0 -%}
+        <span class="cvb-tier__pill">−{{ savings }} %</span>
+      {%- endif -%}
+    </span>
+    {%- capture caption -%}
+      {%- if bs.caption != blank -%}{{ bs.caption }}{%- endif -%}
+      {%- if bs.show_per_box and boxes > 1 -%}
+        {%- if bs.caption != blank %} · {% endif -%}
+        {{ per_box | money }} la boîte
+      {%- endif -%}
+    {%- endcapture -%}
+    {%- if caption != blank -%}
+      <span class="cvb-tier__caption">{{ caption }}</span>
+    {%- endif -%}
+    {%- if bs.gift != blank -%}
+      <span class="cvb-tier__gift">{{ bs.gift }}</span>
+    {%- endif -%}
+  </span>
+
+  <span class="cvb-tier__price">
+    <strong>{{ price | money }}</strong>
+    {%- if compare > price -%}
+      <s>{{ compare | money }}</s>
+    {%- endif -%}
+  </span>
+
+  {%- if is_matched == false and request.design_mode -%}
+    <span class="cvb-tier__warning">
+      Aucune variante « {{ bs.option_value }} » trouvée : créez les variantes d'offre sur le produit.
+    </span>
+  {%- endif -%}
+</label>
+
+{% stylesheet %}
+  .cvb-tier {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    border: 1.5px solid var(--cv-line);
+    border-radius: var(--cv-radius);
+    background: var(--cv-white);
+    color: var(--cv-navy);
+    cursor: pointer;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .cvb-tier--badged {
+    margin-top: 6px;
+  }
+
+  .cvb-tier:hover {
+    border-color: rgb(var(--cv-navy-rgb) / 0.35);
+  }
+
+  .cvb-tier.is-selected {
+    border-color: var(--cv-blue);
+    box-shadow: 0 0 0 1px var(--cv-blue), 0 6px 18px rgb(46 143 219 / 0.12);
+  }
+
+  .cvb-tier:has(.cvb-tier__input:focus-visible) {
+    outline: 2px solid var(--cv-navy);
+    outline-offset: 2px;
+  }
+
+  .cvb-tier.is-unavailable {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .cvb-tier__badge {
+    position: absolute;
+    top: 0;
+    right: 14px;
+    transform: translateY(-50%);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--cv-navy);
+    color: var(--cv-white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .cvb-tier.is-selected .cvb-tier__badge {
+    background: var(--cv-blue);
+  }
+
+  .cvb-tier__radio {
+    width: 20px;
+    height: 20px;
+    border: 1.5px solid rgb(var(--cv-navy-rgb) / 0.4);
+    border-radius: 50%;
+    background: var(--cv-white);
+    transition: border 0.15s ease;
+  }
+
+  .cvb-tier.is-selected .cvb-tier__radio {
+    border: 6px solid var(--cv-blue);
+  }
+
+  .cvb-tier__body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+
+  .cvb-tier__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .cvb-tier__pill {
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--cv-blue);
+    color: var(--cv-white);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .cvb-tier__caption,
+  .cvb-tier__gift {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .cvb-tier__gift {
+    font-weight: 600;
+    color: var(--cv-blue);
+  }
+
+  .cvb-tier__price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    text-align: right;
+  }
+
+  .cvb-tier__price strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cv-navy);
+  }
+
+  .cvb-tier.is-selected .cvb-tier__price strong {
+    color: var(--cv-blue);
+  }
+
+  .cvb-tier__price s {
+    font-size: 13px;
+    color: var(--cv-navy);
+  }
+
+  .cvb-tier__warning {
+    grid-column: 1 / -1;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cv-blue);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Offre",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "option_value",
+      "label": "Variante liée (nom exact)",
+      "info": "Nom de la variante tel qu'il apparaît sur le produit, ex. « 1 achetée + 1 offerte »."
+    },
+    {
+      "type": "range",
+      "id": "variant_position",
+      "label": "Sinon : position de la variante",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titre de l'offre",
+      "default": "1 boîte"
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Détail",
+      "info": "Ex. « 24 sticks »."
+    },
+    {
+      "type": "text",
+      "id": "gift",
+      "label": "Bonus",
+      "info": "Ex. « + Livraison offerte »."
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "info": "Ex. « Le plus choisi »."
+    },
+    {
+      "type": "checkbox",
+      "id": "preselect",
+      "label": "Offre sélectionnée par défaut",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "boxes",
+      "label": "Nombre de boîtes incluses",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "show_per_box",
+      "label": "Afficher le prix par boîte",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_savings",
+      "label": "Afficher le % d'économie",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
