@@ -33,7 +33,7 @@
             dims: 'Vidéo 1080 × 1920',
             sizes: '(min-width: 990px) 220px, 60vw'
           %}
-          {%- if block.settings.video != blank or block.settings.video_url != blank -%}
+          {%- if section.settings.enable_sound and block.settings.video != blank or section.settings.enable_sound and block.settings.video_url != blank -%}
             <button
               type="button"
               class="cv-ugc__sound"
@@ -262,6 +262,13 @@
     { "type": "text", "id": "eyebrow", "label": "Surtitre", "default": "De vrais gens · De vrais résultats" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Regardez ce qui sort" },
     { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Un quart de tour, et le résultat est là, sur l'embout.</p>" },
+    {
+      "type": "checkbox",
+      "id": "enable_sound",
+      "label": "Bouton son sur les vidéos",
+      "info": "Désactivé : les vidéos restent toujours muettes.",
+      "default": true
+    },
     { "type": "text", "id": "swipe_hint", "label": "Indication mobile", "default": "Glissez pour voir la suite →" },
     { "type": "header", "content": "Preuve sociale" },
     { "type": "text", "id": "proof_line", "label": "Ligne de note", "default": "Noté 4,8/5 par nos clients" },
