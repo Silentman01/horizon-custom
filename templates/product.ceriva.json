@@ -599,6 +599,16 @@
                 "row_guarantee",
                 "row_shipping"
               ]
+            },
+            "value_highlight": {
+              "type": "ceriva-highlight",
+              "settings": {
+                "tone": "soft",
+                "badge": "Réutilisable",
+                "title": "Vous ne payez pas un bâtonnet.",
+                "highlight": "Vous payez jusqu'à 30 utilisations.",
+                "text": "Un stick remplace des dizaines de cotons-tiges. Rincez-le, réutilisez-le."
+              }
             }
           },
           "block_order": [
@@ -610,6 +620,7 @@
             "bundles",
             "variant_picker",
             "buy_buttons",
+            "value_highlight",
             "trust",
             "accordion"
           ]
@@ -684,8 +695,7 @@
         "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
-        "padding_bottom": 64,
-        "enable_sound": false
+        "padding_bottom": 64
       }
     },
     "cv_problem": {
