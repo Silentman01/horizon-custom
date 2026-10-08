@@ -1094,13 +1094,6 @@
             "answer": "<p>Non. L'embout est souple et le geste ne demande aucune pression : vous le placez à l'entrée du conduit, vous tournez doucement, vous retirez. Si vous ressentez la moindre gêne, arrêtez.</p>"
           }
         },
-        "question_2": {
-          "type": "question",
-          "settings": {
-            "question": "Est-ce que je risque d'aller trop loin ?",
-            "answer": "<p>Ceriva s'utilise uniquement à l'entrée du conduit auditif. La tige est pensée pour un geste en surface : n'insérez jamais au-delà de ce qui entre naturellement, et ne forcez jamais.</p>"
-          }
-        },
         "question_3": {
           "type": "question",
           "settings": {
@@ -1120,13 +1113,6 @@
           "settings": {
             "question": "À quelle fréquence l'utiliser ?",
             "answer": "<p>Une à deux fois par semaine suffit pour la plupart des gens. L'oreille se nettoie aussi naturellement : inutile d'en faire trop.</p>"
-          }
-        },
-        "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "Convient-il aux enfants ?",
-            "answer": "<p>Ceriva est conçu pour les adultes. Pour un enfant, demandez d'abord l'avis d'un professionnel de santé.</p>"
           }
         },
         "question_7": {
@@ -1153,11 +1139,9 @@
       },
       "block_order": [
         "question_1",
-        "question_2",
         "question_3",
         "question_4",
         "question_5",
-        "question_6",
         "question_7",
         "question_8",
         "question_9"
