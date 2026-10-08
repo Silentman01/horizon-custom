@@ -210,11 +210,11 @@
             "stock": {
               "type": "ceriva-stock-bar",
               "settings": {
-                "label": "En stock — expédié sous 24/48 h",
-                "right_label": "Offre de lancement",
-                "show_bar": false,
+                "label": "Stock limité — expédié sous 24/48 h",
+                "right_label": "",
+                "show_bar": true,
                 "fill": 80,
-                "use_inventory": true,
+                "use_inventory": false,
                 "low_threshold": 20,
                 "low_label": "Plus que [n] en stock"
               },
