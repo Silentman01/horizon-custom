@@ -9,45 +9,6 @@
  */
 {
   "sections": {
-    "cv_marquee": {
-      "type": "ceriva-marquee",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "Livraison offerte en France"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "Satisfait ou remboursé 30 jours"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "Rinçable et réutilisable"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "text": "Expédié sous 24/48 h"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ],
-      "settings": {
-        "tone": "navy",
-        "speed": 36
-      }
-    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -1247,7 +1208,6 @@
     }
   },
   "order": [
-    "cv_marquee",
     "main",
     "cv_ugc",
     "cv_problem",
