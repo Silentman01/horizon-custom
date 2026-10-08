@@ -511,7 +511,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Livraison :</strong> offerte en France. Commandes expédiées sous 24 à 48 h, livrées en 3 à 5 jours ouvrés. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p><p><strong>Retours :</strong> contactez-nous via la page Contact (ou en répondant à votre e-mail de confirmation) avec votre numéro de commande, dans les 30 jours suivant la réception. Une fois le retour validé, le remboursement est effectué sur votre moyen de paiement d'origine.</p>",
+                        "text": "<p><strong>Livraison :</strong> offerte en Europe. Commandes expédiées sous 24 à 48 h, livrées en 3 à 5 jours ouvrés. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p><p><strong>Retours :</strong> contactez-nous via la page Contact (ou en répondant à votre e-mail de confirmation) avec votre numéro de commande, dans les 30 jours suivant la réception. Une fois le retour validé, le remboursement est effectué sur votre moyen de paiement d'origine.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
