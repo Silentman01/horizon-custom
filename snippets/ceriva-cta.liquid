@@ -2,8 +2,9 @@
   Renders a Ceriva call-to-action button with a merchant-selected action.
 
   @param {string} label - Button text; nothing renders when blank
-  @param {string} [action] - 'offer' (scroll to the offer selector), 'cart' (add the selected offer to cart) or 'url'
+  @param {string} [action] - 'offer' (scroll to the offer selector), 'cart' (add the selected offer to cart), 'product' or 'url'
   @param {string} [url] - Destination when action is 'url'
+  @param {product} [product] - Destination when action is 'product'; falls back to the store's first product
   @param {string} [style] - 'primary' (default) or 'outline'
   @param {string} [class] - Extra classes
 
@@ -29,6 +30,16 @@
       >
         {{- label -}}
       </button>
+    {%- when 'product' -%}
+      {%- liquid
+        assign target = product | default: collections.all.products.first
+      -%}
+      <a
+        class="{{ btn_class }}"
+        href="{{ target.url | default: routes.all_products_collection_url }}"
+      >
+        {{- label -}}
+      </a>
     {%- when 'url' -%}
       <a
         class="{{ btn_class }}"

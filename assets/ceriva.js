@@ -146,9 +146,69 @@ document.addEventListener('click', (event) => {
   toggle.setAttribute('aria-pressed', String(unmute));
 });
 
+/* ---------- Mouse drag-to-scroll for horizontal rails (touch keeps native swipe) ---------- */
+
+function initDrag() {
+  document.querySelectorAll('[data-cv-drag]:not([data-cv-drag-ready])').forEach((el) => {
+    const rail = /** @type {HTMLElement} */ (el);
+    rail.dataset.cvDragReady = '';
+    let startX = 0;
+    let startScroll = 0;
+    let moved = false;
+    let pointerId = -1;
+
+    rail.addEventListener('pointerdown', (event) => {
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
+      if (event.target instanceof Element && event.target.closest('button, a')) return;
+      if (rail.scrollWidth <= rail.clientWidth) return;
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScroll = rail.scrollLeft;
+      moved = false;
+    });
+
+    rail.addEventListener('pointermove', (event) => {
+      if (event.pointerId !== pointerId) return;
+      const dx = event.clientX - startX;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) {
+        moved = true;
+        rail.classList.add('is-dragging');
+        rail.setPointerCapture(pointerId);
+      }
+      rail.scrollLeft = startScroll - dx;
+    });
+
+    const end = () => {
+      if (pointerId === -1) return;
+      pointerId = -1;
+      if (!moved) return;
+      // Re-enable snapping, then settle on the nearest card.
+      const left = rail.scrollLeft;
+      rail.classList.remove('is-dragging');
+      rail.scrollLeft = left;
+      const card = rail.firstElementChild;
+      const step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(rail).columnGap || '0') : 0;
+      if (step) rail.scrollTo({ left: Math.round(left / step) * step, behavior: reducedMotion() ? 'auto' : 'smooth' });
+    };
+    rail.addEventListener('pointerup', end);
+    rail.addEventListener('pointercancel', end);
+
+    // A drag should not also count as a click on a card (e.g. the sound button).
+    rail.addEventListener('click', (event) => {
+      if (moved) {
+        event.preventDefault();
+        event.stopPropagation();
+        moved = false;
+      }
+    }, true);
+  });
+}
+
 function init() {
   initReveal();
   initVideos();
+  initDrag();
 }
 
 init();

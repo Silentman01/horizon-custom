@@ -135,6 +135,7 @@
           label: section.settings.button_label,
           action: section.settings.button_action,
           url: section.settings.button_link,
+          product: section.settings.button_product,
           style: section.settings.button_style
         %}
       </div>
@@ -388,11 +389,13 @@
       "options": [
         { "value": "offer", "label": "Remonter au choix de l'offre" },
         { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "product", "label": "Aller à la page produit" },
         { "value": "url", "label": "Lien personnalisé" }
       ],
       "default": "offer"
     },
     { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    { "type": "product", "id": "button_product", "label": "Produit (action « page produit »)", "info": "Vide = premier produit de la boutique." },
     {
       "type": "select",
       "id": "button_style",
