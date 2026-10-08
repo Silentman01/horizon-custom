@@ -9,45 +9,6 @@
  */
 {
   "sections": {
-    "cv_marquee": {
-      "type": "ceriva-marquee",
-      "settings": {
-        "tone": "navy",
-        "speed": 36
-      },
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "Livraison offerte en France"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "Satisfait ou remboursé 30 jours"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "Rinçable et réutilisable"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "text": "Expédié sous 24/48 h"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ]
-    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -93,11 +54,13 @@
             "gap": 18,
             "sticky_details_desktop": true,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 8,
             "padding-block-end": 24,
@@ -111,7 +74,8 @@
                 "score": "4,8/5",
                 "count": "1 200+ avis clients",
                 "link": "#avis"
-              }
+              },
+              "blocks": {}
             },
             "title": {
               "type": "text",
@@ -127,6 +91,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -151,6 +116,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -169,25 +135,29 @@
                   "type": "_ceriva-check-item",
                   "settings": {
                     "text": "<p><strong>Des oreilles qui respirent</strong> : fini cette sensation de bouchon</p>"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "check_2": {
                   "type": "_ceriva-check-item",
                   "settings": {
                     "text": "<p><strong>Il retire au lieu d'enfoncer</strong> : l'embout adhésif capte le cérumen au contact</p>"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "check_3": {
                   "type": "_ceriva-check-item",
                   "settings": {
                     "text": "<p><strong>Vous voyez le résultat</strong>, directement sur l'embout</p>"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "check_4": {
                   "type": "_ceriva-check-item",
                   "settings": {
                     "text": "<p><strong>Rinçable et réutilisable</strong> : un stick remplace des dizaines de cotons-tiges</p>"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -207,7 +177,8 @@
                 "use_inventory": true,
                 "low_threshold": 20,
                 "low_label": "Plus que [n] en stock"
-              }
+              },
+              "blocks": {}
             },
             "bundles": {
               "type": "ceriva-bundle-picker",
@@ -231,7 +202,8 @@
                     "boxes": 1,
                     "show_per_box": true,
                     "show_savings": true
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_2": {
                   "type": "_ceriva-bundle-tier",
@@ -246,7 +218,8 @@
                     "boxes": 2,
                     "show_per_box": true,
                     "show_savings": true
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_3": {
                   "type": "_ceriva-bundle-tier",
@@ -261,7 +234,8 @@
                     "boxes": 4,
                     "show_per_box": true,
                     "show_savings": true
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -275,6 +249,15 @@
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -287,8 +270,23 @@
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
+                "text_color": "",
                 "show_pickup_availability": false,
                 "gift_card_form": false,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -298,14 +296,24 @@
                 "quantity": {
                   "type": "quantity",
                   "static": true,
-                  "settings": {},
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
                   "blocks": {}
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
                 },
@@ -324,7 +332,8 @@
                 "item_1": "Satisfait ou remboursé 30 jours",
                 "item_2": "Livraison offerte",
                 "item_3": "Paiement sécurisé"
-              }
+              },
+              "blocks": {}
             },
             "payment_icons": {
               "type": "payment-icons",
@@ -343,10 +352,14 @@
               "settings": {
                 "icon": "plus",
                 "dividers": true,
+                "divider_color": "",
                 "type_preset": "h6",
+                "background_color": "",
+                "text_color": "",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
+                "border_color": "",
                 "border_radius": 0,
                 "padding-block-start": 8,
                 "padding-block-end": 0,
@@ -377,6 +390,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -415,6 +429,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -453,6 +468,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -491,6 +507,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -529,6 +546,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -569,7 +587,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -577,12 +594,53 @@
         "limit_details_width": true,
         "gap": 48,
         "enable_sticky_add_to_cart": true,
+        "background_color": "",
         "padding-block-start": 24,
         "padding-block-end": 48
       }
     },
     "cv_ugc": {
       "type": "ceriva-ugc-videos",
+      "blocks": {
+        "video_1": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/9d29a9058ac04ca9889036508bfbf293.mp4",
+            "caption": "",
+            "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout"
+          }
+        },
+        "video_2": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/874d8b109e604ccf8c46c25b83012f64.mp4",
+            "caption": "",
+            "placeholder_label": "UGC : réaction « je n'en revenais pas »"
+          }
+        },
+        "video_4": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/b04764ee1a6a4e6ea979b14151a50fd6.mp4",
+            "caption": "",
+            "placeholder_label": "UGC : utilisateur d'écouteurs intra"
+          }
+        },
+        "video_5": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/f108ea46c3014acdb2d55e690fcbf0ee.mp4",
+            "caption": "",
+            "placeholder_label": "UGC : ouverture de la boîte Ceriva"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_4",
+        "video_5"
+      ],
       "settings": {
         "tone": "ice",
         "eyebrow": "De vrais gens · De vrais résultats",
@@ -597,68 +655,10 @@
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
-      },
-      "blocks": {
-        "video_1": {
-          "type": "video",
-          "settings": {
-            "caption": "",
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/9d29a9058ac04ca9889036508bfbf293.mp4",
-            "placeholder_label": "UGC : retrait du stick, gros plan sur l'embout"
-          }
-        },
-        "video_2": {
-          "type": "video",
-          "settings": {
-            "caption": "",
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/874d8b109e604ccf8c46c25b83012f64.mp4",
-            "placeholder_label": "UGC : réaction « je n'en revenais pas »"
-          }
-        },
-        "video_3": {
-          "type": "video",
-          "settings": {
-            "caption": "",
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/df08141d93404df98f14dffca9b463a8.mp4",
-            "placeholder_label": "UGC : rinçage du stick sous l'eau tiède"
-          }
-        },
-        "video_4": {
-          "type": "video",
-          "settings": {
-            "caption": "",
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/b04764ee1a6a4e6ea979b14151a50fd6.mp4",
-            "placeholder_label": "UGC : utilisateur d'écouteurs intra"
-          }
-        },
-        "video_5": {
-          "type": "video",
-          "settings": {
-            "caption": "",
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/f108ea46c3014acdb2d55e690fcbf0ee.mp4",
-            "placeholder_label": "UGC : ouverture de la boîte Ceriva"
-          }
-        }
-      },
-      "block_order": [
-        "video_1",
-        "video_2",
-        "video_3",
-        "video_4",
-        "video_5"
-      ]
+      }
     },
     "cv_problem": {
       "type": "ceriva-problem",
-      "settings": {
-        "tone": "white",
-        "eyebrow": "Le vrai problème",
-        "image_asset": "ceriva-problem.jpg",
-        "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
-        "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "point_1": {
           "type": "point",
@@ -686,10 +686,59 @@
         "point_1",
         "point_2",
         "point_3"
-      ]
+      ],
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Le vrai problème",
+        "title": "Pourquoi vos oreilles ne semblent jamais vraiment propres",
+        "text": "<p>Oreilles qui grattent, sensation de bouchon qui revient ? Le problème, c'est peut-être votre coton-tige.</p>",
+        "image_asset": "ceriva-problem.jpg",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_solution": {
       "type": "ceriva-media-list",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Il capte, il ne pousse pas",
+            "text": "<p>L'embout adhésif accroche le cérumen au contact et le ramène avec lui. Rien n'est repoussé plus loin.</p>",
+            "image_asset": "ceriva-switch-item-1.jpg"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "Souple, jamais agressif",
+            "text": "<p>L'embout épouse la forme de l'oreille. Pas de raclage, pas de grattage : un geste doux et maîtrisé.</p>",
+            "image_asset": "ceriva-switch-item-2.jpg"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Le résultat sous vos yeux",
+            "text": "<p>Après chaque passage, vous voyez ce qui est sorti. Étrangement satisfaisant, et surtout rassurant.</p>",
+            "image_asset": "ceriva-switch-item-3.jpg"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "title": "Rincé, il repart à neuf",
+            "text": "<p>Un passage sous l'eau tiède et l'adhérence revient. Un seul stick vous accompagne pendant des semaines.</p>",
+            "image_asset": "ceriva-switch-item-4.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
       "settings": {
         "tone": "ice",
         "list_style": "checks",
@@ -706,56 +755,10 @@
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
-      },
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "title": "Il capte, il ne pousse pas",
-            "text": "<p>L'embout adhésif accroche le cérumen au contact et le ramène avec lui. Rien n'est repoussé plus loin.</p>"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "title": "Souple, jamais agressif",
-            "text": "<p>L'embout épouse la forme de l'oreille. Pas de raclage, pas de grattage : un geste doux et maîtrisé.</p>"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "title": "Le résultat sous vos yeux",
-            "text": "<p>Après chaque passage, vous voyez ce qui est sorti. Étrangement satisfaisant, et surtout rassurant.</p>"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "title": "Rincé, il repart à neuf",
-            "text": "<p>Un passage sous l'eau tiède et l'adhérence revient. Un seul stick vous accompagne pendant des semaines.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ]
+      }
     },
     "cv_steps": {
       "type": "ceriva-steps",
-      "settings": {
-        "tone": "white",
-        "eyebrow": "Mode d'emploi",
-        "title": "Des oreilles nettes en 3 gestes",
-        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
-        "step_label": "Étape",
-        "note": "Usage externe uniquement : n'insérez jamais le stick au-delà de l'entrée du conduit. En cas de douleur, d'infection ou de tympan perforé, demandez l'avis d'un professionnel de santé.",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "step_1": {
           "type": "step",
@@ -789,19 +792,24 @@
         "step_1",
         "step_2",
         "step_3"
-      ]
+      ],
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Mode d'emploi",
+        "title": "Des oreilles nettes en 3 gestes",
+        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
+        "step_label": "Étape",
+        "note": "",
+        "button_label": "",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_value": {
       "type": "ceriva-value",
-      "settings": {
-        "tone": "navy",
-        "eyebrow": "Réutilisable",
-        "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
-        "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
-        "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "stat_1": {
           "type": "stat",
@@ -829,27 +837,19 @@
         "stat_1",
         "stat_2",
         "stat_3"
-      ]
+      ],
+      "settings": {
+        "tone": "navy",
+        "eyebrow": "Réutilisable",
+        "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
+        "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
+        "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_specs": {
       "type": "ceriva-media-list",
-      "settings": {
-        "tone": "white",
-        "list_style": "rows",
-        "media_position": "right",
-        "ratio": "square",
-        "image_asset": "ceriva-packshot.jpg",
-        "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
-        "eyebrow": "En bref",
-        "title": "Ceriva, en détail",
-        "text": "",
-        "button_label": "",
-        "button_action": "offer",
-        "button_link": "",
-        "button_style": "primary",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "item_1": {
           "type": "item",
@@ -901,25 +901,27 @@
         "item_4",
         "item_5",
         "item_6"
-      ]
-    },
-    "cv_comparison": {
-      "type": "ceriva-comparison",
+      ],
       "settings": {
-        "tone": "ice",
-        "eyebrow": "Comparatif",
-        "title": "Ceriva ou coton-tige ?",
-        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
-        "col_benefit": "Critère",
-        "col_us": "Ceriva",
-        "col_them": "Coton-tige",
-        "button_label": "Je passe à Ceriva",
+        "tone": "white",
+        "list_style": "rows",
+        "media_position": "right",
+        "ratio": "square",
+        "image_asset": "ceriva-packshot.jpg",
+        "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
+        "eyebrow": "En bref",
+        "title": "Ceriva, en détail",
+        "text": "",
+        "button_label": "",
         "button_action": "offer",
         "button_link": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
-      },
+      }
+    },
+    "cv_comparison": {
+      "type": "ceriva-comparison",
       "blocks": {
         "row_1": {
           "type": "row",
@@ -968,32 +970,25 @@
         "row_3",
         "row_4",
         "row_5"
-      ]
-    },
-    "cv_reviews": {
-      "type": "ceriva-reviews",
+      ],
       "settings": {
-        "sample_notice": true,
-        "tone": "white",
-        "eyebrow": "Avis vérifiés",
-        "title": "Ce qu'en disent nos clients",
-        "show_summary": true,
-        "score": "4,8",
-        "count_label": "1 200+ avis vérifiés",
-        "share_5": 82,
-        "share_4": 12,
-        "share_3": 4,
-        "share_2": 1,
-        "share_1": 1,
-        "visible_count": 6,
-        "more_label": "Voir plus d'avis",
-        "button_label": "Je rejoins les clients Ceriva",
+        "tone": "ice",
+        "eyebrow": "Comparatif",
+        "title": "Ceriva ou coton-tige ?",
+        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
+        "col_benefit": "Critère",
+        "col_us": "Ceriva",
+        "col_them": "Coton-tige",
+        "button_label": "Je passe à Ceriva",
         "button_action": "offer",
         "button_link": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
-      },
+      }
+    },
+    "cv_reviews": {
+      "type": "ceriva-reviews",
       "blocks": {
         "review_1": {
           "type": "review",
@@ -1034,6 +1029,7 @@
         "review_4": {
           "type": "review",
           "settings": {
+            "image_asset": "",
             "placeholder_label": "",
             "title": "Le rinçage marche vraiment",
             "text": "<p>J'étais sceptique sur le côté réutilisable. Un coup d'eau tiède, on laisse sécher, et il accroche comme au premier jour. Je n'ai plus racheté de cotons-tiges.</p>",
@@ -1045,6 +1041,7 @@
         "review_5": {
           "type": "review",
           "settings": {
+            "image_asset": "",
             "placeholder_label": "",
             "title": "Toute la famille a adopté",
             "text": "<p>Une boîte, un stick chacun. Mon mari, qui ne jurait que par les cotons-tiges, ne veut plus revenir en arrière.</p>",
@@ -1056,6 +1053,7 @@
         "review_6": {
           "type": "review",
           "settings": {
+            "image_asset": "",
             "placeholder_label": "",
             "title": "Simple et efficace",
             "text": "<p>Livré rapidement, facile à utiliser dès la première fois. Le genre de produit dont on se demande comment on faisait avant.</p>",
@@ -1072,20 +1070,32 @@
         "review_4",
         "review_5",
         "review_6"
-      ]
+      ],
+      "settings": {
+        "sample_notice": false,
+        "tone": "white",
+        "eyebrow": "Avis vérifiés",
+        "title": "Ce qu'en disent nos clients",
+        "show_summary": true,
+        "score": "4,8",
+        "count_label": "1 200+ avis vérifiés",
+        "share_5": 82,
+        "share_4": 12,
+        "share_3": 4,
+        "share_2": 1,
+        "share_1": 1,
+        "visible_count": 6,
+        "more_label": "Voir plus d'avis",
+        "button_label": "Je rejoins les clients Ceriva",
+        "button_action": "offer",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_faq": {
       "type": "ceriva-faq",
-      "settings": {
-        "tone": "ice",
-        "eyebrow": "FAQ",
-        "title": "Vos questions, nos réponses",
-        "text": "",
-        "open_first": true,
-        "contact": "<p>Une autre question ? <a href=\"/pages/contact\">Écrivez-nous</a>, nous vous répondons rapidement.</p>",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "question_1": {
           "type": "question",
@@ -1161,7 +1171,17 @@
         "question_7",
         "question_8",
         "question_9"
-      ]
+      ],
+      "settings": {
+        "tone": "ice",
+        "eyebrow": "FAQ",
+        "title": "Vos questions, nos réponses",
+        "text": "",
+        "open_first": true,
+        "contact": "<p>Une autre question ? <a href=\"/pages/contact\">Écrivez-nous</a>, nous vous répondons rapidement.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "cv_guarantee": {
       "type": "ceriva-guarantee",
@@ -1183,7 +1203,6 @@
     }
   },
   "order": [
-    "cv_marquee",
     "main",
     "cv_ugc",
     "cv_problem",
