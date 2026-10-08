@@ -84,13 +84,13 @@
     "variant_button_width": "equal-width-buttons",
     "content_for_index": [],
     "blocks": {
-      "16156609502398088594": {
-        "type": "shopify://apps/omega-facebook-pixel/blocks/app-embed-block/ecdcc423-3dbd-480c-85e8-fdb9789cf058",
+      "15557474716127144420": {
+        "type": "shopify://apps/kaching-bundles/blocks/app-embed-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
         "disabled": false,
         "settings": {}
       },
-      "15557474716127144420": {
-        "type": "shopify://apps/kaching-bundles/blocks/app-embed-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+      "16156609502398088594": {
+        "type": "shopify://apps/omega-facebook-pixel/blocks/app-embed-block/ecdcc423-3dbd-480c-85e8-fdb9789cf058",
         "disabled": false,
         "settings": {}
       }
