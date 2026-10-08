@@ -11,46 +11,6 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
-    "ceriva_marquee_JUMqga": {
-      "type": "ceriva-marquee",
-      "blocks": {
-        "item_UtCYMH": {
-          "type": "item",
-          "settings": {
-            "text": "Livraison offerte en France"
-          }
-        },
-        "item_UDKFBk": {
-          "type": "item",
-          "settings": {
-            "text": "Satisfait ou remboursé 30 jours"
-          }
-        },
-        "item_WLVCxg": {
-          "type": "item",
-          "settings": {
-            "text": "Rinçable et réutilisable"
-          }
-        },
-        "item_qBjKec": {
-          "type": "item",
-          "settings": {
-            "text": "Expédié sous 24/48 h"
-          }
-        }
-      },
-      "block_order": [
-        "item_UtCYMH",
-        "item_UDKFBk",
-        "item_WLVCxg",
-        "item_qBjKec"
-      ],
-      "name": "Ceriva — Bandeau défilant",
-      "settings": {
-        "tone": "navy",
-        "speed": 36
-      }
-    },
     "header_section": {
       "type": "header",
       "blocks": {
@@ -94,12 +54,12 @@
         "menu_position": "center",
         "menu_row": "top",
         "customer_account_menu": "customer-account-main-menu",
-        "show_search": true,
+        "show_search": false,
         "search_position": "right",
         "search_row": "top",
-        "show_country": true,
+        "show_country": false,
         "country_selector_style": false,
-        "show_language": true,
+        "show_language": false,
         "localization_font": "heading",
         "localization_font_size": "0.875rem",
         "localization_position": "right",
@@ -136,7 +96,6 @@
     }
   },
   "order": [
-    "ceriva_marquee_JUMqga",
     "header_section"
   ]
 }
