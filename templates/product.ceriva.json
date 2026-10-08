@@ -618,14 +618,6 @@
             "placeholder_label": "UGC : réaction « je n'en revenais pas »"
           }
         },
-        "video_3": {
-          "type": "video",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/df08141d93404df98f14dffca9b463a8.mp4",
-            "caption": "",
-            "placeholder_label": "UGC : rinçage du stick sous l'eau tiède"
-          }
-        },
         "video_4": {
           "type": "video",
           "settings": {
@@ -646,7 +638,6 @@
       "block_order": [
         "video_1",
         "video_2",
-        "video_3",
         "video_4",
         "video_5"
       ],
