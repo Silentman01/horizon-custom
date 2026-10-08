@@ -821,14 +821,14 @@
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "30*",
+            "number": "30",
             "label": "utilisations par stick"
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "number": "720*",
+            "number": "720",
             "label": "utilisations par boîte"
           }
         }
@@ -843,7 +843,11 @@
         "eyebrow": "Réutilisable",
         "title": "Vous n'achetez pas un bâtonnet. Vous achetez des mois d'oreilles nettes.",
         "text": "<p>Un stick Ceriva se rince et se réutilise, là où le coton-tige finit à la poubelle après un seul passage.</p>",
+<<<<<<< HEAD
         "footnote": "*Jusqu'à 30 utilisations par stick, rincé et séché après chaque usage.",
+=======
+        "footnote": "",
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -855,42 +859,72 @@
           "type": "item",
           "settings": {
             "title": "Pour qui",
+<<<<<<< HEAD
             "text": "<p>Oreilles qui grattent ou se sentent bouchées, porteurs d'écouteurs, et tous ceux qui veulent arrêter le coton-tige.</p>"
+=======
+            "text": "<p>Oreilles qui grattent ou se sentent bouchées, porteurs d'écouteurs, et tous ceux qui veulent arrêter le coton-tige.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         },
         "item_2": {
           "type": "item",
           "settings": {
             "title": "Sensation",
+<<<<<<< HEAD
             "text": "<p>Un embout souple qui épouse l'oreille. Ni raclage, ni frottement.</p>"
+=======
+            "text": "<p>Un embout souple qui épouse l'oreille. Ni raclage, ni frottement.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
             "title": "Comment ça agit",
+<<<<<<< HEAD
             "text": "<p>L'embout adhésif capte cérumen et résidus au contact, et les ramène vers l'extérieur.</p>"
+=======
+            "text": "<p>L'embout adhésif capte cérumen et résidus au contact, et les ramène vers l'extérieur.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         },
         "item_4": {
           "type": "item",
           "settings": {
             "title": "Prise en main",
+<<<<<<< HEAD
             "text": "<p>Une tige fine et une prise ferme, pour un geste précis à l'entrée du conduit.</p>"
+=======
+            "text": "<p>Une tige fine et une prise ferme, pour un geste précis à l'entrée du conduit.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         },
         "item_5": {
           "type": "item",
           "settings": {
             "title": "Entretien",
+<<<<<<< HEAD
             "text": "<p>Rinçage à l'eau tiède, séchage à l'air libre.</p>"
+=======
+            "text": "<p>Rinçage à l'eau tiède, séchage à l'air libre.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         },
         "item_6": {
           "type": "item",
           "settings": {
             "title": "Sans",
+<<<<<<< HEAD
             "text": "<p>Fibres de coton, bords métalliques, gouttes ni liquides.</p>"
+=======
+            "text": "<p>Fibres de coton, bords métalliques, gouttes ni liquides.</p>",
+            "image_asset": ""
+>>>>>>> 45ae0d275be6f8df2d6959de43a557be0c9d1635
           }
         }
       },
