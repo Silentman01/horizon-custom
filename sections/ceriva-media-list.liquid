@@ -59,7 +59,20 @@
                 class="cv-ml__check cv-reveal"
                 {{ block.shopify_attributes }}
               >
-                {% render 'ceriva-check-icon' %}
+                {%- if block.settings.image or block.settings.image_asset != blank -%}
+                  <div class="cv-ml__thumb">
+                    {% render 'ceriva-media',
+                      image: block.settings.image,
+                      asset: block.settings.image_asset,
+                      ratio: '1',
+                      label: block.settings.title,
+                      sizes: '96px'
+                    %}
+                    {% render 'ceriva-check-icon' %}
+                  </div>
+                {%- else -%}
+                  {% render 'ceriva-check-icon' %}
+                {%- endif -%}
                 <div>
                   <h3 class="cv-ml__check-title">{{ block.settings.title }}</h3>
                   <div class="cv-ml__check-text cv__rte">{{ block.settings.text }}</div>
@@ -140,6 +153,38 @@
   .cv-ml__check .cv-check {
     width: 26px;
     height: 26px;
+  }
+
+  .cv-ml__check:has(.cv-ml__thumb) {
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* Item photo with the check as a badge on its corner */
+  .cv-ml__thumb {
+    position: relative;
+    flex: none;
+    width: 76px;
+  }
+
+  .cv-ml__thumb .cv-media {
+    --cv-media-radius: var(--cv-radius-lg);
+    box-shadow: 0 6px 16px rgb(var(--cv-navy-rgb) / 0.12);
+  }
+
+  .cv-ml__thumb .cv-check {
+    position: absolute;
+    right: -6px;
+    bottom: -6px;
+    width: 24px;
+    height: 24px;
+    box-shadow: 0 0 0 3px var(--cv-bg);
+  }
+
+  @media screen and (min-width: 750px) {
+    .cv-ml__thumb {
+      width: 92px;
+    }
   }
 
   .cv-ml__check-title {
@@ -281,7 +326,9 @@
       "name": "Élément",
       "settings": [
         { "type": "text", "id": "title", "label": "Titre / libellé", "default": "Élément" },
-        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Description</p>" }
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Description</p>" },
+        { "type": "image_picker", "id": "image", "label": "Image (style Coches)", "info": "Remplace la coche par une vignette." },
+        { "type": "text", "id": "image_asset", "label": "Image du thème (fichier)", "info": "Utilisée si aucune image n'est choisie, ex. ceriva-switch-item-1.jpg." }
       ]
     }
   ],
