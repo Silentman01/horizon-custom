@@ -220,70 +220,6 @@
               },
               "blocks": {}
             },
-            "bundles": {
-              "type": "ceriva-bundle-picker",
-              "settings": {
-                "heading": "Offre de lancement",
-                "subheading": "Dans la limite des stocks disponibles",
-                "hide_native_picker": true,
-                "hide_quantity": true
-              },
-              "blocks": {
-                "tier_1": {
-                  "type": "_ceriva-bundle-tier",
-                  "settings": {
-                    "option_value": "1 boîte",
-                    "variant_position": 1,
-                    "title": "1 boîte",
-                    "caption": "24 sticks",
-                    "gift": "",
-                    "badge": "",
-                    "preselect": false,
-                    "boxes": 1,
-                    "show_per_box": true,
-                    "show_savings": true
-                  },
-                  "blocks": {}
-                },
-                "tier_2": {
-                  "type": "_ceriva-bundle-tier",
-                  "settings": {
-                    "option_value": "1 achetée + 1 offerte",
-                    "variant_position": 2,
-                    "title": "1 achetée + 1 offerte",
-                    "caption": "48 sticks",
-                    "gift": "",
-                    "badge": "Le plus choisi",
-                    "preselect": true,
-                    "boxes": 2,
-                    "show_per_box": true,
-                    "show_savings": true
-                  },
-                  "blocks": {}
-                },
-                "tier_3": {
-                  "type": "_ceriva-bundle-tier",
-                  "settings": {
-                    "option_value": "2 achetées + 2 offertes",
-                    "variant_position": 3,
-                    "title": "2 achetées + 2 offertes",
-                    "caption": "96 sticks · une boîte pour chacun",
-                    "gift": "",
-                    "badge": "Meilleure valeur",
-                    "preselect": false,
-                    "boxes": 4,
-                    "show_per_box": true,
-                    "show_savings": true
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "tier_1",
-                "tier_2",
-                "tier_3"
-              ]
-            },
             "variant_picker": {
               "type": "variant-picker",
               "settings": {
@@ -618,7 +554,6 @@
             "subtitle",
             "checklist",
             "stock",
-            "bundles",
             "variant_picker",
             "buy_buttons",
             "value_highlight",
@@ -631,7 +566,7 @@
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
         "equal_columns": true,
-        "limit_details_width": true,
+        "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": true,
         "background_color": "",
