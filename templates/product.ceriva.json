@@ -375,18 +375,6 @@
               },
               "blocks": {}
             },
-            "payment_icons": {
-              "type": "payment-icons",
-              "settings": {
-                "horizontal_alignment": "center",
-                "gap": 8,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
             "accordion": {
               "type": "accordion",
               "settings": {
@@ -622,7 +610,6 @@
             "variant_picker",
             "buy_buttons",
             "trust",
-            "payment_icons",
             "accordion"
           ]
         }
