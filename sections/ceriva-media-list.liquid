@@ -34,7 +34,7 @@
           {%- if ss.eyebrow != blank -%}
             <p class="cv__eyebrow">{{ ss.eyebrow }}</p>
           {%- endif -%}
-          <h2 class="cv__title">{{ ss.title }}</h2>
+          <{{ ss.heading_tag | default: 'h2' }} class="cv__title">{{ ss.title }}</{{ ss.heading_tag | default: 'h2' }}>
           {%- if ss.text != blank -%}
             <div class="cv__sub">{{ ss.text }}</div>
           {%- endif -%}
@@ -88,6 +88,7 @@
               label: ss.button_label,
               action: ss.button_action,
               url: ss.button_link,
+              product: ss.button_product,
               style: ss.button_style
             %}
           </div>
@@ -291,6 +292,17 @@
     { "type": "text", "id": "placeholder_label", "label": "Description de l'emplacement", "default": "Photo produit Ceriva" },
     { "type": "text", "id": "eyebrow", "label": "Surtitre" },
     { "type": "text", "id": "title", "label": "Titre", "default": "Titre" },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "label": "Niveau du titre",
+      "info": "H1 seulement pour le titre principal d'une page (ex. en haut de l'accueil).",
+      "options": [
+        { "value": "h1", "label": "H1" },
+        { "value": "h2", "label": "H2" }
+      ],
+      "default": "h2"
+    },
     { "type": "richtext", "id": "text", "label": "Texte" },
     { "type": "header", "content": "Bouton" },
     { "type": "text", "id": "button_label", "label": "Texte du bouton" },
@@ -301,11 +313,13 @@
       "options": [
         { "value": "offer", "label": "Remonter au choix de l'offre" },
         { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "product", "label": "Aller à la page produit" },
         { "value": "url", "label": "Lien personnalisé" }
       ],
       "default": "offer"
     },
     { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    { "type": "product", "id": "button_product", "label": "Produit (action « page produit »)", "info": "Vide = premier produit de la boutique." },
     {
       "type": "select",
       "id": "button_style",

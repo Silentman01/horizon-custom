@@ -15,6 +15,7 @@
 
     <div
       class="cv-ugc__rail"
+      data-cv-drag
       tabindex="0"
       aria-label="{{ section.settings.title | strip_html | escape }}"
     >
@@ -96,6 +97,7 @@
           label: section.settings.button_label,
           action: section.settings.button_action,
           url: section.settings.button_link,
+          product: section.settings.button_product,
           style: section.settings.button_style
         %}
       </div>
@@ -121,6 +123,23 @@
 
   .cv-ugc__rail::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Mouse drag (desktop / editor preview): grab cursor, no snapping or text selection mid-drag */
+  @media (hover: hover) and (pointer: fine) {
+    .cv-ugc__rail {
+      cursor: grab;
+    }
+  }
+
+  .cv-ugc__rail.is-dragging {
+    cursor: grabbing;
+    scroll-snap-type: none;
+    user-select: none;
+  }
+
+  .cv-ugc__rail.is-dragging .cv-ugc__card {
+    pointer-events: none;
   }
 
   @media screen and (min-width: 750px) {
@@ -256,11 +275,13 @@
       "options": [
         { "value": "offer", "label": "Remonter au choix de l'offre" },
         { "value": "cart", "label": "Ajouter l'offre choisie au panier" },
+        { "value": "product", "label": "Aller à la page produit" },
         { "value": "url", "label": "Lien personnalisé" }
       ],
       "default": "offer"
     },
     { "type": "url", "id": "button_link", "label": "Lien", "visible_if": "{{ section.settings.button_action == 'url' }}" },
+    { "type": "product", "id": "button_product", "label": "Produit (action « page produit »)", "info": "Vide = premier produit de la boutique." },
     {
       "type": "select",
       "id": "button_style",

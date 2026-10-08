@@ -9,274 +9,264 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "cv_hero": {
+      "type": "ceriva-media-list",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "item_1": {
+          "type": "item",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "title": "Il retire au lieu d'enfoncer",
+            "text": "<p>L'embout adhésif capte le cérumen au contact et le ramène vers l'extérieur.</p>"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "item_2": {
+          "type": "item",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "title": "Vous voyez le résultat",
+            "text": "<p>Ce qui est retiré reste sur l'embout, à chaque passage.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Rinçable et réutilisable",
+            "text": "<p>Un stick remplace des dizaines de cotons-tiges.</p>"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "item_1",
+        "item_2",
+        "item_3"
       ],
-      "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "tone": "ice",
+        "list_style": "checks",
+        "media_position": "right",
+        "ratio": "square",
+        "image_asset": "ceriva-hero.jpg",
+        "placeholder_label": "Boîte Ceriva",
+        "eyebrow": "Stick auriculaire adhésif réutilisable",
+        "title": "Des oreilles nettes, sans coton-tige",
+        "text": "<p>Le geste que vous faites depuis toujours, enfin fait correctement : Ceriva capte le cérumen au lieu de le repousser.</p>",
+        "button_label": "Découvrir Ceriva",
+        "button_action": "product",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 48,
+        "padding_bottom": 56
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "cv_steps": {
+      "type": "ceriva-steps",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "step_1": {
+          "type": "step",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "image_asset": "ceriva-step-1.jpg",
+            "placeholder_label": "Étape 1 : embout posé à l'entrée du conduit (gros plan)",
+            "title": "Placez",
+            "text": "<p>Posez délicatement l'embout à l'entrée du conduit. Jamais en profondeur, jamais en forçant.</p>"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "step_2": {
+          "type": "step",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "image_asset": "ceriva-step-2.jpg",
+            "placeholder_label": "Étape 2 : main qui fait tourner le stick d'un quart de tour",
+            "title": "Tournez",
+            "text": "<p>Un quart de tour, avec une pression légère : l'embout capte le cérumen au contact.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image_asset": "ceriva-step-3.jpg",
+            "placeholder_label": "Étape 3 : embout avec résidus visibles, puis rinçage",
+            "title": "Retirez & rincez",
+            "text": "<p>Sortez le stick, constatez le résultat, puis rincez-le à l'eau tiède. Il est prêt pour la prochaine fois.</p>"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "tone": "white",
+        "eyebrow": "Mode d'emploi",
+        "title": "Des oreilles nettes en 3 gestes",
+        "text": "<p>Moins d'une minute. Ni gouttes, ni dégâts.</p>",
+        "step_label": "Étape",
+        "note": "",
+        "button_label": "",
+        "button_action": "product",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "cv_comparison": {
+      "type": "ceriva-comparison",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Retire le cérumen au lieu de le tasser",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Ne laisse aucune fibre dans l'oreille",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Embout souple qui épouse l'oreille",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Vous montre ce qui a été retiré",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Réutilisable après rinçage",
+            "us": true,
+            "them": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ],
+      "settings": {
+        "tone": "white",
+        "eyebrow": "Comparatif",
+        "title": "Ceriva ou coton-tige ?",
+        "text": "<p>Le même geste. Un résultat qui n'a rien à voir.</p>",
+        "col_benefit": "Critère",
+        "col_us": "Ceriva",
+        "col_them": "Coton-tige",
+        "button_label": "Je passe à Ceriva",
+        "button_action": "product",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "cv_reviews": {
+      "type": "ceriva-reviews",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "image_asset": "ceriva-review-1.jpg",
+            "placeholder_label": "Photo client : embout après usage",
+            "title": "Je ne pensais pas en avoir autant",
+            "text": "<p>J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu.</p>",
+            "author": "Camille R.",
+            "detail": "Lyon",
+            "verified": true
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "image_asset": "ceriva-review-2.jpg",
+            "placeholder_label": "Photo client : boîte Ceriva sur un bureau, écouteurs à côté",
+            "title": "Indispensable avec mes écouteurs",
+            "text": "<p>Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva une fois par semaine, plus aucune gêne, et mes écouteurs restent propres.</p>",
+            "author": "Thomas L.",
+            "detail": "Nantes",
+            "verified": true
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "image_asset": "ceriva-review-3.jpg",
+            "placeholder_label": "Photo client : stick en main",
+            "title": "Très doux, aucune douleur",
+            "text": "<p>J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini.</p>",
+            "author": "Nadia B.",
+            "detail": "Marseille",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ],
+      "settings": {
+        "sample_notice": false,
+        "tone": "ice",
+        "eyebrow": "Avis vérifiés",
+        "title": "Ce qu'en disent nos clients",
+        "show_summary": true,
+        "score": "4,8",
+        "count_label": "1 200+ avis vérifiés",
+        "share_5": 82,
+        "share_4": 12,
+        "share_3": 4,
+        "share_2": 1,
+        "share_1": 1,
+        "visible_count": 3,
+        "more_label": "Voir plus d'avis",
+        "button_label": "Découvrir Ceriva",
+        "button_action": "product",
+        "button_link": "",
+        "button_style": "primary",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "cv_guarantee": {
+      "type": "ceriva-guarantee",
+      "settings": {
+        "tone": "ice",
+        "seal_number": "30",
+        "seal_label": "jours",
+        "eyebrow": "Essai sans risque",
+        "title": "30 jours pour sentir la différence",
+        "text": "<p>Essayez Ceriva pendant 30 jours. Si vos oreilles ne vous semblent pas plus nettes et plus légères, écrivez-nous : nous vous remboursons intégralement. Sans justificatif, sans discussion.</p>",
+        "button_label": "J'essaie Ceriva sans risque",
+        "button_action": "product",
+        "button_link": "",
+        "button_style": "primary",
+        "ticks": "Livraison offerte | Remboursement intégral | Paiement sécurisé",
+        "padding_top": 48,
+        "padding_bottom": 80
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "cv_hero",
+    "cv_steps",
+    "cv_comparison",
+    "cv_reviews",
+    "cv_guarantee"
   ]
 }
