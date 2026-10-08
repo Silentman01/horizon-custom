@@ -9,6 +9,46 @@
  */
 {
   "sections": {
+    "ceriva_marquee_MHKGbn": {
+      "type": "ceriva-marquee",
+      "blocks": {
+        "item_N8fBBa": {
+          "type": "item",
+          "settings": {
+            "text": "Livraison offerte en France"
+          }
+        },
+        "item_Tc8mjV": {
+          "type": "item",
+          "settings": {
+            "text": "Satisfait ou remboursé 30 jours"
+          }
+        },
+        "item_PLyfik": {
+          "type": "item",
+          "settings": {
+            "text": "Rinçable et réutilisable"
+          }
+        },
+        "item_HTXwwP": {
+          "type": "item",
+          "settings": {
+            "text": "Expédié sous 24/48 h"
+          }
+        }
+      },
+      "block_order": [
+        "item_N8fBBa",
+        "item_Tc8mjV",
+        "item_PLyfik",
+        "item_HTXwwP"
+      ],
+      "name": "Ceriva — Bandeau défilant",
+      "settings": {
+        "tone": "navy",
+        "speed": 36
+      }
+    },
     "cv_hero": {
       "type": "ceriva-media-list",
       "blocks": {
@@ -16,21 +56,24 @@
           "type": "item",
           "settings": {
             "title": "Il retire au lieu d'enfoncer",
-            "text": "<p>L'embout adhésif capte le cérumen au contact et le ramène vers l'extérieur.</p>"
+            "text": "<p>L'embout adhésif capte le cérumen au contact et le ramène vers l'extérieur.</p>",
+            "image_asset": ""
           }
         },
         "item_2": {
           "type": "item",
           "settings": {
             "title": "Vous voyez le résultat",
-            "text": "<p>Ce qui est retiré reste sur l'embout, à chaque passage.</p>"
+            "text": "<p>Ce qui est retiré reste sur l'embout, à chaque passage.</p>",
+            "image_asset": ""
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
             "title": "Rinçable et réutilisable",
-            "text": "<p>Un stick remplace des dizaines de cotons-tiges.</p>"
+            "text": "<p>Un stick remplace des dizaines de cotons-tiges.</p>",
+            "image_asset": ""
           }
         }
       },
@@ -53,6 +96,7 @@
         "button_label": "Découvrir Ceriva",
         "button_action": "product",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 48,
         "padding_bottom": 56
@@ -104,6 +148,7 @@
         "button_label": "",
         "button_action": "product",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -171,6 +216,7 @@
         "button_label": "Je passe à Ceriva",
         "button_action": "product",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -239,6 +285,7 @@
         "button_label": "Découvrir Ceriva",
         "button_action": "product",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -256,6 +303,7 @@
         "button_label": "J'essaie Ceriva sans risque",
         "button_action": "product",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "ticks": "Livraison offerte | Remboursement intégral | Paiement sécurisé",
         "padding_top": 48,
@@ -264,6 +312,7 @@
     }
   },
   "order": [
+    "ceriva_marquee_MHKGbn",
     "cv_hero",
     "cv_steps",
     "cv_comparison",

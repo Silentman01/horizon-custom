@@ -9,6 +9,46 @@
  */
 {
   "sections": {
+    "ceriva_marquee_bhLUMD": {
+      "type": "ceriva-marquee",
+      "blocks": {
+        "item_KxfVhb": {
+          "type": "item",
+          "settings": {
+            "text": "Livraison offerte en France"
+          }
+        },
+        "item_jPXgTY": {
+          "type": "item",
+          "settings": {
+            "text": "Satisfait ou remboursé 30 jours"
+          }
+        },
+        "item_mETXnz": {
+          "type": "item",
+          "settings": {
+            "text": "Rinçable et réutilisable"
+          }
+        },
+        "item_NAtBe8": {
+          "type": "item",
+          "settings": {
+            "text": "Expédié sous 24/48 h"
+          }
+        }
+      },
+      "block_order": [
+        "item_KxfVhb",
+        "item_jPXgTY",
+        "item_mETXnz",
+        "item_NAtBe8"
+      ],
+      "name": "Ceriva — Bandeau défilant",
+      "settings": {
+        "tone": "navy",
+        "speed": 36
+      }
+    },
     "main": {
       "type": "product-information",
       "blocks": {
@@ -646,16 +686,17 @@
         "eyebrow": "De vrais gens · De vrais résultats",
         "title": "Regardez ce qui sort",
         "text": "<p>Un quart de tour, et le résultat reste sur l'embout. Sans filtre, sans retouche.</p>",
+        "enable_sound": false,
         "swipe_hint": "Glissez pour voir la suite →",
         "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
         "proof_title": "Ils ont rangé leurs cotons-tiges pour de bon",
         "button_label": "Je veux ce résultat",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
-        "padding_bottom": 64,
-        "enable_sound": false
+        "padding_bottom": 64
       }
     },
     "cv_problem": {
@@ -749,10 +790,12 @@
         "placeholder_label": "Lifestyle : utilisatrice souriante, stick Ceriva en main, fond clair",
         "eyebrow": "La différence Ceriva",
         "title": "Pourquoi ils passent à Ceriva",
+        "heading_tag": "h2",
         "text": "<p>Le geste que vous faites depuis toujours. Enfin fait correctement.</p>",
         "button_label": "Je choisis mon offre",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -804,6 +847,7 @@
         "button_label": "",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -918,10 +962,12 @@
         "placeholder_label": "Packshot : boîte Ceriva ouverte + stick, fond blanc #FFFFFF",
         "eyebrow": "En bref",
         "title": "Ceriva, en détail",
+        "heading_tag": "h2",
         "text": "",
         "button_label": "",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -989,6 +1035,7 @@
         "button_label": "Je passe à Ceriva",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -1096,6 +1143,7 @@
         "button_label": "Je rejoins les clients Ceriva",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "padding_top": 64,
         "padding_bottom": 64
@@ -1202,6 +1250,7 @@
         "button_label": "J'essaie Ceriva sans risque",
         "button_action": "offer",
         "button_link": "",
+        "button_product": "",
         "button_style": "primary",
         "ticks": "Livraison offerte | Remboursement intégral | Paiement sécurisé",
         "padding_top": 48,
@@ -1210,6 +1259,7 @@
     }
   },
   "order": [
+    "ceriva_marquee_bhLUMD",
     "main",
     "cv_ugc",
     "cv_problem",
