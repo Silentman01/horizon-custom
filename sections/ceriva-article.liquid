@@ -1,0 +1,1200 @@
+{%- liquid
+  assign ss = section.settings
+  assign cta_product = ss.product | default: collections.all.products.first
+  assign cta_url = cta_product.url | default: routes.all_products_collection_url
+-%}
+
+<div
+  class="cv cva"
+  style="{% render 'ceriva-tokens' %}"
+>
+  <header class="cva-mast">
+    <div class="cva-mast__inner">
+      <span class="cva-mast__name">{{ ss.masthead_name }}</span>
+      {%- if ss.disclosure != blank -%}
+        <span class="cva-mast__ad">{{ ss.disclosure }}</span>
+      {%- endif -%}
+    </div>
+  </header>
+
+  <article class="cva-article">
+    <header class="cva-head">
+      {%- if ss.category != blank -%}
+        <p class="cva-head__cat">{{ ss.category }}</p>
+      {%- endif -%}
+      <h1 class="cva-head__title">{{ ss.title }}</h1>
+      {%- if ss.deck != blank -%}
+        <p class="cva-head__deck">{{ ss.deck }}</p>
+      {%- endif -%}
+
+      <div class="cva-byline">
+        <span
+          class="cva-byline__avatar"
+          aria-hidden="true"
+        >
+          {%- if ss.author_image -%}
+            {{ ss.author_image | image_url: width: 96 | image_tag: width: 44, height: 44, alt: '' }}
+          {%- elsif ss.author_asset != blank -%}
+            <img
+              src="{{ ss.author_asset | asset_url }}"
+              alt=""
+              width="44"
+              height="44"
+            >
+          {%- else -%}
+            {{ ss.author_name | slice: 0 }}
+          {%- endif -%}
+        </span>
+        <div class="cva-byline__text">
+          <p class="cva-byline__name">
+            Par <strong>{{ ss.author_name }}</strong>
+            {%- if ss.author_role != blank %} · {{ ss.author_role }}{% endif -%}
+          </p>
+          <p class="cva-byline__meta">
+            {%- if ss.date_text != blank -%}{{ ss.date_text }}{%- endif -%}
+            {%- if ss.date_text != blank and ss.reading_time != blank %} · {% endif -%}
+            {%- if ss.reading_time != blank -%}{{ ss.reading_time }}{%- endif -%}
+          </p>
+        </div>
+      </div>
+
+      {%- if ss.hero_image or ss.hero_asset != blank -%}
+        <figure class="cva-fig cva-fig--hero">
+          {% render 'ceriva-media',
+            image: ss.hero_image,
+            asset: ss.hero_asset,
+            ratio: '3 / 2',
+            label: ss.hero_caption,
+            sizes: '(min-width: 760px) 720px, 100vw',
+            eager: true
+          %}
+          {%- if ss.hero_caption != blank -%}
+            <figcaption>{{ ss.hero_caption }}</figcaption>
+          {%- endif -%}
+        </figure>
+      {%- endif -%}
+    </header>
+
+    <div class="cva-body">
+      {%- assign first_cta_done = false -%}
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        {%- case block.type -%}
+          {%- when 'heading' -%}
+            <h2
+              class="cva-h2"
+              {{ block.shopify_attributes }}
+            >
+              {%- if b.kicker != blank -%}
+                <span class="cva-h2__kicker">{{ b.kicker }}</span>
+              {%- endif -%}
+              {{ b.text }}
+            </h2>
+
+          {%- when 'text' -%}
+            <div
+              class="cva-text cva-text--{{ b.style }}{% if b.dropcap %} cva-text--dropcap{% endif %}"
+              {{ block.shopify_attributes }}
+            >
+              {{ b.text }}
+            </div>
+
+          {%- when 'image' -%}
+            {%- liquid
+              case b.ratio
+                when 'square'
+                  assign r = '1'
+                when 'portrait'
+                  assign r = '4 / 5'
+                else
+                  assign r = '3 / 2'
+              endcase
+            -%}
+            <figure
+              class="cva-fig"
+              {{ block.shopify_attributes }}
+            >
+              {% render 'ceriva-media',
+                image: b.image,
+                asset: b.asset,
+                ratio: r,
+                label: b.caption,
+                sizes: '(min-width: 760px) 720px, 100vw'
+              %}
+              {%- if b.caption != blank -%}
+                <figcaption>{{ b.caption }}</figcaption>
+              {%- endif -%}
+            </figure>
+
+          {%- when 'quote' -%}
+            <blockquote
+              class="cva-quote cva-quote--{{ b.style }}"
+              {{ block.shopify_attributes }}
+            >
+              <p>{{ b.text }}</p>
+              {%- if b.cite != blank -%}
+                <cite>{{ b.cite }}</cite>
+              {%- endif -%}
+            </blockquote>
+
+          {%- when 'stat' -%}
+            <div
+              class="cva-stat"
+              {{ block.shopify_attributes }}
+            >
+              <span class="cva-stat__number">{{ b.number }}</span>
+              <span class="cva-stat__text">{{ b.text }}</span>
+            </div>
+
+          {%- when 'callout' -%}
+            <aside
+              class="cva-callout cva-callout--{{ b.tone }}"
+              {{ block.shopify_attributes }}
+            >
+              {%- if b.title != blank -%}
+                <p class="cva-callout__title">{{ b.title }}</p>
+              {%- endif -%}
+              <div class="cva-callout__text">{{ b.text }}</div>
+            </aside>
+
+          {%- when 'steps' -%}
+            <ol
+              class="cva-steps"
+              {{ block.shopify_attributes }}
+            >
+              {%- for i in (1..4) -%}
+                {%- assign t_key = 'title_' | append: i -%}
+                {%- assign x_key = 'text_' | append: i -%}
+                {%- if b[t_key] != blank -%}
+                  <li>
+                    <span
+                      class="cva-steps__n"
+                      aria-hidden="true"
+                    >
+                      {{- i -}}
+                    </span>
+                    <div>
+                      <p class="cva-steps__title">{{ b[t_key] }}</p>
+                      <p class="cva-steps__text">{{ b[x_key] }}</p>
+                    </div>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ol>
+
+          {%- when 'timeline' -%}
+            <div
+              class="cva-timeline"
+              {{ block.shopify_attributes }}
+            >
+              <ol>
+                {%- for i in (1..5) -%}
+                  {%- assign l_key = 'label_' | append: i -%}
+                  {%- assign x_key = 'text_' | append: i -%}
+                  {%- if b[l_key] != blank -%}
+                    <li>
+                      <span class="cva-timeline__label">{{ b[l_key] }}</span>
+                      <p>{{ b[x_key] }}</p>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ol>
+              {%- if b.note != blank -%}
+                <p class="cva-timeline__note">{{ b.note }}</p>
+              {%- endif -%}
+            </div>
+
+          {%- when 'cta' -%}
+            {%- liquid
+              assign target = b.product | default: cta_product
+              assign href = target.url | default: cta_url
+            -%}
+            {%- if b.style == 'inline' -%}
+              <p
+                class="cva-inline-cta"
+                {% unless first_cta_done %}
+                  data-cva-first-cta
+                {% endunless %}
+                {{ block.shopify_attributes }}
+              >
+                <a href="{{ href }}">{{ b.button }}</a>
+                {%- if b.note != blank %} <span>{{ b.note }}</span>{% endif -%}
+              </p>
+            {%- else -%}
+              <aside
+                class="cva-cta cva-cta--{{ b.style }}"
+                {% unless first_cta_done %}
+                  data-cva-first-cta
+                {% endunless %}
+                {% if b.style == 'offer' %}
+                  data-cva-offer
+                {% endif %}
+                {{ block.shopify_attributes }}
+              >
+                {%- if b.kicker != blank -%}
+                  <p class="cva-cta__kicker">{{ b.kicker }}</p>
+                {%- endif -%}
+                <div class="cva-cta__grid{% if b.image or b.asset != blank %} cva-cta__grid--media{% endif %}">
+                  {%- if b.image or b.asset != blank -%}
+                    <div class="cva-cta__media">
+                      {% render 'ceriva-media',
+                        image: b.image,
+                        asset: b.asset,
+                        ratio: '1',
+                        label: b.title,
+                        sizes: '200px'
+                      %}
+                    </div>
+                  {%- endif -%}
+                  <div class="cva-cta__body">
+                    {%- if b.title != blank -%}
+                      <p class="cva-cta__title">{{ b.title }}</p>
+                    {%- endif -%}
+                    {%- if b.text != blank -%}
+                      <div class="cva-cta__text">{{ b.text }}</div>
+                    {%- endif -%}
+                  </div>
+                </div>
+                <a
+                  class="cv-btn cva-cta__btn"
+                  href="{{ href }}"
+                >
+                  {{- b.button -}}
+                </a>
+                {%- if b.note != blank -%}
+                  <p class="cva-cta__note">{{ b.note }}</p>
+                {%- endif -%}
+              </aside>
+            {%- endif -%}
+            {%- assign first_cta_done = true -%}
+
+          {%- when 'review' -%}
+            <figure
+              class="cva-review"
+              {{ block.shopify_attributes }}
+            >
+              {%- if b.image or b.asset != blank -%}
+                <div class="cva-review__media">
+                  {% render 'ceriva-media',
+                    image: b.image,
+                    asset: b.asset,
+                    ratio: '1',
+                    label: b.author,
+                    sizes: '120px',
+                    position: '50% 35%'
+                  %}
+                </div>
+              {%- endif -%}
+              <div>
+                {% render 'ceriva-stars', size: '15' %}
+                <blockquote>{{ b.text }}</blockquote>
+                <figcaption>
+                  <strong>{{ b.author }}</strong>
+                  {%- if b.detail != blank %} · {{ b.detail }}{% endif -%}
+                </figcaption>
+              </div>
+            </figure>
+
+          {%- when 'divider' -%}
+            <p
+              class="cva-divider"
+              aria-hidden="true"
+              {{ block.shopify_attributes }}
+            >
+              • • •
+            </p>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if request.design_mode and ss.sample_notice -%}
+      <p class="cva-notice">
+        Rappel éditeur : les avis affichés sont des exemples. Remplacez-les par de vrais avis clients avant de diffuser
+        cette page.
+      </p>
+    {%- endif -%}
+  </article>
+
+  <footer class="cva-foot">
+    {%- if ss.footer_note != blank -%}
+      <div class="cva-foot__note">{{ ss.footer_note }}</div>
+    {%- endif -%}
+    <p class="cva-foot__links">
+      © {{ 'now' | date: '%Y' }} {{ shop.name }}
+      {%- for policy in shop.policies %}
+        · <a href="{{ policy.url }}">{{ policy.title }}</a>
+      {%- endfor %}
+    </p>
+  </footer>
+
+  {%- if ss.sticky_label != blank -%}
+    <div
+      class="cva-sticky"
+      data-cva-sticky
+      hidden
+    >
+      <span class="cva-sticky__text">{{ ss.sticky_text }}</span>
+      <a
+        class="cv-btn cva-sticky__btn"
+        href="{{ cta_url }}"
+      >
+        {{- ss.sticky_label -}}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+{% render 'ceriva-script' %}
+
+{% stylesheet %}
+  .cva {
+    --cv-bg: var(--cv-ice);
+    --cv-fg: var(--cv-navy);
+    --cva-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    --cva-col: 680px;
+
+    min-height: 100vh;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cva {
+      font-size: 18px;
+    }
+  }
+
+  /* Masthead */
+  .cva-mast {
+    background: var(--cv-navy);
+    color: var(--cv-white);
+  }
+
+  .cva-mast__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: var(--cva-col);
+    margin: 0 auto;
+    padding: 10px var(--cv-gutter);
+  }
+
+  .cva-mast__name {
+    font-family: var(--cva-serif);
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  .cva-mast__ad {
+    padding: 2px 8px;
+    border: 1px solid rgb(255 255 255 / 0.5);
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Article column */
+  .cva-article {
+    max-width: var(--cva-col);
+    margin: 0 auto;
+    padding: 28px var(--cv-gutter) 48px;
+  }
+
+  .cva-head__cat {
+    margin: 0 0 10px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cva-head__title {
+    margin: 0;
+    font-family: var(--cva-serif);
+    font-size: clamp(28px, 6vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--cv-navy);
+    text-wrap: balance;
+  }
+
+  .cva-head__deck {
+    margin: 14px 0 0;
+    font-family: var(--cva-serif);
+    font-size: 19px;
+    font-style: italic;
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
+
+  .cva-byline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 22px 0;
+    padding: 14px 0;
+    border-block: 1px solid var(--cv-line);
+  }
+
+  .cva-byline__avatar {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    border-radius: 50%;
+    background: var(--cv-navy);
+    color: var(--cv-white);
+    font-family: var(--cva-serif);
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  .cva-byline__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cva-byline__name,
+  .cva-byline__meta {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Figures */
+  .cva-fig {
+    margin: 28px 0;
+  }
+
+  .cva-fig--hero {
+    margin-top: 0;
+  }
+
+  .cva-fig .cv-media {
+    --cv-media-radius: 10px;
+  }
+
+  .cva-fig figcaption {
+    margin-top: 8px;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Body copy */
+  .cva-body {
+    display: flow-root;
+  }
+
+  .cva-text p {
+    margin: 0 0 1.1em;
+  }
+
+  .cva-text a {
+    color: var(--cv-blue);
+    text-underline-offset: 3px;
+  }
+
+  .cva-text--lead {
+    font-family: var(--cva-serif);
+    font-size: 1.12em;
+    line-height: 1.65;
+  }
+
+  .cva-text--bridge {
+    font-weight: 700;
+  }
+
+  .cva-text--dropcap > p:first-child::first-letter {
+    float: left;
+    margin: 0.06em 0.1em 0 0;
+    font-family: var(--cva-serif);
+    font-size: 3.4em;
+    font-weight: 700;
+    line-height: 0.85;
+    color: var(--cv-blue);
+  }
+
+  .cva-h2 {
+    margin: 44px 0 16px;
+    font-family: var(--cva-serif);
+    font-size: clamp(23px, 4.6vw, 28px);
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--cv-navy);
+    text-wrap: balance;
+  }
+
+  .cva-h2__kicker {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-body--family);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  /* Pull quote */
+  .cva-quote {
+    margin: 30px 0;
+  }
+
+  .cva-quote p {
+    margin: 0;
+    font-family: var(--cva-serif);
+    font-style: italic;
+    font-size: 1.3em;
+    line-height: 1.45;
+    color: var(--cv-navy);
+  }
+
+  .cva-quote cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 14px;
+    font-style: normal;
+  }
+
+  .cva-quote--pull {
+    padding-left: 18px;
+    border-left: 3px solid var(--cv-blue);
+  }
+
+  .cva-quote--label {
+    padding: 22px 20px;
+    border: 1.5px dashed rgb(var(--cv-navy-rgb) / 0.35);
+    border-radius: 8px;
+    background: var(--cv-white);
+    text-align: center;
+  }
+
+  .cva-quote--label p {
+    font-family: var(--font-body--family);
+    font-style: normal;
+    font-size: 1.15em;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+
+  /* Data highlight */
+  .cva-stat {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 30px 0;
+    padding: 20px 22px;
+    border-radius: 10px;
+    background: var(--cv-navy);
+    color: var(--cv-white);
+  }
+
+  .cva-stat__number {
+    flex: none;
+    font-family: var(--cva-serif);
+    font-size: clamp(36px, 9vw, 52px);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--cv-white);
+  }
+
+  .cva-stat__text {
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  /* Callout */
+  .cva-callout {
+    margin: 30px 0;
+    padding: 20px 22px;
+    border-radius: 10px;
+  }
+
+  .cva-callout--soft {
+    border: 1.5px solid rgb(46 143 219 / 0.3);
+    background: rgb(46 143 219 / 0.07);
+  }
+
+  .cva-callout--navy {
+    background: var(--cv-navy);
+    color: var(--cv-white);
+  }
+
+  .cva-callout__title {
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cva-callout--navy .cva-callout__title {
+    color: var(--cv-white);
+  }
+
+  .cva-callout__text {
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  .cva-callout__text p {
+    margin: 0 0 0.7em;
+  }
+
+  .cva-callout__text p:last-child,
+  .cva-callout__text ul:last-child {
+    margin-bottom: 0;
+  }
+
+  .cva-callout__text ul {
+    margin: 0;
+    padding-left: 1.1em;
+  }
+
+  .cva-callout__text li {
+    margin-bottom: 0.35em;
+  }
+
+  /* Steps */
+  .cva-steps {
+    display: grid;
+    gap: 14px;
+    margin: 26px 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cva-steps li {
+    display: flex;
+    gap: 14px;
+    padding: 16px 18px;
+    border-radius: 10px;
+    background: var(--cv-white);
+  }
+
+  .cva-steps__n {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--cv-blue);
+    color: var(--cv-white);
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .cva-steps__title {
+    margin: 2px 0 2px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+
+  .cva-steps__text {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* Timeline */
+  .cva-timeline {
+    margin: 28px 0;
+  }
+
+  .cva-timeline ol {
+    margin: 0;
+    padding: 0 0 0 22px;
+    list-style: none;
+    border-left: 2px solid rgb(46 143 219 / 0.35);
+  }
+
+  .cva-timeline li {
+    position: relative;
+    padding: 0 0 18px;
+  }
+
+  .cva-timeline li::before {
+    content: '';
+    position: absolute;
+    top: 7px;
+    left: -29px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--cv-blue);
+    box-shadow: 0 0 0 4px var(--cv-ice);
+  }
+
+  .cva-timeline__label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cva-timeline li p {
+    margin: 2px 0 0;
+  }
+
+  .cva-timeline__note {
+    margin: 4px 0 0;
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* Recommendation / offer boxes */
+  .cva-inline-cta {
+    margin: 4px 0 26px;
+    font-weight: 700;
+  }
+
+  .cva-inline-cta a {
+    color: var(--cv-blue);
+    text-underline-offset: 4px;
+  }
+
+  .cva-inline-cta span {
+    display: block;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .cva-cta {
+    margin: 34px 0;
+    padding: 22px;
+    border: 1px solid var(--cv-line);
+    border-radius: 12px;
+    background: var(--cv-white);
+    box-shadow: 0 10px 30px rgb(var(--cv-navy-rgb) / 0.07);
+  }
+
+  .cva-cta--offer {
+    border: 2px solid var(--cv-blue);
+  }
+
+  .cva-cta__kicker {
+    margin: 0 0 12px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--cv-blue);
+  }
+
+  .cva-cta__grid {
+    display: grid;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .cva-cta__grid--media {
+    grid-template-columns: 96px 1fr;
+  }
+
+  @media screen and (min-width: 750px) {
+    .cva-cta__grid--media {
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+    }
+  }
+
+  .cva-cta__media .cv-media {
+    --cv-media-radius: 8px;
+  }
+
+  .cva-cta__title {
+    margin: 0 0 4px;
+    font-family: var(--cva-serif);
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .cva-cta__text {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cva-cta__text p {
+    margin: 0 0 0.5em;
+  }
+
+  .cva-cta__text p:last-child,
+  .cva-cta__text ul:last-child {
+    margin-bottom: 0;
+  }
+
+  .cva-cta__text ul {
+    margin: 0;
+    padding-left: 1.1em;
+  }
+
+  .cva-cta__btn {
+    width: 100%;
+    text-align: center;
+    text-wrap: balance;
+    margin-top: 18px;
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 17px;
+  }
+
+  .cva-cta__note {
+    margin: 10px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  /* Reviews */
+  .cva-review {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 14px;
+    margin: 0 0 14px;
+    padding: 16px;
+    border-radius: 10px;
+    background: var(--cv-white);
+  }
+
+  .cva-review:not(:has(.cva-review__media)) {
+    grid-template-columns: 1fr;
+  }
+
+  .cva-review__media .cv-media {
+    --cv-media-radius: 8px;
+  }
+
+  .cva-review blockquote {
+    margin: 6px 0;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cva-review figcaption {
+    font-size: 13px;
+  }
+
+  .cva-divider {
+    margin: 34px 0;
+    font-size: 14px;
+    letter-spacing: 0.6em;
+    text-align: center;
+    color: var(--cv-blue);
+  }
+
+  .cva-notice {
+    margin-top: 24px;
+    padding: 12px 16px;
+    border: 1.5px dashed var(--cv-blue);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  /* Footer */
+  .cva-foot {
+    max-width: var(--cva-col);
+    margin: 0 auto;
+    padding: 24px var(--cv-gutter) 110px;
+    border-top: 1px solid var(--cv-line);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .cva-foot__note p {
+    margin: 0 0 0.8em;
+  }
+
+  .cva-foot__links a {
+    color: inherit;
+  }
+
+  /* Sticky recommendation bar (appears after the product is introduced) */
+  .cva-sticky {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 10px var(--cv-gutter) calc(10px + env(safe-area-inset-bottom));
+    background: rgb(255 255 255 / 0.96);
+    box-shadow: 0 -6px 20px rgb(var(--cv-navy-rgb) / 0.1);
+    transform: translateY(110%);
+    transition: transform 0.3s ease;
+  }
+
+  .cva-sticky[hidden] {
+    display: flex;
+    visibility: hidden;
+  }
+
+  .cva-sticky.is-visible {
+    visibility: visible;
+    transform: none;
+  }
+
+  .cva-sticky__text {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .cva-sticky__btn {
+    flex: none;
+    min-height: 44px;
+    padding: 10px 18px;
+    font-size: 14px;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const sticky = document.querySelector('[data-cva-sticky]');
+    const start = document.querySelector('[data-cva-first-cta]');
+    if (!sticky || !start || !('IntersectionObserver' in window)) return;
+
+    sticky.hidden = false;
+    let pastStart = false;
+    let offerVisible = false;
+    const update = () => sticky.classList.toggle('is-visible', pastStart && !offerVisible);
+
+    // Show once the reader has scrolled past the first recommendation…
+    new IntersectionObserver(([entry]) => {
+      pastStart = entry.boundingClientRect.top < 0 || entry.isIntersecting;
+      update();
+    }).observe(start);
+
+    // …and step aside while the final offer box itself is on screen.
+    const offer = document.querySelector('[data-cva-offer]');
+    if (offer) {
+      new IntersectionObserver(([entry]) => {
+        offerVisible = entry.isIntersecting;
+        update();
+      }).observe(offer);
+    }
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Ceriva — Article",
+  "tag": "section",
+  "class": "cv-section",
+  "settings": [
+    { "type": "header", "content": "Bandeau" },
+    { "type": "text", "id": "masthead_name", "label": "Nom de la publication", "default": "Le Carnet Ceriva" },
+    {
+      "type": "text",
+      "id": "disclosure",
+      "label": "Mention publicitaire",
+      "info": "Obligatoire pour un publireportage (Code de la consommation, art. L121-3).",
+      "default": "Publicité"
+    },
+    { "type": "header", "content": "En-tête" },
+    { "type": "text", "id": "category", "label": "Rubrique", "default": "Hygiène · Enquête" },
+    { "type": "text", "id": "title", "label": "Titre (H1)", "default": "Titre de l'article" },
+    { "type": "textarea", "id": "deck", "label": "Chapeau" },
+    { "type": "text", "id": "author_name", "label": "Auteur", "default": "La rédaction Ceriva" },
+    { "type": "text", "id": "author_role", "label": "Précision auteur", "default": "Contenu proposé par Ceriva" },
+    { "type": "image_picker", "id": "author_image", "label": "Photo auteur" },
+    { "type": "text", "id": "author_asset", "label": "Photo auteur (fichier du thème)" },
+    { "type": "text", "id": "date_text", "label": "Date" },
+    { "type": "text", "id": "reading_time", "label": "Temps de lecture", "default": "7 min de lecture" },
+    { "type": "image_picker", "id": "hero_image", "label": "Image principale" },
+    { "type": "text", "id": "hero_asset", "label": "Image principale (fichier du thème)" },
+    { "type": "text", "id": "hero_caption", "label": "Légende" },
+    { "type": "header", "content": "Lien des recommandations" },
+    { "type": "product", "id": "product", "label": "Produit", "info": "Vide = premier produit de la boutique." },
+    { "type": "text", "id": "sticky_text", "label": "Barre fixe : texte", "default": "Ceriva · stick auriculaire réutilisable" },
+    { "type": "text", "id": "sticky_label", "label": "Barre fixe : bouton", "info": "Vide = pas de barre.", "default": "Voir l'offre" },
+    { "type": "header", "content": "Bas de page" },
+    { "type": "richtext", "id": "footer_note", "label": "Mentions" },
+    { "type": "checkbox", "id": "sample_notice", "label": "Rappel « avis d'exemple » dans l'éditeur", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Intertitre",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Surtitre" },
+        { "type": "text", "id": "text", "label": "Intertitre", "default": "Intertitre" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Paragraphes",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Texte</p>" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "lead", "label": "Introduction (serif)" },
+            { "value": "bridge", "label": "Transition (gras)" }
+          ],
+          "default": "normal"
+        },
+        { "type": "checkbox", "id": "dropcap", "label": "Lettrine", "default": false }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Image du thème (fichier)" },
+        {
+          "type": "select",
+          "id": "ratio",
+          "label": "Format",
+          "options": [
+            { "value": "landscape", "label": "Paysage 3:2" },
+            { "value": "square", "label": "Carré" },
+            { "value": "portrait", "label": "Portrait 4:5" }
+          ],
+          "default": "landscape"
+        },
+        { "type": "text", "id": "caption", "label": "Légende" }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Citation",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Citation" },
+        { "type": "text", "id": "cite", "label": "Source" },
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "pull", "label": "Exergue" },
+            { "value": "label", "label": "Mention imprimée (encadré)" }
+          ],
+          "default": "pull"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "name": "Chiffre clé",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Chiffre", "default": "14 600" },
+        { "type": "textarea", "id": "text", "label": "Texte" }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Encadré",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "richtext", "id": "text", "label": "Texte", "default": "<p>Texte</p>" },
+        {
+          "type": "select",
+          "id": "tone",
+          "label": "Style",
+          "options": [
+            { "value": "soft", "label": "Bleu clair" },
+            { "value": "navy", "label": "Bleu nuit" }
+          ],
+          "default": "soft"
+        }
+      ]
+    },
+    {
+      "type": "steps",
+      "name": "Étapes",
+      "settings": [
+        { "type": "text", "id": "title_1", "label": "Étape 1" },
+        { "type": "text", "id": "text_1", "label": "Texte 1" },
+        { "type": "text", "id": "title_2", "label": "Étape 2" },
+        { "type": "text", "id": "text_2", "label": "Texte 2" },
+        { "type": "text", "id": "title_3", "label": "Étape 3" },
+        { "type": "text", "id": "text_3", "label": "Texte 3" },
+        { "type": "text", "id": "title_4", "label": "Étape 4" },
+        { "type": "text", "id": "text_4", "label": "Texte 4" }
+      ]
+    },
+    {
+      "type": "timeline",
+      "name": "Chronologie",
+      "settings": [
+        { "type": "text", "id": "label_1", "label": "Repère 1" },
+        { "type": "textarea", "id": "text_1", "label": "Texte 1" },
+        { "type": "text", "id": "label_2", "label": "Repère 2" },
+        { "type": "textarea", "id": "text_2", "label": "Texte 2" },
+        { "type": "text", "id": "label_3", "label": "Repère 3" },
+        { "type": "textarea", "id": "text_3", "label": "Texte 3" },
+        { "type": "text", "id": "label_4", "label": "Repère 4" },
+        { "type": "textarea", "id": "text_4", "label": "Texte 4" },
+        { "type": "text", "id": "label_5", "label": "Repère 5" },
+        { "type": "textarea", "id": "text_5", "label": "Texte 5" },
+        { "type": "text", "id": "note", "label": "Note" }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "Recommandation",
+      "settings": [
+        {
+          "type": "select",
+          "id": "style",
+          "label": "Style",
+          "options": [
+            { "value": "inline", "label": "Lien dans le texte" },
+            { "value": "box", "label": "Encadré" },
+            { "value": "offer", "label": "Encadré offre (final)" }
+          ],
+          "default": "box"
+        },
+        { "type": "text", "id": "kicker", "label": "Surtitre" },
+        { "type": "text", "id": "title", "label": "Titre" },
+        { "type": "richtext", "id": "text", "label": "Texte" },
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Image du thème (fichier)" },
+        { "type": "text", "id": "button", "label": "Bouton / lien", "default": "Découvrir Ceriva" },
+        { "type": "text", "id": "note", "label": "Ligne sous le bouton" },
+        { "type": "product", "id": "product", "label": "Produit (sinon celui de la section)" }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Avis lecteur",
+      "settings": [
+        { "type": "textarea", "id": "text", "label": "Avis" },
+        { "type": "text", "id": "author", "label": "Prénom + initiale", "default": "Prénom N." },
+        { "type": "text", "id": "detail", "label": "Détail" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "asset", "label": "Photo (fichier du thème)" }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Séparateur",
+      "settings": []
+    }
+  ],
+  "presets": [{ "name": "Ceriva — Article" }]
+}
+{% endschema %}

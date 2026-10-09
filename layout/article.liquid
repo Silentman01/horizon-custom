@@ -1,0 +1,77 @@
+<!doctype html>
+{% comment %}
+  Editorial layout for native-ad landing pages (advertorials).
+  Same theme head as layout/theme.liquid, without the store header, footer, cart drawer or search,
+  so paid-traffic readers land on something that reads like a publication.
+  Pages using it are kept out of search results (paid traffic only).
+{% endcomment %}
+<html
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+  lang="{{ request.locale.iso_code }}"
+  dir="{{ request.locale.direction | default: 'ltr' }}"
+>
+  <head>
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+
+    {%- render 'meta-tags' -%}
+    <meta
+      name="robots"
+      content="noindex, nofollow"
+    >
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-palette' -%}
+
+    {{ 'ceriva-serif.woff2' | asset_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+    <style>
+      /* Source Serif 4 (SIL Open Font Licence), self-hosted, latin subset */
+      @font-face {
+        font-family: 'Source Serif 4';
+        font-style: normal;
+        font-weight: 400 700;
+        font-display: swap;
+        src: url('{{ 'ceriva-serif.woff2' | asset_url }}') format('woff2');
+      }
+      @font-face {
+        font-family: 'Source Serif 4';
+        font-style: italic;
+        font-weight: 400 600;
+        font-display: swap;
+        src: url('{{ 'ceriva-serif-italic.woff2' | asset_url }}') format('woff2');
+      }
+      .cv-article-layout {
+        margin: 0;
+        background: var(--color-background);
+      }
+    </style>
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="cv-article-layout">
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+
+    <main
+      id="MainContent"
+      class="content-for-layout"
+      role="main"
+      data-template="{{ template }}"
+    >
+      {{ content_for_layout }}
+    </main>
+  </body>
+</html>
