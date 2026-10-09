@@ -1,0 +1,454 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "article",
+  "sections": {
+    "article": {
+      "type": "ceriva-article",
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "style": "lead",
+            "dropcap": true,
+            "text": "<p>Il y a de fortes chances qu'une boîte de cotons-tiges se trouve en ce moment dans votre salle de bain. Achetée la semaine dernière, peut-être, entre le dentifrice et le gel douche.</p><p>Sur cette boîte, il y a une phrase. Une seule ligne, imprimée en petit, que presque personne ne lit. Elle concerne un geste que l'on répète chaque matin depuis l'enfance. Et une fois qu'on l'a lue, on ne regarde plus jamais ce geste de la même façon.</p>"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Pour comprendre pourquoi, il faut repartir du début.</p>"
+          }
+        },
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Le rituel",
+            "text": "Un geste appris avant même de savoir lire"
+          }
+        },
+        "image_1": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-morning.jpg",
+            "ratio": "landscape",
+            "caption": "Après la douche, entre la serviette et la brosse à dents : un geste qu'on ne remarque même plus."
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Pensez à votre matin. La douche. La serviette. Le brossage de dents. Et quelque part entre les deux, ce petit geste qu'on ne remarque plus : un coton-tige, un passage de chaque côté.</p><p>On l'a appris enfant, souvent de nos parents, qui l'avaient eux-mêmes appris des leurs. Personne ne l'a jamais remis en question. C'est devenu aussi naturel que se laver les mains.</p><p>Pourtant, un détail aurait dû nous mettre la puce à l'oreille. Le coton ressort presque propre. Un peu jaune au bout, guère plus. Et quelques heures plus tard, la sensation est revenue : ce petit bouchon de coton invisible au fond de l'oreille, ce son légèrement étouffé quand on retire ses écouteurs, cette démangeaison qui revient sans prévenir.</p>"
+          }
+        },
+        "image_2": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-earbuds.jpg",
+            "ratio": "landscape",
+            "caption": "Le signe que beaucoup remarquent en premier : le dépôt jaunâtre sur les embouts des écouteurs."
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>On se dit qu'on « en produit beaucoup ». Que c'est normal. Et on passe à autre chose.</p>"
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "style": "bridge",
+            "text": "<p>Maintenant, si vous en avez une sous la main, allez chercher la boîte. Retournez-la. Lisez le dos, ou le côté.</p>"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "La mention",
+            "text": "Ce que le fabricant écrit lui-même"
+          }
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Sur de nombreuses marques, une phrase est imprimée en petits caractères, souvent coincée entre la composition et le numéro de lot :</p>"
+          }
+        },
+        "quote_1": {
+          "type": "quote",
+          "settings": {
+            "style": "label",
+            "text": "« Ne pas introduire dans le conduit auditif. »",
+            "cite": "Mention figurant sur de nombreux emballages de cotons-tiges"
+          }
+        },
+        "text_7": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Relisez-la. La première fois pour être sûr d'avoir bien lu. La deuxième parce que quelque chose cloche. La troisième parce que vous avez compris : le fabricant lui-même vous demande de ne pas faire ce que vous faites tous les matins.</p><p>Ce n'est pas une coquetterie juridique. Le coton-tige a été conçu pour autre chose : appliquer une crème, démaquiller, sécher le pavillon de l'oreille, nettoyer un objet. Pas pour entrer dans le conduit. Et la raison est d'une simplicité presque vexante.</p>"
+          }
+        },
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "14 600",
+            "text": "C'est le nombre de passages de coton-tige en vingt ans, à raison d'un par oreille et par jour. Combien de fois a-t-on vraiment vu ce qu'on retirait ?"
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "L'explication",
+            "text": "Un coton fait pour absorber, pas pour attraper"
+          }
+        },
+        "text_8": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Le bout d'un coton-tige est rond, compact et absorbant. Quand on le passe dans l'oreille, il prend un peu de ce qu'il touche en surface. Le reste, il le pousse devant lui.</p><p>Un peu plus loin à chaque passage. Comme un piston.</p><p>Ce que vous voyez sur le coton, c'est l'entrée de l'oreille. Pas ce qui reste derrière. Et ce qui reste derrière a tendance à se tasser, jour après jour, là où ni le coton ni vous ne pouvez le voir.</p>"
+          }
+        },
+        "image_3": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-piston.jpg",
+            "ratio": "landscape",
+            "caption": "L'« effet piston » : le coton absorbe la surface et repousse le reste plus loin dans le conduit."
+          }
+        },
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "tone": "soft",
+            "title": "Bon à savoir",
+            "text": "<p>Le cérumen n'est pas de la saleté. Il protège et hydrate la peau du conduit, et l'oreille l'évacue naturellement vers l'extérieur, aidée par les mouvements de la mâchoire. Le but n'est donc pas de « tout enlever », mais de retirer en douceur ce qui s'accumule à l'entrée, sans repousser le reste.</p>"
+          }
+        },
+        "text_9": {
+          "type": "text",
+          "settings": {
+            "style": "bridge",
+            "text": "<p>Ce détail explique pourquoi la sensation revient toujours. Et pourquoi les « solutions » qu'on essaie ensuite ne règlent rien.</p>"
+          }
+        },
+        "heading_4": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Ce qu'on essaie",
+            "text": "Spray, poire, bougies : le tiroir que tout le monde connaît"
+          }
+        },
+        "image_4": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-drawer.jpg",
+            "ratio": "landscape",
+            "caption": "Des solutions achetées, essayées une ou deux fois, puis oubliées au fond d'un tiroir."
+          }
+        },
+        "text_10": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Quand la sensation d'oreille pleine s'installe, on cherche. Le soir, téléphone en main : « pourquoi j'ai toujours l'oreille qui gratte », « sensation d'oreille bouchée après la douche ». Puis on essaie.</p><p><strong>Le spray.</strong> On ne sait jamais vraiment ce qui est sorti. <strong>La poire.</strong> Long, salissant, et on ne voit toujours rien. <strong>Les bougies.</strong> Aucune efficacité démontrée, et un vrai risque de brûlure. <strong>Le cure-oreille en métal</strong> de nos grands-parents avait au moins le mérite d'attraper, mais plus personne n'ose s'en servir.</p><p>Et le coton-tige, lui, reste sur l'étagère. Faute de mieux.</p>"
+          }
+        },
+        "quote_2": {
+          "type": "quote",
+          "settings": {
+            "style": "pull",
+            "text": "Il manquait un outil simple pour l'entrée de l'oreille. Qui accroche au lieu de pousser. Qui montre ce qu'il retire. Et qu'on ose utiliser sans appréhension."
+          }
+        },
+        "heading_5": {
+          "type": "heading",
+          "settings": {
+            "kicker": "La découverte",
+            "text": "Un embout qui accroche au lieu de pousser"
+          }
+        },
+        "text_11": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>C'est exactement le point de départ de Ceriva, une jeune marque qui a voulu repenser ce geste plutôt que d'ajouter un énième produit au tiroir.</p><p>Le principe tient en une phrase : au lieu d'un coton qui absorbe et repousse, un embout en gel souple et légèrement adhésif, qui capte ce qu'il touche et le ramène avec lui.</p>"
+          }
+        },
+        "image_5": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-discovery.jpg",
+            "ratio": "landscape",
+            "caption": "Ceriva : des sticks à embout en gel souple, translucides et rinçables."
+          }
+        },
+        "text_12": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>On le pose à l'entrée de l'oreille, un léger quart de tour, on retire. Ce qui était accessible reste collé à l'embout. Et comme l'embout est translucide, on voit exactement ce qu'on a retiré. Pour beaucoup, c'est la première fois en vingt ans.</p>"
+          }
+        },
+        "cta_1": {
+          "type": "cta",
+          "settings": {
+            "style": "inline",
+            "button": "Voir comment fonctionne Ceriva →",
+            "note": "Le stick à embout adhésif, présenté sur le site de la marque."
+          }
+        },
+        "heading_6": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Mode d'emploi",
+            "text": "Trois gestes, moins d'une minute"
+          }
+        },
+        "steps_1": {
+          "type": "steps",
+          "settings": {
+            "title_1": "Placez",
+            "text_1": "Posez l'embout à l'entrée de l'oreille, sans jamais l'enfoncer.",
+            "title_2": "Tournez",
+            "text_2": "Un léger quart de tour, avec une pression minimale : l'embout capte ce qu'il touche.",
+            "title_3": "Retirez et rincez",
+            "text_3": "Regardez l'embout, puis rincez-le à l'eau tiède. Il est prêt pour la prochaine fois."
+          }
+        },
+        "image_6": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-tip.jpg",
+            "ratio": "square",
+            "caption": "Ce qui ressort reste visible sur l'embout. C'est souvent à ce moment-là que l'on comprend."
+          }
+        },
+        "heading_7": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Ce que racontent les utilisateurs",
+            "text": "Les premières semaines, étape par étape"
+          }
+        },
+        "timeline_1": {
+          "type": "timeline",
+          "settings": {
+            "label_1": "Le premier matin",
+            "text_1": "On regarde l'embout. Puis on le regarde encore. Des années de cotons-tiges, et c'est la première fois qu'on voit vraiment ce qu'on retire.",
+            "label_2": "Quelques jours plus tard",
+            "text_2": "La sensation de coton au réveil ne revient pas. On ne le remarque pas tout de suite : c'est en se brossant les dents qu'on se dit « tiens ».",
+            "label_3": "La deuxième semaine",
+            "text_3": "En fin de journée, les embouts des écouteurs ressortent propres.",
+            "label_4": "Au bout d'un mois",
+            "text_4": "La boîte de cotons-tiges a rejoint le tiroir à maquillage. Là où elle aurait toujours dû être.",
+            "note": "Ressentis rapportés par des utilisateurs. Chaque oreille est différente."
+          }
+        },
+        "heading_8": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Le calcul",
+            "text": "Pourquoi on ne jette pas un stick après usage"
+          }
+        },
+        "text_13": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>C'est souvent la première objection : « encore un produit jetable ». C'est justement l'inverse. Chaque stick se rince à l'eau tiède jusqu'à ce que l'adhérence revienne, puis sèche à l'air libre. Il sert jusqu'à 30 fois.</p><p>Une boîte contient 24 sticks. À une ou deux utilisations par semaine, elle dure des mois, et chaque membre du foyer peut avoir le sien, comme une brosse à dents.</p>"
+          }
+        },
+        "image_7": {
+          "type": "image",
+          "settings": {
+            "asset": "ceriva-art-rinse.jpg",
+            "ratio": "square",
+            "caption": "Un rinçage à l'eau tiède, et l'embout retrouve son adhérence."
+          }
+        },
+        "cta_2": {
+          "type": "cta",
+          "settings": {
+            "style": "box",
+            "kicker": "Notre recommandation",
+            "title": "Ceriva, le stick auriculaire réutilisable",
+            "asset": "ceriva-art-box.jpg",
+            "text": "<ul><li>Un embout en gel souple qui accroche au lieu de pousser</li><li>Translucide : vous voyez ce que vous retirez</li><li>Rinçable, jusqu'à 30 utilisations par stick</li></ul>",
+            "button": "Découvrir Ceriva et ses offres",
+            "note": "Livraison offerte · Satisfait ou remboursé 30 jours"
+          }
+        },
+        "heading_9": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Questions fréquentes",
+            "text": "Ce que les lecteurs nous demandent le plus"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "tone": "soft",
+            "title": "",
+            "text": "<p><strong>Est-ce que ça fait mal ?</strong><br>Non. L'embout est souple et le geste ne demande aucune pression. En cas de gêne, on arrête.</p><p><strong>Risque-t-on d'aller trop loin ?</strong><br>Ceriva s'utilise uniquement à l'entrée du conduit, jamais en profondeur et sans forcer.</p><p><strong>À quelle fréquence l'utiliser ?</strong><br>Une à deux fois par semaine suffit pour la plupart des gens. L'oreille se nettoie aussi toute seule.</p><p><strong>Qui ne doit pas l'utiliser ?</strong><br>En cas de douleur, d'infection, d'écoulement, de tympan perforé ou d'opération récente de l'oreille, demandez d'abord l'avis d'un professionnel de santé.</p>"
+          }
+        },
+        "heading_10": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Ils ont essayé",
+            "text": "Ce qu'en disent les premiers utilisateurs"
+          }
+        },
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "asset": "ceriva-review-1.jpg",
+            "author": "Camille R.",
+            "detail": "Lyon",
+            "text": "J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu."
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "asset": "ceriva-review-2.jpg",
+            "author": "Thomas L.",
+            "detail": "Nantes",
+            "text": "Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva une fois par semaine, plus aucune gêne, et mes écouteurs restent propres."
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "asset": "ceriva-review-3.jpg",
+            "author": "Nadia B.",
+            "detail": "Marseille",
+            "text": "J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini."
+          }
+        },
+        "divider_1": {
+          "type": "divider",
+          "settings": {}
+        },
+        "heading_11": {
+          "type": "heading",
+          "settings": {
+            "kicker": "En résumé",
+            "text": "Une ligne au dos d'une boîte"
+          }
+        },
+        "text_14": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p>Si vous faites ce geste tous les matins, faites les comptes une dernière fois : des milliers de passages en quelques années, et presque jamais l'occasion de voir ce que vous retiriez vraiment.</p><p>La vraie propreté, ce n'est peut-être pas de nettoyer plus souvent. C'est de nettoyer avec le bon outil.</p>"
+          }
+        },
+        "cta_3": {
+          "type": "cta",
+          "settings": {
+            "style": "offer",
+            "kicker": "L'offre du moment",
+            "title": "La deuxième boîte est offerte",
+            "asset": "ceriva-art-offer.jpg",
+            "text": "<p>En ce moment, Ceriva propose <strong>1 boîte achetée, 1 offerte</strong> : 48 sticks rinçables, de quoi équiper toute la maison.</p><ul><li>Livraison offerte</li><li>30 jours satisfait ou remboursé, sans justificatif</li></ul>",
+            "button": "Vérifier la disponibilité de l'offre",
+            "note": "Dans la limite des stocks disponibles."
+          }
+        },
+        "text_15": {
+          "type": "text",
+          "settings": {
+            "style": "normal",
+            "text": "<p><em>P.-S. Ceriva s'utilise uniquement à l'entrée de l'oreille, sans forcer. Et si au bout de 30 jours vous ne voyez pas la différence, vous êtes remboursé.</em></p>"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "text_2",
+        "heading_1",
+        "image_1",
+        "text_3",
+        "image_2",
+        "text_4",
+        "text_5",
+        "heading_2",
+        "text_6",
+        "quote_1",
+        "text_7",
+        "stat_1",
+        "heading_3",
+        "text_8",
+        "image_3",
+        "callout_1",
+        "text_9",
+        "heading_4",
+        "image_4",
+        "text_10",
+        "quote_2",
+        "heading_5",
+        "text_11",
+        "image_5",
+        "text_12",
+        "cta_1",
+        "heading_6",
+        "steps_1",
+        "image_6",
+        "heading_7",
+        "timeline_1",
+        "heading_8",
+        "text_13",
+        "image_7",
+        "cta_2",
+        "heading_9",
+        "callout_2",
+        "heading_10",
+        "review_1",
+        "review_2",
+        "review_3",
+        "divider_1",
+        "heading_11",
+        "text_14",
+        "cta_3",
+        "text_15"
+      ],
+      "settings": {
+        "masthead_name": "Le Carnet Ceriva",
+        "disclosure": "Publicité",
+        "category": "Hygiène · Enquête",
+        "title": "Retournez votre boîte de cotons-tiges. La petite ligne au dos change tout.",
+        "deck": "Un geste répété des milliers de fois depuis l'enfance, une mention que presque personne ne lit, et l'explication de cette sensation d'oreille « pleine » qui revient toujours.",
+        "author_name": "La rédaction Ceriva",
+        "author_role": "Contenu proposé par Ceriva",
+        "author_asset": "ceriva-avatar.jpg",
+        "date_text": "Publié le 9 octobre 2026",
+        "reading_time": "7 min de lecture",
+        "hero_asset": "ceriva-art-box-back.jpg",
+        "hero_caption": "La mention figure sur de nombreuses boîtes de cotons-tiges. Elle est rarement lue.",
+        "sticky_text": "Ceriva · stick auriculaire réutilisable",
+        "sticky_label": "Voir l'offre",
+        "footer_note": "<p>Publicité. Cet article est un contenu promotionnel rédigé et publié par Ceriva. Les informations présentées ne remplacent pas l'avis d'un professionnel de santé. Les témoignages reflètent des expériences individuelles ; les résultats peuvent varier.</p>",
+        "sample_notice": true
+      }
+    }
+  },
+  "order": [
+    "article"
+  ]
+}

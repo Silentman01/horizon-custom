@@ -15,7 +15,7 @@
         "item_KxfVhb": {
           "type": "item",
           "settings": {
-            "text": "Livraison offerte en France"
+            "text": "Livraison offerte"
           }
         },
         "item_jPXgTY": {
@@ -210,11 +210,11 @@
             "stock": {
               "type": "ceriva-stock-bar",
               "settings": {
-                "label": "En stock — expédié sous 24/48 h",
-                "right_label": "Offre de lancement",
-                "show_bar": false,
+                "label": "Stock limité — expédié sous 24/48 h",
+                "right_label": "",
+                "show_bar": true,
                 "fill": 80,
-                "use_inventory": true,
+                "use_inventory": false,
                 "low_threshold": 20,
                 "low_label": "Plus que [n] en stock"
               },
@@ -511,7 +511,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Livraison :</strong> offerte en France. Commandes expédiées sous 24 à 48 h, livrées en 3 à 5 jours ouvrés. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p><p><strong>Retours :</strong> contactez-nous via la page Contact (ou en répondant à votre e-mail de confirmation) avec votre numéro de commande, dans les 30 jours suivant la réception. Une fois le retour validé, le remboursement est effectué sur votre moyen de paiement d'origine.</p>",
+                        "text": "<p><strong>Livraison :</strong> offerte en Europe. Commandes expédiées sous 24 à 48 h, livrées en 3 à 5 jours ouvrés. Vous recevez un numéro de suivi par e-mail dès l'expédition.</p><p><strong>Retours :</strong> contactez-nous via la page Contact (ou en répondant à votre e-mail de confirmation) avec votre numéro de commande, dans les 30 jours suivant la réception. Une fois le retour validé, le remboursement est effectué sur votre moyen de paiement d'origine.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -546,16 +546,6 @@
                 "row_guarantee",
                 "row_shipping"
               ]
-            },
-            "value_highlight": {
-              "type": "ceriva-highlight",
-              "settings": {
-                "tone": "soft",
-                "badge": "Réutilisable",
-                "title": "Vous ne payez pas un bâtonnet.",
-                "highlight": "Vous payez jusqu'à 30 utilisations.",
-                "text": "Un stick remplace des dizaines de cotons-tiges. Rincez-le, réutilisez-le."
-              }
             }
           },
           "block_order": [
@@ -1104,13 +1094,6 @@
             "answer": "<p>Non. L'embout est souple et le geste ne demande aucune pression : vous le placez à l'entrée du conduit, vous tournez doucement, vous retirez. Si vous ressentez la moindre gêne, arrêtez.</p>"
           }
         },
-        "question_2": {
-          "type": "question",
-          "settings": {
-            "question": "Est-ce que je risque d'aller trop loin ?",
-            "answer": "<p>Ceriva s'utilise uniquement à l'entrée du conduit auditif. La tige est pensée pour un geste en surface : n'insérez jamais au-delà de ce qui entre naturellement, et ne forcez jamais.</p>"
-          }
-        },
         "question_3": {
           "type": "question",
           "settings": {
@@ -1130,13 +1113,6 @@
           "settings": {
             "question": "À quelle fréquence l'utiliser ?",
             "answer": "<p>Une à deux fois par semaine suffit pour la plupart des gens. L'oreille se nettoie aussi naturellement : inutile d'en faire trop.</p>"
-          }
-        },
-        "question_6": {
-          "type": "question",
-          "settings": {
-            "question": "Convient-il aux enfants ?",
-            "answer": "<p>Ceriva est conçu pour les adultes. Pour un enfant, demandez d'abord l'avis d'un professionnel de santé.</p>"
           }
         },
         "question_7": {
@@ -1163,11 +1139,9 @@
       },
       "block_order": [
         "question_1",
-        "question_2",
         "question_3",
         "question_4",
         "question_5",
-        "question_6",
         "question_7",
         "question_8",
         "question_9"
