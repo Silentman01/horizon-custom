@@ -35,7 +35,7 @@
         muted: true,
         loop: true,
         playsinline: true,
-        preload: 'metadata',
+        preload: 'none',
         class: 'cv-autoplay'
     }}
   {%- elsif video_url != blank -%}
@@ -48,7 +48,7 @@
       muted
       loop
       playsinline
-      preload="metadata"
+      preload="none"
     ></video>
   {%- elsif image -%}
     {{
@@ -57,8 +57,22 @@
       | image_tag: loading: loading, sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', alt: image.alt
     }}
   {%- elsif asset != blank -%}
+    {%- liquid
+      assign asset_src = asset | asset_url
+      capture asset_srcset
+        for w in (1..5)
+          assign px = w | times: 240 | plus: 120
+          echo asset_src | append: '&width=' | append: px | append: ' ' | append: px | append: 'w'
+          unless forloop.last
+            echo ', '
+          endunless
+        endfor
+      endcapture
+    -%}
     <img
-      src="{{ asset | asset_url }}"
+      src="{{ asset_src }}&width=900"
+      srcset="{{ asset_srcset }}"
+      sizes="{{ sizes | default: '100vw' }}"
       alt="{{ label | escape }}"
       width="1200"
       height="1200"

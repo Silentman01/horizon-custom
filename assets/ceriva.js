@@ -109,7 +109,8 @@ const videoObserver =
             else video.pause();
           });
         },
-        { threshold: 0.4 }
+        // Start a little before the video scrolls into view, since nothing is preloaded.
+        { rootMargin: '200px 0px', threshold: 0 }
       )
     : null;
 
