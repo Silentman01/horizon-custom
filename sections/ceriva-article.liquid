@@ -295,6 +295,52 @@
               </div>
             </figure>
 
+          {%- when 'compare' -%}
+            <div
+              class="cva-compare"
+              {{ block.shopify_attributes }}
+            >
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col"><span class="visually-hidden">Critère</span></th>
+                    <th
+                      scope="col"
+                      class="cva-compare__us"
+                    >
+                      {{ b.col_1 }}
+                    </th>
+                    <th scope="col">{{ b.col_2 }}</th>
+                    <th scope="col">{{ b.col_3 }}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for i in (1..6) -%}
+                    {%- assign r_key = 'row_' | append: i -%}
+                    {%- if b[r_key] != blank -%}
+                      {%- assign cells = b[r_key] | split: '|' -%}
+                      <tr>
+                        <th scope="row">{{ cells[0] | strip }}</th>
+                        {%- for c in (1..3) -%}
+                          {%- assign v = cells[c] | strip -%}
+                          <td{% if c == 1 %} class="cva-compare__us"{% endif %}>
+                            {%- case v -%}
+                              {%- when 'oui' -%}
+                                <span class="cva-compare__yes" aria-label="Oui">✓</span>
+                              {%- when 'non' -%}
+                                <span class="cva-compare__no" aria-label="Non">✕</span>
+                              {%- else -%}
+                                {{ v }}
+                            {%- endcase -%}
+                          </td>
+                        {%- endfor -%}
+                      </tr>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+
           {%- when 'divider' -%}
             <p
               class="cva-divider"
@@ -889,6 +935,66 @@
     font-size: 13px;
   }
 
+  /* Comparison table */
+  .cva-compare {
+    margin: 28px 0;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--cv-white);
+    box-shadow: 0 6px 24px rgb(var(--cv-navy-rgb) / 0.06);
+  }
+
+  .cva-compare table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .cva-compare th,
+  .cva-compare td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--cv-line);
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .cva-compare tbody tr:last-child > * {
+    border-bottom: 0;
+  }
+
+  .cva-compare tbody th {
+    text-align: left;
+    font-weight: 600;
+  }
+
+  .cva-compare thead th {
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .cva-compare .cva-compare__us {
+    background: rgb(46 143 219 / 0.08);
+    color: var(--cv-navy);
+    font-weight: 700;
+  }
+
+  .cva-compare thead .cva-compare__us {
+    background: var(--cv-blue);
+    color: var(--cv-white);
+  }
+
+  .cva-compare__yes {
+    color: var(--cv-blue);
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .cva-compare__no {
+    color: rgb(var(--cv-navy-rgb) / 0.35);
+    font-size: 16px;
+  }
+
   .cva-divider {
     margin: 34px 0;
     font-size: 14px;
@@ -1187,6 +1293,25 @@
         { "type": "text", "id": "detail", "label": "Détail" },
         { "type": "image_picker", "id": "image", "label": "Photo" },
         { "type": "text", "id": "asset", "label": "Photo (fichier du thème)" }
+      ]
+    },
+    {
+      "type": "compare",
+      "name": "Comparatif",
+      "settings": [
+        { "type": "text", "id": "col_1", "label": "Colonne 1 (mise en avant)", "default": "Ceriva" },
+        { "type": "text", "id": "col_2", "label": "Colonne 2", "default": "Coton-tige" },
+        { "type": "text", "id": "col_3", "label": "Colonne 3", "default": "Spray / poire" },
+        {
+          "type": "paragraph",
+          "content": "Une ligne = Critère | col. 1 | col. 2 | col. 3. Écrivez oui ou non pour afficher ✓ ou ✕."
+        },
+        { "type": "text", "id": "row_1", "label": "Ligne 1" },
+        { "type": "text", "id": "row_2", "label": "Ligne 2" },
+        { "type": "text", "id": "row_3", "label": "Ligne 3" },
+        { "type": "text", "id": "row_4", "label": "Ligne 4" },
+        { "type": "text", "id": "row_5", "label": "Ligne 5" },
+        { "type": "text", "id": "row_6", "label": "Ligne 6" }
       ]
     },
     {
