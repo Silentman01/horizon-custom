@@ -16,24 +16,30 @@
         "text_1": {
           "type": "text",
           "settings": {
+            "text": "<p>Si vous arrivez ici, vous connaissez sans doute la sensation. Ce petit bouchon de coton au réveil. Le son un peu étouffé le soir. Le dépôt jaunâtre sur la grille de vos écouteurs. Et peut-être avez-vous déjà retourné la boîte de cotons-tiges pour lire la petite ligne au dos.</p><p>Reste la question que tout le monde se pose à ce moment-là&nbsp;: «&nbsp;Mais alors, je fais comment&nbsp;?&nbsp;»</p>",
             "style": "lead",
-            "dropcap": true,
-            "text": "<p>Si vous arrivez ici, vous connaissez sans doute la sensation. Ce petit bouchon de coton au réveil. Le son un peu étouffé le soir. Le dépôt jaunâtre sur la grille de vos écouteurs. Et peut-être avez-vous déjà retourné la boîte de cotons-tiges pour lire la petite ligne au dos.</p><p>Reste la question que tout le monde se pose à ce moment-là : « Mais alors, je fais comment ? »</p>"
+            "dropcap": true
           }
         },
         "text_2": {
           "type": "text",
           "settings": {
+            "text": "<p>La réponse tient en un stick, un quart de tour et dix secondes. Voici les 7 raisons pour lesquelles ceux qui sont passés au stick Ceriva rangent leurs cotons-tiges.</p>",
             "style": "normal",
-            "text": "<p>La réponse tient en un stick, un quart de tour et dix secondes. Voici les 7 raisons pour lesquelles ceux qui sont passés au stick Ceriva rangent leurs cotons-tiges.</p>"
+            "dropcap": false
           }
         },
         "cta_1": {
           "type": "cta",
           "settings": {
             "style": "inline",
+            "kicker": "",
+            "title": "",
+            "text": "",
+            "asset": "",
             "button": "Déjà convaincu ? Voir l'offre du moment →",
-            "note": "La 2e boîte est offerte en ce moment."
+            "note": "La 2e boîte est offerte en ce moment.",
+            "product": ""
           }
         },
         "heading_1": {
@@ -54,15 +60,17 @@
         "text_3": {
           "type": "text",
           "settings": {
+            "text": "<p>Le bout d'un coton-tige est rond, compact, absorbant. Il est fait pour appliquer ou essuyer, pas pour attraper. Dans l'oreille, il prend un peu de ce qu'il touche, et pousse le reste devant lui. Un peu plus loin à chaque passage.</p><p>L'embout de Ceriva fait l'inverse. C'est un gel souple et légèrement adhésif : posé à l'entrée de l'oreille, il capte ce qu'il touche et le ramène avec lui.</p>",
             "style": "normal",
-            "text": "<p>Le bout d'un coton-tige est rond, compact, absorbant. Il est fait pour appliquer ou essuyer, pas pour attraper. Dans l'oreille, il prend un peu de ce qu'il touche, et pousse le reste devant lui. Un peu plus loin à chaque passage.</p><p>L'embout de Ceriva fait l'inverse. C'est un gel souple et légèrement adhésif : posé à l'entrée de l'oreille, il capte ce qu'il touche et le ramène avec lui.</p>"
+            "dropcap": false
           }
         },
         "text_4": {
           "type": "text",
           "settings": {
+            "text": "<p>Il ne pousse pas. Il accroche.</p>",
             "style": "bridge",
-            "text": "<p>Il ne pousse pas. Il accroche.</p>"
+            "dropcap": false
           }
         },
         "heading_2": {
@@ -83,8 +91,9 @@
         "text_5": {
           "type": "text",
           "settings": {
+            "text": "<p>C'est le moment que décrivent presque tous les nouveaux utilisateurs. On pose l'embout, un quart de tour, on le retire. On regarde l'embout. Puis on le regarde encore.</p><p>Après des années de cotons-tiges qui ressortaient « presque propres », c'est souvent la première fois qu'on voit vraiment ce qu'on retire. Et c'est exactement ce qui manquait à toutes les autres solutions.</p>",
             "style": "normal",
-            "text": "<p>C'est le moment que décrivent presque tous les nouveaux utilisateurs. On pose l'embout, un quart de tour, on le retire. On regarde l'embout. Puis on le regarde encore.</p><p>Après des années de cotons-tiges qui ressortaient « presque propres », c'est souvent la première fois qu'on voit vraiment ce qu'on retire. Et c'est exactement ce qui manquait à toutes les autres solutions.</p>"
+            "dropcap": false
           }
         },
         "heading_3": {
@@ -105,8 +114,9 @@
         "text_6": {
           "type": "text",
           "settings": {
+            "text": "<p><strong>Le spray</strong> : on penche la tête, on attend, on recommence plusieurs jours, sans jamais savoir ce qui est sorti. <strong>La poire</strong> : une demi-heure au-dessus du lavabo et la salle de bain trempée. <strong>Les bougies</strong> : de la fumée, une odeur de cire brûlée, et aucune efficacité démontrée.</p><p>Avec Ceriva, il n'y a rien à préparer et rien à attendre :</p>",
             "style": "normal",
-            "text": "<p><strong>Le spray</strong> : on penche la tête, on attend, on recommence plusieurs jours, sans jamais savoir ce qui est sorti. <strong>La poire</strong> : une demi-heure au-dessus du lavabo et la salle de bain trempée. <strong>Les bougies</strong> : de la fumée, une odeur de cire brûlée, et aucune efficacité démontrée.</p><p>Avec Ceriva, il n'y a rien à préparer et rien à attendre :</p>"
+            "dropcap": false
           }
         },
         "steps_1": {
@@ -117,7 +127,9 @@
             "title_2": "Tournez",
             "text_2": "Un léger quart de tour, sans appuyer.",
             "title_3": "Retirez",
-            "text_3": "Regardez l'embout, rincez-le à l'eau tiède. C'est fini."
+            "text_3": "Regardez l'embout, rincez-le à l'eau tiède. C'est fini.",
+            "title_4": "",
+            "text_4": ""
           }
         },
         "heading_4": {
@@ -138,8 +150,9 @@
         "text_7": {
           "type": "text",
           "settings": {
+            "text": "<p>Les écouteurs bouchent l'entrée de l'oreille plusieurs heures par jour. Ce qui devrait sortir naturellement reste là : une partie colle à la grille, le reste s'accumule à l'entrée. Et plus on nettoie au coton-tige, plus on pousse. C'est un cercle.</p><p>Dix secondes de Ceriva le soir, en retirant ses écouteurs, suffisent à le casser : ce qui s'accumule à l'entrée est retiré au lieu d'être repoussé. Ce que rapportent les utilisateurs : une grille qui reste propre plus longtemps, et plus besoin de monter le volume d'un côté.</p>",
             "style": "normal",
-            "text": "<p>Les écouteurs bouchent l'entrée de l'oreille plusieurs heures par jour. Ce qui devrait sortir naturellement reste là : une partie colle à la grille, le reste s'accumule à l'entrée. Et plus on nettoie au coton-tige, plus on pousse. C'est un cercle.</p><p>Dix secondes de Ceriva le soir, en retirant ses écouteurs, suffisent à le casser : ce qui s'accumule à l'entrée est retiré au lieu d'être repoussé. Ce que rapportent les utilisateurs : une grille qui reste propre plus longtemps, et plus besoin de monter le volume d'un côté.</p>"
+            "dropcap": false
           }
         },
         "cta_2": {
@@ -148,10 +161,11 @@
             "style": "box",
             "kicker": "Notre recommandation",
             "title": "Ceriva, le stick auriculaire adhésif",
-            "asset": "ceriva-art-box.jpg",
             "text": "<ul><li>Un embout en gel souple qui accroche au lieu de pousser</li><li>Translucide : vous voyez ce que vous retirez</li><li>Rinçable, jusqu'à 30 utilisations par stick</li></ul>",
+            "asset": "ceriva-art-box.jpg",
             "button": "Découvrir Ceriva et ses offres",
-            "note": "2e boîte offerte · Livraison offerte · 30 jours satisfait ou remboursé"
+            "note": "2e boîte offerte · Livraison offerte · 30 jours satisfait ou remboursé",
+            "product": ""
           }
         },
         "heading_5": {
@@ -172,16 +186,17 @@
         "text_8": {
           "type": "text",
           "settings": {
+            "text": "<p>Le cure-oreille en métal de nos grands-parents avait le bon principe : attraper plutôt que pousser. Mais il grattait, et plus personne n'ose s'en servir. Ceriva reprend l'idée avec un embout en gel souple, sans arête ni partie dure.</p><p>Pas besoin d'aller loin : c'est à l'entrée que les choses s'accumulent, et l'oreille se charge naturellement du reste. Ceriva s'utilise donc uniquement à l'entrée du conduit, sans forcer, jamais en profondeur.</p>",
             "style": "normal",
-            "text": "<p>Le cure-oreille en métal de nos grands-parents avait le bon principe : attraper plutôt que pousser. Mais il grattait, et plus personne n'ose s'en servir. Ceriva reprend l'idée avec un embout en gel souple, sans arête ni partie dure.</p><p>Pas besoin d'aller loin : c'est à l'entrée que les choses s'accumulent, et l'oreille se charge naturellement du reste. Ceriva s'utilise donc uniquement à l'entrée du conduit, sans forcer, jamais en profondeur.</p>"
+            "dropcap": false
           }
         },
         "callout_1": {
           "type": "callout",
           "settings": {
-            "tone": "soft",
             "title": "À savoir",
-            "text": "<p>En cas de douleur, d'infection, d'écoulement, de tympan perforé ou d'opération récente de l'oreille, demandez d'abord l'avis d'un professionnel de santé.</p>"
+            "text": "<p>En cas de douleur, d'infection, d'écoulement, de tympan perforé ou d'opération récente de l'oreille, demandez d'abord l'avis d'un professionnel de santé.</p>",
+            "tone": "soft"
           }
         },
         "heading_6": {
@@ -202,8 +217,9 @@
         "text_9": {
           "type": "text",
           "settings": {
+            "text": "<p>Ce n'est pas un énième produit jetable. Après usage, un rinçage à l'eau tiède et l'embout retrouve son adhérence. Chaque stick sert jusqu'à 30 fois.</p><p>Une boîte contient 24 sticks : de quoi tenir des mois, et en donner un à chaque membre de la famille, comme une brosse à dents.</p>",
             "style": "normal",
-            "text": "<p>Ce n'est pas un énième produit jetable. Après usage, un rinçage à l'eau tiède et l'embout retrouve son adhérence. Chaque stick sert jusqu'à 30 fois.</p><p>Une boîte contient 24 sticks : de quoi tenir des mois, et en donner un à chaque membre de la famille, comme une brosse à dents.</p>"
+            "dropcap": false
           }
         },
         "heading_7": {
@@ -216,15 +232,17 @@
         "text_10": {
           "type": "text",
           "settings": {
+            "text": "<p>Ceriva est garanti 30 jours satisfait ou remboursé. Si vous ne voyez pas la différence, vous êtes remboursé. Sans justificatif, sans discussion.</p>",
             "style": "normal",
-            "text": "<p>Ceriva est garanti 30 jours satisfait ou remboursé. Si vous ne voyez pas la différence, vous êtes remboursé. Sans justificatif, sans discussion.</p>"
+            "dropcap": false
           }
         },
         "text_11": {
           "type": "text",
           "settings": {
+            "text": "<p>Vous ne risquez rien, à part de ne plus jamais regarder un coton-tige de la même façon.</p>",
             "style": "bridge",
-            "text": "<p>Vous ne risquez rien, à part de ne plus jamais regarder un coton-tige de la même façon.</p>"
+            "dropcap": false
           }
         },
         "heading_8": {
@@ -245,6 +263,8 @@
             "text_3": "Vous retirez vos écouteurs après une longue journée. La grille est propre.",
             "label_4": "Semaine 4",
             "text_4": "La boîte de cotons-tiges a rejoint le tiroir à maquillage. Là où elle aurait toujours dû être.",
+            "label_5": "",
+            "text_5": "",
             "note": "Ressentis rapportés par des utilisateurs. Chaque oreille est différente."
           }
         },
@@ -273,7 +293,8 @@
             "row_2": "Vous voyez ce qui est retiré | oui | non | non",
             "row_3": "Prêt en 10 secondes | oui | oui | non",
             "row_4": "Sans liquide, sans eau partout | oui | oui | non",
-            "row_5": "Réutilisable | Jusqu'à 30 fois | non | non"
+            "row_5": "Réutilisable | Jusqu'à 30 fois | non | non",
+            "row_6": ""
           }
         },
         "heading_10": {
@@ -286,28 +307,28 @@
         "review_1": {
           "type": "review",
           "settings": {
-            "asset": "ceriva-review-1.jpg",
+            "text": "J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu.",
             "author": "Camille R.",
             "detail": "Lyon",
-            "text": "J'étais persuadée d'avoir les oreilles propres avec mes cotons-tiges. Premier passage avec Ceriva : j'ai compris. Et la sensation d'oreille pleine que j'avais le matin a disparu."
+            "asset": "ceriva-review-1.jpg"
           }
         },
         "review_2": {
           "type": "review",
           "settings": {
-            "asset": "ceriva-review-2.jpg",
+            "text": "Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva le soir, plus aucune gêne, et mes écouteurs restent propres.",
             "author": "Thomas L.",
             "detail": "Nantes",
-            "text": "Je porte des intras toute la journée au travail. Depuis que j'utilise Ceriva le soir, plus aucune gêne, et mes écouteurs restent propres."
+            "asset": "ceriva-review-2.jpg"
           }
         },
         "review_3": {
           "type": "review",
           "settings": {
-            "asset": "ceriva-review-3.jpg",
+            "text": "J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini.",
             "author": "Nadia B.",
             "detail": "Marseille",
-            "text": "J'ai les oreilles sensibles et j'avais peur que ce soit désagréable. Pas du tout : l'embout est souple, on tourne doucement et c'est fini."
+            "asset": "ceriva-review-3.jpg"
           }
         },
         "heading_11": {
@@ -320,9 +341,9 @@
         "callout_2": {
           "type": "callout",
           "settings": {
-            "tone": "soft",
             "title": "",
-            "text": "<p><strong>Est-ce que ça fait mal ?</strong><br>Non. L'embout est souple et le geste ne demande aucune pression. En cas de gêne, on arrête.</p><p><strong>À quelle fréquence l'utiliser ?</strong><br>Une à deux fois par semaine suffit pour la plupart des gens, ou le soir en retirant ses écouteurs si on les porte beaucoup.</p><p><strong>Combien de temps dure une boîte ?</strong><br>24 sticks utilisables jusqu'à 30 fois chacun : plusieurs mois pour une personne, ou de quoi équiper toute la famille.</p><p><strong>Et si ça ne me convient pas ?</strong><br>Vous avez 30 jours pour être remboursé, sans justificatif.</p>"
+            "text": "<p><strong>Est-ce que ça fait mal ?</strong><br>Non. L'embout est souple et le geste ne demande aucune pression. En cas de gêne, on arrête.</p><p><strong>À quelle fréquence l'utiliser ?</strong><br>Une à deux fois par semaine suffit pour la plupart des gens, ou le soir en retirant ses écouteurs si on les porte beaucoup.</p><p><strong>Combien de temps dure une boîte ?</strong><br>24 sticks utilisables jusqu'à 30 fois chacun : plusieurs mois pour une personne, ou de quoi équiper toute la famille.</p><p><strong>Et si ça ne me convient pas ?</strong><br>Vous avez 30 jours pour être remboursé, sans justificatif.</p>",
+            "tone": "soft"
           }
         },
         "heading_12": {
@@ -335,8 +356,9 @@
         "text_12": {
           "type": "text",
           "settings": {
+            "text": "<p><strong>Ce n'est pas votre faute.</strong> Vous n'avez pas des oreilles « sales » : vous utilisiez un outil qui n'a jamais été conçu pour ça.</p><p><strong>Rien de ce que vous avez essayé ne pouvait vous montrer le résultat.</strong> Le spray, la poire, les bougies : on ne voit jamais ce qui est sorti.</p><p><strong>Il existe un stick qui accroche au lieu de pousser</strong>, qui vous montre ce qu'il retire, et qui se rince pour resservir. Il s'appelle Ceriva.</p>",
             "style": "normal",
-            "text": "<p><strong>Ce n'est pas votre faute.</strong> Vous n'avez pas des oreilles « sales » : vous utilisiez un outil qui n'a jamais été conçu pour ça.</p><p><strong>Rien de ce que vous avez essayé ne pouvait vous montrer le résultat.</strong> Le spray, la poire, les bougies : on ne voit jamais ce qui est sorti.</p><p><strong>Il existe un stick qui accroche au lieu de pousser</strong>, qui vous montre ce qu'il retire, et qui se rince pour resservir. Il s'appelle Ceriva.</p>"
+            "dropcap": false
           }
         },
         "cta_3": {
@@ -345,17 +367,19 @@
             "style": "offer",
             "kicker": "L'offre du moment",
             "title": "1 boîte achetée, 1 boîte offerte",
-            "asset": "ceriva-art-offer.jpg",
             "text": "<p><strong>48 sticks rinçables</strong>, jusqu'à 30 utilisations chacun : de quoi équiper toute la maison.</p><ul><li>Livraison offerte</li><li>30 jours satisfait ou remboursé, sans justificatif</li></ul>",
+            "asset": "ceriva-art-offer.jpg",
             "button": "Vérifier la disponibilité de l'offre",
-            "note": "Dans la limite des stocks disponibles."
+            "note": "Dans la limite des stocks disponibles.",
+            "product": ""
           }
         },
         "text_13": {
           "type": "text",
           "settings": {
+            "text": "<p><em>P.-S. L'offre 1 boîte achetée = 1 offerte n'est pas permanente. Si vous pensez à essayer, c'est le bon moment. À utiliser uniquement à l'entrée de l'oreille, sans forcer.</em></p>",
             "style": "normal",
-            "text": "<p><em>P.-S. L'offre 1 boîte achetée = 1 offerte n'est pas permanente. Si vous pensez à essayer, c'est le bon moment. À utiliser uniquement à l'entrée de l'oreille, sans forcer.</em></p>"
+            "dropcap": false
           }
         }
       },
@@ -405,8 +429,8 @@
         "text_13"
       ],
       "settings": {
-        "masthead_name": "Le Carnet Ceriva",
-        "disclosure": "Publicité",
+        "masthead_name": "Le Carnet Santé",
+        "disclosure": "",
         "category": "Hygiène · Le guide",
         "title": "Oreille « pleine », écouteurs encrassés : 7 raisons pour lesquelles ce stick en gel remplace le coton-tige",
         "deck": "Il ne pousse pas, il accroche. Comment fonctionne le stick Ceriva, ce que remarquent ses utilisateurs les premiers jours, et à qui il convient.",
@@ -417,9 +441,10 @@
         "reading_time": "5 min de lecture",
         "hero_asset": "ceriva-lp-hero.jpg",
         "hero_caption": "Le premier réflexe après un passage de Ceriva : regarder l'embout. Puis le regarder encore.",
+        "product": "",
         "sticky_text": "2e boîte offerte · livraison offerte",
         "sticky_label": "Voir l'offre",
-        "footer_note": "<p>Publicité. Cet article est un contenu promotionnel rédigé et publié par Ceriva. Les informations présentées ne remplacent pas l'avis d'un professionnel de santé. Les témoignages reflètent des expériences individuelles ; les résultats peuvent varier.</p>",
+        "footer_note": "<p>Publicité. Cet article est un contenu promotionnel rédigé et publié par Ceriva. Les informations présentées ne remplacent pas l'avis d'un professionnel de santé. Les témoignages reflètent des expériences individuelles&nbsp;; les résultats peuvent varier.</p>",
         "sample_notice": true
       }
     }
