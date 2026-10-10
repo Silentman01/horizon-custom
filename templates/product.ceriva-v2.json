@@ -540,7 +540,7 @@
         "tone": "ice",
         "eyebrow": "Sans filtre, sans retouche",
         "title": "Regardez ce qui sort",
-        "text": "Un quart de tour. Le résultat reste sur l'embout.",
+        "text": "<p>Un quart de tour. Le résultat reste sur l'embout.</p>",
         "enable_sound": false,
         "swipe_hint": "Glissez pour voir la suite →",
         "proof_line": "Noté 4,8/5 par plus de 1 200 clients",
@@ -561,21 +561,21 @@
           "type": "point",
           "settings": {
             "title": "Il pousse le cérumen",
-            "text": "Comme un piston, il l'enfonce un peu plus à chaque passage."
+            "text": "<p>Comme un piston, il l'enfonce un peu plus à chaque passage.</p>"
           }
         },
         "point_2": {
           "type": "point",
           "settings": {
             "title": "Il laisse des fibres",
-            "text": "Le coton s'effiloche et reste dans l'oreille."
+            "text": "<p>Le coton s'effiloche et reste dans l'oreille.</p>"
           }
         },
         "point_3": {
           "type": "point",
           "settings": {
             "title": "Ça gratte encore plus",
-            "text": "Frotter irrite la peau. Alors ça gratte, et on recommence."
+            "text": "<p>Frotter irrite la peau. Alors ça gratte, et on recommence.</p>"
           }
         }
       },
@@ -588,7 +588,7 @@
         "tone": "white",
         "eyebrow": "Le problème",
         "title": "Votre coton-tige ne nettoie pas vraiment",
-        "text": "Il ressort presque propre. Mais la sensation d'oreille pleine revient toujours.",
+        "text": "<p>Il ressort presque propre. Mais la sensation d'oreille pleine revient toujours.</p>",
         "image_asset": "ceriva-problem.jpg",
         "padding_top": 64,
         "padding_bottom": 64
@@ -601,7 +601,7 @@
           "type": "item",
           "settings": {
             "title": "Il attrape, il ne pousse pas",
-            "text": "L'embout collant accroche le cérumen et le ramène dehors.",
+            "text": "<p>L'embout collant accroche le cérumen et le ramène dehors.</p>",
             "image_asset": "ceriva-switch-item-1.jpg"
           }
         },
@@ -609,7 +609,7 @@
           "type": "item",
           "settings": {
             "title": "Vous voyez le résultat",
-            "text": "Tout ce qui sort reste sur l'embout. Plus de doute.",
+            "text": "<p>Tout ce qui sort reste sur l'embout. Plus de doute.</p>",
             "image_asset": "ceriva-switch-item-2.jpg"
           }
         },
@@ -617,7 +617,7 @@
           "type": "item",
           "settings": {
             "title": "Tout doux",
-            "text": "Embout souple. Rien qui gratte, rien qui racle.",
+            "text": "<p>Embout souple. Rien qui gratte, rien qui racle.</p>",
             "image_asset": "ceriva-switch-item-3.jpg"
           }
         },
@@ -625,7 +625,7 @@
           "type": "item",
           "settings": {
             "title": "Lavable",
-            "text": "Un coup d'eau tiède, il est prêt. Jusqu'à 30 fois.",
+            "text": "<p>Un coup d'eau tiède, il est prêt. Jusqu'à 30 fois.</p>",
             "image_asset": "ceriva-switch-item-4.jpg"
           }
         }
@@ -646,7 +646,7 @@
         "eyebrow": "La solution",
         "title": "Pourquoi ça marche",
         "heading_tag": "h2",
-        "text": "Le même geste qu'avant. Avec le bon outil.",
+        "text": "<p>Le même geste qu'avant. Avec le bon outil.</p>",
         "button_label": "Je choisis mon offre",
         "button_action": "offer",
         "button_link": "",
@@ -665,7 +665,7 @@
             "image_asset": "ceriva-step-1.jpg",
             "placeholder_label": "Étape 1 : embout posé à l'entrée du conduit (gros plan)",
             "title": "Posez",
-            "text": "À l'entrée de l'oreille. Jamais au fond."
+            "text": "<p>À l'entrée de l'oreille. Jamais au fond.</p>"
           }
         },
         "step_2": {
@@ -674,7 +674,7 @@
             "image_asset": "ceriva-step-2.jpg",
             "placeholder_label": "Étape 2 : main qui fait tourner le stick d'un quart de tour",
             "title": "Tournez",
-            "text": "Un quart de tour, sans appuyer."
+            "text": "<p>Un quart de tour, sans appuyer.</p>"
           }
         },
         "step_3": {
@@ -683,7 +683,7 @@
             "image_asset": "ceriva-step-3.jpg",
             "placeholder_label": "Étape 3 : embout avec résidus visibles, puis rinçage",
             "title": "Retirez",
-            "text": "Regardez l'embout, puis rincez-le."
+            "text": "<p>Regardez l'embout, puis rincez-le.</p>"
           }
         }
       },
@@ -696,7 +696,7 @@
         "tone": "white",
         "eyebrow": "Mode d'emploi",
         "title": "3 gestes, 10 secondes",
-        "text": "Pas de gouttes. Pas d'eau partout.",
+        "text": "<p>Pas de gouttes. Pas d'eau partout.</p>",
         "step_label": "Étape",
         "note": "",
         "button_label": "",
@@ -742,7 +742,7 @@
         "tone": "navy",
         "eyebrow": "Réutilisable",
         "title": "Une boîte. Des mois d'oreilles nettes.",
-        "text": "Un coton-tige finit à la poubelle. Un stick Ceriva se lave et resert.",
+        "text": "<p>Un coton-tige finit à la poubelle. Un stick Ceriva se lave et resert.</p>",
         "footnote": "",
         "padding_top": 64,
         "padding_bottom": 64
@@ -803,7 +803,7 @@
         "tone": "ice",
         "eyebrow": "Comparatif",
         "title": "Ceriva ou coton-tige ?",
-        "text": "Le même geste. Pas le même résultat.",
+        "text": "<p>Le même geste. Pas le même résultat.</p>",
         "col_benefit": "Critère",
         "col_us": "Ceriva",
         "col_them": "Coton-tige",
@@ -1005,7 +1005,7 @@
         "seal_label": "jours",
         "eyebrow": "Zéro risque",
         "title": "30 jours pour essayer",
-        "text": "Pas convaincu ? Écrivez-nous, on vous rembourse tout. Sans justificatif.",
+        "text": "<p>Pas convaincu ? Écrivez-nous, on vous rembourse tout. Sans justificatif.</p>",
         "button_label": "J'essaie Ceriva sans risque",
         "button_action": "offer",
         "button_link": "",
