@@ -1,0 +1,241 @@
+<div
+  class="nxc"
+  style="{% render 'noxis-vars' %} --nx-pt: {{ section.settings.padding_top }}px; --nx-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="nxc__top">
+    <h2 class="nxc__title">
+      {{ section.settings.title }}
+      {%- if section.settings.title_accent != blank %}
+        <span>{{ section.settings.title_accent }}</span>
+      {%- endif -%}
+    </h2>
+    {%- if section.settings.text != blank -%}
+      <p class="nxc__deck">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </div>
+
+  <table class="nxc__table">
+    <thead>
+      <tr>
+        <th scope="col"><span class="visually-hidden">Feature</span></th>
+        <th
+          scope="col"
+          class="nxc__us nxc__us--top"
+        >
+          {{ section.settings.col_us }}
+        </th>
+        <th scope="col">{{ section.settings.col_them }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {%- for block in section.blocks -%}
+        {%- assign b = block.settings -%}
+        <tr {{ block.shopify_attributes }}>
+          <th scope="row">{{ b.label }}</th>
+          <td class="nxc__us{% if forloop.last %} nxc__us--bottom{% endif %}">
+            {%- if b.us_text != blank -%}
+              <span class="nxc__word">{{ b.us_text }}</span>
+            {%- elsif b.us -%}
+              <span
+                class="nxc__yes"
+                aria-label="Yes"
+              >
+                <svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            {%- else -%}
+              <svg class="nxc__no" viewBox="0 0 24 24" width="12" height="12" aria-label="No"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            {%- endif -%}
+          </td>
+          <td>
+            {%- if b.them_text != blank -%}
+              <span class="nxc__word nxc__word--them">{{ b.them_text }}</span>
+            {%- elsif b.them -%}
+              <svg class="nxc__them-yes" viewBox="0 0 24 24" width="14" height="14" aria-label="Yes"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {%- else -%}
+              <svg class="nxc__no" viewBox="0 0 24 24" width="12" height="12" aria-label="No"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+            {%- endif -%}
+          </td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+</div>
+
+{% stylesheet %}
+  .nxc {
+    padding-block: var(--nx-pt, 48px) var(--nx-pb, 48px);
+    color: var(--nx-fg);
+  }
+
+  .nxc__top {
+    margin-bottom: 40px;
+    padding-inline: 16px;
+    text-align: center;
+  }
+
+  .nxc__title {
+    margin: 0 0 10px;
+    font-family: var(--nx-heading);
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #000000;
+  }
+
+  .nxc__title span {
+    color: var(--nx-amber);
+  }
+
+  .nxc__deck {
+    margin: 0;
+    font-size: 15px;
+    color: #888888;
+  }
+
+  .nxc__table {
+    width: calc(100% - 32px);
+    max-width: 740px;
+    margin: 0 auto;
+    border-collapse: collapse;
+  }
+
+  .nxc__table th,
+  .nxc__table td {
+    padding: 16px 10px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .nxc__table thead th {
+    font-size: 13px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .nxc__table tbody th {
+    width: 42%;
+    padding-left: 0;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    color: #000000;
+  }
+
+  .nxc__us {
+    width: 30%;
+    background: var(--nx-amber);
+  }
+
+  .nxc__us--top {
+    padding-top: 26px !important;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .nxc__us--bottom {
+    padding-bottom: 22px !important;
+    border-radius: 0 0 12px 12px;
+  }
+
+  .nxc__yes {
+    display: inline-grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .nxc__them-yes {
+    color: #000000;
+  }
+
+  .nxc__no {
+    color: #000000;
+    vertical-align: middle;
+  }
+
+  .nxc__word {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000000;
+  }
+
+  .nxc__word--them {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  @media screen and (max-width: 749px) {
+    .nxc__top {
+      margin-bottom: 20px;
+    }
+
+    .nxc__table th,
+    .nxc__table td {
+      padding: 10px 4px;
+    }
+
+    .nxc__table tbody th {
+      font-size: 11px;
+    }
+
+    .nxc__table thead th {
+      font-size: 12px;
+    }
+
+    .nxc__us--top {
+      padding-top: 15px !important;
+    }
+
+    .nxc__us--bottom {
+      padding-bottom: 15px !important;
+    }
+
+    .nxc__yes {
+      width: 18px;
+      height: 18px;
+    }
+
+    .nxc__yes svg {
+      width: 10px;
+      height: 10px;
+    }
+
+    .nxc__word,
+    .nxc__word--them {
+      font-size: 12px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis comparison",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "Why Choose" },
+    { "type": "text", "id": "title_accent", "label": "Heading accent (amber)", "default": "Us?" },
+    { "type": "text", "id": "text", "label": "Subheading" },
+    { "type": "text", "id": "col_us", "label": "Highlighted column", "default": "Noxis Headlight Glasses" },
+    { "type": "text", "id": "col_them", "label": "Other column", "default": "Others" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Feature", "default": "Feature" },
+        { "type": "checkbox", "id": "us", "label": "Highlighted column: yes", "default": true },
+        { "type": "text", "id": "us_text", "label": "Highlighted column: text instead of icon" },
+        { "type": "checkbox", "id": "them", "label": "Other column: yes", "default": false },
+        { "type": "text", "id": "them_text", "label": "Other column: text instead of icon" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Noxis comparison", "blocks": [{ "type": "row" }, { "type": "row" }, { "type": "row" }] }]
+}
+{% endschema %}

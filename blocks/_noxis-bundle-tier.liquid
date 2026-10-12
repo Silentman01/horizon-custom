@@ -1,0 +1,292 @@
+{%- liquid
+  assign product_resource = closest.product
+  assign bs = block.settings
+  assign tier_variant = null
+
+  if bs.option_value != blank
+    assign wanted = bs.option_value | strip | downcase
+    for v in product_resource.variants
+      assign v_title = v.title | strip | downcase
+      if v_title == wanted
+        assign tier_variant = v
+        break
+      endif
+    endfor
+  endif
+
+  if tier_variant == null
+    assign idx = bs.variant_position | minus: 1
+    if product_resource.variants.size > idx
+      assign tier_variant = product_resource.variants[idx]
+    endif
+  endif
+
+  assign is_matched = true
+  if tier_variant == null or product_resource.has_only_default_variant
+    assign is_matched = false
+    assign tier_variant = product_resource.selected_or_first_available_variant
+  endif
+
+  assign price = tier_variant.price
+  assign compare = tier_variant.compare_at_price | default: 0
+  assign saved = 0
+  if compare > price
+    assign saved = compare | minus: price
+  endif
+
+  # ?variant= in the URL wins; otherwise the tier flagged "preselect" is the default offer.
+  assign is_selected = false
+  if product_resource.selected_variant
+    if is_matched and tier_variant.id == product_resource.selected_variant.id
+      assign is_selected = true
+    endif
+  elsif bs.preselect
+    assign is_selected = true
+  endif
+
+  assign thumb = bs.image | default: tier_variant.featured_image | default: product_resource.featured_image
+-%}
+
+<label
+  class="nxb-tier{% if is_selected %} is-selected{% endif %}{% unless tier_variant.available %} is-unavailable{% endunless %}"
+  {{ block.shopify_attributes }}
+>
+  <input
+    class="nxb-tier__input visually-hidden"
+    type="radio"
+    name="nxb-{{ section.id }}"
+    value="{{ tier_variant.id }}"
+    {% if is_matched %}
+      data-variant-id="{{ tier_variant.id }}"
+    {% endif %}
+    {% if is_selected %}
+      checked
+    {% endif %}
+    {% if bs.preselect %}
+      data-preselect
+    {% endif %}
+    {% unless tier_variant.available %}
+      disabled
+    {% endunless %}
+  >
+
+  {%- if bs.badge != blank -%}
+    <span class="nxb-tier__badge">{{ bs.badge }}</span>
+  {%- endif -%}
+
+  <span class="nxb-tier__main">
+    <span class="nxb-tier__thumb">
+      {%- if thumb -%}
+        {{ thumb | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 44, height: 44 }}
+      {%- endif -%}
+    </span>
+
+    <span class="nxb-tier__body">
+      <span class="nxb-tier__title">
+        {{- bs.title | default: tier_variant.title -}}
+        {%- if saved > 0 -%}
+          <span class="nxb-tier__pill">SAVE {{ saved | money }}</span>
+        {%- endif -%}
+      </span>
+      {%- if bs.subtitle != blank -%}
+        <span class="nxb-tier__subtitle">{{ bs.subtitle }}</span>
+      {%- endif -%}
+    </span>
+
+    <span class="nxb-tier__prices">
+      <span class="nxb-tier__price">{{ price | money }}</span>
+      {%- if compare > price -%}
+        <s class="nxb-tier__compare">{{ compare | money }}</s>
+      {%- endif -%}
+    </span>
+  </span>
+
+  {%- if bs.gift != blank -%}
+    <span class="nxb-tier__gift">
+      <span class="nxb-tier__gift-label">
+        {%- if bs.gift_image -%}
+          {{ bs.gift_image | image_url: width: 60 | image_tag: loading: 'lazy', alt: '', width: 24, height: 24 }}
+        {%- endif -%}
+        {{ bs.gift }}
+      </span>
+      {%- if bs.gift_value != blank -%}
+        <s>{{ bs.gift_value }}</s>
+      {%- endif -%}
+    </span>
+  {%- endif -%}
+</label>
+
+{% stylesheet %}
+  .nxb-tier {
+    position: relative;
+    display: block;
+    overflow: visible;
+    border: 1px solid var(--nx-amber);
+    border-radius: 18px;
+    background: var(--nx-amber-soft);
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .nxb-tier.is-selected {
+    background: #ffffff;
+    box-shadow: 0 0 0 1px var(--nx-amber);
+  }
+
+  .nxb-tier.is-unavailable {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .nxb-tier:has(.nxb-tier__input:focus-visible) {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+
+  .nxb-tier__badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--nx-amber);
+    color: #000000;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .nxb-tier__main {
+    display: grid;
+    grid-template-columns: 44px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 14px 12px;
+  }
+
+  .nxb-tier__thumb {
+    width: 44px;
+    height: 44px;
+    overflow: hidden;
+    border-radius: 6px;
+    background: #ffffff;
+  }
+
+  .nxb-tier__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .nxb-tier__body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .nxb-tier__title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+  }
+
+  .nxb-tier__pill {
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--nx-amber);
+    color: #000000;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  .nxb-tier__subtitle {
+    font-size: 14px;
+    color: #555555;
+  }
+
+  .nxb-tier__prices {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+
+  .nxb-tier__price {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+  }
+
+  .nxb-tier__compare {
+    font-size: 14px;
+    color: #555555;
+  }
+
+  .nxb-tier__gift {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 7px 14px;
+    border-radius: 0 0 17px 17px;
+    background: #cccccc;
+    color: #000000;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .nxb-tier.is-selected .nxb-tier__gift {
+    background: var(--nx-amber);
+  }
+
+  .nxb-tier__gift-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nxb-tier__gift-label img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+  }
+
+  .nxb-tier__gift s {
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 749px) {
+    .nxb-tier__title,
+    .nxb-tier__price {
+      font-size: 18px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bundle card",
+  "settings": [
+    { "type": "text", "id": "option_value", "label": "Variant name", "info": "Exact variant name, e.g. Buy 2. Empty = use the position below." },
+    { "type": "range", "id": "variant_position", "label": "Variant position", "min": 1, "max": 10, "step": 1, "default": 1 },
+    { "type": "text", "id": "title", "label": "Title", "default": "Buy 1" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "badge", "label": "Corner badge" },
+    { "type": "image_picker", "id": "image", "label": "Thumbnail", "info": "Empty = variant image, then product image." },
+    { "type": "text", "id": "gift", "label": "Gift strip text", "default": "+ 1 FREE Glasses Case" },
+    { "type": "text", "id": "gift_value", "label": "Gift value (crossed out)", "default": "$14.95" },
+    { "type": "image_picker", "id": "gift_image", "label": "Gift icon" },
+    { "type": "checkbox", "id": "preselect", "label": "Selected by default", "default": false }
+  ]
+}
+{% endschema %}

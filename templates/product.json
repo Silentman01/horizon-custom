@@ -16,22 +16,23 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
-            "media_columns": "two",
-            "image_gap": 4,
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 8,
             "large_first_image": false,
-            "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 8,
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "contain",
-            "media_radius": 0,
+            "media_radius": 12,
             "extend_media": false,
-            "zoom": true,
-            "video_loop": false,
+            "zoom": false,
+            "video_loop": true,
             "hide_variants": true,
             "padding-block-start": 0,
             "padding-block-end": 0,
@@ -50,187 +51,45 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 18,
             "sticky_details_desktop": true,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
-            "padding-block-start": 24,
+            "padding-block-start": 8,
             "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "t:names.header",
+            "rating": {
+              "type": "noxis-rating",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_xpVMaM": {
-                  "type": "text",
-                  "name": "t:names.title",
-                  "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_tVjtKg": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": true,
-                    "show_tax_info": true,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
-              ]
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color3 }}",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
+                "text": "Rated 4.8/5 by 1,300+ drivers"
               },
               "blocks": {}
             },
-            "variant_picker_R3rGDr": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": false,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "buy_buttons_eYQEYi": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": true,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
-            "text_aEtTtq": {
+            "title": {
               "type": "text",
-              "name": "t:names.product_description",
               "settings": {
-                "text": "{{ closest.product.description }}",
-                "width": "100%",
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
                 "font_size": "",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -240,102 +99,11 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
-            }
-          },
-          "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
-          ]
-        },
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "disclosures"
-      ],
-      "settings": {
-        "content_width": "content-center-aligned",
-        "desktop_media_position": "left",
-        "equal_columns": false,
-        "limit_details_width": false,
-        "gap": 48,
-        "padding-block-start": 0,
-        "padding-block-end": 0
-      }
-    },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
-      "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
-          "settings": {
-            "text": "<h2>You may also like </h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
-          "settings": {
-            "product_card_gap": 8,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
             },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
+            "subtitle": {
+              "type": "text",
               "settings": {
+                "text": "<p>Every winter the drive home gets harder. Brighter headlights, more rain, more of that blinding glare.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -346,70 +114,565 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "checklist": {
+              "type": "noxis-checklist",
+              "settings": {
+                "item_1": "See the road clearly after dark",
+                "item_2": "Slips right over your prescription glasses",
+                "item_3": "Stop flinching at every oncoming car",
+                "item_4": "One size fits every face"
+              },
+              "blocks": {}
+            },
+            "bundle": {
+              "type": "noxis-bundle",
+              "settings": {
+                "heading": "Bundle & Save",
+                "hide_native_picker": true
+              },
+              "blocks": {
+                "tier_1": {
+                  "type": "_noxis-bundle-tier",
+                  "settings": {
+                    "variant_position": 1,
+                    "title": "Buy 1",
+                    "subtitle": "",
+                    "badge": "",
+                    "gift": "+ 1 FREE Glasses Case",
+                    "gift_value": "$14.95",
+                    "preselect": false
+                  }
+                },
+                "tier_2": {
+                  "type": "_noxis-bundle-tier",
+                  "settings": {
+                    "variant_position": 2,
+                    "title": "Buy 2",
+                    "subtitle": "Free Shipping",
+                    "badge": "MOST POPULAR",
+                    "gift": "+ 2 FREE Glasses Cases",
+                    "gift_value": "$29.90",
+                    "preselect": true
+                  }
+                },
+                "tier_3": {
+                  "type": "_noxis-bundle-tier",
+                  "settings": {
+                    "variant_position": 3,
+                    "title": "Buy 3",
+                    "subtitle": "Free Shipping",
+                    "badge": "BEST VALUE",
+                    "gift": "+ 3 FREE Glasses Cases",
+                    "gift_value": "$44.85",
+                    "preselect": false
+                  }
+                }
+              },
+              "block_order": [
+                "tier_1",
+                "tier_2",
+                "tier_3"
+              ]
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": false,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "divider_color": "",
+                "type_preset": "h6",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "row_what": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "What do they actually do?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>They take the blinding edge off oncoming headlights, so you stop squinting into a white blur.</p><p>Here's why it happens. Modern LED headlights are brighter than the old bulbs, and they're bluer too. Blue light scatters inside your eye. That's the haze, and the blind second right after a car passes.</p><p>Amber lenses filter out that harsh blue light. So you get:</p><ul><li>Headlights that don't blind you</li><li>Eyes that bounce back in a blink</li><li>Night drives that don't leave you wiped out</li></ul><p>They won't darken the road like sunglasses. And they're not a cheap yellow tint that just turns white glare into yellow glare.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_how": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "How do they work?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>Amber filtering, not a tint.</strong> Amber sits opposite blue on the color wheel, so the lens cuts the harsh blue light modern LED headlights throw at you.</p><p><strong>Polarized layer.</strong> It turns stark white headlights into a softer, warmer glow and cuts the glare bouncing off wet roads and windshields. Your eyes handle that warm light far more comfortably.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_fit": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Will they fit over my glasses?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Yes, that's exactly what they're made for. The wraparound frame slips over most prescription glasses, and they work just as well on their own or with contacts.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_guarantee": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Our guarantee",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Wear them for 30 days on the roads you actually drive. If they don't make your night drives easier, email us and we'll refund every cent. No store credit, no partial refund, and you don't have to send them back.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "text_color": "",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_what",
+                "row_how",
+                "row_fit",
+                "row_guarantee"
+              ]
             }
           },
           "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
+            "rating",
+            "title",
+            "subtitle",
+            "checklist",
+            "bundle",
+            "variant_picker",
+            "buy_buttons",
+            "accordion"
           ]
         }
       },
-      "block_order": [
-        "text_cbcgyb"
-      ],
-      "name": "t:names.product_recommendations",
       "settings": {
-        "product": "{{ closest.product }}",
-        "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 28,
-        "padding-block-start": 48,
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": true,
+        "background_color": "",
+        "padding-block-start": 24,
         "padding-block-end": 48
       }
+    },
+    "nx_testimonials": {
+      "type": "noxis-testimonials",
+      "settings": {
+        "title": "What Our Drivers Say",
+        "text": "Thousands of drivers already wear Noxis Headlight Glasses",
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "text": "<p>Honestly, I almost sent them back. My first week was dry and clear and I couldn't tell much difference. Then it poured. Interstate, construction zone, every headlight bouncing off the wet road at me. That's the drive that usually turns into one bright smear and I'm guessing where my lane is. With these on, it just looked like rain. Subtle on a clear night, a real difference in the wet. Around here, that's the only night that counts.</p>",
+            "name": "Gary M",
+            "placeholder_label": "Man in his 50s, selfie in the driver's seat at night, wearing the glasses"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "text": "<p>I bought these for my dad, who's 74 and had started asking me to drive him to things. I tried a pair on to make sure they weren't junk and ended up keeping it. I'm 43, perfect eyes, and I'd decided the headache on the drive home was just part of driving now. It isn't. For me it's the few seconds after a car passes, when I used to see nothing. Dad's verdict: 'I can finally watch the road instead of the lights.'</p>",
+            "name": "Lauren T",
+            "placeholder_label": "Woman and her older father in a car at night, both wearing the glasses"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "text": "<p>I quit driving at night two winters ago and told everyone it was my choice. It wasn't. I stopped making plans that ended after six, and then people stopped inviting me. My first real test was the beltway at seven, in traffic, the exact drive I'd have talked myself out of. I didn't slow down for a single oncoming car. They're not magic, bright lights are still bright. But I drove somewhere alone after dark for the first time in two years.</p>",
+            "name": "Ron D",
+            "placeholder_label": "Older man in the driver's seat at night, city lights behind, wearing the glasses"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3"
+      ]
+    },
+    "nx_story": {
+      "type": "noxis-image-text",
+      "settings": {
+        "image_first": false,
+        "ratio": "1 / 1",
+        "placeholder_label": "Driver's view of a dark road at night, oncoming headlights glaring",
+        "title": "You Never Decided to Stop Driving at Night",
+        "text": "<p>It happened bit by bit. First the <strong>highway after dark</strong>, then <strong>any road you didn't know by heart</strong>, then the 7 pm plans you were suddenly <strong>too tired for</strong>. Nobody sat you down and said your <strong>driving days were shrinking</strong>, and when you brought it up, someone blamed your age. <strong>It isn't your age. Headlights changed</strong>, your eyes didn't, and that's the part you can <strong>actually fix tonight</strong>.</p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {}
+    },
+    "nx_compare": {
+      "type": "noxis-comparison",
+      "settings": {
+        "title": "Why Choose",
+        "title_accent": "Us?",
+        "text": "Built for the drive home",
+        "col_us": "Noxis Headlight Glasses",
+        "col_them": "Others",
+        "padding_top": 64,
+        "padding_bottom": 64
+      },
+      "blocks": {
+        "r1": {
+          "type": "row",
+          "settings": {
+            "label": "LED Headlights",
+            "us": true,
+            "us_text": "",
+            "them": false,
+            "them_text": ""
+          }
+        },
+        "r2": {
+          "type": "row",
+          "settings": {
+            "label": "Sensitive Eyes",
+            "us": true,
+            "us_text": "",
+            "them": true,
+            "them_text": ""
+          }
+        },
+        "r3": {
+          "type": "row",
+          "settings": {
+            "label": "Fits Over Prescription Glasses",
+            "us": true,
+            "us_text": "",
+            "them": false,
+            "them_text": ""
+          }
+        },
+        "r4": {
+          "type": "row",
+          "settings": {
+            "label": "Polarized Amber Lens",
+            "us": true,
+            "us_text": "",
+            "them": false,
+            "them_text": ""
+          }
+        },
+        "r5": {
+          "type": "row",
+          "settings": {
+            "label": "30-Day Guarantee",
+            "us": true,
+            "us_text": "Yes",
+            "them": false,
+            "them_text": "No"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5"
+      ]
+    },
+    "nx_honest": {
+      "type": "noxis-image-text",
+      "settings": {
+        "image_first": true,
+        "ratio": "1 / 1",
+        "placeholder_label": "Oncoming car at night with two bright LED headlights",
+        "title": "We Won't Pretend They're Magic",
+        "text": "<p>Any ad promising that <strong>headlights will disappear is lying to you</strong>. Good amber <strong>takes the worst edge off the glare</strong>, which sounds small until you've <strong>driven 40 minutes</strong> without being blinded once by an oncoming car. Most glasses like these fail because they're <strong>just colored plastic</strong>: a yellow tint turns <strong>white glare into yellow glare</strong>, and the whole category gets a bad name. <strong>Better, not perfect</strong>, and <strong>you'll feel it on your first drive</strong>.</p>",
+        "padding_top": 36,
+        "padding_bottom": 36
+      },
+      "blocks": {}
+    },
+    "nx_faq": {
+      "type": "noxis-faq",
+      "settings": {
+        "title": "FAQ",
+        "padding_top": 24,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "My eye doctor says these don't work. Who's right?",
+            "answer": "<p>Honestly, a bit of both of us. Every lens filters some light, so on a pitch-black road with no traffic you're better off without them, and our instructions say so. What your doctor isn't measuring is how uncomfortable glare feels on a busy road full of LED headlights. That's what these are for. Try them for 30 days and trust your own drive.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "Could I miss a pedestrian in dark clothes?",
+            "answer": "<p>It's exactly the right question, and it's why we tell you to take them off on unlit roads. The lens filters the harsh blue end of the light instead of dimming everything, so signs, curbs and people stay visible wherever there's any light at all.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Will they fit over my prescription glasses?",
+            "answer": "<p>Yes. That's what they're designed for: nothing to swap, no second prescription to pay for. They also work on their own or with contacts.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Aren't these just cheap yellow-tinted glasses?",
+            "answer": "<p>No, and those cheap ones are the reason people ask. A plain yellow lens just colors the glare instead of cutting it, which is why so many people say theirs \"just made everything yellow.\"</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "What if they don't help me?",
+            "answer": "<p>Email us within 30 days and we'll refund the full amount. We'd rather you test them properly and send them back than never find out. The case is yours to keep either way.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ]
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "nx_testimonials",
+    "nx_story",
+    "nx_compare",
+    "nx_honest",
+    "nx_faq"
   ]
 }

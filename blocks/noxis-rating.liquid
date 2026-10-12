@@ -1,0 +1,53 @@
+<div
+  class="nx-rating"
+  style="{% render 'noxis-vars' %}"
+  {{ block.shopify_attributes }}
+>
+  <span
+    class="nx-rating__stars"
+    aria-hidden="true"
+  >
+    {%- for i in (1..5) -%}
+      <svg
+        viewBox="0 0 24 24"
+        width="16"
+        height="16"
+      >
+        <path d="M12 .587l3.668 7.431 8.144 1.18-5.906 5.434 1.391 8.079L12 18.896l-7.297 3.843 1.391-8.079-5.906-5.434 8.144-1.18z"/>
+      </svg>
+    {%- endfor -%}
+  </span>
+  <span class="nx-rating__text">{{ block.settings.text }}</span>
+</div>
+
+{% stylesheet %}
+  .nx-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+
+  .nx-rating__stars {
+    display: flex;
+  }
+
+  .nx-rating__stars svg {
+    fill: var(--nx-amber);
+  }
+
+  .nx-rating__text {
+    font-size: 14px;
+    color: #333333;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis rating",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Text", "default": "Rated 4.8/5 by 1,300+ drivers" }
+  ],
+  "presets": [{ "name": "Noxis rating" }]
+}
+{% endschema %}

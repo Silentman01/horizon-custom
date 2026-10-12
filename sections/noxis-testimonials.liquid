@@ -1,0 +1,161 @@
+<div
+  class="nxt"
+  style="{% render 'noxis-vars' %} --nx-pt: {{ section.settings.padding_top }}px; --nx-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="nxt__top">
+    <h2 class="nxt__title">{{ section.settings.title }}</h2>
+    {%- if section.settings.text != blank -%}
+      <p class="nxt__deck">{{ section.settings.text }}</p>
+    {%- endif -%}
+  </div>
+
+  <div class="nxt__grid">
+    {%- for block in section.blocks -%}
+      <article
+        class="nxt__card"
+        {{ block.shopify_attributes }}
+      >
+        {% render 'noxis-media',
+          image: block.settings.image,
+          ratio: '1 / 1',
+          label: block.settings.placeholder_label,
+          sizes: '(min-width: 750px) 340px, 76vw'
+        %}
+        <div class="nxt__body">
+          <span
+            class="nxt__stars"
+            aria-label="5 out of 5 stars"
+          >
+            ★★★★★
+          </span>
+          <div class="nxt__text">{{ block.settings.text }}</div>
+          <p class="nxt__name">{{ block.settings.name }}</p>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .nxt {
+    padding-block: var(--nx-pt, 48px) var(--nx-pb, 48px);
+    color: var(--nx-fg);
+  }
+
+  .nxt__top {
+    max-width: 1040px;
+    margin: 0 auto 20px;
+    padding-inline: 16px;
+    text-align: center;
+  }
+
+  .nxt__title {
+    margin: 0;
+    font-family: var(--nx-heading);
+    font-size: clamp(26px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+  }
+
+  .nxt__deck {
+    margin: 6px 0 0;
+    font-size: 15px;
+  }
+
+  .nxt__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding-inline: 16px;
+  }
+
+  .nxt__card {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--nx-cream);
+  }
+
+  .nxt__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 18px 18px;
+    text-align: center;
+  }
+
+  .nxt__stars {
+    font-size: 15px;
+    letter-spacing: 2px;
+    color: #000000;
+  }
+
+  .nxt__text {
+    font-size: 13px;
+    line-height: 1.55;
+    color: #333333;
+  }
+
+  .nxt__text p {
+    margin: 0;
+  }
+
+  .nxt__name {
+    margin: auto 0 0;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 700;
+  }
+
+  @media screen and (max-width: 749px) {
+    .nxt__grid {
+      display: flex;
+      grid-template-columns: none;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding-inline: 16px;
+      scrollbar-width: none;
+    }
+
+    .nxt__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nxt__card {
+      flex: 0 0 clamp(230px, 76vw, 320px);
+      scroll-snap-align: start;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis testimonials",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "What Our Drivers Say" },
+    { "type": "text", "id": "text", "label": "Subheading" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "placeholder_label", "label": "Placeholder label", "default": "Customer selfie in the driver's seat at night, wearing the glasses" },
+        { "type": "richtext", "id": "text", "label": "Review" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Name" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Noxis testimonials", "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }] }]
+}
+{% endschema %}

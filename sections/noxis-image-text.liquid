@@ -1,0 +1,124 @@
+<div
+  class="nxit{% if section.settings.image_first %} nxit--image-first{% endif %}"
+  style="{% render 'noxis-vars' %} --nx-pt: {{ section.settings.padding_top }}px; --nx-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <div class="nxit__inner">
+    <div class="nxit__media">
+      {% render 'noxis-media',
+        image: section.settings.image,
+        ratio: section.settings.ratio,
+        label: section.settings.placeholder_label,
+        radius: 12,
+        sizes: '(min-width: 750px) 580px, 100vw'
+      %}
+    </div>
+    <div class="nxit__content">
+      <h2 class="nxit__title">{{ section.settings.title }}</h2>
+      <div class="nxit__text">{{ section.settings.text }}</div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .nxit {
+    padding-block: var(--nx-pt, 48px) var(--nx-pb, 48px);
+    color: var(--nx-fg);
+  }
+
+  .nxit__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1160px;
+    margin: 0 auto;
+    padding-inline: 16px;
+  }
+
+  .nxit__media {
+    order: 2;
+  }
+
+  .nxit--image-first .nxit__media {
+    order: 0;
+  }
+
+  .nxit__content {
+    padding: 24px 74px;
+  }
+
+  .nxit__title {
+    margin: 0 0 14px;
+    font-family: var(--nx-heading);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #000000;
+  }
+
+  .nxit__text {
+    font-size: 15px;
+    line-height: 1.75;
+    letter-spacing: 0.02em;
+    color: #333333;
+  }
+
+  .nxit__text p {
+    margin: 0 0 1em;
+  }
+
+  .nxit__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .nxit__text strong {
+    color: #000000;
+  }
+
+  @media screen and (max-width: 749px) {
+    .nxit__inner {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .nxit__media,
+    .nxit--image-first .nxit__media {
+      order: 0;
+    }
+
+    .nxit__content {
+      padding: 0 4px;
+    }
+
+    .nxit__title {
+      font-size: 22px;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis image with text",
+  "tag": "section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "placeholder_label", "label": "Placeholder label", "default": "Image" },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "1 / 1", "label": "Square" },
+        { "value": "4 / 5", "label": "Portrait" },
+        { "value": "4 / 3", "label": "Landscape" }
+      ],
+      "default": "1 / 1"
+    },
+    { "type": "checkbox", "id": "image_first", "label": "Image on the left (desktop)", "default": false },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Text</p>" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 36 }
+  ],
+  "presets": [{ "name": "Noxis image with text" }]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+<ul
+  class="nx-checks"
+  style="{% render 'noxis-vars' %}"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..6) -%}
+    {%- assign key = 'item_' | append: i -%}
+    {%- if block.settings[key] != blank -%}
+      <li>
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M7.5 12.2l3 3 6-6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>{{ block.settings[key] }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+
+{% stylesheet %}
+  .nx-checks {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nx-checks li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    color: #333333;
+  }
+
+  .nx-checks svg {
+    flex: none;
+    color: #333333;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis check list",
+  "settings": [
+    { "type": "text", "id": "item_1", "label": "Item 1", "default": "See the road clearly after dark" },
+    { "type": "text", "id": "item_2", "label": "Item 2", "default": "Slips right over your prescription glasses" },
+    { "type": "text", "id": "item_3", "label": "Item 3", "default": "Stop flinching at every oncoming car" },
+    { "type": "text", "id": "item_4", "label": "Item 4", "default": "One size fits every face" },
+    { "type": "text", "id": "item_5", "label": "Item 5" },
+    { "type": "text", "id": "item_6", "label": "Item 6" }
+  ],
+  "presets": [{ "name": "Noxis check list" }]
+}
+{% endschema %}

@@ -1,0 +1,142 @@
+<div
+  class="nxf"
+  style="{% render 'noxis-vars' %} --nx-pt: {{ section.settings.padding_top }}px; --nx-pb: {{ section.settings.padding_bottom }}px;"
+>
+  <h2 class="nxf__title">{{ section.settings.title }}</h2>
+  <div class="nxf__list">
+    {%- for block in section.blocks -%}
+      <details
+        class="nxf__item"
+        name="nxf-{{ section.id }}"
+        {{ block.shopify_attributes }}
+      >
+        <summary>
+          <svg
+            class="nxf__icon"
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M9.5 9.3a2.6 2.6 0 0 1 5 .9c0 1.8-2.5 2.2-2.5 3.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            <circle cx="12" cy="17.2" r="1" fill="currentColor"/>
+          </svg>
+          <span>{{ block.settings.question }}</span>
+          <svg
+            class="nxf__caret"
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            aria-hidden="true"
+          >
+            <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </summary>
+        <div class="nxf__answer">{{ block.settings.answer }}</div>
+      </details>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .nxf {
+    padding-block: var(--nx-pt, 48px) var(--nx-pb, 48px);
+    color: var(--nx-fg);
+  }
+
+  .nxf__title {
+    margin: 0 0 20px;
+    font-family: var(--nx-heading);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    color: #000000;
+  }
+
+  .nxf__list {
+    max-width: 740px;
+    margin: 0 auto;
+    padding-inline: 16px;
+  }
+
+  .nxf__item {
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  .nxf__item:first-child {
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .nxf__item summary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 6px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+    color: #000000;
+    list-style: none;
+    cursor: pointer;
+  }
+
+  .nxf__item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .nxf__icon {
+    flex: none;
+    color: #333333;
+  }
+
+  .nxf__caret {
+    flex: none;
+    margin-left: auto;
+    color: #555555;
+    transition: transform 0.2s ease;
+  }
+
+  .nxf__item[open] .nxf__caret {
+    transform: rotate(180deg);
+  }
+
+  .nxf__answer {
+    padding: 0 6px 16px 34px;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333333;
+  }
+
+  .nxf__answer p {
+    margin: 0 0 0.8em;
+  }
+
+  .nxf__answer p:last-child {
+    margin-bottom: 0;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis FAQ",
+  "tag": "section",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Heading", "default": "FAQ" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Answer</p>" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Noxis FAQ", "blocks": [{ "type": "question" }, { "type": "question" }] }]
+}
+{% endschema %}
