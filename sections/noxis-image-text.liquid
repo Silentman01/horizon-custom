@@ -6,6 +6,7 @@
     <div class="nxit__media">
       {% render 'noxis-media',
         image: section.settings.image,
+        asset: section.settings.asset,
         ratio: section.settings.ratio,
         label: section.settings.placeholder_label,
         radius: 12,
@@ -101,6 +102,7 @@
   "tag": "section",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "Image (theme file)", "info": "Used when no image is picked, e.g. noxis-night-road.webp." },
     { "type": "text", "id": "placeholder_label", "label": "Placeholder label", "default": "Image" },
     {
       "type": "select",

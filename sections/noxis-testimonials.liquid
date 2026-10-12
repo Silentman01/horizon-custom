@@ -17,6 +17,7 @@
       >
         {% render 'noxis-media',
           image: block.settings.image,
+          asset: block.settings.image_asset,
           ratio: '1 / 1',
           label: block.settings.placeholder_label,
           sizes: '(min-width: 750px) 340px, 76vw'
@@ -150,6 +151,7 @@
       "name": "Testimonial",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_asset", "label": "Photo (theme file)" },
         { "type": "text", "id": "placeholder_label", "label": "Placeholder label", "default": "Customer selfie in the driver's seat at night, wearing the glasses" },
         { "type": "richtext", "id": "text", "label": "Review" },
         { "type": "text", "id": "name", "label": "Name", "default": "Name" }
