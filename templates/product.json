@@ -339,7 +339,7 @@
                     "text": {
                       "type": "text",
                       "settings": {
-                        "text": "<p><strong>Amber filtering, not a tint.</strong> Amber sits opposite blue on the color wheel, so the lens cuts the harsh blue light modern LED headlights throw at you.</p><p><strong>Polarized layer.</strong> It turns stark white headlights into a softer, warmer glow and cuts the glare bouncing off wet roads and windshields. Your eyes handle that warm light far more comfortably.</p>",
+                        "text": "<p><strong>Amber filtering, not a tint.</strong> Amber sits opposite blue on the color wheel, so the lens cuts the harsh blue light modern LED headlights throw at you.</p><p><strong>GlareCut Technology™.</strong> It turns blinding white headlights into a soft, warm orange. Your eyes handle orange light far more comfortably than stark white, so glare drops and the blinding effect softens.</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
@@ -539,7 +539,7 @@
       "settings": {
         "title": "Why Choose",
         "title_accent": "Us?",
-        "text": "Built for the drive home",
+        "text": "Rated #1 Headlight Glasses",
         "col_us": "Noxis Headlight Glasses",
         "col_them": "Others",
         "padding_top": 64,
@@ -579,7 +579,7 @@
         "r4": {
           "type": "row",
           "settings": {
-            "label": "Polarized Amber Lens",
+            "label": "Glare Cut Technology",
             "us": true,
             "us_text": "",
             "them": false,
