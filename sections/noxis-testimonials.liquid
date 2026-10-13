@@ -9,7 +9,10 @@
     {%- endif -%}
   </div>
 
-  <div class="nxt__grid">
+  <div
+    class="nxt__grid"
+    data-nxt-rail
+  >
     {%- for block in section.blocks -%}
       <article
         class="nxt__card"
@@ -119,9 +122,22 @@
       display: flex;
       grid-template-columns: none;
       overflow-x: auto;
+      overscroll-behavior-x: contain;
       scroll-snap-type: x mandatory;
       scroll-padding-inline: 16px;
       scrollbar-width: none;
+      touch-action: pan-x pan-y;
+      cursor: grab;
+    }
+
+    .nxt__grid.is-dragging {
+      scroll-snap-type: none;
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    .nxt__grid.is-dragging img {
+      pointer-events: none;
     }
 
     .nxt__grid::-webkit-scrollbar {
@@ -134,6 +150,66 @@
     }
   }
 {% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    // Mouse/pen drag for the mobile rail: the theme editor's mobile preview on desktop has no touch scrolling.
+    const init = () => {
+      document.querySelectorAll('[data-nxt-rail]:not([data-nxt-ready])').forEach((rail) => {
+        rail.dataset.nxtReady = '';
+        let startX = 0;
+        let startScroll = 0;
+        let moved = false;
+        let pointerId = -1;
+
+        rail.addEventListener('pointerdown', (event) => {
+          if (event.pointerType === 'touch' || event.button !== 0) return;
+          if (rail.scrollWidth <= rail.clientWidth) return;
+          pointerId = event.pointerId;
+          startX = event.clientX;
+          startScroll = rail.scrollLeft;
+          moved = false;
+        });
+
+        rail.addEventListener('pointermove', (event) => {
+          if (event.pointerId !== pointerId) return;
+          const dx = event.clientX - startX;
+          if (!moved && Math.abs(dx) < 4) return;
+          if (!moved) {
+            moved = true;
+            rail.classList.add('is-dragging');
+            rail.setPointerCapture(pointerId);
+          }
+          rail.scrollLeft = startScroll - dx;
+        });
+
+        const end = () => {
+          if (pointerId === -1) return;
+          pointerId = -1;
+          if (!moved) return;
+          const left = rail.scrollLeft;
+          rail.classList.remove('is-dragging');
+          rail.scrollLeft = left;
+          const card = rail.firstElementChild;
+          const gap = parseFloat(getComputedStyle(rail).columnGap) || 0;
+          const step = card ? card.getBoundingClientRect().width + gap : 0;
+          if (step) rail.scrollTo({ left: Math.round(left / step) * step, behavior: 'smooth' });
+        };
+        rail.addEventListener('pointerup', end);
+        rail.addEventListener('pointercancel', end);
+        rail.addEventListener('click', (event) => {
+          if (moved) {
+            event.preventDefault();
+            event.stopPropagation();
+            moved = false;
+          }
+        }, true);
+      });
+    };
+    init();
+    document.addEventListener('shopify:section:load', init);
+  })();
+{% endjavascript %}
 
 {% schema %}
 {
