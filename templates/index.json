@@ -11,7 +11,6 @@
   "sections": {
     "nx_featured_product": {
       "type": "featured-product-information",
-      "name": "Featured product",
       "blocks": {
         "media-gallery": {
           "type": "_featured-product-information-carousel",
@@ -67,6 +66,7 @@
           "blocks": {
             "vendor": {
               "type": "text",
+              "name": "Vendor",
               "settings": {
                 "text": "<p>Noxis</p>",
                 "width": "100%",
@@ -88,11 +88,11 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {},
-              "name": "Vendor"
+              "blocks": {}
             },
             "title": {
               "type": "text",
+              "name": "Title",
               "settings": {
                 "text": "<h2>{{ closest.product.title }}</h2>",
                 "width": "100%",
@@ -114,8 +114,7 @@
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {},
-              "name": "Title"
+              "blocks": {}
             },
             "buy_buttons": {
               "type": "buy-buttons",
@@ -146,6 +145,7 @@
               "blocks": {
                 "quantity": {
                   "type": "quantity",
+                  "disabled": true,
                   "static": true,
                   "settings": {
                     "input_style": "default",
@@ -155,8 +155,7 @@
                     "border_width": 1,
                     "border_radius": 0
                   },
-                  "blocks": {},
-                  "disabled": true
+                  "blocks": {}
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
@@ -197,7 +196,9 @@
           ]
         }
       },
+      "name": "Featured product",
       "settings": {
+        "product": "noxis™-polarized-headlight-glasses",
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
         "equal_columns": true,

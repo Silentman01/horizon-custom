@@ -479,38 +479,32 @@
     },
     "nx_testimonials": {
       "type": "noxis-testimonials",
-      "settings": {
-        "title": "What Our Drivers Say",
-        "text": "Thousands of drivers already wear Noxis Headlight Glasses",
-        "padding_top": 48,
-        "padding_bottom": 48
-      },
       "blocks": {
         "t1": {
           "type": "testimonial",
           "settings": {
-            "text": "<p>Honestly, I almost sent them back. My first week was dry and clear and I couldn't tell much difference. Then it poured. Interstate, construction zone, every headlight bouncing off the wet road at me. That's the drive that usually turns into one bright smear and I'm guessing where my lane is. With these on, it just looked like rain. Subtle on a clear night, a real difference in the wet. Around here, that's the only night that counts.</p>",
-            "name": "Gary M",
+            "image_asset": "noxis-review-1.jpg",
             "placeholder_label": "Man in his 50s, selfie in the driver's seat at night, wearing the glasses",
-            "image_asset": "noxis-review-1.jpg"
+            "text": "<p>Honestly, I almost sent them back. My first week was dry and clear and I couldn't tell much difference. Then it poured. Interstate, construction zone, every headlight bouncing off the wet road at me. That's the drive that usually turns into one bright smear and I'm guessing where my lane is. With these on, it just looked like rain. Subtle on a clear night, a real difference in the wet. Around here, that's the only night that counts.</p>",
+            "name": "Gary M"
           }
         },
         "t2": {
           "type": "testimonial",
           "settings": {
-            "text": "<p>I bought these for my mom, who's 74 and had started asking me to drive her to things. I tried a pair on to make sure they weren't junk and ended up keeping it. I'm 43, perfect eyes, and I'd decided the headache on the drive home was just part of driving now. It isn't. For me it's the few seconds after a car passes, when I used to see nothing. Mom's verdict: 'I can finally watch the road instead of the lights.'</p>",
-            "name": "Lauren T",
+            "image_asset": "noxis-review-2.jpg",
             "placeholder_label": "Woman and her elderly mother in a car at night, both wearing the glasses",
-            "image_asset": "noxis-review-2.jpg"
+            "text": "<p>I bought these for my mom, who's 74 and had started asking me to drive her to things. I tried a pair on to make sure they weren't junk and ended up keeping it. I'm 43, perfect eyes, and I'd decided the headache on the drive home was just part of driving now. It isn't. For me it's the few seconds after a car passes, when I used to see nothing. Mom's verdict: 'I can finally watch the road instead of the lights.'</p>",
+            "name": "Lauren T"
           }
         },
         "t3": {
           "type": "testimonial",
           "settings": {
-            "text": "<p>I quit driving at night two winters ago and told everyone it was my choice. It wasn't. I stopped making plans that ended after six, and then people stopped inviting me. My first real test was the beltway at seven, in traffic, the exact drive I'd have talked myself out of. I didn't slow down for a single oncoming car. They're not magic, bright lights are still bright. But I drove somewhere alone after dark for the first time in two years.</p>",
-            "name": "Ron D",
+            "image_asset": "noxis-review-3.jpg",
             "placeholder_label": "Older man in the driver's seat at night, city lights behind, wearing the glasses",
-            "image_asset": "noxis-review-3.jpg"
+            "text": "<p>I quit driving at night two winters ago and told everyone it was my choice. It wasn't. I stopped making plans that ended after six, and then people stopped inviting me. My first real test was the beltway at seven, in traffic, the exact drive I'd have talked myself out of. I didn't slow down for a single oncoming car. They're not magic, bright lights are still bright. But I drove somewhere alone after dark for the first time in two years.</p>",
+            "name": "Ron D"
           }
         }
       },
@@ -518,33 +512,29 @@
         "t1",
         "t2",
         "t3"
-      ]
+      ],
+      "settings": {
+        "title": "What Our Drivers Say",
+        "text": "Thousands of drivers already wear Noxis Headlight Glasses",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "nx_story": {
       "type": "noxis-image-text",
       "settings": {
-        "image_first": false,
-        "ratio": "1 / 1",
         "asset": "noxis-night-road.webp",
         "placeholder_label": "Driver's view of a dark road at night, oncoming headlights glaring",
+        "ratio": "1 / 1",
+        "image_first": false,
         "title": "You Never Decided to Stop Driving at Night",
         "text": "<p>It happened bit by bit. First the <strong>highway after dark</strong>, then <strong>any road you didn't know by heart</strong>, then the 7 pm plans you were suddenly <strong>too tired for</strong>. Nobody sat you down and said your <strong>driving days were shrinking</strong>, and when you brought it up, someone blamed your age. <strong>It isn't your age. Headlights changed</strong>, your eyes didn't, and that's the part you can <strong>actually fix tonight</strong>.</p>",
         "padding_top": 36,
         "padding_bottom": 36
-      },
-      "blocks": {}
+      }
     },
     "nx_compare": {
       "type": "noxis-comparison",
-      "settings": {
-        "title": "Why Choose",
-        "title_accent": "Us?",
-        "text": "Rated #1 Headlight Glasses",
-        "col_us": "Noxis Headlight Glasses",
-        "col_them": "Others",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
       "blocks": {
         "r1": {
           "type": "row",
@@ -603,29 +593,32 @@
         "r3",
         "r4",
         "r5"
-      ]
+      ],
+      "settings": {
+        "title": "Why Choose",
+        "title_accent": "Us?",
+        "text": "Rated #1 Headlight Glasses",
+        "col_us": "Noxis Headlight Glasses",
+        "col_them": "Others",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
     },
     "nx_honest": {
       "type": "noxis-image-text",
       "settings": {
-        "image_first": true,
-        "ratio": "1 / 1",
         "asset": "noxis-headlights.webp",
         "placeholder_label": "Oncoming car at night with two bright LED headlights",
+        "ratio": "1 / 1",
+        "image_first": true,
         "title": "We Won't Pretend They're Magic",
         "text": "<p>Any ad promising that <strong>headlights will disappear is lying to you</strong>. Good amber <strong>takes the worst edge off the glare</strong>, which sounds small until you've <strong>driven 40 minutes</strong> without being blinded once by an oncoming car. Most glasses like these fail because they're <strong>just colored plastic</strong>: a yellow tint turns <strong>white glare into yellow glare</strong>, and the whole category gets a bad name. <strong>Better, not perfect</strong>, and <strong>you'll feel it on your first drive</strong>.</p>",
         "padding_top": 36,
         "padding_bottom": 36
-      },
-      "blocks": {}
+      }
     },
     "nx_faq": {
       "type": "noxis-faq",
-      "settings": {
-        "title": "FAQ",
-        "padding_top": 24,
-        "padding_bottom": 56
-      },
       "blocks": {
         "q1": {
           "type": "question",
@@ -669,7 +662,12 @@
         "q3",
         "q4",
         "q5"
-      ]
+      ],
+      "settings": {
+        "title": "FAQ",
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
