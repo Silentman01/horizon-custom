@@ -1,0 +1,91 @@
+{%- comment -%}
+  Noxis "View full details →" text link (clone of Dawn's featured-product link).
+  Links to the closest product (featured product section), else to the custom link, else to all products.
+{%- endcomment -%}
+{%- liquid
+  assign nx_url = routes.all_products_collection_url
+  if closest.product != blank
+    assign nx_url = closest.product.url
+  endif
+  if block.settings.link != blank
+    assign nx_url = block.settings.link
+  endif
+-%}
+<a
+  href="{{ nx_url }}"
+  class="nx-details-link"
+  style="--nx-details-size: {{ block.settings.font_size }}px;"
+  {{ block.shopify_attributes }}
+>
+  <span>{{ block.settings.label }}</span>
+  <svg
+    class="nx-details-link__arrow"
+    viewBox="0 0 14 10"
+    width="14"
+    height="10"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      fill="currentColor"
+      fill-rule="evenodd"
+      d="M8.537.808a.5.5 0 0 1 .817-.162l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 1 1-.708-.708L11.793 5.5H1a.5.5 0 0 1 0-1h10.793L8.646 1.354a.5.5 0 0 1-.109-.546z"
+    />
+  </svg>
+</a>
+
+{% stylesheet %}
+  .nx-details-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-body--family);
+    font-size: var(--nx-details-size, 15px);
+    letter-spacing: 0.04em;
+    line-height: 1.4;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .nx-details-link:hover span {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .nx-details-link__arrow {
+    flex: none;
+    width: 11px;
+    height: auto;
+    transition: transform 0.2s ease;
+  }
+
+  .nx-details-link:hover .nx-details-link__arrow {
+    transform: translateX(3px);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Noxis details link",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "View full details" },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Leave empty to link to the product of this section."
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [{ "name": "Noxis details link" }]
+}
+{% endschema %}
