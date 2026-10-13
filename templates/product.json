@@ -131,12 +131,15 @@
                 "item_1": "See the road clearly after dark",
                 "item_2": "Slips right over your prescription glasses",
                 "item_3": "Stop flinching at every oncoming car",
-                "item_4": "One size fits every face"
+                "item_4": "One size fits every face",
+                "item_5": "",
+                "item_6": ""
               },
               "blocks": {}
             },
             "bundle": {
               "type": "noxis-bundle",
+              "disabled": true,
               "settings": {
                 "heading": "Bundle & Save",
                 "hide_native_picker": true
@@ -145,6 +148,7 @@
                 "tier_1": {
                   "type": "_noxis-bundle-tier",
                   "settings": {
+                    "option_value": "",
                     "variant_position": 1,
                     "title": "Buy 1",
                     "subtitle": "",
@@ -152,11 +156,13 @@
                     "gift": "+ 1 FREE Glasses Case",
                     "gift_value": "$14.95",
                     "preselect": false
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_2": {
                   "type": "_noxis-bundle-tier",
                   "settings": {
+                    "option_value": "",
                     "variant_position": 2,
                     "title": "Buy 2",
                     "subtitle": "Free Shipping",
@@ -164,11 +170,13 @@
                     "gift": "+ 2 FREE Glasses Cases",
                     "gift_value": "$29.90",
                     "preselect": true
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_3": {
                   "type": "_noxis-bundle-tier",
                   "settings": {
+                    "option_value": "",
                     "variant_position": 3,
                     "title": "Buy 3",
                     "subtitle": "Free Shipping",
@@ -176,7 +184,8 @@
                     "gift": "+ 3 FREE Glasses Cases",
                     "gift_value": "$44.85",
                     "preselect": false
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
