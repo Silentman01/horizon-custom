@@ -137,63 +137,6 @@
               },
               "blocks": {}
             },
-            "bundle": {
-              "type": "noxis-bundle",
-              "disabled": true,
-              "settings": {
-                "heading": "Bundle & Save",
-                "hide_native_picker": true
-              },
-              "blocks": {
-                "tier_1": {
-                  "type": "_noxis-bundle-tier",
-                  "settings": {
-                    "option_value": "",
-                    "variant_position": 1,
-                    "title": "Buy 1",
-                    "subtitle": "",
-                    "badge": "",
-                    "gift": "+ 1 FREE Glasses Case",
-                    "gift_value": "$14.95",
-                    "preselect": false
-                  },
-                  "blocks": {}
-                },
-                "tier_2": {
-                  "type": "_noxis-bundle-tier",
-                  "settings": {
-                    "option_value": "",
-                    "variant_position": 2,
-                    "title": "Buy 2",
-                    "subtitle": "Free Shipping",
-                    "badge": "MOST POPULAR",
-                    "gift": "+ 2 FREE Glasses Cases",
-                    "gift_value": "$29.90",
-                    "preselect": true
-                  },
-                  "blocks": {}
-                },
-                "tier_3": {
-                  "type": "_noxis-bundle-tier",
-                  "settings": {
-                    "option_value": "",
-                    "variant_position": 3,
-                    "title": "Buy 3",
-                    "subtitle": "Free Shipping",
-                    "badge": "BEST VALUE",
-                    "gift": "+ 3 FREE Glasses Cases",
-                    "gift_value": "$44.85",
-                    "preselect": false
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "tier_1",
-                "tier_2",
-                "tier_3"
-              ]
-            },
             "variant_picker": {
               "type": "variant-picker",
               "settings": {
@@ -467,7 +410,6 @@
             "title",
             "subtitle",
             "checklist",
-            "bundle",
             "variant_picker",
             "buy_buttons",
             "accordion"
@@ -480,7 +422,7 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
-        "enable_sticky_add_to_cart": true,
+        "enable_sticky_add_to_cart": false,
         "background_color": "",
         "padding-block-start": 24,
         "padding-block-end": 48
