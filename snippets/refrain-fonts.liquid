@@ -1,2 +1,7 @@
-{%- comment -%} Loads Plus Jakarta Sans + Fraunces Italic (brand fonts). Render once per Refrain section; the browser dedupes. {%- endcomment -%}
-<style>@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');</style>
+{%- comment -%}
+  Loads Plus Jakarta Sans + Fraunces Italic (brand fonts) with display=swap.
+  Render once per Refrain section; the browser dedupes identical <link> tags.
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
