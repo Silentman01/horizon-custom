@@ -142,35 +142,161 @@
 {
   "name": "Refrain · Examples",
   "settings": [
-    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "examples" },
-    { "type": "select", "id": "background", "label": "Background", "default": "lilac", "options": [ { "value": "page", "label": "Page" }, { "value": "lilac", "label": "Lilac" }, { "value": "ink", "label": "Ink" } ] },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Écoutez" },
-    { "type": "text", "id": "heading", "label": "Heading (*word* = italic emphasis)", "default": "Écoutez des *exemples*" },
-    { "type": "textarea", "id": "sub", "label": "Subheading", "default": "Chaque chanson est composée pour une personne et une histoire." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Créer ma chanson" },
-    { "type": "url", "id": "button_link", "label": "Button link", "default": "/products/chanson-personnalisee" }
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor ID",
+      "default": "examples"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "default": "lilac",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page"
+        },
+        {
+          "value": "lilac",
+          "label": "Lilac"
+        },
+        {
+          "value": "ink",
+          "label": "Ink"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Écoutez"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*word* = italic emphasis)",
+      "default": "Écoutez des *exemples*"
+    },
+    {
+      "type": "textarea",
+      "id": "sub",
+      "label": "Subheading",
+      "default": "Chaque chanson est composée pour une personne et une histoire."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Créer ma chanson"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "default": "/products/chanson-personnalisee"
+    }
   ],
   "blocks": [
     {
-      "type": "example", "name": "Example",
+      "type": "example",
+      "name": "Example",
       "settings": [
-        { "type": "text", "id": "name", "label": "Name", "default": "Camille" },
-        { "type": "text", "id": "recipient_line", "label": "Recipient line", "default": "Pour sa maman · Anniversaire" },
-        { "type": "text", "id": "style", "label": "Style chip", "default": "Pop douce" },
-        { "type": "text", "id": "audio_asset", "label": "Audio theme asset file name (e.g. refrain-demo-1.mp3)" },
-        { "type": "url", "id": "audio_url", "label": "Audio URL (overrides asset)" },
-        { "type": "textarea", "id": "lyrics", "label": "Lyrics excerpt", "default": "Camille, tu es la lumière\nDe tous nos matins d'hiver\nCamille, ton rire éclaire\nTout ce que tu aimes faire" },
-        { "type": "image_picker", "id": "image", "label": "Image (16:9, optional)" },
-        { "type": "text", "id": "image_asset", "label": "Image theme asset file name" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Camille"
+        },
+        {
+          "type": "text",
+          "id": "recipient_line",
+          "label": "Recipient line",
+          "default": "Pour sa maman · Anniversaire"
+        },
+        {
+          "type": "text",
+          "id": "style",
+          "label": "Style chip",
+          "default": "Pop douce"
+        },
+        {
+          "type": "text",
+          "id": "audio_asset",
+          "label": "Audio theme asset file name (e.g. refrain-demo-1.mp3)"
+        },
+        {
+          "type": "url",
+          "id": "audio_url",
+          "label": "Audio URL (overrides asset)"
+        },
+        {
+          "type": "textarea",
+          "id": "lyrics",
+          "label": "Lyrics excerpt",
+          "default": "Camille, tu es la lumière\nDe tous nos matins d'hiver\nCamille, ton rire éclaire\nTout ce que tu aimes faire"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (16:9, optional)"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Image theme asset file name"
+        }
       ]
     }
   ],
   "presets": [
-    { "name": "Refrain · Examples", "blocks": [
-      { "type": "example", "settings": { "name": "Camille", "recipient_line": "Pour sa maman · Anniversaire", "style": "Pop douce", "audio_asset": "refrain-demo-1.mp3", "lyrics": "Camille, tu es la lumière\nDe tous nos matins d'hiver\nCamille, ton rire éclaire\nTout ce que tu aimes faire", "image_asset": "refrain-example-1.jpg" } },
-      { "type": "example", "settings": { "name": "Lucas", "recipient_line": "Pour son papa · Fête des pères", "style": "Folk", "audio_asset": "refrain-demo-2.mp3", "lyrics": "Lucas, la route est belle\nQuand tu marches devant nous\nLucas, ta voix nous appelle\nOn te suivrait partout", "image_asset": "refrain-example-2.jpg" } },
-      { "type": "example", "settings": { "name": "Inès", "recipient_line": "Pour sa meilleure amie · Mariage", "style": "Acoustique", "audio_asset": "refrain-demo-3.mp3", "lyrics": "Inès, ce soir tout commence\nOn a dansé sous les étoiles\nInès, quelle belle chance\nDe t'avoir à nos côtés", "image_asset": "refrain-example-3.jpg" } }
-    ] }
+    {
+      "name": "Refrain · Examples",
+      "blocks": [
+        {
+          "type": "example",
+          "settings": {
+            "name": "Nathalie",
+            "recipient_line": "Pour sa maman · Fête des mères",
+            "style": "",
+            "lyrics": "Nathalie, Nathalie\nC'est ton prénom qu'on chante aujourd'hui\nPour chaque nuit où tu veillais sur nous\nNathalie, merci pour tout",
+            "audio_asset": "refrain-demo-maman.mp3"
+          }
+        },
+        {
+          "type": "example",
+          "settings": {
+            "name": "Camille",
+            "recipient_line": "Pour sa future femme · Mariage",
+            "style": "",
+            "lyrics": "Camille, aujourd'hui je dis oui\nOui pour la vie, oui pour nos nuits\nDevant tous ceux qu'on aime, je promets\nCamille, toi et moi, pour de vrai",
+            "audio_asset": "refrain-demo-camille.mp3"
+          }
+        },
+        {
+          "type": "example",
+          "settings": {
+            "name": "Mamie Jeanne",
+            "recipient_line": "Pour sa grand-mère · 90 ans",
+            "style": "",
+            "lyrics": "Jeanne, ma Mamie Jeanne\nTon rire est resté dans nos âmes\nQuatre-vingt-dix printemps et tant d'amour\nJeanne, on t'aime pour toujours",
+            "audio_asset": "refrain-demo-mamie.mp3"
+          }
+        },
+        {
+          "type": "example",
+          "settings": {
+            "name": "Lucas",
+            "recipient_line": "Pour son meilleur ami · 30 ans",
+            "style": "",
+            "lyrics": "Lucas, Lucas, trente ans ce soir\nLève ton verre, c'est ton histoire\nOn chante ton nom jusqu'au matin\nLucas, le meilleur reste à venir, c'est certain",
+            "audio_asset": "refrain-demo-lucas.mp3"
+          }
+        }
+      ]
+    }
   ]
 }
 {% endschema %}
