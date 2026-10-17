@@ -455,16 +455,34 @@
         });
         this.audio.addEventListener('play', () => this.icons(true));
         this.audio.addEventListener('pause', () => this.icons(false));
-        this.audio.addEventListener('loadedmetadata', () => { this.q('[data-dur]').textContent = fmt(Math.min(this.audio.duration, this.limit || Infinity)); });
+        /* Preview window: [start, start + limit] of the track; UI shows 0:00 -> limit. */
+        const win = () => {
+          const st = this.start || 0;
+          const full = this.audio.duration || 0;
+          const len = this.limit ? Math.min(this.limit, Math.max(full - st, 0) || this.limit) : Math.max(full - st, 0);
+          return { st, len };
+        };
+        this.audio.addEventListener('loadedmetadata', () => {
+          const { st, len } = win();
+          if (st && this.audio.currentTime < st) this.audio.currentTime = st;
+          this.q('[data-dur]').textContent = fmt(len);
+        });
+        this.audio.addEventListener('play', () => {
+          const { st, len } = win();
+          const t = this.audio.currentTime;
+          if (t < st - 0.25 || (len && t >= st + len - 0.1)) { this.audio.currentTime = st; this.q('[data-ended]').hidden = true; }
+        });
         this.audio.addEventListener('timeupdate', () => {
-          if (this.limit && this.audio.currentTime >= this.limit) { this.audio.pause(); this.audio.currentTime = this.limit; this.q('[data-ended]').hidden = false; }
-          const d = Math.min(this.audio.duration || 1, this.limit || Infinity);
-          this.q('[data-prog]').style.width = (this.audio.currentTime / d) * 100 + '%';
-          this.q('[data-cur]').textContent = fmt(this.audio.currentTime);
+          const { st, len } = win();
+          if (this.limit && this.audio.currentTime >= st + this.limit) { this.audio.pause(); this.audio.currentTime = st + this.limit; this.q('[data-ended]').hidden = false; }
+          const rel = Math.max(0, this.audio.currentTime - st);
+          this.q('[data-prog]').style.width = (len ? Math.min(rel / len, 1) * 100 : 0) + '%';
+          this.q('[data-cur]').textContent = fmt(Math.min(rel, len || rel));
         });
         this.q('.rf-player__prog').addEventListener('click', (e) => {
           const r = e.currentTarget.getBoundingClientRect();
-          const d = Math.min(this.audio.duration || 0, this.limit || Infinity); if (d) this.audio.currentTime = Math.min(((e.clientX - r.left) / r.width) * d, d - 0.5);
+          const { st, len } = win();
+          if (len) this.audio.currentTime = st + Math.min(Math.max(((e.clientX - r.left) / r.width) * len, 0), len - 0.5);
         });
         this.q('[data-buy]').addEventListener('click', () => this.buy());
       }
@@ -607,7 +625,7 @@
           if (d.status === 'failed') return this.fail('error');
           if (d.status === 'ready' && d.preview_url) {
             this.save({ previewId: this.previewId, ready: true });
-            return this.result({ url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75 });
+            return this.result({ url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75, start: d.preview_mode === 'transcoded' ? 0 : (Number(d.preview_start) || 0) });
           }
         } catch (e) { this._errs = (this._errs || 0) + 1; if (this._errs > 4) return this.demo(); }
         this._timer = setTimeout(() => this.poll(), 4000);
@@ -634,6 +652,8 @@
         if (r.demo && name) lyr = lyr.replace(/\{name\}/g, name);
         this.q('[data-lyrics]').textContent = lyr;
         this.limit = r.seconds || (r.demo ? 0 : 75);
+        this.start = Math.max(0, r.start || 0);
+        this.q('[data-prog]').style.width = '0%'; this.q('[data-cur]').textContent = '0:00';
         this.q('[data-ended]').hidden = true;
         const buy = this.q('[data-buy]');
         buy.disabled = !!r.demo; buy.textContent = r.demo ? buy.dataset.demoLabel : buy.dataset.label;
