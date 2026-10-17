@@ -20,7 +20,9 @@
         "ghost_link": "#stones",
         "rating_text": "Excellent 4.8 out of 5",
         "ship_text": "Free express shipping",
-        "guarantee_text": "30-day money-back guarantee"
+        "guarantee_text": "30-day money-back guarantee",
+        "image_desktop_asset": "aurea-home-hero-desktop.jpg",
+        "image_mobile_asset": "aurea-home-hero-mobile.jpg"
       }
     },
     "aurea_marquee": {
@@ -158,7 +160,8 @@
             "tag": "The Merchant's Stone",
             "name": "Citrine",
             "text": "Valued for centuries as the stone of prosperity. Its warm golden glow is linked to confidence, success and money that comes in and stays.",
-            "chips": "Prosperity, Confidence, Success"
+            "chips": "Prosperity, Confidence, Success",
+            "image_asset": "aurea-science-citrine.jpg"
           }
         },
         "stone_2": {
@@ -167,7 +170,8 @@
             "tag": "The Stone of Luck",
             "name": "Green Aventurine",
             "text": "The lucky charm of the crystal world. A soft green stone tied to good fortune, new opportunities and the nerve to say yes to them.",
-            "chips": "Luck, Opportunity, Optimism"
+            "chips": "Luck, Opportunity, Optimism",
+            "image_asset": "aurea-science-aventurine.jpg"
           }
         },
         "stone_3": {
@@ -176,7 +180,8 @@
             "tag": "The Stone of Renewal",
             "name": "African Turquoise",
             "text": "A deep green stone of change, for closing old chapters and growing into what comes next.",
-            "chips": "Renewal, Growth, Protection"
+            "chips": "Renewal, Growth, Protection",
+            "image_asset": "aurea-science-turquoise.jpg"
           }
         }
       },
@@ -197,7 +202,8 @@
         "eyebrow": "Our ritual",
         "heading": "Charged under *the full moon*",
         "text": "Before a bracelet ships, we cleanse it and leave it out under the light of the full moon, the way crystal lovers have charged their stones for generations. It reaches you ready to wear from your very first morning.",
-        "cta_label": "Shop the bracelet"
+        "cta_label": "Shop the bracelet",
+        "image_asset": "aurea-home-moon.jpg"
       },
       "blocks": {
         "point_1": {
@@ -242,7 +248,8 @@
         "eyebrow": "Your 30-second ritual",
         "heading": "Before your first coffee. *Every day.*",
         "text": "",
-        "cta_label": "Start my ritual"
+        "cta_label": "Start my ritual",
+        "image_asset": "aurea-home-ritual.jpg"
       },
       "blocks": {
         "step_1": {
@@ -396,7 +403,8 @@
             "title": "The check I had written off",
             "text": "I retired early after a back injury ended my work, and I was living on Social Security, about $500 short every month. By day 16 of wearing the bracelet I had the energy to take on part-time consulting. Five days later a payment came in from an old business deal I had completely forgotten. $4,200!!",
             "name": "Richard T.",
-            "verified": "Verified buyer"
+            "verified": "Verified buyer",
+            "avatar_asset": "aurea-testi-robert.jpg"
           }
         },
         "review_2": {
@@ -405,7 +413,8 @@
             "title": "Everything started moving",
             "text": "Wow, so many results since I started wearing this! An unexpected refund check for $8K, a $12K tax return, new clients reaching out, less fear about my current job being my only option, and the freedom to travel. I just took a trip to Italy and Greece with no idea how the money and the time would work out, and it did!!",
             "name": "Marianne K.",
-            "verified": "Verified buyer"
+            "verified": "Verified buyer",
+            "avatar_asset": "aurea-testi-denise.jpg"
           }
         },
         "review_3": {
@@ -414,7 +423,8 @@
             "title": "I never leave the house without it",
             "text": "A raise I had given up on came through the same week it arrived. I don't go anywhere without it now.",
             "name": "Dana L.",
-            "verified": "Verified buyer"
+            "verified": "Verified buyer",
+            "avatar_asset": "aurea-testi-jessica.jpg"
           }
         }
       },
@@ -607,7 +617,8 @@
         "cta_label": "Claim my bracelet",
         "note_1": "Free express shipping",
         "note_2": "30-day money-back guarantee",
-        "note_3": "Secure checkout"
+        "note_3": "Secure checkout",
+        "image_asset": "aurea-home-moon.jpg"
       }
     }
   },

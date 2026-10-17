@@ -596,7 +596,8 @@
       "type": "aurea-feature",
       "settings": {
         "eyebrow": "THAT'S WHERE AUREA® COMES IN",
-        "heading": "Restoring Flow, Luck & *Abundance*, Naturally"
+        "heading": "Restoring Flow, Luck & *Abundance*, Naturally",
+        "image_asset": "aurea-feature.jpg"
       },
       "blocks": {
         "b1": {
@@ -663,28 +664,32 @@
           "type": "card",
           "settings": {
             "title": "Citrine Quartz",
-            "text": "<p>Citrine is a <strong>piezoelectric crystal</strong> — pressed lightly by your pulse, it creates a real, measurable electric charge (the same principle inside every quartz watch). Resting on your pulse point, it helps <strong>retune your energy field</strong> to the frequency prosperity flows toward.</p>"
+            "text": "<p>Citrine is a <strong>piezoelectric crystal</strong> — pressed lightly by your pulse, it creates a real, measurable electric charge (the same principle inside every quartz watch). Resting on your pulse point, it helps <strong>retune your energy field</strong> to the frequency prosperity flows toward.</p>",
+            "image_asset": "aurea-science-citrine.jpg"
           }
         },
         "b2": {
           "type": "card",
           "settings": {
             "title": "Tri-Crystal Resonance",
-            "text": "<p>Citrine, Green Aventurine and African Turquoise all belong to the <strong>quartz family</strong> — and quartz is so steady in frequency that it keeps time in every watch and radio. Worn together at your pulse, the three <strong>resonate as one</strong>, sending a stronger, steadier signal than any single stone.</p>"
+            "text": "<p>Citrine, Green Aventurine and African Turquoise all belong to the <strong>quartz family</strong> — and quartz is so steady in frequency that it keeps time in every watch and radio. Worn together at your pulse, the three <strong>resonate as one</strong>, sending a stronger, steadier signal than any single stone.</p>",
+            "image_asset": "aurea-science-aventurine.jpg"
           }
         },
         "b3": {
           "type": "card",
           "settings": {
             "title": "Vibrational Field Clearing",
-            "text": "<p>Everything vibrates at a frequency — you too. Stress, debt and scarcity pull you into a <strong>low-frequency state that pushes opportunity away</strong>. The bracelet helps <strong>clear that interference</strong> and raise you back to your natural prosperity frequency — so what you ask for can finally arrive.</p>"
+            "text": "<p>Everything vibrates at a frequency — you too. Stress, debt and scarcity pull you into a <strong>low-frequency state that pushes opportunity away</strong>. The bracelet helps <strong>clear that interference</strong> and raise you back to your natural prosperity frequency — so what you ask for can finally arrive.</p>",
+            "image_asset": "aurea-science-turquoise.jpg"
           }
         },
         "b4": {
           "type": "card",
           "settings": {
             "title": "Not a vision board. A signal.",
-            "text": "<p>What Tibetan monks knew for centuries, physics now measures. No journaling, no \"manifest harder\" — it works <strong>whether you believe or not</strong>, through real frequency. Worn at your pulse, your intention stops being a thought… and becomes a <strong>signal</strong>.</p>"
+            "text": "<p>What Tibetan monks knew for centuries, physics now measures. No journaling, no \"manifest harder\" — it works <strong>whether you believe or not</strong>, through real frequency. Worn at your pulse, your intention stops being a thought… and becomes a <strong>signal</strong>.</p>",
+            "image_asset": "aurea-science-4.jpg"
           }
         }
       },
@@ -700,7 +705,8 @@
       "settings": {
         "heading": "What to expect when your body starts *vibrating*",
         "button_label": "Raise My Frequency",
-        "button_link": "#MainContent"
+        "button_link": "#MainContent",
+        "image_asset": "aurea-timeline.jpg"
       },
       "blocks": {
         "b1": {

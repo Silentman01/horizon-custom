@@ -12,7 +12,7 @@
           <h3>{{ block.settings.title }}</h3>
           <p class="au-h-rv__text">{{ block.settings.text }}</p>
           <footer>
-            <div class="au-h-rv__av">{% render 'aurea-media', image: block.settings.avatar, ratio: '1 / 1', radius: 999, sizes: '46px', label: ' ' %}</div>
+            <div class="au-h-rv__av">{% render 'aurea-media', image: block.settings.avatar, asset: block.settings.avatar_asset, ratio: '1 / 1', radius: 999, sizes: '46px', label: ' ' %}</div>
             <div><strong>{{ block.settings.name }}</strong><span><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 1.8 3-.2 1 2.8 2.5 1.7-.9 2.9.9 2.9-2.5 1.7-1 2.8-3-.2L12 22l-2.4-1.8-3 .2-1-2.8-2.5-1.7.9-2.9-.9-2.9 2.5-1.7 1-2.8 3 .2z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{{ block.settings.verified }}</span></div>
           </footer>
         </article>
@@ -91,6 +91,11 @@
       "type": "review",
       "name": "Review",
       "settings": [
+        {
+          "type": "text",
+          "id": "avatar_asset",
+          "label": "Theme asset fallback (filename)"
+        },
         {
           "type": "image_picker",
           "id": "avatar",

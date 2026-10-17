@@ -8,7 +8,7 @@
     <div class="au-h-st">
       {%- for block in section.blocks -%}
         <article class="au-h-st__card" {{ block.shopify_attributes }}>
-          <div class="au-h-st__img">{% render 'aurea-media', image: block.settings.image, ratio: '1 / 1', radius: 0, sizes: '(min-width: 990px) 380px, 120px', label: 'Stone image 1:1' %}</div>
+          <div class="au-h-st__img">{% render 'aurea-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', radius: 0, sizes: '(min-width: 990px) 380px, 120px', label: 'Stone image 1:1' %}</div>
           <div class="au-h-st__body">
             <p class="au-h-st__tag">{{ block.settings.tag }}</p>
             <h3 class="au-h-st__name">{{ block.settings.name }}</h3>
@@ -97,6 +97,11 @@
       "type": "stone",
       "name": "Stone",
       "settings": [
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Theme asset fallback (filename)"
+        },
         {
           "type": "image_picker",
           "id": "image",

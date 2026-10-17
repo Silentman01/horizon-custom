@@ -1,7 +1,7 @@
 <section class="au-feat" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
   <div class="au-feat__card">
     <div class="au-feat__img">
-      {% render 'aurea-media', image: section.settings.image, ratio: '1024 / 874', label: 'Image: bracelet ring with floating crystals (transparent PNG, 1024x874)', sizes: '(min-width: 750px) 400px, 360px' %}
+      {% render 'aurea-media', image: section.settings.image, asset: section.settings.image_asset, ratio: '1024 / 874', label: 'Image: bracelet ring with floating crystals (transparent PNG, 1024x874)', sizes: '(min-width: 750px) 400px, 360px' %}
     </div>
     <div class="au-feat__body">
       {%- if section.settings.eyebrow != blank -%}<p class="au-feat__eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
@@ -38,6 +38,7 @@
   "name": "Aurea dark feature card",
   "settings": [
     { "type": "image_picker", "id": "image", "label": "Image (transparent, bleeds out of the card)" },
+    { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback filename)" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "THAT'S WHERE AUREA® COMES IN" },
     { "type": "text", "id": "heading", "label": "Heading (*word* = gold italic)", "default": "Bringing Back Flow, Luck & *Prosperity* Naturally" }
   ],

@@ -1,7 +1,7 @@
 {%- assign href = section.settings.link | default: section.settings.product.url | default: routes.all_products_collection_url -%}
 <section class="au-h au-h-sp au-h-sp--{{ section.settings.scheme }} au-h-sp--{{ section.settings.image_side }}{% if section.settings.scheme == 'dark' %} au-h--dark{% endif %}" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
   <div class="au-h-wrap au-h-sp__grid">
-    <div class="au-h-sp__media">{% render 'aurea-media', image: section.settings.image, ratio: section.settings.image_ratio, radius: 6, sizes: '(min-width: 990px) 560px, 100vw', label: section.settings.image_label %}</div>
+    <div class="au-h-sp__media">{% render 'aurea-media', image: section.settings.image, asset: section.settings.image_asset, ratio: section.settings.image_ratio, radius: 6, sizes: '(min-width: 990px) 560px, 100vw', label: section.settings.image_label %}</div>
     <div class="au-h-sp__text">
       {%- if section.settings.eyebrow != blank -%}<p class="au-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       {% render 'aurea-title', text: section.settings.heading, class: 'au-h-h2' %}
@@ -121,6 +121,11 @@
           "label": "Numbered steps"
         }
       ]
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme asset fallback (filename)"
     },
     {
       "type": "image_picker",

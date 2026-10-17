@@ -9,7 +9,7 @@
       {%- for block in section.blocks -%}
         <article class="au-sci__card" {{ block.shopify_attributes }}>
           {%- assign ph = 'Image: ' | append: block.settings.title -%}
-          {% render 'aurea-media', image: block.settings.image, ratio: '1 / 1', label: ph, sizes: '(min-width: 750px) 25vw, 78vw' %}
+          {% render 'aurea-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: ph, sizes: '(min-width: 750px) 25vw, 78vw' %}
           <div class="au-sci__body">
             <h3 class="au-sci__title">{{ block.settings.title }}</h3>
             <div class="au-sci__text">{{ block.settings.text }}</div>
@@ -62,6 +62,7 @@
       "name": "Card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image (1:1)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback filename)" },
         { "type": "text", "id": "title", "label": "Title", "default": "Citrine Quartz" },
         { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Citrine is a <strong>piezoelectric crystal</strong>.</p>" }
       ]

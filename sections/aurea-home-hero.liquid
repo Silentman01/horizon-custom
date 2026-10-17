@@ -2,20 +2,28 @@
 {%- liquid
   assign d = section.settings.image_desktop
   assign m = section.settings.image_mobile
+  assign da = section.settings.image_desktop_asset
+  assign ma = section.settings.image_mobile_asset
   assign both = false
-  if d != blank and m != blank
-    assign both = true
+  if d != blank or da != blank
+    if m != blank or ma != blank
+      assign both = true
+    endif
   endif
 -%}
 <section class="au-h au-h-hero{% if both %} is-both{% endif %}" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
   <div class="au-h-hero__bg">
     {%- if d != blank -%}
       {{ d | image_url: width: 2400 | image_tag: class: 'au-h-hero__img au-h-hero__img--d', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1200, 1800, 2400', alt: '' }}
+    {%- elsif da != blank -%}
+      <img src="{{ da | asset_url }}" class="au-h-hero__img au-h-hero__img--d" loading="eager" fetchpriority="high" width="2400" height="1350" alt="">
     {%- endif -%}
     {%- if m != blank -%}
       {{ m | image_url: width: 1400 | image_tag: class: 'au-h-hero__img au-h-hero__img--m', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '390, 750, 1100, 1400', alt: '' }}
+    {%- elsif ma != blank -%}
+      <img src="{{ ma | asset_url }}" class="au-h-hero__img au-h-hero__img--m" loading="eager" fetchpriority="high" width="1100" height="1956" alt="">
     {%- endif -%}
-    {%- if d == blank and m == blank -%}
+    {%- if d == blank and m == blank and da == blank and ma == blank -%}
       <div class="au-h-hero__ph" role="img" aria-label="Hero image placeholder"><span>Hero image: desktop 16:9 (2560x1440), mobile 9:16 (1400x2489)<br>Bracelet on mossy stone, subject in right half</span></div>
     {%- endif -%}
     <div class="au-h-hero__veil"></div>
@@ -106,10 +114,20 @@
   "name": "Aurea home hero",
   "settings": [
     {
+      "type": "text",
+      "id": "image_desktop_asset",
+      "label": "Theme asset fallback (filename)"
+    },
+    {
       "type": "image_picker",
       "id": "image_desktop",
       "label": "Desktop image",
       "info": "Slot: hero-desktop, 16:9 (2560x1440). Subject in right half, left 40% quiet."
+    },
+    {
+      "type": "text",
+      "id": "image_mobile_asset",
+      "label": "Theme asset fallback (filename)"
     },
     {
       "type": "image_picker",
