@@ -1,0 +1,181 @@
+<section class="au-h au-h--parch" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
+  <div class="au-h-wrap au-h-fq">
+    <div class="au-h-fq__aside">
+      {%- if section.settings.eyebrow != blank -%}<p class="au-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {% render 'aurea-title', text: section.settings.heading, class: 'au-h-h2' %}
+      <p class="au-h-fq__p">{{ section.settings.aside_text }}</p>
+      <div class="au-h-fq__box"><a href="{{ section.settings.contact_link | default: routes.root_url | append: 'pages/contact' }}">{{ section.settings.contact_label }}<svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+    <div class="au-h-fq__list">
+      {%- for block in section.blocks -%}
+        <details class="au-h-fq__item" {{ block.shopify_attributes }}>
+          <summary><span>{{ block.settings.question }}</span><i aria-hidden="true"><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></i></summary>
+          <div class="au-h-fq__a">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+  .au-h { padding: 60px 0; font-family: var(--au-body); color: #2A2E29; background: #fff; }
+  .au-h *, .au-h *::before, .au-h *::after { box-sizing: border-box; }
+  .au-h--parch { background: var(--au-parchment); }
+  .au-h--pine { background: var(--au-pine); }
+  .au-h--dark { background: var(--au-espresso); }
+  .au-h.au-h--dark, .au-h.au-h--pine, .au-h.au-h-hero { color: #fff; }
+  .au-h-wrap { width: calc(100% - 32px); max-width: 1200px; margin-inline: auto; }
+  .au-h-head { max-width: 720px; margin: 0 auto 36px; text-align: center; }
+  .au-h-h2 { font-size: 31px; line-height: 1.08; }
+  .au-h-sub { max-width: 600px; margin: 14px auto 0; font-size: 17px; line-height: 1.6; color: #4A5249; }
+  .au-h-i { width: 1em; height: 1em; flex: none; }
+  .au-h .au-icon { width: 1em; height: 1em; flex: none; }
+  .au-h-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 32px; border-radius: 999px; background: var(--au-pine); color: var(--au-parchment); font-family: var(--au-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .au-h-btn:hover { filter: brightness(1.12); }
+  .au-h-btn:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 3px; }
+  .au-h-btn .au-h-i { font-size: 18px; }
+  .au-h-btn--gold { background: var(--au-gold); color: #1E1A10; }
+  .au-h-btn--ghost { background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / 0.55); }
+  .au-h-dark .au-title, .au-h--dark .au-title, .au-h--pine .au-title { color: #fff; }
+  .au-h-dark .au-title em, .au-h--dark .au-title em, .au-h--pine .au-title em { color: #DDB866; }
+  .au-h--dark .au-eyebrow, .au-h--pine .au-eyebrow { color: #DDB866; }
+  .au-h-tp { display: inline-flex; gap: 2px; }
+  .au-h-tp svg { width: 20px; height: 20px; padding: 3px; background: #00B67A; }
+  .au-h-ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(135deg, #f1f1f1, #dcdcdc); color: #6b6b6b; font-size: 12px; text-align: center; }
+  @media (min-width: 750px) { .au-h { padding: 72px 0; } .au-h-wrap { width: calc(100% - 48px); } .au-h-head { margin-bottom: 56px; } .au-h-h2 { font-size: 36px; } .au-h-btn { width: auto; } }
+  @media (min-width: 990px) { .au-h { padding: 96px 0; } .au-h-h2 { font-size: 44px; } }
+
+  .au-h-fq { display: grid; gap: 28px; align-items: start; }
+  .au-h-fq__p { margin: 16px 0 20px; font-size: 16px; line-height: 1.65; color: #4A5249; }
+  .au-h-fq__box { padding: 20px; border-radius: 14px; background: #F3EEE3; }
+  .au-h-fq__box a { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--au-pine); text-decoration: underline; text-underline-offset: 3px; }
+  .au-h-fq__box .au-h-i { font-size: 16px; }
+  .au-h-fq__list { display: grid; gap: 12px; }
+  .au-h-fq__item { border: 1px solid var(--au-line); border-radius: 6px; background: #fff; }
+  .au-h-fq__item summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; font-size: 16px; font-weight: 600; cursor: pointer; list-style: none; }
+  .au-h-fq__item summary::-webkit-details-marker { display: none; }
+  .au-h-fq__item summary:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 2px; }
+  .au-h-fq__item summary i { display: grid; place-items: center; flex: none; width: 30px; height: 30px; border-radius: 50%; background: #EAF0E6; color: var(--au-pine); font-size: 16px; transition: transform 0.2s; }
+  .au-h-fq__item[open] summary i { transform: rotate(45deg); }
+  .au-h-fq__a { padding: 0 20px 20px; font-size: 15.5px; line-height: 1.7; color: #4A5249; }
+  @media (min-width: 750px) { .au-h-fq__item summary { font-size: 17px; } }
+  @media (min-width: 990px) { .au-h-fq { grid-template-columns: 0.8fr 1.2fr; gap: 72px; } .au-h-fq__aside { position: sticky; top: 120px; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea home FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Good to know"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*word* = gold italic)",
+      "default": "Questions, *answered*"
+    },
+    {
+      "type": "textarea",
+      "id": "aside_text",
+      "label": "Aside text",
+      "default": "Still have a question? Write to us from our contact page. We are happy to help."
+    },
+    {
+      "type": "text",
+      "id": "contact_label",
+      "label": "Contact link text",
+      "default": "contact page"
+    },
+    {
+      "type": "url",
+      "id": "contact_link",
+      "label": "Contact link (empty = /pages/contact)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": ""
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurea home FAQ",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "How long until I feel something?",
+            "answer": "Many people notice a subtle shift within the first few days of daily wear. For best results, keep it in steady contact with your skin."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Are the stones real?",
+            "answer": "Yes. Every bracelet is made with genuine citrine, green aventurine and African turquoise beads."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How do I wear it?",
+            "answer": "The left wrist is traditionally the receiving side, but wear it wherever feels right. Put it on each morning and set one clear intention."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "Will it fit my wrist?",
+            "answer": "Yes. The elastic cord is one size and stretches comfortably to fit most wrists. No clasp needed."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How does Buy 1 Get 1 work?",
+            "answer": "Choose the Buy 1 Get 1 option on the product page and you get two bracelets for the price of one. Keep one and gift the other, or wear both."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How much is shipping?",
+            "answer": "Express shipping is free on every order, and you get a tracking link by email as soon as your bracelet ships."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "How do I care for it?",
+            "answer": "Keep it dry when you can and gently wipe the stones. Avoid harsh chemicals to protect their natural energy."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "You are covered by our 30-day money-back guarantee. If it's not for you, send it back for a full refund."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

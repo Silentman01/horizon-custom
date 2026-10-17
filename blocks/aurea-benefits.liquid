@@ -1,0 +1,30 @@
+<ul class="au-ben" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  {%- for i in (1..4) -%}
+    {%- assign tk = 'text_' | append: i -%}
+    {%- assign ik = 'icon_' | append: i -%}
+    {%- if block.settings[tk] != blank -%}
+      <li class="au-ben__item">{% render 'aurea-icon', name: block.settings[ik] %}<span>{{ block.settings[tk] }}</span></li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{% stylesheet %}
+  .au-ben { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin: 0; padding: 14px 0; list-style: none; width: 100%; border-top: 0.5px solid rgb(0 0 0 / 0.15); }
+  .au-ben__item { display: flex; align-items: center; gap: 10px; font-family: var(--au-body); font-size: 14px; font-weight: 500; line-height: 1.25; color: var(--au-ink); }
+  .au-ben .au-icon { flex: none; color: var(--au-gold); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea benefits (2x2)",
+  "settings": [
+    { "type": "text", "id": "text_1", "label": "Benefit 1", "default": "Attracts Abundance Daily" },
+    { "type": "select", "id": "icon_1", "label": "Icon 1", "default": "horseshoe", "options": [ { "value": "horseshoe", "label": "Horseshoe" }, { "value": "moon", "label": "Moon" }, { "value": "lock", "label": "Lock" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "gem", "label": "Gem" } ] },
+    { "type": "text", "id": "text_2", "label": "Benefit 2", "default": "Cleansed & Full-Moon Charged" },
+    { "type": "select", "id": "icon_2", "label": "Icon 2", "default": "moon", "options": [ { "value": "horseshoe", "label": "Horseshoe" }, { "value": "moon", "label": "Moon" }, { "value": "lock", "label": "Lock" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "gem", "label": "Gem" } ] },
+    { "type": "text", "id": "text_3", "label": "Benefit 3", "default": "Raises Your Wealth Frequency" },
+    { "type": "select", "id": "icon_3", "label": "Icon 3", "default": "lock", "options": [ { "value": "horseshoe", "label": "Horseshoe" }, { "value": "moon", "label": "Moon" }, { "value": "lock", "label": "Lock" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "gem", "label": "Gem" } ] },
+    { "type": "text", "id": "text_4", "label": "Benefit 4", "default": "Activates Luck Vibrations" },
+    { "type": "select", "id": "icon_4", "label": "Icon 4", "default": "sparkle", "options": [ { "value": "horseshoe", "label": "Horseshoe" }, { "value": "moon", "label": "Moon" }, { "value": "lock", "label": "Lock" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "gem", "label": "Gem" } ] }
+  ],
+  "presets": [ { "name": "Aurea benefits (2x2)" } ]
+}
+{% endschema %}

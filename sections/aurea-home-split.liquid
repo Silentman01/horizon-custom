@@ -1,0 +1,258 @@
+{%- assign href = section.settings.link | default: section.settings.product.url | default: routes.all_products_collection_url -%}
+<section class="au-h au-h-sp au-h-sp--{{ section.settings.scheme }} au-h-sp--{{ section.settings.image_side }}{% if section.settings.scheme == 'dark' %} au-h--dark{% endif %}" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
+  <div class="au-h-wrap au-h-sp__grid">
+    <div class="au-h-sp__media">{% render 'aurea-media', image: section.settings.image, ratio: section.settings.image_ratio, radius: 6, sizes: '(min-width: 990px) 560px, 100vw', label: section.settings.image_label %}</div>
+    <div class="au-h-sp__text">
+      {%- if section.settings.eyebrow != blank -%}<p class="au-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {% render 'aurea-title', text: section.settings.heading, class: 'au-h-h2' %}
+      {%- if section.settings.text != blank -%}<p class="au-h-sp__p">{{ section.settings.text }}</p>{%- endif -%}
+      {%- if section.settings.mode == 'steps' -%}
+        <ol class="au-h-sp__steps">
+          {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}><span class="au-h-sp__num">{{ forloop.index }}</span><div><h3>{{ block.settings.title }}</h3><p>{{ block.settings.text }}</p></div></li>{%- endfor -%}
+        </ol>
+      {%- else -%}
+        <ul class="au-h-sp__pts">
+          {%- for block in section.blocks -%}<li {{ block.shopify_attributes }}><span class="au-h-sp__ico">{% render 'aurea-icon', name: block.settings.icon %}</span><div><strong>{{ block.settings.title }}</strong><p>{{ block.settings.text }}</p></div></li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <a class="au-h-btn {% if section.settings.scheme == 'dark' %}au-h-btn--gold{% endif %}" href="{{ href }}">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+{% stylesheet %}
+  .au-h { padding: 60px 0; font-family: var(--au-body); color: #2A2E29; background: #fff; }
+  .au-h *, .au-h *::before, .au-h *::after { box-sizing: border-box; }
+  .au-h--parch { background: var(--au-parchment); }
+  .au-h--pine { background: var(--au-pine); }
+  .au-h--dark { background: var(--au-espresso); }
+  .au-h.au-h--dark, .au-h.au-h--pine, .au-h.au-h-hero { color: #fff; }
+  .au-h-wrap { width: calc(100% - 32px); max-width: 1200px; margin-inline: auto; }
+  .au-h-head { max-width: 720px; margin: 0 auto 36px; text-align: center; }
+  .au-h-h2 { font-size: 31px; line-height: 1.08; }
+  .au-h-sub { max-width: 600px; margin: 14px auto 0; font-size: 17px; line-height: 1.6; color: #4A5249; }
+  .au-h-i { width: 1em; height: 1em; flex: none; }
+  .au-h .au-icon { width: 1em; height: 1em; flex: none; }
+  .au-h-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 32px; border-radius: 999px; background: var(--au-pine); color: var(--au-parchment); font-family: var(--au-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .au-h-btn:hover { filter: brightness(1.12); }
+  .au-h-btn:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 3px; }
+  .au-h-btn .au-h-i { font-size: 18px; }
+  .au-h-btn--gold { background: var(--au-gold); color: #1E1A10; }
+  .au-h-btn--ghost { background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / 0.55); }
+  .au-h-dark .au-title, .au-h--dark .au-title, .au-h--pine .au-title { color: #fff; }
+  .au-h-dark .au-title em, .au-h--dark .au-title em, .au-h--pine .au-title em { color: #DDB866; }
+  .au-h--dark .au-eyebrow, .au-h--pine .au-eyebrow { color: #DDB866; }
+  .au-h-tp { display: inline-flex; gap: 2px; }
+  .au-h-tp svg { width: 20px; height: 20px; padding: 3px; background: #00B67A; }
+  .au-h-ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(135deg, #f1f1f1, #dcdcdc); color: #6b6b6b; font-size: 12px; text-align: center; }
+  @media (min-width: 750px) { .au-h { padding: 72px 0; } .au-h-wrap { width: calc(100% - 48px); } .au-h-head { margin-bottom: 56px; } .au-h-h2 { font-size: 36px; } .au-h-btn { width: auto; } }
+  @media (min-width: 990px) { .au-h { padding: 96px 0; } .au-h-h2 { font-size: 44px; } }
+
+  .au-h.au-h-sp--dark { background: radial-gradient(circle at 85% 0%, #3a2b1a, var(--au-espresso) 60%); color: #fff; }
+  .au-h-sp__grid { display: grid; gap: 40px; align-items: center; }
+  .au-h-sp__media { width: 100%; max-width: 560px; margin-inline: auto; }
+  .au-h-sp__p { margin: 20px 0 0; font-size: 17px; line-height: 1.7; color: #4A5249; }
+  .au-h-sp--dark .au-h-sp__p { color: rgb(255 255 255 / 0.8); }
+  .au-h-sp__pts, .au-h-sp__steps { display: grid; gap: 22px; margin: 28px 0 32px; padding: 0; list-style: none; }
+  .au-h-sp__pts li { display: flex; gap: 16px; align-items: flex-start; }
+  .au-h-sp__ico { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid rgb(221 184 102 / 0.3); border-radius: 50%; background: rgb(221 184 102 / 0.14); color: #DDB866; font-size: 22px; }
+  .au-h-sp__pts strong { display: block; font-size: 17px; }
+  .au-h-sp__pts p { margin: 4px 0 0; font-size: 15px; line-height: 1.55; color: rgb(255 255 255 / 0.72); }
+  .au-h-sp--light .au-h-sp__pts p { color: #4A5249; }
+  .au-h-sp__steps { gap: 28px; }
+  .au-h-sp__steps li { position: relative; display: flex; gap: 18px; align-items: flex-start; }
+  .au-h-sp__steps li:not(:last-child)::before { content: ''; position: absolute; left: 27px; top: 56px; bottom: -28px; border-left: 1px dashed rgb(201 154 58 / 0.6); }
+  .au-h-sp__num { display: grid; place-items: center; flex: none; width: 56px; height: 56px; border-radius: 50%; background: var(--au-pine); color: var(--au-gold); font-family: var(--au-heading); font-size: 22px; font-weight: 600; }
+  .au-h-sp__steps h3 { margin: 4px 0 4px; font-family: var(--au-heading); font-size: 20px; font-weight: 600; color: var(--au-pine); }
+  .au-h-sp__steps p { margin: 0; font-size: 15px; line-height: 1.6; color: #4A5249; }
+  @media (min-width: 990px) {
+    .au-h-sp__grid { grid-template-columns: 1fr 1fr; gap: 72px; }
+    .au-h-sp__media { max-width: none; margin: 0; }
+    .au-h-sp--right .au-h-sp__media { order: 2; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea home split",
+  "settings": [
+    {
+      "type": "select",
+      "id": "scheme",
+      "label": "Color scheme",
+      "default": "dark",
+      "options": [
+        {
+          "value": "dark",
+          "label": "Dark (espresso)"
+        },
+        {
+          "value": "light",
+          "label": "Light (white)"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side (desktop)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mode",
+      "label": "List style",
+      "default": "points",
+      "options": [
+        {
+          "value": "points",
+          "label": "Icon points"
+        },
+        {
+          "value": "steps",
+          "label": "Numbered steps"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Moon: 4:3 landscape. Ritual: 4:5 portrait. No logo or text."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "4 / 3",
+      "options": [
+        {
+          "value": "4 / 3",
+          "label": "4:3 landscape"
+        },
+        {
+          "value": "4 / 5",
+          "label": "4:5 portrait"
+        },
+        {
+          "value": "1 / 1",
+          "label": "1:1 square"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "image_label",
+      "label": "Placeholder label",
+      "default": "Image 4:3 (moon)"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Our ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*word* = gold italic)",
+      "default": "Charged under *the full moon*"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Paragraph",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Shop the bracelet"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link (empty = selected product, then all products)"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product for the button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Point / step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cleansed"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (points mode)",
+          "default": "sparkle",
+          "options": [
+            {
+              "value": "sparkle",
+              "label": "sparkle"
+            },
+            {
+              "value": "moon",
+              "label": "moon"
+            },
+            {
+              "value": "gem",
+              "label": "gem"
+            },
+            {
+              "value": "shield",
+              "label": "shield"
+            },
+            {
+              "value": "clock",
+              "label": "clock"
+            },
+            {
+              "value": "moonstar",
+              "label": "moonstar"
+            },
+            {
+              "value": "infinity",
+              "label": "infinity"
+            },
+            {
+              "value": "pouch",
+              "label": "pouch"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurea home split"
+    }
+  ]
+}
+{% endschema %}

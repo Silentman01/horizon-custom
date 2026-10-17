@@ -1,0 +1,12 @@
+<div class="au-ship" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  <span class="au-ship__item"><i class="au-ship__dot" aria-hidden="true"></i>{{ block.settings.left }}</span>
+  <span class="au-ship__item">{{ block.settings.right }}</span>
+</div>
+{% stylesheet %}
+  .au-ship { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 14px; width: 100%; font-family: var(--au-body); font-size: 14px; color: var(--au-ink); }
+  .au-ship__item { display: inline-flex; align-items: center; gap: 8px; }
+  .au-ship__dot { width: 9px; height: 9px; border-radius: 50%; background: #4f9d57; }
+{% endstylesheet %}
+{% schema %}
+{ "name": "Aurea ship row", "settings": [ { "type": "text", "id": "left", "label": "Left text", "default": "Ships by Monday" }, { "type": "text", "id": "right", "label": "Right text", "default": "🇺🇸 Ships within 24H" } ], "presets": [ { "name": "Aurea ship row" } ] }
+{% endschema %}

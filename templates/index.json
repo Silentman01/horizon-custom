@@ -9,274 +9,621 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "aurea_hero": {
+      "type": "aurea-home-hero",
+      "settings": {
+        "pill": "Charged under every full moon",
+        "heading": "Attract What's *Yours*",
+        "text": "Real citrine, green aventurine and African turquoise, strung on one bracelet and charged under the full moon for luck, money and fresh starts.",
+        "cta_label": "Shop the bracelet",
+        "ghost_label": "Meet the stones",
+        "ghost_link": "#stones",
+        "rating_text": "Excellent 4.8 out of 5",
+        "ship_text": "Free express shipping",
+        "guarantee_text": "30-day money-back guarantee"
+      }
+    },
+    "aurea_marquee": {
+      "type": "aurea-home-marquee",
+      "settings": {},
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "item_1": {
+          "type": "item",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "text": "Citrine"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "item_2": {
+          "type": "item",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "text": "Green Aventurine"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "African Turquoise"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Moon-charged"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "text": "Free express shipping"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "text": "30-day guarantee"
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "text": "Buy 1 Get 1 Free"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7"
+      ]
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "aurea_featured": {
+      "type": "aurea-home-featured",
+      "settings": {
+        "eyebrow": "Our bestseller",
+        "heading": "Meet the *Prosperity Bracelet*",
+        "badge": "Bestseller",
+        "rating_text": "Excellent 4.8 out of 5",
+        "fallback_title": "Aurea® Prosperity Bracelet",
+        "save_label": "Save 20%",
+        "description": "Three stones, one daily intention. Put it on each morning as a small reminder of what you are calling in: more flow, more luck, more ease with money.",
+        "offer_title": "Buy 1, Get 1 FREE",
+        "offer_text": "Pick Buy 1 Get 1 and your second bracelet is on us. One to keep, one to gift.",
+        "cta_label": "Shop now",
+        "assure_1": "Free express shipping",
+        "assure_2": "30-day money-back",
+        "assure_3": "Secure checkout"
+      },
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "benefit_1": {
+          "type": "benefit",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "text": "Attracts abundance every day"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "benefit_2": {
+          "type": "benefit",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "text": "Cleansed and moon-charged"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "text": "Invites luck and opportunity"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "text": "Genuine natural stones"
+          }
+        },
+        "benefit_5": {
+          "type": "benefit",
+          "settings": {
+            "text": "One-size stretch fit"
+          }
+        },
+        "benefit_6": {
+          "type": "benefit",
+          "settings": {
+            "text": "Made for everyday wear"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "benefit_5",
+        "benefit_6"
+      ]
+    },
+    "aurea_stones": {
+      "type": "aurea-home-stones",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "eyebrow": "The three stones",
+        "heading": "Three stones. *One intention.*",
+        "sub": "Each stone has one job. Nothing here is just decoration."
+      },
+      "blocks": {
+        "stone_1": {
+          "type": "stone",
+          "settings": {
+            "tag": "The Merchant's Stone",
+            "name": "Citrine",
+            "text": "Valued for centuries as the stone of prosperity. Its warm golden glow is linked to confidence, success and money that comes in and stays.",
+            "chips": "Prosperity, Confidence, Success"
+          }
+        },
+        "stone_2": {
+          "type": "stone",
+          "settings": {
+            "tag": "The Stone of Luck",
+            "name": "Green Aventurine",
+            "text": "The lucky charm of the crystal world. A soft green stone tied to good fortune, new opportunities and the nerve to say yes to them.",
+            "chips": "Luck, Opportunity, Optimism"
+          }
+        },
+        "stone_3": {
+          "type": "stone",
+          "settings": {
+            "tag": "The Stone of Renewal",
+            "name": "African Turquoise",
+            "text": "A deep green stone of change, for closing old chapters and growing into what comes next.",
+            "chips": "Renewal, Growth, Protection"
+          }
+        }
+      },
+      "block_order": [
+        "stone_1",
+        "stone_2",
+        "stone_3"
+      ]
+    },
+    "aurea_moon": {
+      "type": "aurea-home-split",
+      "settings": {
+        "scheme": "dark",
+        "image_side": "left",
+        "mode": "points",
+        "image_ratio": "4 / 3",
+        "image_label": "Moon image 4:3 (bracelet under the full moon, candlelight)",
+        "eyebrow": "Our ritual",
+        "heading": "Charged under *the full moon*",
+        "text": "Before a bracelet ships, we cleanse it and leave it out under the light of the full moon, the way crystal lovers have charged their stones for generations. It reaches you ready to wear from your very first morning.",
+        "cta_label": "Shop the bracelet"
+      },
+      "blocks": {
+        "point_1": {
+          "type": "item",
+          "settings": {
+            "title": "Cleansed",
+            "text": "Every bracelet is cleansed to clear any energy it picked up along the way.",
+            "icon": "sparkle"
+          }
+        },
+        "point_2": {
+          "type": "item",
+          "settings": {
+            "title": "Moon-charged",
+            "text": "Left under the full moon so it arrives charged and ready.",
+            "icon": "moon"
+          }
+        },
+        "point_3": {
+          "type": "item",
+          "settings": {
+            "title": "Genuine stones",
+            "text": "Real citrine, green aventurine and African turquoise.",
+            "icon": "gem"
+          }
+        }
+      },
+      "block_order": [
+        "point_1",
+        "point_2",
+        "point_3"
+      ]
+    },
+    "aurea_ritual": {
+      "type": "aurea-home-split",
+      "settings": {
+        "scheme": "light",
+        "image_side": "right",
+        "mode": "steps",
+        "image_ratio": "4 / 5",
+        "image_label": "Ritual image 4:5 (wrist, coffee, morning light)",
+        "eyebrow": "Your 30-second ritual",
+        "heading": "Before your first coffee. *Every day.*",
+        "text": "",
+        "cta_label": "Start my ritual"
+      },
+      "blocks": {
+        "step_1": {
+          "type": "item",
+          "settings": {
+            "title": "Slide it on",
+            "text": "Put the bracelet on your left wrist and feel the stones against your skin."
+          }
+        },
+        "step_2": {
+          "type": "item",
+          "settings": {
+            "title": "Name one wish",
+            "text": "Pick one clear intention for the day. Keep it short and specific."
+          }
+        },
+        "step_3": {
+          "type": "item",
+          "settings": {
+            "title": "Let it work",
+            "text": "Go about your day, stay open to luck and notice what shows up."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "aurea_icons": {
+      "type": "aurea-home-icons",
+      "settings": {
+        "eyebrow": "Why they wear it",
+        "heading": "Less worry. *More flow.*",
+        "sub": "What our wearers tell us they notice once the bracelet is part of their day.",
+        "cta_label": "Get my bracelet"
+      },
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "title": "Lets go of heavy energy",
+            "text": "A daily reminder to release the stress and scarcity you have been carrying.",
+            "icon": "wind"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "title": "Keeps abundance close",
+            "text": "Your intention sits right at your pulse, all day long.",
+            "icon": "magnet"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "title": "Money feels lighter",
+            "text": "Less 2AM math, more calm about what comes in and what goes out.",
+            "icon": "coins"
+          }
+        },
+        "card_4": {
+          "type": "card",
+          "settings": {
+            "title": "Luck finds you",
+            "text": "Stay open to the call, the raise, the lucky break.",
+            "icon": "clover"
+          }
+        },
+        "card_5": {
+          "type": "card",
+          "settings": {
+            "title": "Clears your vibration",
+            "text": "Start each morning from a calmer, clearer place.",
+            "icon": "wave"
+          }
+        },
+        "card_6": {
+          "type": "card",
+          "settings": {
+            "title": "Peace at night",
+            "text": "Fall asleep lighter, with fewer worries on repeat.",
+            "icon": "moonstar"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3",
+        "card_4",
+        "card_5",
+        "card_6"
+      ]
+    },
+    "aurea_timeline": {
+      "type": "aurea-home-timeline",
+      "settings": {
+        "eyebrow": "What to expect",
+        "heading": "What wearers *report*",
+        "note": "Reported by wearers, never promised. Your own pace may differ."
+      },
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "label": "First 72 hours",
+            "title": "A subtle shift",
+            "text": "A gentle warmth or tingle at your pulse point as you settle into wearing it.",
+            "icon": "hourglass"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "label": "Week 1",
+            "title": "Calmer and lighter",
+            "text": "The money-anxiety loop quiets first. You feel calmer, lighter, less gripped by the math.",
+            "icon": "sun"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "label": "Week 2+",
+            "title": "A new baseline",
+            "text": "You move through your days like someone abundance flows to. Aligned and unblocked.",
+            "icon": "sparkle"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ]
+    },
+    "aurea_reviews": {
+      "type": "aurea-home-reviews",
+      "settings": {
+        "eyebrow": "Reviews",
+        "heading": "Loved by *our wearers*",
+        "score_text": "Excellent 4.8 out of 5"
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "title": "The check I had written off",
+            "text": "I retired early after a back injury ended my work, and I was living on Social Security, about $500 short every month. By day 16 of wearing the bracelet I had the energy to take on part-time consulting. Five days later a payment came in from an old business deal I had completely forgotten. $4,200!!",
+            "name": "Richard T.",
+            "verified": "Verified buyer"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "title": "Everything started moving",
+            "text": "Wow, so many results since I started wearing this! An unexpected refund check for $8K, a $12K tax return, new clients reaching out, less fear about my current job being my only option, and the freedom to travel. I just took a trip to Italy and Greece with no idea how the money and the time would work out, and it did!!",
+            "name": "Marianne K.",
+            "verified": "Verified buyer"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "title": "I never leave the house without it",
+            "text": "A raise I had given up on came through the same week it arrived. I don't go anywhere without it now.",
+            "name": "Dana L.",
+            "verified": "Verified buyer"
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3"
+      ]
+    },
+    "aurea_compare": {
+      "type": "aurea-comparison",
+      "settings": {
+        "eyebrow": "",
+        "heading": "Why *Aurea*",
+        "col_brand": "Aurea",
+        "col_others": "Others"
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Genuine crystals & stones"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Cleansed & moon-charged"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Adjustable, one-size fit"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Free express shipping"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "30-day money-back guarantee"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Free shade swap & support"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "aurea_guarantee": {
+      "type": "aurea-home-guarantee",
+      "settings": {
+        "eyebrow": "Our promise",
+        "heading": "Wear it for 30 days. *Risk-free.*",
+        "text": "If it doesn't feel right, send it back within 30 days for a full refund. No questions asked. That's how sure we are.",
+        "seal_text": "MONEY-BACK GUARANTEE • RISK-FREE •",
+        "num": "30",
+        "unit": "DAYS"
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "title": "Free express shipping",
+            "text": "On every order, with tracking.",
+            "icon": "truck"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "title": "30-day money-back",
+            "text": "Full refund, no questions asked.",
+            "icon": "shield"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "title": "Secure checkout",
+            "text": "Encrypted, protected payment.",
+            "icon": "lock"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ]
+    },
+    "aurea_faq": {
+      "type": "aurea-home-faq",
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Questions, *answered*",
+        "aside_text": "Still have a question? Write to us from our contact page. We are happy to help.",
+        "contact_label": "contact page"
+      },
+      "blocks": {
+        "q_1": {
+          "type": "item",
+          "settings": {
+            "question": "How long until I feel something?",
+            "answer": "Many people notice a subtle shift within the first few days of daily wear. For best results, keep it in steady contact with your skin."
+          }
+        },
+        "q_2": {
+          "type": "item",
+          "settings": {
+            "question": "Are the stones real?",
+            "answer": "Yes. Every bracelet is made with genuine citrine, green aventurine and African turquoise beads."
+          }
+        },
+        "q_3": {
+          "type": "item",
+          "settings": {
+            "question": "How do I wear it?",
+            "answer": "The left wrist is traditionally the receiving side, but wear it wherever feels right. Put it on each morning and set one clear intention."
+          }
+        },
+        "q_4": {
+          "type": "item",
+          "settings": {
+            "question": "Will it fit my wrist?",
+            "answer": "Yes. The elastic cord is one size and stretches comfortably to fit most wrists. No clasp needed."
+          }
+        },
+        "q_5": {
+          "type": "item",
+          "settings": {
+            "question": "How does Buy 1 Get 1 work?",
+            "answer": "Choose the Buy 1 Get 1 option on the product page and you get two bracelets for the price of one. Keep one and gift the other, or wear both."
+          }
+        },
+        "q_6": {
+          "type": "item",
+          "settings": {
+            "question": "How much is shipping?",
+            "answer": "Express shipping is free on every order, and you get a tracking link by email as soon as your bracelet ships."
+          }
+        },
+        "q_7": {
+          "type": "item",
+          "settings": {
+            "question": "How do I care for it?",
+            "answer": "Keep it dry when you can and gently wipe the stones. Avoid harsh chemicals to protect their natural energy."
+          }
+        },
+        "q_8": {
+          "type": "item",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "You are covered by our 30-day money-back guarantee. If it's not for you, send it back for a full refund."
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5",
+        "q_6",
+        "q_7",
+        "q_8"
+      ]
+    },
+    "aurea_final": {
+      "type": "aurea-home-final",
+      "settings": {
+        "pill": "Full Moon Offer · Buy 1 Get 1 Free",
+        "heading": "Your abundance is *already on its way*",
+        "text": "Put it on tomorrow morning. Backed by our 30-day money-back guarantee.",
+        "cta_label": "Claim my bracelet",
+        "note_1": "Free express shipping",
+        "note_2": "30-day money-back guarantee",
+        "note_3": "Secure checkout"
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "aurea_hero",
+    "aurea_marquee",
+    "aurea_featured",
+    "aurea_stones",
+    "aurea_moon",
+    "aurea_ritual",
+    "aurea_icons",
+    "aurea_timeline",
+    "aurea_reviews",
+    "aurea_compare",
+    "aurea_guarantee",
+    "aurea_faq",
+    "aurea_final"
   ]
 }

@@ -16,21 +16,21 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
-            "media_columns": "two",
+            "media_presentation": "carousel",
+            "media_columns": "one",
             "image_gap": 4,
             "large_first_image": false,
-            "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
-            "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
-            "aspect_ratio": "adapt",
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 84,
+            "aspect_ratio": "1",
             "constrain_to_viewport": true,
-            "media_fit": "contain",
+            "media_fit": "cover",
             "media_radius": 0,
             "extend_media": false,
-            "zoom": true,
+            "zoom": false,
             "video_loop": false,
             "hide_variants": true,
             "padding-block-start": 0,
@@ -50,7 +50,7 @@
             "custom_width_mobile": 100,
             "height": "fit",
             "details_position": "flex-start",
-            "gap": 28,
+            "gap": 14,
             "sticky_details_desktop": true,
             "background_media": "none",
             "video_position": "cover",
@@ -59,174 +59,29 @@
             "border_width": 1,
             "border_opacity": 100,
             "border_radius": 0,
-            "padding-block-start": 24,
+            "padding-block-start": 8,
             "padding-block-end": 24,
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_icgrde": {
-              "type": "group",
-              "name": "t:names.header",
+            "rating": {
+              "type": "aurea-rating",
               "settings": {
-                "content_direction": "column",
-                "vertical_on_mobile": true,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 12,
-                "width": "fill",
-                "custom_width": 100,
-                "width_mobile": "fill",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "text_xpVMaM": {
-                  "type": "text",
-                  "name": "t:names.title",
-                  "settings": {
-                    "text": "<h1>{{ closest.product.title }}</h1>",
-                    "width": "fit-content",
-                    "max_width": "normal",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "price_tVjtKg": {
-                  "type": "price",
-                  "settings": {
-                    "show_sale_price_first": true,
-                    "show_installments": true,
-                    "show_tax_info": true,
-                    "type_preset": "paragraph",
-                    "width": "100%",
-                    "alignment": "left",
-                    "font": "var(--font-body--family)",
-                    "font_size": "1rem",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "padding-block-start": 4,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_xpVMaM",
-                "price_tVjtKg"
-              ]
-            },
-            "divider_VJhene": {
-              "type": "_divider",
-              "name": "t:names.divider",
-              "settings": {
-                "thickness": 1,
-                "corner_radius": "square",
-                "divider_color": "{{ settings.color_palette.color3 }}",
-                "width_percent": 100,
-                "padding-block-start": 0,
-                "padding-block-end": 0
+                "text": "4.8/5 (193,819+ Customers)"
               },
               "blocks": {}
             },
-            "variant_picker_R3rGDr": {
-              "type": "variant-picker",
-              "settings": {
-                "variant_style": "buttons",
-                "show_swatches": false,
-                "alignment": "left",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "buy_buttons_eYQEYi": {
-              "type": "buy-buttons",
-              "settings": {
-                "stacking": true,
-                "show_pickup_availability": false,
-                "gift_card_form": true,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {
-                "quantity": {
-                  "type": "quantity",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                },
-                "add-to-cart": {
-                  "type": "add-to-cart",
-                  "static": true,
-                  "settings": {
-                    "style_class": "button"
-                  },
-                  "blocks": {}
-                },
-                "accelerated-checkout": {
-                  "type": "accelerated-checkout",
-                  "static": true,
-                  "settings": {},
-                  "blocks": {}
-                }
-              },
-              "block_order": []
-            },
-            "text_aEtTtq": {
+            "title": {
               "type": "text",
-              "name": "t:names.product_description",
               "settings": {
-                "text": "{{ closest.product.description }}",
+                "text": "<h1>{{ closest.product.title }}</h1>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
-                "type_preset": "rte",
-                "font": "var(--font-body--family)",
-                "font_size": "",
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
+                "font_size": "2rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -240,14 +95,314 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "desc": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Start attracting what you want <strong>within days</strong> with the <strong>Aurea® Prosperity Bracelet™</strong>, cleansed and charged under the full moon.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "benefits": {
+              "type": "aurea-benefits",
+              "settings": {
+                "text_1": "Attracts Abundance Daily",
+                "text_2": "Cleansed & Full-Moon Charged",
+                "text_3": "Raises Your Wealth Frequency",
+                "text_4": "Activates Luck Vibrations"
+              },
+              "blocks": {}
+            },
+            "bundle": {
+              "type": "aurea-bundle",
+              "settings": {
+                "heading": ""
+              },
+              "blocks": {
+                "t1": {
+                  "type": "_aurea-bundle-tier",
+                  "settings": {
+                    "quantity": 1,
+                    "preselect": false,
+                    "title": "1 bracelet only",
+                    "price": "$39.90",
+                    "compare": "$49.90",
+                    "pill": "Save 22%",
+                    "image_asset": "aurea-tier-packshot.jpg"
+                  }
+                },
+                "t2": {
+                  "type": "_aurea-bundle-tier",
+                  "settings": {
+                    "quantity": 2,
+                    "preselect": true,
+                    "badge": "MOST POPULAR",
+                    "title": "Buy 1 Get 1 FREE",
+                    "subtitle": "FALL SALE · 2nd ONE FREE",
+                    "price": "$39.90",
+                    "compare": "$99.80",
+                    "pill": "Save 50%",
+                    "image_asset": "aurea-tier-packshot.jpg"
+                  }
+                }
+              },
+              "block_order": [
+                "t1",
+                "t2"
+              ]
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "text_color": "",
+                "show_pickup_availability": false,
+                "gift_card_form": false,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 999,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "ship": {
+              "type": "aurea-ship-row",
+              "settings": {},
+              "blocks": {}
+            },
+            "batch": {
+              "type": "aurea-batch",
+              "settings": {
+                "bullet_2": "Only 500 bracelets cleansed per moon cycle. Then the batch closes."
+              },
+              "blocks": {}
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "type_preset": "h6",
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "r1": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "PRODUCT DETAILS",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "stones": {
+                      "type": "aurea-stones",
+                      "settings": {}
+                    }
+                  },
+                  "block_order": [
+                    "stones"
+                  ]
+                },
+                "r2": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "HOW TO USE EFFECTIVELY",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p><strong>Wear it the moment it arrives</strong> — touching your skin is what counts most.</p><p>Many people notice a soft warmth within minutes. That's perfectly normal.</p><p>Wear it every day, most of all before something big — interviews, dates, major decisions.</p><p>The longer you wear it, the more it syncs with you and begins working for you.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                },
+                "r3": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "ADJUSTABLE LENGTH",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>The stretch cord fits most wrists with ease — slip it on, no clasp needed. One size fits you.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                },
+                "r4": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "SHIPPING & DELIVERY",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Orders ship within 24 hours. Most customers get their bracelet in 3–5 business days, with tracking sent to your inbox.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                }
+              },
+              "block_order": [
+                "r1",
+                "r2",
+                "r3",
+                "r4"
+              ]
+            },
+            "fb": {
+              "type": "aurea-fb-comment",
+              "settings": {},
+              "blocks": {}
             }
           },
           "block_order": [
-            "group_icgrde",
-            "divider_VJhene",
-            "variant_picker_R3rGDr",
-            "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "rating",
+            "title",
+            "desc",
+            "benefits",
+            "bundle",
+            "buy_buttons",
+            "ship",
+            "batch",
+            "accordion",
+            "fb"
           ]
         },
         "disclosures": {
@@ -265,151 +420,430 @@
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
-        "gap": 48,
+        "gap": 76,
         "padding-block-start": 0,
-        "padding-block-end": 0
+        "padding-block-end": 0,
+        "enable_sticky_add_to_cart": true
       }
     },
-    "product_recommendations_qggXJq": {
-      "type": "product-recommendations",
+    "au_press": {
+      "type": "aurea-press",
+      "settings": {},
       "blocks": {
-        "text_cbcgyb": {
-          "type": "text",
-          "name": "t:names.header",
+        "b1": {
+          "type": "logo",
           "settings": {
-            "text": "<h2>You may also like </h2>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h4",
-            "font": "var(--font-body--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "name": "ELLE"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "b2": {
+          "type": "logo",
           "settings": {
-            "product_card_gap": 8,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 8,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_DNizbJ": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_M7MJkb": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_gLWgA6": {
-              "type": "price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_DNizbJ",
-            "product_title_M7MJkb",
-            "price_gLWgA6"
-          ]
+            "name": "Forbes",
+            "serif": true
+          }
+        },
+        "b3": {
+          "type": "logo",
+          "settings": {
+            "name": "Marie Claire"
+          }
+        },
+        "b4": {
+          "type": "logo",
+          "settings": {
+            "name": "Women's Health"
+          }
+        },
+        "b5": {
+          "type": "logo",
+          "settings": {
+            "name": "COSMOPOLITAN"
+          }
+        },
+        "b6": {
+          "type": "logo",
+          "settings": {
+            "name": "VOGUE",
+            "serif": true
+          }
         }
       },
       "block_order": [
-        "text_cbcgyb"
-      ],
-      "name": "t:names.product_recommendations",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "au_testi": {
+      "type": "aurea-testimonials",
       "settings": {
-        "product": "{{ closest.product }}",
-        "recommendation_type": "related",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 4,
-        "columns": 4,
-        "mobile_columns": "2",
-        "columns_gap": 12,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "eyebrow": "Real customers",
+        "heading": "Trusted by *thousands*"
+      },
+      "blocks": {
+        "t1": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Daniel R.",
+            "quote": "I left my job early because my back gave out. Living on Social Security, I was $400 short every single month. By day 19 with the bracelet I had enough energy to take on part-time consulting. Four days after that, a royalty check showed up from a patent I'd filed years ago and totally forgotten. $3,800!!",
+            "likes": "12",
+            "age": "3d",
+            "avatar_asset": "aurea-testi-robert.jpg"
+          }
+        },
+        "t2": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Michelle K.",
+            "quote": "So many wins since I started wearing this! A surprise disability check for $9K, a $11K tax refund, investors open to backing me, and way less fear about relying on my one job. I flew off to Hawaii and Bali with no idea how the money or time would work out, and it all did!!",
+            "likes": "5",
+            "age": "3d",
+            "avatar_asset": "aurea-testi-denise.jpg"
+          }
+        },
+        "t3": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Linda W.",
+            "quote": "I don't believe in magic, but since I started wearing this bracelet, with its lovely green and gold look, my luck has really turned. Not long ago I met someone truly special. Could be a coincidence, but I'm so grateful.",
+            "likes": "24",
+            "age": "3d",
+            "avatar_asset": "aurea-testi-karen.jpg"
+          }
+        },
+        "t4": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Evan P.",
+            "quote": "Signed the client I'd chased for a year — three days after I put it on. Coincidence? Maybe. I'm keeping it on.",
+            "likes": "24",
+            "age": "3d"
+          }
+        },
+        "t5": {
+          "type": "testimonial",
+          "settings": {
+            "name": "Alicia G.",
+            "quote": "The raise I'd stopped hoping for came through the week it arrived. I never leave home without it now.",
+            "likes": "24",
+            "age": "3d",
+            "avatar_asset": "aurea-testi-jessica.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5"
+      ]
+    },
+    "au_pain": {
+      "type": "aurea-pain",
+      "settings": {
+        "heading": "You're Not Unlucky. Your channel's just *blocked.*",
+        "sub": "The world calls it \"bad luck.\" What's really happening runs deeper."
+      },
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "icon": "pouch",
+            "title": "Money slips away",
+            "text": "It comes in Friday. By Monday it's gone. You never get ahead."
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "icon": "stuck",
+            "title": "Always stuck",
+            "text": "You work hard, you pray, you do everything right, and you're still treading water."
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "icon": "sign",
+            "title": "Nothing lands",
+            "text": "The raise, the client, the lucky break… they all pass you by."
+          }
+        },
+        "b4": {
+          "type": "card",
+          "settings": {
+            "icon": "clock",
+            "title": "2AM money dread",
+            "text": "Lying awake at 2AM doing the math on bills, with worry that won't slow down."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "au_feature": {
+      "type": "aurea-feature",
+      "settings": {
+        "eyebrow": "THAT'S WHERE AUREA® COMES IN",
+        "heading": "Restoring Flow, Luck & *Abundance*, Naturally"
+      },
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "icon": "wind",
+            "label": "Clears bad energy"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "icon": "magnet",
+            "label": "Draws prosperity"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "icon": "coins",
+            "label": "Money flows naturally"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "icon": "wave",
+            "label": "Cleanse your vibration"
+          }
+        },
+        "b5": {
+          "type": "item",
+          "settings": {
+            "icon": "infinity",
+            "label": "Opportunities come to you"
+          }
+        },
+        "b6": {
+          "type": "item",
+          "settings": {
+            "icon": "moonstar",
+            "label": "Peace at night"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "au_science": {
+      "type": "aurea-science",
+      "settings": {
+        "eyebrow": "ANCIENT WISDOM, REAL PHYSICS",
+        "heading": "Why this bracelet does what *vision boards* never could",
+        "sub": "For centuries, monks charged these three stones under the full moon. Modern physics finally explains why it works: frequency, not faith."
+      },
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "title": "Citrine Quartz",
+            "text": "<p>Citrine is a <strong>piezoelectric crystal</strong> — pressed lightly by your pulse, it creates a real, measurable electric charge (the same principle inside every quartz watch). Resting on your pulse point, it helps <strong>retune your energy field</strong> to the frequency prosperity flows toward.</p>"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "title": "Tri-Crystal Resonance",
+            "text": "<p>Citrine, Green Aventurine and African Turquoise all belong to the <strong>quartz family</strong> — and quartz is so steady in frequency that it keeps time in every watch and radio. Worn together at your pulse, the three <strong>resonate as one</strong>, sending a stronger, steadier signal than any single stone.</p>"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "title": "Vibrational Field Clearing",
+            "text": "<p>Everything vibrates at a frequency — you too. Stress, debt and scarcity pull you into a <strong>low-frequency state that pushes opportunity away</strong>. The bracelet helps <strong>clear that interference</strong> and raise you back to your natural prosperity frequency — so what you ask for can finally arrive.</p>"
+          }
+        },
+        "b4": {
+          "type": "card",
+          "settings": {
+            "title": "Not a vision board. A signal.",
+            "text": "<p>What Tibetan monks knew for centuries, physics now measures. No journaling, no \"manifest harder\" — it works <strong>whether you believe or not</strong>, through real frequency. Worn at your pulse, your intention stops being a thought… and becomes a <strong>signal</strong>.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "au_timeline": {
+      "type": "aurea-timeline",
+      "settings": {
+        "heading": "What to expect when your body starts *vibrating*",
+        "button_label": "Raise My Frequency",
+        "button_link": "#MainContent"
+      },
+      "blocks": {
+        "b1": {
+          "type": "step",
+          "settings": {
+            "label": "First 72 hours",
+            "text": "A soft warmth or tingle at your pulse point. Your field is starting to retune."
+          }
+        },
+        "b2": {
+          "type": "step",
+          "settings": {
+            "label": "Week 1",
+            "text": "The money-anxiety loop quiets first. You sleep easier. You feel calmer, lighter, less gripped by the math."
+          }
+        },
+        "b3": {
+          "type": "step",
+          "settings": {
+            "label": "Week 2+",
+            "text": "A new baseline. You move through money like someone it flows to: the forgotten check, the surprise refund. Aligned, magnetic, unblocked."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "au_compare": {
+      "type": "aurea-comparison",
+      "settings": {
+        "eyebrow": "The difference",
+        "heading": "Why *Aurea®*",
+        "col_brand": "Aurea",
+        "col_others": "Others"
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "label": "Genuine crystals & stones"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "label": "Cleansed & moon-charged"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "label": "Adjustable, one-size fit"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "label": "30-day money-back guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "au_guarantee": {
+      "type": "aurea-guarantee",
+      "settings": {
+        "heading": "30-Day *Money-Back* Guarantee",
+        "text": "Wear it for 30 days. If nothing shifts, or it doesn't feel right, send it back for a full refund. No questions asked. That's how sure we are. And today your second bracelet is FREE."
+      }
+    },
+    "au_faq": {
+      "type": "aurea-faq",
+      "settings": {
+        "eyebrow": "Good to know",
+        "heading": "Frequently asked *questions*"
+      },
+      "blocks": {
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "How soon will I feel something?",
+            "answer": "Many people notice a shift within the first few days of daily wear. Keep it on your skin every day for best results."
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "Will it fit my wrist?",
+            "answer": "Yes — the stretch cord is one size and fits most wrists comfortably. No clasp needed."
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "How do I care for it?",
+            "answer": "Keep it dry when you can and wipe the stones gently. Skip harsh chemicals to protect their natural energy."
+          }
+        },
+        "b4": {
+          "type": "question",
+          "settings": {
+            "question": "What's your return policy?",
+            "answer": "You're covered by our 30-day money-back guarantee. If it's not for you, send it back for a full refund. You risk nothing."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "au_cta": {
+      "type": "aurea-cta",
+      "settings": {
+        "eyebrow": "Only 500 per moon. This batch closes soon.",
+        "heading": "Start attracting *abundance* today",
+        "text": "Join 193,000+ customers already wearing theirs. Buy 1, Get 1 FREE, backed by our 30-day money-back guarantee.",
+        "button_label": "Claim My 2 Bracelets",
+        "button_link": "#MainContent"
       }
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "au_press",
+    "au_testi",
+    "au_pain",
+    "au_feature",
+    "au_science",
+    "au_timeline",
+    "au_compare",
+    "au_guarantee",
+    "au_faq",
+    "au_cta"
   ]
 }

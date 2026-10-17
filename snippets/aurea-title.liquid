@@ -1,0 +1,58 @@
+{%- comment -%}
+  Heading with gold italic words. Wrap words in *asterisks* in the setting text.
+  Params: text, tag (h1-h3, default h2), class
+{%- endcomment -%}
+{%- assign tag = tag | default: 'h2' -%}
+{%- assign parts = text | escape | split: '*' -%}
+<{{ tag }} class="au-title {{ class }}">
+  {%- for p in parts -%}
+    {%- assign odd = forloop.index0 | modulo: 2 -%}
+    {%- if odd == 1 -%}<em>{{ p }}</em>{%- else -%}{{ p }}{%- endif -%}
+  {%- endfor -%}
+</{{ tag }}>
+{% stylesheet %}
+  .au-title {
+    margin: 0;
+    font-family: var(--au-heading);
+    font-weight: 600;
+    line-height: 1.12;
+    color: var(--au-pine);
+    text-wrap: balance;
+  }
+  .au-title em {
+    font-style: italic;
+    color: var(--au-gold);
+  }
+  .au-eyebrow {
+    margin: 0 0 10px;
+    font-family: var(--au-body);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--au-gold);
+  }
+  .au-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 36px;
+    border-radius: 999px;
+    background: var(--au-pine);
+    color: var(--au-parchment);
+    font-family: var(--au-body);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .au-btn:hover {
+    filter: brightness(1.15);
+  }
+  .au-btn:focus-visible {
+    outline: 2px solid var(--au-gold);
+    outline-offset: 3px;
+  }
+{% endstylesheet %}

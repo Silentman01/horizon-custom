@@ -1,0 +1,53 @@
+{%- assign bs = block.settings -%}
+<label class="aub-tier{% if bs.preselect %} is-selected{% endif %}" {{ block.shopify_attributes }}>
+  <input class="aub-tier__input visually-hidden" type="radio" name="aub-{{ section.id }}" value="{{ bs.quantity }}" data-qty="{{ bs.quantity }}"{% if bs.preselect %} checked{% endif %}>
+  {%- if bs.badge != blank -%}<span class="aub-tier__badge">{{ bs.badge }}</span>{%- endif -%}
+  <span class="aub-tier__thumb">
+    {%- if bs.image -%}
+      {{ bs.image | image_url: width: 200 | image_tag: loading: 'lazy', alt: '', width: 72, height: 72 }}
+    {%- elsif bs.image_asset != blank -%}
+      <img src="{{ bs.image_asset | asset_url }}" alt="" loading="lazy" width="72" height="72">
+    {%- else -%}
+      <span class="aub-tier__ph" aria-hidden="true"></span>
+    {%- endif -%}
+  </span>
+  <span class="aub-tier__title">{{ bs.title }}</span>
+  {%- if bs.subtitle != blank -%}<span class="aub-tier__sub">{{ bs.subtitle }}</span>{%- endif -%}
+  <span class="aub-tier__prices">
+    <span class="aub-tier__price">{{ bs.price }}</span>
+    {%- if bs.compare != blank -%}<s class="aub-tier__compare">{{ bs.compare }}</s>{%- endif -%}
+  </span>
+  {%- if bs.pill != blank -%}<span class="aub-tier__pill">{{ bs.pill }}</span>{%- endif -%}
+</label>
+{% stylesheet %}
+  .aub-tier { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 22px 10px 24px; border: 2px solid var(--au-line); border-radius: 6px; background: var(--au-bg); text-align: center; cursor: pointer; font-family: var(--au-body); color: var(--au-ink); }
+  .aub-tier.is-selected { border-color: var(--au-pine); background: var(--au-parchment); }
+  .aub-tier:has(.aub-tier__input:focus-visible) { outline: 2px solid var(--au-gold); outline-offset: 2px; }
+  .aub-tier__badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); padding: 3px 10px; border-radius: 4px; background: var(--au-pine); color: var(--au-parchment); font-size: 10px; font-weight: 700; font-style: italic; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+  .aub-tier__thumb { width: 72px; height: 72px; margin-bottom: 4px; border-radius: 10px; overflow: hidden; }
+  .aub-tier__thumb img { width: 100%; height: 100%; object-fit: contain; }
+  .aub-tier__ph { display: block; width: 100%; height: 100%; background: var(--au-gold-soft); }
+  .aub-tier__title { font-size: 16px; font-weight: 700; line-height: 1.2; }
+  .aub-tier__sub { font-size: 14px; color: rgb(0 0 0 / 0.6); }
+  .aub-tier__prices { display: flex; align-items: baseline; gap: 6px; }
+  .aub-tier__price { font-size: 16px; font-weight: 700; }
+  .aub-tier__compare { font-size: 0.8em; color: rgb(0 0 0 / 0.45); }
+  .aub-tier__pill { position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 50%); padding: 3px 12px; border-radius: 999px; background: var(--au-gold); color: #1e1a10; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea bundle card",
+  "settings": [
+    { "type": "range", "id": "quantity", "label": "Quantity added to cart", "min": 1, "max": 6, "step": 1, "default": 1 },
+    { "type": "checkbox", "id": "preselect", "label": "Selected by default", "default": false },
+    { "type": "text", "id": "badge", "label": "Badge (top)", "default": "" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback filename)", "default": "aurea-tier-packshot.jpg" },
+    { "type": "text", "id": "title", "label": "Title", "default": "1 bracelet only" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "price", "label": "Price", "default": "$39.90" },
+    { "type": "text", "id": "compare", "label": "Crossed-out price", "default": "$49.90" },
+    { "type": "text", "id": "pill", "label": "Save pill (bottom)", "default": "Save 22%" }
+  ]
+}
+{% endschema %}

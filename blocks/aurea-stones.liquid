@@ -1,0 +1,32 @@
+<ul class="au-stones" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  {%- for i in (1..3) -%}
+    {%- assign nk = 'name_' | append: i -%}
+    {%- assign dk = 'desc_' | append: i -%}
+    {%- if block.settings[nk] != blank -%}
+      <li class="au-stones__row">
+        <span class="au-stones__icon">{% render 'aurea-icon', name: 'gem' %}</span>
+        <span><strong>{{ block.settings[nk] }}</strong> <span class="au-stones__desc">{{ block.settings[dk] }}</span></span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{% stylesheet %}
+  .au-stones { display: grid; gap: 12px; margin: 0; padding: 4px 0 8px; list-style: none; font-family: var(--au-body); font-size: 14px; color: var(--au-ink); }
+  .au-stones__row { display: flex; align-items: center; gap: 12px; }
+  .au-stones__icon { flex: none; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: #faf6ec; color: var(--au-gold); }
+  .au-stones__desc { color: rgb(0 0 0 / 0.55); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea stones list",
+  "settings": [
+    { "type": "text", "id": "name_1", "label": "Stone 1", "default": "Citrine" },
+    { "type": "text", "id": "desc_1", "label": "Stone 1 text", "default": "- (Happiness | Positive Energy | Focus)" },
+    { "type": "text", "id": "name_2", "label": "Stone 2", "default": "African Turquoise" },
+    { "type": "text", "id": "desc_2", "label": "Stone 2 text", "default": "- (Growth | Transformation | Wisdom)" },
+    { "type": "text", "id": "name_3", "label": "Stone 3", "default": "Green Aventurine" },
+    { "type": "text", "id": "desc_3", "label": "Stone 3 text", "default": "- (Luck | Opportunity | Prosperity)" }
+  ],
+  "presets": [ { "name": "Aurea stones list" } ]
+}
+{% endschema %}
