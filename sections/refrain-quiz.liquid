@@ -36,7 +36,6 @@
   assign st9 = sbs[8]
   assign uid = 'rfq-' | append: section.id
   assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
-  assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
   assign price_std = 19
   assign price_prem = 35
   if v_std
@@ -356,12 +355,8 @@
             </div>
             <p class="rf-photo__err" data-photo-err role="alert" hidden></p>
           </div>
-          <label class="rf-check rf-waiver" for="{{ uid }}-waiver">
-            <input id="{{ uid }}-waiver" type="checkbox" data-waiver required>
-            <span>Je demande l’exécution immédiate et je reconnais perdre mon droit de rétractation une fois la chanson livrée (<a href="{{ terms_url }}" target="_blank" rel="noopener">conditions générales de vente<span class="rf-sr"> (nouvel onglet)</span></a>).</span>
-          </label>
-          <button type="button" class="rf-btn rf-offer__cta" data-buy disabled aria-describedby="{{ uid }}-buyhint" data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
-          <p class="rf-offer__hint" id="{{ uid }}-buyhint" data-buy-hint>Cochez la case ci-dessus pour commander. Utilisez la même adresse e-mail que pour l’extrait.</p>
+          <button type="button" class="rf-btn rf-offer__cta" data-buy aria-describedby="{{ uid }}-buyhint" data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
+          <p class="rf-offer__hint" id="{{ uid }}-buyhint" data-buy-hint>Utilisez la même adresse e-mail que pour l’extrait.</p>
           <p class="rf-offer__err" data-buy-err role="alert" hidden>{{ section.settings.cart_error }}</p>
           <p class="rf-offer__fine">{% render 'refrain-icon', name: 'lock' %}<span>{{ section.settings.cta_fine }}</span></p>
           {%- if section.settings.after_steps != blank -%}
@@ -509,7 +504,6 @@
   .rf-tier__list--prem .rf-icon { background: var(--rf-ink); color: var(--rf-lime); }
   .rf-tier__list--prem li:first-child { color: var(--rf-ink); font-weight: 700; }
   .rf-tier__badge { position: absolute; top: -11px; right: 14px; padding: 3px 10px; border-radius: 99px; background: var(--rf-ink); color: var(--rf-lime); font-size: 12px; font-weight: 700; }
-  .rf-waiver { margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 13.5px; }
   .rf-offer__cta { width: 100%; margin-top: 14px; min-height: 58px; font-size: 17px; }
   .rf-offer__cta[aria-busy='true'] { opacity: .6; pointer-events: none; }
   .rf-offer__cta:disabled { background: var(--rf-line); color: var(--rf-ink-soft); cursor: not-allowed; box-shadow: none; transform: none; }
@@ -601,7 +595,6 @@
       rate: (min) => 'Vous avez déjà demandé plusieurs extraits récemment. Pour éviter les abus, nous limitons le nombre d’extraits gratuits. Réessayez ' + (min ? 'dans ' + min + ' minute' + (min > 1 ? 's' : '') : 'un peu plus tard') + ' : vos réponses sont enregistrées.',
       network: 'Impossible de joindre notre serveur. Vérifiez votre connexion internet, puis réessayez : vos réponses sont enregistrées.',
       expired: 'Ce lien d’extrait n’est plus valide ou a expiré. Vous pouvez créer un nouvel extrait, vos réponses sont gardées sur cet appareil.',
-      waiver: 'Cochez la case ci-dessus pour commander.',
       playBlocked: 'Touchez à nouveau le bouton lecture pour lancer l’extrait.',
       reload: 'Le lien audio a expiré, il vient d’être renouvelé. Touchez lecture pour reprendre.'
     };
@@ -750,8 +743,6 @@
           seekTo(map[e.key]);
         });
         /* offer */
-        const waiver = this.q('[data-waiver]');
-        waiver.addEventListener('change', () => this.buyState());
         this.qa('input[name="tier"]').forEach((r) => r.addEventListener('change', () => this.photoVisible()));
         this.q('[data-photo-input]').addEventListener('change', (e) => this.photoPick(e.target.files && e.target.files[0]));
         this.q('[data-photo-consent]').addEventListener('change', () => { this.q('[data-photo-send]').disabled = !this.q('[data-photo-consent]').checked; });
@@ -1234,19 +1225,16 @@
 
       buyState() {
         const btn = this.q('[data-buy]');
-        const ok = this.q('[data-waiver]').checked;
         btn.textContent = this.isDemo ? btn.dataset.demoLabel : btn.dataset.label;
-        btn.disabled = !!this.isDemo || !ok;
+        btn.disabled = !!this.isDemo;
         this.q('[data-buy-hint]').hidden = !!this.isDemo;
-        this.q('[data-buy-hint]').textContent = ok ? 'Utilisez la même adresse e-mail que pour l’extrait.' : MSG.waiver + ' Utilisez la même adresse e-mail que pour l’extrait.';
+        this.q('[data-buy-hint]').textContent = 'Utilisez la même adresse e-mail que pour l’extrait.';
       }
 
       async buy() {
         const btn = this.q('[data-buy]'); const err = this.q('[data-buy-err]');
         if (this._buying) return;
         if (this.isDemo || !this.session || !/^[0-9a-f-]{36}$/i.test(this.session.id)) { err.hidden = false; return; }
-        const waiver = this.q('[data-waiver]');
-        if (!waiver.checked) { this.buyState(); waiver.focus(); return; }
         this._buying = true; err.hidden = true; btn.setAttribute('aria-busy', 'true');
         const a = this.answers();
         const tier = (this.q('input[name="tier"]:checked') || {}).value || 'standard';
@@ -1254,8 +1242,7 @@
         const mkt = privacy.marketing();
         const properties = {
           _preview_id: this.session.id,
-          _recipient_name: a.name,
-          _waiver_accepted: new Date().toISOString()
+          _recipient_name: a.name
         };
         const root = window.Shopify && Shopify.routes ? Shopify.routes.root : '/';
         try {
