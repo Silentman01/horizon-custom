@@ -1,0 +1,23 @@
+{
+  "skill_name": "run-product",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Do this product for the US market: https://plaims.com/products/plaims-headlight-glasses — start with branding and wait for my validation.",
+      "expected_output": "Phase 0 preflight + PRODUCT_DIR + BRIEF.md; capture + media + Brandsearch pulls started; BRANDING.md with competitor snapshot table, 7-10 invented possessive-friendly names (top 3 starred, no domain filtering), palette = competitor hex 1:1, title = competitor pattern 1:1; stops at the gate without creating the branch.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Brand name is Noxis, US market. Run everything for https://plaims.com/products/plaims-headlight-glasses: product page on a new branch, product images, the page gifs, and 25 ads from their top Meta image ads with ad copy.",
+      "expected_output": "No branding gate (brand given); branch noxis from main; section spec; Mode A page build with bundle cards driving the variant picker; home page index.json cloned 1:1 from plaims.com home reusing noxis sections; packshot + gallery remakes without logo and with claims at full strength; raw GIFs + WebP; Brandsearch ads ranked by reach_rank (Top rank by impressions), not spend (US), ties by days running, filtered to headlight; 5 top ads at ~97% + 20 pattern ads, packshot attached to every prompt; AD_COPY.md; policies fetched from plaims.com/policies/* and rewritten 1:1 with Noxis/domain/email, Wyoming address removed, pushed or delivered as files; DELIVERY.md.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "get the top image ads of https://klarea-france.com/products/klarea-pro%C2%AE-nettoyeur-doreille-adhesif with brandsearch and make 10 ads for our brand Ceriva (France) + the ad copy in french",
+      "expected_output": "Partial run entering Phase 3 D: reuses/creates BRIEF; generates packshot if missing; Brandsearch pulls with keyword filter; EU market so eu spend/reach may be the primary sort, then reach_rank; analysis; ads in French; AD_COPY in French with claims unchanged.",
+      "files": []
+    }
+  ]
+}
