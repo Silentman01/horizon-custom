@@ -5,9 +5,13 @@
     <ul class="au-pain__grid">
       {%- for block in section.blocks -%}
         <li class="au-pain__card" {{ block.shopify_attributes }}>
-          <span class="au-pain__icon">
+          {%- assign has_img = false -%}
+          {%- if block.settings.image or block.settings.image_asset != blank -%}{%- assign has_img = true -%}{%- endif -%}
+          <span class="au-pain__icon{% if has_img %} au-pain__icon--img{% endif %}">
             {%- if block.settings.image -%}
-              {{ block.settings.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: '', width: 84, height: 84 }}
+              {{ block.settings.image | image_url: width: 320 | image_tag: loading: 'lazy', alt: '', width: 128, height: 128 }}
+            {%- elsif block.settings.image_asset != blank -%}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="" loading="lazy" decoding="async" width="128" height="128">
             {%- else -%}
               {% render 'aurea-icon', name: block.settings.icon %}
             {%- endif -%}
@@ -31,6 +35,8 @@
   .au-pain__card:last-child { border-bottom: 0.5px solid var(--au-gold); }
   .au-pain__icon { flex: none; display: grid; place-items: center; width: 58px; height: 58px; border-radius: 50%; overflow: hidden; box-shadow: 0 0 0 2px var(--au-gold); color: var(--au-gold); background: #fff; }
   .au-pain__icon img { width: 100%; height: 100%; object-fit: cover; }
+  .au-pain__icon--img { width: 76px; height: 76px; background: var(--au-pine); box-shadow: 0 0 0 2px var(--au-gold), 0 0 0 5px var(--au-parchment), 0 0 0 6px rgb(from var(--au-gold) r g b / 0.45); }
+  .au-pain__icon--img img { transform: scale(1.06); }
   .au-pain__cap { margin: 0 0 4px; font-size: 15px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--au-gold); }
   .au-pain__desc { margin: 0; font-size: 16px; line-height: 1.4; color: rgb(from var(--au-ink) r g b / 0.85); }
   @media (min-width: 750px) {
@@ -39,6 +45,10 @@
     .au-pain__card { flex-direction: column; padding: 26px 18px; border: 1px solid var(--au-gold); border-radius: 12px; text-align: center; }
     .au-pain__card:last-child { border-bottom: 1px solid var(--au-gold); }
     .au-pain__icon { width: 84px; height: 84px; }
+    .au-pain__icon--img { width: 132px; height: 132px; margin-bottom: 4px; }
+  }
+  @media (min-width: 750px) and (max-width: 1099px) {
+    .au-pain__icon--img { width: 100px; height: 100px; }
   }
 {% endstylesheet %}
 {% schema %}
@@ -54,6 +64,7 @@
       "name": "Card",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Round image (replaces icon)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback filename)" },
         { "type": "select", "id": "icon", "label": "Fallback icon", "default": "pouch", "options": [ { "value": "pouch", "label": "Pouch" }, { "value": "stuck", "label": "House" }, { "value": "sign", "label": "Signpost" }, { "value": "clock", "label": "Clock" } ] },
         { "type": "text", "id": "title", "label": "Title", "default": "Money slips away" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "It comes in, then disappears just as fast, so you never get ahead." }

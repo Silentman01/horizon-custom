@@ -2,6 +2,8 @@
   <span class="au-fb__avatar">
     {%- if block.settings.avatar -%}
       {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 40, height: 40 }}
+    {%- elsif block.settings.avatar_asset != blank -%}
+      <img src="{{ block.settings.avatar_asset | asset_url }}" alt="" width="40" height="40" loading="lazy">
     {%- endif -%}
   </span>
   <div class="au-fb__main">
@@ -29,6 +31,7 @@
   "name": "Aurea Facebook comment",
   "settings": [
     { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+    { "type": "text", "id": "avatar_asset", "label": "Avatar theme asset (fallback filename)", "default": "aurea-fb-avatar.jpg" },
     { "type": "text", "id": "name", "label": "Name", "default": "Laura Bennett" },
     { "type": "textarea", "id": "text", "label": "Comment", "default": "Didn't expect much, but a few lucky things happened the very week I put it on 😂 A job offer, a refund I'd forgotten about… it's staying on my wrist. Wish I'd bought one years ago." },
     { "type": "text", "id": "likes", "label": "Reaction count", "default": "21" },

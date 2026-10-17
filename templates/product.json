@@ -67,9 +67,15 @@
           "blocks": {
             "rating": {
               "type": "aurea-rating",
+              "disabled": true,
               "settings": {
                 "text": "4.8/5 (193,819+ Customers)"
               },
+              "blocks": {}
+            },
+            "trust": {
+              "type": "aurea-trust-strip",
+              "settings": {},
               "blocks": {}
             },
             "title": {
@@ -394,6 +400,7 @@
           },
           "block_order": [
             "rating",
+            "trust",
             "title",
             "desc",
             "benefits",
@@ -557,7 +564,8 @@
           "settings": {
             "icon": "pouch",
             "title": "Money slips away",
-            "text": "It comes in Friday. By Monday it's gone. You never get ahead."
+            "text": "It comes in Friday. By Monday it's gone. You never get ahead.",
+            "image_asset": "aurea-pain-1.jpg"
           }
         },
         "b2": {
@@ -565,7 +573,8 @@
           "settings": {
             "icon": "stuck",
             "title": "Always stuck",
-            "text": "You work hard, you pray, you do everything right, and you're still treading water."
+            "text": "You work hard, you pray, you do everything right, and you're still treading water.",
+            "image_asset": "aurea-pain-2.jpg"
           }
         },
         "b3": {
@@ -573,7 +582,8 @@
           "settings": {
             "icon": "sign",
             "title": "Nothing lands",
-            "text": "The raise, the client, the lucky break… they all pass you by."
+            "text": "The raise, the client, the lucky break… they all pass you by.",
+            "image_asset": "aurea-pain-3.jpg"
           }
         },
         "b4": {
@@ -581,7 +591,8 @@
           "settings": {
             "icon": "clock",
             "title": "2AM money dread",
-            "text": "Lying awake at 2AM doing the math on bills, with worry that won't slow down."
+            "text": "Lying awake at 2AM doing the math on bills, with worry that won't slow down.",
+            "image_asset": "aurea-pain-4.jpg"
           }
         }
       },
@@ -597,7 +608,7 @@
       "settings": {
         "eyebrow": "THAT'S WHERE AUREA® COMES IN",
         "heading": "Restoring Flow, Luck & *Abundance*, Naturally",
-        "image_asset": "aurea-feature.jpg"
+        "image_asset": "aurea-feature.webp"
       },
       "blocks": {
         "b1": {
@@ -665,7 +676,7 @@
           "settings": {
             "title": "Citrine Quartz",
             "text": "<p>Citrine is a <strong>piezoelectric crystal</strong> — pressed lightly by your pulse, it creates a real, measurable electric charge (the same principle inside every quartz watch). Resting on your pulse point, it helps <strong>retune your energy field</strong> to the frequency prosperity flows toward.</p>",
-            "image_asset": "aurea-science-citrine.jpg"
+            "image_asset": "aurea-science-ill-1.jpg"
           }
         },
         "b2": {
@@ -673,7 +684,7 @@
           "settings": {
             "title": "Tri-Crystal Resonance",
             "text": "<p>Citrine, Green Aventurine and African Turquoise all belong to the <strong>quartz family</strong> — and quartz is so steady in frequency that it keeps time in every watch and radio. Worn together at your pulse, the three <strong>resonate as one</strong>, sending a stronger, steadier signal than any single stone.</p>",
-            "image_asset": "aurea-science-aventurine.jpg"
+            "image_asset": "aurea-science-ill-2.jpg"
           }
         },
         "b3": {
@@ -681,7 +692,7 @@
           "settings": {
             "title": "Vibrational Field Clearing",
             "text": "<p>Everything vibrates at a frequency — you too. Stress, debt and scarcity pull you into a <strong>low-frequency state that pushes opportunity away</strong>. The bracelet helps <strong>clear that interference</strong> and raise you back to your natural prosperity frequency — so what you ask for can finally arrive.</p>",
-            "image_asset": "aurea-science-turquoise.jpg"
+            "image_asset": "aurea-science-ill-3.jpg"
           }
         },
         "b4": {
@@ -689,7 +700,7 @@
           "settings": {
             "title": "Not a vision board. A signal.",
             "text": "<p>What Tibetan monks knew for centuries, physics now measures. No journaling, no \"manifest harder\" — it works <strong>whether you believe or not</strong>, through real frequency. Worn at your pulse, your intention stops being a thought… and becomes a <strong>signal</strong>.</p>",
-            "image_asset": "aurea-science-4.jpg"
+            "image_asset": "aurea-science-ill-4.jpg"
           }
         }
       },
