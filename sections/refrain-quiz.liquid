@@ -37,8 +37,8 @@
   assign uid = 'rfq-' | append: section.id
   assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
   assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
-  assign price_std = 39
-  assign price_prem = 49
+  assign price_std = 19
+  assign price_prem = 35
   if v_std
     assign price_std = v_std.price | divided_by: 100.0
   endif
@@ -63,7 +63,6 @@
     data-std-price="{{ price_std }}"
     data-prem-price="{{ price_prem }}"
     data-demo-audio="{{ demo_src }}"
-    data-demo-title="{{ section.settings.demo_title | escape }}"
     data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
     data-force-demo="{{ section.settings.force_demo }}"
     data-pixel="{{ section.settings.pixel_id | escape }}"
@@ -284,7 +283,6 @@
 
       {%- comment -%} PLAYER + OFFER {%- endcomment -%}
       <div class="rf-result" data-result hidden>
-        <p class="rf-demo-note" data-demo-note hidden>{{ section.settings.demo_note }}</p>
         <div class="rf-player">
           <p class="rf-player__k">{{ section.settings.player_kicker }} <b data-r-name></b></p>
           <h2 class="rf-player__t" tabindex="-1" data-r-title></h2>
@@ -313,7 +311,7 @@
             <legend class="rf-sr">Choisissez votre formule</legend>
             <label class="rf-tier">
               <input type="radio" name="tier" value="standard" checked>
-              <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{% if v_std %}{{ v_std.price | money_without_trailing_zeros }}{% else %}39 €{% endif %}</b></span>
+              <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{% if v_std %}{{ v_std.price | money_without_trailing_zeros }}{% else %}19 €{% endif %}</b></span>
               <ul class="rf-tier__list">
                 {%- for pt in std_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
               </ul>
@@ -321,16 +319,43 @@
             <label class="rf-tier rf-tier--prem">
               <input type="radio" name="tier" value="premium">
               {%- if section.settings.prem_badge != blank -%}<span class="rf-tier__badge">{{ section.settings.prem_badge }}</span>{%- endif -%}
-              <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}49 €{% endif %}</b></span>
+              <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}35 €{% endif %}</b></span>
               {%- if v_prem and v_std and v_prem.price > v_std.price -%}
                 {%- assign diff = v_prem.price | minus: v_std.price -%}
                 <span class="rf-tier__delta">+{{ diff | money_without_trailing_zeros }} par rapport au {{ section.settings.std_name }}</span>
+              {%- elsif v_prem == nil and v_std == nil -%}
+                <span class="rf-tier__delta">+16 € par rapport au {{ section.settings.std_name }}</span>
               {%- endif -%}
               <ul class="rf-tier__list rf-tier__list--prem">
                 {%- for pt in prem_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
               </ul>
             </label>
           </fieldset>
+          {%- comment -%} Optional Premium photo (API contract v2, "Premium photo before payment"). Never blocks the purchase. {%- endcomment -%}
+          <div class="rf-photo" data-photo role="group" aria-labelledby="{{ uid }}-photo-t" hidden>
+            <p class="rf-photo__t" id="{{ uid }}-photo-t">Une photo pour l’illustration <span class="rf-opt">(facultatif)</span></p>
+            <p class="rf-photo__help" id="{{ uid }}-photo-help">Une photo nette et habillée, sans nom, adresse ni école visibles. L’illustration est une interprétation artistique, pas une copie de la photo. Pas de photo ? Nous créerons l’illustration à partir de vos réponses.</p>
+            <div class="rf-photo__pick" data-photo-pick>
+              <input class="rf-photo__file" id="{{ uid }}-photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif" aria-describedby="{{ uid }}-photo-help {{ uid }}-photo-fmt" data-photo-input>
+              <label class="rf-btn rf-btn--ghost rf-photo__btn" for="{{ uid }}-photo"><span data-photo-pick-label>Choisir une photo</span></label>
+              <span class="rf-photo__fmt" id="{{ uid }}-photo-fmt">JPG, PNG, HEIC ou WebP, 10 Mo au maximum</span>
+            </div>
+            <div class="rf-photo__card" data-photo-card hidden>
+              <img class="rf-photo__thumb" data-photo-img alt="Aperçu de la photo choisie" width="72" height="72" hidden>
+              <div class="rf-photo__state">
+                <p class="rf-photo__status" data-photo-status role="status" aria-live="polite"></p>
+                <button type="button" class="rf-link rf-photo__remove" data-photo-remove>Retirer la photo</button>
+              </div>
+            </div>
+            <div data-photo-confirm hidden>
+              <label class="rf-check" for="{{ uid }}-photo-consent">
+                <input id="{{ uid }}-photo-consent" type="checkbox" data-photo-consent>
+                <span>J’ai le droit de partager cette photo, et les personnes qui y figurent sont d’accord (pour un enfant : je suis son parent ou j’ai l’accord de ses parents). J’accepte qu’elle soit utilisée pour créer, par intelligence artificielle, l’illustration et le clip de ma commande, puis supprimée 30 jours après leur livraison. <a href="{{ privacy_url }}" target="_blank" rel="noopener">En savoir plus<span class="rf-sr"> (nouvel onglet)</span></a></span>
+              </label>
+              <button type="button" class="rf-btn rf-photo__send" data-photo-send disabled>Envoyer ma photo</button>
+            </div>
+            <p class="rf-photo__err" data-photo-err role="alert" hidden></p>
+          </div>
           <label class="rf-check rf-waiver" for="{{ uid }}-waiver">
             <input id="{{ uid }}-waiver" type="checkbox" data-waiver required>
             <span>Je demande l’exécution immédiate et je reconnais perdre mon droit de rétractation une fois la chanson livrée (<a href="{{ terms_url }}" target="_blank" rel="noopener">conditions générales de vente<span class="rf-sr"> (nouvel onglet)</span></a>).</span>
@@ -433,7 +458,22 @@
   .rf-load__fail { margin-top: 16px; }
   .rf-load__fail p { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-weight: 600; line-height: 1.5; }
   /* result */
-  .rf-demo-note { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--rf-page); border: 1px dashed var(--rf-violet); font-size: 13px; color: var(--rf-ink-soft); }
+  .rf-photo { margin: 16px 0 4px; padding: 16px; border-radius: 18px; background: var(--rf-page); border: 1.5px solid var(--rf-line); }
+  .rf-photo__t { margin: 0; font-size: 16px; font-weight: 800; letter-spacing: -0.01em; }
+  .rf-photo__help { margin: 6px 0 12px; font-size: 13px; line-height: 1.5; color: var(--rf-ink-soft); }
+  .rf-photo__pick { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+  .rf-photo__file { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+  .rf-photo__btn { min-height: 48px; padding: 0 20px; font-size: 15px; }
+  .rf-photo__file:focus-visible + .rf-photo__btn { outline: 3px solid var(--rf-violet); outline-offset: 2px; }
+  .rf-photo__fmt { font-size: 13px; color: var(--rf-ink-soft); }
+  .rf-photo__card { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+  .rf-photo__thumb { flex: none; width: 72px; height: 72px; border-radius: 14px; object-fit: cover; background: var(--rf-line); }
+  .rf-photo__state { min-width: 0; }
+  .rf-photo__status { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+  .rf-photo__remove { padding-left: 0; }
+  .rf-photo__send { min-height: 48px; margin-top: 8px; padding: 0 22px; font-size: 15px; }
+  .rf-photo__send:disabled { opacity: .45; cursor: default; }
+  .rf-photo__err { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; line-height: 1.45; }
   .rf-player { background: var(--rf-ink); color: #fff; border-radius: 22px; padding: 20px 18px; }
   .rf-player__k { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--rf-lilac); }
   .rf-player__k b { color: var(--rf-lime); }
@@ -496,6 +536,30 @@
 {% javascript %}
   if (!customElements.get('refrain-quiz')) {
     const KEY = 'refrain_quiz_v2';          /* localStorage: answers + step only (no token) */
+    const PHOTO = {
+      consentVersion: 'e9-v1', maxBytes: 10 * 1024 * 1024,
+      chosen: 'Photo choisie. Cochez la case ci-dessous, puis envoyez-la.',
+      sending: 'Envoi de votre photo…',
+      checking: 'Photo reçue, nous la vérifions…',
+      active: 'Photo enregistrée : elle servira pour l’illustration de votre formule Premium.',
+      slow: 'Photo reçue. La vérification continue : vous pouvez commander dès maintenant.',
+      refusedShort: 'Photo non retenue.',
+      refused: 'Cette photo ne respecte pas nos règles et a été supprimée. Choisissez-en une autre, ou commandez sans photo : l’illustration sera créée à partir de vos réponses.',
+      removed: 'Photo retirée.',
+      errors: {
+        too_large: 'Ce fichier dépasse 10 Mo. Choisissez une photo plus légère.',
+        unsupported_type: 'Format non reconnu : choisissez une photo JPG, PNG, HEIC ou WebP.',
+        unsupported_media_type: 'Format non reconnu : choisissez une photo JPG, PNG, HEIC ou WebP.',
+        heic_unsupported: 'Les photos HEIC ne sont pas encore acceptées : choisissez un JPG ou un PNG.',
+        image_too_small: 'Cette photo est trop petite. Choisissez-en une plus grande.',
+        undecodable_image: 'Cette image est illisible. Choisissez une autre photo.',
+        photo_limit: 'Vous avez atteint le nombre maximal de photos. Vous pouvez commander : l’illustration sera créée à partir de vos réponses.',
+        photo_locked: 'Votre commande est déjà enregistrée : la photo ne peut plus être modifiée ici.',
+        consent_required: 'Cochez la case pour envoyer votre photo.',
+        rate_limited: 'Trop d’envois en peu de temps. Réessayez dans quelques minutes.',
+        generic: 'L’envoi n’a pas abouti. Réessayez, ou commandez sans photo.'
+      }
+    };
     const SKEY = 'refrain_preview_v2';      /* sessionStorage: { id, token } (contract v2) */
     const TTL = 7 * 24 * 3600 * 1000;
     const STEPS = 9;
@@ -632,7 +696,7 @@
         this.q('[data-new]').addEventListener('click', () => { sess.clear(); this.session = null; this.backToForm(STEPS); });
         this.q('[data-check]').addEventListener('click', () => { this._errs = 0; this.poll(true); });
         this.q('[data-restart]').addEventListener('click', () => {
-          store.clear(); sess.clear(); this.session = null; this.audio.pause();
+          store.clear(); sess.clear(); this.session = null; this.audio.pause(); this.photoReset();
           this.form.reset(); this.fill({}); this.counters(); this.resetTurnstile();
           this.q('[data-result]').hidden = true; this.form.hidden = false; this.go(1);
           this.scrollTop();
@@ -688,6 +752,11 @@
         /* offer */
         const waiver = this.q('[data-waiver]');
         waiver.addEventListener('change', () => this.buyState());
+        this.qa('input[name="tier"]').forEach((r) => r.addEventListener('change', () => this.photoVisible()));
+        this.q('[data-photo-input]').addEventListener('change', (e) => this.photoPick(e.target.files && e.target.files[0]));
+        this.q('[data-photo-consent]').addEventListener('change', () => { this.q('[data-photo-send]').disabled = !this.q('[data-photo-consent]').checked; });
+        this.q('[data-photo-send]').addEventListener('click', () => this.photoSend());
+        this.q('[data-photo-remove]').addEventListener('click', () => this.photoRemove());
         this.q('[data-buy]').addEventListener('click', () => this.buy());
         /* one audio at a time across Refrain players */
         if (!window.__rfOneAudio) {
@@ -993,7 +1062,7 @@
       /* preview_mode clip* / transcoded* / truncated*: the file is already the clip -> play from 0. Always cap at preview_seconds. */
       toResult(d) {
         const clip = /^(clip|transcoded|truncated)/.test(String(d.preview_mode || ''));
-        return { url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75, start: clip ? 0 : Number(d.preview_start) || 0 };
+        return { url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75, start: clip ? 0 : Number(d.preview_start) || 0, photo: d.photo || null };
       }
 
       async refreshUrl() {
@@ -1024,7 +1093,7 @@
         this.isDemo = true;
         this.q('[data-fail]').hidden = true;
         let n = 1;
-        const tick = () => { this.stage(n); if (n++ < 4) this._timer = setTimeout(tick, reduce() ? 300 : 1100); else this.result({ url: this.dataset.demoAudio, title: this.dataset.demoTitle, lyrics: this.dataset.demoLyrics, demo: true }); };
+        const tick = () => { this.stage(n); if (n++ < 4) this._timer = setTimeout(tick, reduce() ? 300 : 1100); else this.result({ url: this.dataset.demoAudio, title: '', lyrics: this.dataset.demoLyrics, demo: true }); };
         tick();
       }
 
@@ -1043,9 +1112,9 @@
       result(r) {
         clearTimeout(this._timer);
         const name = r.name || this.answers().name || '';
+        this.isDemo = !!r.demo;
         this.q('[data-loading]').hidden = true; this.q('[data-resume]').hidden = true; this.form.hidden = true;
         this.q('[data-result]').hidden = false;
-        this.q('[data-demo-note]').hidden = !r.demo;
         this.q('[data-r-name]').textContent = name;
         this.q('[data-r-title]').textContent = (r.title || ('La chanson de ' + name)).replace(/\{name\}/g, name);
         let lyr = r.lyrics || '';
@@ -1058,9 +1127,109 @@
         if (r.url) { this.audio.src = r.url; this.q('[data-play]').disabled = false; } else { this.audio.removeAttribute('src'); this.q('[data-play]').disabled = true; }
         this.q('[data-prog]').style.width = '0%'; this.q('[data-cur]').textContent = '0:00';
         this.q('[data-dur]').textContent = this.limit ? fmt(this.limit) : '0:00';
+        this.photoReset(r.photo);
         this.buyState();
         this.scrollTop();
         this.q('[data-r-title]').focus({ preventScroll: true });
+      }
+
+      /* ---- Optional Premium photo: chosen before payment, used by Premium only, never blocks the purchase ---- */
+      photoVisible() {
+        const prem = ((this.q('input[name="tier"]:checked') || {}).value) === 'premium';
+        const live = !this.isDemo && this.session && /^[0-9a-f-]{36}$/i.test(this.session.id) && this.api && !/REFRAIN-DOMAIN/.test(this.api);
+        this.q('[data-photo]').hidden = !(prem && live);
+      }
+      photoReset(state) {
+        clearTimeout(this._photoTimer);
+        if (this._photoUrl) { try { URL.revokeObjectURL(this._photoUrl); } catch (e) {} this._photoUrl = null; }
+        this._photoFile = null; this._photoBusy = false;
+        this._photoSent = !!(state && (state.status === 'active' || state.status === 'pending'));
+        const input = this.q('[data-photo-input]'); input.value = '';
+        this.q('[data-photo-consent]').checked = false; this.q('[data-photo-send]').disabled = true;
+        this.q('[data-photo-confirm]').hidden = true; this.q('[data-photo-err]').hidden = true;
+        const img = this.q('[data-photo-img]'); img.hidden = true; img.removeAttribute('src');
+        const st = state && state.status;
+        if (st === 'active' || st === 'pending') this.photoShow(st === 'active' ? PHOTO.active : PHOTO.checking, false);
+        else { this.q('[data-photo-card]').hidden = true; this.q('[data-photo-pick]').hidden = false; this.q('[data-photo-pick-label]').textContent = 'Choisir une photo'; }
+        if (st === 'pending') this.photoPoll(0);
+        if (st === 'refused') this.photoError(PHOTO.refused);
+        this.photoVisible();
+      }
+      photoShow(text, pickAgain) {
+        this.q('[data-photo-card]').hidden = false;
+        this.q('[data-photo-status]').textContent = text;
+        this.q('[data-photo-pick]').hidden = !pickAgain;
+        this.q('[data-photo-pick-label]').textContent = 'Choisir une autre photo';
+      }
+      photoError(text) { const e = this.q('[data-photo-err]'); e.textContent = text; e.hidden = false; }
+      photoPick(file) {
+        this.q('[data-photo-err]').hidden = true;
+        if (!file) return;
+        if (file.size > PHOTO.maxBytes) { this.q('[data-photo-input]').value = ''; return this.photoError(PHOTO.errors.too_large); }
+        if (file.type && !/^image\/(jpeg|png|webp|heic|heif)$/i.test(file.type)) { this.q('[data-photo-input]').value = ''; return this.photoError(PHOTO.errors.unsupported_type); }
+        this._photoFile = file;
+        if (this._photoUrl) { try { URL.revokeObjectURL(this._photoUrl); } catch (e) {} }
+        const img = this.q('[data-photo-img]');
+        try { this._photoUrl = URL.createObjectURL(file); img.src = this._photoUrl; img.hidden = false; img.onerror = () => { img.hidden = true; }; } catch (e) { img.hidden = true; }
+        this.photoShow(PHOTO.chosen, false);
+        this.q('[data-photo-confirm]').hidden = false;
+        this.q('[data-photo-send]').disabled = !this.q('[data-photo-consent]').checked;
+        this.q('[data-photo-consent]').focus();
+      }
+      async photoSend() {
+        if (this._photoBusy || !this._photoFile || !this.session) return;
+        if (!this.q('[data-photo-consent]').checked) return;
+        this._photoBusy = true;
+        const btn = this.q('[data-photo-send]'); btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+        this.q('[data-photo-err]').hidden = true;
+        this.q('[data-photo-status]').textContent = PHOTO.sending;
+        const fd = new FormData();
+        fd.append('photo', this._photoFile, this._photoFile.name || 'photo.jpg');
+        fd.append('consent', '1');
+        fd.append('consent_version', PHOTO.consentVersion);
+        let r = null, j = {};
+        try {
+          r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id) + '/photo', { method: 'POST', headers: { 'X-Refrain-Token': this.session.token }, body: fd });
+          j = await r.json().catch(() => ({}));
+        } catch (e) { r = null; }
+        btn.removeAttribute('aria-busy'); this._photoBusy = false;
+        if (!r || !r.ok) {
+          btn.disabled = !this.q('[data-photo-consent]').checked;
+          this.q('[data-photo-status]').textContent = PHOTO.chosen;
+          return this.photoError(PHOTO.errors[j.error] || PHOTO.errors.generic);
+        }
+        this._photoSent = true; this._photoFile = null;
+        this.q('[data-photo-confirm]').hidden = true;
+        this.photoShow(PHOTO.checking, false);
+        this.photoPoll(0);
+      }
+      async photoPoll(n) {
+        clearTimeout(this._photoTimer);
+        if (!this.session) return;
+        let d = null;
+        try {
+          const r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id), { headers: { 'X-Refrain-Token': this.session.token }, cache: 'no-store' });
+          if (r.ok) d = await r.json();
+        } catch (e) {}
+        const st = d && d.photo && d.photo.status;
+        if (st === 'active') return this.photoShow(PHOTO.active, false);
+        if (st === 'refused') { this._photoSent = false; this.photoShow(PHOTO.refusedShort, true); this.q('[data-photo-img]').hidden = true; return this.photoError(PHOTO.refused); }
+        if (!d || st === 'pending') {
+          if (n < 10) { this._photoTimer = setTimeout(() => this.photoPoll(n + 1), 3000); return; }
+          return this.photoShow(PHOTO.slow, false); /* still checked server side; never blocks the purchase */
+        }
+        this.photoReset(null);
+      }
+      async photoRemove() {
+        clearTimeout(this._photoTimer);
+        if (this._photoSent && this.session) {
+          try {
+            await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id) + '/photo/remove', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Refrain-Token': this.session.token }, body: '{}' });
+          } catch (e) {}
+        }
+        this.photoReset(null);
+        this.announce(PHOTO.removed);
+        this.q('[data-photo-input]').focus();
       }
 
       buyState() {
@@ -1160,8 +1329,14 @@
     {
       "type": "text",
       "id": "demo_title",
-      "label": "Demo song title",
-      "default": "Exemple de chanson"
+      "label": "Demo song title (not shown)",
+      "info": "Kept for compatibility. Demo mode always shows « La chanson de [prénom] », with no « exemple » or « démonstration » wording."
+    },
+    {
+      "type": "text",
+      "id": "demo_note",
+      "label": "Demo notice (not shown)",
+      "info": "Kept for compatibility. No demo notice is displayed."
     },
     {
       "type": "textarea",
@@ -1169,12 +1344,7 @@
       "label": "Demo lyrics excerpt",
       "info": "{name} is replaced by the recipient's name."
     },
-    {
-      "type": "text",
-      "id": "demo_note",
-      "label": "Demo notice",
-      "default": "Mode démonstration : voici un exemple d’extrait."
-    },
+
     {
       "type": "header",
       "content": "Hero"

@@ -1,5 +1,5 @@
 {%- comment -%}
-  Ratio-locked image frame. Uploaded image wins, then theme asset (file name in assets/), then a labeled placeholder.
+  Ratio-locked image frame. Uploaded image wins, then theme asset (file name in assets/), then a plain lilac fill (no visible text).
   Params: image, asset, ratio (e.g. '1 / 1'), label, sizes, radius, fit ('cover'|'contain'),
           eager (no lazy loading), priority (LCP image: eager + fetchpriority high),
           desk_image / desk_asset (optional art-directed image for >= 990px, rendered as <picture>), desk_sizes
@@ -53,7 +53,7 @@
     {%- endif -%}
     {%- if has_desk -%}</picture>{%- endif -%}
   {%- else -%}
-    <div class="rf-media__ph" role="img" aria-label="{{ label | escape }}"><span>{{ label }}</span></div>
+    <div class="rf-media__ph" aria-hidden="true"></div>
   {%- endif -%}
 </div>
 {% stylesheet %}

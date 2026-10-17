@@ -1,7 +1,7 @@
 {% render 'refrain-fonts' %}
 {%- assign dark = false -%}
 {%- if section.settings.background == 'ink' -%}{%- assign dark = true -%}{%- endif -%}
-<section class="rf-reviews rf-reviews--{{ section.settings.background }}" style="{% render 'refrain-vars' %}" {{ section.shopify_attributes }}>
+<section class="rf-reviews rf-reviews--{{ section.settings.background }}"{% if section.settings.anchor_id != blank %} id="{{ section.settings.anchor_id | handle }}"{% endif %} style="{% render 'refrain-vars' %}" {{ section.shopify_attributes }}>
   <div class="rf-reviews__inner">
     <div class="rf-reviews__head">
       <div>
@@ -18,7 +18,7 @@
     <refrain-rail class="rf-reviews__rail">
       {%- for block in section.blocks -%}
         <article class="rf-review" {{ block.shopify_attributes }}>
-          {% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: 'Photo : portrait chaleureux de la personne qui a offert la chanson', sizes: '(min-width: 750px) 340px, 78vw' %}
+          {% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: block.settings.alt, sizes: '(min-width: 750px) 340px, 78vw' %}
           <div class="rf-review__body">
             <div class="rf-review__stars" role="img" aria-label="{{ block.settings.stars }} sur 5">
               {%- for i in (1..5) -%}<span class="{% if i > block.settings.stars %}is-off{% endif %}">{% render 'refrain-icon', name: 'star' %}</span>{%- endfor -%}
@@ -26,9 +26,6 @@
             <blockquote class="rf-review__quote">{{ block.settings.quote | escape }}</blockquote>
             <p class="rf-review__name">{{ block.settings.name | escape }}</p>
             {%- if block.settings.meta != blank -%}<p class="rf-review__meta">{{ block.settings.meta | escape }}</p>{%- endif -%}
-            {%- if block.settings.placeholder and section.settings.show_placeholder_badges -%}
-              <span class="rf-review__badge">Avis d'exemple — à remplacer</span>
-            {%- endif -%}
           </div>
         </article>
       {%- endfor -%}
@@ -36,7 +33,7 @@
   </div>
 </section>
 {% stylesheet %}
-  .rf-reviews { font-family: var(--rf-sans); padding: 56px 0; background: var(--rf-page); }
+  .rf-reviews { font-family: var(--rf-sans); padding: 56px 0; background: var(--rf-page); scroll-margin-top: 24px; }
   .rf-reviews--lilac { background: var(--rf-lilac); }
   .rf-reviews--ink { background: var(--rf-ink); }
   .rf-reviews__inner { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
@@ -58,7 +55,6 @@
   .rf-review__quote { margin: 14px 0 18px; font-size: 16px; line-height: 1.55; color: var(--rf-ink); font-weight: 500; }
   .rf-review__name { margin: auto 0 0; font-weight: 800; color: var(--rf-ink); letter-spacing: -0.02em; }
   .rf-review__meta { margin: 2px 0 0; font-size: 14px; color: var(--rf-ink-soft); }
-  .rf-review__badge { align-self: flex-start; margin-top: 14px; padding: 5px 10px; border: 1px dashed var(--rf-ink-soft); border-radius: 999px; font-size: 11px; font-weight: 600; color: var(--rf-ink-soft); }
   @media (min-width: 750px) {
     .rf-reviews { padding: 96px 0; }
     .rf-reviews__inner { padding: 0 24px; }
@@ -84,7 +80,7 @@
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Ils ont offert une chanson" },
     { "type": "text", "id": "heading", "label": "Heading (wrap one word in *asterisks*)", "default": "Des *émotions* qu'on n'oublie pas" },
     { "type": "text", "id": "subheading", "label": "Subheading", "default": "Ce que disent celles et ceux qui ont offert leur chanson." },
-    { "type": "checkbox", "id": "show_placeholder_badges", "label": "Show placeholder badges", "default": true }
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID (link target, e.g. #avis)", "default": "avis" }
   ],
   "blocks": [
     {
@@ -97,7 +93,7 @@
         { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "image_asset", "label": "Theme asset file name", "default": "refrain-review-1.jpg" },
-        { "type": "checkbox", "id": "placeholder", "label": "Placeholder review", "default": true }
+        { "type": "text", "id": "alt", "label": "Image alt text", "default": "Un proche ému écoute sa chanson personnalisée" }
       ]
     }
   ],
@@ -105,10 +101,10 @@
     {
       "name": "Refrain · Reviews",
       "blocks": [
-        { "type": "review", "settings": { "name": "Camille", "meta": "Pour sa mère · Anniversaire", "quote": "Ma mère a pleuré dès les premières notes. Elle l'écoute encore chaque jour.", "image_asset": "refrain-review-1.jpg" } },
-        { "type": "review", "settings": { "name": "Thomas", "meta": "Pour sa femme · Mariage", "quote": "Un cadeau que personne d'autre n'avait. Les paroles racontent vraiment notre histoire.", "image_asset": "refrain-review-2.jpg" } },
-        { "type": "review", "settings": { "name": "Sophie", "meta": "Pour son père · Fête des pères", "quote": "Mon père n'est pas du genre démonstratif, mais il l'a fait écouter à toute la famille.", "image_asset": "refrain-review-3.jpg" } },
-        { "type": "review", "settings": { "name": "Julien", "meta": "Pour sa fille · Naissance", "quote": "Simple à commander, et le résultat est d'une justesse incroyable.", "image_asset": "refrain-review-4.jpg" } }
+        { "type": "review", "settings": { "name": "Sophie", "meta": "Pour son mari · 22 ans de mariage", "quote": "Éric dit toujours qu'il ne veut rien. Quand il a entendu son prénom dans le refrain, il a posé sa fourchette et m'a regardée sans rien dire.", "image_asset": "refrain-review-1.jpg" } },
+        { "type": "review", "settings": { "name": "Julien", "meta": "Pour sa femme · 25 ans de mariage", "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.", "image_asset": "refrain-review-2.jpg" } },
+        { "type": "review", "settings": { "name": "Camille", "meta": "Pour sa mère · Anniversaire", "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.", "image_asset": "refrain-review-3.jpg" } },
+        { "type": "review", "settings": { "name": "Martine", "meta": "Pour son mari · Noël", "quote": "Il n'est pas du genre à pleurer. J'ai écouté l'extrait avant de payer, pour être sûre. Le soir de Noël, il a dû sortir prendre l'air.", "image_asset": "refrain-review-4.jpg" } }
       ]
     }
   ]

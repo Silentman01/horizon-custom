@@ -9,6 +9,37 @@
  */
 {
   "sections": {
+    "hero_product": {
+      "type": "refrain-hero-product",
+      "blocks": {
+        "s1": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "refrain-product-premium.jpg",
+            "alt": "Tout ce que contient Refrain Premium : 2 chansons complètes, et en cadeau le clip paroles, l'illustration et les paroles imprimables"
+          }
+        },
+        "s2": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "refrain-hero-couple-square.jpg",
+            "alt": "Un homme ému écoute la chanson que sa femme lui offre"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2"
+      ],
+      "settings": {
+        "rating_text": "Lire les avis",
+        "rating_link": "#avis",
+        "heading": "Chanson personnalisée — son prénom dans le *refrain*",
+        "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
+        "cta_label": "Créer son extrait gratuit",
+        "cta_link": "#quiz"
+      }
+    },
     "quiz": {
       "type": "refrain-quiz",
       "blocks": {
@@ -18,9 +49,7 @@
             "title": "Pour qui est cette chanson ?",
             "help": "Commençons par la personne qui va l'écouter.",
             "options": "Sa maman,Son papa,Son amour,Son enfant,Ses grands-parents,Un ami / une amie,Un frère / une sœur,Autre",
-            "options_2": "",
-            "placeholder": "Ex. : ma marraine, mon équipe, notre nounou",
-            "placeholder_2": ""
+            "placeholder": "Ex. : ma marraine, mon équipe, notre nounou"
           }
         },
         "b2": {
@@ -28,10 +57,7 @@
           "settings": {
             "title": "Pour quelle occasion ?",
             "help": "La chanson suivra le ton du moment.",
-            "options": "Anniversaire,Noël,Fête des mères,Fête des pères,Saint-Valentin,Anniversaire de mariage,Mariage,Naissance,Départ en retraite,Juste pour dire merci,Autre",
-            "options_2": "",
-            "placeholder": "",
-            "placeholder_2": ""
+            "options": "Anniversaire,Noël,Fête des mères,Fête des pères,Saint-Valentin,Anniversaire de mariage,Mariage,Naissance,Départ en retraite,Juste pour dire merci,Autre"
           }
         },
         "b3": {
@@ -39,8 +65,6 @@
           "settings": {
             "title": "Quel est son prénom ?",
             "help": "Son prénom sera chanté dans le refrain. Écrivez la prononciation comme elle se dit.",
-            "options": "",
-            "options_2": "",
             "placeholder": "Ex. : Louise",
             "placeholder_2": "Ex. : « Lou-i-ze », ou un surnom comme « Loulou »"
           }
@@ -51,9 +75,7 @@
             "title": "Quelle musique lui ressemble ?",
             "help": "Choisissez un style et une voix.",
             "options": "Pop émouvante,Ballade piano,Chanson française,Folk acoustique,R&B doux,Pop festive,Jazz feutré,Choisir pour moi",
-            "options_2": "Femme,Homme,Surprise",
-            "placeholder": "",
-            "placeholder_2": ""
+            "options_2": "Femme,Homme,Surprise"
           }
         },
         "b5": {
@@ -62,9 +84,7 @@
             "title": "Qu'est-ce qui rend cette personne si spéciale ?",
             "help": "Choisissez jusqu'à 3 qualités, puis ajoutez un détail qui n'appartient qu'à elle.",
             "options": "Drôle,Généreux·se,Courageux·se,Tendre,Patient·e,Rêveur·se,Protecteur·rice,Plein·e d’énergie,Toujours là,Gourmand·e,Aventurier·e,Sage",
-            "options_2": "",
-            "placeholder": "Ex. : elle chante faux sous la douche et rit plus fort que tout le monde",
-            "placeholder_2": ""
+            "placeholder": "Ex. : elle chante faux sous la douche et rit plus fort que tout le monde"
           }
         },
         "b6": {
@@ -72,10 +92,7 @@
           "settings": {
             "title": "Un souvenir à garder pour toujours",
             "help": "Un moment précis. Un lieu, une date, une phrase.",
-            "options": "",
-            "options_2": "",
-            "placeholder": "Ex. : l'été 2009 à Biarritz, quand elle m'a appris à nager en chantant du Goldman",
-            "placeholder_2": ""
+            "placeholder": "Ex. : l'été 2009 à Biarritz, quand elle m'a appris à nager en chantant du Goldman"
           }
         },
         "b7": {
@@ -83,21 +100,14 @@
           "settings": {
             "title": "Ce que vous voulez lui dire",
             "help": "Ce qu'elle doit entendre, ressentir, ne jamais oublier.",
-            "options": "",
-            "options_2": "",
-            "placeholder": "Ex. : merci d'avoir toujours cru en moi, même quand moi je n'y croyais plus",
-            "placeholder_2": ""
+            "placeholder": "Ex. : merci d'avoir toujours cru en moi, même quand moi je n'y croyais plus"
           }
         },
         "b8": {
           "type": "step",
           "settings": {
             "title": "En quelle langue ?",
-            "help": "Un dernier choix, puis nous préparons son extrait.",
-            "options": "",
-            "options_2": "",
-            "placeholder": "",
-            "placeholder_2": ""
+            "help": "Un dernier choix, puis nous préparons son extrait."
           }
         },
         "b9": {
@@ -105,9 +115,6 @@
           "settings": {
             "title": "Où vous envoyer son extrait ?",
             "help": "Nous vous envoyons le lien de l'extrait. Pratique si vous fermez la page.",
-            "options": "",
-            "options_2": "",
-            "placeholder": "",
             "placeholder_2": "J’accepte que Refrain utilise mon e-mail pour m’envoyer mon extrait et le suivi de ma commande. Pas de spam. Désinscription en un clic."
           }
         }
@@ -125,15 +132,9 @@
       ],
       "settings": {
         "api_base": "https://api.REFRAIN-DOMAIN.com",
-        "pixel_id": "META-PIXEL-ID",
-        "turnstile_site_key": "TURNSTILE-SITE-KEY",
         "force_demo": false,
-        "product": "",
         "demo_audio_asset": "refrain-demo-maman.mp3",
-        "demo_audio_url": "",
-        "demo_title": "La chanson de Nathalie (exemple)",
         "demo_lyrics": "{name}, tu chantais faux dans la cuisine,\nEt moi je riais, assis sur la vitrine.\nToute ta vie dans une mélodie,\n{name}, c'est toi qui nous l'as appris.",
-        "demo_note": "Mode démonstration : l'extrait ci-dessous est un exemple. La génération personnalisée sera bientôt activée.",
         "eyebrow": "Chanson personnalisée",
         "heading": "Écoutez son extrait, *gratuitement*.",
         "sub": "Répondez à quelques questions sur la personne. Nous créons un extrait de sa chanson. Vous ne commandez que s'il vous touche.",
@@ -156,10 +157,7 @@
         "prem_badge": "Pour l'offrir en grand",
         "prem_points": "Tout le Standard inclus\nLivraison prioritaire sous 12 h\nClip paroles animé, son prénom en surbrillance\nPochette personnalisée",
         "cta_label": "Commander sa chanson",
-        "demo_cta": "Commande disponible après votre extrait personnalisé",
-        "player_ended": "L’extrait s’arrête ici. Commandez pour écouter la chanson complète.",
         "cta_fine": "Paiement sécurisé. Contenu numérique livré par e-mail : en payant, vous acceptez la livraison immédiate et renoncez au droit de rétractation. Révisions illimitées, puis remboursement si ce n'est toujours pas juste.",
-        "cart_error": "Un souci est survenu. Réessayez dans un instant.",
         "after_steps": "Nous relisons chaque détail.\nNotre équipe ajuste les deux chansons.\nVous recevez tout, prêt à offrir."
       }
     },
@@ -254,8 +252,7 @@
         "heading": "Trois étapes, *zéro* risque",
         "button_label": "Créer son extrait gratuit",
         "button_link": "#quiz",
-        "show_sticky_image": false,
-        "image_asset": ""
+        "show_sticky_image": false
       }
     },
     "reviews": {
@@ -264,67 +261,61 @@
         "b1": {
           "type": "review",
           "settings": {
-            "name": "Camille",
-            "meta": "Pour sa mère · Anniversaire",
-            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
+            "name": "Sophie",
+            "meta": "Pour son mari · 22 ans de mariage",
+            "quote": "Éric dit toujours qu'il ne veut rien. Quand il a entendu son prénom dans le refrain, il a posé sa fourchette et m'a regardée sans rien dire.",
             "stars": 5,
-            "image_asset": "refrain-review-1.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-1.jpg"
           }
         },
         "b2": {
           "type": "review",
           "settings": {
             "name": "Julien",
-            "meta": "Pour sa femme · Anniversaire de mariage",
+            "meta": "Pour sa femme · 25 ans de mariage",
             "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.",
             "stars": 5,
-            "image_asset": "refrain-review-2.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-2.jpg"
           }
         },
         "b3": {
           "type": "review",
           "settings": {
-            "name": "Sophie",
-            "meta": "Pour son père · Départ en retraite",
-            "quote": "On l'a passée au pot de départ. Mon père, qui ne pleure jamais, a dû sortir prendre l'air.",
+            "name": "Camille",
+            "meta": "Pour sa mère · Anniversaire",
+            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
             "stars": 5,
-            "image_asset": "refrain-review-3.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-3.jpg"
           }
         },
         "b4": {
           "type": "review",
           "settings": {
-            "name": "Nadia",
-            "meta": "Pour sa fille · Naissance",
-            "quote": "Une berceuse avec le prénom de ma fille. On la lui chante tous les soirs, maintenant.",
+            "name": "Martine",
+            "meta": "Pour son mari · Noël",
+            "quote": "Il n'est pas du genre à pleurer. J'ai écouté l'extrait avant de payer, pour être sûre. Le soir de Noël, il a dû sortir prendre l'air.",
             "stars": 5,
-            "image_asset": "refrain-review-4.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-4.jpg"
           }
         },
         "b5": {
           "type": "review",
           "settings": {
-            "name": "Marc",
-            "meta": "Pour sa grand-mère · Noël",
-            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
+            "name": "Nadia",
+            "meta": "Pour sa mère · Noël",
+            "quote": "On l'a passée sur la télé, avec la vidéo des paroles. Quand son prénom s'est affiché, maman a pris la main de papa.",
             "stars": 5,
-            "image_asset": "refrain-review-1.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-5.jpg"
           }
         },
         "b6": {
           "type": "review",
           "settings": {
-            "name": "Léa",
-            "meta": "Pour sa meilleure amie · Juste pour dire merci",
-            "quote": "J'ai écouté l'extrait avant de payer. Dès les premières secondes, j'ai su que je commandais.",
+            "name": "Élodie",
+            "meta": "Pour sa mère · 60 ans",
+            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
             "stars": 5,
-            "image_asset": "refrain-review-2.jpg",
-            "placeholder": false
+            "image_asset": "refrain-review-6.jpg"
           }
         }
       },
@@ -340,8 +331,7 @@
         "background": "lilac",
         "eyebrow": "Avis",
         "heading": "Des histoires mises en *chanson*",
-        "subheading": "Ce qu'on nous raconte après l'écoute.",
-        "show_placeholder_badges": true
+        "subheading": "Ce qu'on nous raconte après l'écoute."
       }
     },
     "comparison": {
@@ -438,7 +428,6 @@
           "settings": {
             "title": "Anniversaire",
             "text": "Toute sa vie, mise en chanson.",
-            "link": "",
             "image_asset": "refrain-occasion-birthday.jpg"
           }
         },
@@ -447,7 +436,6 @@
           "settings": {
             "title": "Noël",
             "text": "Commandez avant le 20 décembre pour une livraison avant Noël.",
-            "link": "",
             "image_asset": "refrain-occasion-christmas.jpg"
           }
         },
@@ -456,7 +444,6 @@
           "settings": {
             "title": "Fête des mères",
             "text": "Pour lui dire ce qu'on ne dit jamais à table.",
-            "link": "",
             "image_asset": "refrain-occasion-mother.jpg"
           }
         },
@@ -465,7 +452,6 @@
           "settings": {
             "title": "Saint-Valentin",
             "text": "Votre histoire, de la rencontre à aujourd'hui.",
-            "link": "",
             "image_asset": "refrain-occasion-couple.jpg"
           }
         },
@@ -474,7 +460,6 @@
           "settings": {
             "title": "Mariage",
             "text": "Pour le premier slow ou le discours des témoins.",
-            "link": "",
             "image_asset": "refrain-occasion-wedding.jpg"
           }
         },
@@ -483,7 +468,6 @@
           "settings": {
             "title": "Naissance",
             "text": "Une berceuse avec son prénom, dès le premier jour.",
-            "link": "",
             "image_asset": "refrain-occasion-baby.jpg"
           }
         }
@@ -656,13 +640,12 @@
         "button_label": "Créer son extrait gratuit",
         "button_link": "#quiz",
         "note": "Écoutez avant de payer · Livraison sous 24 h · Révisions illimitées",
-        "image_asset": "refrain-cta.jpg",
-        "sticky_enable": true,
-        "sticky_label": "Créer son extrait gratuit"
+        "image_asset": "refrain-cta.jpg"
       }
     }
   },
   "order": [
+    "hero_product",
     "quiz",
     "marquee",
     "timeline",

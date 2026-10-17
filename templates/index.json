@@ -19,16 +19,13 @@
         "button_label": "Créer son extrait gratuit",
         "button_link": "/products/chanson-personnalisee#quiz",
         "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
-        "image_asset": "refrain-hero-desktop.jpg",
-        "mobile_image_asset": "refrain-hero-mobile.jpg",
-        "chip_title": "« Nathalie » · Fête des mères"
+        "image_asset": "refrain-hero-couple-desktop.jpg",
+        "mobile_image_asset": "refrain-hero-couple-mobile.jpg",
+        "chip_title": "« Éric » · 22 ans de mariage"
       }
     },
     "marquee": {
       "type": "refrain-marquee",
-      "settings": {
-        "speed": 35
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -74,18 +71,13 @@
         "b4",
         "b5",
         "b6"
-      ]
+      ],
+      "settings": {
+        "speed": 35
+      }
     },
     "timeline": {
       "type": "refrain-timeline",
-      "settings": {
-        "background": "page",
-        "eyebrow": "Comment ça marche",
-        "heading": "De vos souvenirs à sa *chanson*",
-        "button_label": "Commencer",
-        "button_link": "/products/chanson-personnalisee#quiz",
-        "show_sticky_image": false
-      },
       "blocks": {
         "b1": {
           "type": "step",
@@ -116,17 +108,18 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "background": "page",
+        "eyebrow": "Comment ça marche",
+        "heading": "De vos souvenirs à sa *chanson*",
+        "button_label": "Commencer",
+        "button_link": "/products/chanson-personnalisee#quiz",
+        "show_sticky_image": false
+      }
     },
     "occasions": {
       "type": "refrain-occasions",
-      "settings": {
-        "background": "lilac",
-        "heading": "Pour chaque *moment*",
-        "sub": "Une chanson pour toutes les fois où les mots ne suffisent pas.",
-        "button_label": "Créer son extrait gratuit",
-        "button_link": "/products/chanson-personnalisee#quiz"
-      },
       "blocks": {
         "b1": {
           "type": "occasion",
@@ -184,26 +177,25 @@
         "b4",
         "b5",
         "b6"
-      ]
+      ],
+      "settings": {
+        "background": "lilac",
+        "heading": "Pour chaque *moment*",
+        "sub": "Une chanson pour toutes les fois où les mots ne suffisent pas.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/chanson-personnalisee#quiz"
+      }
     },
     "reviews": {
       "type": "refrain-reviews",
-      "settings": {
-        "background": "lilac",
-        "eyebrow": "Avis",
-        "heading": "Des histoires mises en *chanson*",
-        "subheading": "Ce qu'on nous raconte après l'écoute.",
-        "show_placeholder_badges": true
-      },
       "blocks": {
         "b1": {
           "type": "review",
           "settings": {
-            "name": "Camille",
-            "meta": "Pour sa mère · Anniversaire",
-            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
+            "name": "Sophie",
+            "meta": "Pour son mari · 22 ans de mariage",
+            "quote": "Éric dit toujours qu'il ne veut rien. Quand il a entendu son prénom dans le refrain, il a posé sa fourchette et m'a regardée sans rien dire.",
             "stars": 5,
-            "placeholder": true,
             "image_asset": "refrain-review-1.jpg"
           }
         },
@@ -211,55 +203,50 @@
           "type": "review",
           "settings": {
             "name": "Julien",
-            "meta": "Pour sa femme · Anniversaire de mariage",
+            "meta": "Pour sa femme · 25 ans de mariage",
             "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.",
             "stars": 5,
-            "placeholder": true,
             "image_asset": "refrain-review-2.jpg"
           }
         },
         "b3": {
           "type": "review",
           "settings": {
-            "name": "Sophie",
-            "meta": "Pour son père · Départ en retraite",
-            "quote": "On l'a passée au pot de départ. Mon père, qui ne pleure jamais, a dû sortir prendre l'air.",
+            "name": "Camille",
+            "meta": "Pour sa mère · Anniversaire",
+            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
             "stars": 5,
-            "placeholder": true,
             "image_asset": "refrain-review-3.jpg"
           }
         },
         "b4": {
           "type": "review",
           "settings": {
-            "name": "Nadia",
-            "meta": "Pour sa fille · Naissance",
-            "quote": "Une berceuse avec le prénom de ma fille. On la lui chante tous les soirs, maintenant.",
+            "name": "Martine",
+            "meta": "Pour son mari · Noël",
+            "quote": "Il n'est pas du genre à pleurer. J'ai écouté l'extrait avant de payer, pour être sûre. Le soir de Noël, il a dû sortir prendre l'air.",
             "stars": 5,
-            "placeholder": true,
             "image_asset": "refrain-review-4.jpg"
           }
         },
         "b5": {
           "type": "review",
           "settings": {
-            "name": "Marc",
-            "meta": "Pour sa grand-mère · Noël",
-            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
+            "name": "Nadia",
+            "meta": "Pour sa mère · Noël",
+            "quote": "On l'a passée sur la télé, avec la vidéo des paroles. Quand son prénom s'est affiché, maman a pris la main de papa.",
             "stars": 5,
-            "placeholder": true,
-            "image_asset": "refrain-review-1.jpg"
+            "image_asset": "refrain-review-5.jpg"
           }
         },
         "b6": {
           "type": "review",
           "settings": {
-            "name": "Léa",
-            "meta": "Pour sa meilleure amie · Juste pour dire merci",
-            "quote": "J'ai écouté l'extrait avant de payer. Dès les premières secondes, j'ai su que je commandais.",
+            "name": "Élodie",
+            "meta": "Pour sa mère · 60 ans",
+            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
             "stars": 5,
-            "placeholder": true,
-            "image_asset": "refrain-review-2.jpg"
+            "image_asset": "refrain-review-6.jpg"
           }
         }
       },
@@ -270,19 +257,16 @@
         "b4",
         "b5",
         "b6"
-      ]
+      ],
+      "settings": {
+        "background": "lilac",
+        "eyebrow": "Avis",
+        "heading": "Des histoires mises en *chanson*",
+        "subheading": "Ce qu'on nous raconte après l'écoute."
+      }
     },
     "comparison": {
       "type": "refrain-comparison",
-      "settings": {
-        "background": "page",
-        "heading": "Le cadeau qui ne finit pas dans un *tiroir*",
-        "subheading": "Comparez avant de choisir.",
-        "col_us": "Refrain",
-        "col_a": "Carte cadeau",
-        "col_b": "Cadeau « tiroir »",
-        "image_asset": "refrain-compare-drawer.jpg"
-      },
       "blocks": {
         "b1": {
           "type": "row",
@@ -356,16 +340,19 @@
         "b5",
         "b6",
         "b7"
-      ]
+      ],
+      "settings": {
+        "background": "page",
+        "heading": "Le cadeau qui ne finit pas dans un *tiroir*",
+        "subheading": "Comparez avant de choisir.",
+        "col_us": "Refrain",
+        "col_a": "Carte cadeau",
+        "col_b": "Cadeau « tiroir »",
+        "image_asset": "refrain-compare-drawer.jpg"
+      }
     },
     "promise": {
       "type": "refrain-promise",
-      "settings": {
-        "background": "page",
-        "eyebrow": "Notre promesse",
-        "heading": "Un cadeau sans *risque*",
-        "sub": ""
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -405,16 +392,16 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "background": "page",
+        "eyebrow": "Notre promesse",
+        "heading": "Un cadeau sans *risque*",
+        "sub": ""
+      }
     },
     "guarantee": {
       "type": "refrain-guarantee",
-      "settings": {
-        "badge_text": "Extrait gratuit · Révisions illimitées",
-        "heading": "Écoutez avant de *payer*",
-        "image_asset": "refrain-guarantee.jpg",
-        "text": "<p>Vous écoutez d'abord un extrait gratuit. Vous ne commandez que s'il vous touche. Ensuite, nous ajustons les chansons autant de fois que nécessaire. Si ce n'est toujours pas juste après nos révisions, nous vous remboursons.</p>"
-      },
       "blocks": {
         "b1": {
           "type": "point",
@@ -439,16 +426,16 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "badge_text": "Extrait gratuit · Révisions illimitées",
+        "heading": "Écoutez avant de *payer*",
+        "text": "<p>Vous écoutez d'abord un extrait gratuit. Vous ne commandez que s'il vous touche. Ensuite, nous ajustons les chansons autant de fois que nécessaire. Si ce n'est toujours pas juste après nos révisions, nous vous remboursons.</p>",
+        "image_asset": "refrain-guarantee.jpg"
+      }
     },
     "faq": {
       "type": "refrain-faq",
-      "settings": {
-        "background": "page",
-        "heading": "Vos *questions*",
-        "subheading": "Tout ce qu'il faut savoir avant de commander.",
-        "contact": "<p>Une autre question ? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
-      },
       "blocks": {
         "b1": {
           "type": "q",
@@ -548,7 +535,13 @@
         "b10",
         "b11",
         "b12"
-      ]
+      ],
+      "settings": {
+        "background": "page",
+        "heading": "Vos *questions*",
+        "subheading": "Tout ce qu'il faut savoir avant de commander.",
+        "contact": "<p>Une autre question ? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
+      }
     },
     "cta": {
       "type": "refrain-cta",
