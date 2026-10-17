@@ -23,4 +23,12 @@
   .rf-btn--on-dark { background: var(--rf-lime); color: var(--rf-ink); }
   .rf-btn--ghost { background: transparent; color: var(--rf-ink); box-shadow: inset 0 0 0 2px var(--rf-ink); }
   @media (min-width: 750px) { .rf-sub { font-size: 19px; } }
+  /* Shared Refrain a11y helpers (this snippet is rendered by every Refrain section). */
+  .rf-sr { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); border: 0; white-space: nowrap; }
+  [class^='rf-'] a:focus-visible, [class^='rf-'] button:focus-visible, [class^='rf-'] summary:focus-visible, [class^='rf-'] [tabindex]:focus-visible { outline: 3px solid var(--rf-violet, #6A4BD8); outline-offset: 3px; }
+  .rf-btn--on-dark:focus-visible { outline-color: var(--rf-lime, #D4F53C); }
+  @media (prefers-reduced-motion: reduce) {
+    [class^='rf-'], [class^='rf-'] *, [class^='rf-'] *::before, [class^='rf-'] *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+    .rf-btn:hover { transform: none; }
+  }
 {% endstylesheet %}

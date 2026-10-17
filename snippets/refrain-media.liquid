@@ -1,25 +1,63 @@
 {%- comment -%}
   Ratio-locked image frame. Uploaded image wins, then theme asset (file name in assets/), then a labeled placeholder.
-  Params: image, asset, ratio (e.g. '1 / 1'), label, sizes, radius, eager, fit ('cover'|'contain')
+  Params: image, asset, ratio (e.g. '1 / 1'), label, sizes, radius, fit ('cover'|'contain'),
+          eager (no lazy loading), priority (LCP image: eager + fetchpriority high),
+          desk_image / desk_asset (optional art-directed image for >= 990px, rendered as <picture>), desk_sizes
+  Theme assets get a responsive srcset through the CDN `width` parameter; width/height are always set.
 {%- endcomment -%}
 {%- liquid
   assign r = ratio | default: '1 / 1'
+  assign rp = r | split: '/'
+  assign rw = rp[0] | strip | plus: 0
+  assign rh = rp[1] | strip | plus: 0
+  if rw < 1 or rh < 1
+    assign rw = 1
+    assign rh = 1
+  endif
+  assign h = 1200 | times: rh | divided_by: rw
   assign loading = 'lazy'
-  if eager
+  assign fp = 'auto'
+  if eager or priority
     assign loading = 'eager'
+  endif
+  if priority
+    assign fp = 'high'
+  endif
+  assign sz = sizes | default: '100vw'
+  assign widths = '360,540,720,900,1200,1600' | split: ','
+  assign has_desk = false
+  if desk_image or desk_asset != blank
+    assign has_desk = true
   endif
 -%}
 <div class="rf-media" style="aspect-ratio: {{ r }};{% if radius != blank %} --rf-media-radius: {{ radius }}px;{% endif %}{% if fit == 'contain' %} --rf-fit: contain;{% endif %}">
-  {%- if image -%}
-    {{ image | image_url: width: 1600 | image_tag: loading: loading, sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', alt: image.alt }}
-  {%- elsif asset != blank -%}
-    <img src="{{ asset | asset_url }}" alt="{{ label | escape }}" loading="{{ loading }}" decoding="async" width="1200" height="1200">
+  {%- if image or asset != blank -%}
+    {%- if has_desk -%}
+      {%- capture dsrc -%}
+        {%- if desk_image -%}
+          {%- for w in widths -%}{{ desk_image | image_url: width: w }} {{ w }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}
+        {%- else -%}
+          {%- assign du = desk_asset | asset_url -%}
+          {%- if du contains '?' -%}{%- assign du = du | append: '&' -%}{%- else -%}{%- assign du = du | append: '?' -%}{%- endif -%}
+          {%- for w in widths -%}{{ du }}width={{ w }} {{ w }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}
+        {%- endif -%}
+      {%- endcapture -%}
+      <picture><source media="(min-width: 990px)" srcset="{{ dsrc }}" sizes="{{ desk_sizes | default: sz }}">
+    {%- endif -%}
+    {%- if image -%}
+      {{ image | image_url: width: 1600 | image_tag: loading: loading, fetchpriority: fp, decoding: 'async', sizes: sz, widths: '360, 540, 720, 900, 1200, 1600', alt: image.alt }}
+    {%- else -%}
+      {%- assign u = asset | asset_url -%}
+      {%- if u contains '?' -%}{%- assign u = u | append: '&' -%}{%- else -%}{%- assign u = u | append: '?' -%}{%- endif -%}
+      <img src="{{ u }}width=1200" srcset="{%- for w in widths -%}{{ u }}width={{ w }} {{ w }}w{% unless forloop.last %}, {% endunless %}{%- endfor -%}" sizes="{{ sz }}" alt="{{ label | escape }}" width="1200" height="{{ h }}" loading="{{ loading }}"{% if priority %} fetchpriority="high"{% endif %} decoding="async">
+    {%- endif -%}
+    {%- if has_desk -%}</picture>{%- endif -%}
   {%- else -%}
     <div class="rf-media__ph" role="img" aria-label="{{ label | escape }}"><span>{{ label }}</span></div>
   {%- endif -%}
 </div>
 {% stylesheet %}
   .rf-media { position: relative; width: 100%; overflow: hidden; border-radius: var(--rf-media-radius, 0); background: #DCCFFF; }
-  .rf-media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: var(--rf-fit, cover); }
+  .rf-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: var(--rf-fit, cover); }
   .rf-media__ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(135deg, #DCCFFF, #C9B8FA); color: #1E0F4A; font-size: 12px; line-height: 1.4; text-align: center; }
 {% endstylesheet %}

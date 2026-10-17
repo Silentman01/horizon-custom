@@ -17,6 +17,18 @@
       <div class="rf-cta__img">{% render 'refrain-media', image: section.settings.image, asset: section.settings.image_asset, ratio: '4 / 3', label: 'Photo : moment d’émotion pendant l’écoute d’une chanson offerte', radius: 22, sizes: '(min-width: 990px) 520px, 90vw' %}</div>
     {%- endif -%}
   </div>
+  {%- if section.settings.sticky_enable and section.settings.sticky_label != blank -%}
+    {%- liquid
+      assign sticky_href = section.settings.button_link | default: '/products/chanson-personnalisee'
+      if template.suffix == 'refrain'
+        assign sticky_href = '#quiz'
+      endif
+    -%}
+    {%- comment -%} Mobile-only sticky CTA: hidden while the hero/quiz, this section or the footer is on screen. {%- endcomment -%}
+    <refrain-sticky class="rf-sticky" hidden>
+      <a class="rf-btn rf-sticky__btn" href="{{ sticky_href }}">{{ section.settings.sticky_label | escape }} {% render 'refrain-icon', name: 'arrow' %}</a>
+    </refrain-sticky>
+  {%- endif -%}
 </section>
 {% stylesheet %}
   .rf-cta { font-family: var(--rf-sans); padding: 56px 0; background: var(--rf-lilac); }
@@ -37,7 +49,47 @@
   @media (min-width: 990px) {
     .rf-cta__inner.has-img { grid-template-columns: 1fr 1fr; align-items: center; gap: 72px; }
   }
+  .rf-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgb(248 245 255 / .94); box-shadow: 0 -8px 24px rgb(30 15 74 / .12); transform: translateY(110%); visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .rf-sticky.is-on { transform: none; visibility: visible; transition: transform .25s ease; }
+  .rf-sticky__btn { width: 100%; min-height: 52px; }
+  .rf-sticky__btn svg { width: 20px; height: 20px; }
+  @media (min-width: 750px) { .rf-sticky { display: none !important; } }
+  @supports (backdrop-filter: blur(8px)) { .rf-sticky { backdrop-filter: blur(8px); } }
 {% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('refrain-sticky')) {
+    class RefrainSticky extends HTMLElement {
+      connectedCallback() {
+        if (!('IntersectionObserver' in window)) return;
+        this.hidden = false;
+        const blockers = [...document.querySelectorAll('#quiz, .rf-hero, .rf-cta, footer, .shopify-section-group-footer-group')];
+        const seen = new Set();
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));
+          const on = seen.size === 0 && window.scrollY > window.innerHeight * 0.6;
+          this.classList.toggle('is-on', on);
+          this.inert = !on;
+        });
+        blockers.forEach((b) => io.observe(b));
+        this.inert = true;
+        /* Re-evaluate once the visitor scrolls past the first screen. */
+        window.addEventListener('scroll', () => { if (seen.size === 0) { const on = window.scrollY > window.innerHeight * 0.6; this.classList.toggle('is-on', on); this.inert = !on; } }, { passive: true });
+        this.querySelector('a').addEventListener('click', (e) => {
+          const href = e.currentTarget.getAttribute('href');
+          if (href.charAt(0) !== '#') return;
+          const t = document.querySelector(href);
+          if (!t) return;
+          e.preventDefault();
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          const f = t.querySelector('input, button');
+          if (f) setTimeout(() => f.focus({ preventScroll: true }), reduce ? 0 : 500);
+        });
+      }
+    }
+    customElements.define('refrain-sticky', RefrainSticky);
+  }
+{% endjavascript %}
 {% schema %}
 {
   "name": "Refrain · CTA",
@@ -50,7 +102,10 @@
     { "type": "url", "id": "button_link", "label": "Button link" },
     { "type": "text", "id": "note", "label": "Note", "default": "Écoutez avant de payer" },
     { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "image_asset", "label": "Theme asset file name", "default": "refrain-cta.jpg" }
+    { "type": "text", "id": "image_asset", "label": "Theme asset file name", "default": "refrain-cta.jpg" },
+    { "type": "header", "content": "Mobile sticky button" },
+    { "type": "checkbox", "id": "sticky_enable", "label": "Show sticky button on mobile", "default": true, "info": "Appears after the first screen; hidden while the hero, the quiz, this section or the footer is visible. On the Refrain product template it scrolls to the quiz." },
+    { "type": "text", "id": "sticky_label", "label": "Sticky button label", "default": "Créer son extrait gratuit" }
   ],
   "presets": [{ "name": "Refrain · CTA" }]
 }

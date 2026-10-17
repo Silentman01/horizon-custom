@@ -18,8 +18,6 @@
         "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
         "button_label": "Créer son extrait gratuit",
         "button_link": "/products/chanson-personnalisee#quiz",
-        "secondary_label": "Écouter des exemples",
-        "secondary_link": "#examples",
         "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
         "image_asset": "refrain-hero-desktop.jpg",
         "mobile_image_asset": "refrain-hero-mobile.jpg",
@@ -76,66 +74,6 @@
         "b4",
         "b5",
         "b6"
-      ]
-    },
-    "examples": {
-      "type": "refrain-examples",
-      "settings": {
-        "anchor_id": "examples",
-        "background": "page",
-        "eyebrow": "Exemples",
-        "heading": "Écoutez des *exemples*",
-        "sub": "Quatre chansons, quatre histoires. La vôtre sera écrite à partir de vos réponses.",
-        "button_label": "Créer son extrait gratuit",
-        "button_link": "/products/chanson-personnalisee#quiz"
-      },
-      "blocks": {
-        "b1": {
-          "type": "example",
-          "settings": {
-            "name": "Nathalie",
-            "recipient_line": "Pour sa maman · Fête des mères",
-            "style": "",
-            "lyrics": "Nathalie, Nathalie\nC'est ton prénom qu'on chante aujourd'hui\nPour chaque nuit où tu veillais sur nous\nNathalie, merci pour tout",
-            "audio_asset": "refrain-demo-maman.mp3"
-          }
-        },
-        "b2": {
-          "type": "example",
-          "settings": {
-            "name": "Camille",
-            "recipient_line": "Pour sa future femme · Mariage",
-            "style": "",
-            "lyrics": "Camille, aujourd'hui je dis oui\nOui pour la vie, oui pour nos nuits\nDevant tous ceux qu'on aime, je promets\nCamille, toi et moi, pour de vrai",
-            "audio_asset": "refrain-demo-camille.mp3"
-          }
-        },
-        "b3": {
-          "type": "example",
-          "settings": {
-            "name": "Mamie Jeanne",
-            "recipient_line": "Pour sa grand-mère · 90 ans",
-            "style": "",
-            "lyrics": "Jeanne, ma Mamie Jeanne\nTon rire est resté dans nos âmes\nQuatre-vingt-dix printemps et tant d'amour\nJeanne, on t'aime pour toujours",
-            "audio_asset": "refrain-demo-mamie.mp3"
-          }
-        },
-        "b4": {
-          "type": "example",
-          "settings": {
-            "name": "Lucas",
-            "recipient_line": "Pour son meilleur ami · 30 ans",
-            "style": "",
-            "lyrics": "Lucas, Lucas, trente ans ce soir\nLève ton verre, c'est ton histoire\nOn chante ton nom jusqu'au matin\nLucas, le meilleur reste à venir, c'est certain",
-            "audio_asset": "refrain-demo-lucas.mp3"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
       ]
     },
     "timeline": {
@@ -628,7 +566,6 @@
   "order": [
     "hero",
     "marquee",
-    "examples",
     "timeline",
     "occasions",
     "reviews",

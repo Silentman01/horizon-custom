@@ -9,18 +9,38 @@
       </ul>
     {%- endfor -%}
   </div>
+  <button type="button" class="rf-marquee__toggle" aria-pressed="false" aria-label="Mettre le défilement en pause" data-rf-marquee>
+    <span class="rf-marquee__ic rf-marquee__ic--pause">{% render 'refrain-icon', name: 'pause' %}</span>
+    <span class="rf-marquee__ic rf-marquee__ic--play">{% render 'refrain-icon', name: 'play' %}</span>
+  </button>
 </section>
 {% stylesheet %}
-  .rf-marquee { overflow: hidden; background: var(--rf-ink); color: #fff; padding: 18px 0; font-family: var(--rf-sans); }
+  .rf-marquee { position: relative; overflow: hidden; background: var(--rf-ink); color: #fff; padding: 18px 0; font-family: var(--rf-sans); }
   .rf-marquee__track { display: flex; width: max-content; animation: rf-marquee var(--rf-marquee-speed, 30s) linear infinite; }
-  .rf-marquee:hover .rf-marquee__track { animation-play-state: paused; }
+  .rf-marquee:hover .rf-marquee__track, .rf-marquee.is-paused .rf-marquee__track { animation-play-state: paused; }
+  .rf-marquee__toggle { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); cursor: pointer; box-shadow: -14px 0 14px var(--rf-ink); }
+  .rf-marquee__toggle:focus-visible { outline: 3px solid var(--rf-lime); outline-offset: -3px; }
+  .rf-marquee__ic { display: grid; }
+  .rf-marquee__ic .rf-icon { width: 18px; height: 18px; }
+  .rf-marquee__ic--play, .rf-marquee.is-paused .rf-marquee__ic--pause { display: none; }
+  .rf-marquee.is-paused .rf-marquee__ic--play { display: grid; }
   .rf-marquee__list { display: flex; flex: none; margin: 0; padding: 0; list-style: none; }
   .rf-marquee__item { display: flex; align-items: center; white-space: nowrap; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
   .rf-marquee__item::after { content: ''; width: 8px; height: 8px; margin: 0 28px; border-radius: 50%; background: var(--rf-lime); }
   @keyframes rf-marquee { to { transform: translateX(-50%); } }
   @media (min-width: 750px) { .rf-marquee { padding: 22px 0; } .rf-marquee__item { font-size: 17px; } }
-  @media (prefers-reduced-motion: reduce) { .rf-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; } .rf-marquee__list[aria-hidden] { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .rf-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; } .rf-marquee__list[aria-hidden] { display: none; } .rf-marquee__toggle { display: none; } }
 {% endstylesheet %}
+{% javascript %}
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-rf-marquee]');
+    if (!b) return;
+    const m = b.closest('.rf-marquee');
+    const paused = m.classList.toggle('is-paused');
+    b.setAttribute('aria-pressed', String(paused));
+    b.setAttribute('aria-label', paused ? 'Relancer le défilement' : 'Mettre le défilement en pause');
+  });
+{% endjavascript %}
 {% schema %}
 {
   "name": "Refrain · Marquee",

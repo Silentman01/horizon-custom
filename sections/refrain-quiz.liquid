@@ -1,6 +1,8 @@
 {%- comment -%}
   Refrain quiz: 9-step questionnaire -> free preview (POST/poll backend) -> player + offer -> AJAX cart -> checkout.
-  API contract: G:\Ecom\Products\Refrain\08_backend\API_CONTRACT.md
+  API contract (v2): G:\Ecom\Products\Refrain\08_backend\API_CONTRACT.md
+  Security: the read_token lives in memory/sessionStorage only; the resume link (#p=<id>.<token>) is stripped from the
+  address bar before any tracker loads; the Meta Pixel only loads with marketing consent (Shopify Customer Privacy API).
 {%- endcomment -%}
 {%- liquid
   assign p = section.settings.product | default: product
@@ -32,6 +34,19 @@
   assign st7 = sbs[6]
   assign st8 = sbs[7]
   assign st9 = sbs[8]
+  assign uid = 'rfq-' | append: section.id
+  assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
+  assign terms_url = shop.terms_of_service.url | default: '/policies/terms-of-service'
+  assign price_std = 39
+  assign price_prem = 49
+  if v_std
+    assign price_std = v_std.price | divided_by: 100.0
+  endif
+  if v_prem
+    assign price_prem = v_prem.price | divided_by: 100.0
+  endif
+  assign std_pts = section.settings.std_points | newline_to_br | split: '<br />'
+  assign prem_pts = section.settings.prem_points | newline_to_br | split: '<br />'
 -%}
 {% render 'refrain-fonts' %}
 <section
@@ -45,12 +60,15 @@
     data-api="{{ section.settings.api_base | escape }}"
     data-std="{{ v_std.id }}"
     data-prem="{{ v_prem.id | default: v_std.id }}"
+    data-std-price="{{ price_std }}"
+    data-prem-price="{{ price_prem }}"
     data-demo-audio="{{ demo_src }}"
     data-demo-title="{{ section.settings.demo_title | escape }}"
     data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
     data-force-demo="{{ section.settings.force_demo }}"
-    data-pid="{{ p.id }}"
     data-pixel="{{ section.settings.pixel_id | escape }}"
+    data-turnstile="{{ section.settings.turnstile_site_key | escape }}"
+    data-fail-text="{{ section.settings.fail_text | escape }}"
   >
     <header class="rf-quiz__head">
       {%- if section.settings.eyebrow != blank -%}<p class="rf-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
@@ -67,120 +85,162 @@
     </header>
 
     <div class="rf-quiz__card" data-card>
+      <p class="rf-sr" aria-live="polite" data-live></p>
+
       <div class="rf-quiz__resume" data-resume hidden>
         <p>{{ section.settings.resume_text }}</p>
-        <div>
+        <div class="rf-quiz__resume-actions">
           <button type="button" class="rf-btn" data-resume-yes>Continuer</button>
           <button type="button" class="rf-link" data-resume-no>Recommencer</button>
         </div>
       </div>
 
       <form class="rf-quiz__form" data-form novalidate>
-        <div class="rf-quiz__progress" aria-hidden="true">
-          <span class="rf-quiz__count"><b data-step-num>1</b> / 9</span>
-          <span class="rf-quiz__bar"><i data-bar></i></span>
+        <div class="rf-quiz__progress">
+          <span class="rf-quiz__count" data-step-label>Étape 1 sur 9</span>
+          <span class="rf-quiz__bar" aria-hidden="true"><i data-bar></i></span>
         </div>
 
         {%- comment -%} STEP 1 recipient {%- endcomment -%}
-        <fieldset class="rf-step" data-step="1">
+        <fieldset class="rf-step" data-step="1" aria-describedby="{{ uid }}-h1">
           <legend class="rf-step__t">{{ st1.settings.title }}</legend>
-          <p class="rf-step__help">{{ st1.settings.help }}</p>
+          <p class="rf-step__help" id="{{ uid }}-h1">{{ st1.settings.help }}</p>
           <div class="rf-chips" data-group="recipient" data-required>
             {%- assign opts = st1.settings.options | split: ',' -%}
             {%- for o in opts -%}{%- assign o = o | strip -%}
-              <label class="rf-chip"><input type="radio" name="recipient" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+              <label class="rf-chip"><input type="radio" name="recipient" value="{{ o | handleize }}"><span>{{ o }}</span></label>
             {%- endfor -%}
           </div>
-          <label class="rf-field" data-other="recipient" hidden><span>Précisez</span><input type="text" name="recipient_other" maxlength="80" placeholder="{{ st1.settings.placeholder | escape }}"></label>
+          <div class="rf-field" data-other="recipient" hidden>
+            <label for="{{ uid }}-recipient-other">Précisez pour qui</label>
+            <input id="{{ uid }}-recipient-other" type="text" name="recipient_other" maxlength="80" autocomplete="off" placeholder="{{ st1.settings.placeholder | escape }}">
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 2 occasion {%- endcomment -%}
-        <fieldset class="rf-step" data-step="2" hidden>
+        <fieldset class="rf-step" data-step="2" aria-describedby="{{ uid }}-h2" hidden>
           <legend class="rf-step__t">{{ st2.settings.title }}</legend>
-          <p class="rf-step__help">{{ st2.settings.help }}</p>
+          <p class="rf-step__help" id="{{ uid }}-h2">{{ st2.settings.help }}</p>
           <div class="rf-chips" data-group="occasion" data-required>
             {%- assign opts = st2.settings.options | split: ',' -%}
             {%- for o in opts -%}{%- assign o = o | strip -%}
-              <label class="rf-chip"><input type="radio" name="occasion" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+              <label class="rf-chip"><input type="radio" name="occasion" value="{{ o | handleize }}"><span>{{ o }}</span></label>
             {%- endfor -%}
           </div>
-          <label class="rf-field" data-other="occasion" hidden><span>Précisez</span><input type="text" name="occasion_other" maxlength="80"></label>
+          <div class="rf-field" data-other="occasion" hidden>
+            <label for="{{ uid }}-occasion-other">Précisez l’occasion</label>
+            <input id="{{ uid }}-occasion-other" type="text" name="occasion_other" maxlength="80" autocomplete="off">
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 3 name {%- endcomment -%}
-        <fieldset class="rf-step" data-step="3" hidden>
+        <fieldset class="rf-step" data-step="3" aria-describedby="{{ uid }}-h3" hidden>
           <legend class="rf-step__t">{{ st3.settings.title }}</legend>
-          <p class="rf-step__help">{{ st3.settings.help }}</p>
-          <label class="rf-field"><span>Prénom ou surnom</span><input type="text" name="name" maxlength="60" required autocomplete="off" placeholder="{{ st3.settings.placeholder | escape }}"></label>
-          <label class="rf-field"><span>Prononciation (facultatif)</span><input type="text" name="pronunciation" maxlength="90" autocomplete="off" placeholder="{{ st3.settings.placeholder_2 | escape }}"></label>
+          <p class="rf-step__help" id="{{ uid }}-h3">{{ st3.settings.help }}</p>
+          <div class="rf-field">
+            <label for="{{ uid }}-name">Prénom ou surnom</label>
+            <input id="{{ uid }}-name" type="text" name="name" maxlength="60" required autocomplete="off" autocapitalize="words" placeholder="{{ st3.settings.placeholder | escape }}">
+          </div>
+          <div class="rf-field">
+            <label for="{{ uid }}-pron">Prononciation <span class="rf-opt">(facultatif)</span></label>
+            <input id="{{ uid }}-pron" type="text" name="pronunciation" maxlength="60" autocomplete="off" placeholder="{{ st3.settings.placeholder_2 | escape }}" aria-describedby="{{ uid }}-pron-help">
+            <small class="rf-field__help" id="{{ uid }}-pron-help">Écrivez le prénom comme il se dit, en séparant les syllabes (par exemple « Ma-é-lisse »). C’est ce que la voix chantera.</small>
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 4 style + voice {%- endcomment -%}
-        <fieldset class="rf-step" data-step="4" hidden>
+        <fieldset class="rf-step" data-step="4" aria-describedby="{{ uid }}-h4" hidden>
           <legend class="rf-step__t">{{ st4.settings.title }}</legend>
-          <p class="rf-step__help">{{ st4.settings.help }}</p>
-          <p class="rf-step__group">Style musical</p>
-          <div class="rf-chips" data-group="style" data-required>
-            {%- assign opts = st4.settings.options | split: ',' -%}
-            {%- for o in opts -%}{%- assign o = o | strip -%}
-              <label class="rf-chip"><input type="radio" name="style" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
-            {%- endfor -%}
-          </div>
-          <p class="rf-step__group">Voix</p>
-          <div class="rf-chips" data-group="voice" data-required>
-            {%- assign opts = st4.settings.options_2 | split: ',' -%}
-            {%- for o in opts -%}{%- assign o = o | strip -%}
-              <label class="rf-chip"><input type="radio" name="voice" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
-            {%- endfor -%}
-          </div>
+          <p class="rf-step__help" id="{{ uid }}-h4">{{ st4.settings.help }}</p>
+          <fieldset class="rf-sub-group">
+            <legend class="rf-step__group">Style musical</legend>
+            <div class="rf-chips" data-group="style" data-required>
+              {%- assign opts = st4.settings.options | split: ',' -%}
+              {%- for o in opts -%}{%- assign o = o | strip -%}
+                <label class="rf-chip"><input type="radio" name="style" value="{{ o | handleize }}"><span>{{ o }}</span></label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
+          <fieldset class="rf-sub-group">
+            <legend class="rf-step__group">Voix</legend>
+            <div class="rf-chips" data-group="voice" data-required>
+              {%- assign opts = st4.settings.options_2 | split: ',' -%}
+              {%- for o in opts -%}{%- assign o = o | strip -%}
+                <label class="rf-chip"><input type="radio" name="voice" value="{{ o | handleize }}"><span>{{ o }}</span></label>
+              {%- endfor -%}
+            </div>
+          </fieldset>
         </fieldset>
 
         {%- comment -%} STEP 5 qualities {%- endcomment -%}
-        <fieldset class="rf-step" data-step="5" hidden>
+        <fieldset class="rf-step" data-step="5" aria-describedby="{{ uid }}-h5" hidden>
           <legend class="rf-step__t">{{ st5.settings.title }}</legend>
-          <p class="rf-step__help">{{ st5.settings.help }}</p>
+          <p class="rf-step__help" id="{{ uid }}-h5">{{ st5.settings.help }}</p>
           <div class="rf-chips" data-group="qualities" data-required data-max="3">
             {%- assign opts = st5.settings.options | split: ',' -%}
             {%- for o in opts -%}{%- assign o = o | strip -%}
-              <label class="rf-chip"><input type="checkbox" name="qualities" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+              <label class="rf-chip"><input type="checkbox" name="qualities" value="{{ o | handleize }}"><span>{{ o }}</span></label>
             {%- endfor -%}
           </div>
-          <label class="rf-field"><span>Un détail en plus (facultatif)</span><input type="text" name="qualities_text" maxlength="300" placeholder="{{ st5.settings.placeholder | escape }}"></label>
+          <div class="rf-field">
+            <label for="{{ uid }}-qtext">Un détail en plus <span class="rf-opt">(facultatif)</span></label>
+            <input id="{{ uid }}-qtext" type="text" name="qualities_text" maxlength="300" autocomplete="off" placeholder="{{ st5.settings.placeholder | escape }}">
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 6 memory {%- endcomment -%}
-        <fieldset class="rf-step" data-step="6" hidden>
+        <fieldset class="rf-step" data-step="6" aria-describedby="{{ uid }}-h6" hidden>
           <legend class="rf-step__t">{{ st6.settings.title }}</legend>
-          <p class="rf-step__help">{{ st6.settings.help }}</p>
-          <label class="rf-field"><span>Votre souvenir</span><textarea name="memory" rows="5" minlength="20" maxlength="600" required placeholder="{{ st6.settings.placeholder | escape }}"></textarea><small class="rf-count" data-count-for="memory">0 / 600</small></label>
+          <p class="rf-step__help" id="{{ uid }}-h6">{{ st6.settings.help }}</p>
+          <div class="rf-field">
+            <label for="{{ uid }}-memory">Votre souvenir</label>
+            <textarea id="{{ uid }}-memory" name="memory" rows="5" minlength="20" maxlength="600" required placeholder="{{ st6.settings.placeholder | escape }}" aria-describedby="{{ uid }}-memory-count"></textarea>
+            <small class="rf-count" id="{{ uid }}-memory-count" data-count-for="memory" data-min="20">0 / 600 · 20 caractères minimum</small>
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 7 message {%- endcomment -%}
-        <fieldset class="rf-step" data-step="7" hidden>
+        <fieldset class="rf-step" data-step="7" aria-describedby="{{ uid }}-h7" hidden>
           <legend class="rf-step__t">{{ st7.settings.title }}</legend>
-          <p class="rf-step__help">{{ st7.settings.help }}</p>
-          <label class="rf-field"><span>Votre message (facultatif)</span><textarea name="message" rows="4" maxlength="400" placeholder="{{ st7.settings.placeholder | escape }}"></textarea><small class="rf-count" data-count-for="message">0 / 400</small></label>
+          <p class="rf-step__help" id="{{ uid }}-h7">{{ st7.settings.help }}</p>
+          <div class="rf-field">
+            <label for="{{ uid }}-message">Votre message <span class="rf-opt">(facultatif)</span></label>
+            <textarea id="{{ uid }}-message" name="message" rows="4" maxlength="400" placeholder="{{ st7.settings.placeholder | escape }}" aria-describedby="{{ uid }}-message-count"></textarea>
+            <small class="rf-count" id="{{ uid }}-message-count" data-count-for="message">0 / 400</small>
+          </div>
         </fieldset>
 
         {%- comment -%} STEP 8 language {%- endcomment -%}
-        <fieldset class="rf-step" data-step="8" hidden>
+        <fieldset class="rf-step" data-step="8" aria-describedby="{{ uid }}-h8" hidden>
           <legend class="rf-step__t">{{ st8.settings.title }}</legend>
-          <p class="rf-step__help">{{ st8.settings.help }}</p>
+          <p class="rf-step__help" id="{{ uid }}-h8">{{ st8.settings.help }}</p>
           <div class="rf-chips" data-group="language" data-required>
-            <label class="rf-chip"><input type="radio" name="language" value="fr" data-label="Français" checked><span>Français</span></label>
-            <label class="rf-chip"><input type="radio" name="language" value="en" data-label="Anglais"><span>Anglais</span></label>
+            <label class="rf-chip"><input type="radio" name="language" value="fr" checked><span>Français</span></label>
+            <label class="rf-chip"><input type="radio" name="language" value="en"><span>Anglais</span></label>
           </div>
         </fieldset>
 
         {%- comment -%} STEP 9 email {%- endcomment -%}
-        <fieldset class="rf-step" data-step="9" hidden>
+        <fieldset class="rf-step" data-step="9" aria-describedby="{{ uid }}-h9" hidden>
           <legend class="rf-step__t">{{ st9.settings.title }}</legend>
-          <p class="rf-step__help">{{ st9.settings.help }}</p>
-          <label class="rf-field"><span>Votre e-mail</span><input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="vous@exemple.fr"></label>
-          <label class="rf-consent"><input type="checkbox" name="consent" required><span>{{ st9.settings.placeholder_2 }}</span></label>
+          <p class="rf-step__help" id="{{ uid }}-h9">{{ st9.settings.help }}</p>
+          <div class="rf-field">
+            <label for="{{ uid }}-email">Votre e-mail</label>
+            <input id="{{ uid }}-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="vous@exemple.fr">
+          </div>
+          <label class="rf-check" for="{{ uid }}-consent">
+            <input id="{{ uid }}-consent" type="checkbox" name="consent" required>
+            <span>{{ st9.settings.placeholder_2 }}</span>
+          </label>
+          <label class="rf-check" for="{{ uid }}-reminders">
+            <input id="{{ uid }}-reminders" type="checkbox" name="reminders_opt_in">
+            <span>Je souhaite recevoir un rappel par e-mail si je n’ai pas encore commandé. <span class="rf-opt">(facultatif)</span></span>
+          </label>
+          <p class="rf-privacy">{% render 'refrain-icon', name: 'lock' %}<span>Vos réponses et votre e-mail servent à créer votre extrait. Pour en savoir plus, consultez notre <a href="{{ privacy_url }}" target="_blank" rel="noopener">politique de confidentialité<span class="rf-sr"> (nouvel onglet)</span></a>.</span></p>
+          <div class="rf-turnstile" data-ts hidden></div>
         </fieldset>
 
-        <p class="rf-quiz__err" data-err role="alert" hidden></p>
+        <p class="rf-quiz__err" id="{{ uid }}-err" data-err role="alert" hidden></p>
 
         <div class="rf-quiz__nav">
           <button type="button" class="rf-btn rf-btn--ghost" data-back hidden>Retour</button>
@@ -188,25 +248,37 @@
             <span data-next-label>Continuer</span>{% render 'refrain-icon', name: 'arrow' %}
           </button>
         </div>
-        <p class="rf-quiz__fine">{{ section.settings.fine_print }}</p>
+        {%- if section.settings.fine_print != blank -%}<p class="rf-quiz__fine">{{ section.settings.fine_print }}</p>{%- endif -%}
       </form>
 
       {%- comment -%} LOADING {%- endcomment -%}
-      <div class="rf-load" data-loading hidden aria-live="polite">
+      <div class="rf-load" data-loading hidden>
         <p class="rf-eyebrow">{{ section.settings.load_kicker }}</p>
-        <p class="rf-load__t">{{ section.settings.load_title }}</p>
-        <ol class="rf-load__steps">
+        <h2 class="rf-load__t" tabindex="-1" data-load-title>{{ section.settings.load_title }}</h2>
+        <ol class="rf-load__steps" aria-hidden="true">
           <li data-stage="1"><span></span>Histoire</li>
           <li data-stage="2"><span></span>Paroles</li>
           <li data-stage="3"><span></span>Musique</li>
           <li data-stage="4"><span></span>Extrait</li>
         </ol>
-        <span class="rf-load__bar"><i data-load-bar></i></span>
+        <span class="rf-load__bar" aria-hidden="true"><i data-load-bar></i></span>
+        <p class="rf-sr" role="status" data-load-live></p>
         <p class="rf-load__note" data-load-note>{{ section.settings.load_note }}</p>
-        <p class="rf-load__slow" data-slow hidden>{{ section.settings.load_slow }}</p>
-        <div class="rf-load__fail" data-fail hidden>
-          <p>{{ section.settings.fail_text }}</p>
-          <button type="button" class="rf-btn" data-retry>Réessayer</button>
+        <div class="rf-load__slow" data-slow role="status" hidden>
+          {% render 'refrain-icon', name: 'mail' %}
+          <p>{{ section.settings.load_slow }}</p>
+          <p class="rf-load__addr" data-slow-addr hidden>Adresse indiquée : <b data-slow-email></b></p>
+          <div class="rf-load__actions">
+            <button type="button" class="rf-btn rf-btn--ghost" data-check>Vérifier si l’extrait est prêt</button>
+          </div>
+        </div>
+        <div class="rf-load__fail" data-fail role="alert" hidden>
+          <p data-fail-msg></p>
+          <div class="rf-load__actions">
+            <button type="button" class="rf-btn" data-retry>Réessayer</button>
+            <button type="button" class="rf-link" data-edit>Modifier mes réponses</button>
+            <button type="button" class="rf-link" data-new hidden>Créer un nouvel extrait</button>
+          </div>
         </div>
       </div>
 
@@ -215,41 +287,58 @@
         <p class="rf-demo-note" data-demo-note hidden>{{ section.settings.demo_note }}</p>
         <div class="rf-player">
           <p class="rf-player__k">{{ section.settings.player_kicker }} <b data-r-name></b></p>
-          <p class="rf-player__t" data-r-title></p>
+          <h2 class="rf-player__t" tabindex="-1" data-r-title></h2>
           <div class="rf-player__ctrl">
-            <button type="button" class="rf-player__btn" data-play aria-label="Lecture">
+            <button type="button" class="rf-player__btn" data-play aria-label="Écouter l’extrait">
               <span data-ico-play>{% render 'refrain-icon', name: 'play' %}</span>
               <span data-ico-pause hidden>{% render 'refrain-icon', name: 'pause' %}</span>
             </button>
             <div class="rf-player__track">
-              <span class="rf-player__prog"><i data-prog></i></span>
-              <span class="rf-player__time"><span data-cur>0:00</span><span data-dur>0:00</span></span>
+              <div class="rf-player__seek" data-seek role="slider" tabindex="0" aria-label="Position dans l’extrait" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" aria-valuetext="0:00">
+                <span class="rf-player__prog"><i data-prog></i></span>
+              </div>
+              <span class="rf-player__time" aria-hidden="true"><span data-cur>0:00</span><span data-dur>0:00</span></span>
             </div>
           </div>
-          <audio data-audio preload="metadata"></audio>
+          <p class="rf-player__hint" data-play-hint role="status" hidden></p>
+          <audio data-audio preload="none" playsinline></audio>
           <pre class="rf-player__lyrics" data-lyrics></pre>
-          <p class="rf-player__ended" data-ended hidden>{{ section.settings.player_ended }}</p>
-          <p class="rf-player__note">{{ section.settings.player_note }}</p>
+          <p class="rf-player__ended" data-ended role="status" hidden>{{ section.settings.player_ended }}</p>
+          {%- if section.settings.player_note != blank -%}<p class="rf-player__note">{{ section.settings.player_note }}</p>{%- endif -%}
         </div>
 
         <div class="rf-offer">
           {% render 'refrain-title', text: section.settings.offer_heading, tag: 'h2', class: 'rf-offer__h' %}
-          <div class="rf-tiers" role="radiogroup">
+          <fieldset class="rf-tiers">
+            <legend class="rf-sr">Choisissez votre formule</legend>
             <label class="rf-tier">
               <input type="radio" name="tier" value="standard" checked>
-              <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{{ v_std.price | money_without_trailing_zeros | default: '39 €' }}</b></span>
-              <span class="rf-tier__list">{{ section.settings.std_points | newline_to_br }}</span>
+              <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{% if v_std %}{{ v_std.price | money_without_trailing_zeros }}{% else %}39 €{% endif %}</b></span>
+              <ul class="rf-tier__list">
+                {%- for pt in std_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
+              </ul>
             </label>
             <label class="rf-tier rf-tier--prem">
               <input type="radio" name="tier" value="premium">
               {%- if section.settings.prem_badge != blank -%}<span class="rf-tier__badge">{{ section.settings.prem_badge }}</span>{%- endif -%}
               <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}49 €{% endif %}</b></span>
-              <span class="rf-tier__list">{{ section.settings.prem_points | newline_to_br }}</span>
+              {%- if v_prem and v_std and v_prem.price > v_std.price -%}
+                {%- assign diff = v_prem.price | minus: v_std.price -%}
+                <span class="rf-tier__delta">+{{ diff | money_without_trailing_zeros }} par rapport au {{ section.settings.std_name }}</span>
+              {%- endif -%}
+              <ul class="rf-tier__list rf-tier__list--prem">
+                {%- for pt in prem_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
+              </ul>
             </label>
-          </div>
-          <button type="button" class="rf-btn rf-offer__cta" data-buy data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
+          </fieldset>
+          <label class="rf-check rf-waiver" for="{{ uid }}-waiver">
+            <input id="{{ uid }}-waiver" type="checkbox" data-waiver required>
+            <span>Je demande l’exécution immédiate et je reconnais perdre mon droit de rétractation une fois la chanson livrée (<a href="{{ terms_url }}" target="_blank" rel="noopener">conditions générales de vente<span class="rf-sr"> (nouvel onglet)</span></a>).</span>
+          </label>
+          <button type="button" class="rf-btn rf-offer__cta" data-buy disabled aria-describedby="{{ uid }}-buyhint" data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
+          <p class="rf-offer__hint" id="{{ uid }}-buyhint" data-buy-hint>Cochez la case ci-dessus pour commander. Utilisez la même adresse e-mail que pour l’extrait.</p>
           <p class="rf-offer__err" data-buy-err role="alert" hidden>{{ section.settings.cart_error }}</p>
-          <p class="rf-offer__fine">{% render 'refrain-icon', name: 'lock' %}{{ section.settings.cta_fine }}</p>
+          <p class="rf-offer__fine">{% render 'refrain-icon', name: 'lock' %}<span>{{ section.settings.cta_fine }}</span></p>
           {%- if section.settings.after_steps != blank -%}
             <div class="rf-after">
               <p class="rf-after__t">Après votre commande</p>
@@ -271,259 +360,410 @@
   .rf-quiz [hidden] { display: none !important; }
   .rf-quiz__inner { display: block; max-width: 1160px; margin: 0 auto; }
   .rf-quiz__head { text-align: center; max-width: 720px; margin: 0 auto 24px; }
-  .rf-quiz__h1 { font-size: clamp(36px, 7vw, 68px); }
-  .rf-quiz__head .rf-sub { color: var(--rf-ink); opacity: .82; }
+  .rf-quiz__h1 { font-size: clamp(34px, 7vw, 68px); overflow-wrap: break-word; }
+  .rf-quiz__head .rf-sub { color: var(--rf-ink); }
   .rf-quiz__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin: 18px 0 0; padding: 0; list-style: none; font-size: 14px; font-weight: 600; }
   .rf-quiz__badges li { display: inline-flex; align-items: center; gap: 6px; }
-  .rf-quiz__badges .rf-icon { width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); }
-  .rf-quiz__card { position: relative; max-width: 680px; margin: 0 auto; background: var(--rf-card); border-radius: 26px; padding: 22px 18px 20px; box-shadow: 0 24px 60px -24px rgb(30 15 74 / .35); }
+  .rf-quiz__badges .rf-icon { width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); flex: none; }
+  .rf-quiz__card { position: relative; max-width: 680px; margin: 0 auto; background: var(--rf-card); border-radius: 26px; padding: 22px 16px 20px; box-shadow: 0 24px 60px -24px rgb(30 15 74 / .35); scroll-margin-top: 16px; }
   .rf-quiz__progress { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 13px; font-weight: 700; color: var(--rf-ink-soft); }
+  .rf-quiz__count { flex: none; }
   .rf-quiz__bar { flex: 1; height: 8px; border-radius: 99px; background: var(--rf-line); overflow: hidden; }
   .rf-quiz__bar i { display: block; height: 100%; width: 11%; background: var(--rf-violet); border-radius: inherit; transition: width .35s ease; }
-  .rf-step { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .rf-step, .rf-sub-group, .rf-tiers { border: 0; margin: 0; padding: 0; min-width: 0; }
   .rf-step__t { padding: 0; font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
   .rf-step__help { margin: 6px 0 16px; color: var(--rf-ink-soft); font-size: 15px; line-height: 1.5; }
-  .rf-step__group { margin: 14px 0 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--rf-ink-soft); }
+  .rf-step__help:empty { display: none; }
+  .rf-step__group { padding: 0; margin: 14px 0 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--rf-ink-soft); }
   .rf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .rf-chip { position: relative; cursor: pointer; }
-  .rf-chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
-  .rf-chip span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 15px; font-weight: 600; transition: all .15s; }
+  .rf-chip { position: relative; cursor: pointer; max-width: 100%; }
+  .rf-chip input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; margin: 0; cursor: pointer; }
+  .rf-chip span { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 16px; border-radius: 999px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 15px; font-weight: 600; line-height: 1.25; transition: background-color .15s, border-color .15s, color .15s; }
   .rf-chip:hover span { border-color: var(--rf-violet); }
   .rf-chip input:checked + span { background: var(--rf-ink); border-color: var(--rf-ink); color: #fff; }
   .rf-chip input:focus-visible + span { outline: 3px solid var(--rf-violet); outline-offset: 2px; }
+  .rf-chips:has([aria-invalid]) .rf-chip span { border-color: #9b1235; }
+  .rf-opt { font-weight: 500; color: var(--rf-ink-soft); }
   .rf-field { display: grid; gap: 6px; margin-top: 14px; font-size: 14px; font-weight: 600; }
-  .rf-field input, .rf-field textarea { width: 100%; box-sizing: border-box; padding: 14px 16px; border: 1.5px solid var(--rf-line); border-radius: 14px; background: var(--rf-page); font: 500 16px/1.45 var(--rf-sans); color: var(--rf-ink); resize: vertical; }
-  .rf-field input:focus, .rf-field textarea:focus { outline: none; border-color: var(--rf-violet); background: #fff; box-shadow: 0 0 0 4px rgb(106 75 216 / .12); }
-  .rf-count { justify-self: end; font-weight: 500; color: var(--rf-ink-soft); }
-  .rf-consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13px; line-height: 1.45; color: var(--rf-ink-soft); }
-  .rf-consent input { margin-top: 2px; width: 18px; height: 18px; accent-color: var(--rf-ink); flex: none; }
-  .rf-quiz__err, .rf-offer__err { margin: 14px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; }
+  .rf-field input, .rf-field textarea { width: 100%; box-sizing: border-box; min-height: 48px; padding: 12px 16px; border: 1.5px solid #B9ACE0; border-radius: 14px; background: var(--rf-page); font: 500 16px/1.45 var(--rf-sans); color: var(--rf-ink); resize: vertical; }
+  .rf-field input::placeholder, .rf-field textarea::placeholder { color: #6F6694; opacity: 1; }
+  .rf-field input:focus, .rf-field textarea:focus { outline: none; border-color: var(--rf-violet); background: #fff; box-shadow: 0 0 0 3px rgb(106 75 216 / .45); }
+  .rf-field [aria-invalid='true'] { border-color: #9b1235; }
+  .rf-field__help { font-size: 13px; font-weight: 500; line-height: 1.45; color: var(--rf-ink-soft); }
+  .rf-count { justify-self: end; font-size: 13px; font-weight: 500; color: var(--rf-ink-soft); font-variant-numeric: tabular-nums; }
+  .rf-count.is-near { color: #9b1235; font-weight: 700; }
+  .rf-check { display: flex; gap: 12px; align-items: flex-start; min-height: 44px; margin-top: 12px; padding: 4px 0; font-size: 14px; line-height: 1.45; color: var(--rf-ink); cursor: pointer; }
+  .rf-check input { margin: 1px 0 0; width: 22px; height: 22px; accent-color: var(--rf-ink); flex: none; cursor: pointer; }
+  .rf-check input:focus-visible { outline: 3px solid var(--rf-violet); outline-offset: 2px; }
+  .rf-check a, .rf-privacy a { color: var(--rf-ink); font-weight: 700; text-underline-offset: 3px; }
+  .rf-privacy { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--rf-ink-soft); }
+  .rf-privacy .rf-icon { width: 16px; height: 16px; flex: none; margin-top: 2px; }
+  .rf-turnstile { margin-top: 14px; min-height: 0; }
+  .rf-quiz__err, .rf-offer__err { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; line-height: 1.45; }
   .rf-quiz__nav { display: flex; gap: 10px; margin-top: 22px; }
-  .rf-quiz__nav [data-next] { flex: 1; }
-  .rf-quiz__nav .rf-icon { width: 20px; height: 20px; }
+  .rf-quiz__nav [data-next] { flex: 1; min-width: 0; padding: 0 20px; }
+  .rf-quiz__nav [data-back] { padding: 0 20px; }
+  .rf-quiz__nav .rf-icon { width: 20px; height: 20px; flex: none; }
+  .rf-quiz__nav [data-next][aria-busy='true'] { opacity: .6; pointer-events: none; }
   .rf-quiz__fine { margin: 12px 0 0; text-align: center; font-size: 13px; color: var(--rf-ink-soft); }
-  .rf-link { background: none; border: 0; padding: 8px; font: 600 14px var(--rf-sans); color: var(--rf-ink); text-decoration: underline; cursor: pointer; }
-  .rf-quiz__resume { padding: 14px 16px; margin-bottom: 18px; border-radius: 16px; background: var(--rf-page); border: 1.5px dashed var(--rf-line); }
+  .rf-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; background: none; border: 0; padding: 8px 10px; font: 600 14px var(--rf-sans); color: var(--rf-ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .rf-quiz__resume { padding: 14px 16px; margin-bottom: 18px; border-radius: 16px; background: var(--rf-page); border: 1.5px dashed #B9ACE0; }
   .rf-quiz__resume p { margin: 0 0 10px; font-weight: 600; }
-  .rf-quiz__resume .rf-btn { min-height: 44px; }
+  .rf-quiz__resume-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+  .rf-quiz__resume .rf-btn { min-height: 48px; }
   /* loading */
-  .rf-load { text-align: center; padding: 16px 4px; }
-  .rf-load__t { margin: 0 0 18px; font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+  .rf-load { text-align: center; padding: 16px 0; }
+  .rf-load__t { margin: 0 0 18px; font-size: 24px; font-weight: 800; letter-spacing: -0.03em; outline: none; }
   .rf-load__steps { display: flex; justify-content: space-between; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; font-size: 13px; font-weight: 700; color: var(--rf-ink-soft); }
   .rf-load__steps li { flex: 1; display: grid; justify-items: center; gap: 6px; }
-  .rf-load__steps span { width: 14px; height: 14px; border-radius: 50%; background: var(--rf-line); transition: all .3s; }
+  .rf-load__steps span { width: 14px; height: 14px; border-radius: 50%; background: var(--rf-line); transition: background-color .3s, box-shadow .3s; }
   .rf-load__steps li.is-on { color: var(--rf-ink); }
   .rf-load__steps li.is-on span { background: var(--rf-violet); box-shadow: 0 0 0 5px rgb(106 75 216 / .15); }
+  .rf-load__steps li.is-cur span { animation: rf-pulse 1.4s ease-in-out infinite; }
+  @keyframes rf-pulse { 50% { box-shadow: 0 0 0 9px rgb(106 75 216 / .08); } }
   .rf-load__bar { display: block; height: 8px; border-radius: 99px; background: var(--rf-line); overflow: hidden; }
   .rf-load__bar i { display: block; height: 100%; width: 5%; background: var(--rf-violet); transition: width .8s ease; }
-  .rf-load__note, .rf-load__slow { margin: 14px 0 0; font-size: 14px; color: var(--rf-ink-soft); }
-  .rf-load__slow { font-weight: 600; color: var(--rf-ink); }
-  .rf-load__fail p { font-weight: 600; }
+  .rf-load__note { margin: 14px 0 0; font-size: 14px; color: var(--rf-ink-soft); }
+  .rf-load__slow { margin-top: 18px; padding: 16px; border-radius: 16px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 14px; line-height: 1.5; }
+  .rf-load__slow > .rf-icon { width: 28px; height: 28px; color: var(--rf-violet); }
+  .rf-load__slow p { margin: 6px 0 0; font-weight: 600; }
+  .rf-load__slow .rf-load__addr { font-weight: 500; color: var(--rf-ink-soft); overflow-wrap: anywhere; }
+  .rf-load__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 12px; margin-top: 14px; }
+  .rf-load__actions .rf-btn { min-height: 48px; padding: 0 22px; font-size: 15px; }
+  .rf-load__fail { margin-top: 16px; }
+  .rf-load__fail p { margin: 0; padding: 12px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-weight: 600; line-height: 1.5; }
   /* result */
   .rf-demo-note { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--rf-page); border: 1px dashed var(--rf-violet); font-size: 13px; color: var(--rf-ink-soft); }
-  .rf-player { background: var(--rf-ink); color: #fff; border-radius: 22px; padding: 20px; }
+  .rf-player { background: var(--rf-ink); color: #fff; border-radius: 22px; padding: 20px 18px; }
   .rf-player__k { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--rf-lilac); }
   .rf-player__k b { color: var(--rf-lime); }
-  .rf-player__t { margin: 4px 0 14px; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+  .rf-player__t { margin: 4px 0 14px; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; outline: none; }
   .rf-player__ctrl { display: flex; align-items: center; gap: 14px; }
   .rf-player__btn { flex: none; width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--rf-lime); color: var(--rf-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 8px rgb(212 245 60 / .15); }
+  .rf-player__btn:disabled { opacity: .5; cursor: not-allowed; }
+  .rf-player__btn:focus-visible, .rf-player__seek:focus-visible { outline: 3px solid var(--rf-lime) !important; outline-offset: 4px; }
   .rf-player__btn .rf-icon { width: 28px; height: 28px; }
-  .rf-player__track { flex: 1; }
-  .rf-player__prog { display: block; height: 6px; border-radius: 99px; background: rgb(255 255 255 / .18); overflow: hidden; cursor: pointer; }
+  .rf-player__track { flex: 1; min-width: 0; }
+  .rf-player__seek { display: flex; align-items: center; height: 44px; margin: -12px 0 -6px; cursor: pointer; touch-action: none; border-radius: 6px; }
+  .rf-player__prog { display: block; width: 100%; height: 6px; border-radius: 99px; background: rgb(255 255 255 / .25); overflow: hidden; }
   .rf-player__prog i { display: block; height: 100%; width: 0; background: var(--rf-lime); }
-  .rf-player__time { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--rf-lilac); }
-  .rf-player__lyrics { margin: 16px 0 0; padding: 14px; border-radius: 14px; background: rgb(255 255 255 / .06); font: 500 15px/1.6 var(--rf-sans); white-space: pre-wrap; color: #fff; }
+  .rf-player__time { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--rf-lilac); font-variant-numeric: tabular-nums; }
+  .rf-player__hint { margin: 12px 0 0; font-size: 14px; color: var(--rf-lilac); }
+  .rf-player__lyrics { margin: 16px 0 0; padding: 14px; border-radius: 14px; background: rgb(255 255 255 / .06); font: 500 15px/1.6 var(--rf-sans); white-space: pre-wrap; overflow-wrap: anywhere; color: #fff; }
   .rf-player__lyrics:empty { display: none; }
-  .rf-player__note { margin: 12px 0 0; font-size: 13px; color: var(--rf-lilac); }
+  .rf-player__note { margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--rf-lilac); }
+  .rf-player__ended { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: rgb(212 245 60 / .12); color: var(--rf-lime); font-weight: 700; font-size: 14px; }
   .rf-offer { margin-top: 22px; }
   .rf-offer__h { font-size: clamp(24px, 4vw, 34px); margin-bottom: 14px; }
-  .rf-tiers { display: grid; gap: 10px; }
+  .rf-tiers { display: grid; gap: 14px; }
   .rf-tier { position: relative; display: block; padding: 16px 16px 14px 48px; border-radius: 18px; border: 2px solid var(--rf-line); background: var(--rf-page); cursor: pointer; transition: border-color .15s; }
-  .rf-tier input { position: absolute; left: 16px; top: 19px; width: 20px; height: 20px; accent-color: var(--rf-ink); }
+  .rf-tier input { position: absolute; left: 16px; top: 19px; width: 22px; height: 22px; margin: 0; accent-color: var(--rf-ink); }
   .rf-tier:has(input:checked) { border-color: var(--rf-ink); background: #fff; box-shadow: 0 10px 30px -14px rgb(30 15 74 / .4); }
-  .rf-tier__top { display: flex; justify-content: space-between; gap: 10px; font-size: 17px; }
-  .rf-tier__price { font-size: 20px; }
-  .rf-tier__list { display: block; margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--rf-ink-soft); }
+  .rf-tier:has(input:focus-visible) { outline: 3px solid var(--rf-violet); outline-offset: 2px; }
+  .rf-tier__top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font-size: 17px; }
+  .rf-tier__price { font-size: 20px; white-space: nowrap; }
+  .rf-tier__delta { display: inline-block; margin-top: 6px; padding: 2px 10px; border-radius: 99px; background: var(--rf-lilac); font-size: 12.5px; font-weight: 700; }
+  .rf-tier__list { display: grid; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.45; color: var(--rf-ink-soft); }
+  .rf-tier__list li { display: flex; gap: 8px; align-items: flex-start; }
+  .rf-tier__list .rf-icon { flex: none; width: 18px; height: 18px; margin-top: 1px; padding: 3px; border-radius: 50%; background: var(--rf-lilac); color: var(--rf-ink); stroke-width: 2.6; }
+  .rf-tier__list--prem .rf-icon { background: var(--rf-ink); color: var(--rf-lime); }
+  .rf-tier__list--prem li:first-child { color: var(--rf-ink); font-weight: 700; }
   .rf-tier__badge { position: absolute; top: -11px; right: 14px; padding: 3px 10px; border-radius: 99px; background: var(--rf-ink); color: var(--rf-lime); font-size: 12px; font-weight: 700; }
-  .rf-offer__cta { width: 100%; margin-top: 16px; min-height: 58px; font-size: 17px; }
-  .rf-offer__cta[aria-busy="true"], .rf-offer__cta:disabled { opacity: .55; pointer-events: none; }
-  .rf-player__ended { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: rgb(212 245 60 / .12); color: var(--rf-lime); font-weight: 700; font-size: 14px; }
-  .rf-offer__fine { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 10px 0 0; font-size: 12.5px; color: var(--rf-ink-soft); text-align: center; }
-  .rf-offer__fine .rf-icon { width: 15px; height: 15px; flex: none; }
+  .rf-waiver { margin-top: 16px; padding: 12px 14px; border-radius: 14px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 13.5px; }
+  .rf-offer__cta { width: 100%; margin-top: 14px; min-height: 58px; font-size: 17px; }
+  .rf-offer__cta[aria-busy='true'] { opacity: .6; pointer-events: none; }
+  .rf-offer__cta:disabled { background: var(--rf-line); color: var(--rf-ink-soft); cursor: not-allowed; box-shadow: none; transform: none; }
+  .rf-offer__hint { margin: 8px 0 0; font-size: 13px; line-height: 1.45; text-align: center; color: var(--rf-ink-soft); }
+  .rf-offer__fine { display: flex; justify-content: center; align-items: flex-start; gap: 6px; margin: 10px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--rf-ink-soft); text-align: left; }
+  .rf-offer__fine .rf-icon { width: 15px; height: 15px; flex: none; margin-top: 2px; }
   .rf-after { margin-top: 18px; padding: 14px 16px; border-radius: 16px; background: var(--rf-page); }
   .rf-after__t { margin: 0 0 8px; font-weight: 800; }
   .rf-after ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; color: var(--rf-ink-soft); }
-  .rf-offer > .rf-link { display: block; margin: 10px auto 0; }
+  .rf-offer > .rf-link { display: flex; margin: 10px auto 0; }
+  @media (max-width: 399px) { .rf-quiz__nav .rf-btn { font-size: 15px; padding: 0 16px; } .rf-quiz__nav [data-back] { padding: 0 14px; } }
   @media (min-width: 750px) {
     .rf-quiz { padding: 64px 24px 80px; }
     .rf-quiz__card { padding: 34px 38px 28px; }
+    .rf-player { padding: 22px 24px; }
     .rf-tiers { grid-template-columns: 1fr 1fr; }
   }
-  @media (prefers-reduced-motion: reduce) { .rf-quiz *, .rf-quiz *::before { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    .rf-quiz *, .rf-quiz *::before { transition: none !important; }
+    .rf-load__steps li.is-cur span { animation: none !important; }
+  }
 {% endstylesheet %}
 
 {% javascript %}
   if (!customElements.get('refrain-quiz')) {
-    const KEY = 'refrain_quiz_v1';
+    const KEY = 'refrain_quiz_v2';          /* localStorage: answers + step only (no token) */
+    const SKEY = 'refrain_preview_v2';      /* sessionStorage: { id, token } (contract v2) */
     const TTL = 7 * 24 * 3600 * 1000;
     const STEPS = 9;
-    const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const fmt = (s) => { s = isFinite(s) ? Math.max(0, Math.floor(s)) : 0; return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const uuid = () => (window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => { const r = (Math.random() * 16) | 0; return (c === 'x' ? r : (r & 3) | 8).toString(16); }));
     const store = {
       get() { try { const d = JSON.parse(localStorage.getItem(KEY)); return d && Date.now() - d.t < TTL ? d : null; } catch (e) { return null; } },
       set(d) { try { localStorage.setItem(KEY, JSON.stringify({ ...d, t: Date.now() })); } catch (e) {} },
-      clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
+      clear() { try { localStorage.removeItem(KEY); localStorage.removeItem('refrain_quiz_v1'); } catch (e) {} }
+    };
+    const sess = {
+      get() { try { const d = JSON.parse(sessionStorage.getItem(SKEY)); return d && d.id && d.token ? d : null; } catch (e) { return null; } },
+      set(d) { try { sessionStorage.setItem(SKEY, JSON.stringify(d)); } catch (e) {} },
+      clear() { try { sessionStorage.removeItem(SKEY); } catch (e) {} }
+    };
+    /* Shopify Customer Privacy API (audit H3): Pixel and CAPI flag depend on marketing consent. */
+    const privacy = {
+      load(cb) {
+        const S = window.Shopify;
+        if (S && S.customerPrivacy) return cb();
+        if (S && typeof S.loadFeatures === 'function') {
+          try { S.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], () => cb()); } catch (e) { cb(); }
+        } else cb();
+      },
+      marketing() { try { return !!(window.Shopify && Shopify.customerPrivacy && Shopify.customerPrivacy.marketingAllowed()); } catch (e) { return false; } }
     };
     const MSG = {
       choose: 'Choisissez une option pour continuer.',
       name: 'Indiquez son prénom (ou le surnom que vous utilisez).',
-      memory: 'Racontez-nous un souvenir en quelques phrases (20 caractères minimum).',
-      max: 'Choisissez jusqu’à 3 qualités.',
-      email: 'Indiquez une adresse e-mail valide.',
-      consent: 'Merci de cocher la case pour recevoir votre extrait.',
-      other: 'Précisez votre choix.'
+      memory: (n) => 'Racontez un souvenir en quelques phrases : encore ' + n + ' caractère' + (n > 1 ? 's' : '') + ' au minimum.',
+      max: 'Vous pouvez choisir jusqu’à 3 qualités. Retirez-en une pour en ajouter une autre.',
+      email: 'Indiquez une adresse e-mail valide, par exemple prenom@exemple.fr.',
+      consent: 'Cochez cette case pour que nous puissions créer et vous envoyer votre extrait.',
+      other: 'Précisez votre choix en quelques mots.',
+      turnstile: 'Merci de patienter pendant la vérification anti-robot, puis réessayez.',
+      reformulate: 'Merci de reformuler ce passage : certains contenus ne peuvent pas être mis en chanson.',
+      invalid: 'Merci de vérifier ce champ.',
+      rate: (min) => 'Vous avez déjà demandé plusieurs extraits récemment. Pour éviter les abus, nous limitons le nombre d’extraits gratuits. Réessayez ' + (min ? 'dans ' + min + ' minute' + (min > 1 ? 's' : '') : 'un peu plus tard') + ' : vos réponses sont enregistrées.',
+      network: 'Impossible de joindre notre serveur. Vérifiez votre connexion internet, puis réessayez : vos réponses sont enregistrées.',
+      expired: 'Ce lien d’extrait n’est plus valide ou a expiré. Vous pouvez créer un nouvel extrait, vos réponses sont gardées sur cet appareil.',
+      waiver: 'Cochez la case ci-dessus pour commander.',
+      playBlocked: 'Touchez à nouveau le bouton lecture pour lancer l’extrait.',
+      reload: 'Le lien audio a expiré, il vient d’être renouvelé. Touchez lecture pour reprendre.'
     };
+    const FIELD_STEP = { recipient: 1, recipient_other: 1, occasion: 2, occasion_other: 2, name: 3, pronunciation: 3, style: 4, voice: 4, qualities: 5, qualities_text: 5, memory: 6, message: 7, language: 8, email: 9, consent: 9, turnstile: 9 };
+    const STAGES = ['Histoire', 'Paroles', 'Musique', 'Extrait'];
 
     class RefrainQuiz extends HTMLElement {
       connectedCallback() {
         this.q = (s) => this.querySelector(s);
         this.qa = (s) => [...this.querySelectorAll(s)];
         this.form = this.q('[data-form]');
+        this.errEl = this.q('[data-err]');
         this.api = (this.dataset.api || '').replace(/\/$/, '');
         this.step = 1;
         this.audio = this.q('[data-audio]');
-        this.pixel();
+        this.ts = { key: this.dataset.turnstile || '', token: '', id: null };
+        this.ts.on = !!this.ts.key && !/TURNSTILE/.test(this.ts.key);
+        /* 1. Read and strip the resume link BEFORE any tracker loads (contract v2, audit H2). */
+        const fromLink = this.readLink();
+        this.qa('input, textarea').forEach((el) => { el.dataset.desc = el.getAttribute('aria-describedby') || ''; });
         this.bind();
-        const pid = new URLSearchParams(location.search).get('p');
+        this.initPixel();
         const saved = store.get();
-        if (pid) {
-          if (saved) this.fill(saved.answers || {});
-          this.previewId = pid;
-          this.showLoading();
-          this.poll();
-        } else if (saved && saved.previewId && saved.ready) {
-          this.fill(saved.answers || {});
-          this.previewId = saved.previewId;
-          this.showLoading();
-          this.poll();
-        } else if (saved && saved.answers && Object.keys(saved.answers).length > 1) {
+        if (saved) this.fill(saved.answers || {});
+        this.session = fromLink || sess.get();
+        if (fromLink) sess.set(fromLink);
+        if (this.session) { this.showLoading(); this.poll(); }
+        else if (saved && saved.answers && Object.keys(saved.answers).some((k) => k !== 'language' && saved.answers[k] && saved.answers[k].length)) {
           this.q('[data-resume]').hidden = false;
           this.form.hidden = true;
           this._saved = saved;
         }
-        this.go(1);
+        this.go(1, false);
+        this.counters();
+        document.addEventListener('visibilitychange', () => {
+          if (document.visibilityState === 'visible' && this.session && !this.q('[data-loading]').hidden && this.q('[data-fail]').hidden) this.poll();
+        });
+      }
+
+      /* Resume link: #p=<preview_id>.<read_token> (v2). A query ?p= is accepted the same way and stripped too. */
+      readLink() {
+        const h = new URLSearchParams(location.hash.slice(1)).get('p');
+        const qp = new URLSearchParams(location.search);
+        const raw = h || qp.get('p');
+        if (h !== null || qp.has('p')) {
+          qp.delete('p');
+          const qs = qp.toString();
+          try { history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '')); } catch (e) {}
+        }
+        if (!raw) return null;
+        const i = raw.indexOf('.');
+        if (i < 1) return null;
+        return { id: raw.slice(0, i), token: raw.slice(i + 1) };
       }
 
       bind() {
         this.form.addEventListener('submit', (e) => { e.preventDefault(); this.next(); });
-        this.q('[data-back]').addEventListener('click', () => this.go(this.step - 1));
+        this.form.addEventListener('keydown', (e) => {
+          if (e.key !== 'Enter' || e.isComposing) return;
+          const t = e.target;
+          if (t.tagName === 'BUTTON' || t.tagName === 'A') return;
+          if (t.tagName === 'TEXTAREA' && !(e.ctrlKey || e.metaKey)) return;
+          e.preventDefault();
+          if (t.type === 'radio' && !t.checked) { t.checked = true; t.dispatchEvent(new Event('change', { bubbles: true })); }
+          this.next();
+        });
+        this.q('[data-back]').addEventListener('click', () => { this.go(this.step - 1); this.scrollTop(); });
         this.form.addEventListener('change', (e) => {
           const t = e.target;
           if (t.name === 'recipient' || t.name === 'occasion') {
             const box = this.q(`[data-other="${t.name}"]`);
-            if (box) box.hidden = !/^autre/.test(t.value);
+            if (box) { box.hidden = !/^autre/.test(t.value); if (!box.hidden) box.querySelector('input').focus(); }
           }
           if (t.name === 'qualities') {
             const on = this.qa('input[name="qualities"]:checked');
-            if (on.length > 3) { t.checked = false; this.error(MSG.max); }
+            if (on.length > 3) { t.checked = false; this.error(MSG.max, t.closest('.rf-chips')); this.save(); return; }
           }
+          this.clearIfFixed(t);
           this.save();
         });
-        this.form.addEventListener('input', (e) => {
-          const c = this.q(`[data-count-for="${e.target.name}"]`);
-          if (c) c.textContent = e.target.value.length + ' / ' + e.target.maxLength;
-          this.save();
-        });
+        this.form.addEventListener('input', (e) => { this.counter(e.target); this.clearIfFixed(e.target); this.save(); });
         this.q('[data-resume-yes]').addEventListener('click', () => {
-          this.fill(this._saved.answers || {});
           this.q('[data-resume]').hidden = true; this.form.hidden = false;
           this.go(this._saved.step || 1);
         });
         this.q('[data-resume-no]').addEventListener('click', () => {
-          store.clear(); this.q('[data-resume]').hidden = true; this.form.hidden = false; this.go(1);
+          store.clear(); this.form.reset(); this.fill({}); this.counters();
+          this.q('[data-resume]').hidden = true; this.form.hidden = false; this.go(1);
         });
-        this.q('[data-retry]').addEventListener('click', () => this.submit());
+        this.q('[data-retry]').addEventListener('click', () => this.retry());
+        this.q('[data-edit]').addEventListener('click', () => this.backToForm(this.step || 1));
+        this.q('[data-new]').addEventListener('click', () => { sess.clear(); this.session = null; this.backToForm(STEPS); });
+        this.q('[data-check]').addEventListener('click', () => { this._errs = 0; this.poll(true); });
         this.q('[data-restart]').addEventListener('click', () => {
-          store.clear(); this.audio.pause();
-          const u = new URL(location.href); u.searchParams.delete('p'); history.replaceState(null, '', u);
-          this.form.reset(); this.q('[data-result]').hidden = true; this.form.hidden = false; this.go(1);
+          store.clear(); sess.clear(); this.session = null; this.audio.pause();
+          this.form.reset(); this.fill({}); this.counters(); this.resetTurnstile();
+          this.q('[data-result]').hidden = true; this.form.hidden = false; this.go(1);
           this.scrollTop();
         });
-        // player
-        const play = this.q('[data-play]');
-        play.addEventListener('click', () => {
-          if (this.audio.paused) { this.audio.play().catch(() => {}); if (!this._played) { this._played = true; this.track('PreviewPlayed'); } } else this.audio.pause();
+        /* player */
+        this.q('[data-play]').addEventListener('click', () => {
+          const hint = this.q('[data-play-hint]');
+          if (this.audio.paused) {
+            hint.hidden = true;
+            /* play() runs synchronously inside the tap handler: required by iOS Safari. */
+            const pr = this.audio.play();
+            if (pr) pr.catch((err) => { this.icons(false); if (err && err.name === 'NotAllowedError') { hint.textContent = MSG.playBlocked; hint.hidden = false; } });
+            if (!this._played) { this._played = true; this.track('PreviewPlayed'); }
+          } else this.audio.pause();
         });
         this.audio.addEventListener('play', () => this.icons(true));
         this.audio.addEventListener('pause', () => this.icons(false));
-        /* Preview window: [start, start + limit] of the track; UI shows 0:00 -> limit. */
-        const win = () => {
-          const st = this.start || 0;
-          const full = this.audio.duration || 0;
-          const len = this.limit ? Math.min(this.limit, Math.max(full - st, 0) || this.limit) : Math.max(full - st, 0);
-          return { st, len };
-        };
+        this.audio.addEventListener('ended', () => { this.q('[data-ended]').hidden = false; });
         this.audio.addEventListener('loadedmetadata', () => {
-          const { st, len } = win();
-          if (st && this.audio.currentTime < st) this.audio.currentTime = st;
+          const { st, len } = this.win();
+          if (st && this.audio.currentTime < st) { try { this.audio.currentTime = st; } catch (e) {} }
           this.q('[data-dur]').textContent = fmt(len);
+          this.paint();
         });
         this.audio.addEventListener('play', () => {
-          const { st, len } = win();
+          const { st, len } = this.win();
           const t = this.audio.currentTime;
-          if (t < st - 0.25 || (len && t >= st + len - 0.1)) { this.audio.currentTime = st; this.q('[data-ended]').hidden = true; }
+          if (t < st - 0.25 || (len && t >= st + len - 0.1)) { try { this.audio.currentTime = st; } catch (e) {} this.q('[data-ended]').hidden = true; }
         });
         this.audio.addEventListener('timeupdate', () => {
-          const { st, len } = win();
-          if (this.limit && this.audio.currentTime >= st + this.limit) { this.audio.pause(); this.audio.currentTime = st + this.limit; this.q('[data-ended]').hidden = false; }
-          const rel = Math.max(0, this.audio.currentTime - st);
-          this.q('[data-prog]').style.width = (len ? Math.min(rel / len, 1) * 100 : 0) + '%';
-          this.q('[data-cur]').textContent = fmt(Math.min(rel, len || rel));
+          const { st } = this.win();
+          /* Always cap at preview_seconds, even when the file is already a truncated clip. */
+          if (this.limit && this.audio.currentTime >= st + this.limit) { this.audio.pause(); try { this.audio.currentTime = st + this.limit; } catch (e) {} this.q('[data-ended]').hidden = false; }
+          this.paint();
         });
-        this.q('.rf-player__prog').addEventListener('click', (e) => {
-          const r = e.currentTarget.getBoundingClientRect();
-          const { st, len } = win();
-          if (len) this.audio.currentTime = st + Math.min(Math.max(((e.clientX - r.left) / r.width) * len, 0), len - 0.5);
+        /* Signed URLs last 1 h: on a load error, re-poll once to get a fresh URL. */
+        this.audio.addEventListener('error', () => { if (!this.isDemo && this.session && this.audio.getAttribute('src')) this.refreshUrl(); });
+        const seek = this.q('[data-seek]');
+        const seekTo = (rel) => { const { st, len } = this.win(); if (!len) return; try { this.audio.currentTime = st + Math.min(Math.max(rel, 0), len - 0.5); } catch (e) {} this.paint(); };
+        const seekX = (x) => { const r = seek.getBoundingClientRect(); seekTo(((x - r.left) / r.width) * this.win().len); };
+        seek.addEventListener('pointerdown', (e) => { seekX(e.clientX); try { seek.setPointerCapture(e.pointerId); } catch (er) {} this._drag = true; });
+        seek.addEventListener('pointermove', (e) => { if (this._drag) seekX(e.clientX); });
+        seek.addEventListener('pointerup', () => { this._drag = false; });
+        seek.addEventListener('pointercancel', () => { this._drag = false; });
+        seek.addEventListener('keydown', (e) => {
+          const { st, len } = this.win();
+          const cur = this.audio.currentTime - st;
+          const map = { ArrowRight: cur + 5, ArrowUp: cur + 5, ArrowLeft: cur - 5, ArrowDown: cur - 5, PageUp: cur + 15, PageDown: cur - 15, Home: 0, End: len - 1 };
+          if (!(e.key in map)) return;
+          e.preventDefault();
+          seekTo(map[e.key]);
         });
+        /* offer */
+        const waiver = this.q('[data-waiver]');
+        waiver.addEventListener('change', () => this.buyState());
         this.q('[data-buy]').addEventListener('click', () => this.buy());
+        /* one audio at a time across Refrain players */
+        if (!window.__rfOneAudio) {
+          window.__rfOneAudio = true;
+          document.addEventListener('play', (e) => {
+            document.querySelectorAll('refrain-player audio, refrain-quiz audio').forEach((a) => { if (a !== e.target && !a.paused) a.pause(); });
+          }, true);
+        }
       }
 
-      icons(on) { this.q('[data-ico-play]').hidden = on; this.q('[data-ico-pause]').hidden = !on; }
-      scrollTop() { const c = this.q('[data-card]'); if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
-      pixel() {
-        const id = this.dataset.pixel;
-        if (window.fbq || !id || /PIXEL/.test(id)) return;
-        /* Standard Meta Pixel loader (only when the store has no pixel app). */
-        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-        window.fbq('init', id); window.fbq('track', 'PageView');
+      /* Preview window [start, start + len]; the UI shows 0:00 -> len. */
+      win() {
+        const st = this.start || 0;
+        const full = isFinite(this.audio.duration) ? this.audio.duration : 0;
+        const avail = Math.max(full - st, 0);
+        const len = this.limit ? (avail ? Math.min(this.limit, avail) : this.limit) : avail;
+        return { st, len };
       }
+      paint() {
+        const { st, len } = this.win();
+        const rel = Math.max(0, this.audio.currentTime - st);
+        const cur = Math.min(rel, len || rel);
+        this.q('[data-prog]').style.width = (len ? Math.min(rel / len, 1) * 100 : 0) + '%';
+        this.q('[data-cur]').textContent = fmt(cur);
+        if (len) this.q('[data-dur]').textContent = fmt(len);
+        const s = this.q('[data-seek]');
+        s.setAttribute('aria-valuemax', Math.round(len));
+        s.setAttribute('aria-valuenow', Math.round(cur));
+        s.setAttribute('aria-valuetext', fmt(cur) + (len ? ' sur ' + fmt(len) : ''));
+      }
+      icons(on) {
+        this.q('[data-ico-play]').hidden = on; this.q('[data-ico-pause]').hidden = !on;
+        this.q('[data-play]').setAttribute('aria-label', on ? 'Mettre l’extrait en pause' : 'Écouter l’extrait');
+      }
+      scrollTop() { const c = this.q('[data-card]'); if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block: 'start' }); }
+      announce(m) { const l = this.q('[data-live]'); l.textContent = ''; setTimeout(() => { l.textContent = m; }, 60); }
+
+      /* Meta Pixel: loaded only with marketing consent; re-checked when the visitor answers the banner. */
+      initPixel() {
+        const check = () => {
+          const id = this.dataset.pixel;
+          if (!privacy.marketing() || window.fbq || !id || /PIXEL/.test(id)) return;
+          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+          window.fbq('init', id); window.fbq('track', 'PageView');
+        };
+        privacy.load(check);
+        document.addEventListener('visitorConsentCollected', check);
+      }
+      /* No preview_id / read_token in custom data (audit H2). eventID is kept for CAPI dedup only. */
       track(ev, data, eventID) {
         try {
-          if (!window.fbq) return;
+          if (!window.fbq || !privacy.marketing()) return;
           const std = ev === 'InitiateCheckout';
-          window.fbq(std ? 'track' : 'trackCustom', ev, { ...(data || {}), preview_id: this.previewId || '' }, eventID ? { eventID } : undefined);
+          window.fbq(std ? 'track' : 'trackCustom', ev, data || {}, eventID ? { eventID } : undefined);
         } catch (e) {}
       }
 
       answers() {
         const f = new FormData(this.form);
-        const label = (n) => { const i = this.q(`input[name="${n}"]:checked`); return i ? i.value : ''; };
+        const val = (n) => { const i = this.q(`input[name="${n}"]:checked`); return i ? i.value : ''; };
         return {
-          recipient: label('recipient'), recipient_other: f.get('recipient_other') || '',
-          occasion: label('occasion'), occasion_other: f.get('occasion_other') || '',
-          name: (f.get('name') || '').trim(), pronunciation: f.get('pronunciation') || '',
-          style: label('style'), voice: label('voice'),
-          qualities: f.getAll('qualities'), qualities_text: f.get('qualities_text') || '',
+          recipient: val('recipient'), recipient_other: (f.get('recipient_other') || '').trim(),
+          occasion: val('occasion'), occasion_other: (f.get('occasion_other') || '').trim(),
+          name: (f.get('name') || '').trim(), pronunciation: (f.get('pronunciation') || '').trim(),
+          style: val('style'), voice: val('voice'),
+          qualities: f.getAll('qualities'), qualities_text: (f.get('qualities_text') || '').trim(),
           memory: (f.get('memory') || '').trim(), message: (f.get('message') || '').trim(),
-          language: label('language') || 'fr',
-          email: (f.get('email') || '').trim(), consent: !!f.get('consent')
+          language: val('language') || 'fr',
+          email: (f.get('email') || '').trim(), consent: !!f.get('consent'), reminders_opt_in: !!f.get('reminders_opt_in')
         };
       }
 
       fill(a) {
         Object.entries(a).forEach(([k, v]) => {
-          if (Array.isArray(v)) { v.forEach((x) => { const i = this.q(`input[name="${k}"][value="${x}"]`); if (i) i.checked = true; }); return; }
-          const els = this.qa(`[name="${k}"]`);
-          els.forEach((el) => {
+          if (Array.isArray(v)) { this.qa(`input[name="${k}"]`).forEach((i) => { i.checked = v.indexOf(i.value) > -1; }); return; }
+          this.qa(`[name="${k}"]`).forEach((el) => {
             if (el.type === 'radio') el.checked = el.value === v;
             else if (el.type === 'checkbox') el.checked = !!v;
             else el.value = v || '';
@@ -532,159 +772,333 @@
         ['recipient', 'occasion'].forEach((n) => { const b = this.q(`[data-other="${n}"]`); if (b) b.hidden = !/^autre/.test(a[n] || ''); });
       }
 
-      save(extra) { const cur = store.get() || {}; store.set({ ...cur, answers: this.answers(), step: this.step, ...(extra || {}) }); }
+      save() { const a = this.answers(); delete a.consent; store.set({ answers: a, step: this.step }); }
 
-      go(n) {
+      counter(el) {
+        const c = el && el.name && this.q(`[data-count-for="${el.name}"]`);
+        if (!c) return;
+        const n = el.value.length; const max = el.maxLength; const min = Number(c.dataset.min || 0);
+        c.textContent = n + ' / ' + max + (min && n < min ? ' · ' + min + ' caractères minimum' : '');
+        c.classList.toggle('is-near', max > 0 && n >= max * 0.9);
+      }
+      counters() { this.qa('textarea').forEach((t) => this.counter(t)); }
+
+      go(n, focus = true) {
         n = Math.min(Math.max(n, 1), STEPS);
         this.step = n;
-        this.qa('.rf-step').forEach((s) => (s.hidden = Number(s.dataset.step) !== n));
-        this.q('[data-step-num]').textContent = n;
+        let cur;
+        this.qa('.rf-step').forEach((s) => { const on = Number(s.dataset.step) === n; s.hidden = !on; if (on) cur = s; });
+        this.q('[data-step-label]').textContent = 'Étape ' + n + ' sur ' + STEPS;
         this.q('[data-bar]').style.width = (n / STEPS) * 100 + '%';
         this.q('[data-back]').hidden = n === 1;
         this.q('[data-next-label]').textContent = n === STEPS ? 'Créer son extrait gratuit' : 'Continuer';
         this.error('');
+        if (n === STEPS) this.turnstile();
+        if (focus && cur) {
+          const legend = cur.querySelector('legend');
+          this.announce('Étape ' + n + ' sur ' + STEPS + (legend ? ' : ' + legend.textContent.trim() : ''));
+          const el = cur.querySelector('input:checked') || cur.querySelector('input:not([type="hidden"]), textarea');
+          if (el) el.focus({ preventScroll: true });
+        }
         if (n === 2 && !this._started) { this._started = true; this.track('QuizStart'); }
       }
 
-      error(m) { const e = this.q('[data-err]'); e.textContent = m; e.hidden = !m; }
+      /* Inline error: placed right under the field/group (target), linked with aria-invalid + aria-describedby. */
+      error(m, target) {
+        const e = this.errEl;
+        this.qa('[aria-invalid]').forEach((x) => { x.removeAttribute('aria-invalid'); x.setAttribute('aria-describedby', x.dataset.desc || ''); if (!x.dataset.desc) x.removeAttribute('aria-describedby'); });
+        this._errTarget = null;
+        if (!m) { e.hidden = true; e.textContent = ''; return; }
+        e.textContent = m; e.hidden = false;
+        if (!target) return;
+        target.after(e);
+        this._errTarget = target;
+        const ctl = target.matches('input, textarea') ? [target] : [...target.querySelectorAll('input, textarea')];
+        ctl.forEach((c) => { c.setAttribute('aria-invalid', 'true'); c.setAttribute('aria-describedby', ((c.dataset.desc || '') + ' ' + e.id).trim()); });
+        const f = target.querySelector('input:checked') || ctl[0];
+        if (f) f.focus({ preventScroll: false });
+      }
+      clearIfFixed(t) { if (this._errTarget && (this._errTarget === t || this._errTarget.contains(t))) this.error(''); }
 
       validate(n) {
         const a = this.answers();
         const step = this.q(`.rf-step[data-step="${n}"]`);
+        const wrap = (name) => { const el = this.q(`[name="${name}"]`); return el && (el.closest('.rf-field, .rf-check') || el); };
         for (const g of step.querySelectorAll('[data-group][data-required]')) {
-          if (!g.querySelector('input:checked')) return MSG.choose;
+          if (!g.querySelector('input:checked')) return [MSG.choose, g];
         }
-        if (n === 1 && /^autre/.test(a.recipient) && !a.recipient_other.trim()) return MSG.other;
-        if (n === 2 && /^autre/.test(a.occasion) && !a.occasion_other.trim()) return MSG.other;
-        if (n === 3 && !a.name) return MSG.name;
-        if (n === 6 && a.memory.length < 20) return MSG.memory;
+        if (n === 1 && /^autre/.test(a.recipient) && !a.recipient_other) return [MSG.other, wrap('recipient_other')];
+        if (n === 2 && /^autre/.test(a.occasion) && !a.occasion_other) return [MSG.other, wrap('occasion_other')];
+        if (n === 3 && !a.name) return [MSG.name, wrap('name')];
+        if (n === 6 && a.memory.length < 20) return [MSG.memory(20 - a.memory.length), wrap('memory')];
         if (n === 9) {
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(a.email)) return MSG.email;
-          if (!a.consent) return MSG.consent;
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(a.email)) return [MSG.email, wrap('email')];
+          if (!a.consent) return [MSG.consent, wrap('consent')];
+          if (this.ts.on && !this.ts.token) { const box = this.q('[data-ts]'); box.hidden = false; return [MSG.turnstile, box]; }
         }
-        return '';
+        return null;
       }
 
       next() {
+        if (this.busy) return;
         const err = this.validate(this.step);
-        if (err) { this.error(err); return; }
+        if (err) { this.error(err[0], err[1]); return; }
         this.save();
         if (this.step < STEPS) { this.go(this.step + 1); this.scrollTop(); return; }
         this.submit();
       }
 
+      /* Cloudflare Turnstile (audit C1), loaded only when the email step is reached. */
+      turnstile() {
+        if (!this.ts.on || this.ts.id !== null) return;
+        const box = this.q('[data-ts]');
+        const render = () => {
+          if (!window.turnstile || this.ts.id !== null) return;
+          box.hidden = false;
+          this.ts.id = window.turnstile.render(box, {
+            sitekey: this.ts.key, action: 'preview', language: 'fr', appearance: 'interaction-only',
+            size: box.clientWidth && box.clientWidth < 300 ? 'compact' : 'normal',
+            callback: (tok) => { this.ts.token = tok; if (this._errTarget === box) this.error(''); },
+            'expired-callback': () => { this.ts.token = ''; },
+            'error-callback': () => { this.ts.token = ''; }
+          });
+        };
+        if (window.turnstile) return render();
+        window.__rfTsCbs = window.__rfTsCbs || [];
+        window.__rfTsCbs.push(render);
+        if (document.getElementById('rf-turnstile-js')) return;
+        window.__rfTsReady = () => window.__rfTsCbs.forEach((f) => f());
+        const s = document.createElement('script');
+        s.id = 'rf-turnstile-js'; s.async = true; s.defer = true;
+        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__rfTsReady';
+        document.head.appendChild(s);
+      }
+      resetTurnstile() { this.ts.token = ''; if (this.ts.id !== null && window.turnstile) { try { window.turnstile.reset(this.ts.id); } catch (e) {} } }
+
       showLoading() {
         this.q('[data-resume]').hidden = true;
         this.form.hidden = true; this.q('[data-result]').hidden = true;
-        const l = this.q('[data-loading]'); l.hidden = false;
+        this.q('[data-loading]').hidden = false;
         this.q('[data-fail]').hidden = true; this.q('[data-slow]').hidden = true;
         this.q('[data-load-note]').hidden = false;
+        this._stage = 0; this._errs = 0;
         this.stage(1);
         this.t0 = Date.now();
         this.scrollTop();
+        this.q('[data-load-title]').focus({ preventScroll: true });
       }
 
       stage(n) {
-        this.qa('[data-stage]').forEach((li) => li.classList.toggle('is-on', Number(li.dataset.stage) <= n));
+        n = Math.min(Math.max(n || 1, 1), 4);
+        this.qa('[data-stage]').forEach((li) => { const k = Number(li.dataset.stage); li.classList.toggle('is-on', k <= n); li.classList.toggle('is-cur', k === n); });
         this.q('[data-load-bar]').style.width = Math.min(100, n * 24) + '%';
+        if (n !== this._stage) { this._stage = n; this.q('[data-load-live]').textContent = 'Étape ' + n + ' sur 4 : ' + STAGES[n - 1]; }
+      }
+
+      backToForm(step, msg, field) {
+        clearTimeout(this._timer);
+        this.busy = false; this.q('[data-next]').removeAttribute('aria-busy');
+        this.q('[data-loading]').hidden = true; this.q('[data-result]').hidden = true;
+        this.form.hidden = false;
+        this.go(step);
+        if (msg) {
+          const el = field && this.q(`[name="${field}"]`);
+          this.error(msg, field === 'turnstile' ? this.q('[data-ts]') : el ? (el.closest('.rf-field, .rf-check, .rf-chips') || el) : null);
+        }
+        this.scrollTop();
+      }
+
+      retry() {
+        this.q('[data-fail]').hidden = true;
+        if (this._failKind === 'poll' && this.session) { this.q('[data-load-note]').hidden = false; this._errs = 0; return this.poll(true); }
+        /* A new POST needs a fresh single-use Turnstile token. */
+        if (this.ts.on && !this.ts.token) return this.backToForm(STEPS, MSG.turnstile, 'turnstile');
+        this.submit();
       }
 
       async submit() {
-        this.showLoading();
+        if (this.busy) return;
+        this.busy = true;
+        this.q('[data-next]').setAttribute('aria-busy', 'true');
         const a = this.answers();
-        if (this.dataset.forceDemo === 'true' || !this.api || /REFRAIN-DOMAIN/.test(this.api)) return this.demo();
-        const body = JSON.stringify({ email: a.email, consent: a.consent, answers: { ...a, email: undefined, consent: undefined }, source: { url: location.href } });
-        let res;
-        for (let i = 0; i < 2 && !res; i++) {
+        if (this.dataset.forceDemo === 'true' || !this.api || /REFRAIN-DOMAIN/.test(this.api)) { this.showLoading(); return this.demo(); }
+        this.showLoading();
+        this._rid = this._rid || uuid();     /* same id on retries: the API replays instead of creating a duplicate */
+        const answers = { ...a }; delete answers.email; delete answers.consent; delete answers.reminders_opt_in;
+        const body = JSON.stringify({
+          email: a.email, consent: a.consent, answers,
+          turnstile_token: this.ts.token || undefined,
+          marketing_consent: privacy.marketing(),
+          reminders_opt_in: a.reminders_opt_in,
+          client_request_id: this._rid,
+          source: { url: location.origin + location.pathname }
+        });
+        this.ts.token = '';
+        let r, j = {};
+        for (let i = 0; i < 2; i++) {
           try {
-            const r = await fetch(this.api + '/api/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
-            if (r.status === 429 || r.status === 400) { const j = await r.json().catch(() => ({})); return this.fail(j.error === 'rate_limited' ? 'rate' : 'error'); }
-            if (r.ok) res = await r.json();
-          } catch (e) {}
-          if (!res && i === 0) await new Promise((ok) => setTimeout(ok, 1200));
+            r = await fetch(this.api + '/api/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+            j = await r.json().catch(() => ({}));
+          } catch (e) { r = null; }
+          if (r && (r.ok || r.status < 500)) break;
+          if (i === 0) await new Promise((ok) => setTimeout(ok, 1200));
         }
-        if (!res || !res.preview_id) return this.demo();
-        this.previewId = res.preview_id;
-        this.track('QuizComplete', {}, 'quiz_' + this.previewId);
-        this.save({ previewId: this.previewId, ready: false });
-        const u = new URL(location.href); u.searchParams.set('p', this.previewId); history.replaceState(null, '', u);
+        this.resetTurnstile();
+        this.busy = false; this.q('[data-next]').removeAttribute('aria-busy');
+        if (!r) return this.fail('network');
+        if (r.status === 429) { const ra = Number(r.headers.get('Retry-After')) || 0; return this.fail('rate', ra ? Math.max(1, Math.ceil(ra / 60)) : 0); }
+        if (r.status === 400) {
+          const field = (j.fields && j.fields[0]) || '';
+          const msg = field === 'turnstile' ? MSG.turnstile : j.reason === 'content' ? MSG.reformulate : MSG.invalid;
+          return this.backToForm(FIELD_STEP[field] || STEPS, msg, field);
+        }
+        if (!r.ok || !j.preview_id || !j.read_token) return this.demo();   /* 5xx / 503 busy / 403: demo mode per contract */
+        this._rid = null;
+        this.session = { id: j.preview_id, token: j.read_token };
+        sess.set(this.session);
+        this.track('QuizComplete', {}, 'quiz_' + j.preview_id);
         this.poll();
       }
 
-      async poll() {
+      async poll(now) {
         clearTimeout(this._timer);
+        if (!this.session) return;
         if (!this.api || /REFRAIN-DOMAIN/.test(this.api)) return this.demo();
-        if (Date.now() - this.t0 > 10 * 60 * 1000) return this.fail('timeout');
-        if (Date.now() - this.t0 > 120 * 1000) { this.q('[data-slow]').hidden = false; }
+        const el = Date.now() - this.t0;
+        if (el > 10 * 60 * 1000) return this.emailState(true);
+        if (el > 120 * 1000) this.emailState();
+        let r;
         try {
-          const r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.previewId));
-          if (r.status === 404) return this.fail('error');
-          const d = await r.json();
-          this.stage(Number(d.step) || 1);
-          if (d.email_fallback) this.q('[data-slow]').hidden = false;
-          if (d.status === 'failed') return this.fail('error');
-          if (d.status === 'ready' && d.preview_url) {
-            this.save({ previewId: this.previewId, ready: true });
-            return this.result({ url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75, start: d.preview_mode === 'transcoded' ? 0 : (Number(d.preview_start) || 0) });
-          }
-        } catch (e) { this._errs = (this._errs || 0) + 1; if (this._errs > 4) return this.demo(); }
+          r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id), { headers: { 'X-Refrain-Token': this.session.token }, cache: 'no-store' });
+        } catch (e) {
+          this._errs = (this._errs || 0) + 1;
+          if (this._errs >= 4) return this.fail('poll');
+          this._timer = setTimeout(() => this.poll(), 4000);
+          return;
+        }
+        if (r.status === 404) { sess.clear(); this.session = null; return this.fail('expired'); }
+        if (!r.ok) { this._timer = setTimeout(() => this.poll(), r.status === 429 ? 10000 : 6000); return; }
+        const d = await r.json().catch(() => ({}));
+        this._errs = 0;
+        this.stage(Number(d.step) || 1);
+        if (d.email_fallback) this.emailState();
+        if (d.status === 'failed') return this.fail('error');
+        if (d.status === 'ready' && d.preview_url) {
+          this.q('[data-slow]').hidden = true;
+          return this.result(this.toResult(d));
+        }
         this._timer = setTimeout(() => this.poll(), 4000);
       }
 
+      /* preview_mode clip* / transcoded* / truncated*: the file is already the clip -> play from 0. Always cap at preview_seconds. */
+      toResult(d) {
+        const clip = /^(clip|transcoded|truncated)/.test(String(d.preview_mode || ''));
+        return { url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75, start: clip ? 0 : Number(d.preview_start) || 0 };
+      }
+
+      async refreshUrl() {
+        if (this._refreshing) return;
+        this._refreshing = true;
+        try {
+          const r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id), { headers: { 'X-Refrain-Token': this.session.token }, cache: 'no-store' });
+          const d = r.ok ? await r.json() : null;
+          if (d && d.preview_url) {
+            this.audio.src = d.preview_url;
+            const hint = this.q('[data-play-hint]'); hint.textContent = MSG.reload; hint.hidden = false;
+          }
+        } catch (e) {}
+        setTimeout(() => { this._refreshing = false; }, 30000);
+      }
+
+      emailState(final) {
+        const box = this.q('[data-slow]');
+        const em = this.answers().email;
+        if (em) { this.q('[data-slow-email]').textContent = em; this.q('[data-slow-addr]').hidden = false; }
+        box.hidden = false;
+        this.q('[data-load-note]').hidden = true;
+        if (final) clearTimeout(this._timer);
+      }
+
       demo() {
+        this.busy = false; this.q('[data-next]').removeAttribute('aria-busy');
         this.isDemo = true;
-        this.previewId = 'demo-' + Date.now();
+        this.q('[data-fail]').hidden = true;
         let n = 1;
-        const tick = () => { this.stage(n); if (n++ < 4) this._timer = setTimeout(tick, 1100); else this.result({ url: this.dataset.demoAudio, title: this.dataset.demoTitle, lyrics: this.dataset.demoLyrics, demo: true }); };
+        const tick = () => { this.stage(n); if (n++ < 4) this._timer = setTimeout(tick, reduce() ? 300 : 1100); else this.result({ url: this.dataset.demoAudio, title: this.dataset.demoTitle, lyrics: this.dataset.demoLyrics, demo: true }); };
         tick();
       }
 
-      fail() { this.q('[data-load-note]').hidden = true; this.q('[data-fail]').hidden = false; }
+      fail(kind, extra) {
+        clearTimeout(this._timer);
+        this._failKind = kind;
+        const msg = { rate: MSG.rate(extra), network: MSG.network, poll: MSG.network, expired: MSG.expired }[kind] || this.dataset.failText || '';
+        this.q('[data-fail-msg]').textContent = msg;
+        this.q('[data-load-note]').hidden = true;
+        this.q('[data-retry]').hidden = kind === 'rate' || kind === 'expired';
+        this.q('[data-edit]').hidden = kind === 'poll' || kind === 'expired';
+        this.q('[data-new]').hidden = kind !== 'expired';
+        this.q('[data-fail]').hidden = false;
+      }
 
       result(r) {
+        clearTimeout(this._timer);
         const name = r.name || this.answers().name || '';
-        this.q('[data-loading]').hidden = true;
+        this.q('[data-loading]').hidden = true; this.q('[data-resume]').hidden = true; this.form.hidden = true;
         this.q('[data-result]').hidden = false;
         this.q('[data-demo-note]').hidden = !r.demo;
         this.q('[data-r-name]').textContent = name;
         this.q('[data-r-title]').textContent = (r.title || ('La chanson de ' + name)).replace(/\{name\}/g, name);
         let lyr = r.lyrics || '';
-        if (r.demo && name) lyr = lyr.replace(/\{name\}/g, name);
+        if (name) lyr = lyr.replace(/\{name\}/g, name);
         this.q('[data-lyrics]').textContent = lyr;
         this.limit = r.seconds || (r.demo ? 0 : 75);
         this.start = Math.max(0, r.start || 0);
+        this.q('[data-ended]').hidden = true; this.q('[data-play-hint]').hidden = true;
+        this.audio.pause();
+        if (r.url) { this.audio.src = r.url; this.q('[data-play]').disabled = false; } else { this.audio.removeAttribute('src'); this.q('[data-play]').disabled = true; }
         this.q('[data-prog]').style.width = '0%'; this.q('[data-cur]').textContent = '0:00';
-        this.q('[data-ended]').hidden = true;
-        const buy = this.q('[data-buy]');
-        buy.disabled = !!r.demo; buy.textContent = r.demo ? buy.dataset.demoLabel : buy.dataset.label;
-        if (r.url) { this.audio.src = r.url; this.q('[data-play]').disabled = false; } else { this.q('[data-play]').disabled = true; }
+        this.q('[data-dur]').textContent = this.limit ? fmt(this.limit) : '0:00';
+        this.buyState();
         this.scrollTop();
+        this.q('[data-r-title]').focus({ preventScroll: true });
+      }
+
+      buyState() {
+        const btn = this.q('[data-buy]');
+        const ok = this.q('[data-waiver]').checked;
+        btn.textContent = this.isDemo ? btn.dataset.demoLabel : btn.dataset.label;
+        btn.disabled = !!this.isDemo || !ok;
+        this.q('[data-buy-hint]').hidden = !!this.isDemo;
+        this.q('[data-buy-hint]').textContent = ok ? 'Utilisez la même adresse e-mail que pour l’extrait.' : MSG.waiver + ' Utilisez la même adresse e-mail que pour l’extrait.';
       }
 
       async buy() {
         const btn = this.q('[data-buy]'); const err = this.q('[data-buy-err]');
-        if (this.isDemo || !/^[0-9a-f-]{36}$/i.test(this.previewId || '')) { err.hidden = false; return; }
-        err.hidden = true; btn.setAttribute('aria-busy', 'true');
+        if (this._buying) return;
+        if (this.isDemo || !this.session || !/^[0-9a-f-]{36}$/i.test(this.session.id)) { err.hidden = false; return; }
+        const waiver = this.q('[data-waiver]');
+        if (!waiver.checked) { this.buyState(); waiver.focus(); return; }
+        this._buying = true; err.hidden = true; btn.setAttribute('aria-busy', 'true');
         const a = this.answers();
         const tier = (this.q('input[name="tier"]:checked') || {}).value || 'standard';
         const id = Number(tier === 'premium' ? this.dataset.prem : this.dataset.std);
+        const mkt = privacy.marketing();
         const properties = {
-          _preview_id: this.previewId || '',
+          _preview_id: this.session.id,
           _recipient_name: a.name,
-          _tier: tier,
-          _occasion: a.occasion_other || a.occasion,
-          _style: a.style, _voice: a.voice, _language: a.language,
-          _email: a.email
+          _waiver_accepted: new Date().toISOString()
         };
+        const root = window.Shopify && Shopify.routes ? Shopify.routes.root : '/';
         try {
-          const r = await fetch((window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart/add.js', {
+          await fetch(root + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ attributes: { _marketing_consent: mkt ? '1' : '0' } }) }).catch(() => {});
+          const r = await fetch(root + 'cart/add.js', {
             method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ items: [{ id, quantity: 1, properties }] })
           });
           if (!r.ok) throw new Error('cart');
-          this.track('InitiateCheckout', { tier, value: tier === 'premium' ? 49 : 39, currency: 'EUR' });
-          location.href = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'checkout';
-        } catch (e) { err.hidden = false; btn.removeAttribute('aria-busy'); }
+          this.track('InitiateCheckout', { value: Number(tier === 'premium' ? this.dataset.premPrice : this.dataset.stdPrice) || 0, currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'EUR' });
+          location.href = root + 'checkout';
+        } catch (e) { err.hidden = false; btn.removeAttribute('aria-busy'); this._buying = false; }
       }
     }
     customElements.define('refrain-quiz', RefrainQuiz);
@@ -713,6 +1127,13 @@
       "label": "Meta Pixel ID",
       "default": "META-PIXEL-ID",
       "info": "Leave the placeholder if a pixel app already loads fbq. Events: QuizStart, QuizComplete (eventID quiz_<preview_id>), PreviewPlayed, InitiateCheckout. Purchase fires from the checkout custom pixel."
+    },
+    {
+      "type": "text",
+      "id": "turnstile_site_key",
+      "label": "Cloudflare Turnstile site key",
+      "default": "TURNSTILE-SITE-KEY",
+      "info": "Required by the API (v2) once TURNSTILE_SECRET is set. While it contains the placeholder, no widget is shown and no token is sent."
     },
     {
       "type": "checkbox",

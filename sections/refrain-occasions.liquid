@@ -9,7 +9,7 @@
     </div>
     <ul class="rf-occ__grid">
       {%- for block in section.blocks -%}
-        {%- capture ph -%}Photo: {{ block.settings.title }} moment, warm candid emotion between people{%- endcapture -%}
+        {%- capture ph -%}{{ block.settings.title }} : un moment d’émotion partagé{%- endcapture -%}
         <li class="rf-occ__card" {{ block.shopify_attributes }}>
           {% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '4 / 5', label: ph, radius: 22, sizes: '(min-width: 990px) 360px, 50vw' %}
           <div class="rf-occ__ov">

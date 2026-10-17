@@ -21,20 +21,19 @@
           <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ s.button_link | default: '/products/chanson-personnalisee' }}">{{ s.button_label }} {% render 'refrain-icon', name: 'arrow' %}</a>
         {%- endif -%}
         {%- if s.secondary_label != blank -%}
-          <a class="rf-hero__sec" href="{{ s.secondary_link | default: '#examples' }}">{% render 'refrain-icon', name: 'play' %}<span>{{ s.secondary_label }}</span></a>
+          <a class="rf-hero__sec" href="{{ s.secondary_link | default: '/products/chanson-personnalisee#quiz' }}">{% render 'refrain-icon', name: 'play' %}<span>{{ s.secondary_label }}</span></a>
         {%- endif -%}
       </div>
       {%- if s.trust != blank -%}<p class="rf-hero__trust">{% render 'refrain-icon', name: 'star' %}<span>{{ s.trust }}</span></p>{%- endif -%}
     </div>
     <div class="rf-hero__visual">
-      <div class="rf-hero__img{% if has_mobile %} rf-hero__img--desk{% endif %}">
-        {% render 'refrain-media', image: s.image, asset: s.image_asset, ratio: '4 / 5', label: 'Photo: a person smiling with headphones, moved while listening to a song written just for them (warm, natural light)', radius: 28, sizes: '(min-width: 990px) 560px, 100vw', eager: true %}
+      <div class="rf-hero__img">
+        {%- if has_mobile -%}
+          {% render 'refrain-media', image: s.mobile_image, asset: s.mobile_image_asset, desk_image: s.image, desk_asset: s.image_asset, ratio: '4 / 5', label: 'Une personne émue, casque sur les oreilles, écoute une chanson écrite pour elle', radius: 28, sizes: '(min-width: 750px) 90vw, 100vw', desk_sizes: '(min-width: 1200px) 560px, 46vw', priority: true %}
+        {%- else -%}
+          {% render 'refrain-media', image: s.image, asset: s.image_asset, ratio: '4 / 5', label: 'Une personne émue, casque sur les oreilles, écoute une chanson écrite pour elle', radius: 28, sizes: '(min-width: 1200px) 560px, (min-width: 990px) 46vw, 100vw', priority: true %}
+        {%- endif -%}
       </div>
-      {%- if has_mobile -%}
-        <div class="rf-hero__img rf-hero__img--mob">
-          {% render 'refrain-media', image: s.mobile_image, asset: s.mobile_image_asset, ratio: '4 / 5', label: 'Mobile photo: a person smiling with headphones, moved while listening to a personalised song', radius: 28, sizes: '100vw', eager: true %}
-        </div>
-      {%- endif -%}
       {%- if s.chip_title != blank -%}
         <div class="rf-hero__chip" aria-hidden="true">
           <span class="rf-hero__dot">{% render 'refrain-icon', name: 'play' %}</span>
@@ -57,17 +56,17 @@
   .rf-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; margin-top: 28px; }
   .rf-hero__actions .rf-btn { width: 100%; }
   .rf-hero__actions .rf-icon { width: 20px; height: 20px; }
-  .rf-hero__sec { display: inline-flex; align-items: center; gap: 10px; color: var(--rf-ink); font-weight: 700; font-size: 15px; text-decoration: none; }
+  .rf-hero__sec { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--rf-ink); font-weight: 700; font-size: 15px; text-decoration: none; }
   .rf-hero__sec .rf-icon { width: 34px; height: 34px; padding: 9px; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); }
   .rf-hero__sec span { text-decoration: underline; text-underline-offset: 4px; }
-  .rf-hero .rf-media > img { object-position: 78% 30%; }
+  .rf-hero__sec:focus-visible { outline: 3px solid var(--rf-violet); outline-offset: 4px; border-radius: 8px; }
+  .rf-hero[data-bg='ink'] .rf-hero__sec:focus-visible { outline-color: var(--rf-lime); }
+  .rf-hero .rf-media img { object-position: 78% 30%; }
   .rf-hero__trust { display: flex; align-items: center; gap: 8px; margin: 22px 0 0; font-size: 14px; font-weight: 600; color: var(--rf-ink-soft); }
   .rf-hero__trust .rf-icon { width: 16px; height: 16px; flex: none; color: var(--rf-ink); }
   .rf-hero[data-bg='ink'] .rf-hero__trust .rf-icon { color: var(--rf-lime); }
   .rf-hero__visual { position: relative; }
   .rf-hero__img .rf-media { box-shadow: 0 24px 60px rgb(30 15 74 / .22); }
-  .rf-hero__img--mob { display: block; }
-  .rf-hero__img--desk { display: none; }
   .rf-hero__chip { position: absolute; left: 14px; bottom: 14px; display: flex; align-items: center; gap: 10px; max-width: calc(100% - 28px); padding: 8px 16px 8px 8px; border-radius: 999px; background: var(--rf-ink); color: #fff; box-shadow: 0 12px 30px rgb(30 15 74 / .35); }
   .rf-hero__dot { display: grid; place-items: center; flex: none; width: 36px; height: 36px; border-radius: 50%; background: var(--rf-lime); color: var(--rf-ink); }
   .rf-hero__dot .rf-icon { width: 16px; height: 16px; }
@@ -85,8 +84,6 @@
   @media (min-width: 990px) {
     .rf-hero { padding: 72px 24px; }
     .rf-hero__inner { grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: center; }
-    .rf-hero__img--desk { display: block; }
-    .rf-hero__img--mob { display: none; }
     .rf-hero__chip { left: 22px; bottom: 22px; }
   }
   @media (prefers-reduced-motion: reduce) { .rf-hero__wave i { animation: none; transform: scaleY(.6); } }
@@ -101,8 +98,8 @@
     { "type": "textarea", "id": "sub", "label": "Subheading", "default": "Racontez-nous leur histoire, nous composons une chanson unique, livrée en quelques minutes." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "Créer ma chanson" },
     { "type": "url", "id": "button_link", "label": "Button link" },
-    { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "Écouter des exemples" },
-    { "type": "text", "id": "secondary_link", "label": "Secondary link (anchor or URL)", "default": "#examples" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary link label (optional)" },
+    { "type": "text", "id": "secondary_link", "label": "Secondary link (anchor or URL)", "info": "Defaults to the quiz on the product page." },
     { "type": "text", "id": "trust", "label": "Trust line", "default": "Plus de 1 000 chansons offertes" },
     { "type": "header", "content": "Images" },
     { "type": "image_picker", "id": "image", "label": "Image (desktop, 4:5)" },

@@ -7,16 +7,17 @@
   <div class="rf-tl__inner{% if sticky %} rf-tl__inner--split{% endif %}">
     {%- if sticky -%}
       <div class="rf-tl__sticky">
-        {% render 'refrain-media', image: section.settings.image, asset: section.settings.image_asset, ratio: '4 / 5', label: 'Photo: someone discovering their personalised song on a phone, emotional smile', radius: 28, sizes: '(min-width: 990px) 460px, 100vw' %}
+        {% render 'refrain-media', image: section.settings.image, asset: section.settings.image_asset, ratio: '4 / 5', label: 'Une personne découvre sa chanson personnalisée sur son téléphone, émue', radius: 28, sizes: '(min-width: 990px) 460px, 100vw' %}
       </div>
     {%- endif -%}
     <refrain-timeline class="rf-tl__col">
       {%- if section.settings.eyebrow != blank -%}<p class="rf-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
       {% render 'refrain-title', text: section.settings.heading, dark: dark %}
+      <div class="rf-tl__wrap">
+      <span class="rf-tl__track" aria-hidden="true"><i class="rf-tl__fill"></i></span>
       <ol class="rf-tl__steps">
-        <span class="rf-tl__track" aria-hidden="true"><i class="rf-tl__fill"></i></span>
         {%- for block in section.blocks -%}
-          {%- capture ph -%}Illustration: {{ block.settings.label }}{%- endcapture -%}
+          {%- capture ph -%}Illustration : {{ block.settings.label }}{%- endcapture -%}
           <li class="rf-tl__step" {{ block.shopify_attributes }}>
             <span class="rf-tl__dot" aria-hidden="true">{{ forloop.index }}</span>
             <h3 class="rf-tl__label">{{ block.settings.label }}</h3>
@@ -27,6 +28,7 @@
           </li>
         {%- endfor -%}
       </ol>
+      </div>
       {%- if section.settings.button_label != blank -%}
         <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ section.settings.button_link | default: '/products/chanson-personnalisee' }}">{{ section.settings.button_label }}</a>
       {%- endif -%}
@@ -41,14 +43,14 @@
   .rf-tl__inner { max-width: 1160px; margin: 0 auto; display: grid; gap: 32px; }
   .rf-tl__col { display: block; max-width: 680px; }
   .rf-tl__sticky .rf-media { box-shadow: 0 24px 60px rgb(30 15 74 / .2); }
-  .rf-tl__steps { position: relative; margin: 32px 0; padding: 0 0 0 60px; list-style: none; display: grid; gap: 36px; }
+  .rf-tl__wrap { position: relative; margin: 32px 0; }
+  .rf-tl__steps { position: relative; margin: 0; padding: 0 0 0 60px; list-style: none; display: grid; gap: 36px; }
   .rf-tl__track { position: absolute; left: 17px; top: 18px; bottom: 18px; width: 3px; border-radius: 2px; background: var(--rf-line); }
   .rf-tl[data-bg='lilac'] .rf-tl__track { background: #fff; }
   .rf-tl[data-bg='ink'] .rf-tl__track { background: rgb(255 255 255 / .2); }
   .rf-tl__fill { display: block; width: 100%; height: 0; border-radius: 2px; background: var(--rf-ink); transition: height .2s linear; }
   .rf-tl[data-bg='ink'] .rf-tl__fill { background: var(--rf-lime); }
-  .rf-tl__step { position: relative; opacity: .45; transition: opacity .3s; }
-  .rf-tl__step.is-active { opacity: 1; }
+  .rf-tl__step { position: relative; }
   .rf-tl__dot { position: absolute; left: -60px; top: -4px; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--rf-card); border: 2px solid var(--rf-line); color: var(--rf-ink-soft); font-size: 15px; font-weight: 800; transition: all .3s; }
   .rf-tl__step.is-active .rf-tl__dot { background: var(--rf-ink); border-color: var(--rf-ink); color: var(--rf-lime); box-shadow: 0 0 0 6px rgb(30 15 74 / .12); }
   .rf-tl[data-bg='ink'] .rf-tl__dot { background: var(--rf-ink); border-color: rgb(255 255 255 / .3); color: #fff; }
@@ -74,7 +76,7 @@
         this.steps = [...this.querySelectorAll('.rf-tl__step')];
         this.fill = this.querySelector('.rf-tl__fill');
         this.list = this.querySelector('.rf-tl__steps');
-        this.onScroll = () => this.update();
+        this.onScroll = () => { if (this.raf) return; this.raf = requestAnimationFrame(() => { this.raf = 0; this.update(); }); };
         window.addEventListener('scroll', this.onScroll, { passive: true });
         window.addEventListener('resize', this.onScroll);
         this.update();
