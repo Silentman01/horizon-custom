@@ -188,7 +188,7 @@
                 "input_text_color": "{{ settings.color_palette.foreground }}",
                 "input_border_color": "{{ settings.color_palette.foreground }}",
                 "border_width": 1,
-                "border_radius": 999,
+                "border_radius": 50,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
