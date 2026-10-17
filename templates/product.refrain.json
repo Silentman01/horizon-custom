@@ -609,7 +609,7 @@
           "type": "q",
           "settings": {
             "question": "Je peux vraiment écouter avant de payer ?",
-            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson. Aucune carte bancaire n'est demandée. Vous commandez seulement s'il vous plaît.</p>"
+            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson.</p>"
           }
         },
         "b3": {
@@ -630,14 +630,14 @@
           "type": "q",
           "settings": {
             "question": "En combien de temps je la reçois ?",
-            "answer": "<p>Sous 24 h avec Standard, sous 12 h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
+            "answer": "<p>Sous 24&nbsp;h avec Standard, sous 12&nbsp;h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
           }
         },
         "b6": {
           "type": "q",
           "settings": {
             "question": "Je peux demander des modifications ?",
-            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style : répondez simplement à l'e-mail de livraison.</p>"
+            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style&nbsp;: répondez simplement à l'e-mail de livraison.</p>"
           }
         },
         "b7": {
@@ -645,20 +645,6 @@
           "settings": {
             "question": "Et si ça ne me plaît toujours pas ?",
             "answer": "<p>Nous faisons des révisions jusqu'à ce que ce soit juste. Si ce n'est toujours pas le cas après nos révisions, nous vous remboursons.</p>"
-          }
-        },
-        "b8": {
-          "type": "q",
-          "settings": {
-            "question": "Est-ce que c'est fait par une IA ?",
-            "answer": "<p>Oui, en partie, et nous préférons le dire clairement. Les paroles et la musique sont générées avec l'aide de l'intelligence artificielle, à partir de vos réponses. Notre équipe relit ensuite chaque chanson et l'ajuste avant de vous l'envoyer.</p>"
-          }
-        },
-        "b9": {
-          "type": "q",
-          "settings": {
-            "question": "Que faites-vous de mes données ?",
-            "answer": "<p>Vos réponses servent uniquement à créer et livrer la chanson. Votre e-mail sert à vous envoyer l'extrait et votre commande. Nous ne vendons rien à personne. Vous pouvez demander la suppression de vos données à tout moment par e-mail.</p>"
           }
         },
         "b11": {
@@ -684,8 +670,6 @@
         "b5",
         "b6",
         "b7",
-        "b8",
-        "b9",
         "b11",
         "b12"
       ],
