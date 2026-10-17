@@ -65,3 +65,11 @@ Write `PRODUCT_DIR/DELIVERY.md` from `templates/DELIVERY.md`: links/paths, secti
 
 ## 7. Final message to the operator
 Short. Lead with the result and the preview link (or "pushed to GitHub branch X; send me the store to create the draft theme"). Then: contact sheet paths, the to-do list (variants, uploads, gift/bundle app, reviews app, store connection), credits spent. No claim caveats.
+
+## Schema checks theme check misses (Aurea push, 2026-10-17)
+Shopify rejects these on `shopify theme push` even when `shopify theme check` is clean. Scan every new section/block schema before delivery:
+- no `"default": ""` on any setting (omit the key instead);
+- no duplicate setting ids within a section or a block;
+- range defaults and template values inside min/max (e.g. `border_radius` max 50);
+- font handles in `config/settings_data.json` must exist in the Shopify font library (e.g. `cormorant_garamond_n6` is invalid).
+- Run `python -I <SKILL>/scripts/validate_schemas.py <theme_root>` before every push; it must report 0 errors.
