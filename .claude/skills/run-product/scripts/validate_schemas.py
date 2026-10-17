@@ -32,6 +32,10 @@ def check_settings(path, settings, where):
             continue
         if "label" not in s:
             err(path, f"{where}.{sid}: missing label")
+        elif isinstance(s["label"], str) and not s["label"].startswith("t:") and len(s["label"]) > 70:
+            err(path, f"{where}.{sid}: label longer than 70 chars ({len(s['label'])})")
+        if isinstance(s.get("info"), str) and not s["info"].startswith("t:") and len(s["info"]) > 500:
+            err(path, f"{where}.{sid}: info longer than 500 chars")
         if "default" in s:
             d = s["default"]
             if (d == "" or d is None) and t in ("text", "textarea", "richtext", "inline_richtext", "html", "url", "liquid"):
@@ -66,6 +70,19 @@ def check_settings(path, settings, where):
             err(path, f"{where}.{sid}: {t} without options")
 
 
+def check_values(path, where, values, sch_settings, selects=True):
+    by_id = {s["id"]: s for s in sch_settings if s.get("id")}
+    for k, v in (values or {}).items():
+        s = by_id.get(k)
+        if not s:
+            continue
+        if s.get("type") == "range" and isinstance(v, (int, float)):
+            if not (s["min"] <= v <= s["max"]):
+                err(path, f"{where}.{k}: value {v} outside {s['min']}..{s['max']}")
+        if selects and s.get("type") in ("select", "radio") and v not in [o.get("value") for o in s.get("options", [])]:
+            err(path, f"{where}.{k}: value '{v}' not in options")
+
+
 schemas = {}
 files = glob.glob(os.path.join(root, "sections", "*.liquid")) + glob.glob(os.path.join(root, "blocks", "*.liquid"))
 for p in files:
@@ -95,6 +112,23 @@ for p in files:
             check_settings(p, b["settings"], f"block '{b.get('type')}'")
         if b.get("name") and len(b["name"]) > 25 and not b["name"].startswith("t:"):
             err(p, f"block name '{b['name']}' longer than 25 chars")
+    if kind == "sections" and sch.get("tag") and sch["tag"] not in ("article", "aside", "div", "footer", "header", "section"):
+        err(p, f"invalid tag '{sch['tag']}'")
+    if isinstance(sch.get("max_blocks"), int) and sch["max_blocks"] > 50:
+        err(p, "max_blocks above 50")
+    local_types = {b.get("type") for b in sch.get("blocks", [])}
+    for pr in sch.get("presets", []):
+        if not pr.get("name"):
+            err(p, "preset without name")
+        check_values(p, f"preset '{pr.get('name')}'", pr.get("settings"), sch.get("settings", []), selects=False)
+        pbl = pr.get("blocks", [])
+        for b in (pbl.values() if isinstance(pbl, dict) else pbl):
+            bt = b.get("type")
+            if bt not in local_types and "@theme" not in local_types and "@app" not in local_types and ("blocks", bt) not in schemas and not glob.glob(os.path.join(root, "blocks", bt + ".liquid")):
+                err(p, f"preset '{pr.get('name')}': block type '{bt}' not defined")
+            lb = next((x for x in sch.get("blocks", []) if x.get("type") == bt and "settings" in x), None)
+            if lb:
+                check_values(p, f"preset block {bt}", b.get("settings"), lb["settings"], selects=False)
     btypes = [b.get("type") for b in sch.get("blocks", [])]
     for d in sorted({t for t in btypes if btypes.count(t) > 1}):
         err(p, f"duplicate block type '{d}'")
@@ -102,19 +136,6 @@ for p in files:
 
 def strip_comment(txt):
     return re.sub(r"^\s*/\*.*?\*/", "", txt, flags=re.S)
-
-
-def check_values(path, where, values, sch_settings):
-    by_id = {s["id"]: s for s in sch_settings if s.get("id")}
-    for k, v in (values or {}).items():
-        s = by_id.get(k)
-        if not s:
-            continue
-        if s.get("type") == "range" and isinstance(v, (int, float)):
-            if not (s["min"] <= v <= s["max"]):
-                err(path, f"{where}.{k}: value {v} outside {s['min']}..{s['max']}")
-        if s.get("type") in ("select", "radio") and v not in [o.get("value") for o in s.get("options", [])]:
-            err(path, f"{where}.{k}: value '{v}' not in options")
 
 
 def check_blocks(path, where, blocks, order, parent_sch):
