@@ -18,6 +18,8 @@
         "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
         "button_label": "Créer son extrait gratuit",
         "button_link": "/products/chanson-personnalisee#quiz",
+        "secondary_label": "",
+        "secondary_link": "",
         "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
         "image_asset": "refrain-hero-couple-desktop.jpg",
         "mobile_image_asset": "refrain-hero-couple-mobile.jpg",
@@ -115,7 +117,8 @@
         "heading": "De vos souvenirs à sa *chanson*",
         "button_label": "Commencer",
         "button_link": "/products/chanson-personnalisee#quiz",
-        "show_sticky_image": false
+        "show_sticky_image": false,
+        "image_asset": ""
       }
     },
     "occasions": {
@@ -126,6 +129,7 @@
           "settings": {
             "title": "Anniversaire",
             "text": "Toute sa vie, mise en chanson.",
+            "link": "",
             "image_asset": "refrain-occasion-birthday.jpg"
           }
         },
@@ -134,6 +138,7 @@
           "settings": {
             "title": "Noël",
             "text": "Commandez avant le 20 décembre pour une livraison avant Noël.",
+            "link": "",
             "image_asset": "refrain-occasion-christmas.jpg"
           }
         },
@@ -142,6 +147,7 @@
           "settings": {
             "title": "Fête des mères",
             "text": "Pour lui dire ce qu'on ne dit jamais à table.",
+            "link": "",
             "image_asset": "refrain-occasion-mother.jpg"
           }
         },
@@ -150,6 +156,7 @@
           "settings": {
             "title": "Saint-Valentin",
             "text": "Votre histoire, de la rencontre à aujourd'hui.",
+            "link": "",
             "image_asset": "refrain-occasion-couple.jpg"
           }
         },
@@ -158,6 +165,7 @@
           "settings": {
             "title": "Mariage",
             "text": "Pour le premier slow ou le discours des témoins.",
+            "link": "",
             "image_asset": "refrain-occasion-wedding.jpg"
           }
         },
@@ -166,6 +174,7 @@
           "settings": {
             "title": "Naissance",
             "text": "Une berceuse avec son prénom, dès le premier jour.",
+            "link": "",
             "image_asset": "refrain-occasion-baby.jpg"
           }
         }
@@ -196,7 +205,8 @@
             "meta": "Pour son mari · 22 ans de mariage",
             "quote": "Éric dit toujours qu'il ne veut rien. Quand il a entendu son prénom dans le refrain, il a posé sa fourchette et m'a regardée sans rien dire.",
             "stars": 5,
-            "image_asset": "refrain-review-1.jpg"
+            "image_asset": "refrain-review-1.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
         "b2": {
@@ -206,7 +216,8 @@
             "meta": "Pour sa femme · 25 ans de mariage",
             "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.",
             "stars": 5,
-            "image_asset": "refrain-review-2.jpg"
+            "image_asset": "refrain-review-2.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
         "b3": {
@@ -216,7 +227,8 @@
             "meta": "Pour sa mère · Anniversaire",
             "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
             "stars": 5,
-            "image_asset": "refrain-review-3.jpg"
+            "image_asset": "refrain-review-3.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
         "b4": {
@@ -226,7 +238,8 @@
             "meta": "Pour son mari · Noël",
             "quote": "Il n'est pas du genre à pleurer. J'ai écouté l'extrait avant de payer, pour être sûre. Le soir de Noël, il a dû sortir prendre l'air.",
             "stars": 5,
-            "image_asset": "refrain-review-4.jpg"
+            "image_asset": "refrain-review-4.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
         "b5": {
@@ -236,7 +249,8 @@
             "meta": "Pour sa mère · Noël",
             "quote": "On l'a passée sur la télé, avec la vidéo des paroles. Quand son prénom s'est affiché, maman a pris la main de papa.",
             "stars": 5,
-            "image_asset": "refrain-review-5.jpg"
+            "image_asset": "refrain-review-5.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
         "b6": {
@@ -246,7 +260,8 @@
             "meta": "Pour sa mère · 60 ans",
             "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
             "stars": 5,
-            "image_asset": "refrain-review-6.jpg"
+            "image_asset": "refrain-review-6.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         }
       },
@@ -262,7 +277,8 @@
         "background": "lilac",
         "eyebrow": "Avis",
         "heading": "Des histoires mises en *chanson*",
-        "subheading": "Ce qu'on nous raconte après l'écoute."
+        "subheading": "Ce qu'on nous raconte après l'écoute.",
+        "anchor_id": "avis"
       }
     },
     "comparison": {
@@ -448,7 +464,7 @@
           "type": "q",
           "settings": {
             "question": "Je peux vraiment écouter avant de payer ?",
-            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson. Aucune carte bancaire n'est demandée. Vous commandez seulement s'il vous plaît.</p>"
+            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson.</p>"
           }
         },
         "b3": {
@@ -469,14 +485,14 @@
           "type": "q",
           "settings": {
             "question": "En combien de temps je la reçois ?",
-            "answer": "<p>Sous 24 h avec Standard, sous 12 h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
+            "answer": "<p>Sous 24&nbsp;h avec Standard, sous 12&nbsp;h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
           }
         },
         "b6": {
           "type": "q",
           "settings": {
             "question": "Je peux demander des modifications ?",
-            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style : répondez simplement à l'e-mail de livraison.</p>"
+            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style&nbsp;: répondez simplement à l'e-mail de livraison.</p>"
           }
         },
         "b7": {
@@ -486,32 +502,11 @@
             "answer": "<p>Nous faisons des révisions jusqu'à ce que ce soit juste. Si ce n'est toujours pas le cas après nos révisions, nous vous remboursons.</p>"
           }
         },
-        "b8": {
-          "type": "q",
-          "settings": {
-            "question": "Est-ce que c'est fait par une IA ?",
-            "answer": "<p>Oui, en partie, et nous préférons le dire clairement. Les paroles et la musique sont générées avec l'aide de l'intelligence artificielle, à partir de vos réponses. Notre équipe relit ensuite chaque chanson et l'ajuste avant de vous l'envoyer.</p>"
-          }
-        },
-        "b9": {
-          "type": "q",
-          "settings": {
-            "question": "Que faites-vous de mes données ?",
-            "answer": "<p>Vos réponses servent uniquement à créer et livrer la chanson. Votre e-mail sert à vous envoyer l'extrait et votre commande. Nous ne vendons rien à personne. Vous pouvez demander la suppression de vos données à tout moment par e-mail.</p>"
-          }
-        },
-        "b10": {
-          "type": "q",
-          "settings": {
-            "question": "Ai-je un droit de rétractation ?",
-            "answer": "<p>La chanson est un contenu numérique personnalisé, livré par e-mail. Au paiement, vous acceptez qu'on commence tout de suite et vous renoncez au droit de rétractation de 14 jours. C'est pour cela que vous écoutez l'extrait avant de payer, et que les révisions sont illimitées.</p>"
-          }
-        },
         "b11": {
           "type": "q",
           "settings": {
             "question": "Comment l'offrir ?",
-            "answer": "<p>Faites-la écouter en vrai, envoyez le lien, ou passez-la le jour J. Le fichier MP3 est à vous : téléphone, enceinte, voiture.</p>"
+            "answer": "<p>Faites-la écouter en vrai, envoyez le lien, ou passez-la le jour J. Le fichier MP3 est à vous&nbsp;: téléphone, enceinte, voiture. 😊</p>"
           }
         },
         "b12": {
@@ -530,9 +525,6 @@
         "b5",
         "b6",
         "b7",
-        "b8",
-        "b9",
-        "b10",
         "b11",
         "b12"
       ],
@@ -540,7 +532,7 @@
         "background": "page",
         "heading": "Vos *questions*",
         "subheading": "Tout ce qu'il faut savoir avant de commander.",
-        "contact": "<p>Une autre question ? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
+        "contact": "<p>Une autre question&nbsp;? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
       }
     },
     "cta": {
@@ -552,7 +544,9 @@
         "button_label": "Commencer",
         "button_link": "/products/chanson-personnalisee#quiz",
         "note": "Commandez avant le 20 décembre pour une livraison avant Noël.",
-        "image_asset": "refrain-cta.jpg"
+        "image_asset": "refrain-cta.jpg",
+        "sticky_enable": true,
+        "sticky_label": "Créer son extrait gratuit"
       }
     }
   },
