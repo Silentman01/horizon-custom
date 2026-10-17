@@ -1,282 +1,632 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "hero": {
+      "type": "refrain-hero",
+      "settings": {
+        "background": "lilac",
+        "eyebrow": "Chanson personnalisée",
+        "heading": "Son prénom dans le *refrain*.",
+        "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/chanson-personnalisee#quiz",
+        "secondary_label": "Écouter des exemples",
+        "secondary_link": "#examples",
+        "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
+        "image_asset": "refrain-hero-desktop.jpg",
+        "mobile_image_asset": "refrain-hero-mobile.jpg",
+        "chip_title": "« Nathalie » · Fête des mères"
+      }
+    },
+    "marquee": {
+      "type": "refrain-marquee",
+      "settings": {
+        "speed": 35
+      },
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "b1": {
+          "type": "item",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "text": "Son prénom dans le refrain"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "b2": {
+          "type": "item",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "text": "Écoutez avant de payer"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "text": "2 chansons + paroles"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "text": "Révisions illimitées"
+          }
+        },
+        "b5": {
+          "type": "item",
+          "settings": {
+            "text": "Livraison sous 24 h"
+          }
+        },
+        "b6": {
+          "type": "item",
+          "settings": {
+            "text": "Paiement sécurisé"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "examples": {
+      "type": "refrain-examples",
+      "settings": {
+        "anchor_id": "examples",
+        "background": "page",
+        "eyebrow": "Exemples",
+        "heading": "Écoutez des *exemples*",
+        "sub": "Quatre chansons, quatre histoires. La vôtre sera écrite à partir de vos réponses.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/chanson-personnalisee#quiz"
+      },
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "b1": {
+          "type": "example",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "name": "Nathalie",
+            "recipient_line": "Pour sa maman · Fête des mères",
+            "style": "",
+            "lyrics": "Nathalie, Nathalie\nC'est ton prénom qu'on chante aujourd'hui\nPour chaque nuit où tu veillais sur nous\nNathalie, merci pour tout",
+            "audio_asset": "refrain-demo-maman.mp3"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "b2": {
+          "type": "example",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "name": "Camille",
+            "recipient_line": "Pour sa future femme · Mariage",
+            "style": "",
+            "lyrics": "Camille, aujourd'hui je dis oui\nOui pour la vie, oui pour nos nuits\nDevant tous ceux qu'on aime, je promets\nCamille, toi et moi, pour de vrai",
+            "audio_asset": "refrain-demo-camille.mp3"
+          }
+        },
+        "b3": {
+          "type": "example",
+          "settings": {
+            "name": "Mamie Jeanne",
+            "recipient_line": "Pour sa grand-mère · 90 ans",
+            "style": "",
+            "lyrics": "Jeanne, ma Mamie Jeanne\nTon rire est resté dans nos âmes\nQuatre-vingt-dix printemps et tant d'amour\nJeanne, on t'aime pour toujours",
+            "audio_asset": "refrain-demo-mamie.mp3"
+          }
+        },
+        "b4": {
+          "type": "example",
+          "settings": {
+            "name": "Lucas",
+            "recipient_line": "Pour son meilleur ami · 30 ans",
+            "style": "",
+            "lyrics": "Lucas, Lucas, trente ans ce soir\nLève ton verre, c'est ton histoire\nOn chante ton nom jusqu'au matin\nLucas, le meilleur reste à venir, c'est certain",
+            "audio_asset": "refrain-demo-lucas.mp3"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "timeline": {
+      "type": "refrain-timeline",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "background": "page",
+        "eyebrow": "Comment ça marche",
+        "heading": "De vos souvenirs à sa *chanson*",
+        "button_label": "Commencer",
+        "button_link": "/products/chanson-personnalisee#quiz",
+        "show_sticky_image": false
+      },
+      "blocks": {
+        "b1": {
+          "type": "step",
+          "settings": {
+            "label": "Vous racontez",
+            "text": "Quelques questions sur la personne : son prénom, un souvenir, un message.",
+            "image_asset": "refrain-how-1.jpg"
+          }
+        },
+        "b2": {
+          "type": "step",
+          "settings": {
+            "label": "Vous écoutez",
+            "text": "Son extrait est prêt en quelques minutes. Écoutez avant de payer.",
+            "image_asset": "refrain-how-2.jpg"
+          }
+        },
+        "b3": {
+          "type": "step",
+          "settings": {
+            "label": "Vous offrez",
+            "text": "Ses chansons arrivent par e-mail, prêtes à faire écouter.",
+            "image_asset": "refrain-how-3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "occasions": {
+      "type": "refrain-occasions",
+      "settings": {
+        "background": "lilac",
+        "heading": "Pour chaque *moment*",
+        "sub": "Une chanson pour toutes les fois où les mots ne suffisent pas.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/chanson-personnalisee#quiz"
+      },
+      "blocks": {
+        "b1": {
+          "type": "occasion",
+          "settings": {
+            "title": "Anniversaire",
+            "text": "Toute sa vie, mise en chanson.",
+            "image_asset": "refrain-occasion-birthday.jpg"
+          }
+        },
+        "b2": {
+          "type": "occasion",
+          "settings": {
+            "title": "Noël",
+            "text": "Commandez avant le 20 décembre pour une livraison avant Noël.",
+            "image_asset": "refrain-occasion-christmas.jpg"
+          }
+        },
+        "b3": {
+          "type": "occasion",
+          "settings": {
+            "title": "Fête des mères",
+            "text": "Pour lui dire ce qu'on ne dit jamais à table.",
+            "image_asset": "refrain-occasion-mother.jpg"
+          }
+        },
+        "b4": {
+          "type": "occasion",
+          "settings": {
+            "title": "Saint-Valentin",
+            "text": "Votre histoire, de la rencontre à aujourd'hui.",
+            "image_asset": "refrain-occasion-couple.jpg"
+          }
+        },
+        "b5": {
+          "type": "occasion",
+          "settings": {
+            "title": "Mariage",
+            "text": "Pour le premier slow ou le discours des témoins.",
+            "image_asset": "refrain-occasion-wedding.jpg"
+          }
+        },
+        "b6": {
+          "type": "occasion",
+          "settings": {
+            "title": "Naissance",
+            "text": "Une berceuse avec son prénom, dès le premier jour.",
+            "image_asset": "refrain-occasion-baby.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "reviews": {
+      "type": "refrain-reviews",
+      "settings": {
+        "background": "lilac",
+        "eyebrow": "Avis",
+        "heading": "Des histoires mises en *chanson*",
+        "subheading": "Ce qu'on nous raconte après l'écoute.",
+        "show_placeholder_badges": true
+      },
+      "blocks": {
+        "b1": {
+          "type": "review",
+          "settings": {
+            "name": "Camille",
+            "meta": "Pour sa mère · Anniversaire",
+            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-1.jpg"
+          }
+        },
+        "b2": {
+          "type": "review",
+          "settings": {
+            "name": "Julien",
+            "meta": "Pour sa femme · Anniversaire de mariage",
+            "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-2.jpg"
+          }
+        },
+        "b3": {
+          "type": "review",
+          "settings": {
+            "name": "Sophie",
+            "meta": "Pour son père · Départ en retraite",
+            "quote": "On l'a passée au pot de départ. Mon père, qui ne pleure jamais, a dû sortir prendre l'air.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-3.jpg"
+          }
+        },
+        "b4": {
+          "type": "review",
+          "settings": {
+            "name": "Nadia",
+            "meta": "Pour sa fille · Naissance",
+            "quote": "Une berceuse avec le prénom de ma fille. On la lui chante tous les soirs, maintenant.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-4.jpg"
+          }
+        },
+        "b5": {
+          "type": "review",
+          "settings": {
+            "name": "Marc",
+            "meta": "Pour sa grand-mère · Noël",
+            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-1.jpg"
+          }
+        },
+        "b6": {
+          "type": "review",
+          "settings": {
+            "name": "Léa",
+            "meta": "Pour sa meilleure amie · Juste pour dire merci",
+            "quote": "J'ai écouté l'extrait avant de payer. Dès les premières secondes, j'ai su que je commandais.",
+            "stars": 5,
+            "placeholder": true,
+            "image_asset": "refrain-review-2.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "comparison": {
+      "type": "refrain-comparison",
+      "settings": {
+        "background": "page",
+        "heading": "Le cadeau qui ne finit pas dans un *tiroir*",
+        "subheading": "Comparez avant de choisir.",
+        "col_us": "Refrain",
+        "col_a": "Carte cadeau",
+        "col_b": "Cadeau « tiroir »",
+        "image_asset": "refrain-compare-drawer.jpg"
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "label": "Son prénom, ses souvenirs",
+            "us_text": "Oui, dans le refrain",
+            "a_has": false,
+            "b_has": false
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "label": "Écrit à partir de votre histoire",
+            "us_text": "Oui",
+            "a_has": false,
+            "b_has": false
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "label": "Écoutez avant de payer",
+            "us_text": "Extrait gratuit",
+            "a_has": false,
+            "b_has": false
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "label": "Se réécoute pendant des années",
+            "us_text": "Oui",
+            "a_has": false,
+            "b_has": false
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "label": "Révisions jusqu'à ce que ce soit juste",
+            "us_text": "Illimitées",
+            "a_has": false,
+            "b_has": false
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "label": "Reçu même de dernière minute",
+            "us_text": "Sous 24 h par e-mail",
+            "a_has": true,
+            "b_has": false
+          }
+        },
+        "b7": {
+          "type": "row",
+          "settings": {
+            "label": "Se partage avec toute la famille",
+            "us_text": "Un lien, un fichier",
+            "a_has": false,
+            "b_has": false
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ]
+    },
+    "promise": {
+      "type": "refrain-promise",
+      "settings": {
+        "background": "page",
+        "eyebrow": "Notre promesse",
+        "heading": "Un cadeau sans *risque*",
+        "sub": ""
+      },
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "icon": "ear",
+            "title": "Écoutez avant de payer",
+            "text": "Un extrait gratuit, sans carte bancaire."
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "icon": "pen",
+            "title": "Écrite à partir de vous",
+            "text": "Son prénom, vos souvenirs, vos mots."
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "icon": "refresh",
+            "title": "Révisions illimitées",
+            "text": "Nous ajustons jusqu'à ce que ce soit juste."
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "title": "Livrée sous 24 h",
+            "text": "Par e-mail, prête à offrir. 12 h en Premium."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "guarantee": {
+      "type": "refrain-guarantee",
+      "settings": {
+        "badge_text": "Extrait gratuit · Révisions illimitées",
+        "heading": "Écoutez avant de *payer*",
+        "image_asset": "refrain-guarantee.jpg",
+        "text": "<p>Vous écoutez d'abord un extrait gratuit. Vous ne commandez que s'il vous touche. Ensuite, nous ajustons les chansons autant de fois que nécessaire. Si ce n'est toujours pas juste après nos révisions, nous vous remboursons.</p>"
+      },
+      "blocks": {
+        "b1": {
+          "type": "point",
+          "settings": {
+            "text": "Extrait gratuit, sans carte bancaire"
+          }
+        },
+        "b2": {
+          "type": "point",
+          "settings": {
+            "text": "Révisions illimitées après la commande"
+          }
+        },
+        "b3": {
+          "type": "point",
+          "settings": {
+            "text": "Remboursement si ce n'est toujours pas juste"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "faq": {
+      "type": "refrain-faq",
+      "settings": {
+        "background": "page",
+        "heading": "Vos *questions*",
+        "subheading": "Tout ce qu'il faut savoir avant de commander.",
+        "contact": "<p>Une autre question ? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
+      },
+      "blocks": {
+        "b1": {
+          "type": "q",
+          "settings": {
+            "question": "Qu'est-ce que je reçois ?",
+            "answer": "<p>Deux chansons personnalisées complètes, au format MP3, et leurs paroles complètes. Avec Premium : livraison prioritaire sous 12 h, un clip paroles animé et une pochette personnalisée. Tout arrive par e-mail, avec une page privée pour écouter et télécharger.</p>"
+          }
+        },
+        "b2": {
+          "type": "q",
+          "settings": {
+            "question": "Je peux vraiment écouter avant de payer ?",
+            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson. Aucune carte bancaire n'est demandée. Vous commandez seulement s'il vous plaît.</p>"
+          }
+        },
+        "b3": {
+          "type": "q",
+          "settings": {
+            "question": "À quel point la chanson est-elle personnalisée ?",
+            "answer": "<p>Les paroles sont écrites à partir de vos réponses : son prénom, ses qualités, vos souvenirs, votre message. Son prénom est chanté dans le refrain. Vous choisissez aussi le style et la voix.</p>"
+          }
+        },
+        "b4": {
+          "type": "q",
+          "settings": {
+            "question": "Et si son prénom est difficile à prononcer ?",
+            "answer": "<p>Indiquez la prononciation dans le questionnaire, écrite comme elle se dit (ex. : « Lou-i-ze »). Si elle n'est pas juste dans la version finale, une révision suffit.</p>"
+          }
+        },
+        "b5": {
+          "type": "q",
+          "settings": {
+            "question": "En combien de temps je la reçois ?",
+            "answer": "<p>Sous 24 h avec Standard, sous 12 h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
+          }
+        },
+        "b6": {
+          "type": "q",
+          "settings": {
+            "question": "Je peux demander des modifications ?",
+            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style : répondez simplement à l'e-mail de livraison.</p>"
+          }
+        },
+        "b7": {
+          "type": "q",
+          "settings": {
+            "question": "Et si ça ne me plaît toujours pas ?",
+            "answer": "<p>Nous faisons des révisions jusqu'à ce que ce soit juste. Si ce n'est toujours pas le cas après nos révisions, nous vous remboursons.</p>"
+          }
+        },
+        "b8": {
+          "type": "q",
+          "settings": {
+            "question": "Est-ce que c'est fait par une IA ?",
+            "answer": "<p>Oui, en partie, et nous préférons le dire clairement. Les paroles et la musique sont générées avec l'aide de l'intelligence artificielle, à partir de vos réponses. Notre équipe relit ensuite chaque chanson et l'ajuste avant de vous l'envoyer.</p>"
+          }
+        },
+        "b9": {
+          "type": "q",
+          "settings": {
+            "question": "Que faites-vous de mes données ?",
+            "answer": "<p>Vos réponses servent uniquement à créer et livrer la chanson. Votre e-mail sert à vous envoyer l'extrait et votre commande. Nous ne vendons rien à personne. Vous pouvez demander la suppression de vos données à tout moment par e-mail.</p>"
+          }
+        },
+        "b10": {
+          "type": "q",
+          "settings": {
+            "question": "Ai-je un droit de rétractation ?",
+            "answer": "<p>La chanson est un contenu numérique personnalisé, livré par e-mail. Au paiement, vous acceptez qu'on commence tout de suite et vous renoncez au droit de rétractation de 14 jours. C'est pour cela que vous écoutez l'extrait avant de payer, et que les révisions sont illimitées.</p>"
+          }
+        },
+        "b11": {
+          "type": "q",
+          "settings": {
+            "question": "Comment l'offrir ?",
+            "answer": "<p>Faites-la écouter en vrai, envoyez le lien, ou passez-la le jour J. Le fichier MP3 est à vous : téléphone, enceinte, voiture.</p>"
+          }
+        },
+        "b12": {
+          "type": "q",
+          "settings": {
+            "question": "Elle existe dans d'autres langues ?",
+            "answer": "<p>Pour l'instant, en français et en anglais.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8",
+        "b9",
+        "b10",
+        "b11",
+        "b12"
+      ]
+    },
+    "cta": {
+      "type": "refrain-cta",
+      "settings": {
+        "background": "ink",
+        "heading": "Toute sa vie, mise en *chanson*",
+        "text": "Racontez-nous la personne. Nous écrivons sa chanson. Écoutez avant de payer.",
+        "button_label": "Commencer",
+        "button_link": "/products/chanson-personnalisee#quiz",
+        "note": "Commandez avant le 20 décembre pour une livraison avant Noël.",
+        "image_asset": "refrain-cta.jpg"
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "hero",
+    "marquee",
+    "examples",
+    "timeline",
+    "occasions",
+    "reviews",
+    "comparison",
+    "promise",
+    "guarantee",
+    "faq",
+    "cta"
   ]
 }

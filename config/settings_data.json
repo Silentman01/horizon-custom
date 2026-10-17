@@ -11,10 +11,10 @@
   "current": {
     "logo_height": 36,
     "logo_height_mobile": 28,
-    "type_body_font": "inter_n4",
-    "type_subheading_font": "inter_n5",
-    "type_heading_font": "inter_n7",
-    "type_accent_font": "inter_n7",
+    "type_body_font": "plus_jakarta_sans_n4",
+    "type_subheading_font": "plus_jakarta_sans_n6",
+    "type_heading_font": "plus_jakarta_sans_n8",
+    "type_accent_font": "plus_jakarta_sans_n8",
     "type_size_paragraph": "14",
     "type_line_height_paragraph": "body-loose",
     "type_font_h1": "heading",
@@ -77,11 +77,11 @@
     "palette_input_border": "{{ settings.color_palette.color3 }}",
     "palette_variant_border": "{{ settings.color_palette.color3 }}",
     "color_palette": {
-      "background": "#ffffff",
-      "foreground": "#000000",
-      "color1": "#333333",
-      "color2": "#EEF1EA",
-      "color3": "#DFDFDF"
+      "background": "#F8F5FF",
+      "foreground": "#1E0F4A",
+      "color1": "#1E0F4A",
+      "color2": "#DCCFFF",
+      "color3": "#E3D9FA"
     }
   },
   "presets": {

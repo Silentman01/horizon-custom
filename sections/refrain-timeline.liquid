@@ -1,0 +1,130 @@
+{% render 'refrain-fonts' %}
+{%- assign dark = false -%}
+{%- if section.settings.background == 'ink' -%}{%- assign dark = true -%}{%- endif -%}
+{%- assign sticky = false -%}
+{%- if section.settings.show_sticky_image and section.settings.image != blank or section.settings.show_sticky_image and section.settings.image_asset != blank -%}{%- assign sticky = true -%}{%- endif -%}
+<section class="rf-tl" data-bg="{{ section.settings.background }}" style="{% render 'refrain-vars' %}" {{ section.shopify_attributes }}>
+  <div class="rf-tl__inner{% if sticky %} rf-tl__inner--split{% endif %}">
+    {%- if sticky -%}
+      <div class="rf-tl__sticky">
+        {% render 'refrain-media', image: section.settings.image, asset: section.settings.image_asset, ratio: '4 / 5', label: 'Photo: someone discovering their personalised song on a phone, emotional smile', radius: 28, sizes: '(min-width: 990px) 460px, 100vw' %}
+      </div>
+    {%- endif -%}
+    <refrain-timeline class="rf-tl__col">
+      {%- if section.settings.eyebrow != blank -%}<p class="rf-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {% render 'refrain-title', text: section.settings.heading, dark: dark %}
+      <ol class="rf-tl__steps">
+        <span class="rf-tl__track" aria-hidden="true"><i class="rf-tl__fill"></i></span>
+        {%- for block in section.blocks -%}
+          {%- capture ph -%}Illustration: {{ block.settings.label }}{%- endcapture -%}
+          <li class="rf-tl__step" {{ block.shopify_attributes }}>
+            <span class="rf-tl__dot" aria-hidden="true">{{ forloop.index }}</span>
+            <h3 class="rf-tl__label">{{ block.settings.label }}</h3>
+            <p class="rf-tl__text">{{ block.settings.text }}</p>
+            {%- if block.settings.image != blank or block.settings.image_asset != blank -%}
+              <div class="rf-tl__img">{% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '16 / 10', label: ph, radius: 22, sizes: '(min-width: 990px) 560px, 90vw' %}</div>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ol>
+      {%- if section.settings.button_label != blank -%}
+        <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ section.settings.button_link | default: '/products/chanson-personnalisee' }}">{{ section.settings.button_label }}</a>
+      {%- endif -%}
+    </refrain-timeline>
+  </div>
+</section>
+{% stylesheet %}
+  .rf-tl { padding: 52px 16px; background: var(--rf-page); font-family: var(--rf-sans); }
+  .rf-tl[data-bg='lilac'] { background: var(--rf-lilac); }
+  .rf-tl[data-bg='ink'] { background: var(--rf-ink); color: #fff; }
+  .rf-tl[data-bg='ink'] .rf-eyebrow { color: #fff; }
+  .rf-tl__inner { max-width: 1160px; margin: 0 auto; display: grid; gap: 32px; }
+  .rf-tl__col { display: block; max-width: 680px; }
+  .rf-tl__sticky .rf-media { box-shadow: 0 24px 60px rgb(30 15 74 / .2); }
+  .rf-tl__steps { position: relative; margin: 32px 0; padding: 0 0 0 60px; list-style: none; display: grid; gap: 36px; }
+  .rf-tl__track { position: absolute; left: 17px; top: 18px; bottom: 18px; width: 3px; border-radius: 2px; background: var(--rf-line); }
+  .rf-tl[data-bg='lilac'] .rf-tl__track { background: #fff; }
+  .rf-tl[data-bg='ink'] .rf-tl__track { background: rgb(255 255 255 / .2); }
+  .rf-tl__fill { display: block; width: 100%; height: 0; border-radius: 2px; background: var(--rf-ink); transition: height .2s linear; }
+  .rf-tl[data-bg='ink'] .rf-tl__fill { background: var(--rf-lime); }
+  .rf-tl__step { position: relative; opacity: .45; transition: opacity .3s; }
+  .rf-tl__step.is-active { opacity: 1; }
+  .rf-tl__dot { position: absolute; left: -60px; top: -4px; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--rf-card); border: 2px solid var(--rf-line); color: var(--rf-ink-soft); font-size: 15px; font-weight: 800; transition: all .3s; }
+  .rf-tl__step.is-active .rf-tl__dot { background: var(--rf-ink); border-color: var(--rf-ink); color: var(--rf-lime); box-shadow: 0 0 0 6px rgb(30 15 74 / .12); }
+  .rf-tl[data-bg='ink'] .rf-tl__dot { background: var(--rf-ink); border-color: rgb(255 255 255 / .3); color: #fff; }
+  .rf-tl[data-bg='ink'] .rf-tl__step.is-active .rf-tl__dot { background: var(--rf-lime); border-color: var(--rf-lime); color: var(--rf-ink); box-shadow: 0 0 0 6px rgb(212 245 60 / .2); }
+  .rf-tl__label { margin: 0 0 6px; font-size: 20px; font-weight: 800; letter-spacing: -0.04em; color: var(--rf-ink); }
+  .rf-tl[data-bg='ink'] .rf-tl__label { color: #fff; }
+  .rf-tl__text { margin: 0; font-size: 16px; line-height: 1.55; color: var(--rf-ink-soft); }
+  .rf-tl[data-bg='ink'] .rf-tl__text { color: #fff; opacity: .85; }
+  .rf-tl__img { margin-top: 16px; }
+  .rf-tl__img .rf-media { box-shadow: 0 10px 30px rgb(30 15 74 / .12); }
+  @media (min-width: 990px) {
+    .rf-tl { padding: 96px 24px; }
+    .rf-tl__inner--split { grid-template-columns: 42% 1fr; gap: 80px; align-items: start; }
+    .rf-tl__sticky { position: sticky; top: 100px; }
+    .rf-tl__label { font-size: 24px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .rf-tl__step, .rf-tl__dot, .rf-tl__fill { transition: none; } }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('refrain-timeline')) {
+    class RefrainTimeline extends HTMLElement {
+      connectedCallback() {
+        this.steps = [...this.querySelectorAll('.rf-tl__step')];
+        this.fill = this.querySelector('.rf-tl__fill');
+        this.list = this.querySelector('.rf-tl__steps');
+        this.onScroll = () => this.update();
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+        window.addEventListener('resize', this.onScroll);
+        this.update();
+      }
+      disconnectedCallback() {
+        window.removeEventListener('scroll', this.onScroll);
+        window.removeEventListener('resize', this.onScroll);
+      }
+      update() {
+        const line = window.innerHeight * 0.6;
+        const r = this.list.getBoundingClientRect();
+        const progress = Math.max(0, Math.min(1, (line - r.top) / r.height));
+        this.fill.style.height = progress * 100 + '%';
+        this.steps.forEach((s) => s.classList.toggle('is-active', s.getBoundingClientRect().top < line));
+      }
+    }
+    customElements.define('refrain-timeline', RefrainTimeline);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Refrain · Timeline",
+  "settings": [
+    { "type": "select", "id": "background", "label": "Background", "default": "page", "options": [ { "value": "page", "label": "Page" }, { "value": "lilac", "label": "Lilac" }, { "value": "ink", "label": "Ink" } ] },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Comment ça marche" },
+    { "type": "text", "id": "heading", "label": "Heading (*word* = italic emphasis)", "default": "Votre chanson en trois *étapes*" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Créer ma chanson" },
+    { "type": "url", "id": "button_link", "label": "Button link", "default": "/products/chanson-personnalisee" },
+    { "type": "header", "content": "Sticky image (desktop)" },
+    { "type": "checkbox", "id": "show_sticky_image", "label": "Show big sticky image", "default": false },
+    { "type": "image_picker", "id": "image", "label": "Sticky image (4:5)" },
+    { "type": "text", "id": "image_asset", "label": "Sticky image theme asset file name" }
+  ],
+  "blocks": [
+    {
+      "type": "step", "name": "Step",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Racontez-nous leur histoire" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Prénom, souvenirs, détails qui comptent." },
+        { "type": "image_picker", "id": "image", "label": "Image (16:10, optional)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset file name" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Refrain · Timeline", "blocks": [
+      { "type": "step", "settings": { "label": "Racontez-nous leur histoire", "text": "Le prénom, vos souvenirs, ce qui les rend uniques. Quelques minutes suffisent." } },
+      { "type": "step", "settings": { "label": "Nous composons la chanson", "text": "Paroles, mélodie et voix : tout est créé spécialement pour eux." } },
+      { "type": "step", "settings": { "label": "Vous l'offrez", "text": "Vous recevez la chanson par e-mail, prête à être partagée et à faire naître l'émotion." } }
+    ] }
+  ]
+}
+{% endschema %}

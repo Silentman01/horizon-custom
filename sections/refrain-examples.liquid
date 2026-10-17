@@ -1,0 +1,176 @@
+{% render 'refrain-fonts' %}
+{% render 'refrain-drag' %}
+{%- assign dark = false -%}
+{%- if section.settings.background == 'ink' -%}{%- assign dark = true -%}{%- endif -%}
+<section class="rf-ex" id="{{ section.settings.anchor_id | default: 'examples' }}" data-bg="{{ section.settings.background }}" style="{% render 'refrain-vars' %}" {{ section.shopify_attributes }}>
+  <div class="rf-ex__inner">
+    <div class="rf-ex__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="rf-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {% render 'refrain-title', text: section.settings.heading, dark: dark %}
+      {%- if section.settings.sub != blank -%}<p class="rf-sub">{{ section.settings.sub }}</p>{%- endif -%}
+    </div>
+    <refrain-rail class="rf-ex__rail">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign src = block.settings.audio_url
+          if src == blank and block.settings.audio_asset != blank
+            assign src = block.settings.audio_asset | asset_url
+          endif
+          assign nm = block.settings.name | escape
+          assign lyr = block.settings.lyrics | escape | newline_to_br
+          if nm != blank
+            assign mark = '<mark>' | append: nm | append: '</mark>'
+            assign lyr = lyr | replace: nm, mark
+          endif
+          capture ph
+            echo 'Photo: ' | append: block.settings.name | append: ', a smiling person, warm natural portrait'
+          endcapture
+        -%}
+        <article class="rf-ex__card" {{ block.shopify_attributes }}>
+          {%- if block.settings.image != blank or block.settings.image_asset != blank -%}
+            <div class="rf-ex__img">{% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '16 / 9', label: ph, radius: 0, sizes: '360px' %}</div>
+          {%- endif -%}
+          <div class="rf-ex__body">
+            {%- if block.settings.style != blank -%}<span class="rf-ex__chip">{{ block.settings.style }}</span>{%- endif -%}
+            <h3 class="rf-ex__name">{{ block.settings.name }}</h3>
+            {%- if block.settings.recipient_line != blank -%}<p class="rf-ex__rec">{{ block.settings.recipient_line }}</p>{%- endif -%}
+            <refrain-player class="rf-ex__player">
+              {%- if src != blank -%}
+                <audio preload="none" src="{{ src }}" hidden></audio>
+                <button type="button" class="rf-ex__btn" aria-label="Écouter {{ block.settings.name | escape }}">
+                  <span class="rf-ex__ic rf-ex__ic--play">{% render 'refrain-icon', name: 'play' %}</span>
+                  <span class="rf-ex__ic rf-ex__ic--pause">{% render 'refrain-icon', name: 'pause' %}</span>
+                </button>
+                <div class="rf-ex__prog">
+                  <div class="rf-ex__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i></i></div>
+                  <span class="rf-ex__time">0:00</span>
+                </div>
+              {%- else -%}
+                <button type="button" class="rf-ex__btn" disabled aria-label="Bientôt disponible">
+                  <span class="rf-ex__ic rf-ex__ic--play" style="display:grid">{% render 'refrain-icon', name: 'play' %}</span>
+                </button>
+                <span class="rf-ex__soon">Bientôt disponible</span>
+              {%- endif -%}
+            </refrain-player>
+            {%- if lyr != blank -%}<p class="rf-ex__lyrics">{{ lyr }}</p>{%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
+    </refrain-rail>
+    {%- if section.settings.button_label != blank -%}
+      <div class="rf-ex__cta"><a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ section.settings.button_link | default: '/products/chanson-personnalisee' }}">{{ section.settings.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+{% stylesheet %}
+  .rf-ex { padding: 52px 0; background: var(--rf-page); font-family: var(--rf-sans); scroll-margin-top: 80px; }
+  .rf-ex[data-bg='lilac'] { background: var(--rf-lilac); }
+  .rf-ex[data-bg='ink'] { background: var(--rf-ink); }
+  .rf-ex[data-bg='ink'] .rf-sub, .rf-ex[data-bg='ink'] .rf-eyebrow { color: #fff; }
+  .rf-ex__inner { max-width: 1160px; margin: 0 auto; }
+  .rf-ex__head { max-width: 640px; margin: 0 auto 28px; padding: 0 16px; text-align: center; }
+  .rf-ex__rail { gap: 14px; padding: 8px 16px 28px; scroll-padding: 0 16px; }
+  .rf-ex__card { flex: 0 0 84%; max-width: 360px; display: flex; flex-direction: column; overflow: hidden; border-radius: 22px; background: var(--rf-card); color: var(--rf-ink); box-shadow: 0 10px 30px rgb(30 15 74 / .1); transition: transform .2s, box-shadow .2s; }
+  .rf-ex__card:hover { transform: translateY(-3px); box-shadow: 0 18px 40px rgb(30 15 74 / .16); }
+  .rf-ex__body { display: flex; flex-direction: column; align-items: flex-start; padding: 22px 22px 24px; }
+  .rf-ex__chip { padding: 5px 12px; border-radius: 999px; background: var(--rf-lilac); color: var(--rf-ink); font-size: 12px; font-weight: 700; }
+  .rf-ex__name { margin: 12px 0 0; font-size: 30px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; }
+  .rf-ex__rec { margin: 6px 0 0; font-size: 14px; color: var(--rf-ink-soft); }
+  .rf-ex__player { display: flex; align-items: center; gap: 14px; width: 100%; margin: 20px 0 0; }
+  .rf-ex__btn { position: relative; flex: none; display: grid; place-items: center; width: 60px; height: 60px; padding: 0; border: 0; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); cursor: pointer; box-shadow: 0 8px 20px rgb(30 15 74 / .28); transition: transform .15s; }
+  .rf-ex__btn:hover:not(:disabled) { transform: scale(1.06); }
+  .rf-ex__btn:focus-visible { outline: 3px solid var(--rf-violet); outline-offset: 3px; }
+  .rf-ex__btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+  .rf-ex__ic { display: none; }
+  .rf-ex__ic--play { display: grid; }
+  .rf-ex__ic .rf-icon { width: 24px; height: 24px; }
+  refrain-player.is-playing .rf-ex__ic--play { display: none; }
+  refrain-player.is-playing .rf-ex__ic--pause { display: grid; }
+  .rf-ex__prog { flex: 1; min-width: 0; }
+  .rf-ex__bar { height: 6px; border-radius: 3px; background: var(--rf-line); overflow: hidden; cursor: pointer; }
+  .rf-ex__bar i { display: block; width: 0; height: 100%; border-radius: 3px; background: var(--rf-ink); }
+  .rf-ex__time { display: block; margin-top: 6px; font-size: 12px; font-weight: 600; color: var(--rf-ink-soft); font-variant-numeric: tabular-nums; }
+  .rf-ex__soon { font-size: 14px; font-weight: 600; color: var(--rf-ink-soft); }
+  .rf-ex__lyrics { margin: 20px 0 0; padding-top: 18px; border-top: 1px solid var(--rf-line); font-size: 15px; line-height: 1.65; color: var(--rf-ink-soft); }
+  .rf-ex__lyrics mark { padding: 1px 7px; border-radius: 6px; background: var(--rf-ink); color: var(--rf-lime); font-weight: 700; }
+  .rf-ex__cta { display: flex; justify-content: center; margin-top: 8px; padding: 0 16px; }
+  @media (min-width: 750px) { .rf-ex__card { flex-basis: 360px; } .rf-ex__rail { gap: 20px; } }
+  @media (min-width: 990px) { .rf-ex { padding: 96px 0; } .rf-ex__rail { padding-inline: max(24px, calc((100vw - 1160px) / 2)); scroll-padding-inline: max(24px, calc((100vw - 1160px) / 2)); } }
+  @media (prefers-reduced-motion: reduce) { .rf-ex__card, .rf-ex__btn { transition: none; } }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('refrain-player')) {
+    const fmt = (t) => (isFinite(t) ? Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0') : '0:00');
+    class RefrainPlayer extends HTMLElement {
+      connectedCallback() {
+        this.audio = this.querySelector('audio');
+        this.btn = this.querySelector('.rf-ex__btn');
+        if (!this.audio || !this.btn) return;
+        this.fill = this.querySelector('.rf-ex__bar i');
+        this.bar = this.querySelector('.rf-ex__bar');
+        this.time = this.querySelector('.rf-ex__time');
+        this.btn.addEventListener('click', () => {
+          if (this.audio.paused) {
+            document.querySelectorAll('refrain-player').forEach((p) => { if (p !== this && p.audio && !p.audio.paused) p.audio.pause(); });
+            this.audio.play().catch(() => {});
+          } else {
+            this.audio.pause();
+          }
+        });
+        this.audio.addEventListener('play', () => { this.classList.add('is-playing'); this.btn.setAttribute('aria-pressed', 'true'); });
+        this.audio.addEventListener('pause', () => { this.classList.remove('is-playing'); this.btn.setAttribute('aria-pressed', 'false'); });
+        this.audio.addEventListener('ended', () => { this.audio.currentTime = 0; this.paint(); });
+        this.audio.addEventListener('timeupdate', () => this.paint());
+        this.audio.addEventListener('loadedmetadata', () => this.paint());
+        this.bar.addEventListener('click', (e) => {
+          const r = this.bar.getBoundingClientRect();
+          if (this.audio.duration) this.audio.currentTime = ((e.clientX - r.left) / r.width) * this.audio.duration;
+        });
+      }
+      paint() {
+        const d = this.audio.duration || 0;
+        const pct = d ? (this.audio.currentTime / d) * 100 : 0;
+        this.fill.style.width = pct + '%';
+        this.bar.setAttribute('aria-valuenow', Math.round(pct));
+        this.time.textContent = fmt(this.audio.currentTime) + (d ? ' / ' + fmt(d) : '');
+      }
+    }
+    customElements.define('refrain-player', RefrainPlayer);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Refrain · Examples",
+  "settings": [
+    { "type": "text", "id": "anchor_id", "label": "Anchor ID", "default": "examples" },
+    { "type": "select", "id": "background", "label": "Background", "default": "lilac", "options": [ { "value": "page", "label": "Page" }, { "value": "lilac", "label": "Lilac" }, { "value": "ink", "label": "Ink" } ] },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Écoutez" },
+    { "type": "text", "id": "heading", "label": "Heading (*word* = italic emphasis)", "default": "Écoutez des *exemples*" },
+    { "type": "textarea", "id": "sub", "label": "Subheading", "default": "Chaque chanson est composée pour une personne et une histoire." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Créer ma chanson" },
+    { "type": "url", "id": "button_link", "label": "Button link", "default": "/products/chanson-personnalisee" }
+  ],
+  "blocks": [
+    {
+      "type": "example", "name": "Example",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Camille" },
+        { "type": "text", "id": "recipient_line", "label": "Recipient line", "default": "Pour sa maman · Anniversaire" },
+        { "type": "text", "id": "style", "label": "Style chip", "default": "Pop douce" },
+        { "type": "text", "id": "audio_asset", "label": "Audio theme asset file name (e.g. refrain-demo-1.mp3)" },
+        { "type": "url", "id": "audio_url", "label": "Audio URL (overrides asset)" },
+        { "type": "textarea", "id": "lyrics", "label": "Lyrics excerpt", "default": "Camille, tu es la lumière\nDe tous nos matins d'hiver\nCamille, ton rire éclaire\nTout ce que tu aimes faire" },
+        { "type": "image_picker", "id": "image", "label": "Image (16:9, optional)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset file name" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Refrain · Examples", "blocks": [
+      { "type": "example", "settings": { "name": "Camille", "recipient_line": "Pour sa maman · Anniversaire", "style": "Pop douce", "audio_asset": "refrain-demo-1.mp3", "lyrics": "Camille, tu es la lumière\nDe tous nos matins d'hiver\nCamille, ton rire éclaire\nTout ce que tu aimes faire", "image_asset": "refrain-example-1.jpg" } },
+      { "type": "example", "settings": { "name": "Lucas", "recipient_line": "Pour son papa · Fête des pères", "style": "Folk", "audio_asset": "refrain-demo-2.mp3", "lyrics": "Lucas, la route est belle\nQuand tu marches devant nous\nLucas, ta voix nous appelle\nOn te suivrait partout", "image_asset": "refrain-example-2.jpg" } },
+      { "type": "example", "settings": { "name": "Inès", "recipient_line": "Pour sa meilleure amie · Mariage", "style": "Acoustique", "audio_asset": "refrain-demo-3.mp3", "lyrics": "Inès, ce soir tout commence\nOn a dansé sous les étoiles\nInès, quelle belle chance\nDe t'avoir à nos côtés", "image_asset": "refrain-example-3.jpg" } }
+    ] }
+  ]
+}
+{% endschema %}

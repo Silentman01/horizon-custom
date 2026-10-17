@@ -1,0 +1,42 @@
+{% render 'refrain-fonts' %}
+<section class="rf-marquee" style="{% render 'refrain-vars' %}; --rf-marquee-speed: {{ section.settings.speed }}s" {{ section.shopify_attributes }}>
+  <div class="rf-marquee__track">
+    {%- for i in (1..2) -%}
+      <ul class="rf-marquee__list"{% if i == 2 %} aria-hidden="true"{% endif %}>
+        {%- for block in section.blocks -%}
+          <li class="rf-marquee__item" {% if i == 1 %}{{ block.shopify_attributes }}{% endif %}>{{ block.settings.text }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</section>
+{% stylesheet %}
+  .rf-marquee { overflow: hidden; background: var(--rf-ink); color: #fff; padding: 18px 0; font-family: var(--rf-sans); }
+  .rf-marquee__track { display: flex; width: max-content; animation: rf-marquee var(--rf-marquee-speed, 30s) linear infinite; }
+  .rf-marquee:hover .rf-marquee__track { animation-play-state: paused; }
+  .rf-marquee__list { display: flex; flex: none; margin: 0; padding: 0; list-style: none; }
+  .rf-marquee__item { display: flex; align-items: center; white-space: nowrap; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+  .rf-marquee__item::after { content: ''; width: 8px; height: 8px; margin: 0 28px; border-radius: 50%; background: var(--rf-lime); }
+  @keyframes rf-marquee { to { transform: translateX(-50%); } }
+  @media (min-width: 750px) { .rf-marquee { padding: 22px 0; } .rf-marquee__item { font-size: 17px; } }
+  @media (prefers-reduced-motion: reduce) { .rf-marquee__track { animation: none; width: auto; flex-wrap: wrap; justify-content: center; } .rf-marquee__list[aria-hidden] { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Marquee",
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Loop duration (seconds, higher = slower)", "min": 10, "max": 80, "step": 5, "default": 30 }
+  ],
+  "blocks": [
+    { "type": "item", "name": "Item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Livraison en quelques minutes" } ] }
+  ],
+  "presets": [
+    { "name": "Refrain · Marquee", "blocks": [
+      { "type": "item", "settings": { "text": "Une chanson unique" } },
+      { "type": "item", "settings": { "text": "Livrée en quelques minutes" } },
+      { "type": "item", "settings": { "text": "Satisfait ou refait" } },
+      { "type": "item", "settings": { "text": "Paiement 100% sécurisé" } }
+    ] }
+  ]
+}
+{% endschema %}

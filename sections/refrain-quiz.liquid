@@ -1,0 +1,1011 @@
+{%- comment -%}
+  Refrain quiz: 9-step questionnaire -> free preview (POST/poll backend) -> player + offer -> AJAX cart -> checkout.
+  API contract: G:\Ecom\Products\Refrain\08_backend\API_CONTRACT.md
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product | default: product
+  assign v_std = p.variants.first
+  assign v_prem = nil
+  for v in p.variants
+    assign t = v.title | downcase
+    if t contains 'premium'
+      assign v_prem = v
+    endif
+  endfor
+  if v_prem == nil and p.variants.size > 1
+    assign v_prem = p.variants[1]
+  endif
+  if v_prem and v_std.id == v_prem.id
+    assign v_std = p.variants.last
+  endif
+  assign demo_src = section.settings.demo_audio_url
+  if demo_src == blank and section.settings.demo_audio_asset != blank
+    assign demo_src = section.settings.demo_audio_asset | asset_url
+  endif
+  assign sbs = section.blocks | where: 'type', 'step'
+  assign st1 = sbs[0]
+  assign st2 = sbs[1]
+  assign st3 = sbs[2]
+  assign st4 = sbs[3]
+  assign st5 = sbs[4]
+  assign st6 = sbs[5]
+  assign st7 = sbs[6]
+  assign st8 = sbs[7]
+  assign st9 = sbs[8]
+-%}
+{% render 'refrain-fonts' %}
+<section
+  id="quiz"
+  class="rf-quiz"
+  style="{% render 'refrain-vars' %}"
+  {{ section.shopify_attributes }}
+>
+  <refrain-quiz
+    class="rf-quiz__inner"
+    data-api="{{ section.settings.api_base | escape }}"
+    data-std="{{ v_std.id }}"
+    data-prem="{{ v_prem.id | default: v_std.id }}"
+    data-demo-audio="{{ demo_src }}"
+    data-demo-title="{{ section.settings.demo_title | escape }}"
+    data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
+    data-force-demo="{{ section.settings.force_demo }}"
+    data-pid="{{ p.id }}"
+    data-pixel="{{ section.settings.pixel_id | escape }}"
+  >
+    <header class="rf-quiz__head">
+      {%- if section.settings.eyebrow != blank -%}<p class="rf-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+      {% render 'refrain-title', text: section.settings.heading, tag: 'h1', class: 'rf-quiz__h1' %}
+      {%- if section.settings.sub != blank -%}<p class="rf-sub">{{ section.settings.sub }}</p>{%- endif -%}
+      <ul class="rf-quiz__badges">
+        {%- for i in (1..3) -%}
+          {%- assign key = 'badge_' | append: i -%}
+          {%- if section.settings[key] != blank -%}
+            <li>{% render 'refrain-icon', name: 'check' %}{{ section.settings[key] }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </header>
+
+    <div class="rf-quiz__card" data-card>
+      <div class="rf-quiz__resume" data-resume hidden>
+        <p>{{ section.settings.resume_text }}</p>
+        <div>
+          <button type="button" class="rf-btn" data-resume-yes>Continuer</button>
+          <button type="button" class="rf-link" data-resume-no>Recommencer</button>
+        </div>
+      </div>
+
+      <form class="rf-quiz__form" data-form novalidate>
+        <div class="rf-quiz__progress" aria-hidden="true">
+          <span class="rf-quiz__count"><b data-step-num>1</b> / 9</span>
+          <span class="rf-quiz__bar"><i data-bar></i></span>
+        </div>
+
+        {%- comment -%} STEP 1 recipient {%- endcomment -%}
+        <fieldset class="rf-step" data-step="1">
+          <legend class="rf-step__t">{{ st1.settings.title }}</legend>
+          <p class="rf-step__help">{{ st1.settings.help }}</p>
+          <div class="rf-chips" data-group="recipient" data-required>
+            {%- assign opts = st1.settings.options | split: ',' -%}
+            {%- for o in opts -%}{%- assign o = o | strip -%}
+              <label class="rf-chip"><input type="radio" name="recipient" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+            {%- endfor -%}
+          </div>
+          <label class="rf-field" data-other="recipient" hidden><span>Précisez</span><input type="text" name="recipient_other" maxlength="80" placeholder="{{ st1.settings.placeholder | escape }}"></label>
+        </fieldset>
+
+        {%- comment -%} STEP 2 occasion {%- endcomment -%}
+        <fieldset class="rf-step" data-step="2" hidden>
+          <legend class="rf-step__t">{{ st2.settings.title }}</legend>
+          <p class="rf-step__help">{{ st2.settings.help }}</p>
+          <div class="rf-chips" data-group="occasion" data-required>
+            {%- assign opts = st2.settings.options | split: ',' -%}
+            {%- for o in opts -%}{%- assign o = o | strip -%}
+              <label class="rf-chip"><input type="radio" name="occasion" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+            {%- endfor -%}
+          </div>
+          <label class="rf-field" data-other="occasion" hidden><span>Précisez</span><input type="text" name="occasion_other" maxlength="80"></label>
+        </fieldset>
+
+        {%- comment -%} STEP 3 name {%- endcomment -%}
+        <fieldset class="rf-step" data-step="3" hidden>
+          <legend class="rf-step__t">{{ st3.settings.title }}</legend>
+          <p class="rf-step__help">{{ st3.settings.help }}</p>
+          <label class="rf-field"><span>Prénom ou surnom</span><input type="text" name="name" maxlength="60" required autocomplete="off" placeholder="{{ st3.settings.placeholder | escape }}"></label>
+          <label class="rf-field"><span>Prononciation (facultatif)</span><input type="text" name="pronunciation" maxlength="90" autocomplete="off" placeholder="{{ st3.settings.placeholder_2 | escape }}"></label>
+        </fieldset>
+
+        {%- comment -%} STEP 4 style + voice {%- endcomment -%}
+        <fieldset class="rf-step" data-step="4" hidden>
+          <legend class="rf-step__t">{{ st4.settings.title }}</legend>
+          <p class="rf-step__help">{{ st4.settings.help }}</p>
+          <p class="rf-step__group">Style musical</p>
+          <div class="rf-chips" data-group="style" data-required>
+            {%- assign opts = st4.settings.options | split: ',' -%}
+            {%- for o in opts -%}{%- assign o = o | strip -%}
+              <label class="rf-chip"><input type="radio" name="style" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+            {%- endfor -%}
+          </div>
+          <p class="rf-step__group">Voix</p>
+          <div class="rf-chips" data-group="voice" data-required>
+            {%- assign opts = st4.settings.options_2 | split: ',' -%}
+            {%- for o in opts -%}{%- assign o = o | strip -%}
+              <label class="rf-chip"><input type="radio" name="voice" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+            {%- endfor -%}
+          </div>
+        </fieldset>
+
+        {%- comment -%} STEP 5 qualities {%- endcomment -%}
+        <fieldset class="rf-step" data-step="5" hidden>
+          <legend class="rf-step__t">{{ st5.settings.title }}</legend>
+          <p class="rf-step__help">{{ st5.settings.help }}</p>
+          <div class="rf-chips" data-group="qualities" data-required data-max="3">
+            {%- assign opts = st5.settings.options | split: ',' -%}
+            {%- for o in opts -%}{%- assign o = o | strip -%}
+              <label class="rf-chip"><input type="checkbox" name="qualities" value="{{ o | handleize }}" data-label="{{ o | escape }}"><span>{{ o }}</span></label>
+            {%- endfor -%}
+          </div>
+          <label class="rf-field"><span>Un détail en plus (facultatif)</span><input type="text" name="qualities_text" maxlength="300" placeholder="{{ st5.settings.placeholder | escape }}"></label>
+        </fieldset>
+
+        {%- comment -%} STEP 6 memory {%- endcomment -%}
+        <fieldset class="rf-step" data-step="6" hidden>
+          <legend class="rf-step__t">{{ st6.settings.title }}</legend>
+          <p class="rf-step__help">{{ st6.settings.help }}</p>
+          <label class="rf-field"><span>Votre souvenir</span><textarea name="memory" rows="5" minlength="20" maxlength="600" required placeholder="{{ st6.settings.placeholder | escape }}"></textarea><small class="rf-count" data-count-for="memory">0 / 600</small></label>
+        </fieldset>
+
+        {%- comment -%} STEP 7 message {%- endcomment -%}
+        <fieldset class="rf-step" data-step="7" hidden>
+          <legend class="rf-step__t">{{ st7.settings.title }}</legend>
+          <p class="rf-step__help">{{ st7.settings.help }}</p>
+          <label class="rf-field"><span>Votre message (facultatif)</span><textarea name="message" rows="4" maxlength="400" placeholder="{{ st7.settings.placeholder | escape }}"></textarea><small class="rf-count" data-count-for="message">0 / 400</small></label>
+        </fieldset>
+
+        {%- comment -%} STEP 8 language {%- endcomment -%}
+        <fieldset class="rf-step" data-step="8" hidden>
+          <legend class="rf-step__t">{{ st8.settings.title }}</legend>
+          <p class="rf-step__help">{{ st8.settings.help }}</p>
+          <div class="rf-chips" data-group="language" data-required>
+            <label class="rf-chip"><input type="radio" name="language" value="fr" data-label="Français" checked><span>Français</span></label>
+            <label class="rf-chip"><input type="radio" name="language" value="en" data-label="Anglais"><span>Anglais</span></label>
+          </div>
+        </fieldset>
+
+        {%- comment -%} STEP 9 email {%- endcomment -%}
+        <fieldset class="rf-step" data-step="9" hidden>
+          <legend class="rf-step__t">{{ st9.settings.title }}</legend>
+          <p class="rf-step__help">{{ st9.settings.help }}</p>
+          <label class="rf-field"><span>Votre e-mail</span><input type="email" name="email" required autocomplete="email" inputmode="email" placeholder="vous@exemple.fr"></label>
+          <label class="rf-consent"><input type="checkbox" name="consent" required><span>{{ st9.settings.placeholder_2 }}</span></label>
+        </fieldset>
+
+        <p class="rf-quiz__err" data-err role="alert" hidden></p>
+
+        <div class="rf-quiz__nav">
+          <button type="button" class="rf-btn rf-btn--ghost" data-back hidden>Retour</button>
+          <button type="submit" class="rf-btn" data-next>
+            <span data-next-label>Continuer</span>{% render 'refrain-icon', name: 'arrow' %}
+          </button>
+        </div>
+        <p class="rf-quiz__fine">{{ section.settings.fine_print }}</p>
+      </form>
+
+      {%- comment -%} LOADING {%- endcomment -%}
+      <div class="rf-load" data-loading hidden aria-live="polite">
+        <p class="rf-eyebrow">{{ section.settings.load_kicker }}</p>
+        <p class="rf-load__t">{{ section.settings.load_title }}</p>
+        <ol class="rf-load__steps">
+          <li data-stage="1"><span></span>Histoire</li>
+          <li data-stage="2"><span></span>Paroles</li>
+          <li data-stage="3"><span></span>Musique</li>
+          <li data-stage="4"><span></span>Extrait</li>
+        </ol>
+        <span class="rf-load__bar"><i data-load-bar></i></span>
+        <p class="rf-load__note" data-load-note>{{ section.settings.load_note }}</p>
+        <p class="rf-load__slow" data-slow hidden>{{ section.settings.load_slow }}</p>
+        <div class="rf-load__fail" data-fail hidden>
+          <p>{{ section.settings.fail_text }}</p>
+          <button type="button" class="rf-btn" data-retry>Réessayer</button>
+        </div>
+      </div>
+
+      {%- comment -%} PLAYER + OFFER {%- endcomment -%}
+      <div class="rf-result" data-result hidden>
+        <p class="rf-demo-note" data-demo-note hidden>{{ section.settings.demo_note }}</p>
+        <div class="rf-player">
+          <p class="rf-player__k">{{ section.settings.player_kicker }} <b data-r-name></b></p>
+          <p class="rf-player__t" data-r-title></p>
+          <div class="rf-player__ctrl">
+            <button type="button" class="rf-player__btn" data-play aria-label="Lecture">
+              <span data-ico-play>{% render 'refrain-icon', name: 'play' %}</span>
+              <span data-ico-pause hidden>{% render 'refrain-icon', name: 'pause' %}</span>
+            </button>
+            <div class="rf-player__track">
+              <span class="rf-player__prog"><i data-prog></i></span>
+              <span class="rf-player__time"><span data-cur>0:00</span><span data-dur>0:00</span></span>
+            </div>
+          </div>
+          <audio data-audio preload="metadata"></audio>
+          <pre class="rf-player__lyrics" data-lyrics></pre>
+          <p class="rf-player__ended" data-ended hidden>{{ section.settings.player_ended }}</p>
+          <p class="rf-player__note">{{ section.settings.player_note }}</p>
+        </div>
+
+        <div class="rf-offer">
+          {% render 'refrain-title', text: section.settings.offer_heading, tag: 'h2', class: 'rf-offer__h' %}
+          <div class="rf-tiers" role="radiogroup">
+            <label class="rf-tier">
+              <input type="radio" name="tier" value="standard" checked>
+              <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{{ v_std.price | money_without_trailing_zeros | default: '39 €' }}</b></span>
+              <span class="rf-tier__list">{{ section.settings.std_points | newline_to_br }}</span>
+            </label>
+            <label class="rf-tier rf-tier--prem">
+              <input type="radio" name="tier" value="premium">
+              {%- if section.settings.prem_badge != blank -%}<span class="rf-tier__badge">{{ section.settings.prem_badge }}</span>{%- endif -%}
+              <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}49 €{% endif %}</b></span>
+              <span class="rf-tier__list">{{ section.settings.prem_points | newline_to_br }}</span>
+            </label>
+          </div>
+          <button type="button" class="rf-btn rf-offer__cta" data-buy data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
+          <p class="rf-offer__err" data-buy-err role="alert" hidden>{{ section.settings.cart_error }}</p>
+          <p class="rf-offer__fine">{% render 'refrain-icon', name: 'lock' %}{{ section.settings.cta_fine }}</p>
+          {%- if section.settings.after_steps != blank -%}
+            <div class="rf-after">
+              <p class="rf-after__t">Après votre commande</p>
+              <ol>
+                {%- assign steps = section.settings.after_steps | newline_to_br | split: '<br />' -%}
+                {%- for s in steps -%}{%- if s != blank -%}<li>{{ s | strip }}</li>{%- endif -%}{%- endfor -%}
+              </ol>
+            </div>
+          {%- endif -%}
+          <button type="button" class="rf-link" data-restart>Créer un autre extrait</button>
+        </div>
+      </div>
+    </div>
+  </refrain-quiz>
+</section>
+
+{% stylesheet %}
+  .rf-quiz { background: var(--rf-lilac); padding: 36px 16px 48px; font-family: var(--rf-sans); color: var(--rf-ink); }
+  .rf-quiz [hidden] { display: none !important; }
+  .rf-quiz__inner { display: block; max-width: 1160px; margin: 0 auto; }
+  .rf-quiz__head { text-align: center; max-width: 720px; margin: 0 auto 24px; }
+  .rf-quiz__h1 { font-size: clamp(36px, 7vw, 68px); }
+  .rf-quiz__head .rf-sub { color: var(--rf-ink); opacity: .82; }
+  .rf-quiz__badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; margin: 18px 0 0; padding: 0; list-style: none; font-size: 14px; font-weight: 600; }
+  .rf-quiz__badges li { display: inline-flex; align-items: center; gap: 6px; }
+  .rf-quiz__badges .rf-icon { width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--rf-ink); color: var(--rf-lime); }
+  .rf-quiz__card { position: relative; max-width: 680px; margin: 0 auto; background: var(--rf-card); border-radius: 26px; padding: 22px 18px 20px; box-shadow: 0 24px 60px -24px rgb(30 15 74 / .35); }
+  .rf-quiz__progress { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; font-size: 13px; font-weight: 700; color: var(--rf-ink-soft); }
+  .rf-quiz__bar { flex: 1; height: 8px; border-radius: 99px; background: var(--rf-line); overflow: hidden; }
+  .rf-quiz__bar i { display: block; height: 100%; width: 11%; background: var(--rf-violet); border-radius: inherit; transition: width .35s ease; }
+  .rf-step { border: 0; margin: 0; padding: 0; min-width: 0; }
+  .rf-step__t { padding: 0; font-size: clamp(22px, 4vw, 30px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; }
+  .rf-step__help { margin: 6px 0 16px; color: var(--rf-ink-soft); font-size: 15px; line-height: 1.5; }
+  .rf-step__group { margin: 14px 0 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--rf-ink-soft); }
+  .rf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .rf-chip { position: relative; cursor: pointer; }
+  .rf-chip input { position: absolute; opacity: 0; inset: 0; cursor: pointer; }
+  .rf-chip span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 15px; font-weight: 600; transition: all .15s; }
+  .rf-chip:hover span { border-color: var(--rf-violet); }
+  .rf-chip input:checked + span { background: var(--rf-ink); border-color: var(--rf-ink); color: #fff; }
+  .rf-chip input:focus-visible + span { outline: 3px solid var(--rf-violet); outline-offset: 2px; }
+  .rf-field { display: grid; gap: 6px; margin-top: 14px; font-size: 14px; font-weight: 600; }
+  .rf-field input, .rf-field textarea { width: 100%; box-sizing: border-box; padding: 14px 16px; border: 1.5px solid var(--rf-line); border-radius: 14px; background: var(--rf-page); font: 500 16px/1.45 var(--rf-sans); color: var(--rf-ink); resize: vertical; }
+  .rf-field input:focus, .rf-field textarea:focus { outline: none; border-color: var(--rf-violet); background: #fff; box-shadow: 0 0 0 4px rgb(106 75 216 / .12); }
+  .rf-count { justify-self: end; font-weight: 500; color: var(--rf-ink-soft); }
+  .rf-consent { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; font-size: 13px; line-height: 1.45; color: var(--rf-ink-soft); }
+  .rf-consent input { margin-top: 2px; width: 18px; height: 18px; accent-color: var(--rf-ink); flex: none; }
+  .rf-quiz__err, .rf-offer__err { margin: 14px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; }
+  .rf-quiz__nav { display: flex; gap: 10px; margin-top: 22px; }
+  .rf-quiz__nav [data-next] { flex: 1; }
+  .rf-quiz__nav .rf-icon { width: 20px; height: 20px; }
+  .rf-quiz__fine { margin: 12px 0 0; text-align: center; font-size: 13px; color: var(--rf-ink-soft); }
+  .rf-link { background: none; border: 0; padding: 8px; font: 600 14px var(--rf-sans); color: var(--rf-ink); text-decoration: underline; cursor: pointer; }
+  .rf-quiz__resume { padding: 14px 16px; margin-bottom: 18px; border-radius: 16px; background: var(--rf-page); border: 1.5px dashed var(--rf-line); }
+  .rf-quiz__resume p { margin: 0 0 10px; font-weight: 600; }
+  .rf-quiz__resume .rf-btn { min-height: 44px; }
+  /* loading */
+  .rf-load { text-align: center; padding: 16px 4px; }
+  .rf-load__t { margin: 0 0 18px; font-size: 24px; font-weight: 800; letter-spacing: -0.03em; }
+  .rf-load__steps { display: flex; justify-content: space-between; gap: 6px; margin: 0 0 16px; padding: 0; list-style: none; font-size: 13px; font-weight: 700; color: var(--rf-ink-soft); }
+  .rf-load__steps li { flex: 1; display: grid; justify-items: center; gap: 6px; }
+  .rf-load__steps span { width: 14px; height: 14px; border-radius: 50%; background: var(--rf-line); transition: all .3s; }
+  .rf-load__steps li.is-on { color: var(--rf-ink); }
+  .rf-load__steps li.is-on span { background: var(--rf-violet); box-shadow: 0 0 0 5px rgb(106 75 216 / .15); }
+  .rf-load__bar { display: block; height: 8px; border-radius: 99px; background: var(--rf-line); overflow: hidden; }
+  .rf-load__bar i { display: block; height: 100%; width: 5%; background: var(--rf-violet); transition: width .8s ease; }
+  .rf-load__note, .rf-load__slow { margin: 14px 0 0; font-size: 14px; color: var(--rf-ink-soft); }
+  .rf-load__slow { font-weight: 600; color: var(--rf-ink); }
+  .rf-load__fail p { font-weight: 600; }
+  /* result */
+  .rf-demo-note { margin: 0 0 12px; padding: 8px 12px; border-radius: 10px; background: var(--rf-page); border: 1px dashed var(--rf-violet); font-size: 13px; color: var(--rf-ink-soft); }
+  .rf-player { background: var(--rf-ink); color: #fff; border-radius: 22px; padding: 20px; }
+  .rf-player__k { margin: 0; font-size: 13px; text-transform: uppercase; letter-spacing: .08em; color: var(--rf-lilac); }
+  .rf-player__k b { color: var(--rf-lime); }
+  .rf-player__t { margin: 4px 0 14px; font-size: 22px; font-weight: 800; letter-spacing: -0.03em; }
+  .rf-player__ctrl { display: flex; align-items: center; gap: 14px; }
+  .rf-player__btn { flex: none; width: 64px; height: 64px; border-radius: 50%; border: 0; background: var(--rf-lime); color: var(--rf-ink); display: grid; place-items: center; cursor: pointer; box-shadow: 0 0 0 8px rgb(212 245 60 / .15); }
+  .rf-player__btn .rf-icon { width: 28px; height: 28px; }
+  .rf-player__track { flex: 1; }
+  .rf-player__prog { display: block; height: 6px; border-radius: 99px; background: rgb(255 255 255 / .18); overflow: hidden; cursor: pointer; }
+  .rf-player__prog i { display: block; height: 100%; width: 0; background: var(--rf-lime); }
+  .rf-player__time { display: flex; justify-content: space-between; margin-top: 6px; font-size: 12px; color: var(--rf-lilac); }
+  .rf-player__lyrics { margin: 16px 0 0; padding: 14px; border-radius: 14px; background: rgb(255 255 255 / .06); font: 500 15px/1.6 var(--rf-sans); white-space: pre-wrap; color: #fff; }
+  .rf-player__lyrics:empty { display: none; }
+  .rf-player__note { margin: 12px 0 0; font-size: 13px; color: var(--rf-lilac); }
+  .rf-offer { margin-top: 22px; }
+  .rf-offer__h { font-size: clamp(24px, 4vw, 34px); margin-bottom: 14px; }
+  .rf-tiers { display: grid; gap: 10px; }
+  .rf-tier { position: relative; display: block; padding: 16px 16px 14px 48px; border-radius: 18px; border: 2px solid var(--rf-line); background: var(--rf-page); cursor: pointer; transition: border-color .15s; }
+  .rf-tier input { position: absolute; left: 16px; top: 19px; width: 20px; height: 20px; accent-color: var(--rf-ink); }
+  .rf-tier:has(input:checked) { border-color: var(--rf-ink); background: #fff; box-shadow: 0 10px 30px -14px rgb(30 15 74 / .4); }
+  .rf-tier__top { display: flex; justify-content: space-between; gap: 10px; font-size: 17px; }
+  .rf-tier__price { font-size: 20px; }
+  .rf-tier__list { display: block; margin-top: 6px; font-size: 14px; line-height: 1.55; color: var(--rf-ink-soft); }
+  .rf-tier__badge { position: absolute; top: -11px; right: 14px; padding: 3px 10px; border-radius: 99px; background: var(--rf-ink); color: var(--rf-lime); font-size: 12px; font-weight: 700; }
+  .rf-offer__cta { width: 100%; margin-top: 16px; min-height: 58px; font-size: 17px; }
+  .rf-offer__cta[aria-busy="true"], .rf-offer__cta:disabled { opacity: .55; pointer-events: none; }
+  .rf-player__ended { margin: 12px 0 0; padding: 10px 12px; border-radius: 12px; background: rgb(212 245 60 / .12); color: var(--rf-lime); font-weight: 700; font-size: 14px; }
+  .rf-offer__fine { display: flex; justify-content: center; align-items: center; gap: 6px; margin: 10px 0 0; font-size: 12.5px; color: var(--rf-ink-soft); text-align: center; }
+  .rf-offer__fine .rf-icon { width: 15px; height: 15px; flex: none; }
+  .rf-after { margin-top: 18px; padding: 14px 16px; border-radius: 16px; background: var(--rf-page); }
+  .rf-after__t { margin: 0 0 8px; font-weight: 800; }
+  .rf-after ol { margin: 0; padding-left: 20px; font-size: 14px; line-height: 1.7; color: var(--rf-ink-soft); }
+  .rf-offer > .rf-link { display: block; margin: 10px auto 0; }
+  @media (min-width: 750px) {
+    .rf-quiz { padding: 64px 24px 80px; }
+    .rf-quiz__card { padding: 34px 38px 28px; }
+    .rf-tiers { grid-template-columns: 1fr 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) { .rf-quiz *, .rf-quiz *::before { transition: none !important; } }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('refrain-quiz')) {
+    const KEY = 'refrain_quiz_v1';
+    const TTL = 7 * 24 * 3600 * 1000;
+    const STEPS = 9;
+    const fmt = (s) => { s = Math.max(0, Math.floor(s || 0)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    const store = {
+      get() { try { const d = JSON.parse(localStorage.getItem(KEY)); return d && Date.now() - d.t < TTL ? d : null; } catch (e) { return null; } },
+      set(d) { try { localStorage.setItem(KEY, JSON.stringify({ ...d, t: Date.now() })); } catch (e) {} },
+      clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
+    };
+    const MSG = {
+      choose: 'Choisissez une option pour continuer.',
+      name: 'Indiquez son prénom (ou le surnom que vous utilisez).',
+      memory: 'Racontez-nous un souvenir en quelques phrases (20 caractères minimum).',
+      max: 'Choisissez jusqu’à 3 qualités.',
+      email: 'Indiquez une adresse e-mail valide.',
+      consent: 'Merci de cocher la case pour recevoir votre extrait.',
+      other: 'Précisez votre choix.'
+    };
+
+    class RefrainQuiz extends HTMLElement {
+      connectedCallback() {
+        this.q = (s) => this.querySelector(s);
+        this.qa = (s) => [...this.querySelectorAll(s)];
+        this.form = this.q('[data-form]');
+        this.api = (this.dataset.api || '').replace(/\/$/, '');
+        this.step = 1;
+        this.audio = this.q('[data-audio]');
+        this.pixel();
+        this.bind();
+        const pid = new URLSearchParams(location.search).get('p');
+        const saved = store.get();
+        if (pid) {
+          if (saved) this.fill(saved.answers || {});
+          this.previewId = pid;
+          this.showLoading();
+          this.poll();
+        } else if (saved && saved.previewId && saved.ready) {
+          this.fill(saved.answers || {});
+          this.previewId = saved.previewId;
+          this.showLoading();
+          this.poll();
+        } else if (saved && saved.answers && Object.keys(saved.answers).length > 1) {
+          this.q('[data-resume]').hidden = false;
+          this.form.hidden = true;
+          this._saved = saved;
+        }
+        this.go(1);
+      }
+
+      bind() {
+        this.form.addEventListener('submit', (e) => { e.preventDefault(); this.next(); });
+        this.q('[data-back]').addEventListener('click', () => this.go(this.step - 1));
+        this.form.addEventListener('change', (e) => {
+          const t = e.target;
+          if (t.name === 'recipient' || t.name === 'occasion') {
+            const box = this.q(`[data-other="${t.name}"]`);
+            if (box) box.hidden = !/^autre/.test(t.value);
+          }
+          if (t.name === 'qualities') {
+            const on = this.qa('input[name="qualities"]:checked');
+            if (on.length > 3) { t.checked = false; this.error(MSG.max); }
+          }
+          this.save();
+        });
+        this.form.addEventListener('input', (e) => {
+          const c = this.q(`[data-count-for="${e.target.name}"]`);
+          if (c) c.textContent = e.target.value.length + ' / ' + e.target.maxLength;
+          this.save();
+        });
+        this.q('[data-resume-yes]').addEventListener('click', () => {
+          this.fill(this._saved.answers || {});
+          this.q('[data-resume]').hidden = true; this.form.hidden = false;
+          this.go(this._saved.step || 1);
+        });
+        this.q('[data-resume-no]').addEventListener('click', () => {
+          store.clear(); this.q('[data-resume]').hidden = true; this.form.hidden = false; this.go(1);
+        });
+        this.q('[data-retry]').addEventListener('click', () => this.submit());
+        this.q('[data-restart]').addEventListener('click', () => {
+          store.clear(); this.audio.pause();
+          const u = new URL(location.href); u.searchParams.delete('p'); history.replaceState(null, '', u);
+          this.form.reset(); this.q('[data-result]').hidden = true; this.form.hidden = false; this.go(1);
+          this.scrollTop();
+        });
+        // player
+        const play = this.q('[data-play]');
+        play.addEventListener('click', () => {
+          if (this.audio.paused) { this.audio.play().catch(() => {}); if (!this._played) { this._played = true; this.track('PreviewPlayed'); } } else this.audio.pause();
+        });
+        this.audio.addEventListener('play', () => this.icons(true));
+        this.audio.addEventListener('pause', () => this.icons(false));
+        this.audio.addEventListener('loadedmetadata', () => { this.q('[data-dur]').textContent = fmt(Math.min(this.audio.duration, this.limit || Infinity)); });
+        this.audio.addEventListener('timeupdate', () => {
+          if (this.limit && this.audio.currentTime >= this.limit) { this.audio.pause(); this.audio.currentTime = this.limit; this.q('[data-ended]').hidden = false; }
+          const d = Math.min(this.audio.duration || 1, this.limit || Infinity);
+          this.q('[data-prog]').style.width = (this.audio.currentTime / d) * 100 + '%';
+          this.q('[data-cur]').textContent = fmt(this.audio.currentTime);
+        });
+        this.q('.rf-player__prog').addEventListener('click', (e) => {
+          const r = e.currentTarget.getBoundingClientRect();
+          const d = Math.min(this.audio.duration || 0, this.limit || Infinity); if (d) this.audio.currentTime = Math.min(((e.clientX - r.left) / r.width) * d, d - 0.5);
+        });
+        this.q('[data-buy]').addEventListener('click', () => this.buy());
+      }
+
+      icons(on) { this.q('[data-ico-play]').hidden = on; this.q('[data-ico-pause]').hidden = !on; }
+      scrollTop() { const c = this.q('[data-card]'); if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      pixel() {
+        const id = this.dataset.pixel;
+        if (window.fbq || !id || /PIXEL/.test(id)) return;
+        /* Standard Meta Pixel loader (only when the store has no pixel app). */
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        window.fbq('init', id); window.fbq('track', 'PageView');
+      }
+      track(ev, data, eventID) {
+        try {
+          if (!window.fbq) return;
+          const std = ev === 'InitiateCheckout';
+          window.fbq(std ? 'track' : 'trackCustom', ev, { ...(data || {}), preview_id: this.previewId || '' }, eventID ? { eventID } : undefined);
+        } catch (e) {}
+      }
+
+      answers() {
+        const f = new FormData(this.form);
+        const label = (n) => { const i = this.q(`input[name="${n}"]:checked`); return i ? i.value : ''; };
+        return {
+          recipient: label('recipient'), recipient_other: f.get('recipient_other') || '',
+          occasion: label('occasion'), occasion_other: f.get('occasion_other') || '',
+          name: (f.get('name') || '').trim(), pronunciation: f.get('pronunciation') || '',
+          style: label('style'), voice: label('voice'),
+          qualities: f.getAll('qualities'), qualities_text: f.get('qualities_text') || '',
+          memory: (f.get('memory') || '').trim(), message: (f.get('message') || '').trim(),
+          language: label('language') || 'fr',
+          email: (f.get('email') || '').trim(), consent: !!f.get('consent')
+        };
+      }
+
+      fill(a) {
+        Object.entries(a).forEach(([k, v]) => {
+          if (Array.isArray(v)) { v.forEach((x) => { const i = this.q(`input[name="${k}"][value="${x}"]`); if (i) i.checked = true; }); return; }
+          const els = this.qa(`[name="${k}"]`);
+          els.forEach((el) => {
+            if (el.type === 'radio') el.checked = el.value === v;
+            else if (el.type === 'checkbox') el.checked = !!v;
+            else el.value = v || '';
+          });
+        });
+        ['recipient', 'occasion'].forEach((n) => { const b = this.q(`[data-other="${n}"]`); if (b) b.hidden = !/^autre/.test(a[n] || ''); });
+      }
+
+      save(extra) { const cur = store.get() || {}; store.set({ ...cur, answers: this.answers(), step: this.step, ...(extra || {}) }); }
+
+      go(n) {
+        n = Math.min(Math.max(n, 1), STEPS);
+        this.step = n;
+        this.qa('.rf-step').forEach((s) => (s.hidden = Number(s.dataset.step) !== n));
+        this.q('[data-step-num]').textContent = n;
+        this.q('[data-bar]').style.width = (n / STEPS) * 100 + '%';
+        this.q('[data-back]').hidden = n === 1;
+        this.q('[data-next-label]').textContent = n === STEPS ? 'Créer son extrait gratuit' : 'Continuer';
+        this.error('');
+        if (n === 2 && !this._started) { this._started = true; this.track('QuizStart'); }
+      }
+
+      error(m) { const e = this.q('[data-err]'); e.textContent = m; e.hidden = !m; }
+
+      validate(n) {
+        const a = this.answers();
+        const step = this.q(`.rf-step[data-step="${n}"]`);
+        for (const g of step.querySelectorAll('[data-group][data-required]')) {
+          if (!g.querySelector('input:checked')) return MSG.choose;
+        }
+        if (n === 1 && /^autre/.test(a.recipient) && !a.recipient_other.trim()) return MSG.other;
+        if (n === 2 && /^autre/.test(a.occasion) && !a.occasion_other.trim()) return MSG.other;
+        if (n === 3 && !a.name) return MSG.name;
+        if (n === 6 && a.memory.length < 20) return MSG.memory;
+        if (n === 9) {
+          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(a.email)) return MSG.email;
+          if (!a.consent) return MSG.consent;
+        }
+        return '';
+      }
+
+      next() {
+        const err = this.validate(this.step);
+        if (err) { this.error(err); return; }
+        this.save();
+        if (this.step < STEPS) { this.go(this.step + 1); this.scrollTop(); return; }
+        this.submit();
+      }
+
+      showLoading() {
+        this.q('[data-resume]').hidden = true;
+        this.form.hidden = true; this.q('[data-result]').hidden = true;
+        const l = this.q('[data-loading]'); l.hidden = false;
+        this.q('[data-fail]').hidden = true; this.q('[data-slow]').hidden = true;
+        this.q('[data-load-note]').hidden = false;
+        this.stage(1);
+        this.t0 = Date.now();
+        this.scrollTop();
+      }
+
+      stage(n) {
+        this.qa('[data-stage]').forEach((li) => li.classList.toggle('is-on', Number(li.dataset.stage) <= n));
+        this.q('[data-load-bar]').style.width = Math.min(100, n * 24) + '%';
+      }
+
+      async submit() {
+        this.showLoading();
+        const a = this.answers();
+        if (this.dataset.forceDemo === 'true' || !this.api || /REFRAIN-DOMAIN/.test(this.api)) return this.demo();
+        const body = JSON.stringify({ email: a.email, consent: a.consent, answers: { ...a, email: undefined, consent: undefined }, source: { url: location.href } });
+        let res;
+        for (let i = 0; i < 2 && !res; i++) {
+          try {
+            const r = await fetch(this.api + '/api/preview', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body });
+            if (r.status === 429 || r.status === 400) { const j = await r.json().catch(() => ({})); return this.fail(j.error === 'rate_limited' ? 'rate' : 'error'); }
+            if (r.ok) res = await r.json();
+          } catch (e) {}
+          if (!res && i === 0) await new Promise((ok) => setTimeout(ok, 1200));
+        }
+        if (!res || !res.preview_id) return this.demo();
+        this.previewId = res.preview_id;
+        this.track('QuizComplete', {}, 'quiz_' + this.previewId);
+        this.save({ previewId: this.previewId, ready: false });
+        const u = new URL(location.href); u.searchParams.set('p', this.previewId); history.replaceState(null, '', u);
+        this.poll();
+      }
+
+      async poll() {
+        clearTimeout(this._timer);
+        if (!this.api || /REFRAIN-DOMAIN/.test(this.api)) return this.demo();
+        if (Date.now() - this.t0 > 10 * 60 * 1000) return this.fail('timeout');
+        if (Date.now() - this.t0 > 120 * 1000) { this.q('[data-slow]').hidden = false; }
+        try {
+          const r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.previewId));
+          if (r.status === 404) return this.fail('error');
+          const d = await r.json();
+          this.stage(Number(d.step) || 1);
+          if (d.email_fallback) this.q('[data-slow]').hidden = false;
+          if (d.status === 'failed') return this.fail('error');
+          if (d.status === 'ready' && d.preview_url) {
+            this.save({ previewId: this.previewId, ready: true });
+            return this.result({ url: d.preview_url, title: d.title, lyrics: d.lyrics_excerpt, name: d.recipient_name, seconds: Number(d.preview_seconds) || 75 });
+          }
+        } catch (e) { this._errs = (this._errs || 0) + 1; if (this._errs > 4) return this.demo(); }
+        this._timer = setTimeout(() => this.poll(), 4000);
+      }
+
+      demo() {
+        this.isDemo = true;
+        this.previewId = 'demo-' + Date.now();
+        let n = 1;
+        const tick = () => { this.stage(n); if (n++ < 4) this._timer = setTimeout(tick, 1100); else this.result({ url: this.dataset.demoAudio, title: this.dataset.demoTitle, lyrics: this.dataset.demoLyrics, demo: true }); };
+        tick();
+      }
+
+      fail() { this.q('[data-load-note]').hidden = true; this.q('[data-fail]').hidden = false; }
+
+      result(r) {
+        const name = r.name || this.answers().name || '';
+        this.q('[data-loading]').hidden = true;
+        this.q('[data-result]').hidden = false;
+        this.q('[data-demo-note]').hidden = !r.demo;
+        this.q('[data-r-name]').textContent = name;
+        this.q('[data-r-title]').textContent = (r.title || ('La chanson de ' + name)).replace(/\{name\}/g, name);
+        let lyr = r.lyrics || '';
+        if (r.demo && name) lyr = lyr.replace(/\{name\}/g, name);
+        this.q('[data-lyrics]').textContent = lyr;
+        this.limit = r.seconds || (r.demo ? 0 : 75);
+        this.q('[data-ended]').hidden = true;
+        const buy = this.q('[data-buy]');
+        buy.disabled = !!r.demo; buy.textContent = r.demo ? buy.dataset.demoLabel : buy.dataset.label;
+        if (r.url) { this.audio.src = r.url; this.q('[data-play]').disabled = false; } else { this.q('[data-play]').disabled = true; }
+        this.scrollTop();
+      }
+
+      async buy() {
+        const btn = this.q('[data-buy]'); const err = this.q('[data-buy-err]');
+        if (this.isDemo || !/^[0-9a-f-]{36}$/i.test(this.previewId || '')) { err.hidden = false; return; }
+        err.hidden = true; btn.setAttribute('aria-busy', 'true');
+        const a = this.answers();
+        const tier = (this.q('input[name="tier"]:checked') || {}).value || 'standard';
+        const id = Number(tier === 'premium' ? this.dataset.prem : this.dataset.std);
+        const properties = {
+          _preview_id: this.previewId || '',
+          _recipient_name: a.name,
+          _tier: tier,
+          _occasion: a.occasion_other || a.occasion,
+          _style: a.style, _voice: a.voice, _language: a.language,
+          _email: a.email
+        };
+        try {
+          const r = await fetch((window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart/add.js', {
+            method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ items: [{ id, quantity: 1, properties }] })
+          });
+          if (!r.ok) throw new Error('cart');
+          this.track('InitiateCheckout', { tier, value: tier === 'premium' ? 49 : 39, currency: 'EUR' });
+          location.href = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'checkout';
+        } catch (e) { err.hidden = false; btn.removeAttribute('aria-busy'); }
+      }
+    }
+    customElements.define('refrain-quiz', RefrainQuiz);
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Refrain · Quiz",
+  "class": "rf-quiz-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Backend"
+    },
+    {
+      "type": "text",
+      "id": "api_base",
+      "label": "API base URL",
+      "default": "https://api.REFRAIN-DOMAIN.com",
+      "info": "No trailing slash. Contract: POST /api/preview, GET /api/preview/:id. While it contains REFRAIN-DOMAIN or is unreachable, the quiz runs in demo mode."
+    },
+    {
+      "type": "text",
+      "id": "pixel_id",
+      "label": "Meta Pixel ID",
+      "default": "META-PIXEL-ID",
+      "info": "Leave the placeholder if a pixel app already loads fbq. Events: QuizStart, QuizComplete (eventID quiz_<preview_id>), PreviewPlayed, InitiateCheckout. Purchase fires from the checkout custom pixel."
+    },
+    {
+      "type": "checkbox",
+      "id": "force_demo",
+      "label": "Force demo mode",
+      "default": false
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product (defaults to current)"
+    },
+    {
+      "type": "text",
+      "id": "demo_audio_asset",
+      "label": "Demo audio (theme asset file)",
+      "default": "refrain-demo-maman.mp3"
+    },
+    {
+      "type": "url",
+      "id": "demo_audio_url",
+      "label": "Demo audio URL (overrides asset)"
+    },
+    {
+      "type": "text",
+      "id": "demo_title",
+      "label": "Demo song title",
+      "default": "Exemple de chanson"
+    },
+    {
+      "type": "textarea",
+      "id": "demo_lyrics",
+      "label": "Demo lyrics excerpt",
+      "info": "{name} is replaced by the recipient's name."
+    },
+    {
+      "type": "text",
+      "id": "demo_note",
+      "label": "Demo notice",
+      "default": "Mode démonstration : voici un exemple d’extrait."
+    },
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*one word* = italic)",
+      "default": "Écoutez son extrait *gratuitement*."
+    },
+    {
+      "type": "text",
+      "id": "sub",
+      "label": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "badge_1",
+      "label": "Badge 1"
+    },
+    {
+      "type": "text",
+      "id": "badge_2",
+      "label": "Badge 2"
+    },
+    {
+      "type": "text",
+      "id": "badge_3",
+      "label": "Badge 3"
+    },
+    {
+      "type": "text",
+      "id": "resume_text",
+      "label": "Resume banner",
+      "default": "Bon retour ! Nous avons gardé vos réponses."
+    },
+    {
+      "type": "text",
+      "id": "fine_print",
+      "label": "Fine print under button"
+    },
+    {
+      "type": "header",
+      "content": "Loading"
+    },
+    {
+      "type": "text",
+      "id": "load_kicker",
+      "label": "Kicker",
+      "default": "Création de l’extrait"
+    },
+    {
+      "type": "text",
+      "id": "load_title",
+      "label": "Title",
+      "default": "Nous écrivons sa chanson…"
+    },
+    {
+      "type": "text",
+      "id": "load_note",
+      "label": "Wait note",
+      "default": "Cela prend en général 30 à 90 secondes. Gardez cette page ouverte."
+    },
+    {
+      "type": "text",
+      "id": "load_slow",
+      "label": "Over 120 s",
+      "default": "C’est un peu plus long que prévu. Nous vous envoyons l’extrait par e-mail dès qu’il est prêt."
+    },
+    {
+      "type": "text",
+      "id": "fail_text",
+      "label": "Error",
+      "default": "L’extrait n’a pas pu être créé. Réessayez, nous en préparons un nouveau."
+    },
+    {
+      "type": "header",
+      "content": "Player & offer"
+    },
+    {
+      "type": "text",
+      "id": "player_kicker",
+      "label": "Player kicker",
+      "default": "Extrait pour"
+    },
+    {
+      "type": "text",
+      "id": "player_note",
+      "label": "Note under player"
+    },
+    {
+      "type": "text",
+      "id": "offer_heading",
+      "label": "Offer heading",
+      "default": "Recevez sa chanson *complète*"
+    },
+    {
+      "type": "text",
+      "id": "std_name",
+      "label": "Standard name",
+      "default": "Standard"
+    },
+    {
+      "type": "textarea",
+      "id": "std_points",
+      "label": "Standard points (one per line)"
+    },
+    {
+      "type": "text",
+      "id": "prem_name",
+      "label": "Premium name",
+      "default": "Premium"
+    },
+    {
+      "type": "text",
+      "id": "prem_badge",
+      "label": "Premium badge"
+    },
+    {
+      "type": "textarea",
+      "id": "prem_points",
+      "label": "Premium points (one per line)"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA",
+      "default": "Recevoir sa chanson"
+    },
+    {
+      "type": "text",
+      "id": "demo_cta",
+      "label": "CTA in demo mode (disabled)",
+      "default": "Commande disponible après votre extrait personnalisé"
+    },
+    {
+      "type": "text",
+      "id": "player_ended",
+      "label": "Message when preview ends",
+      "default": "L’extrait s’arrête ici. Commandez pour écouter la chanson complète."
+    },
+    {
+      "type": "text",
+      "id": "cta_fine",
+      "label": "Under CTA",
+      "default": "Paiement sécurisé"
+    },
+    {
+      "type": "text",
+      "id": "cart_error",
+      "label": "Cart error",
+      "default": "Un souci est survenu. Réessayez dans un instant."
+    },
+    {
+      "type": "textarea",
+      "id": "after_steps",
+      "label": "After order steps (one per line)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refrain · Quiz",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Pour qui est cette chanson ?",
+            "options": "Ma mère,Mon père,Mon amour,Mon enfant,Ma grand-mère,Mon grand-père,Un(e) ami(e),Autre"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Pour quelle occasion ?",
+            "options": "Anniversaire,Noël,Fête des mères,Fête des pères,Saint-Valentin,Mariage,Anniversaire de couple,Naissance,Pour dire merci,Autre"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Quel est son prénom ?",
+            "placeholder": "Ex. : Camille, Mamie Jo, mon cœur…",
+            "placeholder_2": "Ex. : Maëlys se dit « Ma-é-lisse »"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Quelle musique lui ressemble ?",
+            "options": "Pop douce,Acoustique,Chanson française,Ballade romantique,R&B,Rock,Jazz,Surprenez-moi",
+            "options_2": "Voix de femme,Voix d’homme,Surprenez-moi"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Qu’est-ce qui la rend si spéciale ?",
+            "help": "Choisissez jusqu’à 3 qualités.",
+            "options": "Drôle,Généreuse,Courageuse,Tendre,Toujours là,Rêveuse,Protectrice,Pleine d’énergie,Patiente,Inspirante,Gourmande,Aventurière"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Un souvenir à mettre en chanson"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Ce que vous voulez lui dire"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "En quelle langue ?"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Où vous envoyer l’extrait ?",
+            "placeholder_2": "J’accepte de recevoir mon extrait et des e-mails de Refrain. Désinscription en un clic."
+          }
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Quiz step",
+      "limit": 9,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "help",
+          "label": "Help"
+        },
+        {
+          "type": "textarea",
+          "id": "options",
+          "label": "Options (comma separated; last 'Autre…' shows a text field)"
+        },
+        {
+          "type": "textarea",
+          "id": "options_2",
+          "label": "Options 2 (voices, step 4)"
+        },
+        {
+          "type": "textarea",
+          "id": "placeholder",
+          "label": "Placeholder"
+        },
+        {
+          "type": "textarea",
+          "id": "placeholder_2",
+          "label": "Placeholder 2 / consent (step 9)"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
