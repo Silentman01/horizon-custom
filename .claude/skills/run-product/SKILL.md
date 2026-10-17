@@ -51,7 +51,8 @@ One prompt runs everything. The only planned stop is the **branding gate** (oper
 - **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
 - **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
-- **Every ad prompt attaches our packshot**; top 5 recreated at ~97%; no competitor brand names.
+- **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).
+- **Every ad prompt attaches our packshot**; no competitor brand names. **Before generating any ad**, write `05_ads/AD_VARIANTS.md` (each source headline → our almost-similar variant; each design → our close-but-different variant) and stop for operator validation; after approval generate and keep going (08 §1b).
 - **Git:** branch named after the brand from clean `main`; commit → pull → merge-check → push; never publish; never overwrite a template with live ad traffic.
 - **Assets live in `PRODUCT_DIR`** (shop folder), not in the theme repo.
 - **Mobile first:** build and QA at 390px first; every horizontal rail scrolls by touch *and* mouse drag (editor mobile preview has no touch).
@@ -105,7 +106,8 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 | B Product images | image agent | 05, tools-kie | packshot first, then gallery remakes → `03_product-images/` |
 | C Page images + GIFs | image agent | 06, tools-kie | testimonials/section remakes, WebP → `04_page-images/`, theme assets |
 | D1 Ad analysis | 2 analyst agents (ranks 1–15, 16–30) | 07 | text → master compiles `05_ads/COMPETITOR_ADS.md` |
-| D2 Ad creatives | ad-creative agent or master (after D1 + packshot) | 08, tools-kie | 25 ads → `05_ads/generated/` |
+| D2a Ad variants | ad-creative agent (after D1) | 08 §1b | `05_ads/AD_VARIANTS.md` → **operator gate** |
+| D2 Ad creatives | ad-creative agent or master (after approval + packshot) | 08, tools-kie | 25 ads → `05_ads/generated/` |
 | E Ad copy | copy agent (after D1) | 09 | `05_ads/AD_COPY.md` |
 | F Policies | master (small) | 12 | `policies.py transform` → `06_policies/<handle>.html` + REVIEW.md (1:1 text, brand/domain/email swapped, addresses/phones/registration numbers removed) |
 

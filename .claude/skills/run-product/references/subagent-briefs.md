@@ -51,7 +51,7 @@ You are LEAD B (Growth) of a run-product launch, running on Opus at low effort. 
 Workers: model "haiku" for downloads, GIF→WebP, contact sheets, rank_ads runs, running kie_jobs.py on prepared job
 files; model "sonnet" for ad analysis (vision), writing Kie prompts/job JSON (packshot, gallery remakes, page
 images, 25 ads), ad copy. Use worker briefs 2, 7, 8, 9, 10, 11 and add `model` to each.
-Stream: packshot FIRST → gallery remakes → page images/GIF WebP → ad analysis (2 analysts) → 25 ads → ad copy.
+Stream: packshot FIRST → gallery remakes → page images/GIF WebP → ad analysis (2 analysts) → AD_VARIANTS.md (STOP for operator approval) → 25 ads → ad copy.
 Kie budget: <credits>; check `kie_jobs.py --credits` before each batch; stay within budget, prioritise packshot →
 gallery → top-5 ads → remaining ads → page images, and report what was skipped.
 Open every contact sheet yourself before accepting a batch (claims at full strength, no logo, no competitor name,
@@ -184,14 +184,26 @@ Then a PATTERNS section: formats, hooks, color system, typography, claim types, 
 Return everything as text (markdown).
 ```
 
+## 12 Copy chief (Opus, playbooks)
+**Launch:** whenever persuasive copy is written (AD_VARIANTS, AD_COPY, page/home copy deck, image claims). **Reference:** 13, 00 §1.
+```
+<COMMON HEADER>
+You are the COPY CHIEF. Read the relevant sections of <SKILL>/books-playbooks/*.html first (grep headings). Write specific
+direct-response copy with NO softness, calibrated to the competitor's proven framework and promise level (they scale);
+sharpen with the playbooks, push promises further only where the angle needs it; no hedges or caveats; claims at full strength. Keep the given structure/format; return the copy + one line per piece naming the
+playbook principle used.
+```
+
 ## 10 Ad-creative agent (Phase 3, D2)
 **Launch:** when COMPETITOR_ADS.md and the packshot exist. **Reference:** 08, tools-kie.
 ```
 <COMMON HEADER>
 KIE_API_KEY: <…>. Credits budget: <n> (top-5 at 2K = 50; 20 × 4:5 1K = 120).
 Task: create 25 Meta image ads for <BRAND>.
-1. Top 5 (ranks 1–5): FIDELITY-97 jobs with TWO references [competitor ad file NN_<id>.*, our packshot], same aspect ratio as
-   the original, text word-for-word incl. claims, our product swapped in, new faces, no competitor brand.
+0. FIRST write 05_ads/AD_VARIANTS.md (08 §1b): for all 25 ads, original headline → our almost-similar variant headline,
+   original design → our design variant. Return it and STOP; generate only after the operator approves.
+1. Top 5 (ranks 1–5): jobs with TWO references [competitor ad file NN_<id>.*, our packshot], same aspect ratio and format,
+   but the APPROVED variant headline and design variant (≈80–90% similar, not a copy), new faces, no competitor brand.
 2. 20 more: pick formats × hooks from COMPETITOR_ADS.md patterns (selection matrix in 08); write one detailed spec per
    ad (layout zones %, verbatim text, colors, fonts, people, product placement); packshot attached to EVERY job;
    4:5 at 1K.

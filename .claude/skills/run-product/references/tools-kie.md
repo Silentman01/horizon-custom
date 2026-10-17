@@ -194,7 +194,10 @@ All text crisp, large, correctly spelled <language>, exactly as written in quote
 <DESC: layout zones + every text line in quotes + people + product placement>
 ```
 
-### FIDELITY-97 (top-5 ad recreation; refs = [competitor ad, packshot])
+### FIDELITY-VARIANT (top-5 default since the Aurea run; refs = [competitor ad, packshot])
+Use the FIDELITY-97 block below but replace "SAME on-image text word for word" with the approved variant text in quotes, and add: "Keep the format, layout zones, typography style and color logic, but change the background scene, props and composition so it is a close variant (about 85% similar), not a copy."
+
+### FIDELITY-97 (legacy — only if the operator asks for an exact recreation)
 ```
 Reference image 1 is an existing ad: recreate it at about 97% fidelity — same canvas layout, same proportions and
 positions, same background, same colors, same typography (weights, sizes, case), same icons, and the SAME on-image
