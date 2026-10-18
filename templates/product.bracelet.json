@@ -502,7 +502,6 @@
       "block_order": [
         "disclosures"
       ],
-      "disabled": true,
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -569,7 +568,6 @@
         "b5",
         "b6"
       ],
-      "disabled": true,
       "settings": {}
     },
     "au_testi": {
@@ -633,7 +631,6 @@
         "t4",
         "t5"
       ],
-      "disabled": true,
       "settings": {
         "eyebrow": "Real customers",
         "heading": "Trusted by *thousands*"
@@ -685,7 +682,6 @@
         "b3",
         "b4"
       ],
-      "disabled": true,
       "settings": {
         "heading": "You're Not Unlucky. Your channel's just *blocked.*",
         "sub": "The world calls it \"bad luck.\" What's really happening runs deeper."
@@ -745,7 +741,6 @@
         "b5",
         "b6"
       ],
-      "disabled": true,
       "settings": {
         "image_asset": "aurea-feature.webp",
         "eyebrow": "THAT'S WHERE AUREA® COMES IN",
@@ -794,7 +789,6 @@
         "b3",
         "b4"
       ],
-      "disabled": true,
       "settings": {
         "eyebrow": "ANCIENT WISDOM, REAL PHYSICS",
         "heading": "Why this bracelet does what *vision boards* never could",
@@ -831,7 +825,6 @@
         "b2",
         "b3"
       ],
-      "disabled": true,
       "settings": {
         "image_asset": "aurea-timeline.jpg",
         "heading": "What to expect when your body starts *vibrating*",
@@ -873,7 +866,6 @@
         "b3",
         "b4"
       ],
-      "disabled": true,
       "settings": {
         "eyebrow": "The difference",
         "heading": "Why *Aurea®*",
@@ -926,7 +918,6 @@
         "b3",
         "b4"
       ],
-      "disabled": true,
       "settings": {
         "eyebrow": "Good to know",
         "heading": "Frequently asked *questions*"
@@ -934,7 +925,6 @@
     },
     "au_cta": {
       "type": "aurea-cta",
-      "disabled": true,
       "settings": {
         "eyebrow": "Only 500 per moon. This batch closes soon.",
         "heading": "Start attracting *abundance* today",
