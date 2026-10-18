@@ -182,7 +182,6 @@
       ],
       "settings": {
         "api_base": "https://api.REFRAIN-DOMAIN.com",
-        "pixel_id": "META-PIXEL-ID",
         "force_demo": false,
         "product": "",
         "demo_audio_asset": "refrain-demo-maman.mp3",

@@ -2,7 +2,7 @@
   Refrain quiz: 9-step questionnaire -> free preview (POST/poll backend) -> player + offer -> AJAX cart -> checkout.
   API contract (v2): G:\Ecom\Products\Refrain\08_backend\API_CONTRACT.md
   Security: the read_token lives in memory/sessionStorage only; the resume link (#p=<id>.<token>) is stripped from the
-  address bar before any tracker loads; the Meta Pixel only loads with marketing consent (Shopify Customer Privacy API).
+  address bar before any tracker loads.
 {%- endcomment -%}
 {%- liquid
   assign p = section.settings.product | default: product
@@ -64,7 +64,6 @@
     data-demo-audio="{{ demo_src }}"
     data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
     data-force-demo="{{ section.settings.force_demo }}"
-    data-pixel="{{ section.settings.pixel_id | escape }}"
     data-fail-text="{{ section.settings.fail_text | escape }}"
   >
     <header class="rf-quiz__head">
@@ -569,17 +568,6 @@
       set(d) { try { sessionStorage.setItem(SKEY, JSON.stringify(d)); } catch (e) {} },
       clear() { try { sessionStorage.removeItem(SKEY); } catch (e) {} }
     };
-    /* Shopify Customer Privacy API (audit H3): the browser Pixel depends on marketing consent. */
-    const privacy = {
-      load(cb) {
-        const S = window.Shopify;
-        if (S && S.customerPrivacy) return cb();
-        if (S && typeof S.loadFeatures === 'function') {
-          try { S.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], () => cb()); } catch (e) { cb(); }
-        } else cb();
-      },
-      marketing() { try { return !!(window.Shopify && Shopify.customerPrivacy && Shopify.customerPrivacy.marketingAllowed()); } catch (e) { return false; } }
-    };
     const MSG = {
       choose: 'Choisissez une option pour continuer.',
       name: 'Indiquez son prénom (ou le surnom que vous utilisez).',
@@ -616,7 +604,6 @@
         const fromLink = this.readLink();
         this.qa('input, textarea').forEach((el) => { el.dataset.desc = el.getAttribute('aria-describedby') || ''; });
         this.bind();
-        this.initPixel();
         const saved = store.get();
         if (saved) this.fill(saved.answers || {});
         this.session = fromLink || sess.get();
@@ -703,7 +690,6 @@
             /* play() runs synchronously inside the tap handler: required by iOS Safari. */
             const pr = this.audio.play();
             if (pr) pr.catch((err) => { this.icons(false); if (err && err.name === 'NotAllowedError') { hint.textContent = MSG.playBlocked; hint.hidden = false; } });
-            if (!this._played) { this._played = true; this.track('PreviewPlayed'); }
           } else this.audio.pause();
         });
         this.audio.addEventListener('play', () => this.icons(true));
@@ -786,26 +772,6 @@
       scrollTop() { const c = this.q('[data-card]'); if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ behavior: reduce() ? 'auto' : 'smooth', block: 'start' }); }
       announce(m) { const l = this.q('[data-live]'); l.textContent = ''; setTimeout(() => { l.textContent = m; }, 60); }
 
-      /* Meta Pixel: loaded only with marketing consent; re-checked when the visitor answers the banner. */
-      initPixel() {
-        const check = () => {
-          const id = this.dataset.pixel;
-          if (!privacy.marketing() || window.fbq || !id || /PIXEL/.test(id)) return;
-          !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-          window.fbq('init', id); window.fbq('track', 'PageView');
-        };
-        privacy.load(check);
-        document.addEventListener('visitorConsentCollected', check);
-      }
-      /* No preview_id / read_token in custom data (audit H2). eventID is kept on the browser event only. */
-      track(ev, data, eventID) {
-        try {
-          if (!window.fbq || !privacy.marketing()) return;
-          const std = ev === 'InitiateCheckout';
-          window.fbq(std ? 'track' : 'trackCustom', ev, data || {}, eventID ? { eventID } : undefined);
-        } catch (e) {}
-      }
-
       answers() {
         const f = new FormData(this.form);
         const val = (n) => { const i = this.q(`input[name="${n}"]:checked`); return i ? i.value : ''; };
@@ -860,7 +826,6 @@
           const el = cur.querySelector('input:checked') || cur.querySelector('input:not([type="hidden"]), textarea');
           if (el) el.focus({ preventScroll: true });
         }
-        if (n === 2 && !this._started) { this._started = true; this.track('QuizStart'); }
       }
 
       /* Inline error: placed right under the field/group (target), linked with aria-invalid + aria-describedby. */
@@ -959,7 +924,6 @@
           email: a.email, consent: a.consent, answers,
           hp: (this.q('[name="hp"]') || {}).value || '',
           started_at: this.startedAt || new Date().toISOString(),
-          marketing_consent: privacy.marketing(),
           reminders_opt_in: a.reminders_opt_in,
           client_request_id: this._rid,
           source: { url: location.origin + location.pathname }
@@ -985,7 +949,6 @@
         this._rid = null;
         this.session = { id: j.preview_id, token: j.read_token };
         sess.set(this.session);
-        this.track('QuizComplete', {}, 'quiz_' + j.preview_id);
         this.poll();
       }
 
@@ -1208,20 +1171,17 @@
         const a = this.answers();
         const tier = (this.q('input[name="tier"]:checked') || {}).value || 'standard';
         const id = Number(tier === 'premium' ? this.dataset.prem : this.dataset.std);
-        const mkt = privacy.marketing();
         const properties = {
           _preview_id: this.session.id,
           _recipient_name: a.name
         };
         const root = window.Shopify && Shopify.routes ? Shopify.routes.root : '/';
         try {
-          await fetch(root + 'cart/update.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ attributes: { _marketing_consent: mkt ? '1' : '0' } }) }).catch(() => {});
           const r = await fetch(root + 'cart/add.js', {
             method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ items: [{ id, quantity: 1, properties }] })
           });
           if (!r.ok) throw new Error('cart');
-          this.track('InitiateCheckout', { value: Number(tier === 'premium' ? this.dataset.premPrice : this.dataset.stdPrice) || 0, currency: (window.Shopify && Shopify.currency && Shopify.currency.active) || 'EUR' });
           location.href = root + 'checkout';
         } catch (e) { err.hidden = false; btn.removeAttribute('aria-busy'); this._buying = false; }
       }
@@ -1245,13 +1205,6 @@
       "label": "API base URL",
       "default": "https://api.REFRAIN-DOMAIN.com",
       "info": "No trailing slash. Contract: POST /api/preview, GET /api/preview/:id. While it contains REFRAIN-DOMAIN or is unreachable, the quiz runs in demo mode."
-    },
-    {
-      "type": "text",
-      "id": "pixel_id",
-      "label": "Meta Pixel ID",
-      "default": "META-PIXEL-ID",
-      "info": "Leave the placeholder if a pixel app already loads fbq. Events: QuizStart, QuizComplete (eventID quiz_<preview_id>), PreviewPlayed, InitiateCheckout. Purchase fires from the checkout custom pixel."
     },
     {
       "type": "checkbox",
