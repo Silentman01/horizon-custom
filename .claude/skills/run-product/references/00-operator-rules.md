@@ -106,3 +106,6 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 Every store header ships with the search icon, country selector and language selector OFF (`show_search`, `show_country`, `show_language` = false in sections/header-group.json). `main` already has them off, so brand branches inherit it; if a branch shows them, turn them off.
 - Footer: "Powered by Shopify" off (`show_powered_by` = false) and the social icons block disabled (`social-links` block `"disabled": true` in sections/footer-group.json). Also set in `main`.
 - Header is not sticky (`enable_sticky_header` = "never"). Also set in `main`.
+
+## 13. Fully customizable sections and blocks (operator, 2026-10-18)
+Every NEW section or block exposes all of its content and styling in the schema, so the operator can change everything in the theme editor without code: every text, image (image_picker + asset fallback), link, icon, color (text, accent, background, buttons, borders), font family/size/weight for headings and body, alignment, spacing/padding (top/bottom, desktop and mobile), layout options (columns, image side, order), visibility toggles per element, and mobile-specific overrides. Group settings with headers and keep them under Shopify limits (max 40 settings per section/block: use blocks for repeated items). Applies to future builds only.
