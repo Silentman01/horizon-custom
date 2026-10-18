@@ -183,7 +183,6 @@
       "settings": {
         "api_base": "https://api.REFRAIN-DOMAIN.com",
         "pixel_id": "META-PIXEL-ID",
-        "turnstile_site_key": "TURNSTILE-SITE-KEY",
         "force_demo": false,
         "product": "",
         "demo_audio_asset": "refrain-demo-maman.mp3",

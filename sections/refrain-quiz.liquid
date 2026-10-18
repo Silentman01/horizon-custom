@@ -65,7 +65,6 @@
     data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
     data-force-demo="{{ section.settings.force_demo }}"
     data-pixel="{{ section.settings.pixel_id | escape }}"
-    data-turnstile="{{ section.settings.turnstile_site_key | escape }}"
     data-fail-text="{{ section.settings.fail_text | escape }}"
   >
     <header class="rf-quiz__head">
@@ -235,7 +234,7 @@
             <span>Je souhaite recevoir un rappel par e-mail si je n’ai pas encore commandé. <span class="rf-opt">(facultatif)</span></span>
           </label>
           <p class="rf-privacy">{% render 'refrain-icon', name: 'lock' %}<span>Vos réponses et votre e-mail servent à créer votre extrait. Pour en savoir plus, consultez notre <a href="{{ privacy_url }}" target="_blank" rel="noopener">politique de confidentialité<span class="rf-sr"> (nouvel onglet)</span></a>.</span></p>
-          <div class="rf-turnstile" data-ts hidden></div>
+          <div class="rf-hp" aria-hidden="true"><input type="text" name="hp" tabindex="-1" autocomplete="off" value=""></div>
         </fieldset>
 
         <p class="rf-quiz__err" id="{{ uid }}-err" data-err role="alert" hidden></p>
@@ -418,7 +417,7 @@
   .rf-check a, .rf-privacy a { color: var(--rf-ink); font-weight: 700; text-underline-offset: 3px; }
   .rf-privacy { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--rf-ink-soft); }
   .rf-privacy .rf-icon { width: 16px; height: 16px; flex: none; margin-top: 2px; }
-  .rf-turnstile { margin-top: 14px; min-height: 0; }
+  .rf-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
   .rf-quiz__err, .rf-offer__err { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; line-height: 1.45; }
   .rf-quiz__nav { display: flex; gap: 10px; margin-top: 22px; }
   .rf-quiz__nav [data-next] { flex: 1; min-width: 0; padding: 0 20px; }
@@ -570,7 +569,7 @@
       set(d) { try { sessionStorage.setItem(SKEY, JSON.stringify(d)); } catch (e) {} },
       clear() { try { sessionStorage.removeItem(SKEY); } catch (e) {} }
     };
-    /* Shopify Customer Privacy API (audit H3): Pixel and CAPI flag depend on marketing consent. */
+    /* Shopify Customer Privacy API (audit H3): the browser Pixel depends on marketing consent. */
     const privacy = {
       load(cb) {
         const S = window.Shopify;
@@ -589,7 +588,6 @@
       email: 'Indiquez une adresse e-mail valide, par exemple prenom@exemple.fr.',
       consent: 'Cochez cette case pour que nous puissions créer et vous envoyer votre extrait.',
       other: 'Précisez votre choix en quelques mots.',
-      turnstile: 'Merci de patienter pendant la vérification anti-robot, puis réessayez.',
       reformulate: 'Merci de reformuler ce passage : certains contenus ne peuvent pas être mis en chanson.',
       invalid: 'Merci de vérifier ce champ.',
       rate: (min) => 'Vous avez déjà demandé plusieurs extraits récemment. Pour éviter les abus, nous limitons le nombre d’extraits gratuits. Réessayez ' + (min ? 'dans ' + min + ' minute' + (min > 1 ? 's' : '') : 'un peu plus tard') + ' : vos réponses sont enregistrées.',
@@ -598,7 +596,7 @@
       playBlocked: 'Touchez à nouveau le bouton lecture pour lancer l’extrait.',
       reload: 'Le lien audio a expiré, il vient d’être renouvelé. Touchez lecture pour reprendre.'
     };
-    const FIELD_STEP = { recipient: 1, recipient_other: 1, occasion: 2, occasion_other: 2, name: 3, pronunciation: 3, style: 4, voice: 4, qualities: 5, qualities_text: 5, memory: 6, message: 7, language: 8, email: 9, consent: 9, turnstile: 9 };
+    const FIELD_STEP = { recipient: 1, recipient_other: 1, occasion: 2, occasion_other: 2, name: 3, pronunciation: 3, style: 4, voice: 4, qualities: 5, qualities_text: 5, memory: 6, message: 7, language: 8, email: 9, consent: 9 };
     const STAGES = ['Histoire', 'Paroles', 'Musique', 'Extrait'];
 
     class RefrainQuiz extends HTMLElement {
@@ -610,8 +608,10 @@
         this.api = (this.dataset.api || '').replace(/\/$/, '');
         this.step = 1;
         this.audio = this.q('[data-audio]');
-        this.ts = { key: this.dataset.turnstile || '', token: '', id: null };
-        this.ts.on = !!this.ts.key && !/TURNSTILE/.test(this.ts.key);
+        this.startedAt = '';
+        const markStart = () => { if (!this.startedAt) this.startedAt = new Date().toISOString(); };
+        this.form.addEventListener('input', markStart, { once: true });
+        this.form.addEventListener('click', markStart, { once: true });
         /* 1. Read and strip the resume link BEFORE any tracker loads (contract v2, audit H2). */
         const fromLink = this.readLink();
         this.qa('input, textarea').forEach((el) => { el.dataset.desc = el.getAttribute('aria-describedby') || ''; });
@@ -690,7 +690,8 @@
         this.q('[data-check]').addEventListener('click', () => { this._errs = 0; this.poll(true); });
         this.q('[data-restart]').addEventListener('click', () => {
           store.clear(); sess.clear(); this.session = null; this.audio.pause(); this.photoReset();
-          this.form.reset(); this.fill({}); this.counters(); this.resetTurnstile();
+          this.form.reset(); this.fill({}); this.counters(); this.startedAt = '';
+          this.form.addEventListener('input', () => { if (!this.startedAt) this.startedAt = new Date().toISOString(); }, { once: true });
           this.q('[data-result]').hidden = true; this.form.hidden = false; this.go(1);
           this.scrollTop();
         });
@@ -796,7 +797,7 @@
         privacy.load(check);
         document.addEventListener('visitorConsentCollected', check);
       }
-      /* No preview_id / read_token in custom data (audit H2). eventID is kept for CAPI dedup only. */
+      /* No preview_id / read_token in custom data (audit H2). eventID is kept on the browser event only. */
       track(ev, data, eventID) {
         try {
           if (!window.fbq || !privacy.marketing()) return;
@@ -853,7 +854,6 @@
         this.q('[data-back]').hidden = n === 1;
         this.q('[data-next-label]').textContent = n === STEPS ? 'Créer son extrait gratuit' : 'Continuer';
         this.error('');
-        if (n === STEPS) this.turnstile();
         if (focus && cur) {
           const legend = cur.querySelector('legend');
           this.announce('Étape ' + n + ' sur ' + STEPS + (legend ? ' : ' + legend.textContent.trim() : ''));
@@ -894,7 +894,6 @@
         if (n === 9) {
           if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(a.email)) return [MSG.email, wrap('email')];
           if (!a.consent) return [MSG.consent, wrap('consent')];
-          if (this.ts.on && !this.ts.token) { const box = this.q('[data-ts]'); box.hidden = false; return [MSG.turnstile, box]; }
         }
         return null;
       }
@@ -907,33 +906,6 @@
         if (this.step < STEPS) { this.go(this.step + 1); this.scrollTop(); return; }
         this.submit();
       }
-
-      /* Cloudflare Turnstile (audit C1), loaded only when the email step is reached. */
-      turnstile() {
-        if (!this.ts.on || this.ts.id !== null) return;
-        const box = this.q('[data-ts]');
-        const render = () => {
-          if (!window.turnstile || this.ts.id !== null) return;
-          box.hidden = false;
-          this.ts.id = window.turnstile.render(box, {
-            sitekey: this.ts.key, action: 'preview', language: 'fr', appearance: 'interaction-only',
-            size: box.clientWidth && box.clientWidth < 300 ? 'compact' : 'normal',
-            callback: (tok) => { this.ts.token = tok; if (this._errTarget === box) this.error(''); },
-            'expired-callback': () => { this.ts.token = ''; },
-            'error-callback': () => { this.ts.token = ''; }
-          });
-        };
-        if (window.turnstile) return render();
-        window.__rfTsCbs = window.__rfTsCbs || [];
-        window.__rfTsCbs.push(render);
-        if (document.getElementById('rf-turnstile-js')) return;
-        window.__rfTsReady = () => window.__rfTsCbs.forEach((f) => f());
-        const s = document.createElement('script');
-        s.id = 'rf-turnstile-js'; s.async = true; s.defer = true;
-        s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=__rfTsReady';
-        document.head.appendChild(s);
-      }
-      resetTurnstile() { this.ts.token = ''; if (this.ts.id !== null && window.turnstile) { try { window.turnstile.reset(this.ts.id); } catch (e) {} } }
 
       showLoading() {
         this.q('[data-resume]').hidden = true;
@@ -963,7 +935,7 @@
         this.go(step);
         if (msg) {
           const el = field && this.q(`[name="${field}"]`);
-          this.error(msg, field === 'turnstile' ? this.q('[data-ts]') : el ? (el.closest('.rf-field, .rf-check, .rf-chips') || el) : null);
+          this.error(msg, el ? (el.closest('.rf-field, .rf-check, .rf-chips') || el) : null);
         }
         this.scrollTop();
       }
@@ -971,8 +943,6 @@
       retry() {
         this.q('[data-fail]').hidden = true;
         if (this._failKind === 'poll' && this.session) { this.q('[data-load-note]').hidden = false; this._errs = 0; return this.poll(true); }
-        /* A new POST needs a fresh single-use Turnstile token. */
-        if (this.ts.on && !this.ts.token) return this.backToForm(STEPS, MSG.turnstile, 'turnstile');
         this.submit();
       }
 
@@ -987,13 +957,13 @@
         const answers = { ...a }; delete answers.email; delete answers.consent; delete answers.reminders_opt_in;
         const body = JSON.stringify({
           email: a.email, consent: a.consent, answers,
-          turnstile_token: this.ts.token || undefined,
+          hp: (this.q('[name="hp"]') || {}).value || '',
+          started_at: this.startedAt || new Date().toISOString(),
           marketing_consent: privacy.marketing(),
           reminders_opt_in: a.reminders_opt_in,
           client_request_id: this._rid,
           source: { url: location.origin + location.pathname }
         });
-        this.ts.token = '';
         let r, j = {};
         for (let i = 0; i < 2; i++) {
           try {
@@ -1003,13 +973,12 @@
           if (r && (r.ok || r.status < 500)) break;
           if (i === 0) await new Promise((ok) => setTimeout(ok, 1200));
         }
-        this.resetTurnstile();
         this.busy = false; this.q('[data-next]').removeAttribute('aria-busy');
         if (!r) return this.fail('network');
         if (r.status === 429) { const ra = Number(r.headers.get('Retry-After')) || 0; return this.fail('rate', ra ? Math.max(1, Math.ceil(ra / 60)) : 0); }
         if (r.status === 400) {
           const field = (j.fields && j.fields[0]) || '';
-          const msg = field === 'turnstile' ? MSG.turnstile : j.reason === 'content' ? MSG.reformulate : MSG.invalid;
+          const msg = j.reason === 'content' ? MSG.reformulate : MSG.invalid;
           return this.backToForm(FIELD_STEP[field] || STEPS, msg, field);
         }
         if (!r.ok || !j.preview_id || !j.read_token) return this.demo();   /* 5xx / 503 busy / 403: demo mode per contract */
@@ -1283,13 +1252,6 @@
       "label": "Meta Pixel ID",
       "default": "META-PIXEL-ID",
       "info": "Leave the placeholder if a pixel app already loads fbq. Events: QuizStart, QuizComplete (eventID quiz_<preview_id>), PreviewPlayed, InitiateCheckout. Purchase fires from the checkout custom pixel."
-    },
-    {
-      "type": "text",
-      "id": "turnstile_site_key",
-      "label": "Cloudflare Turnstile site key",
-      "default": "TURNSTILE-SITE-KEY",
-      "info": "Required by the API (v2) once TURNSTILE_SECRET is set. While it contains the placeholder, no widget is shown and no token is sent."
     },
     {
       "type": "checkbox",
