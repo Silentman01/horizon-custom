@@ -11,10 +11,11 @@
   "current": {
     "logo_height": 36,
     "logo_height_mobile": 28,
+    "page_text_color": "#000000",
     "type_body_font": "instrument_sans_n5",
     "type_subheading_font": "instrument_sans_n5",
-    "type_heading_font": "cormorant_n7",
-    "type_accent_font": "cormorant_n6",
+    "type_heading_font": "arsenal_n7",
+    "type_accent_font": "arsenal_n4",
     "type_size_paragraph": "16",
     "type_line_height_paragraph": "body-loose",
     "type_font_h1": "heading",
