@@ -1,90 +1,86 @@
-{%- comment -%} Compact trust + scarcity strip shown above the product title: badge, generic star rating, offer line. {%- endcomment -%}
-{%- liquid
-  assign bs = block.settings
-  assign show_top = false
-  if bs.badge != blank or bs.show_rating
-    assign show_top = true
-  endif
--%}
-<div class="au-trust" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
-  {%- if show_top -%}
-    <div class="au-trust__top">
-      {%- if bs.badge != blank -%}
-        <span class="au-trust__badge">
-          <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M12 .587l3.668 7.431 8.144 1.18-5.906 5.434 1.391 8.079L12 18.896l-7.297 3.843 1.391-8.079-5.906-5.434 8.144-1.18z"/></svg>
-          {{- bs.badge -}}
-        </span>
-      {%- endif -%}
-      {%- if bs.show_rating -%}
-        <span class="au-trust__rating">
-          <span class="au-trust__stars" aria-hidden="true">
-            {%- for i in (1..5) -%}
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 .587l3.668 7.431 8.144 1.18-5.906 5.434 1.391 8.079L12 18.896l-7.297 3.843 1.391-8.079-5.906-5.434 8.144-1.18z"/></svg>
-            {%- endfor -%}
-          </span>
-          {%- if bs.rating_label != blank -%}<strong class="au-trust__label">{{ bs.rating_label }}</strong>{%- endif -%}
-          {%- if bs.rating_score != blank -%}<span class="au-trust__score">{{ bs.rating_score }}</span>{%- endif -%}
-          {%- if bs.rating_count != blank -%}<span class="au-trust__count{% unless bs.count_mobile %} au-trust--desk{% endunless %}">{{ bs.rating_count }}</span>{%- endif -%}
-        </span>
-      {%- endif -%}
+{%- comment -%} Stacked trust blocks above the product title: bestseller card, star-rating pill (Trustpilot mark only when a profile URL is set), urgency line. {%- endcomment -%}
+{%- assign bs = block.settings -%}
+<div class="au-ts" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  {%- if bs.best_title != blank or bs.best_tagline != blank -%}
+    <div class="au-ts-best">
+      <span class="au-ts-best__chip" aria-hidden="true">{{ bs.best_icon | default: '★' }}</span>
+      <span class="au-ts-best__txt">
+        {%- if bs.best_title != blank -%}<strong>{{ bs.best_title }}</strong>{%- endif -%}
+        {%- if bs.best_tagline != blank -%}<em>{{ bs.best_tagline }}</em>{%- endif -%}
+      </span>
     </div>
   {%- endif -%}
-  {%- if bs.offer != blank or bs.scarcity != blank -%}
-    <p class="au-trust__offer">
-      <i class="au-trust__dot{% if bs.pulse %} is-pulsing{% endif %}" aria-hidden="true"></i>
-      <span class="au-trust__offer-text">
-        {%- if bs.offer != blank -%}<strong>{{ bs.offer }}</strong>{%- endif -%}
-        {%- if bs.offer != blank and bs.scarcity != blank -%}<span class="au-trust__sep" aria-hidden="true">·</span>{%- endif -%}
-        {%- if bs.scarcity != blank -%}<span>{{ bs.scarcity }}</span>{%- endif -%}
-        {%- if bs.guarantee != blank -%}<span class="au-trust__guar{% unless bs.guarantee_mobile %} au-trust--desk{% endunless %}"><span class="au-trust__sep" aria-hidden="true">·</span>{{ bs.guarantee }}</span>{%- endif -%}
+  {%- if bs.show_rating -%}
+    {%- capture tp_label -%}{{ bs.rating_label }}, {{ bs.rating_score }}{% if bs.trustpilot_url != blank %} on Trustpilot{% endif %}{%- endcapture -%}
+    {%- if bs.trustpilot_url != blank -%}
+      <a class="au-ts-tp" href="{{ bs.trustpilot_url }}" target="_blank" rel="noopener" aria-label="{{ tp_label | escape }}">
+    {%- else -%}
+      <div class="au-ts-tp" role="img" aria-label="{{ tp_label | escape }}">
+    {%- endif -%}
+      <span class="au-ts-tp__in" aria-hidden="true">
+        <span class="au-ts-tp__stars"><svg viewBox="0 0 512 96" width="512" height="96" focusable="false">
+          {%- for i in (0..4) -%}
+            <g transform="translate({{ i | times: 104 }} 0)"><rect width="96" height="96" fill="#00B67A"/><path d="M48 16.2l7.9 24.2h25.7L60.8 55.4l7.9 24.2L48 64.6 27.3 79.6l7.9-24.2-20.8-15h25.7z" fill="#fff"/></g>
+          {%- endfor -%}
+        </svg></span>
+        <span class="au-ts-tp__text">
+          {%- if bs.rating_label != blank -%}<strong>{{ bs.rating_label }}</strong>{%- endif -%}
+          {%- if bs.rating_score != blank -%}<span>{{ bs.rating_score }}</span>{%- endif -%}
+        </span>
+        {%- if bs.trustpilot_url != blank -%}
+          <span class="au-ts-tp__brand"><svg class="au-ts-tp__logo" aria-hidden="true" focusable="false" width="1133" height="278" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1132.8 278.2"><path d="M297.7 98.6h114.7V120h-45.1v120.3h-24.8V120h-44.9V98.6zm109.8 39.1h21.2v19.8h.4c.7-2.8 2-5.5 3.9-8.1 1.9-2.6 4.2-5.1 6.9-7.2 2.7-2.2 5.7-3.9 9-5.3 3.3-1.3 6.7-2 10.1-2 2.6 0 4.5.1 5.5.2s2 .3 3.1.4v21.8c-1.6-.3-3.2-.5-4.9-.7-1.7-.2-3.3-.3-4.9-.3-3.8 0-7.4.8-10.8 2.3-3.4 1.5-6.3 3.8-8.8 6.7-2.5 3-4.5 6.6-6 11s-2.2 9.4-2.2 15.1v48.8h-22.6V137.7zm164 102.6h-22.2V226h-.4c-2.8 5.2-6.9 9.3-12.4 12.4-5.5 3.1-11.1 4.7-16.8 4.7-13.5 0-23.3-3.3-29.3-10s-9-16.8-9-30.3v-65.1H504v62.9c0 9 1.7 15.4 5.2 19.1 3.4 3.7 8.3 5.6 14.5 5.6 4.8 0 8.7-.7 11.9-2.2 3.2-1.5 5.8-3.4 7.7-5.9 2-2.4 3.4-5.4 4.3-8.8.9-3.4 1.3-7.1 1.3-11.1v-59.5h22.6v102.5zm38.5-32.9c.7 6.6 3.2 11.2 7.5 13.9 4.4 2.6 9.6 4 15.7 4 2.1 0 4.5-.2 7.2-.5s5.3-1 7.6-1.9c2.4-.9 4.3-2.3 5.9-4.1 1.5-1.8 2.2-4.1 2.1-7-.1-2.9-1.2-5.3-3.2-7.1-2-1.9-4.5-3.3-7.6-4.5-3.1-1.1-6.6-2.1-10.6-2.9-4-.8-8-1.7-12.1-2.6-4.2-.9-8.3-2.1-12.2-3.4-3.9-1.3-7.4-3.1-10.5-5.4-3.1-2.2-5.6-5.1-7.4-8.6-1.9-3.5-2.8-7.8-2.8-13 0-5.6 1.4-10.2 4.1-14 2.7-3.8 6.2-6.8 10.3-9.1 4.2-2.3 8.8-3.9 13.9-4.9 5.1-.9 10-1.4 14.6-1.4 5.3 0 10.4.6 15.2 1.7 4.8 1.1 9.2 2.9 13.1 5.5 3.9 2.5 7.1 5.8 9.7 9.8 2.6 4 4.2 8.9 4.9 14.6h-23.6c-1.1-5.4-3.5-9.1-7.4-10.9-3.9-1.9-8.4-2.8-13.4-2.8-1.6 0-3.5.1-5.7.4-2.2.3-4.2.8-6.2 1.5-1.9.7-3.5 1.8-4.9 3.2-1.3 1.4-2 3.2-2 5.5 0 2.8 1 5 2.9 6.7 1.9 1.7 4.4 3.1 7.5 4.3 3.1 1.1 6.6 2.1 10.6 2.9 4 .8 8.1 1.7 12.3 2.6 4.1.9 8.1 2.1 12.1 3.4 4 1.3 7.5 3.1 10.6 5.4 3.1 2.3 5.6 5.1 7.5 8.5 1.9 3.4 2.9 7.7 2.9 12.7 0 6.1-1.4 11.2-4.2 15.5-2.8 4.2-6.4 7.7-10.8 10.3-4.4 2.6-9.4 4.6-14.8 5.8-5.4 1.2-10.8 1.8-16.1 1.8-6.5 0-12.5-.7-18-2.2-5.5-1.5-10.3-3.7-14.3-6.6-4-3-7.2-6.7-9.5-11.1-2.3-4.4-3.5-9.7-3.7-15.8H610zm74.6-69.7h17.1v-30.8h22.6v30.8h20.4v16.9h-20.4v54.8c0 2.4.1 4.4.3 6.2.2 1.7.7 3.2 1.4 4.4.7 1.2 1.8 2.1 3.3 2.7 1.5.6 3.4.9 6 .9 1.6 0 3.2 0 4.8-.1 1.6-.1 3.2-.3 4.8-.7v17.5c-2.5.3-5 .5-7.3.8-2.4.3-4.8.4-7.3.4-6 0-10.8-.6-14.4-1.7-3.6-1.1-6.5-2.8-8.5-5-2.1-2.2-3.4-4.9-4.2-8.2-.7-3.3-1.2-7.1-1.3-11.3v-60.5h-17.1v-17.1zm76.1 0h21.4v13.9h.4c3.2-6 7.6-10.2 13.3-12.8 5.7-2.6 11.8-3.9 18.5-3.9 8.1 0 15.1 1.4 21.1 4.3 6 2.8 11 6.7 15 11.7 4 5 6.9 10.8 8.9 17.4 2 6.6 3 13.7 3 21.2 0 6.9-.9 13.6-2.7 20-1.8 6.5-4.5 12.2-8.1 17.2-3.6 5-8.2 8.9-13.8 11.9-5.6 3-12.1 4.5-19.7 4.5-3.3 0-6.6-.3-9.9-.9-3.3-.6-6.5-1.6-9.5-2.9-3-1.3-5.9-3-8.4-5.1-2.6-2.1-4.7-4.5-6.5-7.2h-.4v51.2h-22.6V137.7zm79 51.4c0-4.6-.6-9.1-1.8-13.5-1.2-4.4-3-8.2-5.4-11.6-2.4-3.4-5.4-6.1-8.9-8.1-3.6-2-7.7-3.1-12.3-3.1-9.5 0-16.7 3.3-21.5 9.9-4.8 6.6-7.2 15.4-7.2 26.4 0 5.2.6 10 1.9 14.4 1.3 4.4 3.1 8.2 5.7 11.4 2.5 3.2 5.5 5.7 9 7.5 3.5 1.9 7.6 2.8 12.2 2.8 5.2 0 9.5-1.1 13.1-3.2 3.6-2.1 6.5-4.9 8.8-8.2 2.3-3.4 4-7.2 5-11.5.9-4.3 1.4-8.7 1.4-13.2zm39.9-90.5h22.6V120h-22.6V98.6zm0 39.1h22.6v102.6h-22.6V137.7zm42.8-39.1H945v141.7h-22.6V98.6zm91.9 144.5c-8.2 0-15.5-1.4-21.9-4.1-6.4-2.7-11.8-6.5-16.3-11.2-4.4-4.8-7.8-10.5-10.1-17.1-2.3-6.6-3.5-13.9-3.5-21.8 0-7.8 1.2-15 3.5-21.6 2.3-6.6 5.7-12.3 10.1-17.1 4.4-4.8 9.9-8.5 16.3-11.2 6.4-2.7 13.7-4.1 21.9-4.1s15.5 1.4 21.9 4.1c6.4 2.7 11.8 6.5 16.3 11.2 4.4 4.8 7.8 10.5 10.1 17.1 2.3 6.6 3.5 13.8 3.5 21.6 0 7.9-1.2 15.2-3.5 21.8-2.3 6.6-5.7 12.3-10.1 17.1-4.4 4.8-9.9 8.5-16.3 11.2-6.4 2.7-13.7 4.1-21.9 4.1zm0-17.9c5 0 9.4-1.1 13.1-3.2 3.7-2.1 6.7-4.9 9.1-8.3 2.4-3.4 4.1-7.3 5.3-11.6 1.1-4.3 1.7-8.7 1.7-13.2 0-4.4-.6-8.7-1.7-13.1s-2.9-8.2-5.3-11.6c-2.4-3.4-5.4-6.1-9.1-8.2-3.7-2.1-8.1-3.2-13.1-3.2s-9.4 1.1-13.1 3.2c-3.7 2.1-6.7 4.9-9.1 8.2-2.4 3.4-4.1 7.2-5.3 11.6-1.1 4.4-1.7 8.7-1.7 13.1 0 4.5.6 8.9 1.7 13.2 1.1 4.3 2.9 8.2 5.3 11.6 2.4 3.4 5.4 6.2 9.1 8.3 3.7 2.2 8.1 3.2 13.1 3.2zm58.4-87.5h17.1v-30.8h22.6v30.8h20.4v16.9h-20.4v54.8c0 2.4.1 4.4.3 6.2.2 1.7.7 3.2 1.4 4.4.7 1.2 1.8 2.1 3.3 2.7 1.5.6 3.4.9 6 .9 1.6 0 3.2 0 4.8-.1 1.6-.1 3.2-.3 4.8-.7v17.5c-2.5.3-5 .5-7.3.8-2.4.3-4.8.4-7.3.4-6 0-10.8-.6-14.4-1.7-3.6-1.1-6.5-2.8-8.5-5-2.1-2.2-3.4-4.9-4.2-8.2-.7-3.3-1.2-7.1-1.3-11.3v-60.5h-17.1v-17.1z" fill="#191919"/><path fill="#00b67a" d="M271.3 98.6H167.7L135.7 0l-32.1 98.6L0 98.5l83.9 61L51.8 258l83.9-60.9 83.8 60.9-32-98.5 83.8-60.9z"/><path fill="#005128" d="M194.7 181.8l-7.2-22.3-51.8 37.6z"/></svg></span>
+        {%- endif -%}
       </span>
-    </p>
+    {%- if bs.trustpilot_url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+  {%- endif -%}
+  {%- if bs.offer != blank -%}
+    <p class="au-ts-urg"><span class="au-ts-urg__dot" aria-hidden="true"></span>{{ bs.offer }}</p>
   {%- endif -%}
 </div>
 {% stylesheet %}
-  .au-trust { display: grid; gap: 7px; width: 100%; font-family: var(--au-body); color: var(--au-ink); line-height: 1.3; }
-  .au-trust__top { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; }
-  .au-trust__badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px 4px 8px; border-radius: 4px; background: var(--au-pine); color: var(--au-parchment); font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; white-space: nowrap; }
-  .au-trust__badge svg { flex: none; color: var(--au-gold); }
-  .au-trust__rating { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 2px 6px; font-size: 13.5px; }
-  .au-trust__stars { display: inline-flex; gap: 1px; color: var(--au-gold); }
-  .au-trust__stars svg { display: block; }
-  .au-trust__label { font-weight: 700; }
-  .au-trust__count { color: var(--au-muted); }
-  .au-trust__count::before { content: '·'; margin-right: 6px; color: var(--au-muted); }
-  .au-trust__offer { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--au-pine); }
-  .au-trust__offer strong { font-weight: 700; }
-  .au-trust__sep { margin: 0 6px; color: var(--au-gold); }
-  .au-trust__dot { position: relative; flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--au-gold); }
-  .au-trust__dot.is-pulsing::after { content: ''; position: absolute; inset: 0; border-radius: 50%; background: var(--au-gold); animation: au-trust-pulse 1.8s ease-out infinite; }
-  @keyframes au-trust-pulse { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(2.6); opacity: 0; } }
-  @media (prefers-reduced-motion: reduce) { .au-trust__dot.is-pulsing::after { animation: none; opacity: 0; } }
+  .au-ts { display: flex; flex-direction: column; align-items: flex-start; width: 100%; margin-bottom: -2px; font-family: var(--au-body); }
+  .au-ts-best { display: flex; align-items: center; gap: 12px; box-sizing: border-box; width: 100%; margin: 0 0 10px; padding: 10px 14px; background: var(--au-parchment); border: 2px solid var(--au-gold); border-radius: 4px; font-size: 16px; line-height: 1.8; letter-spacing: 0.32px; }
+  .au-ts-best__chip { flex: 0 0 auto; min-width: 36.8px; box-sizing: border-box; padding: 6px 10px; border-radius: 4px; background: var(--au-gold); color: #fff; text-align: center; font-size: 14px; font-weight: 700; line-height: 1; letter-spacing: 0.02em; }
+  .au-ts-best__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .au-ts-best__txt strong { font-size: 12.5px; font-weight: 600; line-height: 1.8; letter-spacing: 0.03em; text-transform: uppercase; color: var(--au-pine); }
+  .au-ts-best__txt em { font-size: 12.5px; font-style: italic; font-weight: 400; line-height: 1.35; letter-spacing: 0.32px; color: #6e6e73; }
+  .au-ts-tp { display: flex; justify-content: flex-start; width: fit-content; max-width: 100%; margin: 0; padding: 5px; box-sizing: border-box; border: 1px solid #dce7df; border-radius: 5px; background: linear-gradient(180deg, #fbfbfb, #f3f7f3 100%); color: #1d2922; font-size: 12px; line-height: 1.25; letter-spacing: 0.32px; text-decoration: none; }
+  a.au-ts-tp:hover { border-color: #00b67a; }
+  .au-ts-tp__in { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; width: fit-content; line-height: 1.8; }
+  .au-ts-tp__stars { display: flex; flex: 0 0 auto; margin-right: 3px; }
+  .au-ts-tp__stars svg, .au-ts-tp__brand svg { display: block; width: auto; height: 15px; }
+  .au-ts-tp__text { display: inline-flex; gap: 5px; align-items: center; white-space: nowrap; }
+  .au-ts-tp__text strong { font-weight: 700; }
+  .au-ts-tp__brand { display: flex; flex: 0 0 auto; margin-left: 5px; }
+  .au-ts-urg { display: flex; align-items: center; gap: 8px; width: 100%; margin: 4px 0 0; font-size: 14.5px; font-weight: 700; line-height: 1.8; letter-spacing: 0.04em; text-transform: uppercase; color: #e53935; }
+  .au-ts-urg__dot { flex: 0 0 auto; width: 7px; height: 7px; border-radius: 50%; background: #e53935; }
   @media (max-width: 749px) {
-    .au-trust { gap: 6px; }
-    .au-trust__rating { font-size: 13px; }
-    .au-trust__offer { font-size: 11px; letter-spacing: 0.06em; }
-    .au-trust__sep { margin: 0 4px; }
-    .au-trust--desk { display: none; }
+    .au-ts { margin-bottom: -4px; }
+    .au-ts-best { gap: 9px; padding: 8px 10px; font-size: 15px; letter-spacing: 0.3px; }
+    .au-ts-best__chip { min-width: 30.4px; padding: 5px 8px; font-size: 12px; }
+    .au-ts-best__txt strong, .au-ts-best__txt em { font-size: 11.5px; }
+    .au-ts-best__txt em { letter-spacing: 0.3px; }
+    .au-ts-tp { padding: 4px; }
+    .au-ts-tp__stars svg, .au-ts-tp__brand svg { height: 13px; }
+    .au-ts-urg { font-size: 12px; }
+    .au-ts-urg__dot { width: 6px; height: 6px; }
   }
 {% endstylesheet %}
 {% schema %}
 {
   "name": "Aurea trust strip",
   "settings": [
-    { "type": "paragraph", "content": "Compact badge, star rating and offer line for above the product title. Keep each text short so it fits on 2 lines on mobile." },
-    { "type": "header", "content": "Badge and rating" },
-    { "type": "text", "id": "badge", "label": "Badge (leave empty to hide)", "default": "Bestseller" },
-    { "type": "checkbox", "id": "show_rating", "label": "Show star rating", "default": true },
+    { "type": "header", "content": "Bestseller card" },
+    { "type": "text", "id": "best_icon", "label": "Icon tile character", "default": "★" },
+    { "type": "text", "id": "best_title", "label": "Title (leave title and tagline empty to hide)", "default": "Our #1 Bestseller This Season" },
+    { "type": "text", "id": "best_tagline", "label": "Tagline", "default": "Real Citrine, Aventurine & Turquoise, Worn Daily For Wealth, Luck And Growth." },
+    { "type": "header", "content": "Rating pill" },
+    { "type": "checkbox", "id": "show_rating", "label": "Show rating pill", "default": true },
     { "type": "text", "id": "rating_label", "label": "Rating word", "default": "Excellent" },
-    { "type": "text", "id": "rating_score", "label": "Rating score", "default": "4.8/5" },
-    { "type": "text", "id": "rating_count", "label": "Rating count", "default": "193,819+ customers" },
-    { "type": "checkbox", "id": "count_mobile", "label": "Show rating count on mobile (may add a 3rd line)", "default": false },
-    { "type": "header", "content": "Offer line" },
-    { "type": "text", "id": "offer", "label": "Offer", "default": "Buy 1 Get 1 Free" },
-    { "type": "text", "id": "scarcity", "label": "Scarcity", "default": "Moon batch 96% reserved" },
-    { "type": "text", "id": "guarantee", "label": "Guarantee (desktop by default)", "default": "30-day guarantee" },
-    { "type": "checkbox", "id": "guarantee_mobile", "label": "Show guarantee on mobile", "default": false },
-    { "type": "checkbox", "id": "pulse", "label": "Pulsing dot", "default": true }
+    { "type": "text", "id": "rating_score", "label": "Rating score", "default": "4.8 out of 5" },
+    { "type": "url", "id": "trustpilot_url", "label": "Trustpilot profile URL", "info": "Only show if this matches your real Trustpilot rating. When set, the Trustpilot logo appears and the pill links to your profile. When empty, the pill shows the stars and score without the Trustpilot mark." },
+    { "type": "header", "content": "Urgency line" },
+    { "type": "text", "id": "offer", "label": "Offer text (keep the % in sync with the batch box)", "default": "Buy 1 Get 1 Free — Half Price | 96% Reserved" }
   ],
   "presets": [ { "name": "Aurea trust strip" } ]
 }

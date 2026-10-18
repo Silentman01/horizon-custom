@@ -15,7 +15,7 @@
               <div class="au-h-feat__slide" {% unless forloop.first %}hidden{% endunless %}>{% render 'aurea-media', image: im, ratio: '1 / 1', radius: 6, sizes: '(min-width: 990px) 560px, 100vw', eager: forloop.first %}</div>
             {%- endfor -%}
           {%- else -%}
-            <div class="au-h-feat__slide">{% render 'aurea-media', ratio: '1 / 1', radius: 6, label: 'Product image 1:1 (selected product gallery 1)' %}</div>
+            <div class="au-h-feat__slide">{% render 'aurea-media', ratio: '1 / 1', radius: 6 %}</div>
           {%- endif -%}
         </div>
         <div class="au-h-feat__thumbs">
@@ -24,7 +24,7 @@
               <button type="button" class="au-h-feat__thumb{% if forloop.first %} is-active{% endif %}" aria-label="Image {{ forloop.index }}">{{ im | image_url: width: 240 | image_tag: loading: 'lazy', sizes: '120px', widths: '120, 240', alt: '' }}</button>
             {%- endfor -%}
           {%- else -%}
-            {%- for i in (1..6) -%}<span class="au-h-feat__thumb{% if forloop.first %} is-active{% endif %}"><span class="au-h-ph">{{ i }}</span></span>{%- endfor -%}
+            {%- for i in (1..6) -%}<span class="au-h-feat__thumb{% if forloop.first %} is-active{% endif %}"><span class="au-h-ph" aria-hidden="true"></span></span>{%- endfor -%}
           {%- endif -%}
         </div>
       </aurea-home-gallery>
