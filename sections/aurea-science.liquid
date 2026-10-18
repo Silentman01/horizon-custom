@@ -17,13 +17,37 @@
         </article>
       {%- endfor -%}
     </aurea-rail>
-    <div class="au-sci__nav" aria-hidden="false">
-      <button type="button" class="au-sci__arrow" aria-label="Previous" onclick="document.getElementById('au-sci-{{ section.id }}').step(-1)">&#8249;</button>
-      <button type="button" class="au-sci__arrow" aria-label="Next" onclick="document.getElementById('au-sci-{{ section.id }}').step(1)">&#8250;</button>
+    <div class="au-sci__nav">
+      <button type="button" class="au-sci__arrow" aria-label="Previous" onclick="document.getElementById('au-sci-{{ section.id }}').step(-1)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="au-sci__dots" aria-hidden="true">
+        {%- for block in section.blocks -%}<span class="au-sci__dot{% if forloop.first %} is-active{% endif %}"></span>{%- endfor -%}
+      </div>
+      <button type="button" class="au-sci__arrow" aria-label="Next" onclick="document.getElementById('au-sci-{{ section.id }}').step(1)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
     </div>
   </div>
 </section>
 {% render 'aurea-drag' %}
+<script>
+  (() => {
+    const rail = document.getElementById('au-sci-{{ section.id }}');
+    if (!rail) return;
+    const dots = rail.parentElement.querySelectorAll('.au-sci__dot');
+    const sync = () => {
+      const kids = [...rail.children];
+      if (!kids.length) return;
+      const left = rail.scrollLeft;
+      let idx = 0, best = Infinity;
+      kids.forEach((k, i) => { const d = Math.abs(k.offsetLeft - rail.offsetLeft - left); if (d < best) { best = d; idx = i; } });
+      if (rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2) idx = kids.length - 1;
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    };
+    rail.addEventListener('scroll', sync, { passive: true });
+  })();
+</script>
 {% stylesheet %}
   .au-sci { padding: 40px 0; background: linear-gradient(180deg, #fbf3e4, #f6ead2); }
   .au-sci__head { max-width: 680px; margin: 0 auto 28px; padding: 0 16px; text-align: center; }
@@ -37,8 +61,13 @@
   .au-sci__title { margin: 0 0 8px; font-family: var(--au-body); font-size: 18px; font-weight: 600; color: var(--au-pine); }
   .au-sci__text { font-size: 14px; line-height: 1.5; color: #4a443a; }
   .au-sci__text strong { color: var(--au-ink); }
-  .au-sci__nav { display: flex; justify-content: center; gap: 12px; }
-  .au-sci__arrow { width: 42px; height: 42px; border: 1px solid var(--au-pine); border-radius: 50%; background: #fff; color: var(--au-pine); font-size: 24px; line-height: 1; cursor: pointer; }
+  .au-sci__nav { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 0 16px; }
+  .au-sci__arrow { appearance: none; box-sizing: border-box; display: inline-flex; flex: 0 0 44px; align-items: center; justify-content: center; width: 44px; min-width: 44px; max-width: 44px; height: 44px; min-height: 44px; margin: 0; padding: 0; border: 1px solid var(--au-pine); border-radius: 50%; background: #fff; color: var(--au-pine); line-height: 1; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .au-sci__arrow svg { display: block; flex: none; width: 18px; height: 18px; }
+  .au-sci__arrow:hover { background: var(--au-pine); color: #fff; }
+  .au-sci__dots { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 72px; }
+  .au-sci__dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: rgb(30 51 40 / 0.25); transition: width 0.25s, background 0.25s; }
+  .au-sci__dot.is-active { width: 22px; background: var(--au-gold); }
   .au-sci__arrow:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 2px; }
   @media (min-width: 750px) {
     .au-sci { padding: 64px 0; }
