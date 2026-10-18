@@ -193,7 +193,7 @@
         "copyright": {
           "type": "footer-copyright",
           "settings": {
-            "show_powered_by": true,
+            "show_powered_by": false,
             "font_size": "0.75rem",
             "case": "none"
           }
@@ -213,7 +213,8 @@
             "youtube_url": "https://www.youtube.com",
             "tiktok_url": "https://www.tiktok.com",
             "twitter_url": "https://www.twitter.com"
-          }
+          },
+          "disabled": true
         }
       },
       "block_order": [
