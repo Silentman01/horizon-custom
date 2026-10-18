@@ -24,7 +24,7 @@
       <img src="{{ ma | asset_url }}" class="au-h-hero__img au-h-hero__img--m" loading="eager" fetchpriority="high" width="1100" height="1956" alt="">
     {%- endif -%}
     {%- if d == blank and m == blank and da == blank and ma == blank -%}
-      <div class="au-h-hero__ph" role="img" aria-label="Hero image placeholder"><span>Hero image: desktop 16:9 (2560x1440), mobile 9:16 (1400x2489)<br>Bracelet on mossy stone, subject in right half</span></div>
+      <div class="au-h-hero__ph" aria-hidden="true"></div>
     {%- endif -%}
     <div class="au-h-hero__veil"></div>
   </div>
@@ -65,6 +65,8 @@
   .au-h-btn--gold { background: var(--au-gold); color: #1E1A10; }
   .au-h-btn--ghost { background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / 0.55); }
   .au-h-dark .au-title, .au-h--dark .au-title, .au-h--pine .au-title { color: #fff; }
+  .au-h-hero .au-title { color: #fff; }
+  .au-h-hero .au-title em { color: #DDB866; }
   .au-h-dark .au-title em, .au-h--dark .au-title em, .au-h--pine .au-title em { color: #DDB866; }
   .au-h--dark .au-eyebrow, .au-h--pine .au-eyebrow { color: #DDB866; }
   .au-h-tp { display: inline-flex; gap: 2px; }
