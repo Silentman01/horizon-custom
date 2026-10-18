@@ -279,7 +279,7 @@
             "ship": {
               "type": "aurea-ship-row",
               "settings": {
-                "left": "Ships by Monday",
+                "left": "Ships by: <strong>Tomorrow</strong>",
                 "right": "🇺🇸 Ships within 24H"
               },
               "blocks": {}
