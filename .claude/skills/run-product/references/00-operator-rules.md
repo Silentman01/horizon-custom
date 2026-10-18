@@ -105,3 +105,4 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 ## 12. Header defaults (operator, 2026-10-18)
 Every store header ships with the search icon, country selector and language selector OFF (`show_search`, `show_country`, `show_language` = false in sections/header-group.json). `main` already has them off, so brand branches inherit it; if a branch shows them, turn them off.
 - Footer: "Powered by Shopify" off (`show_powered_by` = false) and the social icons block disabled (`social-links` block `"disabled": true` in sections/footer-group.json). Also set in `main`.
+- Header is not sticky (`enable_sticky_header` = "never"). Also set in `main`.
