@@ -22,7 +22,9 @@
         "ship_text": "Free express shipping",
         "guarantee_text": "30-day money-back guarantee",
         "image_desktop_asset": "aurea-home-hero-desktop.jpg",
-        "image_mobile_asset": "aurea-home-hero-mobile.jpg"
+        "image_mobile_asset": "aurea-home-hero-mobile.jpg",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       }
     },
     "aurea_marquee": {
@@ -97,7 +99,9 @@
         "cta_label": "Shop now",
         "assure_1": "Free express shipping",
         "assure_2": "30-day money-back",
-        "assure_3": "Secure checkout"
+        "assure_3": "Secure checkout",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       },
       "blocks": {
         "benefit_1": {
@@ -198,12 +202,14 @@
         "image_side": "left",
         "mode": "points",
         "image_ratio": "4 / 3",
-        "image_label": "Moon image 4:3 (bracelet under the full moon, candlelight)",
+        "image_label": "Bracelet under the full moon, by candlelight",
         "eyebrow": "Our ritual",
         "heading": "Charged under *the full moon*",
         "text": "Before a bracelet ships, we cleanse it and leave it out under the light of the full moon, the way crystal lovers have charged their stones for generations. It reaches you ready to wear from your very first morning.",
         "cta_label": "Shop the bracelet",
-        "image_asset": "aurea-home-moon.jpg"
+        "image_asset": "aurea-home-moon.jpg",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       },
       "blocks": {
         "point_1": {
@@ -244,12 +250,14 @@
         "image_side": "right",
         "mode": "steps",
         "image_ratio": "4 / 5",
-        "image_label": "Ritual image 4:5 (wrist, coffee, morning light)",
+        "image_label": "Wrist wearing the bracelet, morning coffee in soft light",
         "eyebrow": "Your 30-second ritual",
         "heading": "Before your first coffee. *Every day.*",
         "text": "",
         "cta_label": "Start my ritual",
-        "image_asset": "aurea-home-ritual.jpg"
+        "image_asset": "aurea-home-ritual.jpg",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       },
       "blocks": {
         "step_1": {
@@ -286,7 +294,9 @@
         "eyebrow": "Why they wear it",
         "heading": "Less worry. *More flow.*",
         "sub": "What our wearers tell us they notice once the bracelet is part of their day.",
-        "cta_label": "Get my bracelet"
+        "cta_label": "Get my bracelet",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       },
       "blocks": {
         "card_1": {
@@ -618,7 +628,9 @@
         "note_1": "Free express shipping",
         "note_2": "30-day money-back guarantee",
         "note_3": "Secure checkout",
-        "image_asset": "aurea-home-moon.jpg"
+        "image_asset": "aurea-home-moon.jpg",
+        "product": "aurea-abundance-bracelet",
+        "link": "/products/aurea-abundance-bracelet"
       }
     }
   },
