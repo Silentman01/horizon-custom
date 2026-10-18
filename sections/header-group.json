@@ -13,7 +13,6 @@
   "sections": {
     "aurea_countdown": {
       "type": "aurea-announcement",
-      "disabled": true,
       "settings": {
         "title": "🌕 FULL MOON SALE",
         "sub": "Shop Now and Get Up To 70% Off",
