@@ -109,3 +109,4 @@ Every store header ships with the search icon, country selector and language sel
 
 ## 13. Fully customizable sections and blocks (operator, 2026-10-18)
 Every NEW section or block exposes all of its content and styling in the schema, so the operator can change everything in the theme editor without code: every text, image (image_picker + asset fallback), link, icon, color (text, accent, background, buttons, borders), font family/size/weight for headings and body, alignment, spacing/padding (top/bottom, desktop and mobile), layout options (columns, image side, order), visibility toggles per element, and mobile-specific overrides. Group settings with headers and keep them under Shopify limits (max 40 settings per section/block: use blocks for repeated items). Applies to future builds only.
+- Ads deliverable = creatives (per placement) + ad copy only. No media plan, budgets, campaign/ad-set structure, targeting or kill/scale rules: the operator runs Ads Manager.
