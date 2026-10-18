@@ -25,11 +25,35 @@
             "image_asset": "refrain-hero-couple-square.jpg",
             "alt": "Un homme ému écoute la chanson que sa femme lui offre"
           }
+        },
+        "s3": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "refrain-product-06-comment.jpg",
+            "alt": "Comment ça marche : racontez-nous, écoutez votre extrait gratuit, recevez sa chanson"
+          }
+        },
+        "s4": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "refrain-product-07-benefices.jpg",
+            "alt": "Un homme ému écoute au casque : son prénom dans le refrain, écrite à partir de vos souvenirs, révisions illimitées"
+          }
+        },
+        "s5": {
+          "type": "slide",
+          "settings": {
+            "image_asset": "refrain-product-08-avis.jpg",
+            "alt": "« Elle a pleuré dès le premier refrain » : avis 5 étoiles, écoutez avant de payer"
+          }
         }
       },
       "block_order": [
         "s1",
-        "s2"
+        "s2",
+        "s3",
+        "s4",
+        "s5"
       ],
       "settings": {
         "gallery_label": "Images du produit",
