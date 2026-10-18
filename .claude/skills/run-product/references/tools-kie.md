@@ -277,3 +277,6 @@ python -I -c "import os,sys,json,urllib.request as u;t,o=sys.argv[1],sys.argv[2]
 
 ## 14. Reporting spend
 Sum the `(N credits)` values from the run logs (or balance before − after) and report per batch in the agent's return and in DELIVERY.md: e.g. "Kie: packshot 10, gallery 50, testimonials 30, ads 170, fixes 20 → 280 credits; balance left 1,720."
+
+## Final step for every batch
+After checking a batch, strip metadata before saving finals: `python -I <SKILL>/scripts/strip_metadata.py <out-folder> --inplace` (set FFMPEG to an ffmpeg binary for videos if it is not on PATH). See operator rules section 14.
