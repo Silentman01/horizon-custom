@@ -233,7 +233,7 @@
             <span>Je souhaite recevoir un rappel par e-mail si je n’ai pas encore commandé. <span class="rf-opt">(facultatif)</span></span>
           </label>
           <p class="rf-privacy">{% render 'refrain-icon', name: 'lock' %}<span>Vos réponses et votre e-mail servent à créer votre extrait. Pour en savoir plus, consultez notre <a href="{{ privacy_url }}" target="_blank" rel="noopener">politique de confidentialité<span class="rf-sr"> (nouvel onglet)</span></a>.</span></p>
-          <div class="rf-hp" aria-hidden="true"><input type="text" name="hp" tabindex="-1" autocomplete="off" value=""></div>
+          <div class="rf-quiz__trap" aria-hidden="true"><input type="text" name="hp" tabindex="-1" autocomplete="off" value=""></div>
         </fieldset>
 
         <p class="rf-quiz__err" id="{{ uid }}-err" data-err role="alert" hidden></p>
@@ -416,7 +416,7 @@
   .rf-check a, .rf-privacy a { color: var(--rf-ink); font-weight: 700; text-underline-offset: 3px; }
   .rf-privacy { display: flex; gap: 8px; align-items: flex-start; margin: 12px 0 0; font-size: 13px; line-height: 1.5; color: var(--rf-ink-soft); }
   .rf-privacy .rf-icon { width: 16px; height: 16px; flex: none; margin-top: 2px; }
-  .rf-hp { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+  .rf-quiz__trap { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
   .rf-quiz__err, .rf-offer__err { margin: 10px 0 0; padding: 10px 14px; border-radius: 12px; background: #fdecef; color: #9b1235; font-size: 14px; font-weight: 600; line-height: 1.45; }
   .rf-quiz__nav { display: flex; gap: 10px; margin-top: 22px; }
   .rf-quiz__nav [data-next] { flex: 1; min-width: 0; padding: 0 20px; }
