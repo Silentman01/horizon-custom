@@ -9,85 +9,192 @@
  */
 {
   "sections": {
-    "hero_product": {
-      "type": "refrain-hero-product",
+    "main": {
+      "type": "product-information",
       "blocks": {
-        "s1": {
-          "type": "slide",
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
           "settings": {
-            "image_asset": "refrain-product-premium.jpg",
-            "alt": "Tout ce que contient Refrain Premium : 2 chansons complètes, et en cadeau le clip paroles, l'illustration et les paroles imprimables"
-          }
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 64,
+            "thumbnail_radius": 12,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 24,
+            "extend_media": false,
+            "zoom": false,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
         },
-        "s2": {
-          "type": "slide",
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
           "settings": {
-            "image_asset": "refrain-hero-couple-square.jpg",
-            "alt": "Un homme ému écoute la chanson que sa femme lui offre"
-          }
-        },
-        "s3": {
-          "type": "slide",
-          "settings": {
-            "image_asset": "refrain-product-06-comment.jpg",
-            "alt": "Comment ça marche : racontez-nous, écoutez votre extrait gratuit, recevez sa chanson"
-          }
-        },
-        "s4": {
-          "type": "slide",
-          "settings": {
-            "image_asset": "refrain-product-07-benefices.jpg",
-            "alt": "Un homme ému écoute au casque : son prénom dans le refrain, écrite à partir de vos souvenirs, révisions illimitées"
-          }
-        },
-        "s5": {
-          "type": "slide",
-          "settings": {
-            "image_asset": "refrain-product-08-avis.jpg",
-            "alt": "« Elle a pleuré dès le premier refrain » : avis 5 étoiles, écoutez avant de payer"
-          }
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 14,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 8,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "trust_card": {
+              "type": "refrain-trust-card",
+              "settings": {
+                "icon": "ear",
+                "title": "Écoutez avant de payer",
+                "text": "Un extrait gratuit de sa chanson, avant toute commande."
+              },
+              "blocks": {}
+            },
+            "rating": {
+              "type": "refrain-rating",
+              "settings": {
+                "show_stars": true,
+                "stars": 5,
+                "text": "Lire les avis",
+                "link": "#avis",
+                "underline": true
+              },
+              "blocks": {}
+            },
+            "title": {
+              "type": "refrain-product-title",
+              "settings": {
+                "heading": "",
+                "tag": "h1"
+              },
+              "blocks": {}
+            },
+            "description": {
+              "type": "refrain-description",
+              "settings": {
+                "text": "<p>Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.</p>"
+              },
+              "blocks": {}
+            },
+            "benefits": {
+              "type": "refrain-benefits",
+              "settings": {
+                "text_1": "Son prénom dans le refrain",
+                "text_2": "Écrite à partir de vos souvenirs",
+                "text_3": "2 chansons + paroles complètes",
+                "text_4": "Révisions illimitées",
+                "icon_1": "music",
+                "icon_2": "pen",
+                "icon_3": "heart",
+                "icon_4": "refresh"
+              },
+              "blocks": {}
+            },
+            "tiers": {
+              "type": "refrain-tiers",
+              "settings": {
+                "std_name": "Standard",
+                "std_price": "19 €",
+                "std_text": "2 chansons complètes et leurs paroles, sous 24 h.",
+                "prem_name": "Premium",
+                "prem_price": "35 €",
+                "prem_badge": "Pour l'offrir en grand",
+                "prem_text": "Tout le Standard, le clip paroles animé et la pochette, sous 12 h."
+              },
+              "blocks": {}
+            },
+            "scarcity": {
+              "type": "refrain-scarcity",
+              "settings": {
+                "deadline": "2026-12-20T23:59:00+01:00",
+                "label": "Livrée avant Noël : commandez avant le 20 déc.",
+                "icon": "gift",
+                "show_countdown": true,
+                "countdown_prefix": "Il reste",
+                "days_label": "j",
+                "hours_label": "h",
+                "minutes_label": "min",
+                "show_bar": true,
+                "fill_mode": "fixed",
+                "fill": 82,
+                "start": "2026-10-01T00:00:00+02:00",
+                "line": "Créneaux de création limités chaque jour",
+                "post_mode": "hide",
+                "post_text": "Livraison par e-mail sous 24 h."
+              },
+              "blocks": {}
+            },
+            "cta": {
+              "type": "refrain-quiz-button",
+              "settings": {
+                "label": "Créer son extrait gratuit",
+                "link": "#quiz",
+                "show_arrow": true,
+                "fine": "Gratuit, sans carte bancaire."
+              },
+              "blocks": {}
+            },
+            "trust_row": {
+              "type": "refrain-trust-row",
+              "settings": {
+                "text_1": "Écoutez avant de payer",
+                "text_2": "Révisions illimitées",
+                "text_3": "Paiement sécurisé",
+                "icon_1": "ear",
+                "icon_2": "refresh",
+                "icon_3": "lock"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "trust_card",
+            "rating",
+            "title",
+            "description",
+            "benefits",
+            "tiers",
+            "scarcity",
+            "cta",
+            "trust_row"
+          ]
         }
       },
-      "block_order": [
-        "s1",
-        "s2",
-        "s3",
-        "s4",
-        "s5"
-      ],
       "settings": {
-        "gallery_label": "Images du produit",
-        "card_title": "Écoutez avant de payer",
-        "card_text": "Un extrait gratuit de sa chanson, avant toute commande.",
-        "rating_text": "Lire les avis",
-        "rating_link": "#avis",
-        "heading": "Chanson personnalisée — son prénom dans le *refrain*",
-        "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
-        "benefit_1": "Son prénom dans le refrain",
-        "benefit_icon_1": "music",
-        "benefit_2": "Écrite à partir de vos souvenirs",
-        "benefit_icon_2": "pen",
-        "benefit_3": "2 chansons + paroles complètes",
-        "benefit_icon_3": "heart",
-        "benefit_4": "Révisions illimitées",
-        "benefit_icon_4": "refresh",
-        "std_name": "Standard",
-        "std_price": "19 €",
-        "std_text": "2 chansons complètes et leurs paroles, sous 24 h.",
-        "prem_name": "Premium",
-        "prem_price": "35 €",
-        "prem_badge": "Pour l'offrir en grand",
-        "prem_text": "Tout le Standard, le clip paroles animé et la pochette, sous 12 h.",
-        "cta_label": "Créer son extrait gratuit",
-        "cta_link": "#quiz",
-        "cta_fine": "Gratuit, sans carte bancaire.",
-        "trust_1": "Écoutez avant de payer",
-        "trust_icon_1": "ear",
-        "trust_2": "Révisions illimitées",
-        "trust_icon_2": "refresh",
-        "trust_3": "Paiement sécurisé",
-        "trust_icon_3": "lock",
-        "date_note": "Livrée avant Noël si commandée avant le 20 déc."
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "enable_sticky_add_to_cart": false,
+        "background_color": "#F8F5FF",
+        "padding-block-start": 12,
+        "padding-block-end": 40
       }
     },
     "quiz": {
@@ -245,12 +352,6 @@
     "marquee": {
       "type": "refrain-marquee",
       "blocks": {
-        "b1": {
-          "type": "item",
-          "settings": {
-            "text": "Son prénom dans le refrain"
-          }
-        },
         "b2": {
           "type": "item",
           "settings": {
@@ -283,7 +384,6 @@
         }
       },
       "block_order": [
-        "b1",
         "b2",
         "b3",
         "b4",
@@ -292,49 +392,6 @@
       ],
       "settings": {
         "speed": 35
-      }
-    },
-    "timeline": {
-      "type": "refrain-timeline",
-      "blocks": {
-        "b1": {
-          "type": "step",
-          "settings": {
-            "label": "Racontez-nous",
-            "text": "Son prénom, vos souvenirs, ce que vous voulez lui dire. 3 minutes suffisent.",
-            "image_asset": "refrain-how-1.jpg"
-          }
-        },
-        "b2": {
-          "type": "step",
-          "settings": {
-            "label": "Écoutez son extrait",
-            "text": "Nous créons un extrait de sa chanson. Gratuit. Vous décidez ensuite.",
-            "image_asset": "refrain-how-2.jpg"
-          }
-        },
-        "b3": {
-          "type": "step",
-          "settings": {
-            "label": "Offrez-la",
-            "text": "Deux chansons complètes et les paroles, par e-mail sous 24 h. Révisions illimitées.",
-            "image_asset": "refrain-how-3.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3"
-      ],
-      "settings": {
-        "background": "page",
-        "eyebrow": "Comment ça marche",
-        "heading": "Trois étapes, *zéro* risque",
-        "button_label": "Créer son extrait gratuit",
-        "button_link": "#quiz",
-        "show_sticky_image": false,
-        "image_asset": ""
       }
     },
     "reviews": {
@@ -421,92 +478,6 @@
         "heading": "Des histoires mises en *chanson*",
         "subheading": "Ce qu'on nous raconte après l'écoute.",
         "anchor_id": "avis"
-      }
-    },
-    "comparison": {
-      "type": "refrain-comparison",
-      "blocks": {
-        "b1": {
-          "type": "row",
-          "settings": {
-            "label": "Son prénom, ses souvenirs",
-            "us_text": "Oui, dans le refrain",
-            "a_has": false,
-            "b_has": false
-          }
-        },
-        "b2": {
-          "type": "row",
-          "settings": {
-            "label": "Écrit à partir de votre histoire",
-            "us_text": "Oui",
-            "a_has": false,
-            "b_has": false
-          }
-        },
-        "b3": {
-          "type": "row",
-          "settings": {
-            "label": "Écoutez avant de payer",
-            "us_text": "Extrait gratuit",
-            "a_has": false,
-            "b_has": false
-          }
-        },
-        "b4": {
-          "type": "row",
-          "settings": {
-            "label": "Se réécoute pendant des années",
-            "us_text": "Oui",
-            "a_has": false,
-            "b_has": false
-          }
-        },
-        "b5": {
-          "type": "row",
-          "settings": {
-            "label": "Révisions jusqu'à ce que ce soit juste",
-            "us_text": "Illimitées",
-            "a_has": false,
-            "b_has": false
-          }
-        },
-        "b6": {
-          "type": "row",
-          "settings": {
-            "label": "Reçu même de dernière minute",
-            "us_text": "Sous 24 h par e-mail",
-            "a_has": true,
-            "b_has": false
-          }
-        },
-        "b7": {
-          "type": "row",
-          "settings": {
-            "label": "Se partage avec toute la famille",
-            "us_text": "Un lien, un fichier",
-            "a_has": false,
-            "b_has": false
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4",
-        "b5",
-        "b6",
-        "b7"
-      ],
-      "settings": {
-        "background": "page",
-        "heading": "Le cadeau qui ne finit pas dans un *tiroir*",
-        "subheading": "Comparez avant de choisir.",
-        "col_us": "Refrain",
-        "col_a": "Carte cadeau",
-        "col_b": "Cadeau « tiroir »",
-        "image_asset": "refrain-compare-drawer.jpg"
       }
     },
     "occasions": {
@@ -718,12 +689,10 @@
     }
   },
   "order": [
-    "hero_product",
+    "main",
     "quiz",
     "marquee",
-    "timeline",
     "reviews",
-    "comparison",
     "occasions",
     "guarantee",
     "faq",

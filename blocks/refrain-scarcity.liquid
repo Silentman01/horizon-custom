@@ -1,0 +1,219 @@
+{%- comment -%}
+  Refrain product info: scarcity card with a real date-based deadline.
+  Live countdown (days, hours, minutes) to the deadline, a fill bar and a short line.
+  After the deadline: hides itself, or shows the post-deadline text. Prefix rf-scar.
+{%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign dl_s = 0
+  if bs.deadline != blank
+    assign dl_s = bs.deadline | date: '%s' | plus: 0
+  endif
+  assign valid = false
+  if dl_s > 1000000000
+    assign valid = true
+  endif
+  assign left_s = dl_s | minus: now_s
+  assign over = false
+  if valid and left_s <= 0
+    assign over = true
+  endif
+  assign left_m = left_s | divided_by: 60
+  if left_m < 0
+    assign left_m = 0
+  endif
+  assign cd_d = left_m | divided_by: 1440
+  assign cd_h = left_m | modulo: 1440 | divided_by: 60
+  assign cd_m = left_m | modulo: 60
+
+  assign fill = bs.fill
+  if bs.fill_mode == 'auto' and valid and bs.start != blank
+    assign st_s = bs.start | date: '%s' | plus: 0
+    assign span_s = dl_s | minus: st_s
+    if st_s > 1000000000 and span_s > 0
+      assign done_s = now_s | minus: st_s
+      assign fill = done_s | times: 100 | divided_by: span_s
+      if fill < 4
+        assign fill = 4
+      elsif fill > 100
+        assign fill = 100
+      endif
+    endif
+  endif
+
+  assign render_it = true
+  if over and bs.post_mode == 'hide' and request.design_mode == false
+    assign render_it = false
+  endif
+-%}
+{%- if render_it -%}
+  <refrain-scarcity
+    class="rf-scar{% if over %} is-over{% endif %}{% if bs.hide_mobile %} rf-scar--hm{% endif %}{% if bs.hide_desktop %} rf-scar--hd{% endif %}"
+    data-deadline="{{ bs.deadline | escape }}"
+    data-start="{{ bs.start | escape }}"
+    data-fill-mode="{{ bs.fill_mode }}"
+    data-post="{{ bs.post_mode }}"
+    style="{% render 'refrain-vars' %} --rf-scar-ff: {{ ff }}; --rf-scar-bg: {{ bs.bg }}; --rf-scar-line: {{ bs.border | default: 'transparent' }}; --rf-scar-text: {{ bs.text_color }}; --rf-scar-soft: {{ bs.soft_color }}; --rf-scar-accent: {{ bs.accent_color }}; --rf-scar-tile: {{ bs.tile_bg }}; --rf-scar-digit: {{ bs.tile_color }}; --rf-scar-track: {{ bs.bar_track }}; --rf-scar-fill-a: {{ bs.bar_fill }}; --rf-scar-fill-b: {{ bs.bar_fill_2 }}; --rf-scar-ls: {{ bs.label_size }}px; --rf-scar-ds: {{ bs.digit_size }}px; --rf-scar-xs: {{ bs.line_size }}px; --rf-scar-radius: {{ bs.radius }}px; --rf-scar-pad: {{ bs.padding }}px; --rf-scar-mt: {{ bs.margin_top }}px; --rf-scar-mb: {{ bs.margin_bottom }}px;"
+    {{ block.shopify_attributes }}
+  >
+    <div class="rf-scar__live">
+      {%- if bs.label != blank -%}
+        <p class="rf-scar__label">
+          {%- if bs.icon != 'none' -%}<span class="rf-scar__icon" aria-hidden="true">{% render 'refrain-icon', name: bs.icon %}</span>{%- endif -%}
+          <span>{{ bs.label | escape }}</span>
+        </p>
+      {%- endif -%}
+      {%- if bs.show_countdown and valid -%}
+        <div class="rf-scar__cd" role="timer" aria-live="off">
+          {%- if bs.countdown_prefix != blank -%}<span class="rf-scar__pre">{{ bs.countdown_prefix | escape }}</span>{%- endif -%}
+          <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="d">{{ cd_d }}</b><span class="rf-scar__u">{{ bs.days_label | escape }}</span></span>
+          <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="h">{% if cd_h < 10 %}0{% endif %}{{ cd_h }}</b><span class="rf-scar__u">{{ bs.hours_label | escape }}</span></span>
+          <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="m">{% if cd_m < 10 %}0{% endif %}{{ cd_m }}</b><span class="rf-scar__u">{{ bs.minutes_label | escape }}</span></span>
+        </div>
+      {%- endif -%}
+      {%- if bs.show_bar -%}
+        <div class="rf-scar__bar" aria-hidden="true"><span class="rf-scar__fill" style="width: {{ fill }}%"></span></div>
+      {%- endif -%}
+      {%- if bs.line != blank -%}
+        <p class="rf-scar__line"><span class="rf-scar__dot" aria-hidden="true"></span><span>{{ bs.line | escape }}</span></p>
+      {%- endif -%}
+    </div>
+    {%- if bs.post_text != blank -%}
+      <p class="rf-scar__post">
+        {%- if bs.icon != 'none' -%}<span class="rf-scar__icon" aria-hidden="true">{% render 'refrain-icon', name: bs.icon %}</span>{%- endif -%}
+        <span>{{ bs.post_text | escape }}</span>
+      </p>
+    {%- endif -%}
+  </refrain-scarcity>
+{%- endif -%}
+{% stylesheet %}
+  .rf-scar { display: block; width: 100%; box-sizing: border-box; margin: var(--rf-scar-mt, 0) 0 var(--rf-scar-mb, 0); padding: var(--rf-scar-pad, 14px); background: var(--rf-scar-bg, #fff); border: 1.5px solid var(--rf-scar-line, #E3D9FA); border-radius: var(--rf-scar-radius, 18px); color: var(--rf-scar-text, #1E0F4A); font-family: var(--rf-scar-ff); }
+  .rf-scar[hidden] { display: none; }
+  .rf-scar__live { display: flex; flex-direction: column; gap: 10px; }
+  .rf-scar__label, .rf-scar__post { display: flex; align-items: center; gap: 8px; margin: 0; font-size: var(--rf-scar-ls, 15px); font-weight: 800; line-height: 1.3; letter-spacing: -0.01em; }
+  .rf-scar.is-over .rf-scar__live, .rf-scar__post { display: none; }
+  .rf-scar.is-over .rf-scar__post { display: flex; }
+  .rf-scar__icon { flex: none; display: flex; color: var(--rf-scar-accent, #6A4BD8); }
+  .rf-scar__icon svg { display: block; width: 20px; height: 20px; }
+  .rf-scar__cd { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .rf-scar__pre { margin-right: 2px; font-size: var(--rf-scar-xs, 13px); font-weight: 600; color: var(--rf-scar-soft, #5E5384); }
+  .rf-scar__unit { display: inline-flex; align-items: baseline; gap: 3px; padding: 5px 9px; border-radius: 10px; background: var(--rf-scar-tile, #1E0F4A); color: var(--rf-scar-digit, #D4F53C); }
+  .rf-scar__num { font-size: var(--rf-scar-ds, 18px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+  .rf-scar__u { font-size: 12px; font-weight: 700; opacity: .85; }
+  .rf-scar__bar { position: relative; height: 8px; overflow: hidden; border-radius: 999px; background: var(--rf-scar-track, #DCCFFF); }
+  .rf-scar__fill { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: linear-gradient(90deg, var(--rf-scar-fill-b, #1E0F4A), var(--rf-scar-fill-a, #6A4BD8)); transition: width .6s ease; }
+  .rf-scar__line { display: flex; align-items: center; gap: 8px; margin: 0; font-size: var(--rf-scar-xs, 13px); font-weight: 600; line-height: 1.35; color: var(--rf-scar-soft, #5E5384); }
+  .rf-scar__dot { flex: none; position: relative; width: 8px; height: 8px; border-radius: 50%; background: var(--rf-scar-accent, #6A4BD8); }
+  .rf-scar__dot::after { content: ''; position: absolute; inset: 0; border-radius: inherit; background: inherit; animation: rf-scar-pulse 1.8s ease-out infinite; }
+  @keyframes rf-scar-pulse { from { transform: scale(1); opacity: .6; } to { transform: scale(2.6); opacity: 0; } }
+  @media (prefers-reduced-motion: reduce) { .rf-scar__dot::after { animation: none; } .rf-scar__fill { transition: none; } }
+  @media (max-width: 749px) { .rf-scar--hm { display: none; } }
+  @media (min-width: 750px) { .rf-scar--hd { display: none; } }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('refrain-scarcity')) {
+    class RefrainScarcity extends HTMLElement {
+      connectedCallback() {
+        this.deadline = Date.parse(this.dataset.deadline || '');
+        if (Number.isNaN(this.deadline)) {
+          this.querySelector('.rf-scar__cd')?.remove();
+          return;
+        }
+        this.start = Date.parse(this.dataset.start || '');
+        this.tick();
+        this.timer = setInterval(() => this.tick(), 15000);
+      }
+      disconnectedCallback() {
+        clearInterval(this.timer);
+      }
+      set(key, value) {
+        const el = this.querySelector('[data-rf-scar="' + key + '"]');
+        if (el) el.textContent = value;
+      }
+      tick() {
+        const now = Date.now();
+        const left = this.deadline - now;
+        if (left <= 0) {
+          clearInterval(this.timer);
+          this.classList.add('is-over');
+          if (this.dataset.post !== 'text' && !(window.Shopify && window.Shopify.designMode)) this.hidden = true;
+          return;
+        }
+        this.classList.remove('is-over');
+        const mins = Math.floor(left / 60000);
+        const pad = (n) => String(n).padStart(2, '0');
+        this.set('d', Math.floor(mins / 1440));
+        this.set('h', pad(Math.floor((mins % 1440) / 60)));
+        this.set('m', pad(mins % 60));
+        if (this.dataset.fillMode === 'auto' && !Number.isNaN(this.start) && this.deadline > this.start) {
+          const pct = Math.min(100, Math.max(4, ((now - this.start) / (this.deadline - this.start)) * 100));
+          const fill = this.querySelector('.rf-scar__fill');
+          if (fill) fill.style.width = pct.toFixed(1) + '%';
+        }
+      }
+    }
+    customElements.define('refrain-scarcity', RefrainScarcity);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Refrain · Scarcity",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Deadline" },
+    { "type": "text", "id": "deadline", "label": "Deadline (date, time and UTC offset)", "info": "Format: 2026-12-20T23:59:00+01:00", "default": "2026-12-20T23:59:00+01:00" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Livrée avant Noël : commandez avant le 20 déc." },
+    { "type": "select", "id": "icon", "label": "Icon", "default": "gift", "options": [ { "value": "none", "label": "None" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "music", "label": "Music" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "mail", "label": "Mail" } ] },
+    { "type": "header", "content": "Countdown" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "countdown_prefix", "label": "Text before the countdown", "default": "Il reste" },
+    { "type": "text", "id": "days_label", "label": "Days unit", "default": "j" },
+    { "type": "text", "id": "hours_label", "label": "Hours unit", "default": "h" },
+    { "type": "text", "id": "minutes_label", "label": "Minutes unit", "default": "min" },
+    { "type": "header", "content": "Fill bar and line" },
+    { "type": "checkbox", "id": "show_bar", "label": "Show fill bar", "default": true },
+    { "type": "select", "id": "fill_mode", "label": "Bar fill", "default": "fixed", "options": [ { "value": "fixed", "label": "Fixed percentage" }, { "value": "auto", "label": "Time elapsed from start date to deadline" } ] },
+    { "type": "range", "id": "fill", "label": "Fixed fill", "min": 5, "max": 100, "step": 1, "unit": "%", "default": 82 },
+    { "type": "text", "id": "start", "label": "Start date (time-elapsed mode)", "info": "Format: 2026-10-01T00:00:00+02:00", "default": "2026-10-01T00:00:00+02:00" },
+    { "type": "text", "id": "line", "label": "Line under the bar (empty hides it)", "default": "Créneaux de création limités chaque jour" },
+    { "type": "header", "content": "After the deadline" },
+    { "type": "select", "id": "post_mode", "label": "Behavior", "default": "hide", "options": [ { "value": "hide", "label": "Hide the card" }, { "value": "text", "label": "Show the text below" } ] },
+    { "type": "text", "id": "post_text", "label": "Post-deadline text", "default": "Livraison par e-mail sous 24 h." },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "label_size", "label": "Label size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "digit_size", "label": "Countdown digits size", "min": 12, "max": 30, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "line_size", "label": "Line size", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "border", "label": "Border", "default": "#E3D9FA" },
+    { "type": "color", "id": "text_color", "label": "Label", "default": "#1E0F4A" },
+    { "type": "color", "id": "soft_color", "label": "Line and prefix", "default": "#5E5384" },
+    { "type": "color", "id": "accent_color", "label": "Icon and dot", "default": "#6A4BD8" },
+    { "type": "color", "id": "tile_bg", "label": "Countdown tiles", "default": "#1E0F4A" },
+    { "type": "color", "id": "tile_color", "label": "Countdown digits", "default": "#D4F53C" },
+    { "type": "color", "id": "bar_track", "label": "Bar track", "default": "#DCCFFF" },
+    { "type": "color", "id": "bar_fill", "label": "Bar fill (end)", "default": "#6A4BD8" },
+    { "type": "color", "id": "bar_fill_2", "label": "Bar fill (start)", "default": "#1E0F4A" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "padding", "label": "Inner padding", "min": 6, "max": 28, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Scarcity" } ]
+}
+{% endschema %}

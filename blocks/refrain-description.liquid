@@ -1,0 +1,56 @@
+{%- comment -%} Refrain product info: short description (rich text). Prefix rf-pdesc. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+-%}
+{%- if bs.text != blank -%}
+  <div
+    class="rf-pdesc{% if bs.hide_mobile %} rf-pdesc--hm{% endif %}{% if bs.hide_desktop %} rf-pdesc--hd{% endif %}"
+    style="{% render 'refrain-vars' %} --rf-pdesc-ff: {{ ff }}; --rf-pdesc-color: {{ bs.color }}; --rf-pdesc-strong: {{ bs.strong_color }}; --rf-pdesc-fs: {{ bs.size }}px; --rf-pdesc-fs-m: {{ bs.size_mobile }}px; --rf-pdesc-lh: {{ bs.line_height | divided_by: 100.0 }}; --rf-pdesc-align: {{ bs.alignment }}; --rf-pdesc-mt: {{ bs.margin_top }}px; --rf-pdesc-mb: {{ bs.margin_bottom }}px;"
+    {{ block.shopify_attributes }}
+  >
+    {{ bs.text }}
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .rf-pdesc { width: 100%; margin: var(--rf-pdesc-mt, 0) 0 var(--rf-pdesc-mb, 0); font-family: var(--rf-pdesc-ff); font-size: var(--rf-pdesc-fs-m, 16px); line-height: var(--rf-pdesc-lh, 1.55); color: var(--rf-pdesc-color, #5E5384); text-align: var(--rf-pdesc-align, left); }
+  .rf-pdesc p { margin: 0; }
+  .rf-pdesc p + p { margin-top: 8px; }
+  .rf-pdesc strong { font-weight: 700; color: var(--rf-pdesc-strong, #1E0F4A); }
+  .rf-pdesc a { color: inherit; text-underline-offset: 3px; }
+  @media (min-width: 750px) { .rf-pdesc { font-size: var(--rf-pdesc-fs, 17px); } }
+  @media (max-width: 749px) { .rf-pdesc--hm { display: none; } }
+  @media (min-width: 750px) { .rf-pdesc--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Description",
+  "tag": null,
+  "settings": [
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.</p>" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "size", "label": "Size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "size_mobile", "label": "Size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "line_height", "label": "Line height (%)", "min": 110, "max": 190, "step": 5, "default": 155 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color", "label": "Text", "default": "#5E5384" },
+    { "type": "color", "id": "strong_color", "label": "Bold text", "default": "#1E0F4A" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Description" } ]
+}
+{% endschema %}

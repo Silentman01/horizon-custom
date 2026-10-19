@@ -1,0 +1,76 @@
+{%- comment -%} Refrain product info: call-to-action button that scrolls to the quiz (#quiz), with optional fine print. Prefix rf-pcta. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+  assign href = bs.link | default: '#quiz'
+-%}
+{%- if bs.label != blank -%}
+  <div
+    class="rf-pcta{% if bs.full_width %} rf-pcta--full{% endif %}{% if bs.hide_mobile %} rf-pcta--hm{% endif %}{% if bs.hide_desktop %} rf-pcta--hd{% endif %}"
+    style="{% render 'refrain-vars' %} --rf-pcta-ff: {{ ff }}; --rf-pcta-bg: {{ bs.bg }}; --rf-pcta-color: {{ bs.color }}; --rf-pcta-hover: {{ bs.hover_bg }}; --rf-pcta-border: {{ bs.border | default: 'transparent' }}; --rf-pcta-fine: {{ bs.fine_color }}; --rf-pcta-fs: {{ bs.size }}px; --rf-pcta-fs-m: {{ bs.size_mobile }}px; --rf-pcta-fw: {{ bs.weight }}; --rf-pcta-h: {{ bs.height }}px; --rf-pcta-radius: {{ bs.radius }}px; --rf-pcta-fines: {{ bs.fine_size }}px; --rf-pcta-align: {{ bs.alignment }}; --rf-pcta-mt: {{ bs.margin_top }}px; --rf-pcta-mb: {{ bs.margin_bottom }}px;"
+    {{ block.shopify_attributes }}
+  >
+    <a class="rf-pcta__btn" href="{{ href }}">
+      <span>{{ bs.label | escape }}</span>
+      {%- if bs.show_arrow -%}<span class="rf-pcta__arrow" aria-hidden="true">{% render 'refrain-icon', name: 'arrow' %}</span>{%- endif -%}
+    </a>
+    {%- if bs.fine != blank -%}<p class="rf-pcta__fine">{{ bs.fine | escape }}</p>{%- endif -%}
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .rf-pcta { display: flex; flex-direction: column; align-items: var(--rf-pcta-align, center); gap: 8px; width: 100%; margin: var(--rf-pcta-mt, 0) 0 var(--rf-pcta-mb, 0); font-family: var(--rf-pcta-ff); }
+  .rf-pcta__btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box; min-height: var(--rf-pcta-h, 56px); padding: 0 30px; border: 2px solid var(--rf-pcta-border, transparent); border-radius: var(--rf-pcta-radius, 40px); background: var(--rf-pcta-bg, #1E0F4A); color: var(--rf-pcta-color, #D4F53C); font-size: var(--rf-pcta-fs-m, 16px); font-weight: var(--rf-pcta-fw, 700); line-height: 1.2; text-align: center; text-decoration: none; cursor: pointer; transition: transform .15s, box-shadow .15s, background-color .15s; }
+  .rf-pcta--full .rf-pcta__btn { width: 100%; }
+  .rf-pcta__btn:hover { background: var(--rf-pcta-hover, #2C1A66); transform: translateY(-1px); box-shadow: 0 10px 24px rgb(30 15 74 / .22); }
+  .rf-pcta__btn:focus-visible { outline: 3px solid var(--rf-violet, #6A4BD8); outline-offset: 3px; }
+  .rf-pcta__arrow { display: flex; }
+  .rf-pcta__arrow svg { display: block; width: 20px; height: 20px; }
+  .rf-pcta__fine { margin: 0; font-size: var(--rf-pcta-fines, 13px); line-height: 1.4; color: var(--rf-pcta-fine, #5E5384); text-align: center; }
+  @media (min-width: 750px) { .rf-pcta__btn { font-size: var(--rf-pcta-fs, 17px); } }
+  @media (max-width: 749px) { .rf-pcta--hm { display: none; } }
+  @media (min-width: 750px) { .rf-pcta--hd { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .rf-pcta__btn { transition: none; } .rf-pcta__btn:hover { transform: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Quiz button",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "label", "label": "Button label (empty hides the button)", "default": "Créer son extrait gratuit" },
+    { "type": "text", "id": "link", "label": "Button link (quiz anchor)", "default": "#quiz" },
+    { "type": "checkbox", "id": "show_arrow", "label": "Show arrow", "default": true },
+    { "type": "text", "id": "fine", "label": "Fine print (empty hides it)", "default": "Gratuit, sans carte bancaire." },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "size", "label": "Label size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "size_mobile", "label": "Label size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "select", "id": "weight", "label": "Label weight", "default": "700", "options": [ { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra bold" } ] },
+    { "type": "range", "id": "fine_size", "label": "Fine print size", "min": 10, "max": 16, "step": 1, "unit": "px", "default": 13 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Button background", "default": "#1E0F4A" },
+    { "type": "color", "id": "color", "label": "Button text", "default": "#D4F53C" },
+    { "type": "color", "id": "hover_bg", "label": "Button background on hover", "default": "#2C1A66" },
+    { "type": "color", "id": "border", "label": "Button border" },
+    { "type": "color", "id": "fine_color", "label": "Fine print", "default": "#5E5384" },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "full_width", "label": "Full width button", "default": true },
+    { "type": "select", "id": "alignment", "label": "Alignment", "default": "center", "options": [ { "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "height", "label": "Button height", "min": 44, "max": 72, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 40 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Quiz button" } ]
+}
+{% endschema %}

@@ -17,9 +17,9 @@
         "heading": "Son prénom dans le *refrain*.",
         "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
         "button_label": "Créer son extrait gratuit",
-        "button_link": "/products/chanson-personnalisee#quiz",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz",
         "secondary_label": "",
-        "secondary_link": "",
+        "secondary_link": "/products/refrain-chanson-personnalisee#quiz",
         "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
         "image_asset": "refrain-hero-couple-desktop.jpg",
         "mobile_image_asset": "refrain-hero-couple-mobile.jpg",
@@ -29,12 +29,6 @@
     "marquee": {
       "type": "refrain-marquee",
       "blocks": {
-        "b1": {
-          "type": "item",
-          "settings": {
-            "text": "Son prénom dans le refrain"
-          }
-        },
         "b2": {
           "type": "item",
           "settings": {
@@ -67,7 +61,6 @@
         }
       },
       "block_order": [
-        "b1",
         "b2",
         "b3",
         "b4",
@@ -116,7 +109,7 @@
         "eyebrow": "Comment ça marche",
         "heading": "De vos souvenirs à sa *chanson*",
         "button_label": "Commencer",
-        "button_link": "/products/chanson-personnalisee#quiz",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz",
         "show_sticky_image": false,
         "image_asset": ""
       }
@@ -192,7 +185,7 @@
         "heading": "Pour chaque *moment*",
         "sub": "Une chanson pour toutes les fois où les mots ne suffisent pas.",
         "button_label": "Créer son extrait gratuit",
-        "button_link": "/products/chanson-personnalisee#quiz"
+        "button_link": "/products/refrain-chanson-personnalisee#quiz"
       }
     },
     "reviews": {
@@ -542,7 +535,7 @@
         "heading": "Toute sa vie, mise en *chanson*",
         "text": "Racontez-nous la personne. Nous écrivons sa chanson. Écoutez avant de payer.",
         "button_label": "Commencer",
-        "button_link": "/products/chanson-personnalisee#quiz",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz",
         "note": "Commandez avant le 20 décembre pour une livraison avant Noël.",
         "image_asset": "refrain-cta.jpg",
         "sticky_enable": true,

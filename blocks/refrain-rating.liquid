@@ -1,0 +1,74 @@
+{%- comment -%} Refrain product info: star rating line linking to the reviews section. Prefix rf-prate. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+  assign tag = 'div'
+  if bs.link != blank
+    assign tag = 'a'
+  endif
+-%}
+{%- if bs.text != blank or bs.show_stars -%}
+  <div
+    class="rf-prate{% if bs.hide_mobile %} rf-prate--hm{% endif %}{% if bs.hide_desktop %} rf-prate--hd{% endif %}"
+    style="{% render 'refrain-vars' %} --rf-prate-ff: {{ ff }}; --rf-prate-star: {{ bs.star_color }}; --rf-prate-color: {{ bs.text_color }}; --rf-prate-fs: {{ bs.text_size }}px; --rf-prate-ss: {{ bs.star_size }}px; --rf-prate-mt: {{ bs.margin_top }}px; --rf-prate-mb: {{ bs.margin_bottom }}px; --rf-prate-align: {{ bs.alignment }};"
+    {{ block.shopify_attributes }}
+  >
+    <{{ tag }} class="rf-prate__in{% if bs.underline and tag == 'a' %} rf-prate__in--u{% endif %}"{% if tag == 'a' %} href="{{ bs.link }}"{% endif %}>
+      {%- if bs.show_stars -%}
+        <span class="rf-prate__stars" role="img" aria-label="{{ bs.stars }} / 5">
+          {%- for i in (1..5) -%}<span class="rf-prate__star{% if i > bs.stars %} is-off{% endif %}">{% render 'refrain-icon', name: 'star' %}</span>{%- endfor -%}
+        </span>
+      {%- endif -%}
+      {%- if bs.score != blank -%}<strong class="rf-prate__score">{{ bs.score | escape }}</strong>{%- endif -%}
+      {%- if bs.text != blank -%}<span class="rf-prate__text">{{ bs.text | escape }}</span>{%- endif -%}
+    </{{ tag }}>
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .rf-prate { display: flex; justify-content: var(--rf-prate-align, flex-start); width: 100%; margin: var(--rf-prate-mt, 0) 0 var(--rf-prate-mb, 0); font-family: var(--rf-prate-ff); }
+  .rf-prate__in { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 8px; min-height: 32px; color: var(--rf-prate-color, #1E0F4A); font-size: var(--rf-prate-fs, 14px); font-weight: 600; text-decoration: none; }
+  .rf-prate__in--u .rf-prate__text { text-decoration: underline; text-underline-offset: 3px; text-decoration-color: color-mix(in srgb, currentColor 30%, transparent); }
+  .rf-prate__in--u:hover .rf-prate__text { text-decoration-color: currentColor; }
+  .rf-prate__stars { display: inline-flex; gap: 2px; color: var(--rf-prate-star, #1E0F4A); }
+  .rf-prate__star svg { display: block; width: var(--rf-prate-ss, 17px); height: var(--rf-prate-ss, 17px); }
+  .rf-prate__star.is-off { opacity: .2; }
+  .rf-prate__score { font-weight: 800; }
+  @media (max-width: 749px) { .rf-prate--hm { display: none; } }
+  @media (min-width: 750px) { .rf-prate--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Rating line",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_stars", "label": "Show stars", "default": true },
+    { "type": "range", "id": "stars", "label": "Stars", "min": 1, "max": 5, "step": 1, "default": 5 },
+    { "type": "text", "id": "score", "label": "Score (optional, e.g. 4,9/5)" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Lire les avis" },
+    { "type": "text", "id": "link", "label": "Link (reviews anchor, e.g. #avis; empty = no link)", "default": "#avis" },
+    { "type": "checkbox", "id": "underline", "label": "Underline the text", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "text_size", "label": "Text size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "star_size", "label": "Star size", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 17 },
+    { "type": "color", "id": "star_color", "label": "Stars", "default": "#1E0F4A" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1E0F4A" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "default": "flex-start", "options": [ { "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Rating line" } ]
+}
+{% endschema %}

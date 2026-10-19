@@ -1,0 +1,78 @@
+{%- comment -%}
+  Refrain product info: product title (H1). Empty "Custom heading" = the product's own title.
+  Wrap one word in *asterisks* for the Fraunces italic emphasis. Prefix rf-ptitle.
+{%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  assign p = closest.product | default: product
+  assign txt = bs.heading
+  if txt == blank
+    assign txt = p.title
+  endif
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-heading--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+  case bs.emphasis_font
+    when 'same'
+      assign ef = ff
+      assign es = 'inherit'
+    else
+      assign ef = 'var(--rf-serif)'
+      assign es = 'italic'
+  endcase
+  assign parts = txt | escape | split: '*'
+-%}
+{%- if txt != blank -%}
+  <{{ bs.tag }}
+    class="rf-ptitle{% if bs.hide_mobile %} rf-ptitle--hm{% endif %}{% if bs.hide_desktop %} rf-ptitle--hd{% endif %}"
+    style="{% render 'refrain-vars' %} --rf-ptitle-ff: {{ ff }}; --rf-ptitle-ef: {{ ef }}; --rf-ptitle-es: {{ es }}; --rf-ptitle-fw: {{ bs.weight }}; --rf-ptitle-color: {{ bs.color }}; --rf-ptitle-em: {{ bs.emphasis_color }}; --rf-ptitle-fs: {{ bs.size }}px; --rf-ptitle-fs-m: {{ bs.size_mobile }}px; --rf-ptitle-lh: {{ bs.line_height | divided_by: 100.0 }}; --rf-ptitle-ls: {{ bs.letter_spacing | divided_by: 100.0 }}em; --rf-ptitle-align: {{ bs.alignment }}; --rf-ptitle-mt: {{ bs.margin_top }}px; --rf-ptitle-mb: {{ bs.margin_bottom }}px;"
+    {{ block.shopify_attributes }}
+  >
+    {%- for part in parts -%}
+      {%- assign odd = forloop.index0 | modulo: 2 -%}
+      {%- if odd == 1 -%}<em>{{ part }}</em>{%- else -%}{{ part }}{%- endif -%}
+    {%- endfor -%}
+  </{{ bs.tag }}>
+{%- endif -%}
+{% stylesheet %}
+  .rf-ptitle { width: 100%; margin: var(--rf-ptitle-mt, 0) 0 var(--rf-ptitle-mb, 0); font-family: var(--rf-ptitle-ff); font-weight: var(--rf-ptitle-fw, 800); font-size: var(--rf-ptitle-fs-m, 32px); line-height: var(--rf-ptitle-lh, 1.05); letter-spacing: var(--rf-ptitle-ls, -0.04em); color: var(--rf-ptitle-color, #1E0F4A); text-align: var(--rf-ptitle-align, left); text-wrap: balance; }
+  .rf-ptitle em { font-family: var(--rf-ptitle-ef); font-style: var(--rf-ptitle-es, italic); font-weight: 500; letter-spacing: -0.02em; color: var(--rf-ptitle-em, #6A4BD8); }
+  @media (min-width: 750px) { .rf-ptitle { font-size: var(--rf-ptitle-fs, 44px); } }
+  @media (max-width: 749px) { .rf-ptitle--hm { display: none; } }
+  @media (min-width: 750px) { .rf-ptitle--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Product title",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Custom heading (empty = product title)", "info": "Wrap one word in *asterisks* for the italic emphasis." },
+    { "type": "select", "id": "tag", "label": "HTML tag", "default": "h1", "options": [ { "value": "h1", "label": "H1" }, { "value": "h2", "label": "H2" }, { "value": "p", "label": "Paragraph" } ] },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "weight", "label": "Weight", "default": "800", "options": [ { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra bold" } ] },
+    { "type": "range", "id": "size", "label": "Size (desktop)", "min": 20, "max": 72, "step": 1, "unit": "px", "default": 44 },
+    { "type": "range", "id": "size_mobile", "label": "Size (mobile)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "line_height", "label": "Line height (%)", "min": 90, "max": 160, "step": 5, "default": 105 },
+    { "type": "range", "id": "letter_spacing", "label": "Letter spacing (1/100 em)", "min": -8, "max": 10, "step": 1, "default": -4 },
+    { "type": "select", "id": "emphasis_font", "label": "Emphasis (*word*) font", "default": "serif", "options": [ { "value": "serif", "label": "Fraunces Italic" }, { "value": "same", "label": "Same as heading" } ] },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color", "label": "Text", "default": "#1E0F4A" },
+    { "type": "color", "id": "emphasis_color", "label": "Emphasis", "default": "#6A4BD8" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Product title" } ]
+}
+{% endschema %}

@@ -17,28 +17,45 @@
         "announcement_BxgCk9": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
+            "text": "Écoutez son extrait gratuit. Ne payez que s’il vous touche.",
+            "link": "/products/refrain-chanson-personnalisee#quiz",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "weight": "700",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": "#D4F53C"
+          },
+          "blocks": {}
+        },
+        "announcement_rf_noel": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Livrée avant Noël : commandez avant le 20 déc.",
+            "link": "/products/refrain-chanson-personnalisee#quiz",
+            "font": "var(--font-body--family)",
+            "font_size": "0.875rem",
+            "weight": "700",
+            "letter_spacing": "normal",
+            "case": "none",
+            "text_color": "#D4F53C"
           },
           "blocks": {}
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_BxgCk9",
+        "announcement_rf_noel"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15,
-        "divider_color": "{{ settings.color_palette.color3 }}"
+        "divider_width": 0,
+        "padding-block-start": 10,
+        "padding-block-end": 10,
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "background_color": "#1E0F4A"
       }
     },
     "header_section": {

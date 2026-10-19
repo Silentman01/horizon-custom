@@ -18,10 +18,10 @@
       {%- if s.sub != blank -%}<p class="rf-sub rf-hero__sub">{{ s.sub }}</p>{%- endif -%}
       <div class="rf-hero__actions">
         {%- if s.button_label != blank -%}
-          <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ s.button_link | default: '/products/chanson-personnalisee' }}">{{ s.button_label }} {% render 'refrain-icon', name: 'arrow' %}</a>
+          <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %}" href="{{ s.button_link | default: '/products/refrain-chanson-personnalisee' }}">{{ s.button_label }} {% render 'refrain-icon', name: 'arrow' %}</a>
         {%- endif -%}
         {%- if s.secondary_label != blank -%}
-          <a class="rf-hero__sec" href="{{ s.secondary_link | default: '/products/chanson-personnalisee#quiz' }}">{% render 'refrain-icon', name: 'play' %}<span>{{ s.secondary_label }}</span></a>
+          <a class="rf-hero__sec" href="{{ s.secondary_link | default: '/products/refrain-chanson-personnalisee#quiz' }}">{% render 'refrain-icon', name: 'play' %}<span>{{ s.secondary_label }}</span></a>
         {%- endif -%}
       </div>
       {%- if s.trust != blank -%}<p class="rf-hero__trust">{% render 'refrain-icon', name: 'star' %}<span>{{ s.trust }}</span></p>{%- endif -%}

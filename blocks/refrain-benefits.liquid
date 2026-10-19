@@ -1,0 +1,79 @@
+{%- comment -%} Refrain product info: benefits grid (2x2 by default) with icons. Prefix rf-pben. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+-%}
+<ul
+  class="rf-pben{% if bs.dividers %} rf-pben--div{% endif %}{% if bs.hide_mobile %} rf-pben--hm{% endif %}{% if bs.hide_desktop %} rf-pben--hd{% endif %}"
+  style="{% render 'refrain-vars' %} --rf-pben-ff: {{ ff }}; --rf-pben-cols: {{ bs.columns }}; --rf-pben-cols-m: {{ bs.columns_mobile }}; --rf-pben-icon: {{ bs.icon_color }}; --rf-pben-color: {{ bs.text_color }}; --rf-pben-line: {{ bs.divider_color }}; --rf-pben-fs: {{ bs.size }}px; --rf-pben-fs-m: {{ bs.size_mobile }}px; --rf-pben-fw: {{ bs.weight }}; --rf-pben-is: {{ bs.icon_size }}px; --rf-pben-pad: {{ bs.padding }}px; --rf-pben-mt: {{ bs.margin_top }}px; --rf-pben-mb: {{ bs.margin_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..4) -%}
+    {%- assign tk = 'text_' | append: i -%}
+    {%- assign ik = 'icon_' | append: i -%}
+    {%- if bs[tk] != blank -%}
+      <li class="rf-pben__item">
+        {%- if bs[ik] != 'none' -%}<span class="rf-pben__icon" aria-hidden="true">{% render 'refrain-icon', name: bs[ik] %}</span>{%- endif -%}
+        <span>{{ bs[tk] | escape }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{% stylesheet %}
+  .rf-pben { display: grid; grid-template-columns: repeat(var(--rf-pben-cols-m, 2), minmax(0, 1fr)); gap: 12px 14px; width: 100%; box-sizing: border-box; margin: var(--rf-pben-mt, 0) 0 var(--rf-pben-mb, 0); padding: var(--rf-pben-pad, 14px) 0; list-style: none; font-family: var(--rf-pben-ff); }
+  .rf-pben--div { border-top: 1px solid var(--rf-pben-line, #E3D9FA); border-bottom: 1px solid var(--rf-pben-line, #E3D9FA); }
+  .rf-pben__item { display: flex; align-items: center; gap: 10px; margin: 0; font-size: var(--rf-pben-fs-m, 14px); font-weight: var(--rf-pben-fw, 600); line-height: 1.3; color: var(--rf-pben-color, #1E0F4A); }
+  .rf-pben__icon { flex: none; display: flex; color: var(--rf-pben-icon, #6A4BD8); }
+  .rf-pben__icon svg { display: block; width: var(--rf-pben-is, 22px); height: var(--rf-pben-is, 22px); }
+  @media (min-width: 750px) {
+    .rf-pben { grid-template-columns: repeat(var(--rf-pben-cols, 2), minmax(0, 1fr)); }
+    .rf-pben__item { font-size: var(--rf-pben-fs, 14px); }
+  }
+  @media (max-width: 749px) { .rf-pben--hm { display: none; } }
+  @media (min-width: 750px) { .rf-pben--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Benefits",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Benefits" },
+    { "type": "text", "id": "text_1", "label": "Benefit 1", "default": "Son prénom dans le refrain" },
+    { "type": "select", "id": "icon_1", "label": "Icon 1", "default": "music", "options": [ { "value": "none", "label": "None" }, { "value": "music", "label": "Music" }, { "value": "pen", "label": "Pen" }, { "value": "heart", "label": "Heart" }, { "value": "refresh", "label": "Refresh" }, { "value": "ear", "label": "Ear" }, { "value": "mic", "label": "Mic" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Shield" } ] },
+    { "type": "text", "id": "text_2", "label": "Benefit 2", "default": "Écrite à partir de vos souvenirs" },
+    { "type": "select", "id": "icon_2", "label": "Icon 2", "default": "pen", "options": [ { "value": "none", "label": "None" }, { "value": "music", "label": "Music" }, { "value": "pen", "label": "Pen" }, { "value": "heart", "label": "Heart" }, { "value": "refresh", "label": "Refresh" }, { "value": "ear", "label": "Ear" }, { "value": "mic", "label": "Mic" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Shield" } ] },
+    { "type": "text", "id": "text_3", "label": "Benefit 3", "default": "2 chansons + paroles complètes" },
+    { "type": "select", "id": "icon_3", "label": "Icon 3", "default": "heart", "options": [ { "value": "none", "label": "None" }, { "value": "music", "label": "Music" }, { "value": "pen", "label": "Pen" }, { "value": "heart", "label": "Heart" }, { "value": "refresh", "label": "Refresh" }, { "value": "ear", "label": "Ear" }, { "value": "mic", "label": "Mic" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Shield" } ] },
+    { "type": "text", "id": "text_4", "label": "Benefit 4", "default": "Révisions illimitées" },
+    { "type": "select", "id": "icon_4", "label": "Icon 4", "default": "refresh", "options": [ { "value": "none", "label": "None" }, { "value": "music", "label": "Music" }, { "value": "pen", "label": "Pen" }, { "value": "heart", "label": "Heart" }, { "value": "refresh", "label": "Refresh" }, { "value": "ear", "label": "Ear" }, { "value": "mic", "label": "Mic" }, { "value": "gift", "label": "Gift" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Shield" } ] },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "size", "label": "Text size (desktop)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "size_mobile", "label": "Text size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "weight", "label": "Weight", "default": "600", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }, { "value": "800", "label": "Extra bold" } ] },
+    { "type": "range", "id": "icon_size", "label": "Icon size", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 22 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "icon_color", "label": "Icons", "default": "#6A4BD8" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#1E0F4A" },
+    { "type": "color", "id": "divider_color", "label": "Dividers", "default": "#E3D9FA" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 1, "max": 4, "step": 1, "default": 2 },
+    { "type": "select", "id": "columns_mobile", "label": "Columns (mobile)", "default": "2", "options": [ { "value": "1", "label": "1" }, { "value": "2", "label": "2" } ] },
+    { "type": "checkbox", "id": "dividers", "label": "Show top and bottom dividers", "default": true },
+    { "type": "range", "id": "padding", "label": "Vertical padding", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 14 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Benefits" } ]
+}
+{% endschema %}

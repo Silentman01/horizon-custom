@@ -1,0 +1,70 @@
+{%- comment -%} Refrain product info: trust row (3 icon items on an ink strip). Prefix rf-ptrust. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+-%}
+<ul
+  class="rf-ptrust rf-ptrust--{{ bs.layout }}{% if bs.hide_mobile %} rf-ptrust--hm{% endif %}{% if bs.hide_desktop %} rf-ptrust--hd{% endif %}"
+  style="{% render 'refrain-vars' %} --rf-ptrust-ff: {{ ff }}; --rf-ptrust-bg: {{ bs.bg }}; --rf-ptrust-color: {{ bs.text_color }}; --rf-ptrust-icon: {{ bs.icon_color }}; --rf-ptrust-fs: {{ bs.size }}px; --rf-ptrust-fs-m: {{ bs.size_mobile }}px; --rf-ptrust-radius: {{ bs.radius }}px; --rf-ptrust-pad: {{ bs.padding }}px; --rf-ptrust-mt: {{ bs.margin_top }}px; --rf-ptrust-mb: {{ bs.margin_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..3) -%}
+    {%- assign tk = 'text_' | append: i -%}
+    {%- assign ik = 'icon_' | append: i -%}
+    {%- if bs[tk] != blank -%}
+      <li class="rf-ptrust__item">
+        {%- if bs[ik] != 'none' -%}<span class="rf-ptrust__ic" aria-hidden="true">{% render 'refrain-icon', name: bs[ik] %}</span>{%- endif -%}
+        <span>{{ bs[tk] | escape }}</span>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
+{% stylesheet %}
+  .rf-ptrust { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: 8px; width: 100%; box-sizing: border-box; margin: var(--rf-ptrust-mt, 0) 0 var(--rf-ptrust-mb, 0); padding: var(--rf-ptrust-pad, 14px) 10px; list-style: none; border-radius: var(--rf-ptrust-radius, 18px); background: var(--rf-ptrust-bg, #1E0F4A); color: var(--rf-ptrust-color, #fff); font-family: var(--rf-ptrust-ff); }
+  .rf-ptrust__item { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 0; text-align: center; font-size: var(--rf-ptrust-fs-m, 12px); font-weight: 600; line-height: 1.3; }
+  .rf-ptrust--row .rf-ptrust__item { flex-direction: row; justify-content: center; text-align: left; }
+  .rf-ptrust__ic { flex: none; display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: color-mix(in srgb, var(--rf-ptrust-icon, #D4F53C) 14%, transparent); color: var(--rf-ptrust-icon, #D4F53C); }
+  .rf-ptrust__ic svg { display: block; width: 17px; height: 17px; }
+  @media (min-width: 750px) { .rf-ptrust__item { font-size: var(--rf-ptrust-fs, 13px); } }
+  @media (max-width: 749px) { .rf-ptrust--hm { display: none; } }
+  @media (min-width: 750px) { .rf-ptrust--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Trust row",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Items" },
+    { "type": "text", "id": "text_1", "label": "Item 1", "default": "Écoutez avant de payer" },
+    { "type": "select", "id": "icon_1", "label": "Icon 1", "default": "ear", "options": [ { "value": "none", "label": "None" }, { "value": "ear", "label": "Ear" }, { "value": "refresh", "label": "Refresh" }, { "value": "lock", "label": "Lock" }, { "value": "mail", "label": "Mail" }, { "value": "shield", "label": "Shield" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "gift", "label": "Gift" } ] },
+    { "type": "text", "id": "text_2", "label": "Item 2", "default": "Révisions illimitées" },
+    { "type": "select", "id": "icon_2", "label": "Icon 2", "default": "refresh", "options": [ { "value": "none", "label": "None" }, { "value": "ear", "label": "Ear" }, { "value": "refresh", "label": "Refresh" }, { "value": "lock", "label": "Lock" }, { "value": "mail", "label": "Mail" }, { "value": "shield", "label": "Shield" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "gift", "label": "Gift" } ] },
+    { "type": "text", "id": "text_3", "label": "Item 3", "default": "Paiement sécurisé" },
+    { "type": "select", "id": "icon_3", "label": "Icon 3", "default": "lock", "options": [ { "value": "none", "label": "None" }, { "value": "ear", "label": "Ear" }, { "value": "refresh", "label": "Refresh" }, { "value": "lock", "label": "Lock" }, { "value": "mail", "label": "Mail" }, { "value": "shield", "label": "Shield" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "gift", "label": "Gift" } ] },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "layout", "label": "Item layout", "default": "stack", "options": [ { "value": "stack", "label": "Icon above text" }, { "value": "row", "label": "Icon beside text" } ] },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "size", "label": "Text size (desktop)", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "size_mobile", "label": "Text size (mobile)", "min": 10, "max": 16, "step": 1, "unit": "px", "default": 12 },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#1E0F4A" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "icon_color", "label": "Icons", "default": "#D4F53C" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "padding", "label": "Vertical padding", "min": 4, "max": 28, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Trust row" } ]
+}
+{% endschema %}

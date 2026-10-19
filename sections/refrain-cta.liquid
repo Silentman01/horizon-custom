@@ -9,7 +9,7 @@
       {% render 'refrain-title', text: section.settings.heading, tag: 'h2', dark: dark %}
       {%- if section.settings.text != blank -%}<p class="rf-sub{% if dark %} rf-cta__sub-dark{% endif %}">{{ section.settings.text | escape }}</p>{%- endif -%}
       {%- if section.settings.button_label != blank -%}
-        <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %} rf-cta__btn" href="{{ section.settings.button_link | default: '/products/chanson-personnalisee' }}">{{ section.settings.button_label | escape }} {% render 'refrain-icon', name: 'arrow' %}</a>
+        <a class="rf-btn{% if dark %} rf-btn--on-dark{% endif %} rf-cta__btn" href="{{ section.settings.button_link | default: '/products/refrain-chanson-personnalisee' }}">{{ section.settings.button_label | escape }} {% render 'refrain-icon', name: 'arrow' %}</a>
       {%- endif -%}
       {%- if section.settings.note != blank -%}<p class="rf-cta__note{% if dark %} rf-cta__note--dark{% endif %}">{{ section.settings.note | escape }}</p>{%- endif -%}
     </div>
@@ -19,7 +19,7 @@
   </div>
   {%- if section.settings.sticky_enable and section.settings.sticky_label != blank -%}
     {%- liquid
-      assign sticky_href = section.settings.button_link | default: '/products/chanson-personnalisee'
+      assign sticky_href = section.settings.button_link | default: '/products/refrain-chanson-personnalisee'
       if template.suffix == 'refrain'
         assign sticky_href = '#quiz'
       endif

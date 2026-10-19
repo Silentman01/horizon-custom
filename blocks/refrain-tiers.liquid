@@ -1,0 +1,97 @@
+{%- comment -%} Refrain product info: Standard / Premium tier summary (display only; purchase happens in the quiz). Prefix rf-ptier. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+-%}
+<div
+  class="rf-ptier{% if bs.stack_mobile %} rf-ptier--stack{% endif %}{% if bs.hide_mobile %} rf-ptier--hm{% endif %}{% if bs.hide_desktop %} rf-ptier--hd{% endif %}"
+  role="list"
+  style="{% render 'refrain-vars' %} --rf-ptier-ff: {{ ff }}; --rf-ptier-s-bg: {{ bs.std_bg }}; --rf-ptier-s-line: {{ bs.std_border }}; --rf-ptier-s-text: {{ bs.std_color }}; --rf-ptier-s-soft: {{ bs.std_soft }}; --rf-ptier-p-bg: {{ bs.prem_bg }}; --rf-ptier-p-text: {{ bs.prem_color }}; --rf-ptier-p-price: {{ bs.prem_price_color }}; --rf-ptier-p-soft: {{ bs.prem_soft }}; --rf-ptier-b-bg: {{ bs.badge_bg }}; --rf-ptier-b-text: {{ bs.badge_color }}; --rf-ptier-ns: {{ bs.name_size }}px; --rf-ptier-ps: {{ bs.price_size }}px; --rf-ptier-ps-m: {{ bs.price_size_mobile }}px; --rf-ptier-ts: {{ bs.text_size }}px; --rf-ptier-radius: {{ bs.radius }}px; --rf-ptier-gap: {{ bs.gap }}px; --rf-ptier-mt: {{ bs.margin_top }}px; --rf-ptier-mb: {{ bs.margin_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.std_name != blank or bs.std_price != blank -%}
+    <div class="rf-ptier__card" role="listitem">
+      <p class="rf-ptier__top"><span class="rf-ptier__name">{{ bs.std_name | escape }}</span><span class="rf-ptier__price">{{ bs.std_price | escape }}</span></p>
+      {%- if bs.std_text != blank -%}<p class="rf-ptier__txt">{{ bs.std_text | escape }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+  {%- if bs.prem_name != blank or bs.prem_price != blank -%}
+    <div class="rf-ptier__card rf-ptier__card--prem" role="listitem">
+      {%- if bs.prem_badge != blank -%}<span class="rf-ptier__badge">{{ bs.prem_badge | escape }}</span>{%- endif -%}
+      <p class="rf-ptier__top"><span class="rf-ptier__name">{{ bs.prem_name | escape }}</span><span class="rf-ptier__price">{{ bs.prem_price | escape }}</span></p>
+      {%- if bs.prem_text != blank -%}<p class="rf-ptier__txt">{{ bs.prem_text | escape }}</p>{%- endif -%}
+    </div>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+  .rf-ptier { display: grid; grid-auto-columns: minmax(0, 1fr); grid-auto-flow: column; gap: var(--rf-ptier-gap, 10px); width: 100%; margin: var(--rf-ptier-mt, 0) 0 var(--rf-ptier-mb, 0); font-family: var(--rf-ptier-ff); }
+  .rf-ptier__card { position: relative; padding: 14px; border-radius: var(--rf-ptier-radius, 18px); background: var(--rf-ptier-s-bg, #fff); box-shadow: inset 0 0 0 1.5px var(--rf-ptier-s-line, #E3D9FA); color: var(--rf-ptier-s-text, #1E0F4A); }
+  .rf-ptier__card--prem { background: var(--rf-ptier-p-bg, #1E0F4A); box-shadow: none; color: var(--rf-ptier-p-text, #fff); }
+  .rf-ptier__badge { position: absolute; top: -10px; right: 12px; padding: 3px 10px; border-radius: 999px; background: var(--rf-ptier-b-bg, #D4F53C); color: var(--rf-ptier-b-text, #1E0F4A); font-size: 11px; font-weight: 800; line-height: 1.4; white-space: nowrap; }
+  .rf-ptier__top { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 8px; margin: 0; }
+  .rf-ptier__name { font-size: var(--rf-ptier-ns, 15px); font-weight: 800; }
+  .rf-ptier__price { font-size: var(--rf-ptier-ps-m, 22px); font-weight: 800; letter-spacing: -0.03em; }
+  .rf-ptier__card--prem .rf-ptier__price { color: var(--rf-ptier-p-price, #D4F53C); }
+  .rf-ptier__txt { margin: 6px 0 0; font-size: var(--rf-ptier-ts, 13px); line-height: 1.45; color: var(--rf-ptier-s-soft, #5E5384); }
+  .rf-ptier__card--prem .rf-ptier__txt { color: var(--rf-ptier-p-soft, #DCCFFF); }
+  @media (max-width: 749px) {
+    .rf-ptier--stack { grid-auto-flow: row; grid-auto-columns: auto; grid-template-columns: minmax(0, 1fr); row-gap: calc(var(--rf-ptier-gap, 10px) + 6px); }
+    .rf-ptier--hm { display: none; }
+  }
+  @media (min-width: 750px) {
+    .rf-ptier__price { font-size: var(--rf-ptier-ps, 24px); }
+    .rf-ptier--hd { display: none; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Tier summary",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Standard" },
+    { "type": "text", "id": "std_name", "label": "Name (empty name and price hide the card)", "default": "Standard" },
+    { "type": "text", "id": "std_price", "label": "Price", "default": "19 €" },
+    { "type": "text", "id": "std_text", "label": "Summary", "default": "2 chansons complètes et leurs paroles, sous 24 h." },
+    { "type": "header", "content": "Premium" },
+    { "type": "text", "id": "prem_name", "label": "Name (empty name and price hide the card)", "default": "Premium" },
+    { "type": "text", "id": "prem_price", "label": "Price", "default": "35 €" },
+    { "type": "text", "id": "prem_badge", "label": "Badge (empty hides it)", "default": "Pour l'offrir en grand" },
+    { "type": "text", "id": "prem_text", "label": "Summary", "default": "Tout le Standard, le clip paroles animé et la pochette, sous 12 h." },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "name_size", "label": "Name size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "price_size", "label": "Price size (desktop)", "min": 14, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "price_size_mobile", "label": "Price size (mobile)", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 22 },
+    { "type": "range", "id": "text_size", "label": "Summary size", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "header", "content": "Standard colors" },
+    { "type": "color", "id": "std_bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "std_border", "label": "Border", "default": "#E3D9FA" },
+    { "type": "color", "id": "std_color", "label": "Name and price", "default": "#1E0F4A" },
+    { "type": "color", "id": "std_soft", "label": "Summary", "default": "#5E5384" },
+    { "type": "header", "content": "Premium colors" },
+    { "type": "color", "id": "prem_bg", "label": "Background", "default": "#1E0F4A" },
+    { "type": "color", "id": "prem_color", "label": "Name", "default": "#FFFFFF" },
+    { "type": "color", "id": "prem_price_color", "label": "Price", "default": "#D4F53C" },
+    { "type": "color", "id": "prem_soft", "label": "Summary", "default": "#DCCFFF" },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#D4F53C" },
+    { "type": "color", "id": "badge_color", "label": "Badge text", "default": "#1E0F4A" },
+    { "type": "header", "content": "Layout" },
+    { "type": "checkbox", "id": "stack_mobile", "label": "Stack the cards on mobile", "default": false },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 32, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "gap", "label": "Gap between cards", "min": 0, "max": 32, "step": 2, "unit": "px", "default": 10 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Tier summary" } ]
+}
+{% endschema %}

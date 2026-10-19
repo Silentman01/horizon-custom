@@ -1,0 +1,72 @@
+{%- comment -%} Refrain product info: trust card (icon chip + title + text). Prefix rf-ptc. {%- endcomment -%}
+{% render 'refrain-fonts' %}
+{%- liquid
+  assign bs = block.settings
+  case bs.font
+    when 'serif'
+      assign ff = 'var(--rf-serif)'
+    when 'theme'
+      assign ff = 'var(--font-body--family)'
+    else
+      assign ff = 'var(--rf-sans)'
+  endcase
+-%}
+{%- if bs.title != blank or bs.text != blank -%}
+  <div
+    class="rf-ptc{% if bs.hide_mobile %} rf-ptc--hm{% endif %}{% if bs.hide_desktop %} rf-ptc--hd{% endif %}{% if bs.uppercase %} rf-ptc--upper{% endif %}"
+    style="{% render 'refrain-vars' %} --rf-ptc-ff: {{ ff }}; --rf-ptc-bg: {{ bs.bg }}; --rf-ptc-border: {{ bs.border | default: 'transparent' }}; --rf-ptc-title: {{ bs.title_color }}; --rf-ptc-text: {{ bs.text_color }}; --rf-ptc-chip: {{ bs.chip_bg }}; --rf-ptc-icon: {{ bs.icon_color }}; --rf-ptc-ts: {{ bs.title_size }}px; --rf-ptc-xs: {{ bs.text_size }}px; --rf-ptc-radius: {{ bs.radius }}px; --rf-ptc-pad: {{ bs.padding }}px; --rf-ptc-mt: {{ bs.margin_top }}px; --rf-ptc-mb: {{ bs.margin_bottom }}px; --rf-ptc-align: {{ bs.alignment }};"
+    {{ block.shopify_attributes }}
+  >
+    {%- if bs.icon != 'none' -%}
+      <span class="rf-ptc__chip" aria-hidden="true">{% render 'refrain-icon', name: bs.icon %}</span>
+    {%- endif -%}
+    <span class="rf-ptc__txt">
+      {%- if bs.title != blank -%}<strong class="rf-ptc__title">{{ bs.title | escape }}</strong>{%- endif -%}
+      {%- if bs.text != blank -%}<span class="rf-ptc__text">{{ bs.text | escape }}</span>{%- endif -%}
+    </span>
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .rf-ptc { display: flex; align-items: center; justify-content: var(--rf-ptc-align, flex-start); gap: 12px; width: 100%; box-sizing: border-box; margin: var(--rf-ptc-mt, 0) 0 var(--rf-ptc-mb, 0); padding: var(--rf-ptc-pad, 12px) calc(var(--rf-ptc-pad, 12px) + 4px); background: var(--rf-ptc-bg, #DCCFFF); border: 1.5px solid var(--rf-ptc-border, transparent); border-radius: var(--rf-ptc-radius, 16px); font-family: var(--rf-ptc-ff); }
+  .rf-ptc__chip { flex: none; display: grid; place-items: center; width: 38px; height: 38px; border-radius: 12px; background: var(--rf-ptc-chip, #1E0F4A); color: var(--rf-ptc-icon, #D4F53C); }
+  .rf-ptc__chip svg { width: 20px; height: 20px; display: block; }
+  .rf-ptc__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .rf-ptc__title { font-size: var(--rf-ptc-ts, 13px); font-weight: 800; line-height: 1.3; color: var(--rf-ptc-title, #1E0F4A); }
+  .rf-ptc--upper .rf-ptc__title { letter-spacing: 0.04em; text-transform: uppercase; }
+  .rf-ptc__text { font-size: var(--rf-ptc-xs, 13px); line-height: 1.4; color: var(--rf-ptc-text, #5E5384); }
+  @media (max-width: 749px) { .rf-ptc--hm { display: none; } }
+  @media (min-width: 750px) { .rf-ptc--hd { display: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Refrain · Trust card",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "select", "id": "icon", "label": "Icon", "default": "ear", "options": [ { "value": "none", "label": "None" }, { "value": "ear", "label": "Ear" }, { "value": "music", "label": "Music" }, { "value": "heart", "label": "Heart" }, { "value": "gift", "label": "Gift" }, { "value": "shield", "label": "Shield" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "mic", "label": "Mic" }, { "value": "lock", "label": "Lock" }, { "value": "clock", "label": "Clock" } ] },
+    { "type": "text", "id": "title", "label": "Title (empty title and text hide the card)", "default": "Écoutez avant de payer" },
+    { "type": "text", "id": "text", "label": "Text", "default": "Un extrait gratuit de sa chanson, avant toute commande." },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font", "label": "Font", "default": "sans", "options": [ { "value": "sans", "label": "Plus Jakarta Sans" }, { "value": "serif", "label": "Fraunces Italic" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size", "min": 10, "max": 22, "step": 1, "unit": "px", "default": 13 },
+    { "type": "checkbox", "id": "uppercase", "label": "Uppercase title", "default": true },
+    { "type": "range", "id": "text_size", "label": "Text size", "min": 10, "max": 20, "step": 1, "unit": "px", "default": 13 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg", "label": "Background", "default": "#DCCFFF" },
+    { "type": "color", "id": "border", "label": "Border" },
+    { "type": "color", "id": "title_color", "label": "Title", "default": "#1E0F4A" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#5E5384" },
+    { "type": "color", "id": "chip_bg", "label": "Icon tile", "default": "#1E0F4A" },
+    { "type": "color", "id": "icon_color", "label": "Icon", "default": "#D4F53C" },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "alignment", "label": "Alignment", "default": "flex-start", "options": [ { "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 32, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "padding", "label": "Inner padding", "min": 4, "max": 28, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "margin_top", "label": "Space above", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "range", "id": "margin_bottom", "label": "Space below", "min": 0, "max": 60, "step": 2, "unit": "px", "default": 0 },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain · Trust card" } ]
+}
+{% endschema %}
