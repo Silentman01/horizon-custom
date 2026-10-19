@@ -113,3 +113,6 @@ Every NEW section or block exposes all of its content and styling in the schema,
 
 ## 14. Strip metadata from AI-generated media (operator, 2026-10-18)
 Every AI-generated image or video (Kie GPT Image, Suno covers, Runway/Kling clips, ffmpeg ad videos built from them) has its metadata removed BEFORE it is saved as final or uploaded/pushed anywhere: run `python -I <SKILL>/scripts/strip_metadata.py <files-or-folder> --inplace` (images re-encoded without EXIF/XMP/C2PA provenance; videos remuxed with `-map_metadata -1`). Raw Kie downloads stay in scratch/raw; only cleaned copies go to 03_product-images, 04_page-images, 05_ads and theme assets. Every agent brief that generates media includes this step. Applies to new media only.
+
+## 15. Unique CSS class prefixes per section (2026-10-19)
+Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp__*`) and never reuses another component's base class for a different element (a quiz honeypot styled `.rf-hp` once hid the whole product hero on the live store). Before delivery, grep the brand prefix for classes defined in more than one file with conflicting rules, and check the LIVE storefront page (not only the theme editor).
