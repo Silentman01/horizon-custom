@@ -46,6 +46,7 @@
   endif
   assign std_pts = section.settings.std_points | newline_to_br | split: '<br />'
   assign prem_pts = section.settings.prem_points | newline_to_br | split: '<br />'
+  assign def_tier = section.settings.default_tier | default: 'premium'
 -%}
 {% render 'refrain-fonts' %}
 <section
@@ -61,6 +62,7 @@
     data-prem="{{ v_prem.id | default: v_std.id }}"
     data-std-price="{{ price_std }}"
     data-prem-price="{{ price_prem }}"
+    data-default-tier="{{ def_tier }}"
     data-demo-audio="{{ demo_src }}"
     data-demo-lyrics="{{ section.settings.demo_lyrics | escape }}"
     data-force-demo="{{ section.settings.force_demo }}"
@@ -307,14 +309,14 @@
           <fieldset class="rf-tiers">
             <legend class="rf-sr">Choisissez votre formule</legend>
             <label class="rf-tier">
-              <input type="radio" name="tier" value="standard" checked>
+              <input type="radio" name="tier" value="standard"{% if def_tier != 'premium' %} checked{% endif %}>
               <span class="rf-tier__top"><b>{{ section.settings.std_name }}</b><b class="rf-tier__price">{% if v_std %}{{ v_std.price | money_without_trailing_zeros }}{% else %}19 €{% endif %}</b></span>
               <ul class="rf-tier__list">
                 {%- for pt in std_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
               </ul>
             </label>
             <label class="rf-tier rf-tier--prem">
-              <input type="radio" name="tier" value="premium">
+              <input type="radio" name="tier" value="premium"{% if def_tier == 'premium' %} checked{% endif %}>
               {%- if section.settings.prem_badge != blank -%}<span class="rf-tier__badge">{{ section.settings.prem_badge }}</span>{%- endif -%}
               <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}35 €{% endif %}</b></span>
               {%- if v_prem and v_std and v_prem.price > v_std.price -%}
@@ -552,6 +554,7 @@
         generic: 'L’envoi n’a pas abouti. Réessayez, ou commandez sans photo.'
       }
     };
+    const TIER_KEY = 'refrain_tier_v1';    /* sessionStorage: { tier, variantId } shared with blocks/refrain-tiers.liquid */
     const SKEY = 'refrain_preview_v2';      /* sessionStorage: { id, token } (contract v2) */
     const TTL = 7 * 24 * 3600 * 1000;
     const STEPS = 9;
@@ -729,8 +732,11 @@
           e.preventDefault();
           seekTo(map[e.key]);
         });
-        /* offer */
-        this.qa('input[name="tier"]').forEach((r) => r.addEventListener('change', () => this.photoVisible()));
+        /* offer: the tier is shared with the product-info selector (blocks/refrain-tiers.liquid) */
+        this.qa('input[name="tier"]').forEach((r) => r.addEventListener('change', () => { this.photoVisible(); if (r.checked) this.tierEmit(r.value); }));
+        this.onTier = (e) => { const d = e.detail || {}; if (d.source !== this) this.tierApply(d.tier, d.variantId); };
+        document.addEventListener('refrain:tier-change', this.onTier);
+        this.tierInit();
         this.q('[data-photo-input]').addEventListener('change', (e) => this.photoPick(e.target.files && e.target.files[0]));
         this.q('[data-photo-consent]').addEventListener('change', () => { this.q('[data-photo-send]').disabled = !this.q('[data-photo-consent]').checked; });
         this.q('[data-photo-send]').addEventListener('click', () => this.photoSend());
@@ -1065,6 +1071,28 @@
         this.q('[data-r-title]').focus({ preventScroll: true });
       }
 
+      /* ---- Tier sync with the product-info selector: sessionStorage refrain_tier_v1 { tier, variantId } + event refrain:tier-change ---- */
+      tierInit() {
+        let saved = null;
+        try { saved = JSON.parse(sessionStorage.getItem(TIER_KEY)); } catch (e) { saved = null; }
+        if (saved && (saved.tier === 'standard' || saved.tier === 'premium')) return this.tierApply(saved.tier, saved.variantId);
+        const picked = document.querySelector('refrain-tier-pick [role="radio"][aria-checked="true"]');
+        this.tierApply(picked ? picked.dataset.tier : (this.dataset.defaultTier || 'premium'), picked ? picked.dataset.variant : null);
+      }
+      tierApply(tier, variantId) {
+        const id = variantId ? String(variantId) : '';
+        if (id && id === String(this.dataset.prem) && id !== String(this.dataset.std)) tier = 'premium';
+        else if (id && id === String(this.dataset.std) && id !== String(this.dataset.prem)) tier = 'standard';
+        if (tier !== 'standard' && tier !== 'premium') return;
+        const r = this.q('input[name="tier"][value="' + tier + '"]');
+        if (r && !r.checked) { r.checked = true; this.photoVisible(); }
+      }
+      tierEmit(tier) {
+        const variantId = Number(tier === 'premium' ? this.dataset.prem : this.dataset.std) || null;
+        try { sessionStorage.setItem(TIER_KEY, JSON.stringify({ tier, variantId })); } catch (e) {}
+        document.dispatchEvent(new CustomEvent('refrain:tier-change', { detail: { tier, variantId, source: this } }));
+      }
+
       /* ---- Optional Premium photo: chosen before payment, used by Premium only, never blocks the purchase ---- */
       photoVisible() {
         const prem = ((this.q('input[name="tier"]:checked') || {}).value) === 'premium';
@@ -1383,6 +1411,17 @@
       "type": "textarea",
       "id": "prem_points",
       "label": "Premium points (one per line)"
+    },
+    {
+      "type": "select",
+      "id": "default_tier",
+      "label": "Formula selected by default",
+      "info": "The customer's choice in the product-info tier selector takes over when present.",
+      "default": "premium",
+      "options": [
+        { "value": "premium", "label": "Premium" },
+        { "value": "standard", "label": "Standard" }
+      ]
     },
     {
       "type": "text",

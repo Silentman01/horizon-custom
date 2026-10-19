@@ -131,16 +131,20 @@
             "scarcity": {
               "type": "refrain-scarcity",
               "settings": {
+                "mode": "daily",
+                "cutoff_hour": 0,
                 "deadline": "2026-12-20T23:59:00+01:00",
-                "label": "Livrée avant Noël : commandez avant le 20 déc.",
-                "icon": "gift",
+                "label": "Recevez sa chanson dès demain",
+                "icon": "clock",
                 "show_countdown": true,
-                "countdown_prefix": "Il reste",
+                "countdown_prefix": "Commandez dans",
+                "countdown_suffix": "pour la recevoir demain",
                 "days_label": "j",
                 "hours_label": "h",
                 "minutes_label": "min",
+                "seconds_label": "s",
                 "show_bar": true,
-                "fill_mode": "fixed",
+                "fill_mode": "auto",
                 "fill": 82,
                 "start": "2026-10-01T00:00:00+02:00",
                 "line": "Créneaux de création limités chaque jour",
@@ -673,18 +677,13 @@
         "contact": "<p>Une autre question&nbsp;? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
       }
     },
-    "cta": {
-      "type": "refrain-cta",
+    "sticky_cta": {
+      "type": "refrain-sticky-cta",
       "settings": {
-        "background": "ink",
-        "heading": "Son prénom dans le *refrain*",
-        "text": "3 minutes de questions. Un extrait gratuit. Vous décidez ensuite.",
-        "button_label": "Créer son extrait gratuit",
-        "button_link": "#quiz",
-        "note": "Écoutez avant de payer · Livraison sous 24 h · Révisions illimitées",
-        "image_asset": "refrain-cta.jpg",
-        "sticky_enable": true,
-        "sticky_label": "Créer son extrait gratuit"
+        "enable": true,
+        "label": "Créer son extrait gratuit",
+        "link": "#quiz",
+        "show_arrow": true
       }
     }
   },
@@ -696,6 +695,6 @@
     "occasions",
     "guarantee",
     "faq",
-    "cta"
+    "sticky_cta"
   ]
 }

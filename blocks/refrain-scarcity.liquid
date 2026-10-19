@@ -1,7 +1,9 @@
 {%- comment -%}
-  Refrain product info: scarcity card with a real date-based deadline.
-  Live countdown (days, hours, minutes) to the deadline, a fill bar and a short line.
-  After the deadline: hides itself, or shows the post-deadline text. Prefix rf-scar.
+  Refrain product info: scarcity card. Two modes:
+  - daily (default): live countdown (hours, minutes, seconds) to today's cutoff hour in the store time zone,
+    wrapping to the next day after the cutoff; the bar follows the time elapsed in the day (4-96 %).
+  - deadline: countdown (days, hours, minutes) to a fixed date; after it, hides itself or shows the post text.
+  Prefix rf-scar.
 {%- endcomment -%}
 {% render 'refrain-fonts' %}
 {%- liquid
@@ -15,39 +17,72 @@
       assign ff = 'var(--rf-sans)'
   endcase
 
+  assign daily = true
+  if bs.mode == 'deadline'
+    assign daily = false
+  endif
   assign now_s = 'now' | date: '%s' | plus: 0
-  assign dl_s = 0
-  if bs.deadline != blank
-    assign dl_s = bs.deadline | date: '%s' | plus: 0
-  endif
+  assign tz_off = 'now' | date: '%z'
   assign valid = false
-  if dl_s > 1000000000
-    assign valid = true
-  endif
-  assign left_s = dl_s | minus: now_s
   assign over = false
-  if valid and left_s <= 0
-    assign over = true
-  endif
-  assign left_m = left_s | divided_by: 60
-  if left_m < 0
-    assign left_m = 0
-  endif
-  assign cd_d = left_m | divided_by: 1440
-  assign cd_h = left_m | modulo: 1440 | divided_by: 60
-  assign cd_m = left_m | modulo: 60
-
   assign fill = bs.fill
-  if bs.fill_mode == 'auto' and valid and bs.start != blank
-    assign st_s = bs.start | date: '%s' | plus: 0
-    assign span_s = dl_s | minus: st_s
-    if st_s > 1000000000 and span_s > 0
-      assign done_s = now_s | minus: st_s
-      assign fill = done_s | times: 100 | divided_by: span_s
+
+  if daily
+    assign valid = true
+    assign cut_h = bs.cutoff_hour | default: 0 | plus: 0
+    assign now_h = 'now' | date: '%H' | plus: 0
+    assign now_mi = 'now' | date: '%M' | plus: 0
+    assign now_se = 'now' | date: '%S' | plus: 0
+    assign sod = now_h | times: 3600
+    assign sod_m = now_mi | times: 60
+    assign sod = sod | plus: sod_m | plus: now_se
+    assign left_s = cut_h | times: 3600 | minus: sod
+    if left_s <= 0
+      assign left_s = left_s | plus: 86400
+    endif
+    assign cd_h = left_s | divided_by: 3600
+    assign cd_m = left_s | modulo: 3600 | divided_by: 60
+    assign cd_s = left_s | modulo: 60
+    if bs.fill_mode == 'auto'
+      assign done_s = 86400 | minus: left_s
+      assign fill = done_s | times: 100 | divided_by: 86400
       if fill < 4
         assign fill = 4
-      elsif fill > 100
-        assign fill = 100
+      elsif fill > 96
+        assign fill = 96
+      endif
+    endif
+  else
+    assign dl_s = 0
+    if bs.deadline != blank
+      assign dl_s = bs.deadline | date: '%s' | plus: 0
+    endif
+    if dl_s > 1000000000
+      assign valid = true
+    endif
+    assign left_s = dl_s | minus: now_s
+    if valid and left_s <= 0
+      assign over = true
+    endif
+    assign left_m = left_s | divided_by: 60
+    if left_m < 0
+      assign left_m = 0
+    endif
+    assign cd_d = left_m | divided_by: 1440
+    assign cd_h = left_m | modulo: 1440 | divided_by: 60
+    assign cd_m = left_m | modulo: 60
+
+    if bs.fill_mode == 'auto' and valid and bs.start != blank
+      assign st_s = bs.start | date: '%s' | plus: 0
+      assign span_s = dl_s | minus: st_s
+      if st_s > 1000000000 and span_s > 0
+        assign done_s = now_s | minus: st_s
+        assign fill = done_s | times: 100 | divided_by: span_s
+        if fill < 4
+          assign fill = 4
+        elsif fill > 100
+          assign fill = 100
+        endif
       endif
     endif
   endif
@@ -60,6 +95,9 @@
 {%- if render_it -%}
   <refrain-scarcity
     class="rf-scar{% if over %} is-over{% endif %}{% if bs.hide_mobile %} rf-scar--hm{% endif %}{% if bs.hide_desktop %} rf-scar--hd{% endif %}"
+    data-mode="{% if daily %}daily{% else %}deadline{% endif %}"
+    data-cutoff="{{ bs.cutoff_hour | default: 0 }}"
+    data-tz="{{ tz_off }}"
     data-deadline="{{ bs.deadline | escape }}"
     data-start="{{ bs.start | escape }}"
     data-fill-mode="{{ bs.fill_mode }}"
@@ -77,9 +115,15 @@
       {%- if bs.show_countdown and valid -%}
         <div class="rf-scar__cd" role="timer" aria-live="off">
           {%- if bs.countdown_prefix != blank -%}<span class="rf-scar__pre">{{ bs.countdown_prefix | escape }}</span>{%- endif -%}
-          <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="d">{{ cd_d }}</b><span class="rf-scar__u">{{ bs.days_label | escape }}</span></span>
+          {%- unless daily -%}
+            <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="d">{{ cd_d }}</b><span class="rf-scar__u">{{ bs.days_label | escape }}</span></span>
+          {%- endunless -%}
           <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="h">{% if cd_h < 10 %}0{% endif %}{{ cd_h }}</b><span class="rf-scar__u">{{ bs.hours_label | escape }}</span></span>
           <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="m">{% if cd_m < 10 %}0{% endif %}{{ cd_m }}</b><span class="rf-scar__u">{{ bs.minutes_label | escape }}</span></span>
+          {%- if daily -%}
+            <span class="rf-scar__unit"><b class="rf-scar__num" data-rf-scar="s">{% if cd_s < 10 %}0{% endif %}{{ cd_s }}</b><span class="rf-scar__u">{{ bs.seconds_label | escape }}</span></span>
+          {%- endif -%}
+          {%- if bs.countdown_suffix != blank -%}<span class="rf-scar__suf">{{ bs.countdown_suffix | escape }}</span>{%- endif -%}
         </div>
       {%- endif -%}
       {%- if bs.show_bar -%}
@@ -89,7 +133,7 @@
         <p class="rf-scar__line"><span class="rf-scar__dot" aria-hidden="true"></span><span>{{ bs.line | escape }}</span></p>
       {%- endif -%}
     </div>
-    {%- if bs.post_text != blank -%}
+    {%- if bs.post_text != blank and daily == false -%}
       <p class="rf-scar__post">
         {%- if bs.icon != 'none' -%}<span class="rf-scar__icon" aria-hidden="true">{% render 'refrain-icon', name: bs.icon %}</span>{%- endif -%}
         <span>{{ bs.post_text | escape }}</span>
@@ -107,7 +151,9 @@
   .rf-scar__icon { flex: none; display: flex; color: var(--rf-scar-accent, #6A4BD8); }
   .rf-scar__icon svg { display: block; width: 20px; height: 20px; }
   .rf-scar__cd { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
-  .rf-scar__pre { margin-right: 2px; font-size: var(--rf-scar-xs, 13px); font-weight: 600; color: var(--rf-scar-soft, #5E5384); }
+  .rf-scar__pre, .rf-scar__suf { font-size: var(--rf-scar-xs, 13px); font-weight: 600; color: var(--rf-scar-soft, #5E5384); }
+  .rf-scar__pre { margin-right: 2px; }
+  .rf-scar__suf { margin-left: 2px; }
   .rf-scar__unit { display: inline-flex; align-items: baseline; gap: 3px; padding: 5px 9px; border-radius: 10px; background: var(--rf-scar-tile, #1E0F4A); color: var(--rf-scar-digit, #D4F53C); }
   .rf-scar__num { font-size: var(--rf-scar-ds, 18px); font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
   .rf-scar__u { font-size: 12px; font-weight: 700; opacity: .85; }
@@ -125,23 +171,47 @@
   if (!customElements.get('refrain-scarcity')) {
     class RefrainScarcity extends HTMLElement {
       connectedCallback() {
-        this.deadline = Date.parse(this.dataset.deadline || '');
-        if (Number.isNaN(this.deadline)) {
-          this.querySelector('.rf-scar__cd')?.remove();
-          return;
+        this.daily = this.dataset.mode !== 'deadline';
+        if (this.daily) {
+          /* Store UTC offset from Liquid ('now' | date: '%z', e.g. +0200) -> minutes. */
+          const m = /^([+-])(\d{2}):?(\d{2})$/.exec((this.dataset.tz || '').trim());
+          this.offMin = m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3])) : -new Date().getTimezoneOffset();
+          this.cutoff = Math.min(23, Math.max(0, Number(this.dataset.cutoff) || 0)) * 3600;
+        } else {
+          this.deadline = Date.parse(this.dataset.deadline || '');
+          if (Number.isNaN(this.deadline)) {
+            this.querySelector('.rf-scar__cd')?.remove();
+            return;
+          }
+          this.start = Date.parse(this.dataset.start || '');
         }
-        this.start = Date.parse(this.dataset.start || '');
         this.tick();
-        this.timer = setInterval(() => this.tick(), 15000);
+        this.timer = setInterval(() => this.tick(), this.daily ? 1000 : 15000);
       }
       disconnectedCallback() {
         clearInterval(this.timer);
       }
       set(key, value) {
         const el = this.querySelector('[data-rf-scar="' + key + '"]');
-        if (el) el.textContent = value;
+        if (el && el.textContent !== String(value)) el.textContent = value;
+      }
+      fill(pct) {
+        const fill = this.querySelector('.rf-scar__fill');
+        if (fill) fill.style.width = pct.toFixed(1) + '%';
       }
       tick() {
+        const pad = (n) => String(n).padStart(2, '0');
+        if (this.daily) {
+          const shop = new Date(Date.now() + this.offMin * 60000);
+          const sod = shop.getUTCHours() * 3600 + shop.getUTCMinutes() * 60 + shop.getUTCSeconds();
+          let left = this.cutoff - sod;
+          if (left <= 0) left += 86400;
+          this.set('h', pad(Math.floor(left / 3600)));
+          this.set('m', pad(Math.floor((left % 3600) / 60)));
+          this.set('s', pad(left % 60));
+          if (this.dataset.fillMode === 'auto') this.fill(Math.min(96, Math.max(4, ((86400 - left) / 86400) * 100)));
+          return;
+        }
         const now = Date.now();
         const left = this.deadline - now;
         if (left <= 0) {
@@ -152,14 +222,11 @@
         }
         this.classList.remove('is-over');
         const mins = Math.floor(left / 60000);
-        const pad = (n) => String(n).padStart(2, '0');
         this.set('d', Math.floor(mins / 1440));
         this.set('h', pad(Math.floor((mins % 1440) / 60)));
         this.set('m', pad(mins % 60));
         if (this.dataset.fillMode === 'auto' && !Number.isNaN(this.start) && this.deadline > this.start) {
-          const pct = Math.min(100, Math.max(4, ((now - this.start) / (this.deadline - this.start)) * 100));
-          const fill = this.querySelector('.rf-scar__fill');
-          if (fill) fill.style.width = pct.toFixed(1) + '%';
+          this.fill(Math.min(100, Math.max(4, ((now - this.start) / (this.deadline - this.start)) * 100)));
         }
       }
     }
@@ -171,23 +238,27 @@
   "name": "Refrain · Scarcity",
   "tag": null,
   "settings": [
-    { "type": "header", "content": "Deadline" },
-    { "type": "text", "id": "deadline", "label": "Deadline (date, time and UTC offset)", "info": "Format: 2026-12-20T23:59:00+01:00", "default": "2026-12-20T23:59:00+01:00" },
-    { "type": "text", "id": "label", "label": "Label", "default": "Livrée avant Noël : commandez avant le 20 déc." },
-    { "type": "select", "id": "icon", "label": "Icon", "default": "gift", "options": [ { "value": "none", "label": "None" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "music", "label": "Music" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "mail", "label": "Mail" } ] },
+    { "type": "header", "content": "Mode" },
+    { "type": "select", "id": "mode", "label": "Countdown mode", "default": "daily", "options": [ { "value": "daily", "label": "Daily: to today's cutoff hour" }, { "value": "deadline", "label": "Fixed date (deadline)" } ] },
+    { "type": "range", "id": "cutoff_hour", "label": "Daily cutoff hour (store time zone)", "info": "0 = midnight. After the cutoff, the countdown restarts for the next day.", "min": 0, "max": 23, "step": 1, "unit": "h", "default": 0 },
+    { "type": "text", "id": "deadline", "label": "Deadline (fixed date mode: date, time and UTC offset)", "info": "Format: 2026-12-20T23:59:00+01:00", "default": "2026-12-20T23:59:00+01:00" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Recevez sa chanson dès demain" },
+    { "type": "select", "id": "icon", "label": "Icon", "default": "clock", "options": [ { "value": "none", "label": "None" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "heart", "label": "Heart" }, { "value": "music", "label": "Music" }, { "value": "sparkle", "label": "Sparkle" }, { "value": "mail", "label": "Mail" } ] },
     { "type": "header", "content": "Countdown" },
     { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
-    { "type": "text", "id": "countdown_prefix", "label": "Text before the countdown", "default": "Il reste" },
-    { "type": "text", "id": "days_label", "label": "Days unit", "default": "j" },
+    { "type": "text", "id": "countdown_prefix", "label": "Text before the countdown", "default": "Commandez dans" },
+    { "type": "text", "id": "countdown_suffix", "label": "Text after the countdown", "default": "pour la recevoir demain" },
+    { "type": "text", "id": "days_label", "label": "Days unit (fixed date mode)", "default": "j" },
     { "type": "text", "id": "hours_label", "label": "Hours unit", "default": "h" },
     { "type": "text", "id": "minutes_label", "label": "Minutes unit", "default": "min" },
+    { "type": "text", "id": "seconds_label", "label": "Seconds unit (daily mode)", "default": "s" },
     { "type": "header", "content": "Fill bar and line" },
     { "type": "checkbox", "id": "show_bar", "label": "Show fill bar", "default": true },
-    { "type": "select", "id": "fill_mode", "label": "Bar fill", "default": "fixed", "options": [ { "value": "fixed", "label": "Fixed percentage" }, { "value": "auto", "label": "Time elapsed from start date to deadline" } ] },
+    { "type": "select", "id": "fill_mode", "label": "Bar fill", "default": "auto", "info": "Daily mode: time elapsed in the day (4-96 %). Fixed date mode: time elapsed from the start date to the deadline.", "options": [ { "value": "fixed", "label": "Fixed percentage" }, { "value": "auto", "label": "Time elapsed" } ] },
     { "type": "range", "id": "fill", "label": "Fixed fill", "min": 5, "max": 100, "step": 1, "unit": "%", "default": 82 },
-    { "type": "text", "id": "start", "label": "Start date (time-elapsed mode)", "info": "Format: 2026-10-01T00:00:00+02:00", "default": "2026-10-01T00:00:00+02:00" },
+    { "type": "text", "id": "start", "label": "Start date (fixed date mode, time elapsed)", "info": "Format: 2026-10-01T00:00:00+02:00", "default": "2026-10-01T00:00:00+02:00" },
     { "type": "text", "id": "line", "label": "Line under the bar (empty hides it)", "default": "Créneaux de création limités chaque jour" },
-    { "type": "header", "content": "After the deadline" },
+    { "type": "header", "content": "After the deadline (fixed date mode)" },
     { "type": "select", "id": "post_mode", "label": "Behavior", "default": "hide", "options": [ { "value": "hide", "label": "Hide the card" }, { "value": "text", "label": "Show the text below" } ] },
     { "type": "text", "id": "post_text", "label": "Post-deadline text", "default": "Livraison par e-mail sous 24 h." },
     { "type": "header", "content": "Typography" },

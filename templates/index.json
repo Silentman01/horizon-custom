@@ -528,18 +528,13 @@
         "contact": "<p>Une autre question&nbsp;? Écrivez-nous à <a href=\"mailto:hello@refrain-DOMAIN.com\">hello@refrain-DOMAIN.com</a>.</p>"
       }
     },
-    "cta": {
-      "type": "refrain-cta",
+    "sticky_cta": {
+      "type": "refrain-sticky-cta",
       "settings": {
-        "background": "ink",
-        "heading": "Toute sa vie, mise en *chanson*",
-        "text": "Racontez-nous la personne. Nous écrivons sa chanson. Écoutez avant de payer.",
-        "button_label": "Commencer",
-        "button_link": "/products/refrain-chanson-personnalisee#quiz",
-        "note": "Commandez avant le 20 décembre pour une livraison avant Noël.",
-        "image_asset": "refrain-cta.jpg",
-        "sticky_enable": true,
-        "sticky_label": "Créer son extrait gratuit"
+        "enable": true,
+        "label": "Créer son extrait gratuit",
+        "link": "/products/refrain-chanson-personnalisee#quiz",
+        "show_arrow": true
       }
     }
   },
@@ -553,6 +548,6 @@
     "promise",
     "guarantee",
     "faq",
-    "cta"
+    "sticky_cta"
   ]
 }

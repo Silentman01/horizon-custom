@@ -1,0 +1,97 @@
+{%- comment -%}
+  Refrain mobile sticky CTA bar (split out of the former refrain-cta section). Renders nothing visible on desktop.
+  On mobile it appears after the first screen and hides while the hero / product-info CTA, the quiz or the footer is
+  on screen. An in-page anchor link (#quiz) scrolls smoothly and focuses the first field. Prefix rf-stk.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign stk_href = ss.link | default: '#quiz'
+-%}
+{%- if ss.enable and ss.label != blank -%}
+  {% render 'refrain-fonts' %}
+  <div class="rf-stk-wrap" style="{% render 'refrain-vars' %} --rf-stk-bg: {{ ss.bar_bg }}; --rf-stk-btn-bg: {{ ss.button_bg }}; --rf-stk-btn-text: {{ ss.button_color }}; --rf-stk-h: {{ ss.height }}px; --rf-stk-fs: {{ ss.size }}px;" {{ section.shopify_attributes }}>
+    <refrain-sticky-cta class="rf-stk" hidden>
+      <a class="rf-stk__btn" href="{{ stk_href | escape }}">
+        <span>{{ ss.label | escape }}</span>
+        {%- if ss.show_arrow -%}<span class="rf-stk__arrow" aria-hidden="true">{% render 'refrain-icon', name: 'arrow' %}</span>{%- endif -%}
+      </a>
+    </refrain-sticky-cta>
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .rf-stk-wrap { display: contents; }
+  .rf-stk { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; box-sizing: border-box; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--rf-stk-bg, rgb(248 245 255 / .94)); box-shadow: 0 -8px 24px rgb(30 15 74 / .12); font-family: var(--rf-sans); transform: translateY(110%); visibility: hidden; transition: transform .25s ease, visibility 0s linear .25s; }
+  .rf-stk[hidden] { display: none; }
+  .rf-stk.is-on { transform: none; visibility: visible; transition: transform .25s ease; }
+  .rf-stk__btn { display: flex; align-items: center; justify-content: center; gap: 10px; box-sizing: border-box; width: 100%; min-height: var(--rf-stk-h, 52px); padding: 0 24px; border-radius: 999px; background: var(--rf-stk-btn-bg, #1E0F4A); color: var(--rf-stk-btn-text, #D4F53C); font-size: var(--rf-stk-fs, 16px); font-weight: 700; line-height: 1.2; text-align: center; text-decoration: none; }
+  .rf-stk__btn:focus-visible { outline: 3px solid var(--rf-violet, #6A4BD8); outline-offset: 3px; }
+  .rf-stk__arrow { display: flex; }
+  .rf-stk__arrow svg { display: block; width: 20px; height: 20px; }
+  @media (min-width: 750px) { .rf-stk { display: none !important; } }
+  @supports (backdrop-filter: blur(8px)) { .rf-stk { backdrop-filter: blur(8px); } }
+  @media (prefers-reduced-motion: reduce) { .rf-stk, .rf-stk.is-on { transition: none; } }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('refrain-sticky-cta')) {
+    class RefrainStickyCta extends HTMLElement {
+      connectedCallback() {
+        if (!('IntersectionObserver' in window)) return;
+        this.hidden = false;
+        const blockers = [...document.querySelectorAll('#quiz, .rf-hero, .rf-pcta, footer, .shopify-section-group-footer-group')];
+        const seen = new Set();
+        const past = () => window.scrollY > window.innerHeight * 0.6;
+        const update = () => {
+          const on = seen.size === 0 && past();
+          this.classList.toggle('is-on', on);
+          this.inert = !on;
+        };
+        this.io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => (e.isIntersecting ? seen.add(e.target) : seen.delete(e.target)));
+          update();
+        });
+        blockers.forEach((b) => this.io.observe(b));
+        this.inert = true;
+        /* Re-evaluate once the visitor scrolls past the first screen. */
+        this.onScroll = () => { if (seen.size === 0) update(); };
+        window.addEventListener('scroll', this.onScroll, { passive: true });
+        this.querySelector('a').addEventListener('click', (e) => {
+          const href = e.currentTarget.getAttribute('href') || '';
+          if (href.charAt(0) !== '#' || href.length < 2) return;
+          let t = null;
+          try { t = document.querySelector(href); } catch (er) { t = null; }
+          if (!t) return;
+          e.preventDefault();
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+          const f = t.querySelector('input, button');
+          if (f) setTimeout(() => f.focus({ preventScroll: true }), reduce ? 0 : 500);
+        });
+      }
+      disconnectedCallback() {
+        if (this.io) this.io.disconnect();
+        if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+      }
+    }
+    customElements.define('refrain-sticky-cta', RefrainStickyCta);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Refrain · Sticky CTA",
+  "tag": "section",
+  "settings": [
+    { "type": "paragraph", "content": "Mobile only. Appears after the first screen; hidden while the hero, the product-info button, the quiz or the footer is visible." },
+    { "type": "checkbox", "id": "enable", "label": "Show sticky button on mobile", "default": true },
+    { "type": "text", "id": "label", "label": "Button label", "default": "Créer son extrait gratuit" },
+    { "type": "text", "id": "link", "label": "Button link", "info": "#quiz scrolls to the quiz on the product page. From other pages: /products/refrain-chanson-personnalisee#quiz", "default": "#quiz" },
+    { "type": "checkbox", "id": "show_arrow", "label": "Show arrow", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bar_bg", "label": "Bar background", "default": "#F8F5FF" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#1E0F4A" },
+    { "type": "color", "id": "button_color", "label": "Button text", "default": "#D4F53C" },
+    { "type": "range", "id": "height", "label": "Button height", "min": 40, "max": 64, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "size", "label": "Button text size", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 16 }
+  ],
+  "presets": [{ "name": "Refrain · Sticky CTA" }]
+}
+{% endschema %}
