@@ -23,7 +23,7 @@
         <div class="rf-hp__thumbs">
           {%- for block in slides -%}
             <button type="button" class="rf-hp__thumb{% if forloop.first %} is-active{% endif %}" data-rf-slide="{{ forloop.index0 }}" aria-label="Image {{ forloop.index }} sur {{ slides.size }}"{% if forloop.first %} aria-current="true"{% endif %}>
-              {% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: '', radius: 12, sizes: '80px' %}
+              {% render 'refrain-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: '', radius: 12, sizes: '80px', eager: true %}
             </button>
           {%- endfor -%}
         </div>
