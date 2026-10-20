@@ -11,6 +11,7 @@
   "sections": {
     "aurea_hero": {
       "type": "aurea-home-hero",
+      "disabled": true,
       "settings": {
         "image_desktop_asset": "aurea-home-hero-desktop.jpg",
         "image_mobile_asset": "aurea-home-hero-mobile.jpg",
@@ -82,6 +83,7 @@
         "item_6",
         "item_7"
       ],
+      "disabled": true,
       "settings": {}
     },
     "aurea_featured": {
@@ -132,6 +134,7 @@
         "benefit_5",
         "benefit_6"
       ],
+      "disabled": true,
       "settings": {
         "product": "aurea-abundance-bracelet",
         "eyebrow": "Our bestseller",
@@ -189,6 +192,7 @@
         "stone_2",
         "stone_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "The three stones",
         "heading": "Three stones. *One intention.*",
@@ -228,6 +232,7 @@
         "point_2",
         "point_3"
       ],
+      "disabled": true,
       "settings": {
         "scheme": "dark",
         "image_side": "left",
@@ -276,6 +281,7 @@
         "step_2",
         "step_3"
       ],
+      "disabled": true,
       "settings": {
         "scheme": "light",
         "image_side": "right",
@@ -351,6 +357,7 @@
         "card_5",
         "card_6"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Why they wear it",
         "heading": "Less worry. *More flow.*",
@@ -396,6 +403,7 @@
         "step_2",
         "step_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "What to expect",
         "heading": "What wearers *report*",
@@ -441,6 +449,7 @@
         "review_2",
         "review_3"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Reviews",
         "heading": "Loved by *our wearers*",
@@ -495,6 +504,7 @@
         "row_5",
         "row_6"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "",
         "heading": "Why *Aurea*",
@@ -614,6 +624,7 @@
         "q_7",
         "q_8"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "Good to know",
         "heading": "Questions, *answered*",
@@ -624,6 +635,7 @@
     },
     "aurea_final": {
       "type": "aurea-home-final",
+      "disabled": true,
       "settings": {
         "image_asset": "aurea-home-moon.jpg",
         "pill": "Full Moon Offer · Buy 1 Get 1 Free",
