@@ -532,6 +532,7 @@
     const KEY = 'refrain_quiz_v2';          /* localStorage: answers + step only (no token) */
     const PHOTO = {
       consentVersion: 'e9-v1', maxBytes: 10 * 1024 * 1024,
+      sendBytes: 3.5 * 1024 * 1024,           /* the API host caps a request at 4.5 MB: larger photos are downsized in the browser first */
       chosen: 'Photo choisie. Cochez la case ci-dessous, puis envoyez-la.',
       sending: 'Envoi de votre photo…',
       checking: 'Photo reçue, nous la vérifions…',
@@ -542,6 +543,7 @@
       removed: 'Photo retirée.',
       errors: {
         too_large: 'Ce fichier dépasse 10 Mo. Choisissez une photo plus légère.',
+        too_heavy: 'Cette photo est trop lourde à envoyer. Choisissez un JPG ou une photo plus légère.',
         unsupported_type: 'Format non reconnu : choisissez une photo JPG, PNG, HEIC ou WebP.',
         unsupported_media_type: 'Format non reconnu : choisissez une photo JPG, PNG, HEIC ou WebP.',
         heic_unsupported: 'Les photos HEIC ne sont pas encore acceptées : choisissez un JPG ou un PNG.',
@@ -1143,8 +1145,15 @@
         const btn = this.q('[data-photo-send]'); btn.disabled = true; btn.setAttribute('aria-busy', 'true');
         this.q('[data-photo-err]').hidden = true;
         this.q('[data-photo-status]').textContent = PHOTO.sending;
+        const file = await this.photoShrink(this._photoFile);
+        if (!file) {
+          btn.removeAttribute('aria-busy'); this._photoBusy = false;
+          btn.disabled = !this.q('[data-photo-consent]').checked;
+          this.q('[data-photo-status]').textContent = PHOTO.chosen;
+          return this.photoError(PHOTO.errors.too_heavy);
+        }
         const fd = new FormData();
-        fd.append('photo', this._photoFile, this._photoFile.name || 'photo.jpg');
+        fd.append('photo', file, file === this._photoFile ? (file.name || 'photo.jpg') : 'photo.jpg');
         fd.append('consent', '1');
         fd.append('consent_version', PHOTO.consentVersion);
         let r = null, j = {};
@@ -1162,6 +1171,24 @@
         this.q('[data-photo-confirm]').hidden = true;
         this.photoShow(PHOTO.checking, false);
         this.photoPoll(0);
+      }
+      /* Photos above PHOTO.sendBytes are re-encoded as JPEG (longest side 2560 px, then smaller) so the upload fits the
+         API host's request cap. Returns the file to send, or null when it is too heavy and cannot be decoded here. */
+      async photoShrink(file) {
+        if (file.size <= PHOTO.sendBytes) return file;
+        let bmp = null;
+        try { bmp = await createImageBitmap(file); } catch (e) { bmp = null; }
+        if (!bmp) return null;
+        for (const [side, q] of [[2560, 0.88], [2048, 0.85], [1600, 0.82]]) {
+          const k = Math.min(1, side / Math.max(bmp.width, bmp.height));
+          const c = document.createElement('canvas');
+          c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+          c.getContext('2d').drawImage(bmp, 0, 0, c.width, c.height);
+          const blob = await new Promise((ok) => c.toBlob(ok, 'image/jpeg', q));
+          if (blob && blob.size <= PHOTO.sendBytes) { try { bmp.close(); } catch (e) {} return blob; }
+        }
+        try { bmp.close(); } catch (e) {}
+        return null;
       }
       async photoPoll(n) {
         clearTimeout(this._photoTimer);
