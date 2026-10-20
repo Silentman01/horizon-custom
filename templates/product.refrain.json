@@ -472,7 +472,7 @@
         "demo_title": "",
         "demo_note": "",
         "demo_lyrics": "{name}, tu chantais faux dans la cuisine,\nEt moi je riais, assis sur la vitrine.\nToute ta vie dans une mélodie,\n{name}, c'est toi qui nous l'as appris.",
-        "eyebrow": "Chanson personnalisée",
+        "eyebrow": "",
         "heading": "Écoutez son extrait, *gratuitement*.",
         "sub": "Répondez à quelques questions sur la personne. Nous créons un extrait de sa chanson. Vous ne commandez que s'il vous touche.",
         "badge_1": "Écoutez avant de payer",
@@ -627,7 +627,7 @@
       ],
       "settings": {
         "background": "lilac",
-        "eyebrow": "Avis",
+        "eyebrow": "",
         "heading": "Des histoires mises en *chanson*",
         "subheading": "Ce qu'on nous raconte après l'écoute.",
         "anchor_id": "avis",
