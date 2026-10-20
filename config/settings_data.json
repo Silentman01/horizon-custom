@@ -10,8 +10,10 @@
 {
   "current": {
     "logo": "shopify://shop_images/refrain-logo-horizontal.png",
+    "logo_inverse": "shopify://shop_images/refrain-logo-horizontal-white.png",
     "logo_height": 40,
     "logo_height_mobile": 28,
+    "favicon": "shopify://shop_images/refrain-logo-square-180.png",
     "type_body_font": "plus_jakarta_sans_n4",
     "type_subheading_font": "plus_jakarta_sans_n6",
     "type_heading_font": "plus_jakarta_sans_n8",

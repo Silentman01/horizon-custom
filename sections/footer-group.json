@@ -52,33 +52,41 @@
             "padding-inline-start": 0,
             "padding-inline-end": 0
           },
-          "blocks": {}
+          "blocks": {
+            "image_yr8rgq": {
+              "type": "image",
+              "name": "t:names.image",
+              "settings": {
+                "image": "shopify://shop_images/refrain-logo-horizontal-white.png",
+                "link": "",
+                "image_ratio": "adapt",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "image_yr8rgq"
+          ]
         },
         "menu_footer": {
           "type": "menu",
           "settings": {
-            "menu": "footer",
-            "heading": "",
-            "menu_spacing": 12,
-            "show_as_accordion": false,
-            "accordion_icon": "plus",
-            "accordion_dividers": false,
-            "background_color": "",
-            "text_color": "",
-            "heading_preset": "paragraph",
-            "link_preset": "paragraph",
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
-        },
-        "menu_main": {
-          "type": "menu",
-          "settings": {
             "menu": "main-menu",
-            "heading": "",
+            "heading": "Menu",
             "menu_spacing": 12,
             "show_as_accordion": false,
             "accordion_icon": "plus",
@@ -97,8 +105,7 @@
       },
       "block_order": [
         "group_wErUQf",
-        "menu_footer",
-        "menu_main"
+        "menu_footer"
       ],
       "name": "t:names.footer",
       "settings": {
