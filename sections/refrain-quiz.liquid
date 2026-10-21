@@ -33,7 +33,6 @@
   assign st6 = sbs[5]
   assign st7 = sbs[6]
   assign st8 = sbs[7]
-  assign st9 = sbs[8]
   assign uid = 'rfq-' | append: section.id
   assign privacy_url = shop.privacy_policy.url | default: '/policies/privacy-policy'
   assign price_std = 19
@@ -95,7 +94,7 @@
 
       <form class="rf-quiz__form" data-form novalidate>
         <div class="rf-quiz__progress">
-          <span class="rf-quiz__count" data-step-label>Étape 1 sur 9</span>
+          <span class="rf-quiz__count" data-step-label>Étape 1 sur 8</span>
           <span class="rf-quiz__bar" aria-hidden="true"><i data-bar></i></span>
         </div>
 
@@ -216,27 +215,9 @@
             <label class="rf-chip"><input type="radio" name="language" value="fr" checked><span>Français</span></label>
             <label class="rf-chip"><input type="radio" name="language" value="en"><span>Anglais</span></label>
           </div>
-        </fieldset>
-
-        {%- comment -%} STEP 9 email {%- endcomment -%}
-        <fieldset class="rf-step" data-step="9" aria-describedby="{{ uid }}-h9" hidden>
-          <legend class="rf-step__t">{{ st9.settings.title }}</legend>
-          <p class="rf-step__help" id="{{ uid }}-h9">{{ st9.settings.help }}</p>
-          <div class="rf-field">
-            <label for="{{ uid }}-email">Votre e-mail</label>
-            <input id="{{ uid }}-email" type="email" name="email" required autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false" placeholder="vous@exemple.fr">
-          </div>
-          <label class="rf-check" for="{{ uid }}-consent">
-            <input id="{{ uid }}-consent" type="checkbox" name="consent" required>
-            <span>{{ st9.settings.placeholder_2 }}</span>
-          </label>
-          <label class="rf-check" for="{{ uid }}-reminders">
-            <input id="{{ uid }}-reminders" type="checkbox" name="reminders_opt_in">
-            <span>Je souhaite recevoir un rappel par e-mail si je n’ai pas encore commandé. <span class="rf-opt">(facultatif)</span></span>
-          </label>
-          <p class="rf-privacy">{% render 'refrain-icon', name: 'lock' %}<span>Vos réponses et votre e-mail servent à créer votre extrait. Pour en savoir plus, consultez notre <a href="{{ privacy_url }}" target="_blank" rel="noopener">politique de confidentialité<span class="rf-sr"> (nouvel onglet)</span></a>.</span></p>
           <div class="rf-quiz__trap" aria-hidden="true"><input type="text" name="hp" tabindex="-1" autocomplete="off" value=""></div>
         </fieldset>
+
 
         <p class="rf-quiz__err" id="{{ uid }}-err" data-err role="alert" hidden></p>
 
@@ -263,9 +244,7 @@
         <p class="rf-sr" role="status" data-load-live></p>
         <p class="rf-load__note" data-load-note>{{ section.settings.load_note }}</p>
         <div class="rf-load__slow" data-slow role="status" hidden>
-          {% render 'refrain-icon', name: 'mail' %}
           <p>{{ section.settings.load_slow }}</p>
-          <p class="rf-load__addr" data-slow-addr hidden>Adresse indiquée : <b data-slow-email></b></p>
           <div class="rf-load__actions">
             <button type="button" class="rf-btn rf-btn--ghost" data-check>Vérifier si l’extrait est prêt</button>
           </div>
@@ -319,12 +298,7 @@
               <input type="radio" name="tier" value="premium"{% if def_tier == 'premium' %} checked{% endif %}>
               {%- if section.settings.prem_badge != blank -%}<span class="rf-tier__badge">{{ section.settings.prem_badge }}</span>{%- endif -%}
               <span class="rf-tier__top"><b>{{ section.settings.prem_name }}</b><b class="rf-tier__price">{% if v_prem %}{{ v_prem.price | money_without_trailing_zeros }}{% else %}35 €{% endif %}</b></span>
-              {%- if v_prem and v_std and v_prem.price > v_std.price -%}
-                {%- assign diff = v_prem.price | minus: v_std.price -%}
-                <span class="rf-tier__delta">+{{ diff | money_without_trailing_zeros }} par rapport au {{ section.settings.std_name }}</span>
-              {%- elsif v_prem == nil and v_std == nil -%}
-                <span class="rf-tier__delta">+16 € par rapport au {{ section.settings.std_name }}</span>
-              {%- endif -%}
+              {%- if section.settings.prem_value_badge != blank -%}<span class="rf-tier__delta">{{ section.settings.prem_value_badge }}</span>{%- endif -%}
               <ul class="rf-tier__list rf-tier__list--prem">
                 {%- for pt in prem_pts -%}{%- assign pt = pt | strip -%}{%- if pt != blank -%}<li>{% render 'refrain-icon', name: 'check' %}<span>{{ pt }}</span></li>{%- endif -%}{%- endfor -%}
               </ul>
@@ -355,8 +329,7 @@
             </div>
             <p class="rf-photo__err" data-photo-err role="alert" hidden></p>
           </div>
-          <button type="button" class="rf-btn rf-offer__cta" data-buy aria-describedby="{{ uid }}-buyhint" data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
-          <p class="rf-offer__hint" id="{{ uid }}-buyhint" data-buy-hint>Utilisez la même adresse e-mail que pour l’extrait.</p>
+          <button type="button" class="rf-btn rf-offer__cta" data-buy data-label="{{ section.settings.cta_label | escape }}" data-demo-label="{{ section.settings.demo_cta | escape }}">{{ section.settings.cta_label }}</button>
           <p class="rf-offer__err" data-buy-err role="alert" hidden>{{ section.settings.cart_error }}</p>
           <p class="rf-offer__fine">{% render 'refrain-icon', name: 'lock' %}<span>{{ section.settings.cta_fine }}</span></p>
           {%- if section.settings.after_steps != blank -%}
@@ -447,7 +420,6 @@
   .rf-load__slow { margin-top: 18px; padding: 16px; border-radius: 16px; background: var(--rf-page); border: 1.5px solid var(--rf-line); font-size: 14px; line-height: 1.5; }
   .rf-load__slow > .rf-icon { width: 28px; height: 28px; color: var(--rf-violet); }
   .rf-load__slow p { margin: 6px 0 0; font-weight: 600; }
-  .rf-load__slow .rf-load__addr { font-weight: 500; color: var(--rf-ink-soft); overflow-wrap: anywhere; }
   .rf-load__actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px 12px; margin-top: 14px; }
   .rf-load__actions .rf-btn { min-height: 48px; padding: 0 22px; font-size: 15px; }
   .rf-load__fail { margin-top: 16px; }
@@ -559,7 +531,7 @@
     const TIER_KEY = 'refrain_tier_v1';    /* sessionStorage: { tier, variantId } shared with blocks/refrain-tiers.liquid */
     const SKEY = 'refrain_preview_v2';      /* sessionStorage: { id, token } (contract v2) */
     const TTL = 7 * 24 * 3600 * 1000;
-    const STEPS = 9;
+    const STEPS = 8;
     const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const fmt = (s) => { s = isFinite(s) ? Math.max(0, Math.floor(s)) : 0; return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
     const uuid = () => (window.crypto && crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => { const r = (Math.random() * 16) | 0; return (c === 'x' ? r : (r & 3) | 8).toString(16); }));
@@ -578,8 +550,6 @@
       name: 'Indiquez son prénom (ou le surnom que vous utilisez).',
       memory: (n) => 'Racontez un souvenir en quelques phrases : encore ' + n + ' caractère' + (n > 1 ? 's' : '') + ' au minimum.',
       max: 'Vous pouvez choisir jusqu’à 3 qualités. Retirez-en une pour en ajouter une autre.',
-      email: 'Indiquez une adresse e-mail valide, par exemple prenom@exemple.fr.',
-      consent: 'Cochez cette case pour que nous puissions créer et vous envoyer votre extrait.',
       other: 'Précisez votre choix en quelques mots.',
       reformulate: 'Merci de reformuler ce passage : certains contenus ne peuvent pas être mis en chanson.',
       invalid: 'Merci de vérifier ce champ.',
@@ -589,7 +559,7 @@
       playBlocked: 'Touchez à nouveau le bouton lecture pour lancer l’extrait.',
       reload: 'Le lien audio a expiré, il vient d’être renouvelé. Touchez lecture pour reprendre.'
     };
-    const FIELD_STEP = { recipient: 1, recipient_other: 1, occasion: 2, occasion_other: 2, name: 3, pronunciation: 3, style: 4, voice: 4, qualities: 5, qualities_text: 5, memory: 6, message: 7, language: 8, email: 9, consent: 9 };
+    const FIELD_STEP = { recipient: 1, recipient_other: 1, occasion: 2, occasion_other: 2, name: 3, pronunciation: 3, style: 4, voice: 4, qualities: 5, qualities_text: 5, memory: 6, message: 7, language: 8 };
     const STAGES = ['Histoire', 'Paroles', 'Musique', 'Extrait'];
 
     class RefrainQuiz extends HTMLElement {
@@ -790,8 +760,7 @@
           style: val('style'), voice: val('voice'),
           qualities: f.getAll('qualities'), qualities_text: (f.get('qualities_text') || '').trim(),
           memory: (f.get('memory') || '').trim(), message: (f.get('message') || '').trim(),
-          language: val('language') || 'fr',
-          email: (f.get('email') || '').trim(), consent: !!f.get('consent'), reminders_opt_in: !!f.get('reminders_opt_in')
+          language: val('language') || 'fr'
         };
       }
 
@@ -807,7 +776,7 @@
         ['recipient', 'occasion'].forEach((n) => { const b = this.q(`[data-other="${n}"]`); if (b) b.hidden = !/^autre/.test(a[n] || ''); });
       }
 
-      save() { const a = this.answers(); delete a.consent; store.set({ answers: a, step: this.step }); }
+      save() { const a = this.answers(); store.set({ answers: a, step: this.step }); }
 
       counter(el) {
         const c = el && el.name && this.q(`[data-count-for="${el.name}"]`);
@@ -864,10 +833,6 @@
         if (n === 2 && /^autre/.test(a.occasion) && !a.occasion_other) return [MSG.other, wrap('occasion_other')];
         if (n === 3 && !a.name) return [MSG.name, wrap('name')];
         if (n === 6 && a.memory.length < 20) return [MSG.memory(20 - a.memory.length), wrap('memory')];
-        if (n === 9) {
-          if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(a.email)) return [MSG.email, wrap('email')];
-          if (!a.consent) return [MSG.consent, wrap('consent')];
-        }
         return null;
       }
 
@@ -927,12 +892,11 @@
         if (this.dataset.forceDemo === 'true' || !this.api || /REFRAIN-DOMAIN/.test(this.api)) { this.showLoading(); return this.demo(); }
         this.showLoading();
         this._rid = this._rid || uuid();     /* same id on retries: the API replays instead of creating a duplicate */
-        const answers = { ...a }; delete answers.email; delete answers.consent; delete answers.reminders_opt_in;
+        const answers = { ...a };   /* no e-mail in the quiz: the Shopify checkout collects it */
         const body = JSON.stringify({
-          email: a.email, consent: a.consent, answers,
+          answers,
           hp: (this.q('[name="hp"]') || {}).value || '',
           started_at: this.startedAt || new Date().toISOString(),
-          reminders_opt_in: a.reminders_opt_in,
           client_request_id: this._rid,
           source: { url: location.origin + location.pathname }
         });
@@ -974,8 +938,7 @@
         if (!this.session) return;
         if (!this.api || /REFRAIN-DOMAIN/.test(this.api)) return this.demo();
         const el = Date.now() - this.t0;
-        if (el > 10 * 60 * 1000) return this.emailState(true);
-        if (el > 120 * 1000) this.emailState();
+        if (el > 120 * 1000) this.slowState();   /* "Votre extrait arrive…": keeps polling (the backend times out at 15 min -> failed) */
         let r;
         try {
           r = await fetch(this.api + '/api/preview/' + encodeURIComponent(this.session.id), { headers: { 'X-Refrain-Token': this.session.token }, cache: 'no-store' });
@@ -990,7 +953,6 @@
         const d = await r.json().catch(() => ({}));
         this._errs = 0;
         this.stage(Number(d.step) || 1);
-        if (d.email_fallback) this.emailState();
         if (d.status === 'failed') return this.fail('error');
         if (d.status === 'ready' && d.preview_url) {
           this.q('[data-slow]').hidden = true;
@@ -1019,13 +981,9 @@
         setTimeout(() => { this._refreshing = false; }, 30000);
       }
 
-      emailState(final) {
-        const box = this.q('[data-slow]');
-        const em = this.answers().email;
-        if (em) { this.q('[data-slow-email]').textContent = em; this.q('[data-slow-addr]').hidden = false; }
-        box.hidden = false;
+      slowState() {
+        this.q('[data-slow]').hidden = false;
         this.q('[data-load-note]').hidden = true;
-        if (final) clearTimeout(this._timer);
       }
 
       demo() {
@@ -1223,8 +1181,6 @@
         const btn = this.q('[data-buy]');
         btn.textContent = this.isDemo ? btn.dataset.demoLabel : btn.dataset.label;
         btn.disabled = !!this.isDemo;
-        this.q('[data-buy-hint]').hidden = !!this.isDemo;
-        this.q('[data-buy-hint]').textContent = 'Utilisez la même adresse e-mail que pour l’extrait.';
       }
 
       async buy() {
@@ -1241,6 +1197,8 @@
         };
         const root = window.Shopify && Shopify.routes ? Shopify.routes.root : '/';
         try {
+          /* One song per checkout: an earlier preview left in the cart would be paid twice. clear.js needs a JSON body (bare POST = 411). */
+          await fetch(root + 'cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: '{}' }).catch(() => {});
           const r = await fetch(root + 'cart/add.js', {
             method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ items: [{ id, quantity: 1, properties }] })
@@ -1383,7 +1341,7 @@
       "type": "text",
       "id": "load_slow",
       "label": "Over 120 s",
-      "default": "C’est un peu plus long que prévu. Nous vous envoyons l’extrait par e-mail dès qu’il est prêt."
+      "default": "Votre extrait arrive, gardez cette page ouverte."
     },
     {
       "type": "text",
@@ -1433,6 +1391,12 @@
       "type": "text",
       "id": "prem_badge",
       "label": "Premium badge"
+    },
+    {
+      "type": "text",
+      "id": "prem_value_badge",
+      "label": "Premium value badge",
+      "default": "Clip vidéo + illustration inclus"
     },
     {
       "type": "textarea",
@@ -1545,13 +1509,6 @@
           "settings": {
             "title": "En quelle langue ?"
           }
-        },
-        {
-          "type": "step",
-          "settings": {
-            "title": "Où vous envoyer l’extrait ?",
-            "placeholder_2": "J’accepte de recevoir mon extrait et des e-mails de Refrain. Désinscription en un clic."
-          }
         }
       ]
     }
@@ -1590,7 +1547,7 @@
         {
           "type": "textarea",
           "id": "placeholder_2",
-          "label": "Placeholder 2 / consent (step 9)"
+          "label": "Placeholder 2"
         }
       ]
     }
