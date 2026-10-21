@@ -1,0 +1,84 @@
+<!doctype html>
+{%- comment -%}
+  Refrain v2 funnel layout (picked by templates/product.refrain-v2.json through its "layout" key).
+  Started from layout/theme.liquid. Same head (meta, theme CSS, fonts, scripts, CSS variables, content_for_header,
+  so app embeds and the '@shopify/events' import map keep working). Differences:
+  - its own section groups: rf2-header-group (logo only, not sticky) and rf2-footer-group (copyright, policies, contact);
+  - no chat drawer, no search modal, no quick-add modal, no header-height measuring script;
+  - KEEPS Horizon's cart drawer + theme-drawer: the quiz's buy button adds the song to the cart, then opens the drawer,
+    and the visitor checks out from it (operator update 2, AddToCart events on Shopify and Meta).
+  The global header/footer groups and layout/theme.liquid are untouched.
+{%- endcomment -%}
+<html
+  {% if request.design_mode %}
+    class="shopify-design-mode"
+  {% endif %}
+  lang="{{ request.locale.iso_code }}"
+  dir="{{ request.locale.direction | default: 'ltr' }}"
+>
+  <head>
+    {%- if settings.favicon != blank -%}
+      <link
+        rel="icon"
+        type="image/png"
+        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
+      >
+    {%- endif -%}
+
+    {%- render 'meta-tags' -%}
+    {%- render 'stylesheets' -%}
+    {%- render 'fonts' -%}
+    {%- render 'scripts' -%}
+    {%- render 'theme-styles-variables' -%}
+    {%- render 'color-palette' -%}
+
+    {% if request.design_mode %}
+      {%- render 'theme-editor' -%}
+    {% endif %}
+
+    <style>
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+      #quiz { scroll-margin-top: 0; }
+      .rf2-layout__main { display: block; }
+      /* The drawer stays focused on checkout: no "continue shopping" exit in its empty state. */
+      #cart-drawer .cart-items__empty-button { display: none; }
+      /* One song per order (one _preview_id): no quantity stepper (the remove button stays), and the line title and image
+         do not link back to the product page (that would reload the funnel). Scoped to this layout only. */
+      #cart-drawer .cart-items__quantity .quantity-selector-wrapper,
+      #cart-drawer .cart-items__quantity .quantity-selector { display: none; }
+      #cart-drawer .cart-items__title,
+      #cart-drawer .cart-items__media-container { pointer-events: none; cursor: default; }
+    </style>
+
+    {{ content_for_header }}
+  </head>
+
+  <body class="rf2-funnel page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
+
+    <div class="page-wrapper">
+      <div class="rf2-layout__header">
+        {% sections 'rf2-header-group' %}
+      </div>
+
+      <main
+        id="MainContent"
+        class="content-for-layout rf2-layout__main"
+        role="main"
+        data-page-transition-enabled="{{ settings.page_transition_enabled }}"
+        data-product-transition="{{ settings.transition_to_main_product }}"
+        data-template="{{ template }}"
+      >
+        {{ content_for_layout }}
+      </main>
+
+      <footer class="rf2-layout__footer">
+        {% sections 'rf2-footer-group' %}
+      </footer>
+    </div>
+
+    {% render 'cart-drawer', render_wrapper: true %}
+    {% render 'theme-drawer' %}
+  </body>
+</html>

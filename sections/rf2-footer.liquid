@@ -1,0 +1,87 @@
+{%- comment -%}
+  Refrain v2 funnel footer (section group rf2-footer-group, layout theme.rf2-funnel).
+  © year + brand, the legal policy links (shop.policies) and the contact e-mail. No socials, no menus,
+  no payment icons, no "Powered by". Class prefix rf2-f.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign email = ss.contact_email | default: shop.email
+-%}
+<div
+  class="rf2-f rf2-f--{{ ss.align }}{% if ss.hide_mobile %} rf2-f--hide-m{% endif %}{% if ss.hide_desktop %} rf2-f--hide-d{% endif %}"
+  style="--rf2-f-bg: {{ ss.c_bg }}; --rf2-f-text: {{ ss.c_text }}; --rf2-f-link: {{ ss.c_link }}; --rf2-f-fs: {{ ss.text_size }}px; --rf2-f-fs-d: {{ ss.text_size_d }}px; --rf2-f-pt: {{ ss.pad_top }}px; --rf2-f-pb: {{ ss.pad_bottom }}px; --rf2-f-pt-d: {{ ss.pad_top_d }}px; --rf2-f-pb-d: {{ ss.pad_bottom_d }}px; --rf2-f-font: {% if ss.font == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif;"
+>
+  <div class="rf2-f__in">
+    {%- if ss.show_contact and email != blank -%}
+      <p class="rf2-f__contact">
+        {%- if ss.contact_prefix != blank -%}{{ ss.contact_prefix | escape }} {% endif -%}
+        <a class="rf2-f__link" href="mailto:{{ email | escape }}">{{ email | escape }}</a>
+      </p>
+    {%- endif -%}
+    {%- if ss.show_policies and shop.policies.size > 0 -%}
+      <ul class="rf2-f__policies" role="list">
+        {%- for policy in shop.policies -%}
+          <li><a class="rf2-f__link" href="{{ policy.url }}">{{ policy.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if ss.show_copyright -%}
+      <p class="rf2-f__copy">&copy; {{ 'now' | date: '%Y' }} {{ ss.copyright_name | default: shop.name | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+{%- if ss.font == 'brand' -%}{% render 'refrain-fonts' %}{%- endif -%}
+
+<style>
+  .rf2-f { background: var(--rf2-f-bg); color: var(--rf2-f-text); font-family: var(--rf2-f-font); font-size: var(--rf2-f-fs); line-height: 1.5; padding: var(--rf2-f-pt) 16px calc(var(--rf2-f-pb) + env(safe-area-inset-bottom, 0px)); }
+  .rf2-f__in { max-width: 960px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .rf2-f--center .rf2-f__in { align-items: center; text-align: center; }
+  .rf2-f--left .rf2-f__in { align-items: flex-start; text-align: left; }
+  .rf2-f__contact, .rf2-f__copy { margin: 0; }
+  .rf2-f__copy { opacity: 0.75; }
+  .rf2-f__policies { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: inherit; }
+  .rf2-f--center .rf2-f__policies { justify-content: center; }
+  .rf2-f__link { color: var(--rf2-f-link); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; padding: 6px 0; display: inline-block; }
+  .rf2-f__link:hover { text-decoration-thickness: 2px; }
+  .rf2-f__link:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 2px; }
+  @media (max-width: 749px) { .rf2-f--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-f { font-size: var(--rf2-f-fs-d); padding-top: var(--rf2-f-pt-d); padding-bottom: calc(var(--rf2-f-pb-d) + env(safe-area-inset-bottom, 0px)); }
+    .rf2-f--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Footer",
+  "tag": "div",
+  "class": "rf2-footer-section",
+  "enabled_on": { "groups": ["footer"] },
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_contact", "label": "Show the contact e-mail", "default": true },
+    { "type": "text", "id": "contact_prefix", "label": "Text before the e-mail", "default": "Une question ?" },
+    { "type": "text", "id": "contact_email", "label": "Contact e-mail", "default": "contact@mon-refrain.com", "info": "Empty = the store e-mail." },
+    { "type": "checkbox", "id": "show_policies", "label": "Show the policy links", "default": true, "info": "Lists the policies set in Settings > Policies." },
+    { "type": "checkbox", "id": "show_copyright", "label": "Show the copyright line", "default": true },
+    { "type": "text", "id": "copyright_name", "label": "Name after the year", "default": "Refrain" },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "font", "label": "Font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "text_size", "label": "Text size (mobile)", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 13 },
+    { "type": "range", "id": "text_size_d", "label": "Text size (desktop)", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_text", "label": "Text", "default": "#DCCFFF" },
+    { "type": "color", "id": "c_link", "label": "Links", "default": "#FFFFFF" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 36 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 36 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain v2 · Footer" } ]
+}
+{% endschema %}

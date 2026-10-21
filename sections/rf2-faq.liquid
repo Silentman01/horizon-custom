@@ -1,0 +1,144 @@
+{%- comment -%}
+  Refrain v2 · objections FAQ (one block per question, native <details>). Answers use validated claims only: no refund
+  or withdrawal wording (the policies stay in the footer links). A block can hide itself after a date (e.g. the
+  Christmas question). Hidden while the quiz wait/reveal is on. Class prefix rf2-fq.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign brand = false
+  if ss.font_heading == 'brand' or ss.font_body == 'brand'
+    assign brand = true
+  endif
+  assign has_dates = false
+-%}
+{%- if brand -%}{% render 'refrain-fonts' %}{%- endif -%}
+<div
+  class="rf2-fq rf2-fq--{{ ss.align }}{% if ss.hide_mobile %} rf2-fq--hide-m{% endif %}{% if ss.hide_desktop %} rf2-fq--hide-d{% endif %}"
+  style="--rf2-fq-bg: {{ ss.c_bg }}; --rf2-fq-card: {{ ss.c_card }}; --rf2-fq-text: {{ ss.c_text }}; --rf2-fq-soft: {{ ss.c_soft }}; --rf2-fq-accent: {{ ss.c_accent }}; --rf2-fq-w: {{ ss.width }}px; --rf2-fq-title: {{ ss.title_size }}px; --rf2-fq-title-d: {{ ss.title_size_d }}px; --rf2-fq-fs: {{ ss.body_size }}px; --rf2-fq-fs-d: {{ ss.body_size_d }}px; --rf2-fq-pt: {{ ss.pad_top }}px; --rf2-fq-pb: {{ ss.pad_bottom }}px; --rf2-fq-pt-d: {{ ss.pad_top_d }}px; --rf2-fq-pb-d: {{ ss.pad_bottom_d }}px; --rf2-fq-head: {% if ss.font_heading == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-heading--family, system-ui), system-ui, sans-serif; --rf2-fq-body: {% if ss.font_body == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif; --rf2-fq-serif: {% if ss.font_heading == 'brand' %}'Fraunces', {% endif %}var(--font-heading--family, Georgia), Georgia, serif;"
+>
+  <div class="rf2-fq__in">
+    {%- if ss.show_title and ss.title != blank -%}
+      <h2 class="rf2-fq__title">{% render 'rf2-accent', text: ss.title %}</h2>
+    {%- endif -%}
+    <div class="rf2-fq__list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.question == blank -%}{%- continue -%}{%- endif -%}
+        {%- if block.settings.hide_after != blank -%}{%- assign has_dates = true -%}{%- endif -%}
+        <details
+          class="rf2-fq__item"
+          {% if block.settings.hide_after != blank %}data-rf2-fq-until="{{ block.settings.hide_after | escape }}"{% endif %}
+          {% if ss.open_first and forloop.first %}open{% endif %}
+          {{ block.shopify_attributes }}
+        >
+          <summary class="rf2-fq__q">
+            <span>{{ block.settings.question | escape }}</span>
+            <span class="rf2-fq__plus" aria-hidden="true"></span>
+          </summary>
+          <div class="rf2-fq__a">{{ block.settings.answer | escape | newline_to_br }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{%- if has_dates -%}
+  <script>
+    (function () {
+      document.querySelectorAll('[data-rf2-fq-until]').forEach(function (el) {
+        var v = String(el.getAttribute('data-rf2-fq-until') || '').trim();
+        var until = new Date(/T/.test(v) ? v : v + 'T23:59:59+01:00');
+        if (!isNaN(until) && Date.now() > until.getTime()) el.hidden = true;
+      });
+    })();
+  </script>
+{%- endif -%}
+
+<style>
+  .rf2-fq { background: var(--rf2-fq-bg); color: var(--rf2-fq-text); font-family: var(--rf2-fq-body); padding: var(--rf2-fq-pt) 16px var(--rf2-fq-pb); }
+  body.rf2-focus .rf2-fq { display: none; }
+  .rf2-fq__in { max-width: var(--rf2-fq-w); margin: 0 auto; }
+  .rf2-fq--center .rf2-fq__title { text-align: center; }
+  .rf2-fq__title { margin: 0 0 18px; font-family: var(--rf2-fq-head); font-weight: 800; font-size: var(--rf2-fq-title); line-height: 1.15; letter-spacing: -0.01em; }
+  .rf2-fq__title em { font-family: var(--rf2-fq-serif); font-style: italic; font-weight: 600; color: var(--rf2-fq-accent); }
+  .rf2-fq__list { display: grid; gap: 10px; }
+  .rf2-fq__item { background: var(--rf2-fq-card); border-radius: 16px; }
+  .rf2-fq__q { list-style: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 56px; padding: 14px 16px; cursor: pointer; font-weight: 800; font-size: var(--rf2-fq-fs); line-height: 1.35; }
+  .rf2-fq__q::-webkit-details-marker { display: none; }
+  .rf2-fq__q:focus-visible { outline: 2px solid var(--rf2-fq-accent); outline-offset: 2px; border-radius: 16px; }
+  .rf2-fq__plus { flex: 0 0 20px; height: 20px; position: relative; color: var(--rf2-fq-accent); }
+  .rf2-fq__plus::before, .rf2-fq__plus::after { content: ''; position: absolute; left: 2px; right: 2px; top: 9px; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.2s ease; }
+  .rf2-fq__plus::after { transform: rotate(90deg); }
+  .rf2-fq__item[open] .rf2-fq__plus::after { transform: rotate(0deg); }
+  .rf2-fq__a { padding: 0 16px 16px; font-size: var(--rf2-fq-fs); line-height: 1.55; color: var(--rf2-fq-soft); }
+  @media (prefers-reduced-motion: reduce) { .rf2-fq__plus::before, .rf2-fq__plus::after { transition: none; } }
+  @media (max-width: 749px) { .rf2-fq--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-fq { padding-top: var(--rf2-fq-pt-d); padding-bottom: var(--rf2-fq-pb-d); }
+    .rf2-fq__title { font-size: var(--rf2-fq-title-d); }
+    .rf2-fq__q, .rf2-fq__a { font-size: var(--rf2-fq-fs-d); }
+    .rf2-fq__q { padding: 16px 20px; }
+    .rf2-fq__a { padding: 0 20px 18px; }
+    .rf2-fq--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · FAQ",
+  "tag": "section",
+  "class": "rf2-faq-section",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_title", "label": "Show the title", "default": true },
+    { "type": "text", "id": "title", "label": "Title", "default": "Tes *questions*", "info": "Wrap one word in *stars* for the italic accent." },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": false },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#F6F2FF" },
+    { "type": "color", "id": "c_card", "label": "Question card", "default": "#FFFFFF" },
+    { "type": "color", "id": "c_text", "label": "Questions", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_soft", "label": "Answers", "default": "#3D2F6B" },
+    { "type": "color", "id": "c_accent", "label": "Accent (italic, +/− icon)", "default": "#6A4BD8" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font_heading", "label": "Heading font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans + Fraunces)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "font_body", "label": "Body font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size (mobile)", "min": 18, "max": 40, "step": 1, "unit": "px", "default": 26 },
+    { "type": "range", "id": "title_size_d", "label": "Title size (desktop)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 34 },
+    { "type": "range", "id": "body_size", "label": "Text size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "body_size_d", "label": "Text size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Title alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "range", "id": "width", "label": "Content width", "min": 320, "max": 960, "step": 10, "unit": "px", "default": 640 },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "C’est vraiment gratuit ?" },
+        { "type": "textarea", "id": "answer", "label": "Answer", "default": "Oui. Tu réponds aux questions, tu écoutes l’extrait. Ni carte bancaire, ni e-mail, ni numéro. Tu paies seulement s’il te touche.", "info": "Validated claims only. No refund or withdrawal wording." },
+        { "type": "text", "id": "hide_after", "label": "Hide after (YYYY-MM-DD, optional)", "info": "E.g. 2026-12-20 for the Christmas question. Paris time, end of that day." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refrain v2 · FAQ",
+      "blocks": [
+        { "type": "item", "settings": { "question": "C’est vraiment gratuit ?", "answer": "Oui. Tu réponds aux questions, tu écoutes l’extrait. Ni carte bancaire, ni e-mail, ni numéro. Tu paies seulement s’il te touche." } },
+        { "type": "item", "settings": { "question": "Et si son prénom est rare ?", "answer": "Tu peux écrire comment il se prononce. On s’en sert pour le chant. Le prénom reste écrit comme tu l’as tapé." } },
+        { "type": "item", "settings": { "question": "Qu’est-ce que je reçois ?", "answer": "2 versions de sa chanson et toutes les paroles, par e-mail, pour 19 €. Cadeau Premium (35 €) : + le clip paroles, la pochette, en priorité 12 h." } },
+        { "type": "item", "settings": { "question": "Elle arrivera avant Noël ?", "answer": "Oui, si tu commandes avant le 20 décembre.", "hide_after": "2026-12-20" } },
+        { "type": "item", "settings": { "question": "Et si la chanson ne me touche pas ?", "answer": "Tu l’as écoutée avant de payer. Tu paies seulement si elle te touche. Après la commande, tu as droit aux retouches illimitées." } },
+        { "type": "item", "settings": { "question": "Comment l’offrir ?", "answer": "Tu la reçois par e-mail. Fais-la écouter le soir du réveillon. Ou passe le clip Premium sur la télé." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

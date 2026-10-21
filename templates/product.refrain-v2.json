@@ -1,0 +1,269 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "theme.rf2-funnel",
+  "sections": {
+    "quiz": {
+      "type": "rf2-quiz",
+      "blocks": {
+        "q_landing_1": {
+          "type": "landing",
+          "settings": {}
+        },
+        "q_quiz_2": {
+          "type": "quiz",
+          "settings": {}
+        },
+        "q_s1_3": {
+          "type": "s1",
+          "settings": {}
+        },
+        "q_s2_4": {
+          "type": "s2",
+          "settings": {}
+        },
+        "q_s3_5": {
+          "type": "s3",
+          "settings": {}
+        },
+        "q_s4_6": {
+          "type": "s4",
+          "settings": {}
+        },
+        "q_s5_7": {
+          "type": "s5",
+          "settings": {}
+        },
+        "q_s6_8": {
+          "type": "s6",
+          "settings": {}
+        },
+        "q_s7_9": {
+          "type": "s7",
+          "settings": {}
+        },
+        "q_recap_10": {
+          "type": "recap",
+          "settings": {}
+        },
+        "q_errors_11": {
+          "type": "errors",
+          "settings": {}
+        },
+        "q_wait_12": {
+          "type": "wait",
+          "settings": {}
+        },
+        "q_reveal_13": {
+          "type": "reveal",
+          "settings": {}
+        },
+        "q_offer_14": {
+          "type": "offer",
+          "settings": {}
+        },
+        "q_photo_15": {
+          "type": "photo",
+          "settings": {}
+        },
+        "q_resume_16": {
+          "type": "resume",
+          "settings": {}
+        },
+        "q_examples_17": {
+          "type": "examples",
+          "settings": {
+            "field": "s5",
+            "tone": "emotional",
+            "lines": "[maman] « T’as mangé ? », à chaque appel, même à 22 h.\n[papa] « On ne laisse jamais un travail à moitié. »\n[grand-parent] « Reprends-en, tu as maigri. »\n[partenaire] « Rentre bien, envoie-moi un message. »\n[ami] « Appelle-moi quand tu veux, même à 3 h du matin. »\n[enfant] « Encore une histoire, la toute dernière. »\n« Allez, file, tu vas être en retard. »\n« On n’est pas aux pièces. »"
+          }
+        },
+        "q_examples_18": {
+          "type": "examples",
+          "settings": {
+            "field": "s5",
+            "tone": "funny",
+            "lines": "[maman] Range nos affaires, puis nous demande où on les a mises.\n[papa] « C’est une affaire », sur tout ce qu’il rapporte du vide-grenier.\n[grand-parent] « Je ne triche pas, je compte vite », aux cartes.\n[partenaire] « J’ai pas faim »… puis finit mon assiette.\n[ami] « Je suis en bas », encore sous la douche.\n[enfant] Négocie chaque soir « juste 5 minutes » de plus.\n« Je ne dors pas, je réfléchis », devant chaque film.\nPerd ses lunettes… posées sur sa tête."
+          }
+        },
+        "q_examples_19": {
+          "type": "examples",
+          "settings": {
+            "field": "s6",
+            "tone": "emotional",
+            "lines": "[papa] Le jour où il a lâché mon vélo dans la cour. Il courait derrière en criant « pédale ».\n[maman] Le matin du bac, elle m’attendait devant le lycée avec deux croissants.\n[grand-parent] Les étés chez eux : la radio, la véranda, les cartes jusqu’à minuit.\n[partenaire] Notre premier appart sans chauffage : on dormait en manteau, et on riait.\n[ami] La panne à 2 h du matin : tout l’album chanté en attendant.\n[enfant] Le premier jour d’école : sa petite main qui ne lâchait pas la mienne.\nLe train raté : une soirée entière à parler sur un quai."
+          }
+        },
+        "q_examples_20": {
+          "type": "examples",
+          "settings": {
+            "field": "s6",
+            "tone": "funny",
+            "lines": "[papa] L’armoire montée sans la notice. Il reste encore trois vis dans le tiroir.\n[maman] Au karaoké du mariage, elle a gardé le micro toute la nuit.\n[grand-parent] La partie de belote où on a vu la triche… et le refus d’avouer jusqu’au dessert.\n[partenaire] Premier rendez-vous : 40 minutes à chercher une place, pour un resto fermé.\n[ami] Sa propre fête surprise : c’est nous qui avons attendu une heure.\n[enfant] Ses premiers pas : droit vers le chien, pas vers nous.\nLe camping sous la pluie : la tente à l’envers, et le fou rire."
+          }
+        }
+      },
+      "block_order": [
+        "q_landing_1",
+        "q_quiz_2",
+        "q_s1_3",
+        "q_s2_4",
+        "q_s3_5",
+        "q_s4_6",
+        "q_s5_7",
+        "q_s6_8",
+        "q_s7_9",
+        "q_recap_10",
+        "q_errors_11",
+        "q_wait_12",
+        "q_reveal_13",
+        "q_offer_14",
+        "q_photo_15",
+        "q_resume_16",
+        "q_examples_17",
+        "q_examples_18",
+        "q_examples_19",
+        "q_examples_20"
+      ],
+      "settings": {
+        "api_base": "https://api.mon-refrain.com",
+        "force_demo": false
+      }
+    },
+    "sample": {
+      "type": "rf2-sample",
+      "blocks": {
+        "smp_sample_1": {
+          "type": "sample",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "smp_sample_1"
+      ],
+      "settings": {}
+    },
+    "steps": {
+      "type": "rf2-steps",
+      "blocks": {
+        "stp_step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Ses mots",
+            "text": "Tu réponds à 7 petites questions : ses phrases, un souvenir."
+          }
+        },
+        "stp_step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Ses paroles",
+            "text": "On écrit sa chanson autour de son prénom."
+          }
+        },
+        "stp_step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Sa chanson",
+            "text": "Tu écoutes l’extrait gratuit. Tu paies seulement s’il te touche."
+          }
+        }
+      },
+      "block_order": [
+        "stp_step_1",
+        "stp_step_2",
+        "stp_step_3"
+      ],
+      "settings": {}
+    },
+    "info": {
+      "type": "rf2-offer-info",
+      "settings": {}
+    },
+    "risk": {
+      "type": "rf2-risk",
+      "settings": {}
+    },
+    "faq": {
+      "type": "rf2-faq",
+      "blocks": {
+        "fq_item_1": {
+          "type": "item",
+          "settings": {
+            "question": "C’est vraiment gratuit ?",
+            "answer": "Oui. Tu réponds aux questions, tu écoutes l’extrait. Ni carte bancaire, ni e-mail, ni numéro. Tu paies seulement s’il te touche."
+          }
+        },
+        "fq_item_2": {
+          "type": "item",
+          "settings": {
+            "question": "Et si son prénom est rare ?",
+            "answer": "Tu peux écrire comment il se prononce. On s’en sert pour le chant. Le prénom reste écrit comme tu l’as tapé."
+          }
+        },
+        "fq_item_3": {
+          "type": "item",
+          "settings": {
+            "question": "Qu’est-ce que je reçois ?",
+            "answer": "2 versions de sa chanson et toutes les paroles, par e-mail, pour 19 €. Cadeau Premium (35 €) : + le clip paroles, la pochette, en priorité 12 h."
+          }
+        },
+        "fq_item_4": {
+          "type": "item",
+          "settings": {
+            "question": "Elle arrivera avant Noël ?",
+            "answer": "Oui, si tu commandes avant le 20 décembre.",
+            "hide_after": "2026-12-20"
+          }
+        },
+        "fq_item_5": {
+          "type": "item",
+          "settings": {
+            "question": "Et si la chanson ne me touche pas ?",
+            "answer": "Tu l’as écoutée avant de payer. Tu paies seulement si elle te touche. Après la commande, tu as droit aux retouches illimitées."
+          }
+        },
+        "fq_item_6": {
+          "type": "item",
+          "settings": {
+            "question": "Comment l’offrir ?",
+            "answer": "Tu la reçois par e-mail. Fais-la écouter le soir du réveillon. Ou passe le clip Premium sur la télé."
+          }
+        }
+      },
+      "block_order": [
+        "fq_item_1",
+        "fq_item_2",
+        "fq_item_3",
+        "fq_item_4",
+        "fq_item_5",
+        "fq_item_6"
+      ],
+      "settings": {}
+    },
+    "final_cta": {
+      "type": "rf2-final-cta",
+      "settings": {}
+    },
+    "sticky_cta": {
+      "type": "rf2-sticky-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "quiz",
+    "sample",
+    "steps",
+    "info",
+    "risk",
+    "faq",
+    "final_cta",
+    "sticky_cta"
+  ]
+}

@@ -1,0 +1,94 @@
+{%- comment -%}
+  Refrain v2 · risk reversal: only the validated claims (listen first, pay only if it moves you, retouches illimitées).
+  No refund or withdrawal wording here: the legal policies live in the footer links. Hidden while the quiz wait/reveal is on.
+  Class prefix rf2-rk.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign brand = false
+  if ss.font_heading == 'brand' or ss.font_body == 'brand'
+    assign brand = true
+  endif
+-%}
+{%- if brand -%}{% render 'refrain-fonts' %}{%- endif -%}
+<div
+  class="rf2-rk rf2-rk--{{ ss.align }}{% if ss.hide_mobile %} rf2-rk--hide-m{% endif %}{% if ss.hide_desktop %} rf2-rk--hide-d{% endif %}"
+  style="--rf2-rk-bg: {{ ss.c_bg }}; --rf2-rk-card: {{ ss.c_card }}; --rf2-rk-text: {{ ss.c_text }}; --rf2-rk-soft: {{ ss.c_soft }}; --rf2-rk-accent: {{ ss.c_accent }}; --rf2-rk-icon-bg: {{ ss.c_icon_bg }}; --rf2-rk-icon: {{ ss.c_icon }}; --rf2-rk-w: {{ ss.width }}px; --rf2-rk-title: {{ ss.title_size }}px; --rf2-rk-title-d: {{ ss.title_size_d }}px; --rf2-rk-fs: {{ ss.body_size }}px; --rf2-rk-fs-d: {{ ss.body_size_d }}px; --rf2-rk-pt: {{ ss.pad_top }}px; --rf2-rk-pb: {{ ss.pad_bottom }}px; --rf2-rk-pt-d: {{ ss.pad_top_d }}px; --rf2-rk-pb-d: {{ ss.pad_bottom_d }}px; --rf2-rk-head: {% if ss.font_heading == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-heading--family, system-ui), system-ui, sans-serif; --rf2-rk-body: {% if ss.font_body == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif; --rf2-rk-serif: {% if ss.font_heading == 'brand' %}'Fraunces', {% endif %}var(--font-heading--family, Georgia), Georgia, serif;"
+>
+  <div class="rf2-rk__in">
+    <div class="rf2-rk__card">
+      {%- if ss.show_icon -%}
+        <span class="rf2-rk__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-6h3zM3 19a2 2 0 0 0 2 2h1v-6H3z"/></svg>
+        </span>
+      {%- endif -%}
+      {%- if ss.show_title and ss.title != blank -%}
+        <h2 class="rf2-rk__title">{% render 'rf2-accent', text: ss.title %}</h2>
+      {%- endif -%}
+      {%- if ss.text != blank -%}
+        <p class="rf2-rk__text">{{ ss.text | escape }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .rf2-rk { background: var(--rf2-rk-bg); color: var(--rf2-rk-text); font-family: var(--rf2-rk-body); padding: var(--rf2-rk-pt) 16px var(--rf2-rk-pb); }
+  body.rf2-focus .rf2-rk { display: none; }
+  .rf2-rk__in { max-width: var(--rf2-rk-w); margin: 0 auto; }
+  .rf2-rk__card { background: var(--rf2-rk-card); border-radius: 20px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; }
+  .rf2-rk--center .rf2-rk__card { align-items: center; text-align: center; }
+  .rf2-rk__icon { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--rf2-rk-icon-bg); color: var(--rf2-rk-icon); }
+  .rf2-rk__title { margin: 0; font-family: var(--rf2-rk-head); font-weight: 800; font-size: var(--rf2-rk-title); line-height: 1.15; letter-spacing: -0.01em; }
+  .rf2-rk__title em { font-family: var(--rf2-rk-serif); font-style: italic; font-weight: 600; color: var(--rf2-rk-accent); }
+  .rf2-rk__text { margin: 0; font-size: var(--rf2-rk-fs); line-height: 1.55; color: var(--rf2-rk-soft); }
+  @media (max-width: 749px) { .rf2-rk--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-rk { padding-top: var(--rf2-rk-pt-d); padding-bottom: var(--rf2-rk-pb-d); }
+    .rf2-rk__title { font-size: var(--rf2-rk-title-d); }
+    .rf2-rk__text { font-size: var(--rf2-rk-fs-d); }
+    .rf2-rk__card { padding: 32px 36px; }
+    .rf2-rk--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Listen first",
+  "tag": "section",
+  "class": "rf2-risk-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show the icon", "default": true },
+    { "type": "checkbox", "id": "show_title", "label": "Show the title", "default": true },
+    { "type": "text", "id": "title", "label": "Title", "default": "Tu écoutes d’abord. Tu décides ensuite.", "info": "Wrap one word in *stars* for the italic accent." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "L’extrait est gratuit, sans carte bancaire. Tu paies seulement s’il te touche. Après la commande : retouches illimitées.", "info": "Validated claims only. No refund or withdrawal wording: the policies stay in the footer." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "c_card", "label": "Card", "default": "#F6F2FF" },
+    { "type": "color", "id": "c_text", "label": "Title", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_soft", "label": "Text", "default": "#3D2F6B" },
+    { "type": "color", "id": "c_accent", "label": "Italic accent", "default": "#6A4BD8" },
+    { "type": "color", "id": "c_icon_bg", "label": "Icon background", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_icon", "label": "Icon", "default": "#D4F53C" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font_heading", "label": "Heading font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans + Fraunces)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "font_body", "label": "Body font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size (mobile)", "min": 18, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "title_size_d", "label": "Title size (desktop)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "body_size", "label": "Text size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "body_size_d", "label": "Text size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "range", "id": "width", "label": "Content width", "min": 320, "max": 960, "step": 10, "unit": "px", "default": 600 },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain v2 · Listen first" } ]
+}
+{% endschema %}

@@ -1,0 +1,20 @@
+{% doc %}
+  Prints a short text escaped, with the words between *stars* wrapped in <em> (the Fraunces italic accent of the rf2 sections).
+  @param {string} text - The setting value, e.g. "Le refrain d’une chanson pour *Nathalie*"
+
+  @example
+  {% render 'rf2-accent', text: section.settings.title %}
+{% enddoc %}
+{%- liquid
+  assign rf2_parts = text | escape | split: '*'
+  for rf2_part in rf2_parts
+    assign rf2_odd = forloop.index0 | modulo: 2
+    if rf2_odd == 1
+      echo '<em>'
+      echo rf2_part
+      echo '</em>'
+    else
+      echo rf2_part
+    endif
+  endfor
+-%}

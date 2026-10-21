@@ -1,0 +1,90 @@
+{%- comment -%}
+  Refrain v2 funnel header (section group rf2-header-group, layout theme.rf2-funnel).
+  Logo only: no menu, no cart icon, no search, no country/language selector. Not sticky. Class prefix rf2-h.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign logo = ss.logo
+  if logo == blank and ss.use_theme_logo
+    assign logo = settings.logo
+  endif
+  assign logo_alt = ss.logo_text | default: shop.name
+-%}
+<div
+  class="rf2-h rf2-h--{{ ss.align }}{% if ss.show_border %} rf2-h--border{% endif %}{% if ss.hide_mobile %} rf2-h--hide-m{% endif %}{% if ss.hide_desktop %} rf2-h--hide-d{% endif %}"
+  style="--rf2-h-bg: {{ ss.c_bg }}; --rf2-h-text: {{ ss.c_text }}; --rf2-h-border: {{ ss.c_border }}; --rf2-h-height: {{ ss.height }}px; --rf2-h-height-d: {{ ss.height_d }}px; --rf2-h-logo: {{ ss.logo_height }}px; --rf2-h-logo-d: {{ ss.logo_height_d }}px; --rf2-h-fs: {{ ss.text_size }}px; --rf2-h-px: {{ ss.pad_x }}px; --rf2-h-font: {% if ss.font == 'brand' %}'Fraunces', var(--font-heading--family, Georgia), Georgia, serif{% else %}var(--font-heading--family, system-ui), system-ui, sans-serif{% endif %};"
+>
+  {%- if ss.link == 'quiz' -%}
+    <a class="rf2-h__logo" href="#quiz" aria-label="{{ logo_alt | escape }}">
+  {%- else -%}
+    <span class="rf2-h__logo">
+  {%- endif -%}
+  {%- if logo != blank and ss.show_logo_image -%}
+    {%- assign lh2 = ss.logo_height_d | times: 2 -%}
+    {{
+      logo
+      | image_url: height: lh2
+      | image_tag: alt: logo_alt, class: 'rf2-h__img', loading: 'eager', fetchpriority: 'low', sizes: '200px'
+    }}
+  {%- else -%}
+    <span class="rf2-h__text">{{ logo_alt | escape }}</span>
+  {%- endif -%}
+  {%- if ss.link == 'quiz' -%}
+    </a>
+  {%- else -%}
+    </span>
+  {%- endif -%}
+</div>
+{%- if ss.font == 'brand' and ss.show_logo_image == false -%}{% render 'refrain-fonts' %}{%- endif -%}
+
+<style>
+  .rf2-h { position: relative; display: flex; align-items: center; min-height: var(--rf2-h-height); padding: 0 var(--rf2-h-px); background: var(--rf2-h-bg); color: var(--rf2-h-text);  box-sizing: border-box; }
+  .rf2-h--center { justify-content: center; }
+  .rf2-h--left { justify-content: flex-start; }
+  .rf2-h--border { border-bottom: 1px solid var(--rf2-h-border); }
+  .rf2-h__logo { display: inline-flex; align-items: center; color: inherit; text-decoration: none; line-height: 1; }
+  .rf2-h__img { display: block; height: var(--rf2-h-logo); width: auto; max-width: 70vw; object-fit: contain; }
+  .rf2-h__text { font-family: var(--rf2-h-font); font-style: italic; font-weight: 600; font-size: var(--rf2-h-fs); letter-spacing: -0.01em; }
+  .rf2-h__logo:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; border-radius: 4px; }
+  @media (max-width: 749px) { .rf2-h--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-h { min-height: var(--rf2-h-height-d); }
+    .rf2-h__img { height: var(--rf2-h-logo-d); }
+    .rf2-h--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Header",
+  "tag": "header",
+  "class": "rf2-header-section",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "header", "content": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo image", "info": "Leave empty to use the theme logo (Theme settings > Logo)." },
+    { "type": "checkbox", "id": "use_theme_logo", "label": "Use the theme logo when no image is picked", "default": true },
+    { "type": "checkbox", "id": "show_logo_image", "label": "Show the logo image (off = text logo)", "default": true },
+    { "type": "text", "id": "logo_text", "label": "Text logo and image alt text", "default": "Refrain" },
+    { "type": "select", "id": "font", "label": "Text logo font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Fraunces italic)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "range", "id": "text_size", "label": "Text logo size", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 22 },
+    { "type": "select", "id": "link", "label": "Logo link", "default": "quiz", "options": [ { "value": "quiz", "label": "Back to the quiz (#quiz)" }, { "value": "none", "label": "No link" } ], "info": "The funnel header never links away from the page." },
+    { "type": "select", "id": "align", "label": "Logo position", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "header", "content": "Size" },
+    { "type": "range", "id": "height", "label": "Header height (mobile)", "min": 36, "max": 80, "step": 2, "unit": "px", "default": 48 },
+    { "type": "range", "id": "height_d", "label": "Header height (desktop)", "min": 36, "max": 100, "step": 2, "unit": "px", "default": 56 },
+    { "type": "range", "id": "logo_height", "label": "Logo height (mobile)", "min": 14, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "logo_height_d", "label": "Logo height (desktop)", "min": 14, "max": 64, "step": 1, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pad_x", "label": "Side padding", "min": 0, "max": 48, "step": 2, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#DCCFFF" },
+    { "type": "color", "id": "c_text", "label": "Text logo color", "default": "#1E0F4A" },
+    { "type": "checkbox", "id": "show_border", "label": "Show a bottom border", "default": false },
+    { "type": "color", "id": "c_border", "label": "Bottom border color", "default": "#C9BAF5" },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain v2 · Header" } ]
+}
+{% endschema %}

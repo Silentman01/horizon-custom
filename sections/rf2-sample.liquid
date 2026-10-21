@@ -1,0 +1,274 @@
+{%- comment -%}
+  Refrain v2 · real sample under the quiz: plays only the configured window (start → end seconds) of a song,
+  on tap only (no audio request before the tap), and lights each lyric line at its second ('seconds|line', one per row,
+  seconds measured in the audio file). Up to 2 'sample' blocks. Hidden while the quiz wait/reveal is on (body.rf2-focus).
+  Class prefix rf2-smp.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign brand = false
+  if ss.font_heading == 'brand' or ss.font_body == 'brand'
+    assign brand = true
+  endif
+-%}
+{%- if brand -%}{% render 'refrain-fonts' %}{%- endif -%}
+<div
+  class="rf2-smp rf2-smp--{{ ss.align }}{% if ss.hide_mobile %} rf2-smp--hide-m{% endif %}{% if ss.hide_desktop %} rf2-smp--hide-d{% endif %}"
+  id="rf2-sample-{{ section.id }}"
+  style="--rf2-smp-bg: {{ ss.c_bg }}; --rf2-smp-card: {{ ss.c_card }}; --rf2-smp-text: {{ ss.c_text }}; --rf2-smp-soft: {{ ss.c_soft }}; --rf2-smp-accent: {{ ss.c_accent }}; --rf2-smp-btn: {{ ss.c_btn_bg }}; --rf2-smp-btn-text: {{ ss.c_btn_text }}; --rf2-smp-w: {{ ss.width }}px; --rf2-smp-title: {{ ss.title_size }}px; --rf2-smp-title-d: {{ ss.title_size_d }}px; --rf2-smp-lyr: {{ ss.lyric_size }}px; --rf2-smp-lyr-d: {{ ss.lyric_size_d }}px; --rf2-smp-pt: {{ ss.pad_top }}px; --rf2-smp-pb: {{ ss.pad_bottom }}px; --rf2-smp-pt-d: {{ ss.pad_top_d }}px; --rf2-smp-pb-d: {{ ss.pad_bottom_d }}px; --rf2-smp-head: {% if ss.font_heading == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-heading--family, system-ui), system-ui, sans-serif; --rf2-smp-body: {% if ss.font_body == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif; --rf2-smp-serif: {% if ss.font_heading == 'brand' %}'Fraunces', {% endif %}var(--font-heading--family, Georgia), Georgia, serif;"
+>
+  <div class="rf2-smp__in">
+    {%- if ss.show_kicker and ss.kicker != blank -%}
+      <p class="rf2-smp__kicker">{{ ss.kicker | escape }}</p>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign bs = block.settings
+        assign src = bs.audio_url | strip
+        if src == blank and bs.audio_asset != blank
+          assign src = bs.audio_asset | strip | asset_url
+        endif
+        assign name_esc = bs.name | strip | escape
+        assign name_html = '<span class="rf2-smp__name">' | append: name_esc | append: '</span>'
+        assign rows = bs.lines | newline_to_br | split: '<br />'
+      -%}
+      <rf2-sample-player
+        class="rf2-smp__card"
+        data-src="{{ src | escape }}"
+        data-start="{{ bs.start | strip | escape }}"
+        data-end="{{ bs.end | strip | escape }}"
+        data-play="{{ bs.play | escape }}"
+        data-pause="{{ bs.pause | escape }}"
+        {{ block.shopify_attributes }}
+      >
+        {%- if bs.show_title and bs.title != blank -%}
+          <h2 class="rf2-smp__title">{% render 'rf2-accent', text: bs.title %}</h2>
+        {%- endif -%}
+        <button type="button" class="rf2-smp__play" data-rf2-smp-btn aria-pressed="false">
+          <span class="rf2-smp__icon" aria-hidden="true"></span>
+          <span data-rf2-smp-label>{{ bs.play | escape }}</span>
+        </button>
+        {%- if bs.show_bar -%}
+          <div class="rf2-smp__bar" aria-hidden="true"><i data-rf2-smp-fill></i></div>
+        {%- endif -%}
+        <ol class="rf2-smp__lines" role="list">
+          {%- for row in rows -%}
+            {%- assign row = row | strip -%}
+            {%- if row == blank -%}{%- continue -%}{%- endif -%}
+            {%- assign cells = row | split: '|' -%}
+            {%- if cells.size > 1 -%}
+              {%- assign t = cells.first | strip -%}
+              {%- assign txt = row | remove_first: cells.first | remove_first: '|' | strip -%}
+            {%- else -%}
+              {%- assign t = '' -%}
+              {%- assign txt = row -%}
+            {%- endif -%}
+            {%- assign txt_html = txt | escape -%}
+            {%- if name_esc != blank -%}
+              {%- assign txt_html = txt_html | replace: name_esc, name_html -%}
+            {%- endif -%}
+            <li class="rf2-smp__line" data-t="{{ t | escape }}">{{ txt_html }}</li>
+          {%- endfor -%}
+        </ol>
+      </rf2-sample-player>
+    {%- endfor -%}
+
+    {%- if ss.show_cta and ss.cta != blank -%}
+      <a class="rf2-smp__cta" href="#quiz">{{ ss.cta | escape }}</a>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .rf2-smp { background: var(--rf2-smp-bg); color: var(--rf2-smp-text); font-family: var(--rf2-smp-body); padding: var(--rf2-smp-pt) 16px var(--rf2-smp-pb); }
+  body.rf2-focus .rf2-smp { display: none; }
+  .rf2-smp__in { max-width: var(--rf2-smp-w); margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
+  .rf2-smp--center .rf2-smp__in { text-align: center; align-items: stretch; }
+  .rf2-smp__kicker { margin: 0; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--rf2-smp-soft); }
+  .rf2-smp__card { display: block; background: var(--rf2-smp-card); border-radius: 20px; padding: 20px 18px 22px; }
+  .rf2-smp__title { margin: 0 0 16px; font-family: var(--rf2-smp-head); font-weight: 800; font-size: var(--rf2-smp-title); line-height: 1.15; letter-spacing: -0.01em; color: var(--rf2-smp-text); }
+  .rf2-smp__title em { font-family: var(--rf2-smp-serif); font-style: italic; font-weight: 600; color: var(--rf2-smp-accent); }
+  .rf2-smp__play { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 22px; border: 0; border-radius: 999px; background: var(--rf2-smp-btn); color: var(--rf2-smp-btn-text); font: 800 16px/1 var(--rf2-smp-body); cursor: pointer; }
+  .rf2-smp__play:focus-visible, .rf2-smp__cta:focus-visible { outline: 3px solid var(--rf2-smp-text); outline-offset: 3px; }
+  .rf2-smp__icon { width: 0; height: 0; border-style: solid; border-width: 8px 0 8px 13px; border-color: transparent transparent transparent currentColor; }
+  .rf2-smp__play[aria-pressed='true'] .rf2-smp__icon { width: 12px; height: 16px; border: 0; border-left: 4px solid currentColor; border-right: 4px solid currentColor; box-sizing: border-box; }
+  .rf2-smp__bar { height: 4px; border-radius: 4px; background: rgba(255, 255, 255, 0.18); margin: 16px 0 4px; overflow: hidden; }
+  .rf2-smp__bar i { display: block; height: 100%; width: 0; background: var(--rf2-smp-accent); }
+  .rf2-smp__lines { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .rf2-smp__line { font-size: var(--rf2-smp-lyr); line-height: 1.35; font-weight: 700; color: var(--rf2-smp-text); opacity: 0.5; transition: opacity 0.25s ease, transform 0.25s ease; }
+  .rf2-smp__line.is-past { opacity: 0.7; }
+  .rf2-smp__line.is-on { opacity: 1; transform: scale(1.02); }
+  .rf2-smp__name { font-family: var(--rf2-smp-serif); font-style: italic; font-weight: 600; color: var(--rf2-smp-accent); }
+  .rf2-smp__cta { display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 20px; border-radius: 999px; background: var(--rf2-smp-btn); color: var(--rf2-smp-btn-text); font: 800 16px/1.2 var(--rf2-smp-body); text-decoration: none; text-align: center; }
+  @media (prefers-reduced-motion: reduce) { .rf2-smp__line { transition: none; } .rf2-smp__line.is-on { transform: none; } }
+  @media (max-width: 749px) { .rf2-smp--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-smp { padding-top: var(--rf2-smp-pt-d); padding-bottom: var(--rf2-smp-pb-d); }
+    .rf2-smp__title { font-size: var(--rf2-smp-title-d); }
+    .rf2-smp__line { font-size: var(--rf2-smp-lyr-d); }
+    .rf2-smp__card { padding: 28px 32px 30px; }
+    .rf2-smp__cta { align-self: center; min-width: 360px; }
+    .rf2-smp--hide-d { display: none; }
+  }
+</style>
+
+<script>
+  (function () {
+    if (customElements.get('rf2-sample-player')) return;
+    const fmt = (s) => { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+    class Rf2SamplePlayer extends HTMLElement {
+      connectedCallback() {
+        if (this._ready) return;
+        this._ready = true;
+        this.start = parseFloat(this.dataset.start) || 0;
+        this.end = parseFloat(this.dataset.end) || 0;
+        this.btn = this.querySelector('[data-rf2-smp-btn]');
+        this.label = this.querySelector('[data-rf2-smp-label]');
+        this.fill = this.querySelector('[data-rf2-smp-fill]');
+        this.lines = [...this.querySelectorAll('.rf2-smp__line')].map((el) => ({ el, t: parseFloat(el.dataset.t) }));
+        this.btn.addEventListener('click', () => this.toggle());
+        this._onOther = (e) => { if (this.audio && e.target !== this.audio) this.stop(false); };
+        document.addEventListener('play', this._onOther, true);
+        this._mo = new MutationObserver(() => { if (document.body.classList.contains('rf2-focus')) this.stop(false); });
+        this._mo.observe(document.body, { attributes: true, attributeFilter: ['class'] });
+      }
+      disconnectedCallback() {
+        document.removeEventListener('play', this._onOther, true);
+        if (this._mo) this._mo.disconnect();
+        this.stop(false);
+      }
+      ensureAudio() {
+        if (this.audio) return this.audio;
+        /* Created on the first tap only: no audio request before the visitor asks for it. */
+        const a = document.createElement('audio');
+        a.preload = 'none';
+        a.setAttribute('playsinline', '');
+        a.src = this.dataset.src + (this.start > 0 ? '#t=' + this.start : '');
+        a.addEventListener('loadedmetadata', () => this.seekStart());
+        a.addEventListener('pause', () => this.setPlaying(false));
+        a.addEventListener('playing', () => this.setPlaying(true));
+        a.addEventListener('ended', () => this.finish());
+        this.appendChild(a);
+        this.audio = a;
+        return a;
+      }
+      seekStart() {
+        const a = this.audio;
+        if (!a) return;
+        if (a.currentTime < this.start - 0.25 || (this.end && a.currentTime >= this.end - 0.05)) {
+          try { a.currentTime = this.start; } catch (e) { /* not seekable yet */ }
+        }
+      }
+      toggle() {
+        const a = this.ensureAudio();
+        if (!a.paused) { this.stop(false); return; }
+        if (a.readyState >= 1) this.seekStart();
+        const p = a.play();
+        if (p && p.catch) p.catch(() => this.setPlaying(false));
+        this.loop();
+      }
+      loop() {
+        cancelAnimationFrame(this._raf);
+        const tick = () => {
+          const a = this.audio;
+          if (!a) return;
+          const t = a.currentTime;
+          if (this.end && t >= this.end) { this.finish(); return; }
+          this.paint(t);
+          if (!a.paused) this._raf = requestAnimationFrame(tick);
+        };
+        this._raf = requestAnimationFrame(tick);
+      }
+      paint(t) {
+        let on = -1;
+        this.lines.forEach((l, i) => { if (!isNaN(l.t) && t >= l.t) on = i; });
+        this.lines.forEach((l, i) => { l.el.classList.toggle('is-on', i === on); l.el.classList.toggle('is-past', i < on); });
+        if (this.fill && this.end > this.start) this.fill.style.width = Math.min(100, Math.max(0, ((t - this.start) / (this.end - this.start)) * 100)) + '%';
+        this.dataset.at = t.toFixed(2);
+        this.dataset.on = String(on);
+      }
+      finish() {
+        this.stop(true);
+        this.lines.forEach((l) => { l.el.classList.remove('is-on'); l.el.classList.add('is-past'); });
+        if (this.fill) this.fill.style.width = '100%';
+      }
+      stop(ended) {
+        cancelAnimationFrame(this._raf);
+        const a = this.audio;
+        if (a && !a.paused) a.pause();
+        if (a && ended) { try { a.currentTime = this.start; } catch (e) { /* ignore */ } }
+        this.setPlaying(false);
+      }
+      setPlaying(on) {
+        this.btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+        this.label.textContent = on ? this.dataset.pause : this.dataset.play;
+        this.classList.toggle('is-playing', on);
+        if (on) this.loop();
+      }
+    }
+    customElements.define('rf2-sample-player', Rf2SamplePlayer);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Sample song",
+  "tag": "section",
+  "class": "rf2-sample-section",
+  "max_blocks": 2,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_kicker", "label": "Show the kicker", "default": true },
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Écoute à quoi ça ressemble" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show the button back to the quiz", "default": true },
+    { "type": "text", "id": "cta", "label": "Button label (goes to #quiz)", "default": "Écouter l’extrait gratuit de sa chanson" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_card", "label": "Player card", "default": "#2B1A66" },
+    { "type": "color", "id": "c_text", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "c_soft", "label": "Kicker", "default": "#DCCFFF" },
+    { "type": "color", "id": "c_accent", "label": "Accent (name, progress)", "default": "#D4F53C" },
+    { "type": "color", "id": "c_btn_bg", "label": "Button background", "default": "#D4F53C" },
+    { "type": "color", "id": "c_btn_text", "label": "Button text", "default": "#1E0F4A" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font_heading", "label": "Heading font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans + Fraunces)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "font_body", "label": "Body font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size (mobile)", "min": 18, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "title_size_d", "label": "Title size (desktop)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "lyric_size", "label": "Lyrics size (mobile)", "min": 14, "max": 28, "step": 1, "unit": "px", "default": 18 },
+    { "type": "range", "id": "lyric_size_d", "label": "Lyrics size (desktop)", "min": 14, "max": 32, "step": 1, "unit": "px", "default": 21 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "range", "id": "width", "label": "Content width", "min": 320, "max": 960, "step": 10, "unit": "px", "default": 560 },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "sample",
+      "name": "Sample song",
+      "settings": [
+        { "type": "checkbox", "id": "show_title", "label": "Show the title", "default": true },
+        { "type": "text", "id": "title", "label": "Title", "default": "Le refrain d’une chanson pour *Nathalie*", "info": "Wrap one word in *stars* for the italic accent." },
+        { "type": "text", "id": "name", "label": "First name to highlight in the lyrics", "default": "Nathalie" },
+        { "type": "text", "id": "play", "label": "Play button label", "default": "Écouter le refrain" },
+        { "type": "text", "id": "pause", "label": "Pause button label", "default": "Pause" },
+        { "type": "header", "content": "Audio" },
+        { "type": "text", "id": "audio_asset", "label": "Audio file (theme asset name)", "default": "refrain-demo-maman.mp3" },
+        { "type": "text", "id": "audio_url", "label": "Audio URL (overrides the asset)", "info": "Full https URL, e.g. a file from Content > Files." },
+        { "type": "text", "id": "start", "label": "Start (seconds in the file)", "default": "27" },
+        { "type": "text", "id": "end", "label": "End (seconds in the file)", "default": "43.3", "info": "Playback pauses here. About 15 seconds after the start." },
+        { "type": "checkbox", "id": "show_bar", "label": "Show the progress bar", "default": true },
+        { "type": "textarea", "id": "lines", "label": "Lyrics: one line per row, 'seconds|line'", "default": "27.7|Nathalie, Nathalie\n30.7|C’est ton prénom qu’on chante aujourd’hui\n34.9|Pour chaque nuit où tu veillais sur nous\n38.2|Nathalie, merci pour tout", "info": "Seconds in the audio file when the line starts, e.g. 27.7|Nathalie, Nathalie" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Refrain v2 · Sample song", "blocks": [ { "type": "sample" } ] } ]
+}
+{% endschema %}

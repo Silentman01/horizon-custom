@@ -1,0 +1,122 @@
+{%- comment -%}
+  Refrain v2 · how it works: numbered steps (blocks), an optional note. Hidden while the quiz wait/reveal is on.
+  Class prefix rf2-stp.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign brand = false
+  if ss.font_heading == 'brand' or ss.font_body == 'brand'
+    assign brand = true
+  endif
+-%}
+{%- if brand -%}{% render 'refrain-fonts' %}{%- endif -%}
+<div
+  class="rf2-stp rf2-stp--{{ ss.align }}{% if ss.hide_mobile %} rf2-stp--hide-m{% endif %}{% if ss.hide_desktop %} rf2-stp--hide-d{% endif %}"
+  style="--rf2-stp-bg: {{ ss.c_bg }}; --rf2-stp-card: {{ ss.c_card }}; --rf2-stp-text: {{ ss.c_text }}; --rf2-stp-soft: {{ ss.c_soft }}; --rf2-stp-num-bg: {{ ss.c_num_bg }}; --rf2-stp-num: {{ ss.c_num }}; --rf2-stp-accent: {{ ss.c_accent }}; --rf2-stp-w: {{ ss.width }}px; --rf2-stp-title: {{ ss.title_size }}px; --rf2-stp-title-d: {{ ss.title_size_d }}px; --rf2-stp-fs: {{ ss.body_size }}px; --rf2-stp-fs-d: {{ ss.body_size_d }}px; --rf2-stp-pt: {{ ss.pad_top }}px; --rf2-stp-pb: {{ ss.pad_bottom }}px; --rf2-stp-pt-d: {{ ss.pad_top_d }}px; --rf2-stp-pb-d: {{ ss.pad_bottom_d }}px; --rf2-stp-head: {% if ss.font_heading == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-heading--family, system-ui), system-ui, sans-serif; --rf2-stp-body: {% if ss.font_body == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif; --rf2-stp-serif: {% if ss.font_heading == 'brand' %}'Fraunces', {% endif %}var(--font-heading--family, Georgia), Georgia, serif;"
+>
+  <div class="rf2-stp__in">
+    {%- if ss.show_title and ss.title != blank -%}
+      <h2 class="rf2-stp__title">{% render 'rf2-accent', text: ss.title %}</h2>
+    {%- endif -%}
+    <ol class="rf2-stp__list" role="list">
+      {%- for block in section.blocks -%}
+        <li class="rf2-stp__step" {{ block.shopify_attributes }}>
+          {%- if ss.show_numbers -%}<span class="rf2-stp__num" aria-hidden="true">{{ forloop.index }}</span>{%- endif -%}
+          <div class="rf2-stp__body">
+            {%- if block.settings.title != blank -%}<h3 class="rf2-stp__name">{% render 'rf2-accent', text: block.settings.title %}</h3>{%- endif -%}
+            {%- if block.settings.text != blank -%}<p class="rf2-stp__text">{{ block.settings.text | escape }}</p>{%- endif -%}
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+    {%- if ss.show_note and ss.note != blank -%}
+      <p class="rf2-stp__note">{{ ss.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+  .rf2-stp { background: var(--rf2-stp-bg); color: var(--rf2-stp-text); font-family: var(--rf2-stp-body); padding: var(--rf2-stp-pt) 16px var(--rf2-stp-pb); }
+  body.rf2-focus .rf2-stp { display: none; }
+  .rf2-stp__in { max-width: var(--rf2-stp-w); margin: 0 auto; }
+  .rf2-stp--center .rf2-stp__title, .rf2-stp--center .rf2-stp__note { text-align: center; }
+  .rf2-stp__title { margin: 0 0 20px; font-family: var(--rf2-stp-head); font-weight: 800; font-size: var(--rf2-stp-title); line-height: 1.15; letter-spacing: -0.01em; }
+  .rf2-stp__title em, .rf2-stp__name em { font-family: var(--rf2-stp-serif); font-style: italic; font-weight: 600; color: var(--rf2-stp-accent); }
+  .rf2-stp__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .rf2-stp__step { display: flex; gap: 14px; align-items: flex-start; background: var(--rf2-stp-card); border-radius: 18px; padding: 16px; text-align: left; }
+  .rf2-stp__num { flex: 0 0 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: var(--rf2-stp-num-bg); color: var(--rf2-stp-num); font: 800 16px/1 var(--rf2-stp-head); }
+  .rf2-stp__name { margin: 4px 0 4px; font-family: var(--rf2-stp-head); font-weight: 800; font-size: calc(var(--rf2-stp-fs) + 2px); line-height: 1.25; }
+  .rf2-stp__text { margin: 0; font-size: var(--rf2-stp-fs); line-height: 1.5; color: var(--rf2-stp-soft); }
+  .rf2-stp__note { margin: 16px 0 0; font-size: calc(var(--rf2-stp-fs) - 1px); line-height: 1.5; color: var(--rf2-stp-soft); }
+  @media (max-width: 749px) { .rf2-stp--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-stp { padding-top: var(--rf2-stp-pt-d); padding-bottom: var(--rf2-stp-pb-d); }
+    .rf2-stp__title { font-size: var(--rf2-stp-title-d); }
+    .rf2-stp__list { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+    .rf2-stp__step { flex-direction: column; padding: 20px; }
+    .rf2-stp__text { font-size: var(--rf2-stp-fs-d); }
+    .rf2-stp--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · How it works",
+  "tag": "section",
+  "class": "rf2-steps-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_title", "label": "Show the title", "default": true },
+    { "type": "text", "id": "title", "label": "Title", "default": "Comment ça marche", "info": "Wrap one word in *stars* for the italic accent." },
+    { "type": "checkbox", "id": "show_numbers", "label": "Show step numbers", "default": true },
+    { "type": "checkbox", "id": "show_note", "label": "Show the note", "default": true },
+    { "type": "text", "id": "note", "label": "Note under the steps", "default": "Notre équipe relit chaque chanson avant de te l’envoyer." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#F6F2FF" },
+    { "type": "color", "id": "c_card", "label": "Step card", "default": "#FFFFFF" },
+    { "type": "color", "id": "c_text", "label": "Headings", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_soft", "label": "Body text", "default": "#3D2F6B" },
+    { "type": "color", "id": "c_accent", "label": "Italic accent", "default": "#6A4BD8" },
+    { "type": "color", "id": "c_num_bg", "label": "Number background", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_num", "label": "Number", "default": "#D4F53C" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font_heading", "label": "Heading font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans + Fraunces)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "font_body", "label": "Body font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size (mobile)", "min": 18, "max": 40, "step": 1, "unit": "px", "default": 26 },
+    { "type": "range", "id": "title_size_d", "label": "Title size (desktop)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 34 },
+    { "type": "range", "id": "body_size", "label": "Text size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "body_size_d", "label": "Text size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Title alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "range", "id": "width", "label": "Content width", "min": 320, "max": 1200, "step": 10, "unit": "px", "default": 960 },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Step title", "default": "Ses mots" },
+        { "type": "textarea", "id": "text", "label": "Step text", "default": "Tu réponds à 7 petites questions : ses phrases, un souvenir." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Refrain v2 · How it works",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Ses mots", "text": "Tu réponds à 7 petites questions : ses phrases, un souvenir." } },
+        { "type": "step", "settings": { "title": "Ses paroles", "text": "On écrit sa chanson autour de son prénom." } },
+        { "type": "step", "settings": { "title": "Sa chanson", "text": "Tu écoutes l’extrait gratuit. Tu paies seulement s’il te touche." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

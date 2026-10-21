@@ -1,0 +1,92 @@
+{%- comment -%}
+  Refrain v2 · sticky bar back to the quiz. Shows only after the visitor has scrolled past the quiz (#quiz), hides when
+  the quiz or the final button is back on screen, and never shows while the quiz wait/reveal is on (body.rf2-focus,
+  the quiz then shows its own buy bar). Class prefix rf2-sc.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+-%}
+{%- if ss.font == 'brand' -%}{% render 'refrain-fonts' %}{%- endif -%}
+<rf2-sticky-cta
+  class="rf2-sc{% if ss.hide_desktop %} rf2-sc--hide-d{% endif %}"
+  data-hide-final="{{ ss.hide_near_final }}"
+  style="--rf2-sc-bg: {{ ss.c_bg }}; --rf2-sc-btn: {{ ss.c_btn_bg }}; --rf2-sc-btn-text: {{ ss.c_btn_text }}; --rf2-sc-h: {{ ss.button_height }}px; --rf2-sc-fs: {{ ss.button_size }}px; --rf2-sc-w: {{ ss.width }}px; --rf2-sc-font: {% if ss.font == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif;"
+  aria-hidden="true"
+>
+  <div class="rf2-sc__in">
+    <a class="rf2-sc__btn" href="#quiz" tabindex="-1">{{ ss.label | escape }}</a>
+  </div>
+</rf2-sticky-cta>
+
+<style>
+  .rf2-sc { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: block; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)); background: var(--rf2-sc-bg); box-shadow: 0 -6px 20px rgba(30, 15, 74, 0.18); transform: translateY(110%); transition: transform 0.25s ease; font-family: var(--rf2-sc-font); }
+  .rf2-sc.is-on { transform: none; }
+  body.rf2-focus .rf2-sc { display: none; }
+  body.rf2-sc-on:not(.rf2-focus) { padding-bottom: calc(var(--rf2-sc-pad, 76px) + env(safe-area-inset-bottom, 0px)); }
+  .rf2-sc__in { max-width: var(--rf2-sc-w); margin: 0 auto; }
+  .rf2-sc__btn { display: flex; align-items: center; justify-content: center; min-height: var(--rf2-sc-h); padding: 0 20px; border-radius: 999px; background: var(--rf2-sc-btn); color: var(--rf2-sc-btn-text); font: 800 var(--rf2-sc-fs)/1.2 var(--rf2-sc-font); text-decoration: none; text-align: center; }
+  .rf2-sc__btn:focus-visible { outline: 3px solid var(--rf2-sc-btn-text); outline-offset: -5px; }
+  @media (prefers-reduced-motion: reduce) { .rf2-sc { transition: none; } }
+  @media (min-width: 750px) { .rf2-sc--hide-d { display: none; } }
+</style>
+
+<script>
+  (function () {
+    if (customElements.get('rf2-sticky-cta')) return;
+    class Rf2StickyCta extends HTMLElement {
+      connectedCallback() {
+        if (this._ready) return;
+        this._ready = true;
+        this.quiz = document.getElementById('quiz');
+        this.final = this.dataset.hideFinal === 'true' ? document.querySelector('.rf2-fc') : null;
+        this.past = false;
+        this.finalOn = false;
+        if (!this.quiz || !('IntersectionObserver' in window)) return;
+        this._io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.target === this.quiz) this.past = !e.isIntersecting && e.boundingClientRect.top < 0;
+            else this.finalOn = e.isIntersecting;
+          });
+          this.update();
+        });
+        this._io.observe(this.quiz);
+        if (this.final) this._io.observe(this.final);
+        this.querySelector('a').addEventListener('click', () => this.set(false));
+      }
+      disconnectedCallback() { if (this._io) this._io.disconnect(); document.body.classList.remove('rf2-sc-on'); }
+      update() { this.set(this.past && !this.finalOn); }
+      set(on) {
+        this.classList.toggle('is-on', on);
+        this.setAttribute('aria-hidden', on ? 'false' : 'true');
+        this.querySelector('a').tabIndex = on ? 0 : -1;
+        document.body.classList.toggle('rf2-sc-on', on);
+        if (on) document.body.style.setProperty('--rf2-sc-pad', this.offsetHeight + 'px');
+      }
+    }
+    customElements.define('rf2-sticky-cta', Rf2StickyCta);
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Sticky CTA",
+  "tag": "div",
+  "class": "rf2-sticky-cta-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "label", "label": "Button label (goes to #quiz)", "default": "Écouter son extrait gratuit" },
+    { "type": "checkbox", "id": "hide_near_final", "label": "Hide while the final button is on screen", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "select", "id": "font", "label": "Font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "color", "id": "c_bg", "label": "Bar background", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_btn_bg", "label": "Button background", "default": "#D4F53C" },
+    { "type": "color", "id": "c_btn_text", "label": "Button text", "default": "#1E0F4A" },
+    { "type": "range", "id": "button_height", "label": "Button height", "min": 40, "max": 68, "step": 2, "unit": "px", "default": 52 },
+    { "type": "range", "id": "button_size", "label": "Button text size", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "width", "label": "Max width (desktop)", "min": 320, "max": 800, "step": 10, "unit": "px", "default": 520 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain v2 · Sticky CTA" } ]
+}
+{% endschema %}

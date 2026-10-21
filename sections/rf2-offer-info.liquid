@@ -1,0 +1,139 @@
+{%- comment -%}
+  Refrain v2 · what you get (information only, no tier selector, no buy button): the two offers, the Christmas line
+  (hidden automatically after the chosen date) and the reason-why. Hidden while the quiz wait/reveal is on.
+  Class prefix rf2-oi.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign brand = false
+  if ss.font_heading == 'brand' or ss.font_body == 'brand'
+    assign brand = true
+  endif
+  assign offer_lines = ''
+  if ss.line_1 != blank
+    assign offer_lines = offer_lines | append: ss.line_1 | append: '§§'
+  endif
+  if ss.line_2 != blank
+    assign offer_lines = offer_lines | append: ss.line_2 | append: '§§'
+  endif
+  assign offer_lines = offer_lines | split: '§§'
+-%}
+{%- if brand -%}{% render 'refrain-fonts' %}{%- endif -%}
+<div
+  class="rf2-oi rf2-oi--{{ ss.align }}{% if ss.hide_mobile %} rf2-oi--hide-m{% endif %}{% if ss.hide_desktop %} rf2-oi--hide-d{% endif %}"
+  style="--rf2-oi-bg: {{ ss.c_bg }}; --rf2-oi-card: {{ ss.c_card }}; --rf2-oi-text: {{ ss.c_text }}; --rf2-oi-soft: {{ ss.c_soft }}; --rf2-oi-accent: {{ ss.c_accent }}; --rf2-oi-check: {{ ss.c_check }}; --rf2-oi-w: {{ ss.width }}px; --rf2-oi-title: {{ ss.title_size }}px; --rf2-oi-title-d: {{ ss.title_size_d }}px; --rf2-oi-fs: {{ ss.body_size }}px; --rf2-oi-fs-d: {{ ss.body_size_d }}px; --rf2-oi-pt: {{ ss.pad_top }}px; --rf2-oi-pb: {{ ss.pad_bottom }}px; --rf2-oi-pt-d: {{ ss.pad_top_d }}px; --rf2-oi-pb-d: {{ ss.pad_bottom_d }}px; --rf2-oi-head: {% if ss.font_heading == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-heading--family, system-ui), system-ui, sans-serif; --rf2-oi-body: {% if ss.font_body == 'brand' %}'Plus Jakarta Sans', {% endif %}var(--font-body--family, system-ui), system-ui, sans-serif; --rf2-oi-serif: {% if ss.font_heading == 'brand' %}'Fraunces', {% endif %}var(--font-heading--family, Georgia), Georgia, serif;"
+>
+  <div class="rf2-oi__in">
+    {%- if ss.show_title and ss.title != blank -%}
+      <h2 class="rf2-oi__title">{% render 'rf2-accent', text: ss.title %}</h2>
+    {%- endif -%}
+    <div class="rf2-oi__card">
+      <ul class="rf2-oi__list" role="list">
+        {%- for line in offer_lines -%}
+          {%- if line == blank -%}{%- continue -%}{%- endif -%}
+          <li class="rf2-oi__item">
+            <span class="rf2-oi__check" aria-hidden="true"></span>
+            <span>
+              {%- if ss.bold_prefix and line contains ':' -%}
+                {%- assign head = line | split: ':' | first -%}
+                {%- assign rest = line | remove_first: head -%}
+                <strong>{{ head | escape }}</strong>{{ rest | escape }}
+              {%- else -%}
+                {{ line | escape }}
+              {%- endif -%}
+            </span>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if ss.show_xmas and ss.xmas != blank -%}
+        <p class="rf2-oi__xmas" data-rf2-oi-until="{{ ss.xmas_until | escape }}">{{ ss.xmas | escape }}</p>
+      {%- endif -%}
+    </div>
+    {%- if ss.show_reason and ss.reason != blank -%}
+      <p class="rf2-oi__reason">{{ ss.reason | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+{%- if ss.show_xmas and ss.xmas_until != blank -%}
+  <script>
+    (function () {
+      document.querySelectorAll('[data-rf2-oi-until]').forEach(function (el) {
+        var v = String(el.getAttribute('data-rf2-oi-until') || '').trim();
+        if (!v) return;
+        var until = new Date(/T/.test(v) ? v : v + 'T23:59:59+01:00');
+        if (!isNaN(until) && Date.now() > until.getTime()) el.hidden = true;
+      });
+    })();
+  </script>
+{%- endif -%}
+
+<style>
+  .rf2-oi { background: var(--rf2-oi-bg); color: var(--rf2-oi-text); font-family: var(--rf2-oi-body); padding: var(--rf2-oi-pt) 16px var(--rf2-oi-pb); }
+  body.rf2-focus .rf2-oi { display: none; }
+  .rf2-oi__in { max-width: var(--rf2-oi-w); margin: 0 auto; }
+  .rf2-oi--center .rf2-oi__title, .rf2-oi--center .rf2-oi__reason { text-align: center; }
+  .rf2-oi__title { margin: 0 0 18px; font-family: var(--rf2-oi-head); font-weight: 800; font-size: var(--rf2-oi-title); line-height: 1.15; letter-spacing: -0.01em; }
+  .rf2-oi__title em { font-family: var(--rf2-oi-serif); font-style: italic; font-weight: 600; color: var(--rf2-oi-accent); }
+  .rf2-oi__card { background: var(--rf2-oi-card); border-radius: 20px; padding: 18px 18px 16px; }
+  .rf2-oi__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .rf2-oi__item { display: flex; gap: 12px; align-items: flex-start; font-size: var(--rf2-oi-fs); line-height: 1.45; }
+  .rf2-oi__item strong { font-weight: 800; }
+  .rf2-oi__check { flex: 0 0 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--rf2-oi-check); position: relative; }
+  .rf2-oi__check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .rf2-oi__xmas { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid rgba(30, 15, 74, 0.12); font-size: calc(var(--rf2-oi-fs) - 1px); font-weight: 700; color: var(--rf2-oi-accent); }
+  .rf2-oi__reason { margin: 14px 0 0; font-size: calc(var(--rf2-oi-fs) - 1px); line-height: 1.5; color: var(--rf2-oi-soft); }
+  @media (max-width: 749px) { .rf2-oi--hide-m { display: none; } }
+  @media (min-width: 750px) {
+    .rf2-oi { padding-top: var(--rf2-oi-pt-d); padding-bottom: var(--rf2-oi-pb-d); }
+    .rf2-oi__title { font-size: var(--rf2-oi-title-d); }
+    .rf2-oi__item { font-size: var(--rf2-oi-fs-d); }
+    .rf2-oi__card { padding: 24px 28px 20px; }
+    .rf2-oi--hide-d { display: none; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Refrain v2 · Offer info",
+  "tag": "section",
+  "class": "rf2-offer-info-section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_title", "label": "Show the title", "default": true },
+    { "type": "text", "id": "title", "label": "Title", "default": "Ce que tu reçois", "info": "Wrap one word in *stars* for the italic accent." },
+    { "type": "text", "id": "line_1", "label": "Offer line 1", "default": "19 € : 2 versions de sa chanson + toutes les paroles + retouches illimitées" },
+    { "type": "text", "id": "line_2", "label": "Offer line 2", "default": "Cadeau Premium 35 € : + le clip paroles, la pochette, en priorité 12 h" },
+    { "type": "checkbox", "id": "bold_prefix", "label": "Bold the words before the colon", "default": true },
+    { "type": "checkbox", "id": "show_xmas", "label": "Show the Christmas line", "default": true },
+    { "type": "text", "id": "xmas", "label": "Christmas line", "default": "Commandée avant le 20 décembre, livrée avant Noël." },
+    { "type": "text", "id": "xmas_until", "label": "Hide the Christmas line after (YYYY-MM-DD)", "default": "2026-12-20", "info": "Paris time, end of that day." },
+    { "type": "checkbox", "id": "show_reason", "label": "Show the reason line", "default": true },
+    { "type": "text", "id": "reason", "label": "Reason line", "default": "Pas de surprise : tu paies la chanson que tu as déjà écoutée." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "c_bg", "label": "Background", "default": "#DCCFFF" },
+    { "type": "color", "id": "c_card", "label": "Card", "default": "#FFFFFF" },
+    { "type": "color", "id": "c_text", "label": "Text", "default": "#1E0F4A" },
+    { "type": "color", "id": "c_soft", "label": "Reason line", "default": "#3D2F6B" },
+    { "type": "color", "id": "c_accent", "label": "Accent (italic, Christmas line)", "default": "#6A4BD8" },
+    { "type": "color", "id": "c_check", "label": "Check marks", "default": "#6A4BD8" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "font_heading", "label": "Heading font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans + Fraunces)" }, { "value": "theme", "label": "Theme heading font" } ] },
+    { "type": "select", "id": "font_body", "label": "Body font", "default": "brand", "options": [ { "value": "brand", "label": "Refrain (Plus Jakarta Sans)" }, { "value": "theme", "label": "Theme body font" } ] },
+    { "type": "range", "id": "title_size", "label": "Title size (mobile)", "min": 18, "max": 40, "step": 1, "unit": "px", "default": 26 },
+    { "type": "range", "id": "title_size_d", "label": "Title size (desktop)", "min": 18, "max": 56, "step": 1, "unit": "px", "default": 34 },
+    { "type": "range", "id": "body_size", "label": "Text size (mobile)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "body_size_d", "label": "Text size (desktop)", "min": 12, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "align", "label": "Title alignment", "default": "center", "options": [ { "value": "center", "label": "Center" }, { "value": "left", "label": "Left" } ] },
+    { "type": "range", "id": "width", "label": "Content width", "min": 320, "max": 960, "step": 10, "unit": "px", "default": 600 },
+    { "type": "range", "id": "pad_top", "label": "Top padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom padding (mobile)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "pad_top_d", "label": "Top padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "pad_bottom_d", "label": "Bottom padding (desktop)", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 72 },
+    { "type": "header", "content": "Visibility" },
+    { "type": "checkbox", "id": "hide_mobile", "label": "Hide on mobile", "default": false },
+    { "type": "checkbox", "id": "hide_desktop", "label": "Hide on desktop", "default": false }
+  ],
+  "presets": [ { "name": "Refrain v2 · Offer info" } ]
+}
+{% endschema %}
