@@ -321,7 +321,7 @@
         </div>
         <div class="rf2-q__woffer">
           <p data-rf2-t="wait.offer_recap">{{ b_wait.settings.offer_recap | escape }}</p>
-          {%- if b_offer.settings.xmas_line != blank -%}<p data-rf2-xmas>{{ b_offer.settings.xmas_line | escape }}</p>{%- endif -%}
+          {%- if b_offer.settings.show_xmas_line and b_offer.settings.xmas_line != blank -%}<p data-rf2-xmas>{{ b_offer.settings.xmas_line | escape }}</p>{%- endif -%}
         </div>
       </div>
 
@@ -403,7 +403,7 @@
           </div>
 
           <p class="rf2-q__risk" data-rf2-t="offer.risk_line">{{ b_offer.settings.risk_line | escape }}</p>
-          {%- if b_offer.settings.xmas_line != blank -%}<p class="rf2-q__xmas" data-rf2-xmas>{{ b_offer.settings.xmas_line | escape }}</p>{%- endif -%}
+          {%- if b_offer.settings.show_xmas_line and b_offer.settings.xmas_line != blank -%}<p class="rf2-q__xmas" data-rf2-xmas>{{ b_offer.settings.xmas_line | escape }}</p>{%- endif -%}
           <p class="rf2-q__secure"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 10V8a5 5 0 0 1 10 0v2h1a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-9a1 1 0 0 1 1-1zm2 0h6V8a3 3 0 0 0-6 0z" fill="currentColor"/></svg><span data-rf2-t="offer.secure">{{ b_offer.settings.secure | escape }}</span></p>
         </div>
       </div>
@@ -2173,7 +2173,7 @@
           "type": "checkbox",
           "id": "show_identification",
           "label": "Show kicker",
-          "default": true
+          "default": false
         },
         {
           "type": "checkbox",
@@ -2185,7 +2185,7 @@
           "type": "checkbox",
           "id": "show_promise",
           "label": "Show promise card",
-          "default": true
+          "default": false
         },
         {
           "type": "checkbox",
@@ -2850,6 +2850,12 @@
           "id": "xmas_line",
           "label": "Christmas line (hidden after the date)",
           "default": "Commandée avant le 20 décembre, livrée avant Noël."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_xmas_line",
+          "label": "Show the Christmas line",
+          "default": false
         },
         {
           "type": "text",

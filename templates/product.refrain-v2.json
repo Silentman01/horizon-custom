@@ -214,14 +214,6 @@
             "answer": "2 versions de sa chanson et toutes les paroles, par e-mail, pour 19 €. Cadeau Premium (35 €) : + le clip paroles, la pochette, en priorité 12 h."
           }
         },
-        "fq_item_4": {
-          "type": "item",
-          "settings": {
-            "question": "Elle arrivera avant Noël ?",
-            "answer": "Oui, si tu commandes avant le 20 décembre.",
-            "hide_after": "2026-12-20"
-          }
-        },
         "fq_item_5": {
           "type": "item",
           "settings": {
@@ -241,7 +233,6 @@
         "fq_item_1",
         "fq_item_2",
         "fq_item_3",
-        "fq_item_4",
         "fq_item_5",
         "fq_item_6"
       ],

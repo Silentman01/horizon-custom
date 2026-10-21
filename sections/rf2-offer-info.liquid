@@ -27,24 +27,32 @@
     {%- if ss.show_title and ss.title != blank -%}
       <h2 class="rf2-oi__title">{% render 'rf2-accent', text: ss.title %}</h2>
     {%- endif -%}
-    <div class="rf2-oi__card">
-      <ul class="rf2-oi__list" role="list">
-        {%- for line in offer_lines -%}
-          {%- if line == blank -%}{%- continue -%}{%- endif -%}
-          <li class="rf2-oi__item">
-            <span class="rf2-oi__check" aria-hidden="true"></span>
-            <span>
-              {%- if ss.bold_prefix and line contains ':' -%}
-                {%- assign head = line | split: ':' | first -%}
-                {%- assign rest = line | remove_first: head -%}
-                <strong>{{ head | escape }}</strong>{{ rest | escape }}
-              {%- else -%}
-                {{ line | escape }}
-              {%- endif -%}
-            </span>
-          </li>
-        {%- endfor -%}
-      </ul>
+    <div class="rf2-oi__grid">
+      {%- for line in offer_lines -%}
+        {%- if line == blank -%}{%- continue -%}{%- endif -%}
+        {%- assign head = line | split: ':' | first | strip -%}
+        {%- assign rest = line | remove_first: head | remove_first: ':' | strip -%}
+        {%- assign price = '' -%}{%- assign label = head -%}
+        {%- assign words = head | split: ' ' -%}
+        {%- for w in words -%}{%- assign wn = w | remove: '€' -%}{%- assign n = wn | plus: 0 -%}{%- if n > 0 -%}{%- assign price = wn -%}{%- endif -%}{%- endfor -%}
+        {%- if price != blank -%}{%- assign label = head | remove: '€' | remove: price | strip -%}{%- endif -%}
+        {%- if label == blank -%}{%- if forloop.index == 1 -%}{%- assign label = 'Sa chanson' -%}{%- else -%}{%- assign label = 'Cadeau Premium' -%}{%- endif -%}{%- endif -%}
+        {%- assign feats = rest | split: '+' -%}
+        <div class="rf2-oi__offer{% if forloop.index > 1 %} rf2-oi__offer--prem{% endif %}">
+          <div class="rf2-oi__top">
+            <span class="rf2-oi__name">{{ label | escape }}</span>
+            {%- if price != blank -%}<span class="rf2-oi__price">{{ price }}<small>€</small></span>{%- endif -%}
+          </div>
+          <ul class="rf2-oi__list" role="list">
+            {%- if forloop.index > 1 -%}<li class="rf2-oi__item rf2-oi__item--inc"><span class="rf2-oi__check" aria-hidden="true"></span><span>Tout le Standard, et :</span></li>{%- endif -%}
+            {%- for f in feats -%}
+              {%- assign ft = f | strip -%}
+              {%- if ft == blank -%}{%- continue -%}{%- endif -%}
+              <li class="rf2-oi__item"><span class="rf2-oi__check" aria-hidden="true"></span><span>{{ ft | capitalize | escape }}</span></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
       {%- if ss.show_xmas and ss.xmas != blank -%}
         <p class="rf2-oi__xmas" data-rf2-oi-until="{{ ss.xmas_until | escape }}">{{ ss.xmas | escape }}</p>
       {%- endif -%}
@@ -74,12 +82,22 @@
   .rf2-oi--center .rf2-oi__title, .rf2-oi--center .rf2-oi__reason { text-align: center; }
   .rf2-oi__title { margin: 0 0 18px; font-family: var(--rf2-oi-head); font-weight: 800; font-size: var(--rf2-oi-title); line-height: 1.15; letter-spacing: -0.01em; }
   .rf2-oi__title em { font-family: var(--rf2-oi-serif); font-style: italic; font-weight: 600; color: var(--rf2-oi-accent); }
-  .rf2-oi__card { background: var(--rf2-oi-card); border-radius: 20px; padding: 18px 18px 16px; }
-  .rf2-oi__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .rf2-oi__grid { display: grid; gap: 14px; }
+  .rf2-oi__offer { background: var(--rf2-oi-card); border-radius: 22px; padding: 20px 20px 18px; box-shadow: 0 10px 30px rgba(30, 15, 74, 0.08); border: 1px solid rgba(30, 15, 74, 0.08); }
+  .rf2-oi__offer--prem { background: #1E0F4A; color: #fff; border-color: #1E0F4A; box-shadow: 0 14px 34px rgba(30, 15, 74, 0.28); }
+  .rf2-oi__top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px dashed rgba(30, 15, 74, 0.18); }
+  .rf2-oi__offer--prem .rf2-oi__top { border-bottom-color: rgba(255, 255, 255, 0.22); }
+  .rf2-oi__name { font-family: var(--rf2-oi-head); font-weight: 800; font-size: calc(var(--rf2-oi-fs) + 3px); line-height: 1.2; }
+  .rf2-oi__offer--prem .rf2-oi__name { color: #D4F53C; }
+  .rf2-oi__price { font-family: var(--rf2-oi-head); font-weight: 800; font-size: 34px; line-height: 1; letter-spacing: -0.02em; white-space: nowrap; }
+  .rf2-oi__price small { font-size: 18px; margin-left: 2px; }
+  .rf2-oi__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .rf2-oi__item { display: flex; gap: 12px; align-items: flex-start; font-size: var(--rf2-oi-fs); line-height: 1.45; }
-  .rf2-oi__item strong { font-weight: 800; }
-  .rf2-oi__check { flex: 0 0 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--rf2-oi-check); position: relative; }
+  .rf2-oi__item--inc { opacity: 0.75; font-style: italic; }
+  .rf2-oi__check { flex: 0 0 22px; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--rf2-oi-check); position: relative; }
+  .rf2-oi__offer--prem .rf2-oi__check { background: #D4F53C; }
   .rf2-oi__check::after { content: ''; position: absolute; left: 7px; top: 4px; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .rf2-oi__offer--prem .rf2-oi__check::after { border-color: #1E0F4A; }
   .rf2-oi__xmas { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid rgba(30, 15, 74, 0.12); font-size: calc(var(--rf2-oi-fs) - 1px); font-weight: 700; color: var(--rf2-oi-accent); }
   .rf2-oi__reason { margin: 14px 0 0; font-size: calc(var(--rf2-oi-fs) - 1px); line-height: 1.5; color: var(--rf2-oi-soft); }
   @media (max-width: 749px) { .rf2-oi--hide-m { display: none; } }
@@ -87,7 +105,8 @@
     .rf2-oi { padding-top: var(--rf2-oi-pt-d); padding-bottom: var(--rf2-oi-pb-d); }
     .rf2-oi__title { font-size: var(--rf2-oi-title-d); }
     .rf2-oi__item { font-size: var(--rf2-oi-fs-d); }
-    .rf2-oi__card { padding: 24px 28px 20px; }
+    .rf2-oi__grid { grid-template-columns: 1fr 1fr; align-items: start; }
+    .rf2-oi__offer { padding: 24px 26px 22px; }
     .rf2-oi--hide-d { display: none; }
   }
 </style>
@@ -104,10 +123,10 @@
     { "type": "text", "id": "line_1", "label": "Offer line 1", "default": "19 € : 2 versions de sa chanson + toutes les paroles + retouches illimitées" },
     { "type": "text", "id": "line_2", "label": "Offer line 2", "default": "Cadeau Premium 35 € : + le clip paroles, la pochette, en priorité 12 h" },
     { "type": "checkbox", "id": "bold_prefix", "label": "Bold the words before the colon", "default": true },
-    { "type": "checkbox", "id": "show_xmas", "label": "Show the Christmas line", "default": true },
+    { "type": "checkbox", "id": "show_xmas", "label": "Show the Christmas line", "default": false },
     { "type": "text", "id": "xmas", "label": "Christmas line", "default": "Commandée avant le 20 décembre, livrée avant Noël." },
     { "type": "text", "id": "xmas_until", "label": "Hide the Christmas line after (YYYY-MM-DD)", "default": "2026-12-20", "info": "Paris time, end of that day." },
-    { "type": "checkbox", "id": "show_reason", "label": "Show the reason line", "default": true },
+    { "type": "checkbox", "id": "show_reason", "label": "Show the reason line", "default": false },
     { "type": "text", "id": "reason", "label": "Reason line", "default": "Pas de surprise : tu paies la chanson que tu as déjà écoutée." },
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "c_bg", "label": "Background", "default": "#DCCFFF" },
