@@ -9,644 +9,545 @@
  */
 {
   "sections": {
-    "aurea_hero": {
-      "type": "aurea-home-hero",
+    "hero": {
+      "type": "refrain-hero",
       "settings": {
-        "pill": "Charged under every full moon",
-        "heading": "Attract What's *Yours*",
-        "text": "Real citrine, green aventurine and African turquoise, strung on one bracelet and charged under the full moon for luck, money and fresh starts.",
-        "cta_label": "Shop the bracelet",
-        "ghost_label": "Meet the stones",
-        "ghost_link": "#stones",
-        "rating_text": "Excellent 4.8 out of 5",
-        "ship_text": "Free express shipping",
-        "guarantee_text": "30-day money-back guarantee",
-        "image_desktop_asset": "aurea-home-hero-desktop.jpg",
-        "image_mobile_asset": "aurea-home-hero-mobile.jpg",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
+        "background": "lilac",
+        "eyebrow": "Chanson personnalisée",
+        "heading": "Son prénom dans le *refrain*.",
+        "sub": "Une chanson écrite à partir de vos souvenirs. Écoutez son extrait gratuit, puis décidez.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz",
+        "secondary_label": "",
+        "secondary_link": "/products/refrain-chanson-personnalisee#quiz",
+        "trust": "Écoutez avant de payer · 2 chansons + paroles · Livraison sous 24 h",
+        "image_asset": "refrain-hero-couple-desktop.jpg",
+        "mobile_image_asset": "refrain-hero-couple-mobile.jpg",
+        "chip_title": "« Éric » · 22 ans de mariage"
       }
     },
-    "aurea_marquee": {
-      "type": "aurea-home-marquee",
-      "settings": {},
+    "marquee": {
+      "type": "refrain-marquee",
       "blocks": {
-        "item_1": {
+        "b2": {
           "type": "item",
           "settings": {
-            "text": "Citrine"
+            "text": "Écoutez avant de payer"
           }
         },
-        "item_2": {
+        "b3": {
           "type": "item",
           "settings": {
-            "text": "Green Aventurine"
+            "text": "2 chansons + paroles"
           }
         },
-        "item_3": {
+        "b4": {
           "type": "item",
           "settings": {
-            "text": "African Turquoise"
+            "text": "Révisions illimitées"
           }
         },
-        "item_4": {
+        "b5": {
           "type": "item",
           "settings": {
-            "text": "Moon-charged"
+            "text": "Livraison sous 24 h"
           }
         },
-        "item_5": {
+        "b6": {
           "type": "item",
           "settings": {
-            "text": "Free express shipping"
-          }
-        },
-        "item_6": {
-          "type": "item",
-          "settings": {
-            "text": "30-day guarantee"
-          }
-        },
-        "item_7": {
-          "type": "item",
-          "settings": {
-            "text": "Buy 1 Get 1 Free"
+            "text": "Paiement sécurisé"
           }
         }
       },
       "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4",
-        "item_5",
-        "item_6",
-        "item_7"
-      ]
-    },
-    "aurea_featured": {
-      "type": "aurea-home-featured",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
       "settings": {
-        "eyebrow": "Our bestseller",
-        "heading": "Meet the *Prosperity Bracelet*",
-        "badge": "Bestseller",
-        "rating_text": "Excellent 4.8 out of 5",
-        "fallback_title": "Aurea® Prosperity Bracelet",
-        "save_label": "Save 20%",
-        "description": "Three stones, one daily intention. Put it on each morning as a small reminder of what you are calling in: more flow, more luck, more ease with money.",
-        "offer_title": "Buy 1, Get 1 FREE",
-        "offer_text": "Pick Buy 1 Get 1 and your second bracelet is on us. One to keep, one to gift.",
-        "cta_label": "Shop now",
-        "assure_1": "Free express shipping",
-        "assure_2": "30-day money-back",
-        "assure_3": "Secure checkout",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
-      },
-      "blocks": {
-        "benefit_1": {
-          "type": "benefit",
-          "settings": {
-            "text": "Attracts abundance every day"
-          }
-        },
-        "benefit_2": {
-          "type": "benefit",
-          "settings": {
-            "text": "Cleansed and moon-charged"
-          }
-        },
-        "benefit_3": {
-          "type": "benefit",
-          "settings": {
-            "text": "Invites luck and opportunity"
-          }
-        },
-        "benefit_4": {
-          "type": "benefit",
-          "settings": {
-            "text": "Genuine natural stones"
-          }
-        },
-        "benefit_5": {
-          "type": "benefit",
-          "settings": {
-            "text": "One-size stretch fit"
-          }
-        },
-        "benefit_6": {
-          "type": "benefit",
-          "settings": {
-            "text": "Made for everyday wear"
-          }
-        }
-      },
-      "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4",
-        "benefit_5",
-        "benefit_6"
-      ]
+        "speed": 35
+      }
     },
-    "aurea_stones": {
-      "type": "aurea-home-stones",
-      "settings": {
-        "eyebrow": "The three stones",
-        "heading": "Three stones. *One intention.*",
-        "sub": "Each stone has one job. Nothing here is just decoration."
-      },
+    "timeline": {
+      "type": "refrain-timeline",
       "blocks": {
-        "stone_1": {
-          "type": "stone",
-          "settings": {
-            "tag": "The Merchant's Stone",
-            "name": "Citrine",
-            "text": "Valued for centuries as the stone of prosperity. Its warm golden glow is linked to confidence, success and money that comes in and stays.",
-            "chips": "Prosperity, Confidence, Success",
-            "image_asset": "aurea-science-citrine.jpg"
-          }
-        },
-        "stone_2": {
-          "type": "stone",
-          "settings": {
-            "tag": "The Stone of Luck",
-            "name": "Green Aventurine",
-            "text": "The lucky charm of the crystal world. A soft green stone tied to good fortune, new opportunities and the nerve to say yes to them.",
-            "chips": "Luck, Opportunity, Optimism",
-            "image_asset": "aurea-science-aventurine.jpg"
-          }
-        },
-        "stone_3": {
-          "type": "stone",
-          "settings": {
-            "tag": "The Stone of Renewal",
-            "name": "African Turquoise",
-            "text": "A deep green stone of change, for closing old chapters and growing into what comes next.",
-            "chips": "Renewal, Growth, Protection",
-            "image_asset": "aurea-science-turquoise.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "stone_1",
-        "stone_2",
-        "stone_3"
-      ]
-    },
-    "aurea_moon": {
-      "type": "aurea-home-split",
-      "settings": {
-        "scheme": "dark",
-        "image_side": "left",
-        "mode": "points",
-        "image_ratio": "4 / 3",
-        "image_label": "Bracelet under the full moon, by candlelight",
-        "eyebrow": "Our ritual",
-        "heading": "Charged under *the full moon*",
-        "text": "Before a bracelet ships, we cleanse it and leave it out under the light of the full moon, the way crystal lovers have charged their stones for generations. It reaches you ready to wear from your very first morning.",
-        "cta_label": "Shop the bracelet",
-        "image_asset": "aurea-home-moon.jpg",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
-      },
-      "blocks": {
-        "point_1": {
-          "type": "item",
-          "settings": {
-            "title": "Cleansed",
-            "text": "Every bracelet is cleansed to clear any energy it picked up along the way.",
-            "icon": "sparkle"
-          }
-        },
-        "point_2": {
-          "type": "item",
-          "settings": {
-            "title": "Moon-charged",
-            "text": "Left under the full moon so it arrives charged and ready.",
-            "icon": "moon"
-          }
-        },
-        "point_3": {
-          "type": "item",
-          "settings": {
-            "title": "Genuine stones",
-            "text": "Real citrine, green aventurine and African turquoise.",
-            "icon": "gem"
-          }
-        }
-      },
-      "block_order": [
-        "point_1",
-        "point_2",
-        "point_3"
-      ]
-    },
-    "aurea_ritual": {
-      "type": "aurea-home-split",
-      "settings": {
-        "scheme": "light",
-        "image_side": "right",
-        "mode": "steps",
-        "image_ratio": "4 / 5",
-        "image_label": "Wrist wearing the bracelet, morning coffee in soft light",
-        "eyebrow": "Your 30-second ritual",
-        "heading": "Before your first coffee. *Every day.*",
-        "text": "",
-        "cta_label": "Start my ritual",
-        "image_asset": "aurea-home-ritual.jpg",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
-      },
-      "blocks": {
-        "step_1": {
-          "type": "item",
-          "settings": {
-            "title": "Slide it on",
-            "text": "Put the bracelet on your left wrist and feel the stones against your skin."
-          }
-        },
-        "step_2": {
-          "type": "item",
-          "settings": {
-            "title": "Name one wish",
-            "text": "Pick one clear intention for the day. Keep it short and specific."
-          }
-        },
-        "step_3": {
-          "type": "item",
-          "settings": {
-            "title": "Let it work",
-            "text": "Go about your day, stay open to luck and notice what shows up."
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ]
-    },
-    "aurea_icons": {
-      "type": "aurea-home-icons",
-      "settings": {
-        "eyebrow": "Why they wear it",
-        "heading": "Less worry. *More flow.*",
-        "sub": "What our wearers tell us they notice once the bracelet is part of their day.",
-        "cta_label": "Get my bracelet",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
-      },
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "title": "Lets go of heavy energy",
-            "text": "A daily reminder to release the stress and scarcity you have been carrying.",
-            "icon": "wind"
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "title": "Keeps abundance close",
-            "text": "Your intention sits right at your pulse, all day long.",
-            "icon": "magnet"
-          }
-        },
-        "card_3": {
-          "type": "card",
-          "settings": {
-            "title": "Money feels lighter",
-            "text": "Less 2AM math, more calm about what comes in and what goes out.",
-            "icon": "coins"
-          }
-        },
-        "card_4": {
-          "type": "card",
-          "settings": {
-            "title": "Luck finds you",
-            "text": "Stay open to the call, the raise, the lucky break.",
-            "icon": "clover"
-          }
-        },
-        "card_5": {
-          "type": "card",
-          "settings": {
-            "title": "Clears your vibration",
-            "text": "Start each morning from a calmer, clearer place.",
-            "icon": "wave"
-          }
-        },
-        "card_6": {
-          "type": "card",
-          "settings": {
-            "title": "Peace at night",
-            "text": "Fall asleep lighter, with fewer worries on repeat.",
-            "icon": "moonstar"
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2",
-        "card_3",
-        "card_4",
-        "card_5",
-        "card_6"
-      ]
-    },
-    "aurea_timeline": {
-      "type": "aurea-home-timeline",
-      "settings": {
-        "eyebrow": "What to expect",
-        "heading": "What wearers *report*",
-        "note": "Reported by wearers, never promised. Your own pace may differ."
-      },
-      "blocks": {
-        "step_1": {
+        "b1": {
           "type": "step",
           "settings": {
-            "label": "First 72 hours",
-            "title": "A subtle shift",
-            "text": "A gentle warmth or tingle at your pulse point as you settle into wearing it.",
-            "icon": "hourglass"
+            "label": "Vous racontez",
+            "text": "Quelques questions sur la personne : son prénom, un souvenir, un message.",
+            "image_asset": "refrain-how-1.jpg"
           }
         },
-        "step_2": {
+        "b2": {
           "type": "step",
           "settings": {
-            "label": "Week 1",
-            "title": "Calmer and lighter",
-            "text": "The money-anxiety loop quiets first. You feel calmer, lighter, less gripped by the math.",
-            "icon": "sun"
+            "label": "Vous écoutez",
+            "text": "Son extrait est prêt en quelques minutes. Écoutez avant de payer.",
+            "image_asset": "refrain-how-2.jpg"
           }
         },
-        "step_3": {
+        "b3": {
           "type": "step",
           "settings": {
-            "label": "Week 2+",
-            "title": "A new baseline",
-            "text": "You move through your days like someone abundance flows to. Aligned and unblocked.",
-            "icon": "sparkle"
+            "label": "Vous offrez",
+            "text": "Ses chansons arrivent par e-mail, prêtes à faire écouter.",
+            "image_asset": "refrain-how-3.jpg"
           }
         }
       },
       "block_order": [
-        "step_1",
-        "step_2",
-        "step_3"
-      ]
-    },
-    "aurea_reviews": {
-      "type": "aurea-home-reviews",
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
-        "eyebrow": "Reviews",
-        "heading": "Loved by *our wearers*",
-        "score_text": "Excellent 4.8 out of 5"
-      },
+        "background": "page",
+        "eyebrow": "Comment ça marche",
+        "heading": "De vos souvenirs à sa *chanson*",
+        "button_label": "Commencer",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz",
+        "show_sticky_image": false,
+        "image_asset": ""
+      }
+    },
+    "occasions": {
+      "type": "refrain-occasions",
       "blocks": {
-        "review_1": {
+        "b1": {
+          "type": "occasion",
+          "settings": {
+            "title": "Anniversaire",
+            "text": "Toute sa vie, mise en chanson.",
+            "link": "",
+            "image_asset": "refrain-occasion-birthday.jpg"
+          }
+        },
+        "b2": {
+          "type": "occasion",
+          "settings": {
+            "title": "Noël",
+            "text": "Commandez avant le 20 décembre pour une livraison avant Noël.",
+            "link": "",
+            "image_asset": "refrain-occasion-christmas.jpg"
+          }
+        },
+        "b3": {
+          "type": "occasion",
+          "settings": {
+            "title": "Fête des mères",
+            "text": "Pour lui dire ce qu'on ne dit jamais à table.",
+            "link": "",
+            "image_asset": "refrain-occasion-mother.jpg"
+          }
+        },
+        "b4": {
+          "type": "occasion",
+          "settings": {
+            "title": "Saint-Valentin",
+            "text": "Votre histoire, de la rencontre à aujourd'hui.",
+            "link": "",
+            "image_asset": "refrain-occasion-couple.jpg"
+          }
+        },
+        "b5": {
+          "type": "occasion",
+          "settings": {
+            "title": "Mariage",
+            "text": "Pour le premier slow ou le discours des témoins.",
+            "link": "",
+            "image_asset": "refrain-occasion-wedding.jpg"
+          }
+        },
+        "b6": {
+          "type": "occasion",
+          "settings": {
+            "title": "Naissance",
+            "text": "Une berceuse avec son prénom, dès le premier jour.",
+            "link": "",
+            "image_asset": "refrain-occasion-baby.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
+      "settings": {
+        "background": "lilac",
+        "heading": "Pour chaque *moment*",
+        "sub": "Une chanson pour toutes les fois où les mots ne suffisent pas.",
+        "button_label": "Créer son extrait gratuit",
+        "button_link": "/products/refrain-chanson-personnalisee#quiz"
+      }
+    },
+    "reviews": {
+      "type": "refrain-reviews",
+      "blocks": {
+        "b1": {
           "type": "review",
           "settings": {
-            "title": "The check I had written off",
-            "text": "I retired early after a back injury ended my work, and I was living on Social Security, about $500 short every month. By day 16 of wearing the bracelet I had the energy to take on part-time consulting. Five days later a payment came in from an old business deal I had completely forgotten. $4,200!!",
-            "name": "Richard T.",
-            "verified": "Verified buyer",
-            "avatar_asset": "aurea-testi-robert.jpg"
+            "name": "Sophie",
+            "meta": "Pour son mari · 22 ans de mariage",
+            "quote": "Éric dit toujours qu'il ne veut rien. Quand il a entendu son prénom dans le refrain, il a posé sa fourchette et m'a regardée sans rien dire.",
+            "stars": 5,
+            "image_asset": "refrain-review-1.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
-        "review_2": {
+        "b2": {
           "type": "review",
           "settings": {
-            "title": "Everything started moving",
-            "text": "Wow, so many results since I started wearing this! An unexpected refund check for $8K, a $12K tax return, new clients reaching out, less fear about my current job being my only option, and the freedom to travel. I just took a trip to Italy and Greece with no idea how the money and the time would work out, and it did!!",
-            "name": "Marianne K.",
-            "verified": "Verified buyer",
-            "avatar_asset": "aurea-testi-denise.jpg"
+            "name": "Julien",
+            "meta": "Pour sa femme · 25 ans de mariage",
+            "quote": "J'avais peur que ça fasse kitsch. Pas du tout. Son prénom dans le refrain, elle n'en revenait pas.",
+            "stars": 5,
+            "image_asset": "refrain-review-2.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         },
-        "review_3": {
+        "b3": {
           "type": "review",
           "settings": {
-            "title": "I never leave the house without it",
-            "text": "A raise I had given up on came through the same week it arrived. I don't go anywhere without it now.",
-            "name": "Dana L.",
-            "verified": "Verified buyer",
-            "avatar_asset": "aurea-testi-jessica.jpg"
+            "name": "Camille",
+            "meta": "Pour sa mère · Anniversaire",
+            "quote": "Ma mère a reconnu notre maison de Bretagne dès le deuxième couplet. Elle l'a réécoutée trois fois de suite.",
+            "stars": 5,
+            "image_asset": "refrain-review-3.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
+          }
+        },
+        "b4": {
+          "type": "review",
+          "settings": {
+            "name": "Martine",
+            "meta": "Pour son mari · Noël",
+            "quote": "Il n'est pas du genre à pleurer. J'ai écouté l'extrait avant de payer, pour être sûre. Le soir de Noël, il a dû sortir prendre l'air.",
+            "stars": 5,
+            "image_asset": "refrain-review-4.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
+          }
+        },
+        "b5": {
+          "type": "review",
+          "settings": {
+            "name": "Nadia",
+            "meta": "Pour sa mère · Noël",
+            "quote": "On l'a passée sur la télé, avec la vidéo des paroles. Quand son prénom s'est affiché, maman a pris la main de papa.",
+            "stars": 5,
+            "image_asset": "refrain-review-5.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
+          }
+        },
+        "b6": {
+          "type": "review",
+          "settings": {
+            "name": "Élodie",
+            "meta": "Pour sa mère · 60 ans",
+            "quote": "J'ai demandé une révision pour la prononciation de son prénom. Corrigé le lendemain. Parfait.",
+            "stars": 5,
+            "image_asset": "refrain-review-6.jpg",
+            "alt": "Un proche ému écoute sa chanson personnalisée"
           }
         }
       },
       "block_order": [
-        "review_1",
-        "review_2",
-        "review_3"
-      ]
-    },
-    "aurea_compare": {
-      "type": "aurea-comparison",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ],
       "settings": {
-        "eyebrow": "",
-        "heading": "Why *Aurea*",
-        "col_brand": "Aurea",
-        "col_others": "Others"
-      },
+        "background": "lilac",
+        "eyebrow": "Avis",
+        "heading": "Des histoires mises en *chanson*",
+        "subheading": "Ce qu'on nous raconte après l'écoute.",
+        "anchor_id": "avis"
+      }
+    },
+    "comparison": {
+      "type": "refrain-comparison",
       "blocks": {
-        "row_1": {
+        "b1": {
           "type": "row",
           "settings": {
-            "label": "Genuine crystals & stones"
+            "label": "Son prénom, ses souvenirs",
+            "us_text": "Oui, dans le refrain",
+            "a_has": false,
+            "b_has": false
           }
         },
-        "row_2": {
+        "b2": {
           "type": "row",
           "settings": {
-            "label": "Cleansed & moon-charged"
+            "label": "Écrit à partir de votre histoire",
+            "us_text": "Oui",
+            "a_has": false,
+            "b_has": false
           }
         },
-        "row_3": {
+        "b3": {
           "type": "row",
           "settings": {
-            "label": "Adjustable, one-size fit"
+            "label": "Écoutez avant de payer",
+            "us_text": "Extrait gratuit",
+            "a_has": false,
+            "b_has": false
           }
         },
-        "row_4": {
+        "b4": {
           "type": "row",
           "settings": {
-            "label": "Free express shipping"
+            "label": "Se réécoute pendant des années",
+            "us_text": "Oui",
+            "a_has": false,
+            "b_has": false
           }
         },
-        "row_5": {
+        "b5": {
           "type": "row",
           "settings": {
-            "label": "30-day money-back guarantee"
+            "label": "Révisions jusqu'à ce que ce soit juste",
+            "us_text": "Illimitées",
+            "a_has": false,
+            "b_has": false
           }
         },
-        "row_6": {
+        "b6": {
           "type": "row",
           "settings": {
-            "label": "Free shade swap & support"
+            "label": "Reçu même de dernière minute",
+            "us_text": "Sous 24 h par e-mail",
+            "a_has": true,
+            "b_has": false
+          }
+        },
+        "b7": {
+          "type": "row",
+          "settings": {
+            "label": "Se partage avec toute la famille",
+            "us_text": "Un lien, un fichier",
+            "a_has": false,
+            "b_has": false
           }
         }
       },
       "block_order": [
-        "row_1",
-        "row_2",
-        "row_3",
-        "row_4",
-        "row_5",
-        "row_6"
-      ]
-    },
-    "aurea_guarantee": {
-      "type": "aurea-home-guarantee",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ],
       "settings": {
-        "eyebrow": "Our promise",
-        "heading": "Wear it for 30 days. *Risk-free.*",
-        "text": "If it doesn't feel right, send it back within 30 days for a full refund. No questions asked. That's how sure we are.",
-        "seal_text": "MONEY-BACK GUARANTEE • RISK-FREE •",
-        "num": "30",
-        "unit": "DAYS"
-      },
+        "background": "page",
+        "heading": "Le cadeau qui ne finit pas dans un *tiroir*",
+        "subheading": "Comparez avant de choisir.",
+        "col_us": "Refrain",
+        "col_a": "Carte cadeau",
+        "col_b": "Cadeau « tiroir »",
+        "image_asset": "refrain-compare-drawer.jpg"
+      }
+    },
+    "promise": {
+      "type": "refrain-promise",
       "blocks": {
-        "item_1": {
+        "b1": {
           "type": "item",
           "settings": {
-            "title": "Free express shipping",
-            "text": "On every order, with tracking.",
-            "icon": "truck"
+            "icon": "ear",
+            "title": "Écoutez avant de payer",
+            "text": "Un extrait gratuit, sans carte bancaire."
           }
         },
-        "item_2": {
+        "b2": {
           "type": "item",
           "settings": {
-            "title": "30-day money-back",
-            "text": "Full refund, no questions asked.",
-            "icon": "shield"
+            "icon": "pen",
+            "title": "Écrite à partir de vous",
+            "text": "Son prénom, vos souvenirs, vos mots."
           }
         },
-        "item_3": {
+        "b3": {
           "type": "item",
           "settings": {
-            "title": "Secure checkout",
-            "text": "Encrypted, protected payment.",
-            "icon": "lock"
+            "icon": "refresh",
+            "title": "Révisions illimitées",
+            "text": "Nous ajustons jusqu'à ce que ce soit juste."
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "icon": "clock",
+            "title": "Livrée sous 24 h",
+            "text": "Par e-mail, prête à offrir. 12 h en Premium."
           }
         }
       },
       "block_order": [
-        "item_1",
-        "item_2",
-        "item_3"
-      ]
-    },
-    "aurea_faq": {
-      "type": "aurea-home-faq",
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
-        "eyebrow": "Good to know",
-        "heading": "Questions, *answered*",
-        "aside_text": "Still have a question? Write to us from our contact page. We are happy to help.",
-        "contact_label": "contact page"
-      },
+        "background": "page",
+        "eyebrow": "Notre promesse",
+        "heading": "Un cadeau sans *risque*",
+        "sub": ""
+      }
+    },
+    "guarantee": {
+      "type": "refrain-guarantee",
       "blocks": {
-        "q_1": {
-          "type": "item",
+        "b1": {
+          "type": "point",
           "settings": {
-            "question": "How long until I feel something?",
-            "answer": "Many people notice a subtle shift within the first few days of daily wear. For best results, keep it in steady contact with your skin."
+            "text": "Extrait gratuit, sans carte bancaire"
           }
         },
-        "q_2": {
-          "type": "item",
+        "b2": {
+          "type": "point",
           "settings": {
-            "question": "Are the stones real?",
-            "answer": "Yes. Every bracelet is made with genuine citrine, green aventurine and African turquoise beads."
+            "text": "Révisions illimitées après la commande"
           }
         },
-        "q_3": {
-          "type": "item",
+        "b3": {
+          "type": "point",
           "settings": {
-            "question": "How do I wear it?",
-            "answer": "The left wrist is traditionally the receiving side, but wear it wherever feels right. Put it on each morning and set one clear intention."
-          }
-        },
-        "q_4": {
-          "type": "item",
-          "settings": {
-            "question": "Will it fit my wrist?",
-            "answer": "Yes. The elastic cord is one size and stretches comfortably to fit most wrists. No clasp needed."
-          }
-        },
-        "q_5": {
-          "type": "item",
-          "settings": {
-            "question": "How does Buy 1 Get 1 work?",
-            "answer": "Choose the Buy 1 Get 1 option on the product page and you get two bracelets for the price of one. Keep one and gift the other, or wear both."
-          }
-        },
-        "q_6": {
-          "type": "item",
-          "settings": {
-            "question": "How much is shipping?",
-            "answer": "Express shipping is free on every order, and you get a tracking link by email as soon as your bracelet ships."
-          }
-        },
-        "q_7": {
-          "type": "item",
-          "settings": {
-            "question": "How do I care for it?",
-            "answer": "Keep it dry when you can and gently wipe the stones. Avoid harsh chemicals to protect their natural energy."
-          }
-        },
-        "q_8": {
-          "type": "item",
-          "settings": {
-            "question": "What's your return policy?",
-            "answer": "You are covered by our 30-day money-back guarantee. If it's not for you, send it back for a full refund."
+            "text": "Remboursement si ce n'est toujours pas juste"
           }
         }
       },
       "block_order": [
-        "q_1",
-        "q_2",
-        "q_3",
-        "q_4",
-        "q_5",
-        "q_6",
-        "q_7",
-        "q_8"
-      ]
-    },
-    "aurea_final": {
-      "type": "aurea-home-final",
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
-        "pill": "Full Moon Offer · Buy 1 Get 1 Free",
-        "heading": "Your abundance is *already on its way*",
-        "text": "Put it on tomorrow morning. Backed by our 30-day money-back guarantee.",
-        "cta_label": "Claim my bracelet",
-        "note_1": "Free express shipping",
-        "note_2": "30-day money-back guarantee",
-        "note_3": "Secure checkout",
-        "image_asset": "aurea-home-moon.jpg",
-        "product": "aurea-abundance-bracelet",
-        "link": "/products/aurea-abundance-bracelet"
+        "badge_text": "Extrait gratuit · Révisions illimitées",
+        "heading": "Écoutez avant de *payer*",
+        "text": "<p>Vous écoutez d'abord un extrait gratuit. Vous ne commandez que s'il vous touche. Ensuite, nous ajustons les chansons autant de fois que nécessaire. Si ce n'est toujours pas juste après nos révisions, nous vous remboursons.</p>",
+        "image_asset": "refrain-guarantee.jpg"
+      }
+    },
+    "faq": {
+      "type": "refrain-faq",
+      "blocks": {
+        "b1": {
+          "type": "q",
+          "settings": {
+            "question": "Qu'est-ce que je reçois ?",
+            "answer": "<p>Deux chansons personnalisées complètes, au format MP3, et leurs paroles complètes. Avec Premium : livraison prioritaire sous 12 h, un clip paroles animé et une pochette personnalisée. Tout arrive par e-mail, avec une page privée pour écouter et télécharger.</p>"
+          }
+        },
+        "b2": {
+          "type": "q",
+          "settings": {
+            "question": "Je peux vraiment écouter avant de payer ?",
+            "answer": "<p>Oui. Après le questionnaire, nous créons un extrait gratuit de sa chanson.</p>"
+          }
+        },
+        "b3": {
+          "type": "q",
+          "settings": {
+            "question": "À quel point la chanson est-elle personnalisée ?",
+            "answer": "<p>Les paroles sont écrites à partir de vos réponses : son prénom, ses qualités, vos souvenirs, votre message. Son prénom est chanté dans le refrain. Vous choisissez aussi le style et la voix.</p>"
+          }
+        },
+        "b4": {
+          "type": "q",
+          "settings": {
+            "question": "Et si son prénom est difficile à prononcer ?",
+            "answer": "<p>Indiquez la prononciation dans le questionnaire, écrite comme elle se dit (ex. : « Lou-i-ze »). Si elle n'est pas juste dans la version finale, une révision suffit.</p>"
+          }
+        },
+        "b5": {
+          "type": "q",
+          "settings": {
+            "question": "En combien de temps je la reçois ?",
+            "answer": "<p>Sous 24&nbsp;h avec Standard, sous 12&nbsp;h avec Premium. Pour Noël, commandez avant le 20 décembre pour une livraison avant Noël.</p>"
+          }
+        },
+        "b6": {
+          "type": "q",
+          "settings": {
+            "question": "Je peux demander des modifications ?",
+            "answer": "<p>Oui, autant que nécessaire. Un mot, un souvenir, la prononciation, le style&nbsp;: répondez simplement à l'e-mail de livraison.</p>"
+          }
+        },
+        "b7": {
+          "type": "q",
+          "settings": {
+            "question": "Et si ça ne me plaît toujours pas ?",
+            "answer": "<p>Nous faisons des révisions jusqu'à ce que ce soit juste. Si ce n'est toujours pas le cas après nos révisions, nous vous remboursons.</p>"
+          }
+        },
+        "b11": {
+          "type": "q",
+          "settings": {
+            "question": "Comment l'offrir ?",
+            "answer": "<p>Faites-la écouter en vrai, envoyez le lien, ou passez-la le jour J. Le fichier MP3 est à vous&nbsp;: téléphone, enceinte, voiture. 😊</p>"
+          }
+        },
+        "b12": {
+          "type": "q",
+          "settings": {
+            "question": "Elle existe dans d'autres langues ?",
+            "answer": "<p>Pour l'instant, en français et en anglais.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b11",
+        "b12"
+      ],
+      "settings": {
+        "background": "page",
+        "heading": "Vos *questions*",
+        "subheading": "Tout ce qu'il faut savoir avant de commander.",
+        "contact": "<p>Une autre question&nbsp;? Écrivez-nous à <a href=\"mailto:contact@mon-refrain.com\">contact@mon-refrain.com</a>.</p>"
+      }
+    },
+    "sticky_cta": {
+      "type": "refrain-sticky-cta",
+      "settings": {
+        "enable": true,
+        "label": "Créer son extrait gratuit",
+        "link": "/products/refrain-chanson-personnalisee#quiz",
+        "show_arrow": true
       }
     }
   },
   "order": [
-    "aurea_hero",
-    "aurea_marquee",
-    "aurea_featured",
-    "aurea_stones",
-    "aurea_moon",
-    "aurea_ritual",
-    "aurea_icons",
-    "aurea_timeline",
-    "aurea_reviews",
-    "aurea_compare",
-    "aurea_guarantee",
-    "aurea_faq",
-    "aurea_final"
+    "hero",
+    "marquee",
+    "timeline",
+    "occasions",
+    "reviews",
+    "comparison",
+    "promise",
+    "guarantee",
+    "faq",
+    "sticky_cta"
   ]
 }
