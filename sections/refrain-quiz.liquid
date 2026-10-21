@@ -1199,8 +1199,7 @@
         try {
           /* One song per checkout: an earlier preview left in the cart would be paid twice. clear.js needs a JSON body (bare POST = 411). */
           await fetch(root + 'cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: '{}' }).catch(() => {});
-          /* Add like Horizon's product form: the standard cart event feeds add-to-cart tracking and re-renders the cart drawer. */
-          const sectionIds = [...document.querySelectorAll('cart-items-component[data-section-id]')].map((el) => el.dataset.sectionId);
+          /* Same standard cart event as the theme's add-to-cart button (add-to-cart tracking); the cart app renders its own drawer. */
           let ev = null; let deferred = null;
           try {
             ev = await import('@shopify/events');
@@ -1209,16 +1208,16 @@
           } catch (e) { ev = null; deferred = null; }
           const r = await fetch(root + 'cart/add.js', {
             method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ items: [{ id, quantity: 1, properties }], sections: sectionIds.join(','), sections_url: location.pathname })
+            body: JSON.stringify({ items: [{ id, quantity: 1, properties }] })
           });
-          const added = await r.json().catch(() => ({}));
-          if (!r.ok || added.status) { if (deferred) deferred.reject(new Error('cart')); throw new Error('cart'); }
-          const cart = await fetch(root + 'cart.js', { headers: { Accept: 'application/json' } }).then((x) => x.json());
-          if (deferred) deferred.resolve({ cart: ev.CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { items: cart.items, source: 'refrain-quiz', sourceId: 'refrain-quiz', itemCount: 1, sections: added.sections, didError: false } });
-          /* The visitor checks out from the drawer (no auto-redirect). */
-          const drawer = document.querySelector('cart-drawer-component');
-          const themeDrawer = drawer ? drawer.closest('theme-drawer') : null;
-          if (themeDrawer && typeof themeDrawer.open === 'function') { if (!themeDrawer.isOpen) themeDrawer.open(); }
+          if (!r.ok) { if (deferred) deferred.reject(new Error('cart')); throw new Error('cart'); }
+          if (deferred) {
+            const cart = await fetch(root + 'cart.js', { headers: { Accept: 'application/json' } }).then((x) => x.json());
+            deferred.resolve({ cart: ev.CartLinesUpdateEvent.createCartFromAjaxResponse(cart), detail: { items: cart.items, source: 'refrain-quiz', itemCount: 1, didError: false } });
+          }
+          /* Open the cart drawer (the cart app takes over); the visitor checks out from there. */
+          const themeDrawer = document.querySelector('cart-drawer-component')?.closest('theme-drawer');
+          if (themeDrawer && typeof themeDrawer.open === 'function') themeDrawer.open();
           else location.href = root + 'cart';
           btn.removeAttribute('aria-busy'); this._buying = false;
         } catch (e) { err.hidden = false; btn.removeAttribute('aria-busy'); this._buying = false; }
