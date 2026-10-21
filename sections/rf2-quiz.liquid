@@ -372,7 +372,29 @@
               <label class="rf2-q__tier"><input type="radio" name="rf2_tier" value="premium"{% if ss.default_tier == 'premium' %} checked{% endif %}><span><b>{{ v_prem.title | escape }}</b><b data-rf2-price="prem"></b><small>{{ b_offer.settings.premium_line | escape }}</small></span></label>
             </fieldset>
           {%- else -%}
-            <label class="rf2-q__prem"><input type="checkbox" data-rf2-prem{% if ss.default_tier == 'premium' %} checked{% endif %}><span>{{ b_offer.settings.premium_line | escape }}</span></label>
+            {%- liquid
+              assign pl = b_offer.settings.premium_line
+              assign pl_head = pl | split: ':' | first | strip
+              assign pl_rest = pl | remove_first: pl_head | remove_first: ':' | strip
+              if pl_rest == blank
+                assign pl_rest = pl
+                assign pl_head = ''
+              endif
+              assign pl_feats = pl_rest | split: ','
+            -%}
+            <label class="rf2-q__prem">
+              <input type="checkbox" data-rf2-prem{% if ss.default_tier == 'premium' %} checked{% endif %}>
+              <span class="rf2-q__premc">
+                <span class="rf2-q__premtop">
+                  <span class="rf2-q__premtick" aria-hidden="true"></span>
+                  <span class="rf2-q__premname">{{ v_prem.title | default: 'Cadeau Premium' | escape }}</span>
+                  {%- if pl_head != blank -%}<span class="rf2-q__premprice">{{ pl_head | escape }}</span>{%- endif -%}
+                </span>
+                <span class="rf2-q__premlist">
+                  {%- for f in pl_feats -%}{%- assign ft = f | strip -%}{%- if ft != blank -%}<span>{{ ft | capitalize | escape }}</span>{%- endif -%}{%- endfor -%}
+                </span>
+              </span>
+            </label>
           {%- endif -%}
           <button type="button" class="rf2-q__link rf2-q__photo-link" data-rf2-photo-link aria-expanded="false" hidden data-rf2-t="offer.photo_link">{{ b_offer.settings.photo_link | escape }}</button>
 
@@ -569,8 +591,22 @@
   .rf2-q__cta { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; padding: 10px 18px; border: 0; border-radius: 999px; background: var(--rf2-q-lime); color: var(--rf2-q-ink); font: 800 16.5px/1.25 var(--rf2-q-sans); text-align: center; cursor: pointer; box-shadow: 0 10px 26px -10px color-mix(in srgb, var(--rf2-q-lime) 70%, transparent); }
   .rf2-q__cta[aria-busy='true'] { opacity: .65; pointer-events: none; }
   .rf2-q__added { margin: 8px 0 0; padding: 8px 12px; border-radius: 12px; background: rgb(212 245 60 / .14); color: var(--rf2-q-lime); font-weight: 700; font-size: 14px; line-height: 1.4; }
-  .rf2-q__prem { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; padding: 10px 12px; border-radius: 14px; border: 1.5px solid rgb(255 255 255 / .22); font-size: 14px; font-weight: 650; line-height: 1.4; }
-  .rf2-q__prem input { flex: none; width: 20px; height: 20px; margin: 1px 0 0; accent-color: var(--rf2-q-lime); }
+  .rf2-q__prem { display: block; margin-top: 14px; }
+  .rf2-q__prem input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+  .rf2-q__premc { display: block; position: relative; padding: 14px 16px 14px; border-radius: 18px; border: 2px dashed rgb(255 255 255 / .28); background: rgb(255 255 255 / .05); transition: border-color .2s, background .2s, box-shadow .2s, transform .15s; }
+  .rf2-q__prem:hover .rf2-q__premc { border-color: rgb(212 245 60 / .6); }
+  .rf2-q__prem input:focus-visible + .rf2-q__premc { outline: 2px solid var(--rf2-q-lime); outline-offset: 3px; }
+  .rf2-q__prem input:checked + .rf2-q__premc { border-style: solid; border-color: var(--rf2-q-lime); background: rgb(212 245 60 / .1); box-shadow: 0 10px 28px -12px rgb(212 245 60 / .55); }
+  .rf2-q__prem:active .rf2-q__premc { transform: scale(.985); }
+  .rf2-q__premtop { display: flex; align-items: center; gap: 10px; }
+  .rf2-q__premtick { flex: 0 0 24px; width: 24px; height: 24px; border-radius: 7px; border: 2px solid rgb(255 255 255 / .55); position: relative; transition: background .2s, border-color .2s; }
+  .rf2-q__prem input:checked + .rf2-q__premc .rf2-q__premtick { background: var(--rf2-q-lime); border-color: var(--rf2-q-lime); }
+  .rf2-q__prem input:checked + .rf2-q__premc .rf2-q__premtick::after { content: ''; position: absolute; left: 7px; top: 2px; width: 6px; height: 12px; border: solid var(--rf2-q-ink); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .rf2-q__premname { flex: 1; font-weight: 800; font-size: 16px; line-height: 1.2; color: var(--rf2-q-lime); }
+  .rf2-q__premprice { flex: none; padding: 4px 10px; border-radius: 999px; background: var(--rf2-q-lime); color: var(--rf2-q-ink); font-weight: 800; font-size: 14px; white-space: nowrap; }
+  .rf2-q__premlist { display: grid; gap: 6px; margin: 10px 0 0 34px; }
+  .rf2-q__premlist span { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.4; color: #fff; }
+  .rf2-q__premlist span::before { content: ''; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--rf2-q-lime); }
   .rf2-q__tiers { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; border: 0; }
   .rf2-q__tier span { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 10px 12px; border-radius: 14px; border: 1.5px solid rgb(255 255 255 / .22); }
   .rf2-q__tier small { grid-column: 1 / -1; font-size: 13px; color: color-mix(in srgb, #fff 75%, var(--rf2-q-violet)); }
