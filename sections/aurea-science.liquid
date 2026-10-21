@@ -1,0 +1,112 @@
+<section class="au-sci" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
+  <div class="au-sci__head">
+    {%- if section.settings.eyebrow != blank -%}<p class="au-sci__pill">{{ section.settings.eyebrow }}</p>{%- endif -%}
+    {% render 'aurea-title', text: section.settings.heading, class: 'au-sci__h' %}
+    {%- if section.settings.sub != blank -%}<p class="au-sci__sub">{{ section.settings.sub }}</p>{%- endif -%}
+  </div>
+  <div class="au-sci__wrap">
+    <aurea-rail class="au-sci__rail" id="au-sci-{{ section.id }}">
+      {%- for block in section.blocks -%}
+        <article class="au-sci__card" {{ block.shopify_attributes }}>
+          {%- assign ph = 'Image: ' | append: block.settings.title -%}
+          {% render 'aurea-media', image: block.settings.image, asset: block.settings.image_asset, ratio: '1 / 1', label: ph, sizes: '(min-width: 750px) 25vw, 78vw' %}
+          <div class="au-sci__body">
+            <h3 class="au-sci__title">{{ block.settings.title }}</h3>
+            <div class="au-sci__text">{{ block.settings.text }}</div>
+          </div>
+        </article>
+      {%- endfor -%}
+    </aurea-rail>
+    <div class="au-sci__nav">
+      <button type="button" class="au-sci__arrow" aria-label="Previous" onclick="document.getElementById('au-sci-{{ section.id }}').step(-1)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="au-sci__dots" aria-hidden="true">
+        {%- for block in section.blocks -%}<span class="au-sci__dot{% if forloop.first %} is-active{% endif %}"></span>{%- endfor -%}
+      </div>
+      <button type="button" class="au-sci__arrow" aria-label="Next" onclick="document.getElementById('au-sci-{{ section.id }}').step(1)">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+{% render 'aurea-drag' %}
+<script>
+  (() => {
+    const rail = document.getElementById('au-sci-{{ section.id }}');
+    if (!rail) return;
+    const dots = rail.parentElement.querySelectorAll('.au-sci__dot');
+    const sync = () => {
+      const kids = [...rail.children];
+      if (!kids.length) return;
+      const left = rail.scrollLeft;
+      let idx = 0, best = Infinity;
+      kids.forEach((k, i) => { const d = Math.abs(k.offsetLeft - rail.offsetLeft - left); if (d < best) { best = d; idx = i; } });
+      if (rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2) idx = kids.length - 1;
+      dots.forEach((d, i) => d.classList.toggle('is-active', i === idx));
+    };
+    rail.addEventListener('scroll', sync, { passive: true });
+  })();
+</script>
+{% stylesheet %}
+  .au-sci { padding: 40px 0; background: linear-gradient(180deg, #fbf3e4, #f6ead2); }
+  .au-sci__head { max-width: 680px; margin: 0 auto 28px; padding: 0 16px; text-align: center; }
+  .au-sci__pill { display: inline-block; margin: 0 0 14px; padding: 7px 16px; border-radius: 999px; background: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--au-pine); }
+  .au-sci__h { font-weight: 500; font-size: 29px; }
+  .au-sci__sub { margin: 14px 0 0; font-size: 16px; color: #4a443a; }
+  .au-sci__wrap { max-width: 1240px; margin: 0 auto; }
+  .au-sci__rail { gap: 14px; padding: 6px 16px 24px; scroll-padding-left: 16px; }
+  .au-sci__card { flex: 0 0 78%; overflow: hidden; border-radius: 18px; background: #fff; box-shadow: 0 14px 40px rgb(40 25 5 / 0.08); }
+  .au-sci__body { padding: 24px; }
+  .au-sci__title { margin: 0 0 8px; font-family: var(--au-body); font-size: 18px; font-weight: 600; color: var(--au-pine); }
+  .au-sci__text { font-size: 14px; line-height: 1.5; color: #4a443a; }
+  .au-sci__text strong { color: var(--au-ink); }
+  .au-sci__nav { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 0 16px; }
+  .au-sci__arrow { appearance: none; box-sizing: border-box; display: inline-flex; flex: 0 0 44px; align-items: center; justify-content: center; width: 44px; min-width: 44px; max-width: 44px; height: 44px; min-height: 44px; margin: 0; padding: 0; border: 1px solid var(--au-pine); border-radius: 50%; background: #fff; color: var(--au-pine); line-height: 1; cursor: pointer; transition: background 0.2s, color 0.2s; }
+  .au-sci__arrow svg { display: block; flex: none; width: 18px; height: 18px; }
+  .au-sci__arrow:hover { background: var(--au-pine); color: #fff; }
+  .au-sci__dots { display: flex; align-items: center; justify-content: center; gap: 8px; min-width: 72px; }
+  .au-sci__dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: rgb(30 51 40 / 0.25); transition: width 0.25s, background 0.25s; }
+  .au-sci__dot.is-active { width: 22px; background: var(--au-gold); }
+  .au-sci__arrow:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 2px; }
+  @media (min-width: 750px) {
+    .au-sci { padding: 64px 0; }
+    .au-sci__h { font-size: 40px; }
+    .au-sci__rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; overflow: visible; padding: 6px 24px 0; cursor: default; }
+    .au-sci__nav { display: none; }
+  }
+  @media (min-width: 750px) and (max-width: 1099px) { .au-sci__rail { grid-template-columns: repeat(2, 1fr); } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea science cards",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Pill eyebrow", "default": "ANCIENT WISDOM, REAL PHYSICS" },
+    { "type": "text", "id": "heading", "label": "Heading (*word* = gold italic)", "default": "Why this bracelet does what *vision boards* never could" },
+    { "type": "textarea", "id": "sub", "label": "Subtitle", "default": "For centuries, monks charged these three stones under the full moon. Modern physics now shows why it works — frequency, not faith." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (1:1)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback filename)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Citrine Quartz" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Citrine is a <strong>piezoelectric crystal</strong>.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurea science cards",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Citrine Quartz", "text": "<p>Citrine is a <strong>piezoelectric crystal</strong> — pressed lightly by your pulse, it creates a real, measurable electric charge (the same principle inside every quartz watch). Resting on your pulse point, it helps <strong>retune your energy field</strong> to the frequency prosperity flows toward.</p>" } },
+        { "type": "card", "settings": { "title": "Tri-Crystal Resonance", "text": "<p>Citrine, Green Aventurine and African Turquoise all belong to the <strong>quartz family</strong> — and quartz is so steady in frequency that it keeps time in every watch and radio. Worn together at your pulse, the three <strong>resonate as one</strong>, sending a stronger, steadier signal than any single stone.</p>" } },
+        { "type": "card", "settings": { "title": "Vibrational Field Clearing", "text": "<p>Everything vibrates at a frequency — you too. Stress, debt and scarcity pull you into a <strong>low-frequency state that pushes opportunity away</strong>. The bracelet helps <strong>clear that interference</strong> and raise you back to your natural prosperity frequency — so what you ask for can finally arrive.</p>" } },
+        { "type": "card", "settings": { "title": "Not a vision board.", "text": "<p>What Tibetan monks knew for centuries, physics now measures. No journaling, no \"manifest harder\" — it works <strong>whether you believe or not</strong>, through real frequency. Worn at your pulse, your intention stops being a thought… and becomes a <strong>signal</strong>.</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

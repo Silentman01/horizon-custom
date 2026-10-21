@@ -1,0 +1,74 @@
+<aurea-bundle class="aub" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  {%- if block.settings.heading != blank -%}<p class="aub__legend">{{ block.settings.heading }}</p>{%- endif -%}
+  <div class="aub__tiers" role="radiogroup" aria-label="{{ block.settings.heading | default: 'Choose your offer' | escape }}">
+    {% content_for 'blocks' %}
+  </div>
+</aurea-bundle>
+{% stylesheet %}
+  .aub { display: block; width: 100%; padding: 11px 0; }
+  .aub__legend { margin: 0 0 14px; font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+  .product-details:has(aurea-bundle) .quantity-selector-wrapper { display: none; }
+  .aub__tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 6px; padding-bottom: 8px; }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('aurea-bundle')) {
+    class AureaBundle extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener('change', this.onChange);
+        document.addEventListener('click', this.onGlobalClick, true);
+        this.apply();
+        this.watch = new MutationObserver(() => this.apply());
+        this.watch.observe(this.scope(), { childList: true, subtree: true });
+      }
+      disconnectedCallback() {
+        this.removeEventListener('change', this.onChange);
+        document.removeEventListener('click', this.onGlobalClick, true);
+        this.watch?.disconnect();
+      }
+      scope() {
+        return this.closest('.shopify-section') || document.body;
+      }
+      qty() {
+        const c = this.querySelector('.aub-tier__input:checked');
+        return c ? c.dataset.qty : '1';
+      }
+      /* Writes the chosen quantity into every add-to-cart form (main buy box and sticky bar). */
+      apply() {
+        const q = this.qty();
+        document.querySelectorAll('form[action*="/cart/add"] input[name="quantity"]').forEach((i) => {
+          if (i.value !== q) i.value = q;
+        });
+      }
+      /* Re-assert the quantity right before any add-to-cart click. */
+      onGlobalClick = (e) => {
+        if (e.target.closest && e.target.closest('[name="add"], add-to-cart-component, [class*="add-to-cart"]')) this.apply();
+      };
+      onChange = (e) => {
+        if (!e.target.classList.contains('aub-tier__input')) return;
+        this.querySelectorAll('.aub-tier').forEach((t) => t.classList.toggle('is-selected', t.contains(e.target)));
+        this.apply();
+      };
+    }
+    customElements.define('aurea-bundle', AureaBundle);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Aurea bundle cards",
+  "blocks": [ { "type": "_aurea-bundle-tier" } ],
+  "settings": [
+    { "type": "paragraph", "content": "Two-card BOGO offer. Cards set the cart quantity (1 or 2); the Buy-1-Get-1 automatic discount must be created in Shopify admin. Prices shown are text you control." },
+    { "type": "text", "id": "heading", "label": "Legend (optional)" }
+  ],
+  "presets": [
+    {
+      "name": "Aurea bundle cards",
+      "blocks": {
+        "t1": { "type": "_aurea-bundle-tier", "settings": { "quantity": 1, "title": "1 bracelet only", "price": "$39.90", "compare": "$49.90", "pill": "Save 22%" } },
+        "t2": { "type": "_aurea-bundle-tier", "settings": { "quantity": 2, "preselect": true, "badge": "MOST POPULAR", "title": "Buy 1 Get 1 FREE", "subtitle": "FALL SALE", "price": "$39.90", "compare": "$99.80", "pill": "Save 50%" } }
+      },
+      "block_order": ["t1", "t2"]
+    }
+  ]
+}
+{% endschema %}

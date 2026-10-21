@@ -1,0 +1,42 @@
+<div class="au-fb" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  <span class="au-fb__avatar">
+    {%- if block.settings.avatar -%}
+      {{ block.settings.avatar | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 40, height: 40 }}
+    {%- elsif block.settings.avatar_asset != blank -%}
+      <img src="{{ block.settings.avatar_asset | asset_url }}" alt="" width="40" height="40" loading="lazy">
+    {%- endif -%}
+  </span>
+  <div class="au-fb__main">
+    <div class="au-fb__bubble">
+      <p class="au-fb__name">{{ block.settings.name }}</p>
+      <p class="au-fb__text">{{ block.settings.text }}</p>
+      <span class="au-fb__react"><span aria-hidden="true">👍❤️🥰</span> {{ block.settings.likes }}</span>
+    </div>
+    <p class="au-fb__actions"><span>Like</span> <span>Reply</span> <span>{{ block.settings.age }}</span></p>
+  </div>
+</div>
+{% stylesheet %}
+  .au-fb { display: flex; gap: 10px; width: 100%; padding-bottom: 10px; font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  .au-fb__avatar { flex: none; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; background: #d8dadf; }
+  .au-fb__avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .au-fb__main { min-width: 0; }
+  .au-fb__bubble { position: relative; padding: 8px 14px 10px; border-radius: 18px; background: #f0f2f5; }
+  .au-fb__name { margin: 0; font-size: 13px; font-weight: 600; color: #050505; }
+  .au-fb__text { margin: 2px 0 0; font-size: 13px; line-height: 1.34; color: #050505; }
+  .au-fb__react { position: absolute; right: -6px; bottom: -12px; display: inline-flex; gap: 3px; padding: 1px 6px; border-radius: 999px; background: #fff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.25); font-size: 11px; color: #65676b; }
+  .au-fb__actions { display: flex; gap: 12px; margin: 8px 0 0 12px; font-size: 13px; font-weight: 600; color: #65676b; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea Facebook comment",
+  "settings": [
+    { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+    { "type": "text", "id": "avatar_asset", "label": "Avatar theme asset (fallback filename)", "default": "aurea-fb-avatar.jpg" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Laura Bennett" },
+    { "type": "textarea", "id": "text", "label": "Comment", "default": "Didn't expect much, but a few lucky things happened the very week I put it on 😂 A job offer, a refund I'd forgotten about… it's staying on my wrist. Wish I'd bought one years ago." },
+    { "type": "text", "id": "likes", "label": "Reaction count", "default": "21" },
+    { "type": "text", "id": "age", "label": "Age label", "default": "2d" }
+  ],
+  "presets": [ { "name": "Aurea Facebook comment" } ]
+}
+{% endschema %}

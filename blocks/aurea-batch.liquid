@@ -1,0 +1,44 @@
+<div class="au-batch" style="{% render 'aurea-vars' %}" {{ block.shopify_attributes }}>
+  <p class="au-batch__title">{{ block.settings.title }} <span class="au-batch__count">{{ block.settings.count }}</span></p>
+  <ul class="au-batch__bullets">
+    {%- if block.settings.bullet_1 != blank -%}<li>{{ block.settings.bullet_1 }}</li>{%- endif -%}
+    {%- if block.settings.bullet_2 != blank -%}<li>{{ block.settings.bullet_2 }}</li>{%- endif -%}
+  </ul>
+  <div class="au-batch__row is-done"><span><span aria-hidden="true">🌕</span> <s>{{ block.settings.row_1 }}</s></span><span>{{ block.settings.row_1_status }}</span></div>
+  <div class="au-batch__row is-active" style="--au-fill: {{ block.settings.fill }}%"><span><span aria-hidden="true">🌕</span> {{ block.settings.row_2 }}</span><strong>{{ block.settings.row_2_status }}</strong></div>
+  <div class="au-batch__row"><span><span aria-hidden="true">🌑</span> {{ block.settings.row_3 }}</span><span>{{ block.settings.row_3_status }}</span></div>
+</div>
+{% stylesheet %}
+  .au-batch { width: 100%; padding: 15px; border: 1px solid rgb(from var(--au-gold) r g b / 0.3); border-radius: 8px; background: linear-gradient(135deg, #fdfbf4, var(--au-parchment)); font-family: var(--au-body); color: var(--au-ink); }
+  .au-batch__title { margin: 0 0 8px; font-size: 16px; font-weight: 700; }
+  .au-batch__count { color: var(--au-gold); white-space: nowrap; }
+  .au-batch__bullets { margin: 0 0 12px; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 15px; }
+  .au-batch__bullets li { position: relative; padding-left: 24px; }
+  .au-batch__bullets li::before { content: '✓'; position: absolute; left: 0; top: 2px; display: grid; place-items: center; width: 15px; height: 15px; border-radius: 50%; background: var(--au-gold); color: #fff; font-size: 10px; line-height: 1; }
+  .au-batch__row { position: relative; overflow: hidden; display: flex; justify-content: space-between; gap: 10px; margin-top: 7px; padding: 10px 15px; border-radius: 8px; background: #fff; font-size: 14px; }
+  .au-batch__row.is-done { color: #b4ae9f; }
+  .au-batch__row.is-active { color: #fff; font-weight: 600; background: linear-gradient(90deg, var(--au-pine), var(--au-gold)) 0 0 / var(--au-fill, 96%) 100% no-repeat, #fff; }
+  @media (max-width: 749px) {
+    .au-batch { padding: 10px; }
+    .au-batch__bullets { font-size: 13.5px; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea batch box",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "November Full Moon Batch Ships In:" },
+    { "type": "text", "id": "count", "label": "Highlighted count", "default": "3 DAYS" },
+    { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Charged under the November full moon 🌕" },
+    { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Only 500 bracelets cleansed per moon cycle. Then the batch closes." },
+    { "type": "text", "id": "row_1", "label": "Row 1 (sold out)", "default": "October Full Moon Batch" },
+    { "type": "text", "id": "row_1_status", "label": "Row 1 status", "default": "Sold Out" },
+    { "type": "text", "id": "row_2", "label": "Row 2 (active)", "default": "November Full Moon Batch" },
+    { "type": "text", "id": "row_2_status", "label": "Row 2 status", "default": "96% Reserved" },
+    { "type": "range", "id": "fill", "label": "Row 2 fill %", "min": 10, "max": 100, "step": 1, "default": 96 },
+    { "type": "text", "id": "row_3", "label": "Row 3 (next)", "default": "December Full Moon Batch" },
+    { "type": "text", "id": "row_3_status", "label": "Row 3 status", "default": "Charging next" }
+  ],
+  "presets": [ { "name": "Aurea batch box" } ]
+}
+{% endschema %}

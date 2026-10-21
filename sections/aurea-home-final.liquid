@@ -1,0 +1,132 @@
+{%- assign href = section.settings.link | default: section.settings.product.url | default: routes.all_products_collection_url -%}
+<section class="au-h au-h--dark au-h-fin" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
+  <div class="au-h-fin__bg">
+    {%- if section.settings.image != blank -%}{{ section.settings.image | image_url: width: 2400 | image_tag: loading: 'lazy', sizes: '100vw', widths: '750, 1200, 1800, 2400', alt: '' }}{%- elsif section.settings.image_asset != blank -%}<img src="{{ section.settings.image_asset | asset_url }}" loading="lazy" width="1800" height="1350" alt="">{%- else -%}<div class="au-h-fin__ph" aria-hidden="true"></div>{%- endif -%}
+    <div class="au-h-fin__veil"></div>
+  </div>
+  <div class="au-h-wrap au-h-fin__in">
+    {%- if section.settings.pill != blank -%}<p class="au-h-fin__pill"><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4 6.5 6.5 0 0 0 20 14.5z"/></svg>{{ section.settings.pill }}</p>{%- endif -%}
+    {% render 'aurea-title', text: section.settings.heading, class: 'au-h-fin__h' %}
+    <p class="au-h-fin__p">{{ section.settings.text }}</p>
+    <a class="au-h-btn au-h-btn--gold" href="{{ href }}">{{ section.settings.cta_label }}</a>
+    <ul class="au-h-fin__notes"><li><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>{{ section.settings.note_1 }}</li><li><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>{{ section.settings.note_2 }}</li><li><svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>{{ section.settings.note_3 }}</li></ul>
+  </div>
+</section>
+{% stylesheet %}
+  .au-h { padding: 60px 0; font-family: var(--au-body); color: #2A2E29; background: #fff; }
+  .au-h *, .au-h *::before, .au-h *::after { box-sizing: border-box; }
+  .au-h--parch { background: var(--au-parchment); }
+  .au-h--pine { background: var(--au-pine); }
+  .au-h--dark { background: var(--au-espresso); }
+  .au-h.au-h--dark, .au-h.au-h--pine, .au-h.au-h-hero { color: #fff; }
+  .au-h-wrap { width: calc(100% - 32px); max-width: 1200px; margin-inline: auto; }
+  .au-h-head { max-width: 720px; margin: 0 auto 36px; text-align: center; }
+  .au-h-h2 { font-size: 31px; line-height: 1.08; }
+  .au-h-sub { max-width: 600px; margin: 14px auto 0; font-size: 17px; line-height: 1.6; color: #4A5249; }
+  .au-h-i { width: 1em; height: 1em; flex: none; }
+  .au-h .au-icon { width: 1em; height: 1em; flex: none; }
+  .au-h-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 32px; border-radius: 999px; background: var(--au-pine); color: var(--au-parchment); font-family: var(--au-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .au-h-btn:hover { filter: brightness(1.12); }
+  .au-h-btn:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 3px; }
+  .au-h-btn .au-h-i { font-size: 18px; }
+  .au-h-btn--gold { background: var(--au-gold); color: #1E1A10; }
+  .au-h-btn--ghost { background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / 0.55); }
+  .au-h-dark .au-title, .au-h--dark .au-title, .au-h--pine .au-title { color: #fff; }
+  .au-h-dark .au-title em, .au-h--dark .au-title em, .au-h--pine .au-title em { color: #DDB866; }
+  .au-h--dark .au-eyebrow, .au-h--pine .au-eyebrow { color: #DDB866; }
+  .au-h-tp { display: inline-flex; gap: 2px; }
+  .au-h-tp svg { width: 20px; height: 20px; padding: 3px; background: #00B67A; }
+  .au-h-ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(135deg, #f1f1f1, #dcdcdc); color: #6b6b6b; font-size: 12px; text-align: center; }
+  @media (min-width: 750px) { .au-h { padding: 72px 0; } .au-h-wrap { width: calc(100% - 48px); } .au-h-head { margin-bottom: 56px; } .au-h-h2 { font-size: 36px; } .au-h-btn { width: auto; } }
+  @media (min-width: 990px) { .au-h { padding: 96px 0; } .au-h-h2 { font-size: 44px; } }
+
+  .au-h.au-h-fin { position: relative; padding: 80px 0; overflow: hidden; color: #fff; }
+  .au-h-fin__bg { position: absolute; inset: 0; }
+  .au-h-fin__bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 80%; display: block; }
+  .au-h-fin__ph { position: absolute; inset: 0; display: grid; place-items: start end; padding: 20px; background: linear-gradient(135deg, #4a3822, #2A1E12); color: rgb(255 255 255 / 0.45); font-size: 12px; }
+  .au-h-fin__veil { position: absolute; inset: 0; background: linear-gradient(180deg, rgb(42 30 18 / 0.72), rgb(42 30 18 / 0.86)); }
+  .au-h-fin__in { position: relative; max-width: 720px; text-align: center; }
+  .au-h-fin__pill { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 22px; padding: 8px 14px; border: 1px solid rgb(201 154 58 / 0.45); border-radius: 999px; background: rgb(201 154 58 / 0.16); color: #E9D8AE; font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap; }
+  .au-h-fin__pill .au-h-i { font-size: 16px; }
+  .au-h-fin__h { font-size: 36px; line-height: 1.08; color: #fff; }
+  .au-h-fin__p { max-width: 560px; margin: 18px auto 28px; font-size: 16px; line-height: 1.6; color: rgb(255 255 255 / 0.85); }
+  .au-h-fin__notes { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 22px; margin: 26px 0 0; padding: 0; list-style: none; font-size: 14px; }
+  .au-h-fin__notes li { display: inline-flex; align-items: center; gap: 8px; }
+  .au-h-fin__notes .au-h-i { font-size: 18px; color: #DDB866; }
+  @media (min-width: 750px) { .au-h.au-h-fin { padding: 120px 0; } .au-h-fin__pill { font-size: 13px; } .au-h-fin__h { font-size: 54px; } .au-h-fin__p { font-size: 18px; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea home final CTA",
+  "settings": [
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Theme asset fallback (filename)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image",
+      "info": "4:3 landscape (2400x1800), same image as the moon section. Decorative."
+    },
+    {
+      "type": "text",
+      "id": "pill",
+      "label": "Offer pill",
+      "default": "Full Moon Offer · Buy 1 Get 1 Free"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*word* = gold italic)",
+      "default": "Your abundance is *already on its way*"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Paragraph",
+      "default": "Put it on tomorrow morning. Backed by our 30-day money-back guarantee."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Claim my bracelet"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button link (empty = selected product, then all products)"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product for the button link"
+    },
+    {
+      "type": "text",
+      "id": "note_1",
+      "label": "Note 1",
+      "default": "Free express shipping"
+    },
+    {
+      "type": "text",
+      "id": "note_2",
+      "label": "Note 2",
+      "default": "30-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "note_3",
+      "label": "Note 3",
+      "default": "Secure checkout"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurea home final CTA"
+    }
+  ]
+}
+{% endschema %}

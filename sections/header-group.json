@@ -11,51 +11,15 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "header-announcements",
-      "blocks": {
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Écoutez son extrait gratuit. Ne payez que s’il vous touche.",
-            "link": "/products/refrain-chanson-personnalisee#quiz",
-            "font": "var(--font-body--family)",
-            "font_size": "0.875rem",
-            "weight": "700",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": "#D4F53C"
-          },
-          "blocks": {}
-        },
-        "announcement_rf_noel": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Livrée par e-mail sous 24 h · Révisions illimitées",
-            "link": "/products/refrain-chanson-personnalisee#quiz",
-            "font": "var(--font-body--family)",
-            "font_size": "0.875rem",
-            "weight": "700",
-            "letter_spacing": "normal",
-            "case": "none",
-            "text_color": "#D4F53C"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "announcement_BxgCk9",
-        "announcement_rf_noel"
-      ],
-      "name": "t:names.announcement_bar",
+    "aurea_countdown": {
+      "type": "aurea-announcement",
       "settings": {
-        "speed": 5,
-        "section_width": "page-width",
-        "divider_width": 0,
-        "padding-block-start": 10,
-        "padding-block-end": 10,
-        "divider_color": "{{ settings.color_palette.color3 }}",
-        "background_color": "#1E0F4A"
+        "title": "🌕 FULL MOON SALE",
+        "sub": "Shop Now and Get Up To 70% Off",
+        "hours": 2,
+        "label_h": "Hrs",
+        "label_m": "Mins",
+        "label_s": "Secs"
       }
     },
     "header_section": {
@@ -76,6 +40,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
@@ -85,6 +51,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
@@ -96,6 +64,7 @@
         "logo_position": "left",
         "menu_position": "left",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": false,
         "search_position": "right",
         "search_row": "top",
@@ -107,19 +76,38 @@
         "localization_position": "right",
         "localization_row": "top",
         "section_width": "page-width",
-        "section_height": "standard",
+        "section_height": "compact",
         "enable_sticky_header": "never",
         "divider_width": 0,
         "divider_size": "page-width",
-        "border_width": 0,
+        "divider_color": "",
+        "border_width": 1,
+        "bottom_border_color": "",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
+        "background_color_top": "",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
         "enable_transparent_header_home": false,
+        "home_inverse_logo": false,
+        "text_color_transparent_home": "",
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
+    "aurea_countdown",
     "header_section"
   ]
 }

@@ -1,0 +1,176 @@
+<section class="au-h au-h--parch" style="{% render 'aurea-vars' %}" {{ section.shopify_attributes }}>
+  <div class="au-h-wrap">
+    <div class="au-h-head ">
+  {%- if section.settings.eyebrow != blank -%}<p class="au-eyebrow">{{ section.settings.eyebrow }}</p>{%- endif -%}
+  {% render 'aurea-title', text: section.settings.heading, class: 'au-h-h2' %}
+</div>
+    <div class="au-h-tl">
+      {%- for block in section.blocks -%}
+        <div class="au-h-tl__step" {{ block.shopify_attributes }}>
+          <span class="au-h-tl__dot">{%- case block.settings.icon -%}{%- when 'hourglass' -%}<svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg>{%- when 'sun' -%}<svg class="au-h-i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M5 19l1.4-1.4M17.6 6.4L19 5"/></svg>{%- else -%}{% render 'aurea-icon', name: block.settings.icon %}{%- endcase -%}</span>
+          <div><p class="au-h-tl__label">{{ block.settings.label }}</p><h3>{{ block.settings.title }}</h3><p class="au-h-tl__text">{{ block.settings.text }}</p></div>
+        </div>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.note != blank -%}<p class="au-h-tl__note">{{ section.settings.note }}</p>{%- endif -%}
+  </div>
+</section>
+{% stylesheet %}
+  .au-h { padding: 60px 0; font-family: var(--au-body); color: #2A2E29; background: #fff; }
+  .au-h *, .au-h *::before, .au-h *::after { box-sizing: border-box; }
+  .au-h--parch { background: var(--au-parchment); }
+  .au-h--pine { background: var(--au-pine); }
+  .au-h--dark { background: var(--au-espresso); }
+  .au-h.au-h--dark, .au-h.au-h--pine, .au-h.au-h-hero { color: #fff; }
+  .au-h-wrap { width: calc(100% - 32px); max-width: 1200px; margin-inline: auto; }
+  .au-h-head { max-width: 720px; margin: 0 auto 36px; text-align: center; }
+  .au-h-h2 { font-size: 31px; line-height: 1.08; }
+  .au-h-sub { max-width: 600px; margin: 14px auto 0; font-size: 17px; line-height: 1.6; color: #4A5249; }
+  .au-h-i { width: 1em; height: 1em; flex: none; }
+  .au-h .au-icon { width: 1em; height: 1em; flex: none; }
+  .au-h-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; padding: 0 32px; border-radius: 999px; background: var(--au-pine); color: var(--au-parchment); font-family: var(--au-body); font-size: 14px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; }
+  .au-h-btn:hover { filter: brightness(1.12); }
+  .au-h-btn:focus-visible { outline: 2px solid var(--au-gold); outline-offset: 3px; }
+  .au-h-btn .au-h-i { font-size: 18px; }
+  .au-h-btn--gold { background: var(--au-gold); color: #1E1A10; }
+  .au-h-btn--ghost { background: transparent; color: #fff; border: 1px solid rgb(255 255 255 / 0.55); }
+  .au-h-dark .au-title, .au-h--dark .au-title, .au-h--pine .au-title { color: #fff; }
+  .au-h-dark .au-title em, .au-h--dark .au-title em, .au-h--pine .au-title em { color: #DDB866; }
+  .au-h--dark .au-eyebrow, .au-h--pine .au-eyebrow { color: #DDB866; }
+  .au-h-tp { display: inline-flex; gap: 2px; }
+  .au-h-tp svg { width: 20px; height: 20px; padding: 3px; background: #00B67A; }
+  .au-h-ph { position: absolute; inset: 0; display: grid; place-items: center; padding: 16px; background: linear-gradient(135deg, #f1f1f1, #dcdcdc); color: #6b6b6b; font-size: 12px; text-align: center; }
+  @media (min-width: 750px) { .au-h { padding: 72px 0; } .au-h-wrap { width: calc(100% - 48px); } .au-h-head { margin-bottom: 56px; } .au-h-h2 { font-size: 36px; } .au-h-btn { width: auto; } }
+  @media (min-width: 990px) { .au-h { padding: 96px 0; } .au-h-h2 { font-size: 44px; } }
+
+  .au-h-tl { position: relative; display: grid; gap: 28px; }
+  .au-h-tl::before { content: ''; position: absolute; left: 28px; top: 20px; bottom: 20px; width: 2px; background: linear-gradient(180deg, var(--au-gold), var(--au-pine)); opacity: 0.5; }
+  .au-h-tl__step { position: relative; display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: start; }
+  .au-h-tl__dot { display: grid; place-items: center; width: 58px; height: 58px; border: 2px solid var(--au-gold); border-radius: 50%; background: #fff; box-shadow: 0 0 0 8px var(--au-parchment); color: var(--au-pine); font-size: 26px; }
+  .au-h-tl__label { margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--au-gold); }
+  .au-h-tl__step h3 { margin: 0 0 8px; font-family: var(--au-heading); font-size: 22px; font-weight: 600; color: var(--au-pine); }
+  .au-h-tl__text { margin: 0; max-width: 320px; font-size: 15px; line-height: 1.6; color: #4A5249; }
+  .au-h-tl__note { margin: 40px 0 0; font-size: 13px; font-style: italic; text-align: center; color: #6E6E73; }
+  @media (min-width: 750px) {
+    .au-h-tl { grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .au-h-tl::before { left: 16%; right: 16%; top: 29px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--au-gold), var(--au-pine)); }
+    .au-h-tl__step { display: block; text-align: center; }
+    .au-h-tl__dot { margin: 0 auto 22px; }
+    .au-h-tl__text { margin-inline: auto; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Aurea home timeline",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "What to expect"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading (*word* = gold italic)",
+      "default": "What wearers *report*"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Note",
+      "default": "Reported by wearers, never promised. Your own pace may differ."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "hourglass",
+          "options": [
+            {
+              "value": "hourglass",
+              "label": "hourglass"
+            },
+            {
+              "value": "sun",
+              "label": "sun"
+            },
+            {
+              "value": "sparkle",
+              "label": "sparkle"
+            },
+            {
+              "value": "clock",
+              "label": "clock"
+            },
+            {
+              "value": "moon",
+              "label": "moon"
+            },
+            {
+              "value": "gem",
+              "label": "gem"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Week 1"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Aurea home timeline",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "icon": "hourglass",
+            "label": "First 72 hours",
+            "title": "A subtle shift",
+            "text": "A gentle warmth or tingle at your pulse point as you settle into wearing it."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "sun",
+            "label": "Week 1",
+            "title": "Calmer and lighter",
+            "text": "The money-anxiety loop quiets first. You feel calmer, lighter, less gripped by the math."
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "icon": "sparkle",
+            "label": "Week 2+",
+            "title": "A new baseline",
+            "text": "You move through your days like someone abundance flows to. Aligned and unblocked."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

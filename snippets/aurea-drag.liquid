@@ -1,0 +1,51 @@
+{%- comment -%}
+  Defines the <aurea-rail> element: a scroll-snap rail that also scrolls by mouse/pen drag.
+  Render once per section that needs it. Usage: <aurea-rail class="..."> children </aurea-rail>
+{%- endcomment -%}
+{% stylesheet %}
+  aurea-rail { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
+  aurea-rail::-webkit-scrollbar { display: none; }
+  aurea-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  aurea-rail.is-dragging * { pointer-events: none; }
+  aurea-rail > * { scroll-snap-align: start; }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('aurea-rail')) {
+    class AureaRail extends HTMLElement {
+      connectedCallback() {
+        let down = false, startX = 0, startScroll = 0, moved = 0;
+        this.addEventListener('pointerdown', (e) => {
+          if (e.pointerType === 'touch') return;
+          down = true; moved = 0; startX = e.clientX; startScroll = this.scrollLeft;
+        });
+        window.addEventListener('pointermove', (e) => {
+          if (!down) return;
+          const dx = e.clientX - startX;
+          moved = Math.max(moved, Math.abs(dx));
+          if (moved > 4) this.classList.add('is-dragging');
+          this.scrollLeft = startScroll - dx;
+        });
+        const end = () => {
+          if (!down) return;
+          down = false;
+          if (!this.classList.contains('is-dragging')) return;
+          const kids = [...this.children];
+          const left = this.scrollLeft;
+          const target = kids.reduce((a, k) => (Math.abs(k.offsetLeft - this.offsetLeft - left) < Math.abs(a.offsetLeft - this.offsetLeft - left) ? k : a), kids[0]);
+          this.classList.remove('is-dragging');
+          if (target) this.scrollTo({ left: target.offsetLeft - this.offsetLeft, behavior: 'smooth' });
+        };
+        window.addEventListener('pointerup', end);
+        window.addEventListener('pointercancel', end);
+        this.addEventListener('click', (e) => { if (moved > 4) { e.preventDefault(); e.stopPropagation(); moved = 0; } }, true);
+        this.addEventListener('dragstart', (e) => e.preventDefault());
+      }
+      /** Scroll by one card; dir = 1 or -1. */
+      step(dir) {
+        const k = this.children[0];
+        if (k) this.scrollBy({ left: dir * (k.getBoundingClientRect().width + 14), behavior: 'smooth' });
+      }
+    }
+    customElements.define('aurea-rail', AureaRail);
+  }
+{% endjavascript %}
