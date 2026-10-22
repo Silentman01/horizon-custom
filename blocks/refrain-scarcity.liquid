@@ -36,16 +36,24 @@
     assign sod = now_h | times: 3600
     assign sod_m = now_mi | times: 60
     assign sod = sod | plus: sod_m | plus: now_se
-    assign left_s = cut_h | times: 3600 | minus: sod
-    if left_s <= 0
-      assign left_s = left_s | plus: 86400
+    assign cyc_h = bs.cycle_hours | default: 24 | plus: 0
+    assign cyc = cyc_h | times: 3600
+    if cyc_h < 24
+      assign left_s = sod | modulo: cyc
+      assign left_s = cyc | minus: left_s
+    else
+      assign cyc = 86400
+      assign left_s = cut_h | times: 3600 | minus: sod
+      if left_s <= 0
+        assign left_s = left_s | plus: 86400
+      endif
     endif
     assign cd_h = left_s | divided_by: 3600
     assign cd_m = left_s | modulo: 3600 | divided_by: 60
     assign cd_s = left_s | modulo: 60
     if bs.fill_mode == 'auto'
-      assign done_s = 86400 | minus: left_s
-      assign fill = done_s | times: 100 | divided_by: 86400
+      assign done_s = cyc | minus: left_s
+      assign fill = done_s | times: 100 | divided_by: cyc
       if fill < 4
         assign fill = 4
       elsif fill > 96
@@ -97,6 +105,7 @@
     class="rf-scar{% if over %} is-over{% endif %}{% if bs.hide_mobile %} rf-scar--hm{% endif %}{% if bs.hide_desktop %} rf-scar--hd{% endif %}"
     data-mode="{% if daily %}daily{% else %}deadline{% endif %}"
     data-cutoff="{{ bs.cutoff_hour | default: 0 }}"
+    data-cycle="{{ bs.cycle_hours | default: 24 }}"
     data-tz="{{ tz_off }}"
     data-deadline="{{ bs.deadline | escape }}"
     data-start="{{ bs.start | escape }}"
@@ -177,6 +186,7 @@
           const m = /^([+-])(\d{2}):?(\d{2})$/.exec((this.dataset.tz || '').trim());
           this.offMin = m ? (m[1] === '-' ? -1 : 1) * (Number(m[2]) * 60 + Number(m[3])) : -new Date().getTimezoneOffset();
           this.cutoff = Math.min(23, Math.max(0, Number(this.dataset.cutoff) || 0)) * 3600;
+          this.cycle = Math.min(24, Math.max(1, Number(this.dataset.cycle) || 24)) * 3600;
         } else {
           this.deadline = Date.parse(this.dataset.deadline || '');
           if (Number.isNaN(this.deadline)) {
@@ -204,12 +214,14 @@
         if (this.daily) {
           const shop = new Date(Date.now() + this.offMin * 60000);
           const sod = shop.getUTCHours() * 3600 + shop.getUTCMinutes() * 60 + shop.getUTCSeconds();
-          let left = this.cutoff - sod;
+          /* Shorter cycle (e.g. 2 h): restarts at every multiple of the cycle in the store day. */
+          const cyc = this.cycle < 86400 ? this.cycle : 86400;
+          let left = cyc < 86400 ? cyc - (sod % cyc) : this.cutoff - sod;
           if (left <= 0) left += 86400;
           this.set('h', pad(Math.floor(left / 3600)));
           this.set('m', pad(Math.floor((left % 3600) / 60)));
           this.set('s', pad(left % 60));
-          if (this.dataset.fillMode === 'auto') this.fill(Math.min(96, Math.max(4, ((86400 - left) / 86400) * 100)));
+          if (this.dataset.fillMode === 'auto') this.fill(Math.min(96, Math.max(4, ((cyc - left) / cyc) * 100)));
           return;
         }
         const now = Date.now();
@@ -240,6 +252,7 @@
   "settings": [
     { "type": "header", "content": "Mode" },
     { "type": "select", "id": "mode", "label": "Countdown mode", "default": "daily", "options": [ { "value": "daily", "label": "Daily: to today's cutoff hour" }, { "value": "deadline", "label": "Fixed date (deadline)" } ] },
+    { "type": "range", "id": "cycle_hours", "label": "Daily mode: restart every (hours)", "info": "24 = once a day at the cutoff hour. 2 = a 2 h countdown that restarts every 2 h.", "min": 1, "max": 24, "step": 1, "unit": "h", "default": 24 },
     { "type": "range", "id": "cutoff_hour", "label": "Daily cutoff hour (store time zone)", "info": "0 = midnight. After the cutoff, the countdown restarts for the next day.", "min": 0, "max": 23, "step": 1, "unit": "h", "default": 0 },
     { "type": "text", "id": "deadline", "label": "Deadline (fixed date mode: date, time and UTC offset)", "info": "Format: 2026-12-20T23:59:00+01:00", "default": "2026-12-20T23:59:00+01:00" },
     { "type": "text", "id": "label", "label": "Label", "default": "Recevez sa chanson dès demain" },

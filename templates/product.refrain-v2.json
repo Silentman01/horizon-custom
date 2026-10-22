@@ -266,7 +266,8 @@
                 "margin_top": 0,
                 "margin_bottom": 0,
                 "hide_mobile": false,
-                "hide_desktop": false
+                "hide_desktop": false,
+                "cycle_hours": 2
               },
               "blocks": {}
             },
