@@ -366,10 +366,25 @@
           <p class="rf2-q__added" data-rf2-added role="status" hidden></p>
           <p class="rf2-q__cerr" data-rf2-cart-err role="alert" hidden data-rf2-t="offer.cart_error">{{ b_offer.settings.cart_error | escape }}</p>
           {%- if ss.tier_ui == 'cards' -%}
+            {%- assign std_feats = b_offer.settings.standard_line | split: ',' -%}
+            {%- assign prem_feats = b_offer.settings.premium_line | split: ',' -%}
             <fieldset class="rf2-q__tiers">
               <legend class="rf2-q__sr">{{ b_offer.settings.premium_line | escape }}</legend>
-              <label class="rf2-q__tier"><input type="radio" name="rf2_tier" value="standard"{% if ss.default_tier != 'premium' %} checked{% endif %}><span><b>{{ v_std.title | escape }}</b><b data-rf2-price="std"></b></span></label>
-              <label class="rf2-q__tier"><input type="radio" name="rf2_tier" value="premium"{% if ss.default_tier == 'premium' %} checked{% endif %}><span><b>{{ v_prem.title | escape }}</b><b data-rf2-price="prem"></b><small>{{ b_offer.settings.premium_line | escape }}</small></span></label>
+              <label class="rf2-q__tier">
+                <input type="radio" name="rf2_tier" value="standard"{% if ss.default_tier != 'premium' %} checked{% endif %}>
+                <span class="rf2-q__tc">
+                  <span class="rf2-q__ttop"><span class="rf2-q__tdot" aria-hidden="true"></span><b class="rf2-q__tname">{{ v_std.title | escape }}</b><b class="rf2-q__tprice" data-rf2-price="std"></b></span>
+                  <span class="rf2-q__tlist">{%- for f in std_feats -%}{%- assign ft = f | strip -%}{%- if ft != blank -%}<span>{{ ft | capitalize | escape }}</span>{%- endif -%}{%- endfor -%}</span>
+                </span>
+              </label>
+              <label class="rf2-q__tier rf2-q__tier--prem">
+                <input type="radio" name="rf2_tier" value="premium"{% if ss.default_tier == 'premium' %} checked{% endif %}>
+                <span class="rf2-q__tc">
+                  {%- if b_offer.settings.premium_badge != blank -%}<span class="rf2-q__tbadge">{{ b_offer.settings.premium_badge | escape }}</span>{%- endif -%}
+                  <span class="rf2-q__ttop"><span class="rf2-q__tdot" aria-hidden="true"></span><b class="rf2-q__tname">{{ v_prem.title | escape }}</b><b class="rf2-q__tprice" data-rf2-price="prem"></b></span>
+                  <span class="rf2-q__tlist">{%- for f in std_feats -%}{%- if forloop.first -%}<span class="rf2-q__tinc">{{ b_offer.settings.premium_includes | escape }}</span>{%- endif -%}{%- endfor -%}{%- for f in prem_feats -%}{%- assign ft = f | strip -%}{%- if ft != blank -%}<span>{{ ft | capitalize | escape }}</span>{%- endif -%}{%- endfor -%}</span>
+                </span>
+              </label>
             </fieldset>
           {%- else -%}
             {%- liquid
@@ -607,10 +622,25 @@
   .rf2-q__premlist { display: grid; gap: 6px; margin: 10px 0 0 34px; }
   .rf2-q__premlist span { position: relative; padding-left: 18px; font-size: 14px; line-height: 1.4; color: #fff; }
   .rf2-q__premlist span::before { content: ''; position: absolute; left: 0; top: .5em; width: 7px; height: 7px; border-radius: 50%; background: var(--rf2-q-lime); }
-  .rf2-q__tiers { display: grid; gap: 8px; margin: 12px 0 0; padding: 0; border: 0; }
-  .rf2-q__tier span { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; padding: 10px 12px; border-radius: 14px; border: 1.5px solid rgb(255 255 255 / .22); }
-  .rf2-q__tier small { grid-column: 1 / -1; font-size: 13px; color: color-mix(in srgb, #fff 75%, var(--rf2-q-violet)); }
-  .rf2-q__tier input:checked + span { border-color: var(--rf2-q-lime); }
+  .rf2-q__tiers { display: grid; gap: 12px; margin: 14px 0 0; padding: 0; border: 0; }
+  .rf2-q__tier { display: block; }
+  .rf2-q__tc { display: block; position: relative; padding: 14px 16px; border-radius: 18px; border: 2px solid rgb(255 255 255 / .22); background: rgb(255 255 255 / .04); transition: border-color .2s, background .2s, box-shadow .2s, transform .15s; }
+  .rf2-q__tier--prem .rf2-q__tc { padding-top: 20px; border-color: rgb(212 245 60 / .55); background: linear-gradient(160deg, rgb(212 245 60 / .16), rgb(106 75 216 / .22)); }
+  .rf2-q__tier input:checked + .rf2-q__tc { border-color: var(--rf2-q-lime); box-shadow: 0 0 0 1px var(--rf2-q-lime), 0 12px 30px -12px rgb(212 245 60 / .6); }
+  .rf2-q__tier:active .rf2-q__tc { transform: scale(.985); }
+  .rf2-q__tbadge { position: absolute; top: -11px; left: 16px; padding: 3px 10px; border-radius: 999px; background: var(--rf2-q-lime); color: var(--rf2-q-ink); font-size: 12px; font-weight: 800; letter-spacing: .02em; }
+  .rf2-q__ttop { display: flex; align-items: center; gap: 10px; }
+  .rf2-q__tdot { flex: 0 0 22px; width: 22px; height: 22px; border-radius: 50%; border: 2px solid rgb(255 255 255 / .55); position: relative; }
+  .rf2-q__tier input:checked + .rf2-q__tc .rf2-q__tdot { border-color: var(--rf2-q-lime); }
+  .rf2-q__tier input:checked + .rf2-q__tc .rf2-q__tdot::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--rf2-q-lime); }
+  .rf2-q__tname { flex: 1; font-size: 16px; font-weight: 800; line-height: 1.2; }
+  .rf2-q__tier--prem .rf2-q__tname { color: var(--rf2-q-lime); }
+  .rf2-q__tprice { flex: none; font-size: 22px; font-weight: 800; white-space: nowrap; }
+  .rf2-q__tlist { display: grid; gap: 5px; margin: 10px 0 0 32px; }
+  .rf2-q__tlist span { position: relative; padding-left: 16px; font-size: 14px; line-height: 1.4; }
+  .rf2-q__tlist span::before { content: ''; position: absolute; left: 0; top: .5em; width: 6px; height: 6px; border-radius: 50%; background: rgb(255 255 255 / .6); }
+  .rf2-q__tier--prem .rf2-q__tlist span::before { background: var(--rf2-q-lime); }
+  .rf2-q__tlist .rf2-q__tinc { font-style: italic; opacity: .8; }
   .rf2-q__photo-link { color: #fff; }
   .rf2-q__photo { margin-top: 8px; padding: 12px; border-radius: 14px; background: rgb(255 255 255 / .06); }
   .rf2-q__photo-t { margin: 0; font-weight: 800; }
@@ -2127,11 +2157,11 @@
       "type": "select",
       "id": "tier_ui",
       "label": "Premium choice",
-      "default": "line",
+      "default": "cards",
       "options": [
         {
           "value": "line",
-          "label": "One unticked +16 € line"
+          "label": "One unticked line"
         },
         {
           "value": "cards",
@@ -2197,7 +2227,7 @@
           "type": "textarea",
           "id": "promise_card",
           "label": "Promise card",
-          "default": "Pas l’intro : le moment où son prénom arrive. Tu paies seulement s’il te touche (19 €)."
+          "default": "Pas l’intro : le moment où son prénom arrive. Tu paies seulement s’il te touche (9 €)."
         },
         {
           "type": "text",
@@ -2739,7 +2769,7 @@
           "type": "text",
           "id": "offer_recap",
           "label": "Offer recap",
-          "default": "19 € seulement s’il te touche · 2 versions · toutes les paroles · retouches illimitées"
+          "default": "9 € seulement s’il te touche · 2 versions · toutes les paroles · retouches illimitées"
         },
         {
           "type": "text",
@@ -2867,7 +2897,25 @@
           "type": "text",
           "id": "premium_line",
           "label": "Premium option line",
-          "default": "+16 € : le clip où son prénom s’affiche, la pochette, en priorité 12 h"
+          "default": "le clip où son prénom s’affiche, la pochette, en priorité 12 h"
+        },
+        {
+          "type": "text",
+          "id": "standard_line",
+          "label": "Standard card features (comma-separated)",
+          "default": "2 versions de sa chanson, toutes les paroles, retouches illimitées"
+        },
+        {
+          "type": "text",
+          "id": "premium_includes",
+          "label": "Premium card first line",
+          "default": "Tout le Standard, et :"
+        },
+        {
+          "type": "text",
+          "id": "premium_badge",
+          "label": "Premium card badge",
+          "default": "Le cadeau complet"
         },
         {
           "type": "text",
