@@ -106,10 +106,10 @@
               "type": "krino-shade-guide",
               "settings": {
                 "button_label": "Guía de tonos",
-                "title": "Guía de tonos",
                 "image_asset": "krino-product-04.jpg",
-                "close_label": "Cerrar",
-                "text": "<p>Elige el tono más parecido a tu color natural para que se funda sin que se note. Si estás entre dos tonos, elige el más oscuro: se ve más natural.</p>"
+                "title": "Guía de tonos",
+                "text": "<p>Elige el tono más parecido a tu color natural para que se funda sin que se note. Si estás entre dos tonos, elige el más oscuro: se ve más natural.</p>",
+                "close_label": "Cerrar"
               },
               "blocks": {}
             },
@@ -200,6 +200,7 @@
                     "value": "3 frascos",
                     "quantity": 3,
                     "preselect": true,
+                    "image_asset": "krino-bundle-3.png",
                     "badge": "BUEN FIN",
                     "title": "Compra 2, llévate 1 GRATIS",
                     "subtitle": "3 frascos",
@@ -208,8 +209,7 @@
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
                     "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra 48%",
-                    "image_asset": "krino-bundle-3.png"
+                    "save": "Ahorra 48%"
                   }
                 },
                 "card_2": {
@@ -218,14 +218,15 @@
                     "value": "2 frascos",
                     "quantity": 2,
                     "preselect": false,
+                    "image_asset": "krino-bundle-2.png",
                     "title": "Dúo",
                     "subtitle": "2 frascos",
                     "unit_label": "/ frasco",
                     "supply": "Para 2 meses",
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
-                    "save": "Ahorra 22%",
-                    "image_asset": "krino-bundle-2.png"
+                    "gift_line": "+ ENVÍO GRATIS",
+                    "save": "Ahorra 22%"
                   }
                 },
                 "card_3": {
@@ -234,14 +235,15 @@
                     "value": "1 frasco",
                     "quantity": 1,
                     "preselect": false,
+                    "image_asset": "krino-bundle-1.png",
                     "title": "Básico",
                     "subtitle": "1 frasco",
                     "unit_label": "/ frasco",
                     "supply": "Para 1 mes",
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
-                    "save": "Ahorra 22%",
-                    "image_asset": "krino-bundle-1.png"
+                    "gift_line": "+ ENVÍO GRATIS",
+                    "save": "Ahorra 22%"
                   }
                 }
               },
@@ -623,10 +625,10 @@
                 },
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
+                  "disabled": true,
                   "static": true,
                   "settings": {},
-                  "blocks": {},
-                  "disabled": true
+                  "blocks": {}
                 }
               },
               "block_order": []
@@ -653,7 +655,6 @@
           ]
         }
       },
-      "block_order": [],
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
@@ -666,13 +667,6 @@
     },
     "krino_marquee": {
       "type": "krino-marquee",
-      "settings": {
-        "background": "#000000",
-        "text_color": "#FFFFFF",
-        "text_size": 14,
-        "gap": 30,
-        "speed": 40
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -692,16 +686,17 @@
       "block_order": [
         "b1",
         "b2"
-      ]
+      ],
+      "settings": {
+        "background": "#000000",
+        "text_color": "#FFFFFF",
+        "text_size": 14,
+        "gap": 30,
+        "speed": 40
+      }
     },
     "krino_reviews": {
       "type": "krino-reviews",
-      "settings": {
-        "heading": "No lo decimos nosotros",
-        "trust_bold": "Excelente",
-        "show_trust_stars": true,
-        "trust_text": "Más de 40,000 hombres confían en nosotros"
-      },
       "blocks": {
         "b1": {
           "type": "review",
@@ -789,18 +784,16 @@
         "b4",
         "b5",
         "b6"
-      ]
+      ],
+      "settings": {
+        "heading": "No lo decimos nosotros",
+        "trust_bold": "Excelente",
+        "show_trust_stars": true,
+        "trust_text": "Más de 40,000 hombres confían en nosotros"
+      }
     },
     "krino_tech": {
       "type": "krino-tech",
-      "settings": {
-        "image_asset": "krino-tecnologia.jpg",
-        "ratio": "5 / 4",
-        "image_side": "left",
-        "kicker": "NUESTRA TECNOLOGÍA",
-        "heading": "Tecnología Grip-Lock 48™",
-        "text": "<p>Tres capas de ciencia trabajando juntas para lograr el rellenador capilar más natural y duradero jamás creado.</p>"
-      },
       "blocks": {
         "b1": {
           "type": "row",
@@ -831,41 +824,45 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "image_asset": "krino-tecnologia.jpg",
+        "ratio": "5 / 4",
+        "image_side": "left",
+        "kicker": "NUESTRA TECNOLOGÍA",
+        "heading": "Tecnología Grip-Lock 48™",
+        "text": "<p>Tres capas de ciencia trabajando juntas para lograr el rellenador capilar más natural y duradero jamás creado.</p>"
+      }
     },
     "krino_lifestyle": {
       "type": "krino-lifestyle",
-      "settings": {
-        "heading": "Te retamos a que se te caiga",
-        "subheading": "Desaparecemos tus entradas. Legalmente."
-      },
       "blocks": {
         "b1": {
           "type": "tile",
           "settings": {
-            "caption": "Bajo la lluvia",
-            "image_asset": "krino-lifestyle-lluvia.jpg"
+            "image_asset": "krino-lifestyle-lluvia.jpg",
+            "caption": "Bajo la lluvia"
           }
         },
         "b2": {
           "type": "tile",
           "settings": {
-            "caption": "En la oficina",
-            "image_asset": "krino-lifestyle-oficina.jpg"
+            "image_asset": "krino-lifestyle-oficina.jpg",
+            "caption": "En la oficina"
           }
         },
         "b3": {
           "type": "tile",
           "settings": {
-            "caption": "En el gym",
-            "image_asset": "krino-lifestyle-gym.jpg"
+            "image_asset": "krino-lifestyle-gym.jpg",
+            "caption": "En el gym"
           }
         },
         "b4": {
           "type": "tile",
           "settings": {
-            "caption": "En una cita",
-            "image_asset": "krino-lifestyle-cita.jpg"
+            "image_asset": "krino-lifestyle-cita.jpg",
+            "caption": "En una cita"
           }
         }
       },
@@ -874,46 +871,46 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "heading": "Te retamos a que se te caiga",
+        "subheading": "Desaparecemos tus entradas. Legalmente."
+      }
     },
     "krino_howto": {
       "type": "krino-howto",
-      "settings": {
-        "heading": "Si sabes abrir un frasco, ya la armaste",
-        "subheading": "Una rutina tan fácil que vas a sentir que haces trampa."
-      },
       "blocks": {
         "b1": {
           "type": "step",
           "settings": {
             "tab": "PASO 1",
+            "poster_asset": "krino-howto-1.jpg",
             "number": "01",
             "title": "ABRE",
             "text": "Gira el compartimento de abajo y saca la esponja aplicadora.",
-            "badge": "2 segundos",
-            "poster_asset": "krino-howto-1.jpg"
+            "badge": "2 segundos"
           }
         },
         "b2": {
           "type": "step",
           "settings": {
             "tab": "PASO 2",
+            "poster_asset": "krino-howto-2.jpg",
             "number": "02",
             "title": "PRESIONA",
             "text": "Aplica el polvo con la esponja en las zonas que quieres cubrir.",
-            "badge": "10 segundos",
-            "poster_asset": "krino-howto-2.jpg"
+            "badge": "10 segundos"
           }
         },
         "b3": {
           "type": "step",
           "settings": {
             "tab": "PASO 3",
+            "poster_asset": "krino-howto-3.jpg",
             "number": "03",
             "title": "LISTO",
             "text": "Te dura hasta tu próximo shampoo. Sin checarte. Sin retoques. Sin sorpresas.",
-            "badge": "Todo el día",
-            "poster_asset": "krino-howto-3.jpg"
+            "badge": "Todo el día"
           }
         }
       },
@@ -921,14 +918,14 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "heading": "Si sabes abrir un frasco, ya la armaste",
+        "subheading": "Una rutina tan fácil que vas a sentir que haces trampa."
+      }
     },
     "krino_zones": {
       "type": "krino-zones",
-      "settings": {
-        "heading": "Funciona literal donde sea",
-        "subheading": "Krino rellena donde lo necesites: coronilla, entradas o barba."
-      },
       "blocks": {
         "b1": {
           "type": "slide",
@@ -968,7 +965,11 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "heading": "Funciona literal donde sea",
+        "subheading": "Krino rellena donde lo necesites: coronilla, entradas o barba."
+      }
     },
     "krino_barber": {
       "type": "krino-barber",
@@ -981,14 +982,6 @@
     },
     "krino_support_faq": {
       "type": "krino-support-faq",
-      "settings": {
-        "heading": "Preguntas frecuentes",
-        "heading_weight": "600",
-        "card_heading": "¿Necesitas ayuda?",
-        "card_text": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs.",
-        "button_label": "Contacta a soporte",
-        "badge": "Cambio de tono GRATIS"
-      },
       "blocks": {
         "b1": {
           "type": "question",
@@ -1048,16 +1041,22 @@
         "b5",
         "b6",
         "b7"
-      ]
+      ],
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "card_heading": "¿Necesitas ayuda?",
+        "card_text": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs.",
+        "button_label": "Contacta a soporte",
+        "badge": "Cambio de tono GRATIS",
+        "heading_weight": "600"
+      }
     },
     "krino_reviews_app": {
       "type": "krino-apps",
       "settings": {
         "padding_top": 40,
         "padding_bottom": 40
-      },
-      "blocks": {},
-      "block_order": []
+      }
     },
     "krino_sticky": {
       "type": "krino-sticky-pill",
