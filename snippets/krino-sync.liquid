@@ -7,6 +7,8 @@
   - [data-krino-atc] buttons click the native add-to-cart button (cart drawer, fly-to-cart and errors stay native).
   - [data-krino-preselect="VALUE"] inside a [data-krino-opt-name] group selects VALUE on load when the URL has no ?variant=
     (set by the bundle card marked "Selected by default").
+  - Quantity-mode bundle cards (input[data-krino-qty], no pack variant): the choice is kept on the group
+    (data-krino-qty-sel), survives re-renders, updates the add-to-cart total and sets the form quantity on add.
 {%- endcomment -%}
 {% javascript %}
   if (!window.__krinoSync) {
@@ -41,11 +43,44 @@
       const out = group.querySelector('[data-krino-current]');
       if (out) out.textContent = value;
     };
+    const qtyCard = (scope) => {
+      for (const g of scope.querySelectorAll('[data-krino-opt-name]')) {
+        if (!g.querySelector('input[data-krino-qty]')) continue;
+        const want = g.dataset.krinoQtySel;
+        const inputs = [...g.querySelectorAll('input[data-krino-qty]')];
+        return (want && inputs.find((i) => i.dataset.krinoVal === want)) || inputs.find((i) => i.checked) || null;
+      }
+      return null;
+    };
+    const syncQty = (scope) => {
+      for (const g of scope.querySelectorAll('[data-krino-opt-name]')) {
+        const want = g.dataset.krinoQtySel;
+        if (!want || !g.querySelector('input[data-krino-qty]')) continue;
+        mark(g, want);
+        g.querySelectorAll('input[data-krino-qty]').forEach((i) => { i.checked = i.dataset.krinoVal === want; });
+      }
+      const card = qtyCard(scope);
+      if (!card) return;
+      scope.querySelectorAll('.krino-atc__button').forEach((b) => {
+        const price = b.querySelector('.krino-atc__price');
+        if (price && card.dataset.krinoTotal) price.textContent = card.dataset.krinoTotal;
+        const cmp = b.querySelector('.krino-atc__compare');
+        if (cmp) {
+          cmp.textContent = card.dataset.krinoCompareTotal || '';
+          cmp.hidden = !card.dataset.krinoCompareTotal;
+        }
+      });
+    };
     const choose = (ctl) => {
       const group = ctl.closest('[data-krino-opt-name]');
       if (!group) return;
       const value = ctl.dataset.krinoVal;
       mark(group, value);
+      if (ctl.dataset.krinoQty !== undefined) {
+        group.dataset.krinoQtySel = value;
+        syncQty(scopeOf(group));
+        return;
+      }
       pick(group, group.dataset.krinoOptName, value);
     };
     document.addEventListener('click', (e) => {
@@ -58,7 +93,15 @@
         const main = document.querySelector('.krino-atc [data-krino-atc]');
         const scope = scopeOf(main || atc);
         const native = scope.querySelector('.buy-buttons-block button[name="add"]') || document.querySelector('.buy-buttons-block button[name="add"]');
-        if (native && !native.disabled) native.click();
+        if (!native || native.disabled) return;
+        const card = qtyCard(scope);
+        const qtyInput = native.form && native.form.querySelector('input[name="quantity"]');
+        if (card && qtyInput) {
+          qtyInput.value = card.dataset.krinoQty;
+          qtyInput.dispatchEvent(new Event('input', { bubbles: true }));
+          qtyInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+        native.click();
       }
     });
     document.addEventListener('change', (e) => {
@@ -76,6 +119,7 @@
           const fresh = html.querySelector(`[data-krino-live="${el.dataset.krinoLive}"]`);
           if (fresh && fresh.innerHTML !== el.innerHTML) el.innerHTML = fresh.innerHTML;
         });
+        syncQty(scope);
         document.dispatchEvent(new CustomEvent('krino:variant', { detail: res }));
       }).catch(() => {});
     }, true);
@@ -91,7 +135,10 @@
       });
     };
     const ready = () => (customElements.get('variant-picker') ? Promise.resolve() : customElements.whenDefined('variant-picker'));
-    const boot = () => ready().then(() => setTimeout(preselect, 0));
+    const boot = () => ready().then(() => setTimeout(() => {
+      preselect();
+      document.querySelectorAll('.shopify-section').forEach((sec) => { if (qtyCard(sec)) syncQty(sec); });
+    }, 0));
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
   }
 {% endjavascript %}

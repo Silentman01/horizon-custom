@@ -1,6 +1,10 @@
 {%- comment -%}
-  One bundle card inside "Krino bundle cards". Finds the variant with this option value + the current shade,
-  shows its per-unit price (price / quantity) and per-unit compare-at price. Prefix krino-bundle-card.
+  One bundle card inside "Krino bundle cards". Prefix krino-bundle-card. Two modes, picked automatically:
+  - Variant mode: the product has a variant with this option value (e.g. Paquete = 3 frascos). The card selects it;
+    per-unit price = variant price / units.
+  - Quantity mode (no such variant, like bundle apps): the card adds {units} x the current variant. Pack price =
+    price x (units - free units); the free units must be given by an automatic "Buy X get Y" discount in Shopify.
+  {percent} in the save pill = savings vs the compare-at total.
 {%- endcomment -%}
 {%- liquid
   assign bs = block.settings
@@ -21,16 +25,37 @@
       endif
     endfor
   endif
-  assign kbc_selected = false
-  if cur.options contains kbc_want
-    assign kbc_selected = true
-  endif
   assign kbc_qty = bs.quantity | at_least: 1
-  assign kbc_unit = v.price | divided_by: kbc_qty
-  assign kbc_compare = v.compare_at_price | default: 0
+  assign kbc_selected = false
+  if kbc_vid != blank
+    assign kbc_mode = 'variant'
+    if cur.options contains kbc_want
+      assign kbc_selected = true
+    endif
+    assign kbc_total = v.price
+    assign kbc_compare_total = v.compare_at_price | default: 0
+  else
+    assign kbc_mode = 'qty'
+    assign kbc_selected = bs.preselect
+    assign kbc_paid = bs.free_units | default: 0 | times: -1 | plus: kbc_qty | at_least: 1
+    assign kbc_total = v.price | times: kbc_paid
+    assign kbc_compare_total = v.compare_at_price | default: 0 | at_least: v.price | times: kbc_qty
+  endif
+  assign kbc_unit = kbc_total | divided_by: kbc_qty
   assign kbc_unit_compare = 0
-  if kbc_compare > v.price
-    assign kbc_unit_compare = kbc_compare | divided_by: kbc_qty
+  if kbc_compare_total > kbc_total
+    assign kbc_unit_compare = kbc_compare_total | divided_by: kbc_qty
+  endif
+  assign kbc_save = bs.save
+  if kbc_save contains '{percent}'
+    assign kbc_pct = 0
+    if kbc_compare_total > kbc_total
+      assign kbc_pct = kbc_compare_total | minus: kbc_total | times: 100.0 | divided_by: kbc_compare_total | round
+    endif
+    assign kbc_save = kbc_save | replace: '{percent}', kbc_pct
+    if kbc_pct == 0
+      assign kbc_save = ''
+    endif
   endif
 -%}
 <label
@@ -44,6 +69,9 @@
     name="krino-bundles-{{ section.id }}"
     value="{{ kbc_want | escape }}"
     data-krino-val="{{ kbc_want | escape }}"
+    {% if kbc_mode == 'qty' %}data-krino-qty="{{ kbc_qty }}"{% endif %}
+    data-krino-total="{{ kbc_total | money | escape }}"
+    data-krino-compare-total="{% if kbc_compare_total > kbc_total %}{{ kbc_compare_total | money | escape }}{% endif %}"
     {% if bs.preselect %}data-krino-preselect="{{ kbc_want | escape }}"{% endif %}
     {% if kbc_selected %}checked{% endif %}
     {% unless v.available %}disabled{% endunless %}
@@ -72,7 +100,7 @@
     <span class="krino-bundle-card__perk">{%- if bs.perk_check -%}{% render 'krino-icon', name: 'check', size: 13, stroke: 2 %}{%- endif -%}<span>{{ bs.perk }}</span></span>
   {%- endif -%}
   {%- if bs.gift_line != blank -%}<span class="krino-bundle-card__gift">{{ bs.gift_line }}</span>{%- endif -%}
-  {%- if bs.save != blank -%}<span class="krino-bundle-card__save">{{ bs.save }}</span>{%- endif -%}
+  {%- if kbc_save != blank -%}<span class="krino-bundle-card__save">{{ kbc_save }}</span>{%- endif -%}
 </label>
 {% stylesheet %}
   .krino-bundle-card { position: relative; display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; padding: 16px 10px 18px; border: 1.5px solid var(--krino-bundles-card-border, rgb(0 0 0 / 0.13)); border-radius: var(--krino-bundles-radius, 8px); background: var(--krino-bundles-card-bg, #fcfcfc); color: var(--krino-bundles-text, #252525); text-align: center; cursor: pointer; transition: border-color 0.15s ease, background-color 0.15s ease; }
@@ -111,20 +139,104 @@
   "name": "Bundle card",
   "tag": null,
   "settings": [
-    { "type": "text", "id": "value", "label": "Option value (exact spelling)", "default": "1 frasco", "info": "Value of the option set on the parent block (e.g. Paquete)." },
-    { "type": "range", "id": "quantity", "label": "Units in this pack (per-unit price)", "min": 1, "max": 10, "step": 1, "default": 1 },
-    { "type": "checkbox", "id": "preselect", "label": "Selected by default", "default": false, "info": "Selected on page load when the link has no ?variant=. Tip: make this value the first value of the option in Shopify so it is also the default variant." },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback file name)", "default": "krino-bundle-1.png" },
-    { "type": "text", "id": "badge", "label": "Badge on the top border (sale event label)" },
-    { "type": "text", "id": "title", "label": "Title", "default": "Básico" },
-    { "type": "text", "id": "subtitle", "label": "Quantity line", "default": "1 frasco" },
-    { "type": "text", "id": "unit_label", "label": "Unit label after the price", "default": "/ frasco" },
-    { "type": "text", "id": "supply", "label": "Supply line", "default": "Para 1 mes" },
-    { "type": "text", "id": "perk", "label": "Perk line", "default": "Cambio de tono GRATIS" },
-    { "type": "checkbox", "id": "perk_check", "label": "Check mark before the perk", "default": true },
-    { "type": "text", "id": "gift_line", "label": "Gift line (e.g. + ENVÍO GRATIS)" },
-    { "type": "text", "id": "save", "label": "Save pill on the bottom border", "default": "Ahorra 22%" }
+    {
+      "type": "text",
+      "id": "value",
+      "label": "Option value (exact spelling)",
+      "default": "1 frasco",
+      "info": "Variant mode: value of the option set on the parent block (e.g. Paquete). If the product has no variant with this value, the card works in quantity mode and this is only its internal name."
+    },
+    {
+      "type": "range",
+      "id": "quantity",
+      "label": "Units in this pack",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "info": "Quantity mode: this many units of the chosen shade are added to the cart."
+    },
+    {
+      "type": "range",
+      "id": "free_units",
+      "label": "Free units (quantity mode)",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 0,
+      "info": "Shown price = price x (units - free units). Create the matching automatic discount in Shopify (Discounts > Buy X get Y), or checkout charges full price."
+    },
+    {
+      "type": "checkbox",
+      "id": "preselect",
+      "label": "Selected by default",
+      "default": false,
+      "info": "Selected on page load when the link has no ?variant=. Tip: make this value the first value of the option in Shopify so it is also the default variant."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image theme asset (fallback file name)",
+      "default": "krino-bundle-1.png"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge on the top border (sale event label)"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Básico"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Quantity line",
+      "default": "1 frasco"
+    },
+    {
+      "type": "text",
+      "id": "unit_label",
+      "label": "Unit label after the price",
+      "default": "/ frasco"
+    },
+    {
+      "type": "text",
+      "id": "supply",
+      "label": "Supply line",
+      "default": "Para 1 mes"
+    },
+    {
+      "type": "text",
+      "id": "perk",
+      "label": "Perk line",
+      "default": "Cambio de tono GRATIS"
+    },
+    {
+      "type": "checkbox",
+      "id": "perk_check",
+      "label": "Check mark before the perk",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "gift_line",
+      "label": "Gift line (e.g. + ENVÍO GRATIS)"
+    },
+    {
+      "type": "text",
+      "id": "save",
+      "label": "Save pill on the bottom border",
+      "default": "Ahorra 22%",
+      "info": "{percent} = savings vs the crossed-out total, e.g. \"Ahorra {percent}%\"."
+    }
   ]
 }
 {% endschema %}

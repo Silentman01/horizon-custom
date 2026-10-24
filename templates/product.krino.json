@@ -199,6 +199,7 @@
                   "settings": {
                     "value": "3 frascos",
                     "quantity": 3,
+                    "free_units": 1,
                     "preselect": true,
                     "image_asset": "krino-bundle-3.png",
                     "badge": "BUEN FIN",
@@ -209,7 +210,7 @@
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
                     "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra 48%"
+                    "save": "Ahorra {percent}%"
                   }
                 },
                 "card_2": {
@@ -217,6 +218,7 @@
                   "settings": {
                     "value": "2 frascos",
                     "quantity": 2,
+                    "free_units": 0,
                     "preselect": false,
                     "image_asset": "krino-bundle-2.png",
                     "title": "Dúo",
@@ -226,7 +228,7 @@
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
                     "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra 22%"
+                    "save": "Ahorra {percent}%"
                   }
                 },
                 "card_3": {
@@ -234,6 +236,7 @@
                   "settings": {
                     "value": "1 frasco",
                     "quantity": 1,
+                    "free_units": 0,
                     "preselect": false,
                     "image_asset": "krino-bundle-1.png",
                     "title": "Básico",
@@ -243,7 +246,7 @@
                     "perk": "Cambio de tono GRATIS",
                     "perk_check": true,
                     "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra 22%"
+                    "save": "Ahorra {percent}%"
                   }
                 }
               },
