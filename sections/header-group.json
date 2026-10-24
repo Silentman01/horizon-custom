@@ -215,7 +215,8 @@
         "cart_extras_free_border": "#3D5AFE",
         "cart_extras_free_accent": "#3D5AFE",
         "cart_extras_free_badge_from": "#09184C",
-        "cart_extras_free_badge_to": "#3D5AFE"
+        "cart_extras_free_badge_to": "#3D5AFE",
+        "cart_extras_compact": true
       }
     }
   },
