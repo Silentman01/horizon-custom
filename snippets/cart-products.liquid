@@ -5,6 +5,7 @@
 
   @param {boolean} [force_empty] - Force render empty cart state
   @param {block} [block] - The block object providing settings and editor attributes.
+  @param {object} [cx] - Settings of the "Cart drawer" section (free product highlight, see snippets/cart-extras).
   @param {string} [context] - Render context — pass `'drawer'` when rendered inside the cart drawer to enable drawer-specific styles.
 
   @example
@@ -145,10 +146,17 @@
 
           <tbody role="rowgroup">
             {% for item in cart.items %}
+              {%- liquid
+                assign cx_free = false
+                if context == 'drawer' and cx.cart_extras_free_enable and item.final_line_price == 0 and item.original_line_price > 0
+                  assign cx_free = true
+                endif
+              -%}
               <tr
                 id="CartItem-{{ item.key }}"
                 role="row"
-                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% if context == 'drawer' %}{% unless item.unit_price_measurement %} cart-items__table-row--full-width-variants{% endunless %}{% endif %}"
+                class="cart-items__table-row{% if item.parent_relationship.parent != null %} cart-items__nested-line{% endif %}{% if context == 'drawer' %}{% unless item.unit_price_measurement %} cart-items__table-row--full-width-variants{% endunless %}{% endif %}{% if cx_free %} cart-extras-free{% if cx.cart_extras_free_hide_qty %} cart-extras-free--no-qty{% endif %}{% endif %}"
+                {% if cx_free %}{% render 'cart-extras', part: 'free-style', cx: cx %}{% endif %}
                 ref="cartItemRows[]"
                 data-parent-key="{{ item.parent_relationship.parent.key }}"
                 data-key="{{ item.key }}"
@@ -183,6 +191,7 @@
                       -%}
                     </a>
                   {%- endif %}
+                  {%- if cx_free -%}{% render 'cart-extras', part: 'free-badge', cx: cx %}{%- endif -%}
                 </td>
                 <td
                   class="cart-items__details cart-primary-typography"
@@ -300,6 +309,7 @@
                     {%- endif -%}
                   </div>
 
+                  {%- if cx_free -%}{% render 'cart-extras', part: 'free-note', cx: cx, item: item %}{%- endif -%}
                   <div class="cart-items__unit-price-wrapper">
                     <div>
                       {% if item.original_price != item.final_price %}
@@ -409,9 +419,13 @@
                   role="cell"
                   headers="productTotal"
                 >
-                  <text-component value="{{ price | strip_html }}"
-                    ><bdi>{{ price }}</bdi></text-component
-                  >
+                  {%- if cx_free -%}
+                    {% render 'cart-extras', part: 'free-price', cx: cx, item: item %}
+                  {%- else -%}
+                    <text-component value="{{ price | strip_html }}"
+                      ><bdi>{{ price }}</bdi></text-component
+                    >
+                  {%- endif -%}
                   {%- if item.unit_price_measurement -%}
                     <div class="cart-items__price-unit cart-secondary-typography">
                       {% render 'unit-price', price: unit_price, measurement: item.unit_price_measurement %}
