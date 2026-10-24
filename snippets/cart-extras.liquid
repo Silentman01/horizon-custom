@@ -1,0 +1,289 @@
+{%- doc -%}
+  Cart drawer extras (prefix cart-extras). Settings live in Theme settings > "Cart drawer extras".
+  Rendered inside cart-items-component, so every part re-renders with the drawer on each cart change.
+
+  @param {string} part - 'top' (announcement, timer and free-shipping bars above the items),
+    'breakdown' (subtotal / discounts / shipping lines above the total),
+    'badges' (trust badges under the checkout button), 'payments' (payment icons under the checkout button).
+{%- enddoc -%}
+{%- liquid
+  assign cx = settings
+  assign cx_threshold = cx.cart_extras_ship_threshold | default: 0 | times: 100
+  if cx_threshold == 0 or cart.total_price >= cx_threshold
+    assign cx_free_shipping = true
+  else
+    assign cx_free_shipping = false
+  endif
+-%}
+{%- case part -%}
+  {%- when 'top' -%}
+    {%- if cx.cart_extras_announce_enable and cx.cart_extras_announce_text != blank -%}
+      <div
+        class="cart-extras-announce{% unless cx.cart_extras_announce_mobile %} cart-extras--hide-m{% endunless %}"
+        style="--cx-bg: {{ cx.cart_extras_announce_bg }}; --cx-color: {{ cx.cart_extras_announce_color }}; --cx-size: {{ cx.cart_extras_announce_size }}px;"
+      >
+        <p class="cart-extras-announce__text">{{ cx.cart_extras_announce_text }}</p>
+      </div>
+    {%- endif -%}
+
+    {%- if cx.cart_extras_timer_enable and cx.cart_extras_timer_text != blank -%}
+      {%- capture cx_timer_html -%}<span class="cart-extras-timer__clock" data-cx-clock>{{ cx.cart_extras_timer_minutes | prepend: '0' | slice: -2, 2 }}:00</span>{%- endcapture -%}
+      <cart-extras-timer
+        class="cart-extras-timer{% unless cx.cart_extras_timer_mobile %} cart-extras--hide-m{% endunless %}"
+        data-minutes="{{ cx.cart_extras_timer_minutes }}"
+        style="--cx-bg: {{ cx.cart_extras_timer_bg }}; --cx-color: {{ cx.cart_extras_timer_color }}; --cx-size: {{ cx.cart_extras_timer_size }}px;"
+        role="timer"
+      >
+        <p class="cart-extras-timer__text">
+          {%- if cx.cart_extras_timer_icon -%}{% render 'cart-extras-icon', name: 'clock' %}{%- endif -%}
+          {%- assign cx_timer_text = cx.cart_extras_timer_text | replace: '{timer}', cx_timer_html -%}
+          <span>{{ cx_timer_text }}</span>
+        </p>
+      </cart-extras-timer>
+    {%- endif -%}
+
+    {%- if cx.cart_extras_ship_enable -%}
+      {%- liquid
+        if cx_free_shipping
+          assign cx_pct = 100
+          assign cx_text = cx.cart_extras_ship_text_unlocked
+        else
+          assign cx_pct = cart.total_price | times: 100 | divided_by: cx_threshold
+          assign cx_left = cx_threshold | minus: cart.total_price | money
+          assign cx_text = cx.cart_extras_ship_text_locked | replace: '{amount}', cx_left
+        endif
+      -%}
+      <div
+        class="cart-extras-ship{% if cx_free_shipping %} cart-extras-ship--unlocked{% endif %}{% unless cx.cart_extras_ship_mobile %} cart-extras--hide-m{% endunless %}"
+        style="--cx-bg: {{ cx.cart_extras_ship_bg }}; --cx-color: {{ cx.cart_extras_ship_color }}; --cx-fill: {{ cx.cart_extras_ship_fill }}; --cx-track: {{ cx.cart_extras_ship_track }}; --cx-size: {{ cx.cart_extras_ship_size }}px;"
+        role="status"
+      >
+        <p class="cart-extras-ship__text">
+          {%- if cx.cart_extras_ship_icon -%}<span class="cart-extras-ship__icon">{% render 'cart-extras-icon', name: 'truck' %}</span>{%- endif -%}
+          <span>{{ cx_text }}</span>
+        </p>
+        {%- if cx.cart_extras_ship_progress -%}
+          <div class="cart-extras-ship__track" aria-hidden="true">
+            <span class="cart-extras-ship__fill" style="width: {{ cx_pct }}%;"></span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {%- when 'breakdown' -%}
+    {%- if cx.cart_extras_breakdown_enable -%}
+      {%- liquid
+        assign cx_subtotal = 0
+        for item in cart.items
+          assign cx_unit = item.original_price
+          if cx.cart_extras_breakdown_compare_at and item.variant.compare_at_price > cx_unit
+            assign cx_unit = item.variant.compare_at_price
+          endif
+          assign cx_line = cx_unit | times: item.quantity
+          assign cx_subtotal = cx_subtotal | plus: cx_line
+        endfor
+        assign cx_discount = cx_subtotal | minus: cart.total_price
+      -%}
+      <div
+        class="cart-extras-breakdown cart-primary-typography"
+        style="--cx-free: {{ cx.cart_extras_breakdown_free_color }}; --cx-discount: {{ cx.cart_extras_breakdown_discount_color }};"
+      >
+        <p class="cart-extras-breakdown__row">
+          <span>{{ 'content.cart_subtotal' | t }}</span>
+          <span class="cart-secondary-typography"><bdi>{{ cx_subtotal | money }}</bdi></span>
+        </p>
+        {%- if cx_discount > 0 -%}
+          <p class="cart-extras-breakdown__row cart-extras-breakdown__row--discount">
+            <span>{{ 'content.discounts' | t }}</span>
+            <span class="cart-secondary-typography"><bdi>-{{ cx_discount | money }}</bdi></span>
+          </p>
+        {%- endif -%}
+        {%- if cx.cart_extras_breakdown_shipping -%}
+          <p class="cart-extras-breakdown__row">
+            <span>{{ 'content.cart_extras_shipping' | t }}</span>
+            {%- if cx_free_shipping -%}
+              <span class="cart-extras-breakdown__free">
+                {%- if cx.cart_extras_breakdown_ship_compare > 0 -%}
+                  <s class="cart-extras-breakdown__was">{{ cx.cart_extras_breakdown_ship_compare | times: 100 | money }}</s>
+                {%- endif -%}
+                {{ 'content.cart_extras_free' | t }}
+              </span>
+            {%- else -%}
+              <span class="cart-extras-breakdown__later">{{ 'content.cart_extras_shipping_later' | t }}</span>
+            {%- endif -%}
+          </p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {%- when 'badges' -%}
+    {%- if cx.cart_extras_badges_enable -%}
+      {%- capture cx_badges -%}
+        {%- for i in (1..3) -%}
+          {%- assign cx_key = 'cart_extras_badge_' | append: i | append: '_text' -%}
+          {%- assign cx_icon_key = 'cart_extras_badge_' | append: i | append: '_icon' -%}
+          {%- if cx[cx_key] != blank -%}
+            <li class="cart-extras-badges__item">
+              {%- if cx[cx_icon_key] != 'none' -%}{% render 'cart-extras-icon', name: cx[cx_icon_key] %}{%- endif -%}
+              <span>{{ cx[cx_key] }}</span>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      {%- if cx_badges != blank -%}
+        <ul
+          class="cart-extras-badges cart-extras-badges--{{ cx.cart_extras_badges_layout }}{% unless cx.cart_extras_badges_mobile %} cart-extras--hide-m{% endunless %}"
+          style="--cx-color: {{ cx.cart_extras_badges_color }}; --cx-icon: {{ cx.cart_extras_badges_icon_color }}; --cx-size: {{ cx.cart_extras_badges_size }}px;"
+          role="list"
+        >
+          {{ cx_badges }}
+        </ul>
+      {%- endif -%}
+    {%- endif -%}
+
+  {%- when 'payments' -%}
+    {%- if cx.cart_extras_pay_enable and shop.enabled_payment_types.size > 0 -%}
+      <div
+        class="cart-extras-pay{% unless cx.cart_extras_pay_mobile %} cart-extras--hide-m{% endunless %}"
+        style="--cx-pay-h: {{ cx.cart_extras_pay_height }}px; --cx-pay-gap: {{ cx.cart_extras_pay_gap }}px;"
+      >
+        <span class="visually-hidden">{{ 'blocks.payment_methods' | t }}</span>
+        <ul class="cart-extras-pay__list" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="cart-extras-pay__item">{{ type | payment_type_svg_tag: class: 'cart-extras-pay__svg' }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+{%- endcase -%}
+
+{% javascript %}
+  if (!customElements.get('cart-extras-timer')) {
+    customElements.define(
+      'cart-extras-timer',
+      class extends HTMLElement {
+        connectedCallback() {
+          this.clock = this.querySelector('[data-cx-clock]');
+          if (!this.clock) return;
+          this.tick();
+          this.interval = setInterval(() => this.tick(), 1000);
+        }
+        disconnectedCallback() {
+          clearInterval(this.interval);
+        }
+        // One countdown per visitor, kept across drawer re-renders and page loads; restarts when it ends.
+        endTime() {
+          const span = (parseInt(this.dataset.minutes, 10) || 10) * 60000;
+          let end = 0;
+          try {
+            end = parseInt(localStorage.getItem('cart-extras-timer-end'), 10) || 0;
+          } catch (e) {}
+          if (end <= Date.now() || end - Date.now() > span) {
+            end = Date.now() + span;
+            try {
+              localStorage.setItem('cart-extras-timer-end', String(end));
+            } catch (e) {}
+          }
+          return end;
+        }
+        tick() {
+          const left = Math.max(0, Math.round((this.endTime() - Date.now()) / 1000));
+          const m = String(Math.floor(left / 60)).padStart(2, '0');
+          const s = String(left % 60).padStart(2, '0');
+          this.clock.textContent = `${m}:${s}`;
+        }
+      }
+    );
+  }
+{% endjavascript %}
+
+{% stylesheet %}
+  .cart-extras-announce,
+  .cart-extras-timer,
+  .cart-extras-ship {
+    flex-shrink: 0;
+    display: block;
+    padding: 10px var(--cart-drawer-padding, 16px);
+    background: var(--cx-bg);
+    color: var(--cx-color);
+    text-align: center;
+  }
+  .cart-extras-announce__text,
+  .cart-extras-timer__text,
+  .cart-extras-ship__text {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: var(--cx-size, 14px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .cart-extras-announce__text p { margin: 0; }
+  .cart-extras-timer__clock { font-variant-numeric: tabular-nums; }
+  .cart-extras-ship { display: flex; flex-direction: column; gap: 6px; }
+  .cart-extras-ship__icon { display: flex; color: var(--cx-fill); }
+  .cart-extras-ship__track {
+    height: 6px;
+    border-radius: 99px;
+    background: var(--cx-track);
+    overflow: hidden;
+  }
+  .cart-extras-ship__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--cx-fill);
+    transition: width 0.4s ease;
+  }
+  .cart-extras-icon { flex-shrink: 0; width: 1.25em; height: 1.25em; }
+  .cart-extras-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+  .cart-extras-breakdown__row {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .cart-extras-breakdown__row--discount { color: var(--cx-discount); }
+  .cart-extras-breakdown__free { color: var(--cx-free); font-weight: 700; text-transform: uppercase; }
+  .cart-extras-breakdown__was { margin-inline-end: 6px; opacity: 0.6; font-weight: 400; }
+  .cart-extras-breakdown__later { opacity: 0.75; }
+  .cart-extras-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    color: var(--cx-color);
+    font-size: var(--cx-size, 13px);
+    line-height: 1.3;
+  }
+  .cart-extras-badges--stacked { flex-direction: column; align-items: center; }
+  .cart-extras-badges__item { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+  .cart-extras-badges__item .cart-extras-icon { color: var(--cx-icon); }
+  .cart-extras-pay { width: 100%; }
+  .cart-extras-pay__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--cx-pay-gap, 6px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .cart-extras-pay__item { display: flex; }
+  .cart-extras-pay__svg { height: var(--cx-pay-h, 24px); width: auto; }
+  @media screen and (max-width: 749px) {
+    .cart-extras--hide-m { display: none !important; }
+  }
+{% endstylesheet %}
