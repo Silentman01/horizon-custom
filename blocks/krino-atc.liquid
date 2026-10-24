@@ -1,0 +1,73 @@
+{%- comment -%}
+  Krino add-to-cart button: "AGREGAR AL CARRITO | $1,197 $2,307" (total + crossed-out total of the selected variant).
+  It clicks the theme's native add-to-cart button (kept in the buy box, visually hidden), so the cart drawer,
+  errors and checkout stay native. Prefix krino-atc.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign v = closest.product.selected_or_first_available_variant
+  assign ka_compare = v.compare_at_price | default: 0
+  assign ka_label = bs.label
+  if v.available == false
+    assign ka_label = bs.sold_out_label
+  endif
+-%}
+{% render 'krino-sync' %}
+<div
+  class="krino-atc"
+  data-krino-live="{{ block.id }}"
+  {% if bs.hide_native %}data-krino-hide-native{% endif %}
+  style="--krino-atc-bg: {{ bs.background }}; --krino-atc-text: {{ bs.text_color }}; --krino-atc-compare: {{ bs.compare_color }}; --krino-atc-h: {{ bs.height }}px; --krino-atc-h-m: {{ bs.height_mobile }}px; --krino-atc-radius: {{ bs.radius }}px; --krino-atc-size: {{ bs.text_size }}px; --krino-atc-size-m: {{ bs.text_size_mobile }}px; --krino-atc-weight: {{ bs.weight }}; --krino-atc-case: {% if bs.uppercase %}uppercase{% else %}none{% endif %}; --krino-atc-pt: {{ bs.padding_top }}px; --krino-atc-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <button type="button" class="krino-atc__button" data-krino-atc{% unless v.available %} disabled{% endunless %}>
+    <span class="krino-atc__label">{{ ka_label }}</span>
+    {%- if bs.show_price and v.available -%}
+      <span class="krino-atc__sep" aria-hidden="true">|</span>
+      <span class="krino-atc__price">{{ v.price | money }}</span>
+      {%- if bs.show_compare and ka_compare > v.price -%}<s class="krino-atc__compare">{{ ka_compare | money }}</s>{%- endif -%}
+    {%- endif -%}
+  </button>
+</div>
+{% stylesheet %}
+  .krino-atc { width: 100%; padding-block: var(--krino-atc-pt, 0) var(--krino-atc-pb, 0); }
+  .krino-atc__button { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 4px 10px; width: 100%; min-height: var(--krino-atc-h, 48px); padding: 8px 16px; border: 0; border-radius: var(--krino-atc-radius, 8px); background: var(--krino-atc-bg, #3d5afe); color: var(--krino-atc-text, #fff); font-family: var(--font-body--family); font-size: var(--krino-atc-size, 14px); font-weight: var(--krino-atc-weight, 400); letter-spacing: 0.025rem; line-height: 1.2; text-transform: var(--krino-atc-case, uppercase); cursor: pointer; transition: opacity 0.15s ease; }
+  .krino-atc__button:hover { opacity: 0.92; }
+  .krino-atc__button:focus-visible { outline: 2px solid var(--krino-atc-bg, #3d5afe); outline-offset: 3px; }
+  .krino-atc__button[disabled] { opacity: 0.55; cursor: not-allowed; }
+  .krino-atc__sep { opacity: 0.85; }
+  .krino-atc__compare { color: var(--krino-atc-compare, rgb(255 255 255 / 0.7)); }
+  .product-details:has([data-krino-hide-native]) .buy-buttons-block { position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); border: 0; white-space: nowrap; }
+  @media screen and (max-width: 749px) { .krino-atc__button { min-height: var(--krino-atc-h-m, 50px); font-size: var(--krino-atc-size-m, 14px); padding: 8px 12px; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino add to cart",
+  "tag": null,
+  "settings": [
+    { "type": "paragraph", "content": "Keep the native Buy buttons block in the buy box: it is hidden and this button uses it (cart drawer, checkout, errors)." },
+    { "type": "text", "id": "label", "label": "Label", "default": "Agregar al carrito" },
+    { "type": "text", "id": "sold_out_label", "label": "Sold-out label", "default": "Agotado" },
+    { "type": "checkbox", "id": "show_price", "label": "Show the total price", "default": true },
+    { "type": "checkbox", "id": "show_compare", "label": "Show the crossed-out total", "default": true },
+    { "type": "checkbox", "id": "hide_native", "label": "Hide the native add-to-cart button", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#3D5AFE" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "compare_color", "label": "Crossed-out total", "alpha": true, "default": "#FFFFFFB3" },
+    { "type": "checkbox", "id": "uppercase", "label": "Uppercase", "default": true },
+    { "type": "select", "id": "weight", "label": "Weight", "default": "400", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "text_size", "label": "Text size (desktop)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "text_size_mobile", "label": "Text size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "height", "label": "Height (desktop)", "min": 36, "max": 72, "step": 1, "unit": "px", "default": 48 },
+    { "type": "range", "id": "height_mobile", "label": "Height (mobile)", "min": 36, "max": 72, "step": 1, "unit": "px", "default": 50 },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 8 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Krino add to cart" }]
+}
+{% endschema %}

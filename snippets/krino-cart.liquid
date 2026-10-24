@@ -1,0 +1,143 @@
+{%- comment -%}
+  Krino cart drawer extras (prefix krino-cart). Settings live in Theme settings > "Krino · Carrito".
+  Param part: 'bar' (free-shipping bar, top of the drawer), 'guarantee' (row above the total),
+  'payments' (payment icons under the checkout button, from shop.enabled_payment_types).
+  Rendered inside cart-items-component, so it re-renders with the drawer on every cart change.
+{%- endcomment -%}
+{%- liquid
+  assign ks = settings
+-%}
+{%- case part -%}
+  {%- when 'bar' -%}
+    {%- if ks.krino_cart_bar_enable -%}
+      {%- liquid
+        assign kc_threshold = ks.krino_cart_bar_threshold | default: 0 | times: 100
+        assign kc_left = kc_threshold | minus: cart.total_price
+        if kc_threshold > 0 and cart.total_price < kc_threshold
+          assign kc_unlocked = false
+          assign kc_pct = cart.total_price | times: 100 | divided_by: kc_threshold
+          assign kc_amount = kc_left | money
+          assign kc_text = ks.krino_cart_bar_text_locked | replace: '{amount}', kc_amount
+        else
+          assign kc_unlocked = true
+          assign kc_pct = 100
+          assign kc_text = ks.krino_cart_bar_text_unlocked
+        endif
+      -%}
+      <div
+        class="krino-cart-bar{% if kc_unlocked %} krino-cart-bar--unlocked{% endif %}{% unless ks.krino_cart_bar_mobile %} krino-cart--hide-m{% endunless %}"
+        style="--krino-cart-bar-bg: {{ ks.krino_cart_bar_bg }}; --krino-cart-bar-color: {{ ks.krino_cart_bar_color }}; --krino-cart-bar-fill: {{ ks.krino_cart_bar_fill }}; --krino-cart-bar-track: {{ ks.krino_cart_bar_track }}; --krino-cart-bar-size: {{ ks.krino_cart_bar_size }}px; --krino-cart-bar-size-m: {{ ks.krino_cart_bar_size_mobile }}px; --krino-cart-bar-py: {{ ks.krino_cart_bar_padding }}px; --krino-cart-bar-py-m: {{ ks.krino_cart_bar_padding_mobile }}px;"
+        role="status"
+      >
+        <p class="krino-cart-bar__text">
+          {%- if ks.krino_cart_bar_icon -%}<span class="krino-cart-bar__icon">{% render 'krino-icon', name: 'truck', size: 18, stroke: 1.6 %}</span>{%- endif -%}
+          <span>{{ kc_text }}</span>
+        </p>
+        {%- if ks.krino_cart_bar_progress -%}
+          <div class="krino-cart-bar__track" aria-hidden="true">
+            <span class="krino-cart-bar__fill" style="width: {{ kc_pct }}%;"></span>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  {%- when 'guarantee' -%}
+    {%- if ks.krino_cart_guarantee_enable and ks.krino_cart_guarantee_text != blank -%}
+      <div
+        class="krino-cart-guarantee{% unless ks.krino_cart_guarantee_mobile %} krino-cart--hide-m{% endunless %}"
+        style="--krino-cart-g-color: {{ ks.krino_cart_guarantee_color }}; --krino-cart-g-icon: {{ ks.krino_cart_guarantee_icon_color }}; --krino-cart-g-bg: {{ ks.krino_cart_guarantee_bg }}; --krino-cart-g-size: {{ ks.krino_cart_guarantee_size }}px; --krino-cart-g-size-m: {{ ks.krino_cart_guarantee_size_mobile }}px; --krino-cart-g-py: {{ ks.krino_cart_guarantee_padding }}px; --krino-cart-g-py-m: {{ ks.krino_cart_guarantee_padding_mobile }}px;"
+      >
+        <span class="krino-cart-guarantee__icon">{% render 'krino-icon', name: 'verified', size: 20, stroke: 1.6 %}</span>
+        <span class="krino-cart-guarantee__text">{{ ks.krino_cart_guarantee_text }}</span>
+      </div>
+    {%- endif -%}
+
+  {%- when 'payments' -%}
+    {%- if ks.krino_cart_pay_enable and shop.enabled_payment_types.size > 0 -%}
+      <div
+        class="krino-cart-pay{% unless ks.krino_cart_pay_mobile %} krino-cart--hide-m{% endunless %}"
+        style="--krino-cart-pay-h: {{ ks.krino_cart_pay_height }}px; --krino-cart-pay-h-m: {{ ks.krino_cart_pay_height_mobile }}px; --krino-cart-pay-gap: {{ ks.krino_cart_pay_gap }}px; --krino-cart-pay-justify: {{ ks.krino_cart_pay_align }};"
+      >
+        <span class="visually-hidden">{{ 'blocks.payment_methods' | t }}</span>
+        <ul class="krino-cart-pay__list" role="list">
+          {%- for type in shop.enabled_payment_types -%}
+            <li class="krino-cart-pay__item">{{ type | payment_type_svg_tag: class: 'krino-cart-pay__svg' }}</li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+{%- endcase -%}
+
+{% stylesheet %}
+  .krino-cart-bar {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: var(--krino-cart-bar-py-m, 10px) var(--cart-drawer-padding, 16px);
+    background: var(--krino-cart-bar-bg, #f5f7ff);
+    color: var(--krino-cart-bar-color, #09184c);
+    text-align: center;
+  }
+  .krino-cart-bar__text {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: var(--krino-cart-bar-size-m, 14px);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .krino-cart-bar__icon { display: flex; color: var(--krino-cart-bar-fill, #3d5afe); }
+  .krino-cart-bar__track {
+    height: 6px;
+    border-radius: 99px;
+    background: var(--krino-cart-bar-track, #e6e6e6);
+    overflow: hidden;
+  }
+  .krino-cart-bar__fill {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: var(--krino-cart-bar-fill, #3d5afe);
+    transition: width 0.4s ease;
+  }
+  .krino-cart-guarantee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: var(--krino-cart-g-py-m, 8px) 12px;
+    border-radius: 8px;
+    background: var(--krino-cart-g-bg, transparent);
+    color: var(--krino-cart-g-color, #252525);
+    font-size: var(--krino-cart-g-size-m, 14px);
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .krino-cart-guarantee__icon { display: flex; flex-shrink: 0; color: var(--krino-cart-g-icon, #3d5afe); }
+  .krino-cart-pay { width: 100%; }
+  .krino-cart-pay__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: var(--krino-cart-pay-justify, center);
+    gap: var(--krino-cart-pay-gap, 6px);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .krino-cart-pay__item { display: flex; }
+  .krino-cart-pay__svg { height: var(--krino-cart-pay-h-m, 22px); width: auto; }
+  @media screen and (max-width: 749px) {
+    .krino-cart--hide-m { display: none !important; }
+  }
+  @media screen and (min-width: 750px) {
+    .krino-cart-bar { padding-block: var(--krino-cart-bar-py, 12px); }
+    .krino-cart-bar__text { font-size: var(--krino-cart-bar-size, 14px); }
+    .krino-cart-guarantee { padding-block: var(--krino-cart-g-py, 8px); font-size: var(--krino-cart-g-size, 14px); }
+    .krino-cart-pay__svg { height: var(--krino-cart-pay-h, 24px); }
+  }
+{% endstylesheet %}

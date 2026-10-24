@@ -1,0 +1,41 @@
+{%- comment -%} One shade swatch inside "Krino shade swatches". Prefix krino-shade. {%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign cur = closest.product.selected_or_first_available_variant
+  assign ksh_val = bs.value | strip
+  assign ksh_on = false
+  if cur.options contains ksh_val
+    assign ksh_on = true
+  endif
+-%}
+<button
+  type="button"
+  class="krino-shade{% if ksh_on %} is-selected{% endif %}"
+  role="radio"
+  aria-checked="{{ ksh_on }}"
+  aria-label="{{ ksh_val | escape }}"
+  title="{{ ksh_val | escape }}"
+  data-krino-val="{{ ksh_val | escape }}"
+  style="--krino-shade-color: {{ bs.color }};"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.image != blank -%}{{ bs.image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 60, height: 60 }}{%- endif -%}
+</button>
+{% stylesheet %}
+  .krino-shade { position: relative; width: var(--krino-shades-sw, 30px); height: var(--krino-shades-sw, 30px); padding: 0; border: 1px solid rgb(0 0 0 / 0.12); border-radius: var(--krino-shades-radius, 4px); background: var(--krino-shade-color, #1a1a1a); cursor: pointer; overflow: hidden; }
+  .krino-shade img { width: 100%; height: 100%; object-fit: cover; }
+  .krino-shade.is-selected { outline: 2px solid var(--krino-shades-ring, #171717); outline-offset: 2px; }
+  .krino-shade:focus-visible { outline: 2px solid var(--krino-shades-ring, #171717); outline-offset: 3px; }
+  @media screen and (max-width: 749px) { .krino-shade { width: var(--krino-shades-sw-m, 36px); height: var(--krino-shades-sw-m, 36px); } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Shade",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "value", "label": "Option value (exact spelling)", "default": "Negro" },
+    { "type": "color", "id": "color", "label": "Swatch color", "default": "#1A1A1A" },
+    { "type": "image_picker", "id": "image", "label": "Swatch image (optional, replaces the color)" }
+  ]
+}
+{% endschema %}

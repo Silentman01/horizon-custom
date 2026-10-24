@@ -3,6 +3,7 @@
 
   @param {string} [accelerated_checkout_buttons_layout] - { 'vertical' } Forced layout of the additional checkout buttons, instead of relying on platform's layout.
   @param {string} [section_id] - The section ID for cart discount component.
+  @param {boolean} [krino_drawer] - When true, renders the Krino guarantee row above the total and payment icons under the checkout button.
 {%- enddoc -%}
 
 {% render 'text-component-shimmer-styles' %}
@@ -227,6 +228,8 @@
     endif
   -%}
 
+  {% if krino_drawer %}{% render 'krino-cart', part: 'guarantee' %}{% endif %}
+
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
     <span
       class="cart-totals__item cart-totals__total"
@@ -283,6 +286,8 @@
       {{ content_for_additional_checkout_buttons }}
     </div>
   {% endif %}
+
+  {% if krino_drawer %}{% render 'krino-cart', part: 'payments' %}{% endif %}
 </div>
 
 {% stylesheet %}

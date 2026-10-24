@@ -1,0 +1,157 @@
+{%- comment -%}
+  Krino UGC video rail ("Sin filtros, resultados reales"): centred heading + subline, 9:16 video tiles
+  (Krino video blocks: tap/click = play/pause inline), prev/next arrows, swipe and mouse/pen drag, next tile peeking.
+  Hidden on the storefront until at least one video (or poster) is set. Prefix krino-ugc.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+{% render 'krino-rail' %}
+<krino-ugc
+  class="krino-ugc{% if request.design_mode %} krino-ugc--editor{% endif %}"
+  style="--krino-ugc-bg: {{ ss.background }}; --krino-ugc-text: {{ ss.text_color }}; --krino-ugc-per: {{ ss.per_view }}; --krino-ugc-per-m: {{ ss.per_view_mobile }}; --krino-ugc-gap: {{ ss.gap }}px; --krino-vrail-radius: {{ ss.radius }}px; --krino-vrail-icon: {{ ss.icon_color }}; --krino-ugc-arrow-bg: {{ ss.arrow_bg }}; --krino-ugc-arrow: {{ ss.arrow_color }}; --krino-ugc-h-font: {{ ss.heading_font }}; --krino-ugc-h-size: {{ ss.heading_size }}px; --krino-ugc-h-size-m: {{ ss.heading_size_mobile }}px; --krino-ugc-h-weight: {{ ss.heading_weight }}; --krino-ugc-body: {{ ss.body_size }}px; --krino-ugc-pt: {{ ss.padding_top }}px; --krino-ugc-pb: {{ ss.padding_bottom }}px; --krino-ugc-pt-m: {{ ss.padding_top_mobile }}px; --krino-ugc-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-ugc__inner">
+    {%- if ss.heading != blank -%}<h2 class="krino-ugc__heading">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.text != blank -%}<p class="krino-ugc__text">{{ ss.text }}</p>{%- endif -%}
+    <div class="krino-ugc__stage">
+      <krino-rail class="krino-ugc__track" id="KrinoUgc-{{ section.id }}">
+        {% content_for 'blocks' %}
+      </krino-rail>
+      {%- if ss.show_arrows -%}
+        <button type="button" class="krino-ugc__arrow krino-ugc__arrow--prev" data-krino-ugc-dir="-1" aria-label="{{ ss.prev_label | escape }}" hidden>
+          {%- render 'krino-icon', name: 'arrow-left', size: 20, stroke: 1.8 -%}
+        </button>
+        <button type="button" class="krino-ugc__arrow krino-ugc__arrow--next" data-krino-ugc-dir="1" aria-label="{{ ss.next_label | escape }}">
+          {%- render 'krino-icon', name: 'arrow-right', size: 20, stroke: 1.8 -%}
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</krino-ugc>
+{% stylesheet %}
+  .krino-ugc { display: block; padding: var(--krino-ugc-pt, 30px) 0 var(--krino-ugc-pb, 30px); background: var(--krino-ugc-bg, #fcfcfc); color: var(--krino-ugc-text, #252525); }
+  .krino-ugc:not(.krino-ugc--editor):not(:has(.krino-vtile)) { display: none; }
+  .krino-ugc__inner { max-width: 1300px; margin: 0 auto; padding-inline: 40px; text-align: center; }
+  .krino-ugc__heading { margin: 5px 0 0; font-family: var(--krino-ugc-h-font, var(--font-heading--family)); font-size: var(--krino-ugc-h-size, 32px); font-weight: var(--krino-ugc-h-weight, 600); line-height: 1.25; color: inherit; }
+  .krino-ugc__text { margin: 10px 0; font-size: var(--krino-ugc-body, 14px); line-height: 1.4; }
+  .krino-ugc__stage { position: relative; }
+  .krino-ugc__track { gap: var(--krino-ugc-gap, 10px); text-align: left; }
+  .krino-ugc__track > * { width: calc((100% - (var(--krino-ugc-per, 5) - 1) * var(--krino-ugc-gap, 10px)) / var(--krino-ugc-per, 5)); }
+  .krino-ugc--editor .krino-ugc__track:not(:has(.krino-vtile)) { min-height: 200px; border-radius: var(--krino-vrail-radius, 8px); background: #ececec; }
+  .krino-ugc__arrow { position: absolute; top: 50%; z-index: 2; display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border: 0; border-radius: 50%; background: var(--krino-ugc-arrow-bg, #fff); color: var(--krino-ugc-arrow, #000); box-shadow: 0 2px 8px rgb(0 0 0 / 0.18); cursor: pointer; transform: translateY(-50%); }
+  .krino-ugc__arrow[hidden] { display: none; }
+  .krino-ugc__arrow--prev { left: 10px; }
+  .krino-ugc__arrow--next { right: 10px; }
+  @media screen and (max-width: 749px) {
+    .krino-ugc { padding: var(--krino-ugc-pt-m, 30px) 0 var(--krino-ugc-pb-m, 30px); }
+    .krino-ugc__inner { padding-inline: 20px; }
+    .krino-ugc__heading { font-size: var(--krino-ugc-h-size-m, 24px); }
+    .krino-ugc__track > * { width: calc((100% - (var(--krino-ugc-per-m, 2.2) - 1) * var(--krino-ugc-gap, 10px)) / var(--krino-ugc-per-m, 2.2)); }
+  }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('krino-ugc')) {
+    class KrinoUgc extends HTMLElement {
+      connectedCallback() {
+        this.rail = this.querySelector('krino-rail');
+        this.prev = this.querySelector('[data-krino-ugc-dir="-1"]');
+        this.next = this.querySelector('[data-krino-ugc-dir="1"]');
+        if (!this.rail) return;
+        this.onClick = (e) => {
+          const b = e.target.closest('[data-krino-ugc-dir]');
+          if (!b || !this.contains(b) || typeof this.rail.step !== 'function') return;
+          this.rail.step(Number(b.dataset.krinoUgcDir));
+        };
+        this.onScroll = () => { cancelAnimationFrame(this.raf); this.raf = requestAnimationFrame(() => this.paint()); };
+        this.addEventListener('click', this.onClick);
+        this.rail.addEventListener('scroll', this.onScroll, { passive: true });
+        window.addEventListener('resize', this.onScroll);
+        requestAnimationFrame(() => this.paint());
+      }
+      disconnectedCallback() { window.removeEventListener('resize', this.onScroll); }
+      paint() {
+        const r = this.rail;
+        const max = r.scrollWidth - r.clientWidth;
+        if (this.prev) this.prev.hidden = r.scrollLeft <= 2;
+        if (this.next) this.next.hidden = max <= 2 || r.scrollLeft >= max - 2;
+      }
+    }
+    customElements.define('krino-ugc', KrinoUgc);
+  }
+  if (!window.__krinoVideo) {
+    window.__krinoVideo = true;
+    document.addEventListener('click', (e) => {
+      const tile = e.target.closest && e.target.closest('[data-krino-video]');
+      if (!tile) return;
+      const v = tile.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (v.paused) {
+        document.querySelectorAll('[data-krino-video] video').forEach((o) => { if (o !== v && !o.paused) { o.pause(); o.closest('[data-krino-video]').classList.remove('is-playing'); } });
+        v.muted = false;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
+        tile.classList.add('is-playing');
+      } else {
+        v.pause();
+        tile.classList.remove('is-playing');
+      }
+    });
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino UGC videos",
+  "tag": "section",
+  "class": "krino-ugc-section",
+  "blocks": [{ "type": "_krino-video" }],
+  "settings": [
+    { "type": "paragraph", "content": "Upload the videos in Shopify (Content → Files) and select them in each video block. The section stays hidden on the store until a video is set." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Sin filtros, resultados reales" },
+    { "type": "text", "id": "text", "label": "Subline", "default": "Hombres que solo querían volver a sentirse ellos mismos." },
+    { "type": "header", "content": "Rail" },
+    { "type": "range", "id": "per_view", "label": "Videos per view (desktop)", "min": 1, "max": 6, "step": 0.1, "default": 5 },
+    { "type": "range", "id": "per_view_mobile", "label": "Videos per view (mobile)", "min": 1, "max": 4, "step": 0.1, "default": 2.2 },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+    { "type": "text", "id": "prev_label", "label": "Previous arrow label (screen readers)", "default": "Anterior" },
+    { "type": "text", "id": "next_label", "label": "Next arrow label (screen readers)", "default": "Siguiente" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "icon_color", "label": "Play icon", "default": "#FFFFFF" },
+    { "type": "color", "id": "arrow_bg", "label": "Arrow background", "default": "#FFFFFF" },
+    { "type": "color", "id": "arrow_color", "label": "Arrow icon", "default": "#000000" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Subline size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 }
+  ],
+  "presets": [
+    {
+      "name": "Krino UGC videos",
+      "blocks": {
+        "v1": { "type": "_krino-video", "settings": { "label": "Video 1 de clientes" } },
+        "v2": { "type": "_krino-video", "settings": { "label": "Video 2 de clientes" } },
+        "v3": { "type": "_krino-video", "settings": { "label": "Video 3 de clientes" } },
+        "v4": { "type": "_krino-video", "settings": { "label": "Video 4 de clientes" } },
+        "v5": { "type": "_krino-video", "settings": { "label": "Video 5 de clientes" } },
+        "v6": { "type": "_krino-video", "settings": { "label": "Video 6 de clientes" } },
+        "v7": { "type": "_krino-video", "settings": { "label": "Video 7 de clientes" } }
+      },
+      "block_order": ["v1", "v2", "v3", "v4", "v5", "v6", "v7"]
+    }
+  ]
+}
+{% endschema %}

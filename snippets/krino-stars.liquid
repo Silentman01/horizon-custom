@@ -1,0 +1,18 @@
+{%- comment -%}
+  Five filled stars (native SVG, rebuild of the competitor's 5-star image).
+  Params: size (star height in px, default 18), color (default palette color1), gap (px, default 1)
+{%- endcomment -%}
+{%- liquid
+  assign st_size = size | default: 18
+  assign st_color = color | default: settings.color_palette.color1
+  assign st_gap = gap | default: 1
+-%}
+<span class="krino-stars" style="--krino-stars-size: {{ st_size }}px; --krino-stars-color: {{ st_color }}; --krino-stars-gap: {{ st_gap }}px;" role="img" aria-label="5/5">
+  {%- for i in (1..5) -%}
+    <svg class="krino-stars__star" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 1.8l3.1 6.4 7 .9-5.1 4.9 1.3 6.9L12 17.6l-6.3 3.3 1.3-6.9-5.1-4.9 7-.9z"/></svg>
+  {%- endfor -%}
+</span>
+{% stylesheet %}
+  .krino-stars { display: inline-flex; align-items: center; gap: var(--krino-stars-gap, 1px); line-height: 0; vertical-align: middle; }
+  .krino-stars__star { display: block; width: var(--krino-stars-size, 18px); height: var(--krino-stars-size, 18px); fill: var(--krino-stars-color, #3d5afe); }
+{% endstylesheet %}

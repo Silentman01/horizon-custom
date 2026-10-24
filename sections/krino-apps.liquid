@@ -1,0 +1,31 @@
+{%- comment -%}
+  Krino app slot (e.g. the reviews app widget at the end of the product page). Renders only the app blocks added in the
+  theme editor; with no app block it outputs nothing. Prefix krino-apps.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+  <div class="krino-apps" style="--krino-apps-bg: {{ section.settings.background }}; --krino-apps-pt: {{ section.settings.padding_top }}px; --krino-apps-pb: {{ section.settings.padding_bottom }}px; --krino-apps-w: {{ section.settings.max_width }}px;">
+    <div class="krino-apps__inner">
+      {%- for block in section.blocks -%}{% render block %}{%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+{% stylesheet %}
+  .krino-apps { padding: var(--krino-apps-pt, 40px) 0 var(--krino-apps-pb, 40px); background: var(--krino-apps-bg, #fcfcfc); }
+  .krino-apps__inner { max-width: var(--krino-apps-w, 1400px); margin: 0 auto; padding-inline: 20px; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino app slot",
+  "tag": "section",
+  "class": "krino-apps-section",
+  "blocks": [{ "type": "@app" }],
+  "settings": [
+    { "type": "paragraph", "content": "Add your reviews app block here (Add block → Apps). Nothing shows until an app block is added." },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "range", "id": "max_width", "label": "Max width", "min": 800, "max": 1600, "step": 20, "unit": "px", "default": 1400 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 }
+  ],
+  "presets": [{ "name": "Krino app slot" }]
+}
+{% endschema %}

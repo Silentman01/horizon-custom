@@ -1,0 +1,93 @@
+{%- comment -%}
+  Defines <krino-rail>: a horizontal scroll-snap rail that scrolls by touch AND by mouse/pen drag
+  (the theme editor's mobile preview has no touch). Optional pagination: a sibling element
+  <div class="krino-rail-dots" data-krino-dots-for="RAIL_ID"> with one <button> per item.
+  Render once in any file that uses it: {% render 'krino-rail' %}
+{%- endcomment -%}
+{% stylesheet %}
+  krino-rail { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; cursor: grab; }
+  krino-rail::-webkit-scrollbar { display: none; }
+  krino-rail.is-dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+  krino-rail.is-dragging * { pointer-events: none; }
+  krino-rail > * { scroll-snap-align: start; flex-shrink: 0; }
+  .krino-rail-dots { display: flex; justify-content: center; gap: 6px; }
+  .krino-rail-dots button { width: 14px; height: 3px; padding: 0; border: 0; border-radius: 2px; background: var(--krino-dots-off, rgb(61 90 254 / 0.25)); cursor: pointer; transition: width 0.2s ease, background-color 0.2s ease; }
+  .krino-rail-dots button[aria-current='true'] { width: 20px; background: var(--krino-dots-on, #3d5afe); }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('krino-rail')) {
+    class KrinoRail extends HTMLElement {
+      connectedCallback() {
+        let down = false, startX = 0, startScroll = 0;
+        this.moved = 0;
+        this.onDown = (e) => {
+          if (e.pointerType === 'touch' || e.button !== 0 || this.scrollWidth <= this.clientWidth + 1) return;
+          down = true; this.moved = 0; startX = e.clientX; startScroll = this.scrollLeft;
+        };
+        this.onMove = (e) => {
+          if (!down) return;
+          const dx = e.clientX - startX;
+          this.moved = Math.max(this.moved, Math.abs(dx));
+          if (this.moved > 4) this.classList.add('is-dragging');
+          this.scrollLeft = startScroll - dx;
+        };
+        this.onUp = () => {
+          if (!down) return;
+          down = false;
+          if (!this.classList.contains('is-dragging')) return;
+          const left = this.scrollLeft;
+          this.classList.remove('is-dragging');
+          this.scrollLeft = left;
+          const i = this.nearest();
+          this.go(i);
+        };
+        this.addEventListener('pointerdown', this.onDown);
+        window.addEventListener('pointermove', this.onMove);
+        window.addEventListener('pointerup', this.onUp);
+        window.addEventListener('pointercancel', this.onUp);
+        this.addEventListener('click', (e) => { if (this.moved > 4) { e.preventDefault(); e.stopPropagation(); this.moved = 0; } }, true);
+        this.addEventListener('dragstart', (e) => e.preventDefault());
+        this.dots = this.id ? document.querySelector(`[data-krino-dots-for="${this.id}"]`) : null;
+        if (this.dots) {
+          this.dots.addEventListener('click', (e) => {
+            const b = e.target.closest('button');
+            if (!b) return;
+            this.go([...this.dots.children].indexOf(b));
+          });
+          this.onScroll = () => { cancelAnimationFrame(this.raf); this.raf = requestAnimationFrame(() => this.paint()); };
+          this.addEventListener('scroll', this.onScroll, { passive: true });
+          this.paint();
+        }
+      }
+      disconnectedCallback() {
+        window.removeEventListener('pointermove', this.onMove);
+        window.removeEventListener('pointerup', this.onUp);
+        window.removeEventListener('pointercancel', this.onUp);
+      }
+      items() { return [...this.children]; }
+      offsetOf(k) { return k.offsetLeft - this.items()[0].offsetLeft; }
+      nearest() {
+        const left = this.scrollLeft;
+        const kids = this.items();
+        if (!kids.length) return 0;
+        if (left >= this.scrollWidth - this.clientWidth - 2) return kids.length - 1;
+        let best = 0;
+        kids.forEach((k, i) => { if (Math.abs(this.offsetOf(k) - left) < Math.abs(this.offsetOf(kids[best]) - left)) best = i; });
+        return best;
+      }
+      go(i) {
+        const k = this.items()[Math.max(0, Math.min(i, this.items().length - 1))];
+        if (!k) return;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        this.scrollTo({ left: this.offsetOf(k), behavior: reduce ? 'auto' : 'smooth' });
+      }
+      step(dir) { this.go(this.nearest() + dir); }
+      paint() {
+        if (!this.dots) return;
+        const n = this.nearest();
+        [...this.dots.children].forEach((b, i) => b.setAttribute('aria-current', i === n ? 'true' : 'false'));
+      }
+    }
+    customElements.define('krino-rail', KrinoRail);
+  }
+{% endjavascript %}

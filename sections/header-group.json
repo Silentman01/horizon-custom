@@ -39,7 +39,8 @@
         "padding-block-start": 15,
         "padding-block-end": 15,
         "divider_color": "{{ settings.color_palette.color3 }}"
-      }
+      },
+      "disabled": true
     },
     "header_section": {
       "type": "header",
@@ -77,7 +78,7 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "left",
+        "menu_position": "center",
         "menu_row": "top",
         "show_search": false,
         "search_position": "right",
@@ -94,14 +95,32 @@
         "enable_sticky_header": "never",
         "divider_width": 0,
         "divider_size": "page-width",
-        "border_width": 0,
-        "enable_transparent_header_home": false,
+        "border_width": 1,
+        "enable_transparent_header_home": true,
         "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false
+        "enable_transparent_header_collection": false,
+        "bottom_border_color": "#171717",
+        "home_inverse_logo": true,
+        "text_color_transparent_home": "#FFFFFF"
+      }
+    },
+    "krino_promo": {
+      "type": "krino-promo",
+      "settings": {
+        "headline": "BUEN FIN ANTICIPADO",
+        "offer_strong": "60% OFF",
+        "offer": "+ REGALOS GRATIS",
+        "show_countdown": true,
+        "cycle_hours": 6,
+        "label_days": "Días",
+        "label_hours": "Hrs",
+        "label_minutes": "Min",
+        "label_seconds": "Seg"
       }
     }
   },
   "order": [
+    "krino_promo",
     "header_announcements_9jGBFp",
     "header_section"
   ]

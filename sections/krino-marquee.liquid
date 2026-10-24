@@ -1,0 +1,82 @@
+{%- comment -%} Krino black marquee strip: repeated icon + text items scrolling continuously. Prefix krino-marquee. {%- endcomment -%}
+{%- assign ss = section.settings -%}
+{%- capture km_items -%}
+  {%- for block in section.blocks -%}
+    <span class="krino-marquee__item" {{ block.shopify_attributes }}>
+      {%- if block.settings.icon != 'none' -%}{% render 'krino-icon', name: block.settings.icon, size: ss.icon_size, stroke: 1.4 %}{%- endif -%}
+      <span>{{ block.settings.text }}</span>
+    </span>
+  {%- endfor -%}
+{%- endcapture -%}
+<div
+  class="krino-marquee"
+  style="--krino-marquee-bg: {{ ss.background }}; --krino-marquee-text: {{ ss.text_color }}; --krino-marquee-size: {{ ss.text_size }}px; --krino-marquee-size-m: {{ ss.text_size_mobile }}px; --krino-marquee-weight: {{ ss.weight }}; --krino-marquee-gap: {{ ss.gap }}px; --krino-marquee-speed: {{ ss.speed }}s; --krino-marquee-pt: {{ ss.padding_top }}px; --krino-marquee-pb: {{ ss.padding_bottom }}px; --krino-marquee-font: {{ ss.font }};"
+>
+  {%- if section.blocks.size > 0 -%}
+    <div class="krino-marquee__track">
+      {%- for i in (1..2) -%}
+        <div class="krino-marquee__group"{% if i == 2 %} aria-hidden="true"{% endif %}>
+          {{ km_items }}{{ km_items }}{{ km_items }}{{ km_items }}
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+  .krino-marquee { overflow: hidden; padding: var(--krino-marquee-pt, 15px) 0 var(--krino-marquee-pb, 15px); background: var(--krino-marquee-bg, #000); color: var(--krino-marquee-text, #fff); font-family: var(--krino-marquee-font, var(--font-body--family)); }
+  .krino-marquee__track { display: flex; width: max-content; animation: krino-marquee-scroll var(--krino-marquee-speed, 30s) linear infinite; }
+  .krino-marquee__group { display: flex; flex-shrink: 0; gap: var(--krino-marquee-gap, 30px); padding-right: var(--krino-marquee-gap, 30px); }
+  .krino-marquee__item { display: inline-flex; align-items: center; gap: 10px; font-size: var(--krino-marquee-size, 14px); font-weight: var(--krino-marquee-weight, 500); line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
+  .krino-marquee__item svg { flex: 0 0 auto; }
+  @keyframes krino-marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .krino-marquee__track { animation-duration: calc(var(--krino-marquee-speed, 30s) * 4); } }
+  @media screen and (max-width: 749px) { .krino-marquee__item { font-size: var(--krino-marquee-size-m, 14px); } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino marquee",
+  "tag": "section",
+  "class": "krino-marquee-section",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "LA OFERTA TERMINA HOY" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "verified", "options": [
+          { "value": "verified", "label": "Verified badge" }, { "value": "truck", "label": "Truck" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "check-circle", "label": "Check" }, { "value": "shield", "label": "Shield" }, { "value": "none", "label": "None" }
+        ] }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "color", "id": "background", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "Text and icons", "default": "#FFFFFF" },
+    { "type": "select", "id": "font", "label": "Font", "default": "var(--font-body--family)", "options": [
+      { "value": "var(--font-body--family)", "label": "Body" },
+      { "value": "var(--font-heading--family)", "label": "Heading" },
+      { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "weight", "label": "Weight", "default": "500", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "text_size", "label": "Text size (desktop)", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "text_size_mobile", "label": "Text size (mobile)", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "icon_size", "label": "Icon size", "min": 14, "max": 36, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "gap", "label": "Gap between items", "min": 10, "max": 80, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "speed", "label": "Loop duration (higher = slower)", "min": 10, "max": 120, "step": 5, "unit": "s", "default": 40 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 15 }
+  ],
+  "presets": [
+    {
+      "name": "Krino marquee",
+      "blocks": [
+        { "type": "item", "settings": { "text": "LA OFERTA TERMINA HOY", "icon": "verified" } },
+        { "type": "item", "settings": { "text": "ENVÍO GRATIS", "icon": "truck" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

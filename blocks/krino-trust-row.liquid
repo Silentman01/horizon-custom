@@ -1,0 +1,59 @@
+{%- comment -%} Krino trust row under the add-to-cart button (2–3 icon + text items, spaced evenly). Prefix krino-trust. {%- endcomment -%}
+{%- assign bs = block.settings -%}
+<div
+  class="krino-trust"
+  style="--krino-trust-color: {{ bs.text_color }}; --krino-trust-icon: {{ bs.icon_color }}; --krino-trust-size: {{ bs.text_size }}px; --krino-trust-size-m: {{ bs.text_size_mobile }}px; --krino-trust-weight: {{ bs.weight }}; --krino-trust-justify: {{ bs.justify }}; --krino-trust-pt: {{ bs.padding_top }}px; --krino-trust-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- for i in (1..3) -%}
+    {%- capture kt_text -%}text_{{ i }}{%- endcapture -%}
+    {%- capture kt_icon -%}icon_{{ i }}{%- endcapture -%}
+    {%- if bs[kt_text] != blank -%}
+      <span class="krino-trust__item">
+        {%- if bs[kt_icon] != 'none' -%}<span class="krino-trust__icon">{% render 'krino-icon', name: bs[kt_icon], size: bs.icon_size, stroke: 1.4 %}</span>{%- endif -%}
+        <span>{{ bs[kt_text] }}</span>
+      </span>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+{% stylesheet %}
+  .krino-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: var(--krino-trust-justify, space-evenly); gap: 8px 16px; width: 100%; padding-block: var(--krino-trust-pt, 0) var(--krino-trust-pb, 0); }
+  .krino-trust__item { display: inline-flex; align-items: center; gap: 6px; color: var(--krino-trust-color, #252525); font-size: var(--krino-trust-size, 14px); font-weight: var(--krino-trust-weight, 500); line-height: 1.3; }
+  .krino-trust__icon { display: flex; color: var(--krino-trust-icon, #3d5afe); }
+  @media screen and (max-width: 749px) { .krino-trust__item { font-size: var(--krino-trust-size-m, 14px); } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino trust row",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "text_1", "label": "Item 1", "default": "Enviamos en 24 hrs" },
+    { "type": "select", "id": "icon_1", "label": "Item 1 icon", "default": "truck", "options": [
+      { "value": "truck", "label": "Truck" }, { "value": "verified", "label": "Verified badge" }, { "value": "shield", "label": "Shield" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "check-circle", "label": "Check" }, { "value": "none", "label": "None" }
+    ] },
+    { "type": "text", "id": "text_2", "label": "Item 2", "default": "Cambio de tono GRATIS" },
+    { "type": "select", "id": "icon_2", "label": "Item 2 icon", "default": "verified", "options": [
+      { "value": "truck", "label": "Truck" }, { "value": "verified", "label": "Verified badge" }, { "value": "shield", "label": "Shield" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "check-circle", "label": "Check" }, { "value": "none", "label": "None" }
+    ] },
+    { "type": "text", "id": "text_3", "label": "Item 3 (optional)" },
+    { "type": "select", "id": "icon_3", "label": "Item 3 icon", "default": "shield", "options": [
+      { "value": "truck", "label": "Truck" }, { "value": "verified", "label": "Verified badge" }, { "value": "shield", "label": "Shield" }, { "value": "gift", "label": "Gift" }, { "value": "clock", "label": "Clock" }, { "value": "check-circle", "label": "Check" }, { "value": "none", "label": "None" }
+    ] },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "icon_color", "label": "Icons", "default": "#3D5AFE" },
+    { "type": "range", "id": "icon_size", "label": "Icon size", "min": 14, "max": 32, "step": 1, "unit": "px", "default": 20 },
+    { "type": "select", "id": "weight", "label": "Weight", "default": "500", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "text_size", "label": "Text size (desktop)", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "text_size_mobile", "label": "Text size (mobile)", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "select", "id": "justify", "label": "Alignment", "default": "space-evenly", "options": [
+      { "value": "space-evenly", "label": "Spread evenly" }, { "value": "flex-start", "label": "Left" }, { "value": "center", "label": "Center" }
+    ] },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Krino trust row" }]
+}
+{% endschema %}

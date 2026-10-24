@@ -1,0 +1,152 @@
+{%- comment -%}
+  Krino review cards ("No lo decimos nosotros"): heading + trust line, then a rail of cards that starts at the page edge
+  and bleeds right. Card = before | after photos with a shade badge, stars + date, title, text, name. Rail scrolls by
+  touch and mouse/pen drag, with dash pagination. Prefix krino-reviews.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+{% render 'krino-rail' %}
+<div
+  class="krino-reviews"
+  id="krino-reviews"
+  style="--krino-reviews-bg: {{ ss.background }}; --krino-reviews-text: {{ ss.text_color }}; --krino-reviews-muted: {{ ss.muted_color }}; --krino-reviews-card-bg: {{ ss.card_bg }}; --krino-reviews-border: {{ ss.card_border }}; --krino-dots-on: {{ ss.star_color }}; --krino-reviews-h-font: {{ ss.heading_font }}; --krino-reviews-h-size: {{ ss.heading_size }}px; --krino-reviews-h-size-m: {{ ss.heading_size_mobile }}px; --krino-reviews-h-weight: {{ ss.heading_weight }}; --krino-reviews-body: {{ ss.body_size }}px; --krino-reviews-card-w: {{ ss.card_width }}px; --krino-reviews-card-w-m: {{ ss.card_width_mobile }}vw; --krino-reviews-pt: {{ ss.padding_top }}px; --krino-reviews-pb: {{ ss.padding_bottom }}px; --krino-reviews-pt-m: {{ ss.padding_top_mobile }}px; --krino-reviews-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-reviews__head">
+    {%- if ss.heading != blank -%}<h2 class="krino-reviews__heading">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.trust_bold != blank or ss.trust_text != blank -%}
+      <p class="krino-reviews__trust">
+        {%- if ss.trust_bold != blank -%}<strong>{{ ss.trust_bold }}</strong>{%- endif -%}
+        {%- if ss.show_trust_stars -%}{% render 'krino-stars', size: 16, color: ss.star_color %}{%- endif -%}
+        {%- if ss.trust_text != blank -%}<span>{{ ss.trust_text }}</span>{%- endif -%}
+      </p>
+    {%- endif -%}
+  </div>
+  <krino-rail class="krino-reviews__rail" id="KrinoReviews-{{ section.id }}">
+    {%- for block in section.blocks -%}
+      {%- assign bs = block.settings -%}
+      <article class="krino-reviews__card" {{ block.shopify_attributes }}>
+        {%- liquid
+          assign kr_before = false
+          if bs.before_image != blank or bs.before_asset != blank or request.design_mode
+            assign kr_before = true
+          endif
+          assign kr_after = false
+          if bs.after_image != blank or bs.after_asset != blank or request.design_mode
+            assign kr_after = true
+          endif
+        -%}
+        {%- if kr_before or kr_after -%}
+          <div class="krino-reviews__photos{% unless kr_before and kr_after %} krino-reviews__photos--single{% endunless %}">
+            {%- if kr_before -%}{% render 'krino-media', image: bs.before_image, asset: bs.before_asset, ratio: '1 / 1', alt: bs.name, sizes: '(min-width: 750px) 200px, 42vw' %}{%- endif -%}
+            {%- if kr_after -%}{% render 'krino-media', image: bs.after_image, asset: bs.after_asset, ratio: '1 / 1', alt: bs.name, sizes: '(min-width: 750px) 200px, 42vw' %}{%- endif -%}
+            {%- if bs.shade != blank -%}
+              <span class="krino-reviews__shade"><i style="background: {{ bs.shade_color }};"></i>{{ bs.shade }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="krino-reviews__body">
+          <div class="krino-reviews__meta">
+            {% render 'krino-stars', size: 20, color: ss.star_color %}
+            {%- if bs.date != blank -%}<span class="krino-reviews__date">{{ bs.date }}</span>{%- endif -%}
+          </div>
+          {%- if bs.title != blank -%}<p class="krino-reviews__title">{{ bs.title }}</p>{%- endif -%}
+          {%- if bs.text != blank -%}<div class="krino-reviews__text">{{ bs.text }}</div>{%- endif -%}
+          {%- if bs.name != blank -%}<p class="krino-reviews__name">{{ bs.name }}</p>{%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </krino-rail>
+  {%- if ss.show_dots and section.blocks.size > 1 -%}
+    <div class="krino-rail-dots krino-reviews__dots" data-krino-dots-for="KrinoReviews-{{ section.id }}">
+      {%- for block in section.blocks -%}<button type="button" aria-label="{{ forloop.index }}"></button>{%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+  .krino-reviews { --krino-reviews-edge: max(40px, calc((100% - 1300px) / 2 + 40px)); padding: var(--krino-reviews-pt, 50px) 0 var(--krino-reviews-pb, 50px); background: var(--krino-reviews-bg, #fcfcfc); color: var(--krino-reviews-text, #252525); }
+  .krino-reviews__head { padding-inline: 20px; text-align: center; }
+  .krino-reviews__heading { margin: 0 0 10px; font-family: var(--krino-reviews-h-font, var(--font-heading--family)); font-size: var(--krino-reviews-h-size, 32px); font-weight: var(--krino-reviews-h-weight, 600); line-height: 1.25; color: inherit; }
+  .krino-reviews__trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 0 0 25px; font-size: 12.5px; line-height: 1.3; }
+  .krino-reviews__trust strong { font-weight: 700; }
+  .krino-reviews__rail { gap: 16px; padding-inline: var(--krino-reviews-edge); scroll-padding-inline: var(--krino-reviews-edge); padding-bottom: 4px; }
+  .krino-reviews__card { display: flex; flex-direction: column; width: var(--krino-reviews-card-w, 395px); overflow: hidden; border: 1px solid var(--krino-reviews-border, rgb(0 0 0 / 0.12)); border-radius: 8px; background: var(--krino-reviews-card-bg, #fcfcfc); }
+  .krino-reviews__photos { position: relative; display: grid; grid-template-columns: 1fr 1fr; }
+  .krino-reviews__photos--single { grid-template-columns: 1fr; }
+  .krino-reviews__shade { position: absolute; top: 10px; right: 10px; display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: 12px; background: #fff; color: #252525; font-size: 11px; line-height: 1.2; box-shadow: 0 1px 3px rgb(0 0 0 / 0.12); }
+  .krino-reviews__shade i { width: 10px; height: 10px; border-radius: 50%; }
+  .krino-reviews__body { display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 20px; font-size: var(--krino-reviews-body, 14px); line-height: 1.4; }
+  .krino-reviews__meta { display: flex; align-items: center; gap: 10px; }
+  .krino-reviews__date { color: var(--krino-reviews-muted, #757575); font-size: 13px; font-style: italic; }
+  .krino-reviews__title { margin: 0; font-weight: 600; }
+  .krino-reviews__text p { margin: 0; }
+  .krino-reviews__name { margin: auto 0 0; padding-top: 6px; font-weight: 600; }
+  .krino-reviews__dots { margin-top: 20px; }
+  @media screen and (max-width: 749px) {
+    .krino-reviews { --krino-reviews-edge: 20px; padding: var(--krino-reviews-pt-m, 40px) 0 var(--krino-reviews-pb-m, 40px); }
+    .krino-reviews__heading { font-size: var(--krino-reviews-h-size-m, 24px); }
+    .krino-reviews__rail { gap: 12px; }
+    .krino-reviews__card { width: var(--krino-reviews-card-w-m, 82vw); }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino review cards",
+  "tag": "section",
+  "class": "krino-reviews-section",
+  "max_blocks": 20,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "before_image", "label": "Before photo" },
+        { "type": "text", "id": "before_asset", "label": "Before photo theme asset (fallback)" },
+        { "type": "image_picker", "id": "after_image", "label": "After photo" },
+        { "type": "text", "id": "after_asset", "label": "After photo theme asset (fallback)" },
+        { "type": "text", "id": "shade", "label": "Shade badge", "default": "Negro" },
+        { "type": "color", "id": "shade_color", "label": "Shade dot color", "default": "#1A1A1A" },
+        { "type": "text", "id": "date", "label": "Date", "default": "09/02/2026" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Funciona súper bien" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>De lo mejor que he descubierto este año.</p>" },
+        { "type": "text", "id": "name", "label": "Name and city", "default": "Jorge T. CDMX" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "No lo decimos nosotros" },
+    { "type": "text", "id": "trust_bold", "label": "Trust line (bold part)", "default": "Excelente" },
+    { "type": "checkbox", "id": "show_trust_stars", "label": "Show stars in the trust line", "default": true },
+    { "type": "text", "id": "trust_text", "label": "Trust line (text)", "default": "Más de 40,000 hombres confían en nosotros" },
+    { "type": "checkbox", "id": "show_dots", "label": "Show pagination dashes", "default": true },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "muted_color", "label": "Date", "default": "#757575" },
+    { "type": "color", "id": "star_color", "label": "Stars and active dash", "default": "#3D5AFE" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FCFCFC" },
+    { "type": "color", "id": "card_border", "label": "Card border", "alpha": true, "default": "#0000001F" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Card text size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "card_width", "label": "Card width (desktop)", "min": 240, "max": 520, "step": 5, "unit": "px", "default": 395 },
+    { "type": "range", "id": "card_width_mobile", "label": "Card width (mobile, % of screen)", "min": 60, "max": 95, "step": 1, "unit": "%", "default": 82 },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 }
+  ],
+  "presets": [
+    {
+      "name": "Krino review cards",
+      "blocks": [ { "type": "review" }, { "type": "review" }, { "type": "review" } ]
+    }
+  ]
+}
+{% endschema %}

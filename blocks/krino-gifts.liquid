@@ -1,0 +1,75 @@
+{%- comment -%}
+  Krino free gifts: "Regalos GRATIS incluidos:" + gift tiles (child blocks). A tile can be limited to one pack value
+  (e.g. the free jar only on "3 frascos"); the block re-renders when the pack changes. Display only: the operator sets up
+  the real free gift / discount in Shopify. Prefix krino-gifts.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign p = closest.product
+  assign cur = p.selected_or_first_available_variant
+  assign kg_name = bs.option_name | strip | downcase
+  assign kg_value = ''
+  for o in p.options
+    assign kg_o = o | strip | downcase
+    if kg_o == kg_name
+      assign kg_value = cur.options[forloop.index0]
+      break
+    endif
+  endfor
+-%}
+{% render 'krino-sync' %}
+<div
+  class="krino-gifts"
+  id="KrinoGifts-{{ block.id }}"
+  data-krino-live="{{ block.id }}"
+  style="--krino-gifts-label: {{ bs.label_color }}; --krino-gifts-label-size: {{ bs.label_size }}px; --krino-gifts-text: {{ bs.text_color }}; --krino-gifts-accent: {{ bs.accent_color }}; --krino-gifts-bg: {{ bs.tile_bg }}; --krino-gifts-border: {{ bs.tile_border }}; --krino-gifts-radius: {{ bs.radius }}px; --krino-gifts-gap: {{ bs.gap }}px; --krino-gifts-size: {{ bs.text_size }}px; --krino-gifts-size-m: {{ bs.text_size_mobile }}px; --krino-gifts-pt: {{ bs.padding_top }}px; --krino-gifts-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <style>#KrinoGifts-{{ block.id }} [data-krino-only]:not([data-krino-only="{{ kg_value | escape }}"]) { display: none; }</style>
+  {%- if bs.label != blank -%}<p class="krino-gifts__label">{{ bs.label }}</p>{%- endif -%}
+  <div class="krino-gifts__grid">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+{% stylesheet %}
+  .krino-gifts { width: 100%; padding-block: var(--krino-gifts-pt, 0) var(--krino-gifts-pb, 0); }
+  .krino-gifts__label { margin: 0 0 10px; color: var(--krino-gifts-label, #252525); font-size: var(--krino-gifts-label-size, 14px); line-height: 1.4; }
+  .krino-gifts__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--krino-gifts-gap, 10px); }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino free gifts",
+  "tag": null,
+  "blocks": [{ "type": "_krino-gift" }],
+  "settings": [
+    { "type": "paragraph", "content": "Display only. Create the free gift (applicator) and the free-jar logic in Shopify (automatic discount or bundle app)." },
+    { "type": "text", "id": "label", "label": "Label", "default": "Regalos GRATIS incluidos:" },
+    { "type": "text", "id": "option_name", "label": "Pack option name", "default": "Paquete" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "label_color", "label": "Label", "default": "#252525" },
+    { "type": "color", "id": "text_color", "label": "Tile text", "default": "#252525" },
+    { "type": "color", "id": "accent_color", "label": "Icon and GRATIS", "default": "#3D5AFE" },
+    { "type": "color", "id": "tile_bg", "label": "Tile background", "default": "#FCFCFC" },
+    { "type": "color", "id": "tile_border", "label": "Tile border", "alpha": true, "default": "#00000021" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "radius", "label": "Tile corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "label_size", "label": "Label size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "text_size", "label": "Tile text size (desktop)", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "text_size_mobile", "label": "Tile text size (mobile)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Krino free gifts",
+      "blocks": {
+        "g1": { "type": "_krino-gift", "settings": { "icon": "truck", "title": "Envío", "value": "$129" } },
+        "g2": { "type": "_krino-gift", "settings": { "icon": "gift", "title": "Aplicador de precisión", "value": "$249" } },
+        "g3": { "type": "_krino-gift", "settings": { "icon": "gift", "title": "3er frasco", "value": "$769", "only_for": "3 frascos" } }
+      },
+      "block_order": ["g1", "g2", "g3"]
+    }
+  ]
+}
+{% endschema %}

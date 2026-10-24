@@ -1,0 +1,47 @@
+{%- comment -%} One 9:16 video tile (Shopify-hosted video, optional poster). Prefix krino-vtile. {%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign kv_poster = bs.poster
+  if kv_poster == blank and bs.video != blank
+    assign kv_poster = bs.video.preview_image
+  endif
+-%}
+{%- if bs.video != blank or kv_poster != blank or bs.poster_asset != blank -%}
+<div class="krino-vtile" data-krino-video {{ block.shopify_attributes }}>
+  <div class="krino-vtile__frame">
+    {%- if bs.video != blank -%}
+      {{ bs.video | video_tag: image_size: '720x', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none', class: 'krino-vtile__video' }}
+    {%- endif -%}
+    {%- if kv_poster != blank -%}
+      {{ kv_poster | image_url: width: 720 | image_tag: loading: 'lazy', class: 'krino-vtile__poster', alt: bs.label, sizes: '(min-width: 750px) 200px, 40vw' }}
+    {%- elsif bs.poster_asset != blank -%}
+      <img class="krino-vtile__poster" src="{{ bs.poster_asset | asset_url }}" alt="{{ bs.label | escape }}" loading="lazy" width="720" height="1280" onerror="this.remove()">
+    {%- endif -%}
+    {%- if bs.video != blank -%}
+      <span class="krino-vtile__play" aria-hidden="true">{% render 'krino-icon', name: 'play', size: 44, stroke: 1.2 %}</span>
+      <span class="visually-hidden">{{ bs.play_label }}</span>
+    {%- endif -%}
+  </div>
+</div>
+{%- endif -%}
+{% stylesheet %}
+  .krino-vtile { cursor: pointer; }
+  .krino-vtile__frame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: var(--krino-vrail-radius, 8px); background: #e6e6e6; }
+  .krino-vtile__frame video, .krino-vtile__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .krino-vtile__poster { transition: opacity 0.2s ease; }
+  .krino-vtile.is-playing .krino-vtile__poster, .krino-vtile.is-playing .krino-vtile__play { opacity: 0; pointer-events: none; }
+  .krino-vtile__play { position: absolute; inset: 0; display: grid; place-items: center; color: var(--krino-vrail-icon, #fff); filter: drop-shadow(0 2px 6px rgb(0 0 0 / 0.35)); transition: opacity 0.2s ease; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Video",
+  "tag": null,
+  "settings": [
+    { "type": "video", "id": "video", "label": "Video (9:16)" },
+    { "type": "image_picker", "id": "poster", "label": "Poster image (optional)" },
+    { "type": "text", "id": "poster_asset", "label": "Poster theme asset (fallback file name)" },
+    { "type": "text", "id": "label", "label": "Video description (accessibility)", "default": "Video" },
+    { "type": "text", "id": "play_label", "label": "Play label (screen readers)", "default": "Reproducir video" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,124 @@
+{%- comment -%}
+  Krino promo bar (header group): sale event headline | offer line + looping countdown (days fixed, H:M:S of an N-hour cycle)
+  on a navy → blue gradient. The headline is the sale-calendar text (one setting). Prefix krino-promo.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+<div
+  class="krino-promo"
+  style="--krino-promo-from: {{ ss.gradient_from }}; --krino-promo-to: {{ ss.gradient_to }}; --krino-promo-text: {{ ss.text_color }}; --krino-promo-size: {{ ss.headline_size }}px; --krino-promo-size-m: {{ ss.headline_size_mobile }}px; --krino-promo-offer-size: {{ ss.offer_size }}px; --krino-promo-offer-size-m: {{ ss.offer_size_mobile }}px; --krino-promo-pt: {{ ss.padding_top }}px; --krino-promo-pb: {{ ss.padding_bottom }}px; --krino-promo-pt-m: {{ ss.padding_top_mobile }}px; --krino-promo-pb-m: {{ ss.padding_bottom_mobile }}px; --krino-promo-font: {{ ss.font }};"
+>
+  <div class="krino-promo__inner">
+    <div class="krino-promo__copy">
+      {%- if ss.headline != blank -%}<span class="krino-promo__headline">{{ ss.headline }}</span>{%- endif -%}
+      {%- if ss.headline != blank -%}<span class="krino-promo__divider" aria-hidden="true"></span>{%- endif -%}
+      <span class="krino-promo__offer">
+        {%- if ss.offer_strong != blank -%}<strong>{{ ss.offer_strong }}</strong>{%- endif -%}
+        {%- if ss.offer != blank %} {{ ss.offer }}{%- endif -%}
+      </span>
+    </div>
+    {%- if ss.show_countdown -%}
+      <krino-promo-timer class="krino-promo__timer" data-hours="{{ ss.cycle_hours }}" role="timer" aria-live="off">
+        <span class="krino-promo__unit"><b data-u="d">00</b><small>{{ ss.label_days }}</small></span>
+        <span class="krino-promo__colon" aria-hidden="true">:</span>
+        <span class="krino-promo__unit"><b data-u="h">00</b><small>{{ ss.label_hours }}</small></span>
+        <span class="krino-promo__colon" aria-hidden="true">:</span>
+        <span class="krino-promo__unit"><b data-u="m">00</b><small>{{ ss.label_minutes }}</small></span>
+        <span class="krino-promo__colon" aria-hidden="true">:</span>
+        <span class="krino-promo__unit"><b data-u="s">00</b><small>{{ ss.label_seconds }}</small></span>
+      </krino-promo-timer>
+    {%- endif -%}
+  </div>
+</div>
+{% stylesheet %}
+  .krino-promo { position: relative; overflow: hidden; padding: var(--krino-promo-pt, 6px) 16px var(--krino-promo-pb, 6px); background: linear-gradient(135deg, var(--krino-promo-from, #09184c) 0%, var(--krino-promo-to, #3d5afe) 65%); color: var(--krino-promo-text, #fff); font-family: var(--krino-promo-font, var(--font-body--family)); }
+  .krino-promo::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 15% 50%, rgb(61 90 254 / 0.15), transparent 55%); pointer-events: none; }
+  .krino-promo__inner { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; max-width: 1200px; margin: 0 auto; }
+  .krino-promo__copy { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .krino-promo__headline { font-size: var(--krino-promo-size, 12px); font-weight: 800; letter-spacing: 1.2px; line-height: 1.2; text-transform: uppercase; white-space: nowrap; }
+  .krino-promo__divider { width: 1px; height: 14px; background: rgb(255 255 255 / 0.35); }
+  .krino-promo__offer { font-size: var(--krino-promo-offer-size, 11px); font-weight: 500; letter-spacing: 0.6px; line-height: 1.2; text-transform: uppercase; color: rgb(255 255 255 / 0.92); white-space: nowrap; }
+  .krino-promo__offer strong { color: var(--krino-promo-text, #fff); font-weight: 700; }
+  .krino-promo__timer { display: flex; align-items: flex-start; gap: 3px; }
+  .krino-promo__unit { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .krino-promo__unit b { min-width: 28px; padding: 4px 5px; border: 1px solid rgb(255 255 255 / 0.15); border-radius: 4px; background: rgb(255 255 255 / 0.12); font-size: 12px; font-weight: 800; letter-spacing: 1px; line-height: 1; text-align: center; font-variant-numeric: tabular-nums; backdrop-filter: blur(4px); }
+  .krino-promo__unit small { font-size: 7px; font-weight: 600; letter-spacing: 1.2px; line-height: 1; text-transform: uppercase; opacity: 0.6; }
+  .krino-promo__colon { padding-top: 3px; font-size: 12px; font-weight: 700; line-height: 1; opacity: 0.5; }
+  @media screen and (max-width: 749px) {
+    .krino-promo { padding: var(--krino-promo-pt-m, 10px) 20px var(--krino-promo-pb-m, 10px); }
+    .krino-promo__inner { justify-content: space-between; gap: 10px; }
+    .krino-promo__copy { flex-direction: column; align-items: flex-start; gap: 3px; }
+    .krino-promo__divider { display: none; }
+    .krino-promo__headline { font-size: var(--krino-promo-size-m, 12px); white-space: normal; }
+    .krino-promo__offer { font-size: var(--krino-promo-offer-size-m, 10px); white-space: normal; }
+    .krino-promo__unit b { min-width: 20px; padding: 3px; font-size: 11px; }
+    .krino-promo__unit small { font-size: 8px; letter-spacing: 0.6px; }
+  }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('krino-promo-timer')) {
+    class KrinoPromoTimer extends HTMLElement {
+      connectedCallback() {
+        const hours = Math.max(1, parseInt(this.dataset.hours || '6', 10));
+        const cycle = hours * 3600;
+        const anchor = Date.UTC(2025, 6, 4) / 1000;
+        const pad = (n) => String(n).padStart(2, '0');
+        const cells = { d: this.querySelector('[data-u="d"]'), h: this.querySelector('[data-u="h"]'), m: this.querySelector('[data-u="m"]'), s: this.querySelector('[data-u="s"]') };
+        const tick = () => {
+          const now = Math.floor(Date.now() / 1000);
+          let left = cycle - ((now - anchor) % cycle);
+          const d = Math.floor(left / 86400); left -= d * 86400;
+          const h = Math.floor(left / 3600); left -= h * 3600;
+          const m = Math.floor(left / 60);
+          const s = left - m * 60;
+          if (cells.d) cells.d.textContent = pad(d);
+          if (cells.h) cells.h.textContent = pad(h);
+          if (cells.m) cells.m.textContent = pad(m);
+          if (cells.s) cells.s.textContent = pad(s);
+        };
+        tick();
+        this.timer = setInterval(tick, 1000);
+      }
+      disconnectedCallback() { clearInterval(this.timer); }
+    }
+    customElements.define('krino-promo-timer', KrinoPromoTimer);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino promo bar",
+  "tag": "section",
+  "class": "krino-promo-section",
+  "enabled_on": { "groups": ["header"] },
+  "settings": [
+    { "type": "text", "id": "headline", "label": "Headline (sale event)", "default": "BUEN FIN ANTICIPADO", "info": "Calendar: BUEN FIN ANTICIPADO → EL BUEN FIN (13–17/11) → OFERTA DE TEMPORADA → BLACK FRIDAY → VENTA NAVIDEÑA → VENTA DE AÑO NUEVO" },
+    { "type": "text", "id": "offer_strong", "label": "Offer (highlighted part)", "default": "60% OFF" },
+    { "type": "text", "id": "offer", "label": "Offer (rest)", "default": "+ REGALOS GRATIS" },
+    { "type": "header", "content": "Countdown" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "range", "id": "cycle_hours", "label": "Countdown cycle (restarts every N hours)", "min": 1, "max": 24, "step": 1, "unit": "h", "default": 6 },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "Días" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "Hrs" },
+    { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "Min" },
+    { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "Seg" },
+    { "type": "header", "content": "Colors and font" },
+    { "type": "color", "id": "gradient_from", "label": "Gradient start", "default": "#09184C" },
+    { "type": "color", "id": "gradient_to", "label": "Gradient end", "default": "#3D5AFE" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "select", "id": "font", "label": "Font", "default": "var(--font-body--family)", "options": [
+      { "value": "var(--font-body--family)", "label": "Body" },
+      { "value": "var(--font-heading--family)", "label": "Heading" },
+      { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "range", "id": "headline_size", "label": "Headline size (desktop)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "headline_size_mobile", "label": "Headline size (mobile)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "offer_size", "label": "Offer size (desktop)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "offer_size_mobile", "label": "Offer size (mobile)", "min": 9, "max": 18, "step": 1, "unit": "px", "default": 10 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 }
+  ],
+  "presets": [{ "name": "Krino promo bar" }]
+}
+{% endschema %}

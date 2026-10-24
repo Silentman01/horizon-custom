@@ -1,0 +1,119 @@
+{%- comment -%}
+  Krino support card + FAQ: card (heading, hours, contact button, badge) beside an accordion list.
+  Mobile: FAQ first, card below. Prefix krino-sfaq.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign ksf_link = ss.button_link | default: '/pages/contact'
+-%}
+<div
+  class="krino-sfaq{% if ss.card_side == 'right' %} krino-sfaq--flip{% endif %}"
+  style="--krino-sfaq-bg: {{ ss.background }}; --krino-sfaq-text: {{ ss.text_color }}; --krino-sfaq-card-bg: {{ ss.card_bg }}; --krino-sfaq-btn: {{ ss.button_bg }}; --krino-sfaq-btn-text: {{ ss.button_text }}; --krino-sfaq-line: {{ ss.divider_color }}; --krino-sfaq-h-font: {{ ss.heading_font }}; --krino-sfaq-h-size: {{ ss.heading_size }}px; --krino-sfaq-h-size-m: {{ ss.heading_size_mobile }}px; --krino-sfaq-h-weight: {{ ss.heading_weight }}; --krino-sfaq-body: {{ ss.body_size }}px; --krino-sfaq-pt: {{ ss.padding_top }}px; --krino-sfaq-pb: {{ ss.padding_bottom }}px; --krino-sfaq-pt-m: {{ ss.padding_top_mobile }}px; --krino-sfaq-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-sfaq__inner">
+    {%- if ss.show_card -%}
+      <div class="krino-sfaq__card">
+        {%- if ss.card_heading != blank -%}<p class="krino-sfaq__card-heading">{{ ss.card_heading }}</p>{%- endif -%}
+        {%- if ss.card_text != blank -%}<p class="krino-sfaq__card-text">{{ ss.card_text }}</p>{%- endif -%}
+        {%- if ss.button_label != blank -%}<a class="krino-sfaq__button" href="{{ ksf_link }}">{{ ss.button_label }}</a>{%- endif -%}
+        {%- if ss.badge != blank -%}<span class="krino-sfaq__badge">{% render 'krino-icon', name: 'verified', size: 16, stroke: 1.5 %}{{ ss.badge }}</span>{%- endif -%}
+      </div>
+    {%- endif -%}
+    <div class="krino-sfaq__faq">
+      {%- if ss.heading != blank -%}<h2 class="krino-sfaq__heading">{{ ss.heading }}</h2>{%- endif -%}
+      <div class="krino-sfaq__list">
+        {%- for block in section.blocks -%}
+          <details class="krino-sfaq__item"{% if ss.exclusive %} name="krino-sfaq-{{ section.id }}"{% endif %} {{ block.shopify_attributes }}>
+            <summary class="krino-sfaq__q"><span>{{ block.settings.question }}</span>{% render 'krino-icon', name: 'chevron-down', size: 20, stroke: 1.6 %}</summary>
+            <div class="krino-sfaq__a">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+{% stylesheet %}
+  .krino-sfaq { padding: var(--krino-sfaq-pt, 50px) 0 var(--krino-sfaq-pb, 50px); background: var(--krino-sfaq-bg, #fcfcfc); color: var(--krino-sfaq-text, #252525); }
+  .krino-sfaq__inner { display: flex; align-items: flex-start; gap: 50px; max-width: 1300px; margin: 0 auto; padding-inline: 40px; }
+  .krino-sfaq--flip .krino-sfaq__inner { flex-direction: row-reverse; }
+  .krino-sfaq__card { display: flex; flex-direction: column; align-items: center; gap: 10px; flex: 0 0 35%; padding: 30px 20px; background: var(--krino-sfaq-card-bg, #fcfcfc); text-align: center; }
+  .krino-sfaq__card-heading { margin: 0; font-size: 20px; line-height: 1.3; }
+  .krino-sfaq__card-text { margin: 0 0 10px; font-size: var(--krino-sfaq-body, 14px); line-height: 1.4; }
+  .krino-sfaq__button { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 48px; padding: 10px 16px; border-radius: 8px; background: var(--krino-sfaq-btn, #3d5afe); color: var(--krino-sfaq-btn-text, #fff); font-size: 14px; letter-spacing: 0.025rem; text-decoration: none; text-transform: uppercase; }
+  .krino-sfaq__button:hover { opacity: 0.92; }
+  .krino-sfaq__badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border: 1px solid rgb(0 0 0 / 0.13); border-radius: 6px; background: #fff; font-size: 12px; line-height: 1.3; }
+  .krino-sfaq__faq { flex: 1; min-width: 0; }
+  .krino-sfaq__heading { margin: 0 0 10px; font-family: var(--krino-sfaq-h-font, var(--font-heading--family)); font-size: var(--krino-sfaq-h-size, 32px); font-weight: var(--krino-sfaq-h-weight, 500); line-height: 1.25; color: inherit; }
+  .krino-sfaq__item { border-bottom: 1px solid var(--krino-sfaq-line, #171717); }
+  .krino-sfaq__q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; font-size: var(--krino-sfaq-body, 14px); font-weight: 600; line-height: 1.4; list-style: none; cursor: pointer; }
+  .krino-sfaq__q::-webkit-details-marker { display: none; }
+  .krino-sfaq__q svg { flex: 0 0 auto; transition: transform 0.2s ease; }
+  .krino-sfaq__item[open] .krino-sfaq__q svg { transform: rotate(180deg); }
+  .krino-sfaq__a { padding: 0 0 14px; font-size: var(--krino-sfaq-body, 14px); line-height: 1.4; }
+  .krino-sfaq__a p { margin: 0 0 6px; }
+  .krino-sfaq__a p:last-child { margin-bottom: 0; }
+  @media screen and (max-width: 749px) {
+    .krino-sfaq { padding: var(--krino-sfaq-pt-m, 40px) 0 var(--krino-sfaq-pb-m, 40px); }
+    .krino-sfaq__inner, .krino-sfaq--flip .krino-sfaq__inner { flex-direction: column-reverse; align-items: stretch; gap: 20px; padding-inline: 20px; }
+    .krino-sfaq__card { flex-basis: auto; }
+    .krino-sfaq__card-heading { font-size: 18px; }
+    .krino-sfaq__heading { font-size: var(--krino-sfaq-h-size-m, 24px); }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino support + FAQ",
+  "tag": "section",
+  "class": "krino-sfaq-section",
+  "max_blocks": 16,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "¿Se ve natural o no engaño a nadie?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Totalmente indetectable.</p>" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "FAQ heading", "default": "Preguntas frecuentes" },
+    { "type": "checkbox", "id": "exclusive", "label": "Open one question at a time", "default": false },
+    { "type": "header", "content": "Support card" },
+    { "type": "checkbox", "id": "show_card", "label": "Show support card", "default": true },
+    { "type": "select", "id": "card_side", "label": "Card side (desktop)", "default": "left", "options": [
+      { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }
+    ] },
+    { "type": "text", "id": "card_heading", "label": "Card heading", "default": "¿Necesitas ayuda?" },
+    { "type": "textarea", "id": "card_text", "label": "Card text", "default": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Contacta a soporte" },
+    { "type": "url", "id": "button_link", "label": "Button link (empty = /pages/contact)" },
+    { "type": "text", "id": "badge", "label": "Badge", "default": "Cambio de tono GRATIS" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FCFCFC" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#3D5AFE" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#FFFFFF" },
+    { "type": "color", "id": "divider_color", "label": "Question dividers", "default": "#171717" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Text size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 }
+  ],
+  "presets": [
+    { "name": "Krino support + FAQ", "blocks": [ { "type": "question" }, { "type": "question" }, { "type": "question" } ] }
+  ]
+}
+{% endschema %}

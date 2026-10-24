@@ -1,0 +1,158 @@
+{%- comment -%}
+  Krino "Nuestros más vendidos": heading + grid of cards (image, badge, name, discount line, full-width button).
+  Each card can open the product with one shade pre-selected: the first variant whose options contain the card's shade.
+  Image: card image, else that variant's image, else the product image, else a theme asset. Prefix krino-bsell.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign kb_product = ss.product
+  if kb_product == blank and ss.product_handle != blank
+    assign kb_product = all_products[ss.product_handle]
+  endif
+-%}
+<div
+  class="krino-bsell"
+  style="--krino-bsell-bg: {{ ss.background }}; --krino-bsell-text: {{ ss.text_color }}; --krino-bsell-btn: {{ ss.button_bg }}; --krino-bsell-btn-text: {{ ss.button_text }}; --krino-bsell-badge: {{ ss.badge_bg }}; --krino-bsell-badge-text: {{ ss.badge_text }}; --krino-bsell-img-bg: {{ ss.image_bg }}; --krino-bsell-cols: {{ ss.columns }}; --krino-bsell-cols-m: {{ ss.columns_mobile }}; --krino-bsell-h-font: {{ ss.heading_font }}; --krino-bsell-h-size: {{ ss.heading_size }}px; --krino-bsell-h-size-m: {{ ss.heading_size_mobile }}px; --krino-bsell-h-weight: {{ ss.heading_weight }}; --krino-bsell-n-size: {{ ss.name_size }}px; --krino-bsell-n-size-m: {{ ss.name_size_mobile }}px; --krino-bsell-n-weight: {{ ss.name_weight }}; --krino-bsell-d-size: {{ ss.discount_size }}px; --krino-bsell-align: {{ ss.heading_alignment }}; --krino-bsell-pt: {{ ss.padding_top }}px; --krino-bsell-pb: {{ ss.padding_bottom }}px; --krino-bsell-pt-m: {{ ss.padding_top_mobile }}px; --krino-bsell-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-bsell__inner">
+    {%- if ss.heading != blank -%}<h2 class="krino-bsell__heading">{{ ss.heading }}</h2>{%- endif -%}
+    <div class="krino-bsell__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign bs = block.settings
+          assign kb_variant = nil
+          if kb_product != blank and bs.shade != blank
+            for v in kb_product.variants
+              if v.options contains bs.shade
+                assign kb_variant = v
+                break
+              endif
+            endfor
+          endif
+          assign kb_link = bs.link
+          if kb_link == blank
+            if kb_variant != nil
+              assign kb_link = kb_variant.url
+            elsif kb_product != blank
+              assign kb_link = kb_product.url
+            else
+              assign kb_link = routes.all_products_collection_url
+            endif
+          endif
+          assign kb_image = bs.image
+          if kb_image == blank and kb_variant.featured_image != blank
+            assign kb_image = kb_variant.featured_image
+          endif
+          if kb_image == blank and kb_product != blank
+            assign kb_image = kb_product.featured_image
+          endif
+        -%}
+        <div class="krino-bsell__card" {{ block.shopify_attributes }}>
+          <a class="krino-bsell__media" href="{{ kb_link }}" tabindex="-1" aria-hidden="true">
+            {% render 'krino-media', image: kb_image, asset: bs.image_asset, ratio: '1 / 1', alt: bs.title, radius: 8, sizes: '(min-width: 750px) 25vw, 50vw' %}
+            {%- if bs.badge != blank -%}<span class="krino-bsell__badge">{{ bs.badge }}</span>{%- endif -%}
+          </a>
+          {%- if bs.title != blank -%}<h3 class="krino-bsell__name"><a href="{{ kb_link }}">{{ bs.title }}</a></h3>{%- endif -%}
+          {%- if bs.discount != blank -%}<p class="krino-bsell__discount">{{ bs.discount }}</p>{%- endif -%}
+          {%- if bs.button_label != blank -%}<a class="krino-bsell__button" href="{{ kb_link }}">{{ bs.button_label }}</a>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% stylesheet %}
+  .krino-bsell { padding: var(--krino-bsell-pt, 30px) 0 var(--krino-bsell-pb, 50px); background: var(--krino-bsell-bg, #fcfcfc); color: var(--krino-bsell-text, #252525); }
+  .krino-bsell__inner { max-width: 1300px; margin: 0 auto; padding-inline: 40px; }
+  .krino-bsell__heading { margin: 0 0 15px; font-family: var(--krino-bsell-h-font, var(--font-heading--family)); font-size: var(--krino-bsell-h-size, 32px); font-weight: var(--krino-bsell-h-weight, 600); line-height: 1.25; text-align: var(--krino-bsell-align, left); color: inherit; }
+  .krino-bsell__grid { display: grid; grid-template-columns: repeat(var(--krino-bsell-cols, 4), minmax(0, 1fr)); gap: 15px; }
+  .krino-bsell__card { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .krino-bsell__media { position: relative; display: block; border-radius: 8px; }
+  .krino-bsell__media .krino-media { background: var(--krino-bsell-img-bg, #ececec); }
+  .krino-bsell__badge { position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 6px; background: var(--krino-bsell-badge, #fff); color: var(--krino-bsell-badge-text, #000); font-size: 11px; line-height: 1.3; text-transform: uppercase; }
+  .krino-bsell__name { margin: 2px 0 0; font-family: var(--font-heading--family); font-size: var(--krino-bsell-n-size, 19px); font-weight: var(--krino-bsell-n-weight, 400); line-height: 1.25; color: inherit; }
+  .krino-bsell__name a { color: inherit; text-decoration: none; }
+  .krino-bsell__discount { margin: 0; font-size: var(--krino-bsell-d-size, 12.5px); line-height: 1.3; }
+  .krino-bsell__button { display: flex; align-items: center; justify-content: center; min-height: 44px; margin-top: auto; padding: 8px 12px; border-radius: 8px; background: var(--krino-bsell-btn, #3d5afe); color: var(--krino-bsell-btn-text, #fff); font-size: 14px; letter-spacing: 0.025rem; text-align: center; text-transform: uppercase; text-decoration: none; transition: opacity 0.2s ease; }
+  .krino-bsell__button:hover { opacity: 0.88; }
+  @media screen and (max-width: 749px) {
+    .krino-bsell { padding: var(--krino-bsell-pt-m, 30px) 0 var(--krino-bsell-pb-m, 40px); }
+    .krino-bsell__inner { padding-inline: 20px; }
+    .krino-bsell__heading { font-size: var(--krino-bsell-h-size-m, 24px); }
+    .krino-bsell__grid { grid-template-columns: repeat(var(--krino-bsell-cols-m, 2), minmax(0, 1fr)); gap: 10px; }
+    .krino-bsell__name { font-size: var(--krino-bsell-n-size-m, 17px); }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino best sellers",
+  "tag": "section",
+  "class": "krino-bsell-section",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (empty = shade variant or product image)" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback file name)", "default": "krino-home-producto.jpg" },
+        { "type": "text", "id": "badge", "label": "Badge (empty = hidden)", "default": "MÁS VENDIDO" },
+        { "type": "text", "id": "title", "label": "Name", "default": "Rellenador Capilar – Negro" },
+        { "type": "text", "id": "discount", "label": "Discount line", "default": "Hasta 60% OFF ahora mismo" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "Descúbrelo" },
+        { "type": "text", "id": "shade", "label": "Shade to pre-select (exact option value)", "default": "Negro" },
+        { "type": "url", "id": "link", "label": "Link (empty = product with this shade)" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Nuestros más vendidos" },
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "text", "id": "product_handle", "label": "Product handle (used when no product is selected)", "default": "polvo-rellenador-de-cabello" },
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns_mobile", "label": "Columns (mobile)", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "select", "id": "heading_alignment", "label": "Heading alignment", "default": "left", "options": [
+      { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" }
+    ] },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "image_bg", "label": "Image background", "default": "#ECECEC" },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#FFFFFF" },
+    { "type": "color", "id": "badge_text", "label": "Badge text", "default": "#000000" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#3D5AFE" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#FFFFFF" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "select", "id": "name_weight", "label": "Name weight", "default": "400", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "name_size", "label": "Name size (desktop)", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 19 },
+    { "type": "range", "id": "name_size_mobile", "label": "Name size (mobile)", "min": 12, "max": 28, "step": 1, "unit": "px", "default": 17 },
+    { "type": "range", "id": "discount_size", "label": "Discount line size", "min": 10, "max": 20, "step": 0.5, "unit": "px", "default": 12.5 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 50 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 40 }
+  ],
+  "presets": [
+    {
+      "name": "Krino best sellers",
+      "blocks": [
+        { "type": "card", "settings": { "badge": "MÁS VENDIDO", "title": "Rellenador Capilar – Negro", "shade": "Negro" } },
+        { "type": "card", "settings": { "badge": "MÁS VENDIDO", "title": "Rellenador Capilar – Castaño oscuro", "shade": "Castaño oscuro" } },
+        { "type": "card", "settings": { "badge": "MÁS VENDIDO", "title": "Rellenador Capilar – Castaño medio", "shade": "Castaño medio" } },
+        { "type": "card", "settings": { "badge": "PARA CANAS", "title": "Rellenador Capilar – Gris", "shade": "Gris" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

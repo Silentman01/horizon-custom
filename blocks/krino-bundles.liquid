@@ -1,0 +1,86 @@
+{%- comment -%}
+  Krino bundle cards ("Elige tu paquete:"). Each child card is one value of a product option (e.g. Paquete = 3 frascos)
+  and selects it in the hidden native variant picker, so price, cart and checkout use the real variant.
+  Prices on the cards come from the variants (per-unit = variant price / quantity). Prefix krino-bundles.
+{%- endcomment -%}
+{%- assign bs = block.settings -%}
+{% render 'krino-sync' %}
+<div
+  class="krino-bundles krino-bundles--{{ bs.layout }} krino-bundles--m-{{ bs.layout_mobile }}"
+  data-krino-live="{{ block.id }}"
+  data-krino-opt-name="{{ bs.option_name | escape }}"
+  {% if bs.hide_native_picker %}data-krino-hide-picker{% endif %}
+  style="--krino-bundles-label: {{ bs.label_color }}; --krino-bundles-label-size: {{ bs.label_size }}px; --krino-bundles-text: {{ bs.text_color }}; --krino-bundles-muted: {{ bs.muted_color }}; --krino-bundles-accent: {{ bs.accent_color }}; --krino-bundles-card-bg: {{ bs.card_bg }}; --krino-bundles-card-border: {{ bs.card_border }}; --krino-bundles-sel-bg: {{ bs.selected_bg }}; --krino-bundles-sel-border: {{ bs.selected_border }}; --krino-bundles-from: {{ bs.badge_from }}; --krino-bundles-to: {{ bs.badge_to }}; --krino-bundles-radius: {{ bs.radius }}px; --krino-bundles-gap: {{ bs.gap }}px; --krino-bundles-gap-m: {{ bs.gap_mobile }}px; --krino-bundles-price-size: {{ bs.price_size }}px; --krino-bundles-price-size-m: {{ bs.price_size_mobile }}px; --krino-bundles-title-size: {{ bs.title_size }}px; --krino-bundles-title-size-m: {{ bs.title_size_mobile }}px; --krino-bundles-thumb: {{ bs.thumb_height }}px; --krino-bundles-pt: {{ bs.padding_top }}px; --krino-bundles-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.label != blank -%}<p class="krino-bundles__label">{{ bs.label }}</p>{%- endif -%}
+  <div class="krino-bundles__grid" role="radiogroup" aria-label="{{ bs.label | escape }}">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+{% stylesheet %}
+  .krino-bundles { width: 100%; padding-block: var(--krino-bundles-pt, 0) var(--krino-bundles-pb, 0); color: var(--krino-bundles-text, #252525); }
+  .krino-bundles__label { margin: 0 0 10px; color: var(--krino-bundles-label, #252525); font-size: var(--krino-bundles-label-size, 14px); line-height: 1.4; }
+  .krino-bundles__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--krino-bundles-gap, 10px); padding-block: 9px 10px; }
+  .krino-bundles--stacked .krino-bundles__grid { grid-auto-flow: row; grid-auto-columns: auto; gap: 16px; }
+  .product-details:has([data-krino-hide-picker]) variant-picker { display: none; }
+  @media screen and (max-width: 749px) {
+    .krino-bundles--m-row .krino-bundles__grid { grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: var(--krino-bundles-gap-m, 6px); }
+    .krino-bundles--m-stacked .krino-bundles__grid { grid-auto-flow: row; grid-auto-columns: auto; gap: 16px; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino bundle cards",
+  "tag": null,
+  "blocks": [{ "type": "_krino-bundle-card" }],
+  "settings": [
+    { "type": "paragraph", "content": "Each card is one value of the product option below (e.g. Paquete: 1 frasco / 2 frascos / 3 frascos). Prices and crossed-out prices come from the variants (price and compare-at price). Keep the native Variant picker block: it is hidden and driven by these cards." },
+    { "type": "text", "id": "option_name", "label": "Product option name", "default": "Paquete" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Elige tu paquete:" },
+    { "type": "checkbox", "id": "hide_native_picker", "label": "Hide the native variant picker", "default": true },
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "layout", "label": "Desktop layout", "default": "row", "options": [
+      { "value": "row", "label": "Cards in one row" }, { "value": "stacked", "label": "Stacked rows" }
+    ] },
+    { "type": "select", "id": "layout_mobile", "label": "Mobile layout", "default": "row", "options": [
+      { "value": "row", "label": "Cards in one row" }, { "value": "stacked", "label": "Stacked rows" }
+    ] },
+    { "type": "range", "id": "gap", "label": "Gap (desktop)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "gap_mobile", "label": "Gap (mobile)", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "range", "id": "thumb_height", "label": "Card image height", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 60 },
+    { "type": "range", "id": "radius", "label": "Card corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "label_color", "label": "Label", "default": "#252525" },
+    { "type": "color", "id": "text_color", "label": "Card text", "default": "#252525" },
+    { "type": "color", "id": "muted_color", "label": "Muted text (supply, crossed-out)", "default": "#757575" },
+    { "type": "color", "id": "accent_color", "label": "Accent (perk line, gift line)", "default": "#3D5AFE" },
+    { "type": "color", "id": "card_bg", "label": "Card background", "default": "#FCFCFC" },
+    { "type": "color", "id": "card_border", "label": "Card border", "alpha": true, "default": "#00000021" },
+    { "type": "color", "id": "selected_bg", "label": "Selected card background", "default": "#F5F7FF" },
+    { "type": "color", "id": "selected_border", "label": "Selected card border", "default": "#3D5AFE" },
+    { "type": "color", "id": "badge_from", "label": "Badge / save pill gradient start", "default": "#09184C" },
+    { "type": "color", "id": "badge_to", "label": "Badge / save pill gradient end", "default": "#3D5AFE" },
+    { "type": "header", "content": "Text sizes" },
+    { "type": "range", "id": "label_size", "label": "Label size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "title_size", "label": "Card title (desktop)", "min": 10, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "title_size_mobile", "label": "Card title (mobile)", "min": 10, "max": 22, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "price_size", "label": "Price (desktop)", "min": 12, "max": 26, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "price_size_mobile", "label": "Price (mobile)", "min": 12, "max": 26, "step": 1, "unit": "px", "default": 15 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Krino bundle cards",
+      "blocks": {
+        "c3": { "type": "_krino-bundle-card", "settings": { "value": "3 frascos", "quantity": 3, "preselect": true, "badge": "BUEN FIN", "title": "Compra 2, llévate 1 GRATIS", "subtitle": "3 frascos", "supply": "Para 3 meses", "gift_line": "+ ENVÍO GRATIS", "save": "Ahorra 48%", "image_asset": "krino-bundle-3.png" } },
+        "c2": { "type": "_krino-bundle-card", "settings": { "value": "2 frascos", "quantity": 2, "title": "Dúo", "subtitle": "2 frascos", "supply": "Para 2 meses", "save": "Ahorra 22%", "image_asset": "krino-bundle-2.png" } },
+        "c1": { "type": "_krino-bundle-card", "settings": { "value": "1 frasco", "quantity": 1, "title": "Básico", "subtitle": "1 frasco", "supply": "Para 1 mes", "save": "Ahorra 22%", "image_asset": "krino-bundle-1.png" } }
+      },
+      "block_order": ["c3", "c2", "c1"]
+    }
+  ]
+}
+{% endschema %}

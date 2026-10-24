@@ -1,0 +1,97 @@
+{%- comment -%}
+  Glue between the Krino buy-box blocks and Horizon's native (hidden) variant picker and add-to-cart form.
+  Render once in any Krino buy-box block: {% render 'krino-sync' %}
+  - [data-krino-opt-name] wraps option controls; a click on button[data-krino-val] or a change on input[data-krino-val]
+    selects that value in the native variant picker (Horizon then updates price, form id, URL and cart).
+  - [data-krino-live="ID"] elements are re-rendered from the section HTML that Horizon fetches after each variant change.
+  - [data-krino-atc] buttons click the native add-to-cart button (cart drawer, fly-to-cart and errors stay native).
+  - [data-krino-preselect="VALUE"] inside a [data-krino-opt-name] group selects VALUE on load when the URL has no ?variant=
+    (set by the bundle card marked "Selected by default").
+{%- endcomment -%}
+{% javascript %}
+  if (!window.__krinoSync) {
+    window.__krinoSync = true;
+    const scopeOf = (el) => el.closest('.shopify-section') || document;
+    const pick = (el, name, value) => {
+      const scope = scopeOf(el);
+      const radios = scope.querySelectorAll('variant-picker input[type="radio"]');
+      for (const r of radios) {
+        if (r.value === value && (!name || r.dataset.optionName === name)) {
+          if (!r.checked) r.click();
+          return true;
+        }
+      }
+      for (const s of scope.querySelectorAll('variant-picker select')) {
+        const o = [...s.options].find((x) => x.value === value);
+        if (o) {
+          if (s.value !== value) { s.value = value; s.dispatchEvent(new Event('change', { bubbles: true })); }
+          return true;
+        }
+      }
+      return false;
+    };
+    const mark = (group, value) => {
+      group.querySelectorAll('[data-krino-val]').forEach((c) => {
+        const on = c.dataset.krinoVal === value;
+        c.classList.toggle('is-selected', on);
+        if (c.matches('button')) c.setAttribute('aria-checked', on ? 'true' : 'false');
+        const host = c.closest('[data-krino-card]');
+        if (host) host.classList.toggle('is-selected', on);
+      });
+      const out = group.querySelector('[data-krino-current]');
+      if (out) out.textContent = value;
+    };
+    const choose = (ctl) => {
+      const group = ctl.closest('[data-krino-opt-name]');
+      if (!group) return;
+      const value = ctl.dataset.krinoVal;
+      mark(group, value);
+      pick(group, group.dataset.krinoOptName, value);
+    };
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest && e.target.closest('button[data-krino-val]');
+      if (b) { e.preventDefault(); choose(b); return; }
+      const atc = e.target.closest && e.target.closest('[data-krino-atc]');
+      if (atc) {
+        e.preventDefault();
+        if (atc.disabled || atc.getAttribute('aria-disabled') === 'true') return;
+        const main = document.querySelector('.krino-atc [data-krino-atc]');
+        const scope = scopeOf(main || atc);
+        const native = scope.querySelector('.buy-buttons-block button[name="add"]') || document.querySelector('.buy-buttons-block button[name="add"]');
+        if (native && !native.disabled) native.click();
+      }
+    });
+    document.addEventListener('change', (e) => {
+      const i = e.target;
+      if (i instanceof HTMLInputElement && i.dataset.krinoVal !== undefined && i.closest('[data-krino-opt-name]')) choose(i);
+    });
+    document.addEventListener('shopify:product:select', (e) => {
+      const src = e.target instanceof Element ? e.target : null;
+      if (!src || src.closest('product-card') || !e.promise) return;
+      const scope = scopeOf(src);
+      e.promise.then((res) => {
+        const html = res && res.detail && res.detail.html;
+        if (!html) return;
+        scope.querySelectorAll('[data-krino-live]').forEach((el) => {
+          const fresh = html.querySelector(`[data-krino-live="${el.dataset.krinoLive}"]`);
+          if (fresh && fresh.innerHTML !== el.innerHTML) el.innerHTML = fresh.innerHTML;
+        });
+        document.dispatchEvent(new CustomEvent('krino:variant', { detail: res }));
+      }).catch(() => {});
+    }, true);
+    const preselect = () => {
+      if (new URL(window.location.href).searchParams.has('variant')) return;
+      document.querySelectorAll('[data-krino-preselect]').forEach((g) => {
+        const want = g.dataset.krinoPreselect;
+        const host = g.closest('[data-krino-opt-name]');
+        const name = host ? host.dataset.krinoOptName : '';
+        const scope = scopeOf(g);
+        const r = [...scope.querySelectorAll('variant-picker input[type="radio"]')].find((x) => x.value === want && (!name || x.dataset.optionName === name));
+        if (r && !r.checked) r.click();
+      });
+    };
+    const ready = () => (customElements.get('variant-picker') ? Promise.resolve() : customElements.whenDefined('variant-picker'));
+    const boot = () => ready().then(() => setTimeout(preselect, 0));
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+  }
+{% endjavascript %}

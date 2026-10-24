@@ -1,0 +1,83 @@
+{%- comment -%} Krino shade guide: small outline button that opens a modal (bottom sheet on mobile) with the shade chart. Prefix krino-guide. {%- endcomment -%}
+{%- assign bs = block.settings -%}
+<div
+  class="krino-guide"
+  style="--krino-guide-text: {{ bs.button_text }}; --krino-guide-bg: {{ bs.button_bg }}; --krino-guide-border: {{ bs.button_border }}; --krino-guide-radius: {{ bs.radius }}px; --krino-guide-size: {{ bs.text_size }}px; --krino-guide-modal-bg: {{ bs.modal_bg }}; --krino-guide-modal-text: {{ bs.modal_text }}; --krino-guide-pt: {{ bs.padding_top }}px; --krino-guide-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <button type="button" class="krino-guide__open" aria-haspopup="dialog" aria-controls="KrinoGuide-{{ block.id }}">
+    {%- if bs.show_icon -%}{% render 'krino-icon', name: 'info', size: 18, stroke: 1.4 %}{%- endif -%}
+    <span>{{ bs.button_label }}</span>
+  </button>
+  <dialog class="krino-guide__dialog" id="KrinoGuide-{{ block.id }}" aria-labelledby="KrinoGuideTitle-{{ block.id }}">
+    <div class="krino-guide__sheet">
+      <button type="button" class="krino-guide__close" aria-label="{{ bs.close_label | escape }}">{% render 'krino-icon', name: 'close', size: 22, stroke: 1.6 %}</button>
+      {%- if bs.image != blank or bs.image_asset != blank -%}
+        <div class="krino-guide__media">{% render 'krino-media', image: bs.image, asset: bs.image_asset, ratio: '1 / 1', alt: bs.title, radius: 8 %}</div>
+      {%- endif -%}
+      {%- if bs.title != blank -%}<h2 class="krino-guide__title" id="KrinoGuideTitle-{{ block.id }}">{{ bs.title }}</h2>{%- endif -%}
+      {%- if bs.text != blank -%}<div class="krino-guide__text">{{ bs.text }}</div>{%- endif -%}
+    </div>
+  </dialog>
+</div>
+{% stylesheet %}
+  .krino-guide { width: 100%; padding-block: var(--krino-guide-pt, 0) var(--krino-guide-pb, 0); }
+  .krino-guide__open { display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 6px 14px; border: 1px solid var(--krino-guide-border, #171717); border-radius: var(--krino-guide-radius, 8px); background: var(--krino-guide-bg, transparent); color: var(--krino-guide-text, #252525); font: inherit; font-size: var(--krino-guide-size, 14px); line-height: 1.2; cursor: pointer; }
+  .krino-guide__open:hover { opacity: 0.8; }
+  .krino-guide__open:focus-visible, .krino-guide__close:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  .krino-guide__dialog { width: min(480px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); margin: auto; padding: 0; border: 0; border-radius: 12px; background: var(--krino-guide-modal-bg, #fcfcfc); color: var(--krino-guide-modal-text, #252525); overflow: auto; }
+  .krino-guide__dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+  .krino-guide__sheet { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 20px; }
+  .krino-guide__close { position: absolute; top: 10px; right: 10px; z-index: 1; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; background: rgb(255 255 255 / 0.9); color: inherit; cursor: pointer; }
+  .krino-guide__title { margin: 0; font-family: var(--font-body--family); font-size: 16px; font-weight: 600; line-height: 1.3; }
+  .krino-guide__text { font-size: 14px; line-height: 1.4; }
+  .krino-guide__text p { margin: 0; }
+  @media screen and (max-width: 749px) {
+    .krino-guide__dialog { width: 100vw; max-width: 100vw; margin: auto 0 0; border-radius: 16px 16px 0 0; }
+    .krino-guide__sheet { padding: 20px 20px calc(24px + env(safe-area-inset-bottom)); }
+  }
+{% endstylesheet %}
+{% javascript %}
+  if (!window.__krinoGuide) {
+    window.__krinoGuide = true;
+    document.addEventListener('click', (e) => {
+      const open = e.target.closest && e.target.closest('.krino-guide__open');
+      if (open) {
+        const d = document.getElementById(open.getAttribute('aria-controls'));
+        if (d && typeof d.showModal === 'function') d.showModal();
+        return;
+      }
+      const close = e.target.closest && e.target.closest('.krino-guide__close');
+      if (close) { close.closest('dialog').close(); return; }
+      if (e.target instanceof HTMLDialogElement && e.target.classList.contains('krino-guide__dialog')) e.target.close();
+    });
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino shade guide",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Guía de tonos" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show info icon", "default": true },
+    { "type": "header", "content": "Modal" },
+    { "type": "image_picker", "id": "image", "label": "Shade chart image" },
+    { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback file name)", "default": "krino-product-04.jpg" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Guía de tonos" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Elige el tono más parecido a tu color natural para que se funda sin que se note. Si estás entre dos tonos, elige el más oscuro: se ve más natural.</p>" },
+    { "type": "text", "id": "close_label", "label": "Close button label (screen readers)", "default": "Cerrar" },
+    { "type": "color", "id": "modal_bg", "label": "Modal background", "default": "#FCFCFC" },
+    { "type": "color", "id": "modal_text", "label": "Modal text", "default": "#252525" },
+    { "type": "header", "content": "Button style" },
+    { "type": "color", "id": "button_text", "label": "Button text", "default": "#252525" },
+    { "type": "color", "id": "button_bg", "label": "Button background", "alpha": true, "default": "#00000000" },
+    { "type": "color", "id": "button_border", "label": "Button border", "default": "#171717" },
+    { "type": "range", "id": "radius", "label": "Button corner radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 8 },
+    { "type": "range", "id": "text_size", "label": "Button text size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Krino shade guide" }]
+}
+{% endschema %}

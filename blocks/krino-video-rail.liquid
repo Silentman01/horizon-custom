@@ -1,0 +1,74 @@
+{%- comment -%}
+  Krino UGC video rail in the buy box: 9:16 videos, tap/click = play/pause inline, swipe or mouse/pen drag.
+  Desktop shows N per view, mobile shows ~2.7 (next one peeks). Prefix krino-vrail.
+{%- endcomment -%}
+{%- assign bs = block.settings -%}
+{% render 'krino-rail' %}
+<div
+  class="krino-vrail"
+  style="--krino-vrail-per: {{ bs.per_view }}; --krino-vrail-per-m: {{ bs.per_view_mobile }}; --krino-vrail-gap: {{ bs.gap }}px; --krino-vrail-radius: {{ bs.radius }}px; --krino-vrail-icon: {{ bs.icon_color }}; --krino-vrail-pt: {{ bs.padding_top }}px; --krino-vrail-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <krino-rail class="krino-vrail__track">
+    {% content_for 'blocks' %}
+  </krino-rail>
+</div>
+{% stylesheet %}
+  .krino-vrail { width: 100%; padding-block: var(--krino-vrail-pt, 0) var(--krino-vrail-pb, 0); }
+  .krino-vrail:not(:has(.krino-vtile)) { display: none; }
+  .krino-vrail__track { gap: var(--krino-vrail-gap, 10px); }
+  .krino-vrail__track > * { width: calc((100% - (var(--krino-vrail-per, 3) - 1) * var(--krino-vrail-gap, 10px)) / var(--krino-vrail-per, 3)); }
+  @media screen and (max-width: 749px) {
+    .krino-vrail__track > * { width: calc((100% - (var(--krino-vrail-per-m, 2.7) - 0.3) * var(--krino-vrail-gap, 10px)) / var(--krino-vrail-per-m, 2.7)); }
+  }
+{% endstylesheet %}
+{% javascript %}
+  if (!window.__krinoVideo) {
+    window.__krinoVideo = true;
+    document.addEventListener('click', (e) => {
+      const tile = e.target.closest && e.target.closest('[data-krino-video]');
+      if (!tile) return;
+      const v = tile.querySelector('video');
+      if (!v) return;
+      e.preventDefault();
+      if (v.paused) {
+        document.querySelectorAll('[data-krino-video] video').forEach((o) => { if (o !== v && !o.paused) { o.pause(); o.closest('[data-krino-video]').classList.remove('is-playing'); } });
+        v.muted = false;
+        const p = v.play();
+        if (p && p.catch) p.catch(() => { v.muted = true; v.play().catch(() => {}); });
+        tile.classList.add('is-playing');
+      } else {
+        v.pause();
+        tile.classList.remove('is-playing');
+      }
+    });
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino video rail",
+  "tag": null,
+  "blocks": [{ "type": "_krino-video" }],
+  "settings": [
+    { "type": "paragraph", "content": "Upload the videos in Shopify (Content → Files) and select them in each video block." },
+    { "type": "range", "id": "per_view", "label": "Videos per view (desktop)", "min": 1, "max": 5, "step": 0.1, "default": 3 },
+    { "type": "range", "id": "per_view_mobile", "label": "Videos per view (mobile)", "min": 1, "max": 4, "step": 0.1, "default": 2.7 },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 8 },
+    { "type": "color", "id": "icon_color", "label": "Play icon color", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Krino video rail",
+      "blocks": {
+        "v1": { "type": "_krino-video", "settings": { "label": "Video 1" } },
+        "v2": { "type": "_krino-video", "settings": { "label": "Video 2" } },
+        "v3": { "type": "_krino-video", "settings": { "label": "Video 3" } }
+      },
+      "block_order": ["v1", "v2", "v3"]
+    }
+  ]
+}
+{% endschema %}

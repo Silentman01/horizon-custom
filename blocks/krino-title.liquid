@@ -1,0 +1,70 @@
+{%- comment -%} Krino title row: buy-box title + event pill on the same line (sale label = one text setting). Prefix krino-title. {%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign kt_text = bs.title
+  if bs.use_product_title or kt_text == blank
+    assign kt_text = closest.product.title
+  endif
+-%}
+<div
+  class="krino-title"
+  style="--krino-title-color: {{ bs.title_color }}; --krino-title-size: {{ bs.title_size }}px; --krino-title-size-m: {{ bs.title_size_mobile }}px; --krino-title-weight: {{ bs.title_weight }}; --krino-title-font: {{ bs.font }}; --krino-title-pill-from: {{ bs.pill_from }}; --krino-title-pill-to: {{ bs.pill_to }}; --krino-title-pill-text: {{ bs.pill_text_color }}; --krino-title-pill-size: {{ bs.pill_size }}px; --krino-title-pill-radius: {{ bs.pill_radius }}px; --krino-title-gap: {{ bs.gap }}px; --krino-title-pt: {{ bs.padding_top }}px; --krino-title-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  <{{ bs.tag }} class="krino-title__text">{{ kt_text }}</{{ bs.tag }}>
+  {%- if bs.pill != blank -%}
+    <span class="krino-title__pill">
+      {%- if bs.pill_icon -%}{% render 'krino-icon', name: 'discount', size: 14, stroke: 1.7 %}{%- endif -%}
+      <span>{{ bs.pill }}</span>
+    </span>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+  .krino-title { display: flex; flex-wrap: wrap; align-items: center; gap: var(--krino-title-gap, 10px); width: 100%; padding-block: var(--krino-title-pt, 0) var(--krino-title-pb, 0); }
+  .krino-title__text { margin: 0; color: var(--krino-title-color, #252525); font-family: var(--krino-title-font, var(--font-heading--family)); font-size: var(--krino-title-size, 24px); font-weight: var(--krino-title-weight, 600); line-height: 1.25; letter-spacing: 0; }
+  .krino-title__pill { display: inline-flex; align-items: center; gap: 5px; padding: 7px 14px; border-radius: var(--krino-title-pill-radius, 6px); background: linear-gradient(135deg, var(--krino-title-pill-from, #09184c), var(--krino-title-pill-to, #3d5afe)); color: var(--krino-title-pill-text, #fff); font-size: var(--krino-title-pill-size, 11px); font-weight: 600; letter-spacing: 0.5px; line-height: 1; white-space: nowrap; }
+  .krino-title__pill svg { flex: 0 0 auto; }
+  @media screen and (max-width: 749px) {
+    .krino-title__text { font-size: var(--krino-title-size-m, 20px); }
+    .krino-title__pill { padding: 6px 11px; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino title + pill",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title", "default": "Rellenador de Densidad Capilar" },
+    { "type": "checkbox", "id": "use_product_title", "label": "Use the product title instead", "default": false },
+    { "type": "select", "id": "tag", "label": "HTML tag", "default": "h1", "options": [
+      { "value": "h1", "label": "H1" }, { "value": "h2", "label": "H2" }, { "value": "p", "label": "Paragraph" }
+    ] },
+    { "type": "header", "content": "Event pill" },
+    { "type": "text", "id": "pill", "label": "Pill text (sale event label)", "default": "Buen Fin", "info": "Calendar: Buen Fin → Más vendido → Black Friday → Navidad → Año Nuevo. Leave empty to hide." },
+    { "type": "checkbox", "id": "pill_icon", "label": "Show discount icon", "default": true },
+    { "type": "color", "id": "pill_from", "label": "Pill gradient start", "default": "#09184C" },
+    { "type": "color", "id": "pill_to", "label": "Pill gradient end", "default": "#3D5AFE" },
+    { "type": "color", "id": "pill_text_color", "label": "Pill text", "default": "#FFFFFF" },
+    { "type": "range", "id": "pill_size", "label": "Pill text size", "min": 9, "max": 16, "step": 1, "unit": "px", "default": 11 },
+    { "type": "range", "id": "pill_radius", "label": "Pill corner radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 6 },
+    { "type": "header", "content": "Title style" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#252525" },
+    { "type": "select", "id": "font", "label": "Font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" },
+      { "value": "var(--font-subheading--family)", "label": "Subheading" },
+      { "value": "var(--font-body--family)", "label": "Body" },
+      { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "title_weight", "label": "Weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "title_size", "label": "Title size (desktop)", "min": 14, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "title_size_mobile", "label": "Title size (mobile)", "min": 14, "max": 40, "step": 1, "unit": "px", "default": 20 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "gap", "label": "Gap title / pill", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 10 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Krino title + pill" }]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{%- comment -%}
+  Krino newsletter: centred heading + subline + email field with an integrated send button
+  (native Shopify customer form, tag "newsletter"). Prefix krino-news.
+{%- endcomment -%}
+{%- liquid
+  assign ss = section.settings
+  assign kn_form_id = 'KrinoNews-' | append: section.id
+-%}
+<div
+  class="krino-news"
+  style="--krino-news-bg: {{ ss.background }}; --krino-news-text: {{ ss.text_color }}; --krino-news-input-bg: {{ ss.input_bg }}; --krino-news-input-border: {{ ss.input_border }}; --krino-news-w: {{ ss.field_width }}%; --krino-news-h-font: {{ ss.heading_font }}; --krino-news-h-size: {{ ss.heading_size }}px; --krino-news-h-size-m: {{ ss.heading_size_mobile }}px; --krino-news-h-weight: {{ ss.heading_weight }}; --krino-news-body: {{ ss.body_size }}px; --krino-news-pt: {{ ss.padding_top }}px; --krino-news-pb: {{ ss.padding_bottom }}px; --krino-news-pt-m: {{ ss.padding_top_mobile }}px; --krino-news-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-news__inner">
+    {%- if ss.heading != blank -%}<h2 class="krino-news__heading">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.text != blank -%}<p class="krino-news__text">{{ ss.text }}</p>{%- endif -%}
+    <div class="krino-news__form">
+    {%- form 'customer', id: kn_form_id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="krino-news__field">
+        <label class="visually-hidden" for="KrinoNewsEmail-{{ section.id }}">{{ ss.placeholder }}</label>
+        <input
+          id="KrinoNewsEmail-{{ section.id }}"
+          class="krino-news__input"
+          type="email"
+          name="contact[email]"
+          autocomplete="email"
+          autocapitalize="off"
+          spellcheck="false"
+          required
+          placeholder="{{ ss.placeholder | escape }}"
+        >
+        <button type="submit" class="krino-news__submit" aria-label="{{ ss.submit_label | escape }}">
+          {%- render 'krino-icon', name: 'send', size: 20, stroke: 1.6 -%}
+        </button>
+      </div>
+      {%- if form.posted_successfully? -%}
+        <p class="krino-news__message" role="status">{{ ss.success }}</p>
+      {%- elsif form.errors -%}
+        <p class="krino-news__message krino-news__message--error" role="alert">{{ ss.error }}</p>
+      {%- endif -%}
+    {%- endform -%}
+    </div>
+  </div>
+</div>
+{% stylesheet %}
+  .krino-news { padding: var(--krino-news-pt, 25px) 0 var(--krino-news-pb, 24px); background: var(--krino-news-bg, #fcfcfc); color: var(--krino-news-text, #252525); }
+  .krino-news__inner { display: flex; flex-direction: column; align-items: center; max-width: 1300px; margin: 0 auto; padding-inline: 40px; text-align: center; }
+  .krino-news__heading { margin: 0; font-family: var(--krino-news-h-font, var(--font-heading--family)); font-size: var(--krino-news-h-size, 32px); font-weight: var(--krino-news-h-weight, 500); line-height: 1.25; color: inherit; }
+  .krino-news__text { margin: 20px 0 0; font-size: var(--krino-news-body, 14px); line-height: 1.4; }
+  .krino-news__form { width: var(--krino-news-w, 40%); margin: 10px 0; }
+  .krino-news__field { position: relative; margin-top: 10px; }
+  .krino-news__input { width: 100%; min-height: 50px; padding: 14px 52px 14px 14px; border: 1px solid var(--krino-news-input-border, rgb(0 0 0 / 0.13)); border-radius: 4px; background: var(--krino-news-input-bg, #fff); color: inherit; font: inherit; font-size: 14px; }
+  .krino-news__input::placeholder { color: inherit; opacity: 1; }
+  .krino-news__submit { position: absolute; top: 0; right: 0; display: grid; place-items: center; width: 50px; height: 100%; padding: 0; border: 0; background: none; color: inherit; cursor: pointer; }
+  .krino-news__message { margin: 10px 0 0; font-size: 13px; }
+  .krino-news__message--error { color: #c62828; }
+  @media screen and (max-width: 749px) {
+    .krino-news { padding: var(--krino-news-pt-m, 25px) 0 var(--krino-news-pb-m, 24px); }
+    .krino-news__inner { padding-inline: 20px; }
+    .krino-news__heading { font-size: var(--krino-news-h-size-m, 24px); }
+    .krino-news__form { width: 100%; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino newsletter",
+  "tag": "section",
+  "class": "krino-news-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Únete a la comunidad Krino" },
+    { "type": "textarea", "id": "text", "label": "Subline", "default": "Entérate antes que nadie de lanzamientos y ofertas exclusivas." },
+    { "type": "text", "id": "placeholder", "label": "Field placeholder", "default": "Correo electrónico" },
+    { "type": "text", "id": "submit_label", "label": "Send button label (screen readers)", "default": "Enviar" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "¡Listo! Ya estás en la lista." },
+    { "type": "text", "id": "error", "label": "Error message", "default": "Revisa tu correo e inténtalo de nuevo." },
+    { "type": "range", "id": "field_width", "label": "Field width (desktop)", "min": 20, "max": 100, "step": 5, "unit": "%", "default": 40 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "color", "id": "input_bg", "label": "Field background", "default": "#FFFFFF" },
+    { "type": "color", "id": "input_border", "label": "Field border", "default": "#DEDEDE" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Subline size", "min": 11, "max": 22, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 24 }
+  ],
+  "presets": [{ "name": "Krino newsletter" }]
+}
+{% endschema %}

@@ -1,0 +1,35 @@
+{%- comment -%}
+  Prints the id of the variant that has option value `value` and the same other options as `base`
+  (e.g. value "3 frascos" + the current shade). Falls back to the first variant that has `value`, else prints nothing.
+  Params: product, base (variant), value (string)
+  Usage: {%- capture vid -%}{% render 'krino-variant-id', product: p, base: cur, value: '3 frascos' %}{%- endcapture -%}
+{%- endcomment -%}
+{%- liquid
+  assign kv_found = ''
+  assign kv_fallback = ''
+  assign kv_want = value | strip
+  if kv_want != blank and product != blank
+    for x in product.variants
+      if x.options contains kv_want
+        if kv_fallback == ''
+          assign kv_fallback = x.id
+        endif
+        assign kv_diff = 0
+        for o in x.options
+          assign kv_i = forloop.index0
+          if o != kv_want and o != base.options[kv_i]
+            assign kv_diff = kv_diff | plus: 1
+          endif
+        endfor
+        if kv_diff == 0
+          assign kv_found = x.id
+          break
+        endif
+      endif
+    endfor
+  endif
+  if kv_found == ''
+    assign kv_found = kv_fallback
+  endif
+  echo kv_found
+-%}

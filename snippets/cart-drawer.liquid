@@ -110,12 +110,13 @@
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
               >
+                {% render 'krino-cart', part: 'bar' %}
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
 
                 <div class="cart-drawer__summary">
-                  {% render 'cart-summary', section_id: 'cart-drawer-section' %}
+                  {% render 'cart-summary', section_id: 'cart-drawer-section', krino_drawer: true %}
                 </div>
               </scroll-hint>
             {%- endif -%}

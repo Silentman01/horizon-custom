@@ -1,0 +1,92 @@
+{%- comment -%}
+  Krino shipping estimator: truck icon + dated ship day (today + N days, es-MX names) + countdown to midnight.
+  Tokens: {weekday} {day} {month} in line 1, {countdown} in line 2. Prefix krino-eta.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign ke_days = bs.days | times: 86400
+  assign ke_ts = 'now' | date: '%s' | plus: ke_days
+  assign ke_wd = ke_ts | date: '%w' | plus: 0
+  assign ke_mo = ke_ts | date: '%m' | plus: 0 | minus: 1
+  assign ke_d = ke_ts | date: '%e' | strip
+  assign ke_weekdays = bs.weekdays | split: ','
+  assign ke_months = bs.months | split: ','
+  assign ke_line1 = bs.line_1 | replace: '{weekday}', ke_weekdays[ke_wd] | replace: '{day}', ke_d | replace: '{month}', ke_months[ke_mo]
+  assign ke_parts = bs.line_2 | split: '{countdown}'
+-%}
+<div
+  class="krino-eta"
+  data-days="{{ bs.days }}"
+  data-weekdays="{{ bs.weekdays | escape }}"
+  data-months="{{ bs.months | escape }}"
+  data-line="{{ bs.line_1 | escape }}"
+  style="--krino-eta-text: {{ bs.text_color }}; --krino-eta-muted: {{ bs.muted_color }}; --krino-eta-accent: {{ bs.countdown_color }}; --krino-eta-icon: {{ bs.icon_color }}; --krino-eta-size: {{ bs.text_size }}px; --krino-eta-pt: {{ bs.padding_top }}px; --krino-eta-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.show_icon -%}<span class="krino-eta__icon">{% render 'krino-icon', name: 'truck', size: 24, stroke: 1.4 %}</span>{%- endif -%}
+  <span class="krino-eta__lines">
+    <span class="krino-eta__date" data-krino-eta-date>{{ ke_line1 | strip }}</span>
+    {%- if bs.line_2 != blank -%}
+      <span class="krino-eta__cut">{{ ke_parts[0] }}<b class="krino-eta__count" data-krino-eta-count>--H--M--S</b>{{ ke_parts[1] }}</span>
+    {%- endif -%}
+  </span>
+</div>
+{% stylesheet %}
+  .krino-eta { display: flex; align-items: center; gap: 12px; width: 100%; padding-block: var(--krino-eta-pt, 0) var(--krino-eta-pb, 0); text-transform: uppercase; }
+  .krino-eta__icon { display: flex; flex: 0 0 auto; color: var(--krino-eta-icon, #252525); }
+  .krino-eta__lines { display: flex; flex-direction: column; gap: 1px; font-size: var(--krino-eta-size, 12px); line-height: 1.35; }
+  .krino-eta__date { color: var(--krino-eta-text, #252525); font-weight: 700; }
+  .krino-eta__cut { color: var(--krino-eta-muted, #757575); }
+  .krino-eta__count { color: var(--krino-eta-accent, #758afd); font-weight: 700; font-variant-numeric: tabular-nums; }
+{% endstylesheet %}
+{% javascript %}
+  if (!window.__krinoEta) {
+    window.__krinoEta = true;
+    const pad = (n) => String(n).padStart(2, '0');
+    const tick = () => {
+      document.querySelectorAll('.krino-eta').forEach((el) => {
+        const now = new Date();
+        const days = parseInt(el.dataset.days || '1', 10);
+        const d = new Date(now.getFullYear(), now.getMonth(), now.getDate() + days);
+        const wd = (el.dataset.weekdays || '').split(',').map((s) => s.trim());
+        const mo = (el.dataset.months || '').split(',').map((s) => s.trim());
+        const date = el.querySelector('[data-krino-eta-date]');
+        const line = (el.dataset.line || '').replace('{weekday}', wd[d.getDay()] || '').replace('{day}', d.getDate()).replace('{month}', mo[d.getMonth()] || '');
+        if (date && date.textContent !== line) date.textContent = line;
+        const count = el.querySelector('[data-krino-eta-count]');
+        if (count) {
+          const mid = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+          let s = Math.max(0, Math.floor((mid - now) / 1000));
+          const h = Math.floor(s / 3600); s -= h * 3600;
+          const m = Math.floor(s / 60); s -= m * 60;
+          count.textContent = `${pad(h)}H${pad(m)}M${pad(s)}S`;
+        }
+      });
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino ship estimator",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "Line 1", "default": "ENVÍO ESTIMADO: mañana, {weekday} {day} de {month}", "info": "Tokens: {weekday} {day} {month}" },
+    { "type": "text", "id": "line_2", "label": "Line 2", "default": "PIDE EN LOS PRÓXIMOS {countdown}", "info": "{countdown} = time left until midnight" },
+    { "type": "range", "id": "days", "label": "Ship date = today + days", "min": 0, "max": 10, "step": 1, "default": 1 },
+    { "type": "text", "id": "weekdays", "label": "Weekday names (Sunday first, comma-separated)", "default": "domingo,lunes,martes,miércoles,jueves,viernes,sábado" },
+    { "type": "text", "id": "months", "label": "Month names (comma-separated)", "default": "enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre" },
+    { "type": "checkbox", "id": "show_icon", "label": "Show truck icon", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "text_color", "label": "Line 1 color", "default": "#252525" },
+    { "type": "color", "id": "muted_color", "label": "Line 2 color", "default": "#757575" },
+    { "type": "color", "id": "countdown_color", "label": "Countdown color", "default": "#758AFD" },
+    { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#252525" },
+    { "type": "range", "id": "text_size", "label": "Text size", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 12 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [{ "name": "Krino ship estimator" }]
+}
+{% endschema %}

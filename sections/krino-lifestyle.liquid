@@ -1,0 +1,95 @@
+{%- comment -%} Krino lifestyle stress test ("Te retamos a que se te caiga"): heading, subline, grid of image tiles with captions. Prefix krino-life. {%- endcomment -%}
+{%- assign ss = section.settings -%}
+<div
+  class="krino-life"
+  style="--krino-life-bg: {{ ss.background }}; --krino-life-text: {{ ss.text_color }}; --krino-life-h-font: {{ ss.heading_font }}; --krino-life-h-size: {{ ss.heading_size }}px; --krino-life-h-size-m: {{ ss.heading_size_mobile }}px; --krino-life-h-weight: {{ ss.heading_weight }}; --krino-life-body: {{ ss.body_size }}px; --krino-life-cols: {{ ss.columns }}; --krino-life-cols-m: {{ ss.columns_mobile }}; --krino-life-gap: {{ ss.gap }}px; --krino-life-pt: {{ ss.padding_top }}px; --krino-life-pb: {{ ss.padding_bottom }}px; --krino-life-pt-m: {{ ss.padding_top_mobile }}px; --krino-life-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="krino-life__inner">
+    {%- if ss.heading != blank -%}<h2 class="krino-life__heading">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.subheading != blank -%}<p class="krino-life__sub">{{ ss.subheading }}</p>{%- endif -%}
+    <div class="krino-life__grid">
+      {%- for block in section.blocks -%}
+        {%- comment -%} A tile without an image is skipped on the storefront (shown as a neutral frame in the editor). {%- endcomment -%}
+        {%- if block.settings.image != blank or block.settings.image_asset != blank or request.design_mode -%}
+          <figure class="krino-life__tile" {{ block.shopify_attributes }}>
+            {% render 'krino-media', image: block.settings.image, asset: block.settings.image_asset, ratio: ss.ratio, alt: block.settings.caption, radius: 8, sizes: '(min-width: 750px) 25vw, 50vw' %}
+            {%- if block.settings.caption != blank -%}<figcaption class="krino-life__caption">{{ block.settings.caption }}</figcaption>{%- endif -%}
+          </figure>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+{% stylesheet %}
+  .krino-life { padding: var(--krino-life-pt, 20px) 0 var(--krino-life-pb, 20px); background: var(--krino-life-bg, #fcfcfc); color: var(--krino-life-text, #252525); }
+  .krino-life__inner { max-width: 1300px; margin: 0 auto; padding-inline: 40px; }
+  .krino-life__heading { margin: 0; font-family: var(--krino-life-h-font, var(--font-heading--family)); font-size: var(--krino-life-h-size, 32px); font-weight: var(--krino-life-h-weight, 600); line-height: 1.25; text-align: center; color: inherit; }
+  .krino-life__sub { margin: 10px 0 20px; font-size: var(--krino-life-body, 14px); line-height: 1.4; text-align: center; }
+  .krino-life__grid { display: grid; grid-template-columns: repeat(var(--krino-life-cols, 4), minmax(0, 1fr)); gap: var(--krino-life-gap, 15px); }
+  .krino-life__tile { display: flex; flex-direction: column; gap: 8px; margin: 0; }
+  .krino-life__caption { font-size: var(--krino-life-body, 14px); font-weight: 500; line-height: 1.3; }
+  @media screen and (max-width: 749px) {
+    .krino-life { padding: var(--krino-life-pt-m, 30px) 0 var(--krino-life-pb-m, 20px); }
+    .krino-life__inner { padding-inline: 20px; }
+    .krino-life__heading { font-size: var(--krino-life-h-size-m, 24px); }
+    .krino-life__grid { grid-template-columns: repeat(var(--krino-life-cols-m, 2), minmax(0, 1fr)); gap: 10px; }
+  }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino lifestyle tiles",
+  "tag": "section",
+  "class": "krino-life-section",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Tile",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "image_asset", "label": "Image theme asset (fallback file name)" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Bajo la lluvia" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Te retamos a que se te caiga" },
+    { "type": "text", "id": "subheading", "label": "Subline", "default": "Desaparecemos tus entradas. Legalmente." },
+    { "type": "select", "id": "ratio", "label": "Image ratio", "default": "1 / 1", "options": [
+      { "value": "1 / 1", "label": "1:1" }, { "value": "4 / 5", "label": "4:5" }, { "value": "3 / 4", "label": "3:4" }, { "value": "4 / 3", "label": "4:3" }
+    ] },
+    { "type": "range", "id": "columns", "label": "Columns (desktop)", "min": 2, "max": 6, "step": 1, "default": 4 },
+    { "type": "range", "id": "columns_mobile", "label": "Columns (mobile)", "min": 1, "max": 3, "step": 1, "default": 2 },
+    { "type": "range", "id": "gap", "label": "Gap (desktop)", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 15 },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#FCFCFC" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#252525" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Text size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 20 }
+  ],
+  "presets": [
+    {
+      "name": "Krino lifestyle tiles",
+      "blocks": [
+        { "type": "tile", "settings": { "caption": "Bajo la lluvia", "image_asset": "krino-lifestyle-lluvia.jpg" } },
+        { "type": "tile", "settings": { "caption": "En la oficina", "image_asset": "krino-lifestyle-oficina.jpg" } },
+        { "type": "tile", "settings": { "caption": "En el gym", "image_asset": "krino-lifestyle-gym.jpg" } },
+        { "type": "tile", "settings": { "caption": "En una cita", "image_asset": "krino-lifestyle-cita.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

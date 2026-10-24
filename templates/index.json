@@ -9,274 +9,366 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "krino_hero": {
+      "type": "krino-hero",
+      "settings": {
+        "image_asset": "krino-home-hero.jpg",
+        "image_position": "center",
+        "show_stars": true,
+        "proof": "<strong>40,000 clientes satisfechos</strong>",
+        "heading": "Tus entradas se salieron del chat",
+        "text": "El rellenador capilar a prueba de agua que 40,000 hombres usan cada mañana… y nadie lo ha notado jamás.",
+        "button_label": "Descubre el producto",
+        "product_handle": "polvo-rellenador-de-cabello",
+        "alignment": "left",
+        "content_width": 50,
+        "overlay_opacity": 50,
+        "height": 70,
+        "height_mobile": 70,
+        "heading_size": 48,
+        "heading_size_mobile": 32,
+        "body_size": 15,
+        "body_size_mobile": 14,
+        "star_size": 18,
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "b1": {
+          "type": "item",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "icon": "check-box",
+            "text": "Cambio de tono GRATIS"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "b2": {
+          "type": "item",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "icon": "check-box",
+            "text": "Enviamos en 24 hrs"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
+        "b1",
+        "b2"
+      ]
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "krino_best_sellers": {
+      "type": "krino-best-sellers",
+      "settings": {
+        "heading": "Nuestros más vendidos",
+        "product_handle": "polvo-rellenador-de-cabello",
+        "columns": 4,
+        "columns_mobile": 2,
+        "padding_top": 30,
+        "padding_bottom": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 40
+      },
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "b1": {
+          "type": "card",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "image_asset": "krino-home-producto.jpg",
+            "badge": "MÁS VENDIDO",
+            "title": "Rellenador Capilar – Negro",
+            "discount": "Hasta 60% OFF ahora mismo",
+            "button_label": "Descúbrelo",
+            "shade": "Negro"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "b2": {
+          "type": "card",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "image_asset": "krino-home-producto.jpg",
+            "badge": "MÁS VENDIDO",
+            "title": "Rellenador Capilar – Castaño oscuro",
+            "discount": "Hasta 60% OFF ahora mismo",
+            "button_label": "Descúbrelo",
+            "shade": "Castaño oscuro"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "image_asset": "krino-home-producto.jpg",
+            "badge": "MÁS VENDIDO",
+            "title": "Rellenador Capilar – Castaño medio",
+            "discount": "Hasta 60% OFF ahora mismo",
+            "button_label": "Descúbrelo",
+            "shade": "Castaño medio"
+          }
+        },
+        "b4": {
+          "type": "card",
+          "settings": {
+            "image_asset": "krino-home-producto.jpg",
+            "badge": "PARA CANAS",
+            "title": "Rellenador Capilar – Gris",
+            "discount": "Hasta 60% OFF ahora mismo",
+            "button_label": "Descúbrelo",
+            "shade": "Gris"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "krino_band": {
+      "type": "krino-band",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "heading": "La innovación capilar que lo cambia todo",
+        "text": "Camuflaje instantáneo + fijación de 48 horas, en una sola rutina simple y comprobada.",
+        "button_label": "Descubre el producto",
+        "product_handle": "polvo-rellenador-de-cabello",
+        "content_width": 60,
+        "background": "#000000",
+        "text_color": "#FFFFFF",
+        "button_bg": "#FFFFFF",
+        "button_text": "#000000"
+      }
+    },
+    "krino_ugc": {
+      "type": "krino-ugc",
+      "settings": {
+        "heading": "Sin filtros, resultados reales",
+        "text": "Hombres que solo querían volver a sentirse ellos mismos.",
+        "per_view": 5,
+        "per_view_mobile": 2.2,
+        "show_arrows": true,
+        "prev_label": "Anterior",
+        "next_label": "Siguiente"
+      },
+      "blocks": {
+        "video_1": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 1 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_2": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 2 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_3": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 3 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_4": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 4 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_5": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 5 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_6": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 6 de clientes",
+            "play_label": "Reproducir video"
+          }
+        },
+        "video_7": {
+          "type": "_krino-video",
+          "settings": {
+            "label": "Video 7 de clientes",
+            "play_label": "Reproducir video"
+          }
+        }
+      },
+      "block_order": [
+        "video_1",
+        "video_2",
+        "video_3",
+        "video_4",
+        "video_5",
+        "video_6",
+        "video_7"
+      ]
+    },
+    "krino_highlight": {
+      "type": "krino-tech",
+      "settings": {
+        "image_asset": "krino-home-producto.jpg",
+        "ratio": "1 / 1",
+        "image_side": "left",
+        "image_width": 48,
+        "kicker": "RELLENADOR DE DENSIDAD CAPILAR",
+        "heading": "Seguridad en 30 segundos",
+        "text": "<p>Disimulo capilar de nivel profesional que se funde con tu cabello natural. Nadie se va a dar cuenta.</p>",
+        "button_label": "Compra el rellenador",
+        "product_handle": "polvo-rellenador-de-cabello",
+        "button_icon": true,
+        "accent_color": "#252525",
+        "button_bg": "#3D5AFE",
+        "button_text": "#FFFFFF",
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 40
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "icon": "verified",
+            "title": "",
+            "text": "Cubre zonas despobladas en menos de 30 segundos"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "icon": "verified",
+            "title": "",
+            "text": "Fórmula a prueba de agua: dura todo el día"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "icon": "verified",
+            "title": "",
+            "text": "Acabado natural e indetectable"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "icon": "verified",
+            "title": "",
+            "text": "Funciona en todo tipo y color de cabello"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "krino_barber": {
+      "type": "krino-barber",
+      "settings": {
+        "image_asset": "krino-barberia.jpg",
+        "heading": "Muy pronto en tu barbería",
+        "text": "Krino ya está en más de 100 barberías profesionales en todo México.",
+        "overlay_opacity": 50
+      }
+    },
+    "krino_support_faq": {
+      "type": "krino-support-faq",
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "heading_weight": "600",
+        "card_heading": "¿Necesitas ayuda?",
+        "card_text": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs.",
+        "button_label": "Contacta a soporte",
+        "badge": "Cambio de tono GRATIS"
+      },
+      "blocks": {
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se ve natural o no engaño a nadie?",
+            "answer": "<p>Totalmente indetectable. Aunque te vean de cerca, aunque tu barbero esté a 15 cm de tu cabeza. La textura imita la densidad del cabello real. Sin efecto talco, sin brillo. Tu secreto se queda entre tú y nosotros.</p>"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Me dura todo el día?",
+            "answer": "<p>Grip-Lock 48™ lo deja fijo desde el cafecito de la mañana hasta lo que se arme a medianoche. Sudor, lluvia, viento, gym… le da igual. Tus entradas ya se salieron del chat y no regresan hasta tu próximo shampoo.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Tapa los poros o afecta el crecimiento del cabello?",
+            "answer": "<p>No.</p><p>La fórmula es transpirable y no comedogénica.</p><p>Tu cuero cabelludo se mantiene sano y tu cabello sigue su ciclo natural.</p>"
+          }
+        },
+        "b4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Sirve si tengo el cabello muy delgado o ralo?",
+            "answer": "<p>Literal, para eso lo hicimos. Cabello delgado, coronilla rala, entradas… el polvo se adhiere a lo que te queda y se ve como si nunca hubieras perdido nada. Y funciona en todo tipo de cabello: lacio, ondulado, chino o afro.</p>"
+          }
+        },
+        "b5": {
+          "type": "question",
+          "settings": {
+            "question": "Si es a prueba de agua, ¿cómo me lo quito?",
+            "answer": "<p>Te retamos a que tu día lo quite, pero con tu shampoo de siempre sale al instante. Invencible contra la lluvia y el sudor. Indefenso contra el shampoo.</p>"
+          }
+        },
+        "b6": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto me dura un frasco?",
+            "answer": "<p>De 1 a 2 meses usándolo diario. La mayoría lo usa 4 o 5 veces por semana. Cada aplicación te sale en menos que un café, y hace mucho más por tu seguridad.</p>"
+          }
+        },
+        "b7": {
+          "type": "question",
+          "settings": {
+            "question": "¿Qué contiene?",
+            "answer": "<p>Fórmula a base de minerales: Mica, Sílice, Palmitato de etilhexilo y Estearato de magnesio. Todo de grado cosmético y probado en seguridad. Nada que no puedas googlear sin asustarte.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ]
+    },
+    "krino_newsletter": {
+      "type": "krino-newsletter",
+      "settings": {
+        "heading": "Únete a la comunidad Krino",
+        "heading_weight": "600",
+        "text": "Entérate antes que nadie de lanzamientos y ofertas exclusivas.",
+        "placeholder": "Correo electrónico",
+        "submit_label": "Enviar",
+        "success": "¡Listo! Ya estás en la lista.",
+        "error": "Revisa tu correo e inténtalo de nuevo.",
+        "field_width": 40
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "krino_hero",
+    "krino_best_sellers",
+    "krino_band",
+    "krino_ugc",
+    "krino_highlight",
+    "krino_barber",
+    "krino_support_faq",
+    "krino_newsletter"
   ]
 }

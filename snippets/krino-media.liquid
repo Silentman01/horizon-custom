@@ -1,0 +1,24 @@
+{%- comment -%}
+  Ratio-locked image frame. Shows the merchant's image, else a theme asset by file name, else a plain neutral fill.
+  A theme asset that is not uploaded yet removes itself on error, so the slot stays a neutral fill (no visible label).
+  Params: image, asset, ratio (CSS aspect-ratio, default '1 / 1'), alt, sizes, radius (px), eager, fit ('cover'|'contain')
+{%- endcomment -%}
+{%- liquid
+  assign km_ratio = ratio | default: '1 / 1'
+  assign km_loading = 'lazy'
+  if eager
+    assign km_loading = 'eager'
+  endif
+  assign km_fit = fit | default: 'cover'
+-%}
+<div class="krino-media" style="aspect-ratio: {{ km_ratio }};{% if radius != blank %} --krino-media-radius: {{ radius }}px;{% endif %} --krino-media-fit: {{ km_fit }};">
+  {%- if image -%}
+    {{ image | image_url: width: 1600 | image_tag: loading: km_loading, sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600', alt: image.alt }}
+  {%- elsif asset != blank -%}
+    <img src="{{ asset | asset_url }}" alt="{{ alt | escape }}" loading="{{ km_loading }}" decoding="async" width="1200" height="1200" onerror="this.remove()">
+  {%- endif -%}
+</div>
+{% stylesheet %}
+  .krino-media { position: relative; width: 100%; overflow: hidden; border-radius: var(--krino-media-radius, 0); background: #ececec; }
+  .krino-media > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: var(--krino-media-fit, cover); }
+{% endstylesheet %}

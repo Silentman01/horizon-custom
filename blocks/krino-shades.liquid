@@ -1,0 +1,76 @@
+{%- comment -%}
+  Krino shade swatches: "Elige tu tono: Negro" + square color swatches (one child block per shade).
+  Each swatch selects its value in the hidden native variant picker (option name setting, e.g. "Tono"). Prefix krino-shades.
+{%- endcomment -%}
+{%- liquid
+  assign bs = block.settings
+  assign p = closest.product
+  assign cur = p.selected_or_first_available_variant
+  assign ks_name = bs.option_name | strip | downcase
+  assign ks_value = ''
+  for o in p.options
+    assign ks_o = o | strip | downcase
+    if ks_o == ks_name
+      assign ks_value = cur.options[forloop.index0]
+      break
+    endif
+  endfor
+-%}
+{% render 'krino-sync' %}
+<div
+  class="krino-shades"
+  data-krino-live="{{ block.id }}"
+  data-krino-opt-name="{{ bs.option_name | escape }}"
+  style="--krino-shades-label: {{ bs.label_color }}; --krino-shades-size: {{ bs.label_size }}px; --krino-shades-sw: {{ bs.swatch_size }}px; --krino-shades-sw-m: {{ bs.swatch_size_mobile }}px; --krino-shades-radius: {{ bs.swatch_radius }}px; --krino-shades-ring: {{ bs.ring_color }}; --krino-shades-gap: {{ bs.gap }}px; --krino-shades-pt: {{ bs.padding_top }}px; --krino-shades-pb: {{ bs.padding_bottom }}px;"
+  {{ block.shopify_attributes }}
+>
+  {%- if bs.label != blank -%}
+    <p class="krino-shades__label">{{ bs.label }} <strong data-krino-current>{{ ks_value }}</strong></p>
+  {%- endif -%}
+  <div class="krino-shades__list" role="radiogroup" aria-label="{{ bs.label | escape }}">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+{% stylesheet %}
+  .krino-shades { display: flex; flex-direction: column; gap: 8px; width: 100%; padding-block: var(--krino-shades-pt, 0) var(--krino-shades-pb, 0); }
+  .krino-shades__label { margin: 0; color: var(--krino-shades-label, #252525); font-size: var(--krino-shades-size, 14px); line-height: 1.4; }
+  .krino-shades__label strong { font-weight: 700; }
+  .krino-shades__list { display: flex; flex-wrap: wrap; gap: var(--krino-shades-gap, 10px); padding: 3px; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Krino shade swatches",
+  "tag": null,
+  "blocks": [{ "type": "_krino-shade" }],
+  "settings": [
+    { "type": "paragraph", "content": "Each swatch is a value of the product option below (exact spelling). Keep the native Variant picker block in the buy box: it is hidden and driven by these swatches." },
+    { "type": "text", "id": "option_name", "label": "Product option name", "default": "Tono" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Elige tu tono:" },
+    { "type": "color", "id": "label_color", "label": "Label color", "default": "#252525" },
+    { "type": "range", "id": "label_size", "label": "Label size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Swatches" },
+    { "type": "range", "id": "swatch_size", "label": "Swatch size (desktop)", "min": 20, "max": 56, "step": 1, "unit": "px", "default": 30 },
+    { "type": "range", "id": "swatch_size_mobile", "label": "Swatch size (mobile)", "min": 20, "max": 56, "step": 1, "unit": "px", "default": 36 },
+    { "type": "range", "id": "swatch_radius", "label": "Swatch corner radius", "min": 0, "max": 30, "step": 1, "unit": "px", "default": 4 },
+    { "type": "color", "id": "ring_color", "label": "Selected outline", "default": "#171717" },
+    { "type": "range", "id": "gap", "label": "Gap", "min": 2, "max": 24, "step": 1, "unit": "px", "default": 10 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 0 }
+  ],
+  "presets": [
+    {
+      "name": "Krino shade swatches",
+      "blocks": {
+        "s1": { "type": "_krino-shade", "settings": { "value": "Negro", "color": "#1A1A1A" } },
+        "s2": { "type": "_krino-shade", "settings": { "value": "Castaño oscuro", "color": "#3B2314" } },
+        "s3": { "type": "_krino-shade", "settings": { "value": "Castaño medio", "color": "#5C3A1E" } },
+        "s4": { "type": "_krino-shade", "settings": { "value": "Castaño claro", "color": "#8B6914" } },
+        "s5": { "type": "_krino-shade", "settings": { "value": "Rubio", "color": "#D4A853" } },
+        "s6": { "type": "_krino-shade", "settings": { "value": "Gris", "color": "#9E9E9E" } }
+      },
+      "block_order": ["s1", "s2", "s3", "s4", "s5", "s6"]
+    }
+  ]
+}
+{% endschema %}

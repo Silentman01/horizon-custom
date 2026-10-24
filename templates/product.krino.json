@@ -1,0 +1,1085 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "one",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "arrow",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "bottom",
+            "thumbnail_width": 72,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": false,
+            "media_fit": "cover",
+            "media_radius": 8,
+            "extend_media": false,
+            "zoom": false,
+            "video_loop": false,
+            "hide_variants": false,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 12,
+            "sticky_details_desktop": true,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 4,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "rating": {
+              "type": "krino-rating",
+              "settings": {
+                "text": "<strong>Excelente</strong> 4.8/5 — +1,800 reseñas",
+                "link": "",
+                "star_size": 18,
+                "text_size": 12
+              },
+              "blocks": {}
+            },
+            "title": {
+              "type": "krino-title",
+              "settings": {
+                "title": "Rellenador de Densidad Capilar",
+                "tag": "h1",
+                "pill": "Buen Fin"
+              },
+              "blocks": {}
+            },
+            "chips": {
+              "type": "krino-chips",
+              "settings": {
+                "chip_1": "Grip Lock",
+                "chip_2": "No mancha",
+                "chip_3": "A prueba de agua"
+              },
+              "blocks": {}
+            },
+            "benefits": {
+              "type": "krino-benefits",
+              "settings": {
+                "item_1": "Rellena entradas y zonas despobladas en 10 segundos",
+                "item_2": "A prueba de sudor y agua por +48 hrs",
+                "item_3": "Indetectable: se ve como cabello real"
+              },
+              "blocks": {}
+            },
+            "guide": {
+              "type": "krino-shade-guide",
+              "settings": {
+                "button_label": "Guía de tonos",
+                "title": "Guía de tonos",
+                "image_asset": "krino-product-04.jpg",
+                "close_label": "Cerrar",
+                "text": "<p>Elige el tono más parecido a tu color natural para que se funda sin que se note. Si estás entre dos tonos, elige el más oscuro: se ve más natural.</p>"
+              },
+              "blocks": {}
+            },
+            "divider_1": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "#171717",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "shades": {
+              "type": "krino-shades",
+              "settings": {
+                "option_name": "Tono",
+                "label": "Elige tu tono:"
+              },
+              "blocks": {
+                "shade_1": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Negro",
+                    "color": "#1A1A1A"
+                  }
+                },
+                "shade_2": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Castaño oscuro",
+                    "color": "#3B2314"
+                  }
+                },
+                "shade_3": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Castaño medio",
+                    "color": "#5C3A1E"
+                  }
+                },
+                "shade_4": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Castaño claro",
+                    "color": "#8B6914"
+                  }
+                },
+                "shade_5": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Rubio",
+                    "color": "#D4A853"
+                  }
+                },
+                "shade_6": {
+                  "type": "_krino-shade",
+                  "settings": {
+                    "value": "Gris",
+                    "color": "#9E9E9E"
+                  }
+                }
+              },
+              "block_order": [
+                "shade_1",
+                "shade_2",
+                "shade_3",
+                "shade_4",
+                "shade_5",
+                "shade_6"
+              ]
+            },
+            "bundles": {
+              "type": "krino-bundles",
+              "settings": {
+                "option_name": "Paquete",
+                "label": "Elige tu paquete:",
+                "hide_native_picker": true,
+                "layout": "row",
+                "layout_mobile": "row"
+              },
+              "blocks": {
+                "card_1": {
+                  "type": "_krino-bundle-card",
+                  "settings": {
+                    "value": "3 frascos",
+                    "quantity": 3,
+                    "preselect": true,
+                    "badge": "BUEN FIN",
+                    "title": "Compra 2, llévate 1 GRATIS",
+                    "subtitle": "3 frascos",
+                    "unit_label": "/ frasco",
+                    "supply": "Para 3 meses",
+                    "perk": "Cambio de tono GRATIS",
+                    "perk_check": true,
+                    "gift_line": "+ ENVÍO GRATIS",
+                    "save": "Ahorra 48%",
+                    "image_asset": "krino-bundle-3.png"
+                  }
+                },
+                "card_2": {
+                  "type": "_krino-bundle-card",
+                  "settings": {
+                    "value": "2 frascos",
+                    "quantity": 2,
+                    "preselect": false,
+                    "title": "Dúo",
+                    "subtitle": "2 frascos",
+                    "unit_label": "/ frasco",
+                    "supply": "Para 2 meses",
+                    "perk": "Cambio de tono GRATIS",
+                    "perk_check": true,
+                    "save": "Ahorra 22%",
+                    "image_asset": "krino-bundle-2.png"
+                  }
+                },
+                "card_3": {
+                  "type": "_krino-bundle-card",
+                  "settings": {
+                    "value": "1 frasco",
+                    "quantity": 1,
+                    "preselect": false,
+                    "title": "Básico",
+                    "subtitle": "1 frasco",
+                    "unit_label": "/ frasco",
+                    "supply": "Para 1 mes",
+                    "perk": "Cambio de tono GRATIS",
+                    "perk_check": true,
+                    "save": "Ahorra 22%",
+                    "image_asset": "krino-bundle-1.png"
+                  }
+                }
+              },
+              "block_order": [
+                "card_1",
+                "card_2",
+                "card_3"
+              ]
+            },
+            "gifts": {
+              "type": "krino-gifts",
+              "settings": {
+                "label": "Regalos GRATIS incluidos:",
+                "option_name": "Paquete"
+              },
+              "blocks": {
+                "gift_1": {
+                  "type": "_krino-gift",
+                  "settings": {
+                    "icon": "truck",
+                    "title": "Envío",
+                    "value": "$129",
+                    "free_label": "GRATIS"
+                  }
+                },
+                "gift_2": {
+                  "type": "_krino-gift",
+                  "settings": {
+                    "icon": "gift",
+                    "title": "Aplicador de precisión",
+                    "value": "$249",
+                    "free_label": "GRATIS"
+                  }
+                },
+                "gift_3": {
+                  "type": "_krino-gift",
+                  "settings": {
+                    "icon": "gift",
+                    "title": "3er frasco",
+                    "value": "$769",
+                    "free_label": "GRATIS",
+                    "only_for": "3 frascos"
+                  }
+                }
+              },
+              "block_order": [
+                "gift_1",
+                "gift_2",
+                "gift_3"
+              ]
+            },
+            "atc": {
+              "type": "krino-atc",
+              "settings": {
+                "label": "Agregar al carrito",
+                "sold_out_label": "Agotado",
+                "show_price": true,
+                "show_compare": true,
+                "hide_native": true
+              },
+              "blocks": {}
+            },
+            "trust": {
+              "type": "krino-trust-row",
+              "settings": {
+                "text_1": "Enviamos en 24 hrs",
+                "icon_1": "truck",
+                "text_2": "Cambio de tono GRATIS",
+                "icon_2": "verified"
+              },
+              "blocks": {}
+            },
+            "divider_2": {
+              "type": "_divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "divider_color": "#171717",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "estimator": {
+              "type": "krino-estimator",
+              "settings": {
+                "line_1": "ENVÍO ESTIMADO: mañana, {weekday} {day} de {month}",
+                "line_2": "PIDE EN LOS PRÓXIMOS {countdown}",
+                "days": 1
+              },
+              "blocks": {}
+            },
+            "videos": {
+              "type": "krino-video-rail",
+              "settings": {
+                "per_view": 3,
+                "per_view_mobile": 2.7
+              },
+              "blocks": {
+                "video_1": {
+                  "type": "_krino-video",
+                  "settings": {
+                    "label": "Video 1 de clientes",
+                    "play_label": "Reproducir video"
+                  }
+                },
+                "video_2": {
+                  "type": "_krino-video",
+                  "settings": {
+                    "label": "Video 2 de clientes",
+                    "play_label": "Reproducir video"
+                  }
+                },
+                "video_3": {
+                  "type": "_krino-video",
+                  "settings": {
+                    "label": "Video 3 de clientes",
+                    "play_label": "Reproducir video"
+                  }
+                }
+              },
+              "block_order": [
+                "video_1",
+                "video_2",
+                "video_3"
+              ]
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "divider_color": "#171717",
+                "type_preset": "h5",
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "row_1": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "¿Qué es?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>El Polvo Rellenador de Cabello es un producto cosmético de densidad capilar que cubre al instante los huequitos y las zonas despobladas con pigmentos electrostáticos de aspecto natural.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_2": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "¿Y si tengo zonas completamente calvas?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>El Polvo Rellenador funciona mejor en zonas despobladas donde todavía hay algo de cabello. En zonas completamente calvas, el polvo necesita cabello al cual adherirse para lograr el resultado más natural.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_3": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "¿Cómo se aplica?",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Solo da toquecitos con el polvo sobre las zonas despobladas, difumina con el aplicador incluido y déjalo fijar 3 minutos.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_4": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Ventajas de tu paquete",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>El mejor precio por frasco: ahorras más que comprando uno por uno.</p><p>Envío GRATIS en todos tus pedidos.</p><p>Cambio de tono GRATIS si tu tono no te queda.</p><p>Con Compra 2, llévate 1 GRATIS, te alcanza para 3 meses.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                },
+                "row_5": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Envíos y devoluciones",
+                    "open_by_default": false,
+                    "icon": "none"
+                  },
+                  "blocks": {
+                    "text": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Envío GRATIS en todos los pedidos. Aceptamos devoluciones dentro de los 60 días posteriores a la entrega.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_1",
+                "row_2",
+                "row_3",
+                "row_4",
+                "row_5"
+              ]
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": false,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {},
+                  "disabled": true
+                }
+              },
+              "block_order": []
+            }
+          },
+          "block_order": [
+            "rating",
+            "title",
+            "chips",
+            "benefits",
+            "guide",
+            "divider_1",
+            "shades",
+            "bundles",
+            "gifts",
+            "atc",
+            "trust",
+            "divider_2",
+            "estimator",
+            "videos",
+            "accordion",
+            "variant_picker",
+            "buy_buttons"
+          ]
+        }
+      },
+      "block_order": [],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": true,
+        "limit_details_width": false,
+        "gap": 48,
+        "padding-block-start": 30,
+        "padding-block-end": 50
+      }
+    },
+    "krino_marquee": {
+      "type": "krino-marquee",
+      "settings": {
+        "background": "#000000",
+        "text_color": "#FFFFFF",
+        "text_size": 14,
+        "gap": 30,
+        "speed": 40
+      },
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "text": "LA OFERTA TERMINA HOY",
+            "icon": "verified"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "text": "ENVÍO GRATIS",
+            "icon": "truck"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2"
+      ]
+    },
+    "krino_reviews": {
+      "type": "krino-reviews",
+      "settings": {
+        "heading": "No lo decimos nosotros",
+        "trust_bold": "Excelente",
+        "show_trust_stars": true,
+        "trust_text": "Más de 40,000 hombres confían en nosotros"
+      },
+      "blocks": {
+        "b1": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-1-before.jpg",
+            "after_asset": "krino-review-1-after.jpg",
+            "shade": "Negro",
+            "shade_color": "#1A1A1A",
+            "date": "09/02/2026",
+            "title": "Funciona súper bien",
+            "text": "<p>De lo mejor que he descubierto este año. De verdad cubre las zonas despobladas y funciona tal cual lo anuncian. La neta sí me sorprendió jaja</p>",
+            "name": "Jorge T. CDMX"
+          }
+        },
+        "b2": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-2-before.jpg",
+            "after_asset": "krino-review-2-after.jpg",
+            "shade": "Castaño medio",
+            "shade_color": "#5C3A1E",
+            "date": "12/02/2026",
+            "title": "Pensé que era como las fibras",
+            "text": "<p>¡Pero no! Se adhiere al cabello y a la raíz porque es polvo compacto. Al principio se siente raro, pero es de lo mejor que hay para recuperar la seguridad rápido y sin complicarte.</p>",
+            "name": "Eduardo S. Monterrey"
+          }
+        },
+        "b3": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-3-before.jpg",
+            "after_asset": "krino-review-3-after.jpg",
+            "shade": "Gris",
+            "shade_color": "#9E9E9E",
+            "date": "15/01/2026",
+            "title": "producto fantástico",
+            "text": "<p>Producto fantástico, fácil de aplicar, una diferencia increíble en el hueco de la coronilla. El color se funde perfecto y vale cada peso. Eso sí, se pasa a la almohada en la noche, así que hay que lavarlo antes de dormir.</p>",
+            "name": "Daniel K. Guadalajara"
+          }
+        },
+        "b4": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-4-before.jpg",
+            "after_asset": "krino-review-4-after.jpg",
+            "shade": "Negro",
+            "shade_color": "#1A1A1A",
+            "date": "03/03/2026",
+            "title": "¡Funciona mejor!",
+            "text": "<p>Ya probé de todo: fibras, sprays, tintes. Es el primero que se ve natural Y aguanta todo el día. Hasta con lluvia.</p>",
+            "name": "Marco V. Querétaro"
+          }
+        },
+        "b5": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-5-before.jpg",
+            "after_asset": "krino-review-5-after.jpg",
+            "shade": "Negro",
+            "shade_color": "#1A1A1A",
+            "date": "03/03/2026",
+            "title": "¡FUNCIONA TAL CUAL LO PROMETEN!",
+            "text": "<p>Excelente atención al cliente y el producto funciona tal cual lo prometen. Muy contento con mi compra y, otra vez, la atención al cliente es de primera.</p>",
+            "name": "Juan D. Puebla"
+          }
+        },
+        "b6": {
+          "type": "review",
+          "settings": {
+            "before_asset": "krino-review-6-before.jpg",
+            "after_asset": "krino-review-6-after.jpg",
+            "shade": "Castaño oscuro",
+            "shade_color": "#3B2314",
+            "date": "03/03/2026",
+            "title": "Ya llevo un buen rato usándolo",
+            "text": "<p>…y está buenísimo. Hace poco mi pedido llegó dañado, pero Krino me mandó otro sin costo al momento. Su rapidez y profesionalismo me impresionaron. Cliente de por vida.</p>",
+            "name": "Esteban Y. León"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6"
+      ]
+    },
+    "krino_tech": {
+      "type": "krino-tech",
+      "settings": {
+        "image_asset": "krino-tecnologia.jpg",
+        "ratio": "5 / 4",
+        "image_side": "left",
+        "kicker": "NUESTRA TECNOLOGÍA",
+        "heading": "Tecnología Grip-Lock 48™",
+        "text": "<p>Tres capas de ciencia trabajando juntas para lograr el rellenador capilar más natural y duradero jamás creado.</p>"
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "icon": "target",
+            "title": "Pigmentos electrostáticos",
+            "text": "Se pegan como imán al cabello que ya tienes y te dan densidad al instante"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "icon": "shield",
+            "title": "Adhesión con cera natural",
+            "text": "Crea un sello a prueba de agua que resiste sudor, lluvia y fricción por +48 hrs"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "icon": "eye",
+            "title": "Micropartículas de sílice",
+            "text": "Acabado invisible que imita la textura del cabello real: indetectable incluso en HD"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "krino_lifestyle": {
+      "type": "krino-lifestyle",
+      "settings": {
+        "heading": "Te retamos a que se te caiga",
+        "subheading": "Desaparecemos tus entradas. Legalmente."
+      },
+      "blocks": {
+        "b1": {
+          "type": "tile",
+          "settings": {
+            "caption": "Bajo la lluvia",
+            "image_asset": "krino-lifestyle-lluvia.jpg"
+          }
+        },
+        "b2": {
+          "type": "tile",
+          "settings": {
+            "caption": "En la oficina",
+            "image_asset": "krino-lifestyle-oficina.jpg"
+          }
+        },
+        "b3": {
+          "type": "tile",
+          "settings": {
+            "caption": "En el gym",
+            "image_asset": "krino-lifestyle-gym.jpg"
+          }
+        },
+        "b4": {
+          "type": "tile",
+          "settings": {
+            "caption": "En una cita",
+            "image_asset": "krino-lifestyle-cita.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "krino_howto": {
+      "type": "krino-howto",
+      "settings": {
+        "heading": "Si sabes abrir un frasco, ya la armaste",
+        "subheading": "Una rutina tan fácil que vas a sentir que haces trampa."
+      },
+      "blocks": {
+        "b1": {
+          "type": "step",
+          "settings": {
+            "tab": "PASO 1",
+            "number": "01",
+            "title": "ABRE",
+            "text": "Gira el compartimento de abajo y saca la esponja aplicadora.",
+            "badge": "2 segundos",
+            "poster_asset": "krino-howto-1.jpg"
+          }
+        },
+        "b2": {
+          "type": "step",
+          "settings": {
+            "tab": "PASO 2",
+            "number": "02",
+            "title": "PRESIONA",
+            "text": "Aplica el polvo con la esponja en las zonas que quieres cubrir.",
+            "badge": "10 segundos",
+            "poster_asset": "krino-howto-2.jpg"
+          }
+        },
+        "b3": {
+          "type": "step",
+          "settings": {
+            "tab": "PASO 3",
+            "number": "03",
+            "title": "LISTO",
+            "text": "Te dura hasta tu próximo shampoo. Sin checarte. Sin retoques. Sin sorpresas.",
+            "badge": "Todo el día",
+            "poster_asset": "krino-howto-3.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "krino_zones": {
+      "type": "krino-zones",
+      "settings": {
+        "heading": "Funciona literal donde sea",
+        "subheading": "Krino rellena donde lo necesites: coronilla, entradas o barba."
+      },
+      "blocks": {
+        "b1": {
+          "type": "slide",
+          "settings": {
+            "before_1_asset": "krino-zona-coronilla-before.jpg",
+            "after_1_asset": "krino-zona-coronilla-after.jpg",
+            "label_1": "Coronilla",
+            "before_2_asset": "krino-zona-frente-before.jpg",
+            "after_2_asset": "krino-zona-frente-after.jpg",
+            "label_2": "Frente"
+          }
+        },
+        "b2": {
+          "type": "slide",
+          "settings": {
+            "before_1_asset": "krino-zona-ralo-before.jpg",
+            "after_1_asset": "krino-zona-ralo-after.jpg",
+            "label_1": "Cabello ralo",
+            "before_2_asset": "krino-zona-entradas-before.jpg",
+            "after_2_asset": "krino-zona-entradas-after.jpg",
+            "label_2": "Entradas"
+          }
+        },
+        "b3": {
+          "type": "slide",
+          "settings": {
+            "before_1_asset": "krino-zona-5-before.jpg",
+            "after_1_asset": "krino-zona-5-after.jpg",
+            "label_1": "Coronilla",
+            "before_2_asset": "krino-zona-arriba-before.jpg",
+            "after_2_asset": "krino-zona-arriba-after.jpg",
+            "label_2": "Parte de arriba"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "krino_barber": {
+      "type": "krino-barber",
+      "settings": {
+        "image_asset": "krino-barberia.jpg",
+        "heading": "Muy pronto en tu barbería",
+        "text": "Krino ya está en más de 100 barberías profesionales en todo México.",
+        "overlay_opacity": 50
+      }
+    },
+    "krino_support_faq": {
+      "type": "krino-support-faq",
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "heading_weight": "600",
+        "card_heading": "¿Necesitas ayuda?",
+        "card_text": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs.",
+        "button_label": "Contacta a soporte",
+        "badge": "Cambio de tono GRATIS"
+      },
+      "blocks": {
+        "b1": {
+          "type": "question",
+          "settings": {
+            "question": "¿Se ve natural o no engaño a nadie?",
+            "answer": "<p>Totalmente indetectable. Aunque te vean de cerca, aunque tu barbero esté a 15 cm de tu cabeza. La textura imita la densidad del cabello real. Sin efecto talco, sin brillo. Tu secreto se queda entre tú y nosotros.</p>"
+          }
+        },
+        "b2": {
+          "type": "question",
+          "settings": {
+            "question": "¿Me dura todo el día?",
+            "answer": "<p>Grip-Lock 48™ lo deja fijo desde el cafecito de la mañana hasta lo que se arme a medianoche. Sudor, lluvia, viento, gym… le da igual. Tus entradas ya se salieron del chat y no regresan hasta tu próximo shampoo.</p>"
+          }
+        },
+        "b3": {
+          "type": "question",
+          "settings": {
+            "question": "¿Tapa los poros o afecta el crecimiento del cabello?",
+            "answer": "<p>No.</p><p>La fórmula es transpirable y no comedogénica.</p><p>Tu cuero cabelludo se mantiene sano y tu cabello sigue su ciclo natural.</p>"
+          }
+        },
+        "b4": {
+          "type": "question",
+          "settings": {
+            "question": "¿Sirve si tengo el cabello muy delgado o ralo?",
+            "answer": "<p>Literal, para eso lo hicimos. Cabello delgado, coronilla rala, entradas… el polvo se adhiere a lo que te queda y se ve como si nunca hubieras perdido nada. Y funciona en todo tipo de cabello: lacio, ondulado, chino o afro.</p>"
+          }
+        },
+        "b5": {
+          "type": "question",
+          "settings": {
+            "question": "Si es a prueba de agua, ¿cómo me lo quito?",
+            "answer": "<p>Te retamos a que tu día lo quite, pero con tu shampoo de siempre sale al instante. Invencible contra la lluvia y el sudor. Indefenso contra el shampoo.</p>"
+          }
+        },
+        "b6": {
+          "type": "question",
+          "settings": {
+            "question": "¿Cuánto me dura un frasco?",
+            "answer": "<p>De 1 a 2 meses usándolo diario. La mayoría lo usa 4 o 5 veces por semana. Cada aplicación te sale en menos que un café, y hace mucho más por tu seguridad.</p>"
+          }
+        },
+        "b7": {
+          "type": "question",
+          "settings": {
+            "question": "¿Qué contiene?",
+            "answer": "<p>Fórmula a base de minerales: Mica, Sílice, Palmitato de etilhexilo y Estearato de magnesio. Todo de grado cosmético y probado en seguridad. Nada que no puedas googlear sin asustarte.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ]
+    },
+    "krino_reviews_app": {
+      "type": "krino-apps",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "krino_sticky": {
+      "type": "krino-sticky-pill",
+      "settings": {
+        "enable": true,
+        "title": "Polvo Rellenador de Cabello 2.0",
+        "button_label": "Agregar al carrito",
+        "button_label_short": "Agregar"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "krino_marquee",
+    "krino_reviews",
+    "krino_tech",
+    "krino_lifestyle",
+    "krino_howto",
+    "krino_zones",
+    "krino_barber",
+    "krino_support_faq",
+    "krino_reviews_app",
+    "krino_sticky"
+  ]
+}

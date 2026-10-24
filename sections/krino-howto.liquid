@@ -1,0 +1,163 @@
+{%- comment -%}
+  Krino how-to (black band): heading, subline, step tabs; each panel = 4:3 video (or poster) + big number, title, text, time badge.
+  Prefix krino-howto.
+{%- endcomment -%}
+{%- assign ss = section.settings -%}
+<div
+  class="krino-howto"
+  style="--krino-howto-bg: {{ ss.background }}; --krino-howto-text: {{ ss.text_color }}; --krino-howto-tab-on-bg: {{ ss.tab_active_bg }}; --krino-howto-tab-on-text: {{ ss.tab_active_text }}; --krino-howto-h-font: {{ ss.heading_font }}; --krino-howto-h-size: {{ ss.heading_size }}px; --krino-howto-h-size-m: {{ ss.heading_size_mobile }}px; --krino-howto-h-weight: {{ ss.heading_weight }}; --krino-howto-body: {{ ss.body_size }}px; --krino-howto-pt: {{ ss.padding_top }}px; --krino-howto-pb: {{ ss.padding_bottom }}px; --krino-howto-pt-m: {{ ss.padding_top_mobile }}px; --krino-howto-pb-m: {{ ss.padding_bottom_mobile }}px;"
+>
+  <krino-howto-tabs class="krino-howto__inner">
+    {%- if ss.heading != blank -%}<h2 class="krino-howto__heading">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.subheading != blank -%}<p class="krino-howto__sub">{{ ss.subheading }}</p>{%- endif -%}
+    {%- if section.blocks.size > 1 -%}
+      <div class="krino-howto__tabs" role="tablist">
+        {%- for block in section.blocks -%}
+          <button type="button" class="krino-howto__tab" role="tab" id="KrinoHowtoTab-{{ block.id }}" aria-controls="KrinoHowtoPanel-{{ block.id }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"{% unless forloop.first %} tabindex="-1"{% endunless %}>{{ block.settings.tab }}</button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+      {%- assign bs = block.settings -%}
+      <div class="krino-howto__panel" role="tabpanel" id="KrinoHowtoPanel-{{ block.id }}" aria-labelledby="KrinoHowtoTab-{{ block.id }}"{% unless forloop.first %} hidden{% endunless %} {{ block.shopify_attributes }}>
+        <div class="krino-howto__media" data-krino-howto-video>
+          {%- if bs.video != blank -%}
+            {{ bs.video | video_tag: image_size: '1080x', autoplay: false, loop: true, muted: true, controls: false, playsinline: true, preload: 'none' }}
+          {%- endif -%}
+          {%- if bs.poster != blank -%}
+            {{ bs.poster | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'krino-howto__poster', alt: bs.title, sizes: '(min-width: 750px) 50vw, 100vw' }}
+          {%- elsif bs.poster_asset != blank -%}
+            <img class="krino-howto__poster" src="{{ bs.poster_asset | asset_url }}" alt="{{ bs.title | escape }}" loading="lazy" width="1200" height="900" onerror="this.remove()">
+          {%- endif -%}
+          {%- if bs.video != blank -%}<span class="krino-howto__play" aria-hidden="true">{% render 'krino-icon', name: 'play', size: 56, stroke: 1.1 %}</span>{%- endif -%}
+        </div>
+        <div class="krino-howto__copy">
+          {%- if bs.number != blank -%}<span class="krino-howto__num" aria-hidden="true">{{ bs.number }}</span>{%- endif -%}
+          {%- if bs.title != blank -%}<h3 class="krino-howto__title">{{ bs.title }}</h3>{%- endif -%}
+          {%- if bs.text != blank -%}<p class="krino-howto__text">{{ bs.text }}</p>{%- endif -%}
+          {%- if bs.badge != blank -%}<span class="krino-howto__badge">{{ bs.badge }}</span>{%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </krino-howto-tabs>
+</div>
+{% stylesheet %}
+  .krino-howto { padding: var(--krino-howto-pt, 30px) 0 var(--krino-howto-pb, 30px); background: var(--krino-howto-bg, #000); color: var(--krino-howto-text, #fff); }
+  .krino-howto__inner { display: block; max-width: 1300px; margin: 0 auto; padding-inline: 40px; text-align: center; }
+  .krino-howto__heading { margin: 0; font-family: var(--krino-howto-h-font, var(--font-heading--family)); font-size: var(--krino-howto-h-size, 32px); font-weight: var(--krino-howto-h-weight, 600); line-height: 1.25; color: inherit; }
+  .krino-howto__sub { margin: 15px 0 20px; font-size: var(--krino-howto-body, 14px); line-height: 1.4; }
+  .krino-howto__tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+  .krino-howto__tab { min-height: 30px; padding: 10px 15px; border: 1px solid rgb(255 255 255 / 0.5); border-radius: 4px; background: transparent; color: var(--krino-howto-text, #fff); font: inherit; font-size: 14px; line-height: 1; text-transform: uppercase; cursor: pointer; }
+  .krino-howto__tab[aria-selected='true'] { border-color: var(--krino-howto-tab-on-bg, #fff); background: var(--krino-howto-tab-on-bg, #fff); color: var(--krino-howto-tab-on-text, #000); }
+  .krino-howto__tab:focus-visible { outline: 2px solid var(--krino-howto-text, #fff); outline-offset: 2px; }
+  .krino-howto__panel { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 30px; text-align: left; }
+  .krino-howto__panel[hidden] { display: none; }
+  .krino-howto__media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 8px; background: #1a1a1a; cursor: pointer; }
+  .krino-howto__media video, .krino-howto__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .krino-howto__media.is-playing .krino-howto__poster, .krino-howto__media.is-playing .krino-howto__play { opacity: 0; pointer-events: none; }
+  .krino-howto__play { position: absolute; inset: 0; display: grid; place-items: center; color: #fff; filter: drop-shadow(0 2px 8px rgb(0 0 0 / 0.4)); }
+  .krino-howto__copy { display: flex; flex-direction: column; align-items: flex-start; }
+  .krino-howto__num { font-size: clamp(48px, 8vw, 80px); font-weight: 700; line-height: 1; opacity: 0.15; }
+  .krino-howto__title { margin: 0; font-family: var(--krino-howto-h-font, var(--font-heading--family)); font-size: var(--krino-howto-h-size, 32px); font-weight: 700; line-height: 1.2; text-transform: uppercase; color: inherit; }
+  .krino-howto__text { margin: 5px 0 10px; font-size: var(--krino-howto-body, 14px); line-height: 1.4; }
+  .krino-howto__badge { display: inline-block; padding: 4px 10px; border-radius: 6px; background: var(--krino-howto-tab-on-bg, #fff); color: var(--krino-howto-tab-on-text, #000); font-size: 12px; line-height: 1.3; }
+  @media screen and (max-width: 749px) {
+    .krino-howto { padding: var(--krino-howto-pt-m, 30px) 0 var(--krino-howto-pb-m, 30px); }
+    .krino-howto__inner { padding-inline: 20px; }
+    .krino-howto__heading, .krino-howto__title { font-size: var(--krino-howto-h-size-m, 24px); }
+    .krino-howto__panel { grid-template-columns: 1fr; gap: 16px; }
+  }
+{% endstylesheet %}
+{% javascript %}
+  if (!customElements.get('krino-howto-tabs')) {
+    class KrinoHowtoTabs extends HTMLElement {
+      connectedCallback() {
+        this.addEventListener('click', (e) => {
+          const tab = e.target.closest('.krino-howto__tab');
+          if (tab) { this.show(tab); return; }
+          const media = e.target.closest('[data-krino-howto-video]');
+          const v = media && media.querySelector('video');
+          if (!v) return;
+          if (v.paused) { v.play().catch(() => {}); media.classList.add('is-playing'); } else { v.pause(); media.classList.remove('is-playing'); }
+        });
+        this.addEventListener('keydown', (e) => {
+          const tab = e.target.closest('.krino-howto__tab');
+          if (!tab || (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft')) return;
+          const tabs = [...this.querySelectorAll('.krino-howto__tab')];
+          const next = tabs[(tabs.indexOf(tab) + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+          this.show(next); next.focus();
+        });
+      }
+      show(tab) {
+        this.querySelectorAll('.krino-howto__tab').forEach((t) => {
+          const on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          const p = document.getElementById(t.getAttribute('aria-controls'));
+          if (!p) return;
+          p.hidden = !on;
+          if (!on) p.querySelectorAll('video').forEach((v) => { v.pause(); v.closest('[data-krino-howto-video]').classList.remove('is-playing'); });
+        });
+      }
+    }
+    customElements.define('krino-howto-tabs', KrinoHowtoTabs);
+  }
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Krino how-to steps",
+  "tag": "section",
+  "class": "krino-howto-section",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        { "type": "text", "id": "tab", "label": "Tab label", "default": "PASO 1" },
+        { "type": "video", "id": "video", "label": "Video (4:3)" },
+        { "type": "image_picker", "id": "poster", "label": "Poster image" },
+        { "type": "text", "id": "poster_asset", "label": "Poster theme asset (fallback file name)" },
+        { "type": "text", "id": "number", "label": "Big number", "default": "01" },
+        { "type": "text", "id": "title", "label": "Title", "default": "ABRE" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Gira el compartimento de abajo y saca la esponja aplicadora." },
+        { "type": "text", "id": "badge", "label": "Time badge", "default": "2 segundos" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Si sabes abrir un frasco, ya la armaste" },
+    { "type": "text", "id": "subheading", "label": "Subline", "default": "Una rutina tan fácil que vas a sentir que haces trampa." },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "tab_active_bg", "label": "Active tab / badge background", "default": "#FFFFFF" },
+    { "type": "color", "id": "tab_active_text", "label": "Active tab / badge text", "default": "#000000" },
+    { "type": "header", "content": "Typography" },
+    { "type": "select", "id": "heading_font", "label": "Heading font", "default": "var(--font-heading--family)", "options": [
+      { "value": "var(--font-heading--family)", "label": "Heading" }, { "value": "var(--font-subheading--family)", "label": "Subheading" }, { "value": "var(--font-body--family)", "label": "Body" }, { "value": "var(--font-accent--family)", "label": "Accent" }
+    ] },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "600", "options": [
+      { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "600", "label": "Semibold" }, { "value": "700", "label": "Bold" }
+    ] },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 16, "max": 56, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 14, "max": 44, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "body_size", "label": "Text size", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 120, "step": 2, "unit": "px", "default": 30 }
+  ],
+  "presets": [
+    {
+      "name": "Krino how-to steps",
+      "blocks": [
+        { "type": "step", "settings": { "tab": "PASO 1", "number": "01", "title": "ABRE", "text": "Gira el compartimento de abajo y saca la esponja aplicadora.", "badge": "2 segundos", "poster_asset": "krino-howto-1.jpg" } },
+        { "type": "step", "settings": { "tab": "PASO 2", "number": "02", "title": "PRESIONA", "text": "Aplica el polvo con la esponja en las zonas que quieres cubrir.", "badge": "10 segundos", "poster_asset": "krino-howto-2.jpg" } },
+        { "type": "step", "settings": { "tab": "PASO 3", "number": "03", "title": "LISTO", "text": "Te dura hasta tu próximo shampoo. Sin checarte. Sin retoques. Sin sorpresas.", "badge": "Todo el día", "poster_asset": "krino-howto-3.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
