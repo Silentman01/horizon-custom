@@ -645,6 +645,7 @@
         "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
+        "enable_sticky_add_to_cart": false,
         "padding-block-start": 30,
         "padding-block-end": 50
       }
@@ -1047,6 +1048,7 @@
       "settings": {
         "enable": true,
         "title": "Polvo Densificador 2.0",
+        "action": "scroll",
         "button_label": "Elige tu paquete",
         "button_label_short": "Elegir"
       }
