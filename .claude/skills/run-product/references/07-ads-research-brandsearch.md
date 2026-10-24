@@ -234,6 +234,7 @@ color system, type system, claim types, product presentation, people/casting, an
 ---
 
 ## Video ads (out of scope unless asked)
+Full video remake workflow (candidate gate, clip audit, voice clone, captions, (c) regenerations, folders): `14-video-ads.md`. The steps below are only the Brandsearch part of it.
 - The default pull uses `is_image="true"`, and the script skips `is_video` rows.
 - If the operator asks, or aggregates show the brand is mostly video:
   1. Pull with `is_video="true"`, using the same two endpoints and the same ranking rule.

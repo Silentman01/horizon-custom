@@ -1,6 +1,6 @@
 ---
 name: run-product
-description: Run a complete e-commerce product launch from a competitor product URL in one prompt — branding (brand name, palette, title), competitor page capture and section spec, Shopify product page AND home page (index) built 1:1 from the competitor in the current theme (sections/blocks/templates, original copy), product image remakes, page images and raw GIFs, store policies cloned 1:1 (brand/domain/email swapped, private info removed) and pushed, competitor Meta ad research with Brandsearch MCP (top 30 creatives ranked by impressions rank), 25 ad creatives with Kie.ai GPT Image 2.5, and ad copy (primary text, headlines, description). Use this skill whenever the user gives a competitor/product URL and wants to "run", "launch", "test", "clone", "do 1:1", "copy this product", build a product page or home page, make product images, or make ads for a product — even if they only name one of these steps (e.g. "do this product: https://…", "start with branding", "get their top ads and make ours", "remake their images for our brand"). Works in any Shopify theme repo (Horizon, Dawn, other OS 2.0) and orchestrates parallel sub-agents.
+description: Run a complete e-commerce product launch from a competitor product URL in one prompt — branding (brand name, palette, title), competitor page capture and section spec, Shopify product page AND home page (index) built 1:1 from the competitor in the current theme (sections/blocks/templates, original copy), product image remakes, page images and raw GIFs, store policies cloned 1:1 (brand/domain/email swapped, private info removed) and pushed, competitor Meta ad research with Brandsearch MCP (top 30 creatives ranked by impressions rank), 25 ad creatives with Kie.ai GPT Image 2.5, and ad copy (primary text, headlines, description), plus remakes of the competitor's top video ads on request (scene audit, cloned-voice re-voice, captions, regenerated product clips). Use this skill whenever the user gives a competitor/product URL and wants to "run", "launch", "test", "clone", "do 1:1", "copy this product", build a product page or home page, make product images, or make ads for a product — even if they only name one of these steps (e.g. "do this product: https://…", "start with branding", "get their top ads and make ours", "remake their images for our brand"). Works in any Shopify theme repo (Horizon, Dawn, other OS 2.0) and orchestrates parallel sub-agents.
 ---
 
 # Run Product
@@ -52,6 +52,7 @@ One prompt runs everything. The only planned stop is the **branding gate** (oper
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
 - **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
 - **Every ad prompt attaches our packshot**; top 5 recreated at ~97%; no competitor brand names.
+- **Video ads** (on request, `references/14-video-ads.md`): ~20 candidates by `reach_rank` → operator confirms; per video, audit every clip (a clean / b overlay fixed locally / c regenerate); no lip sync; re-voice with an ElevenLabs clone of the original voice (never Kie for audio); always remake the hook, the end and one random body line; (c) clips only after operator confirmation; `generated/videos/` holds finals only.
 - **Git:** branch named after the brand from clean `main`; commit → pull → merge-check → push; never publish; never overwrite a template with live ad traffic.
 - **Assets live in `PRODUCT_DIR`** (shop folder), not in the theme repo.
 - **Mobile first:** build and QA at 390px first; every horizontal rail scrolls by touch *and* mouse drag (editor mobile preview has no touch).
@@ -107,6 +108,7 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 | D1 Ad analysis | 2 analyst agents (ranks 1–15, 16–30) | 07 | text → master compiles `05_ads/COMPETITOR_ADS.md` |
 | D2 Ad creatives | ad-creative agent or master (after D1 + packshot) | 08, tools-kie | 25 ads → `05_ads/generated/` |
 | E Ad copy | copy agent (after D1) | 09 | `05_ads/AD_COPY.md` |
+| G Video ads (on request) | video agent (after the packshot + operator-confirmed candidates) | 14 | `05_ads/generated/videos/vNN-<slug>.mp4` + `vNN-work/` (clips sheet, draft, PLAN) |
 | F Policies | master (small) | 12 | `policies.py transform` → `06_policies/<handle>.html` + REVIEW.md (1:1 text, brand/domain/email swapped, addresses/phones/registration numbers removed) |
 
 Order inside the window: start A1, B (packshot first), C, D1 and A4's home spec at once; A2 when A1 lands; A3 when A2 lands (settings/header/footer can start immediately); A4 builds once A3's settings and reusable sections (testimonials, image-text, comparison, FAQ) exist, reusing them and the gallery images from B; D2 when D1 + packshot land; E when D1 lands.
@@ -129,6 +131,7 @@ Phase 0 ─┬─ Capture agent ──┬─────────────
                                                                    └─ E ad copy (after D1) ───────────┴─► QA ─► Delivery
 ```
 Brandsearch pulls and capture don't need the brand, so they run before the gate; generation work needs the brand, so it waits.
+Video ads (14) are a separate stream, only on request: Brandsearch video pull → `REMAKE_CANDIDATES.md` → **operator gate** → per-video remake (needs the packshot and AD_COPY offer; class (c) regenerations need a second operator OK) → independent check → finals.
 
 ## 6. Folders, scripts, templates
 
@@ -144,6 +147,8 @@ BRIEF.md · DELIVERY.md
 05_ads/competitor/    (raw/ dumps, ranked NN_<id>.<ext>, ranking.json)
 05_ads/generated/     (ad-NN-<slug>.png)
 05_ads/COMPETITOR_ADS.md · 05_ads/AD_COPY.md
+05_ads/REMAKE_CANDIDATES.md · 05_ads/remake-candidates/ (source videos)
+05_ads/generated/videos/  (ONLY final vNN-<slug>.mp4 at the root; vNN-work/ = vNN-clips.jpg, vNN-draft.mp4, vNN-PLAN.md; all other work files in scratch/ and deleted when final)
 06_policies/          (source/ raw competitor policies, <handle>.html ours, REVIEW.md)
 ```
 Theme repo: only theme files, on branch `BRAND_SLUG`, files prefixed with the brand slug.
@@ -157,12 +162,13 @@ Scripts (`scripts/`, run Python with `-I`; all have `--help`):
 - `policies.py fetch|transform|push` — clone competitor policies 1:1 (identity swapped, private info removed, leftovers check) and publish them via Admin GraphQL `shopPolicyUpdate`.
 - `kie_jobs.py jobs.json OUT_DIR` / `kie_jobs.py --credits` — batch Kie GPT Image 2.5 jobs (uploads local refs, polls, downloads). Needs `KIE_API_KEY`.
 - `render_sections.js --theme DIR --template templates/product.json --sections ALL --out page.html [--shot] [--buybox --product p.json --prefix <slug>]` — local Liquid render of custom sections (and a mocked buy box) with the theme's real palette; needs liquidjs (`npm i liquidjs@10` in a scratch dir, pass `--modules` or NODE_PATH).
+- Video remakes (14): `video_clips.py SRC --out DIR [--classes "1-20=b,21=c"]` (scene detection, keyframes, labelled clip sheet, weak-cut list) · `video_transcribe.py SRC --out words.json --lang xx [--against ref.json]` (faster-whisper word timestamps, sync check) · `video_vo.py separate|skeleton|clone|delete-voice|audition|build|mix` (demucs stems, 3 mandatory remake lines, ElevenLabs clone, beat-aligned VO ≤1.08x, splice or ducked mix at −14 LUFS) · `video_captions.py ass|burn` (styled .ass from word timings, cover old overlays, burn in) · `video_finalize.py render|frames|clean` (insert regenerated clips, strip metadata, 0.5 s frame strip, folder clean-up).
 Network note: if Python reports "certificate has expired", the scripts fall back to `certifi`/`curl`; pages behind bot protection need `--html-file` with a browser-saved copy.
 
 Templates (`templates/`): BRIEF.md, BRANDING.md, SECTION_SPEC.md, COMPETITOR_ADS.md, AD_COPY.md, DELIVERY.md.
 
 ## 7. Credits and costs
-Check Kie balance (`GET https://api.kie.ai/api/v1/chat/credit`) before Phase 3. GPT Image 2.5: 1K = 6, 2K = 10, 4K = 16 credits; 4:5 only at 1K. Typical run ≈ 260 credits (packshot 10, ~5 gallery 50, 3 testimonials 30, top-5 ads 50, 20 ads 120) + fixes. If short, tell the operator before generating and prioritise: packshot → gallery → top-5 ads → remaining ads → page images. Brandsearch: list/query calls are cheap; `download_ad` 1 credit each (use only for creatives without a URL); `analyze_ad` 14–19 AI credits (not needed). Report spend in the delivery.
+Check Kie balance (`GET https://api.kie.ai/api/v1/chat/credit`) before Phase 3. GPT Image 2.5: 1K = 6, 2K = 10, 4K = 16 credits; 4:5 only at 1K. Typical run ≈ 260 credits (packshot 10, ~5 gallery 50, 3 testimonials 30, top-5 ads 50, 20 ads 120) + fixes. If short, tell the operator before generating and prioritise: packshot → gallery → top-5 ads → remaining ads → page images. Brandsearch: list/query calls are cheap; `download_ad` 1 credit each (use only for creatives without a URL); `analyze_ad` 14–19 AI credits (not needed). Report spend in the delivery. Video remakes: (c) clip = 76 Kie credits (start frame 6 + wan i2v 720p 5 s 70); voice = ElevenLabs Starter quota (40k characters/month), see 14 §12.
 
 ## 8. Reporting to the operator
 - Short progress lines at milestones; never narrate internal deliberation.

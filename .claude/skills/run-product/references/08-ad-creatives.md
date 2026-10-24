@@ -3,6 +3,7 @@
 Goal: 25 launch-ready Meta image ads for our brand: the competitor's 5 longest-running creatives recreated at ~97% fidelity with our product, plus 20 new ads built on the formats and hooks that the competitor's top 30 prove work. Every ad shows our exact product (packshot attached), carries the claims at full strength, and never shows the competitor's name.
 
 Read first: `00-operator-rules.md` §1 (claims) and §7 (ads); `tools-kie.md` (runner, FIDELITY-97 / PATTERN-AD / KEEP-EDIT patterns, 4:5 = 1K).
+Video ads are a separate workflow: `14-video-ads.md`.
 Starts when **both** exist: `05_ads/COMPETITOR_ADS.md` (from the analysts, 07) and `03_product-images/<slug>-packshot.png` (05 Step 5).
 
 ## Contents
