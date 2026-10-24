@@ -123,6 +123,7 @@ If `templates/product.<x>.json` (or `index.json`) already receives paid traffic:
 |---|---|---|
 | « La configuration « text » est non valide. Tous les nœuds de niveau supérieur doivent être des balises `<p>`, `<ul>`, `<ol>` ou `<h1>`-`<h6>` » / "Setting 'text' is invalid … top level nodes must be …" | Plain text written into a `richtext`/inline-richtext setting | Wrap in `<p>…</p>` (builder `setv()` does it automatically — 04 §6) |
 | "Section type 'x' does not refer to an existing section file" | Template pushed without its section/block files | Add them to `--only` |
+| "pushed with errors" + "Liquid syntax error … was not properly terminated with regexp: /\}\}/"; storefront then shows "Could not find asset snippets/x.liquid" | A `}` inside a `{{ … }}` output tag (e.g. `{{ s | replace: '{timer}', x }}`). Shopify rejects the file and does not upload it; `theme check` does not catch it | Do the replace in an `{% assign %}` / `{% liquid %}` first, then output the variable. Always read the end of the push output: "pushed with errors" means some files were not uploaded |
 | "Invalid block 'x': … not allowed" | Block type not listed in the parent schema `blocks` (or `@theme` missing) | Add the type to the parent's schema |
 | "setting with id='x' … value must be one of" | Select value not in options / out-of-range `range` | Use an allowed value; ranges must respect min/max/step |
 | Push hangs on a prompt | Non-interactive session needs explicit target | Always pass `--store` and `--theme` (and `--allow-live` only per §8) |
