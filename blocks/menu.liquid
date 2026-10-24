@@ -46,7 +46,7 @@
       {% endif %}
       {{ block.shopify_attributes }}
     >
-      <summary class="menu__heading{% if heading == blank and menu.title == blank %} menu__heading--empty{% endif %} {{ block_settings.heading_preset }}">
+      <summary class="menu__heading{% if heading == blank and menu.title == blank %} menu__heading--empty{% elsif block_settings.show_heading == false and show_as_accordion == false %} menu__heading--empty{% endif %} {{ block_settings.heading_preset }}">
         <span class="menu__heading__default">{{ heading | default: menu.title }}</span>
         <span class="menu__heading__accordion">
           {{ heading | default: menu.title }}
@@ -164,6 +164,13 @@
       "type": "text",
       "id": "heading",
       "label": "t:settings.heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show heading",
+      "default": false,
+      "info": "Off = only the links are shown. Accordion menus always show their heading."
     },
     {
       "type": "header",
