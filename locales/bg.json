@@ -121,6 +121,9 @@
     "back_to_main_menu": "Назад към главното меню"
   },
   "content": {
+    "cart_extras_shipping": "Доставка",
+    "cart_extras_free": "Безплатна",
+    "cart_extras_shipping_later": "Изчислява се при плащане",
     "reviews": "мнения",
     "language": "Език",
     "localization_region_and_language": "Регион и език",

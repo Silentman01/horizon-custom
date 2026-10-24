@@ -298,7 +298,7 @@ MOBILE BEHAVIOR (~390px):
 **Default plans**
 - **Bundle / quantity-break app** (Kaching, Bundler, Fast Bundle…): **rebuild natively** as variant-driven cards (e.g. Horizon: a custom block that drives the hidden native variant picker; the operator creates variants per quantity at the tier prices). Record the tiers, badges, preselected tier, gifts and card styles.
 - **Free gifts:** an operator to-do (gift product + automatic discount, or an app). Show the gift strip natively.
-- **Cart drawer extras** (progress bar, upsells): note the threshold and texts. Use a native shipping rate at the same threshold, and add a native bar only if the theme supports it.
+- **Cart drawer extras** (progress bar, upsells): note the threshold and texts. Use a native shipping rate at the same threshold. The theme has a built-in cart drawer mockup (`snippets/cart-extras.liquid`, Theme settings > "Cart drawer extras"): announcement bar, timer bar, free-shipping bar, price details (subtotal / discounts / shipping, labels auto-translated), badges and payment icons under the checkout button, tax note hidden. Everything is off by default: turn on and fill in the copy in `config/settings_data.json` to match the competitor's drawer, in the store language. Never fork it into a brand snippet.
 - **Sticky ATC:** native if the theme has one or the builder adds a light block. Record its label and target.
 - **Reviews app** (Judge.me, Loox…): an operator to-do (install + import). Build a placeholder in the same position. Static rating lines and testimonial cards are theme content. Rebuild them.
 - **Popups / email capture:** note them. Don't rebuild them in Mode A unless the operator asks.

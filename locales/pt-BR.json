@@ -123,6 +123,9 @@
     "back_to_main_menu": "Voltar ao menu principal"
   },
   "content": {
+    "cart_extras_shipping": "Frete",
+    "cart_extras_free": "Grátis",
+    "cart_extras_shipping_later": "Calculado no checkout",
     "reviews": "avaliações",
     "language": "Idioma",
     "localization_region_and_language": "Região e idioma",

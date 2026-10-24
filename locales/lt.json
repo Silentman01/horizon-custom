@@ -125,6 +125,9 @@
     "back_to_main_menu": "Atgal į pagrindinį meniu"
   },
   "content": {
+    "cart_extras_shipping": "Pristatymas",
+    "cart_extras_free": "Nemokamas",
+    "cart_extras_shipping_later": "Apskaičiuojamas atsiskaitant",
     "reviews": "apžvalgos (-ų; -a)",
     "language": "Kalba",
     "localization_region_and_language": "Regionas ir kalba",

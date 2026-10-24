@@ -121,6 +121,9 @@
     "back_to_main_menu": "Quay lại menu chính"
   },
   "content": {
+    "cart_extras_shipping": "Vận chuyển",
+    "cart_extras_free": "Miễn phí",
+    "cart_extras_shipping_later": "Tính khi thanh toán",
     "reviews": "đánh giá",
     "language": "Ngôn ngữ",
     "localization_region_and_language": "Khu vực và ngôn ngữ",

@@ -3,6 +3,7 @@
 
   @param {string} [accelerated_checkout_buttons_layout] - { 'vertical' } Forced layout of the additional checkout buttons, instead of relying on platform's layout.
   @param {string} [section_id] - The section ID for cart discount component.
+  @param {boolean} [drawer] - When true, renders the cart drawer extras (price breakdown, badges, payment icons; see snippets/cart-extras).
 {%- enddoc -%}
 
 {% render 'text-component-shimmer-styles' %}
@@ -11,7 +12,13 @@
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
-    {%- if cart.cart_level_discount_applications.size > 0 -%}
+    {%- liquid
+      assign cx_breakdown = false
+      if drawer and settings.cart_extras_breakdown_enable
+        assign cx_breakdown = true
+      endif
+    -%}
+    {%- if cart.cart_level_discount_applications.size > 0 and cx_breakdown == false -%}
       <span class="cart-totals__item cart-totals__original">
         <span class="cart-totals__original-label">{{ 'content.cart_subtotal' | t }}</span>
         <span
@@ -227,6 +234,8 @@
     endif
   -%}
 
+  {% if drawer %}{% render 'cart-extras', part: 'breakdown' %}{% endif %}
+
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
     <span
       class="cart-totals__item cart-totals__total"
@@ -251,9 +260,11 @@
         {% endform %}
       </span>
     {% endif %}
-    <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
-    </div>
+    {% unless drawer and settings.cart_extras_hide_tax_note %}
+      <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
+        {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+      </div>
+    {% endunless %}
   </div>
 </div>
 
@@ -282,6 +293,11 @@
     >
       {{ content_for_additional_checkout_buttons }}
     </div>
+  {% endif %}
+
+  {% if drawer %}
+    {% render 'cart-extras', part: 'badges' %}
+    {% render 'cart-extras', part: 'payments' %}
   {% endif %}
 </div>
 
