@@ -1622,281 +1622,6 @@
     ]
   },
   {
-    "name": "Krino · Carrito",
-    "settings": [
-      {
-        "type": "paragraph",
-        "content": "Extras del carrito lateral (drawer): barra de envío gratis, garantía arriba del total e íconos de pago bajo el botón de pago."
-      },
-      {
-        "type": "header",
-        "content": "Barra de envío gratis"
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_bar_enable",
-        "label": "Mostrar barra de envío gratis",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_bar_mobile",
-        "label": "Mostrar en móvil",
-        "default": true
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_bar_threshold",
-        "label": "Monto para envío gratis (MXN)",
-        "info": "0 = envío gratis en todos los pedidos (siempre muestra el texto desbloqueado).",
-        "min": 0,
-        "max": 3000,
-        "step": 50,
-        "unit": "$",
-        "default": 0
-      },
-      {
-        "type": "text",
-        "id": "krino_cart_bar_text_unlocked",
-        "label": "Texto desbloqueado",
-        "default": "¡Tu pedido tiene envío GRATIS!"
-      },
-      {
-        "type": "text",
-        "id": "krino_cart_bar_text_locked",
-        "label": "Texto bloqueado",
-        "info": "{amount} = lo que falta para el envío gratis.",
-        "default": "Te faltan {amount} para tu envío GRATIS"
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_bar_icon",
-        "label": "Mostrar ícono de camión",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_bar_progress",
-        "label": "Mostrar barra de progreso",
-        "default": true
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_bar_bg",
-        "label": "Fondo",
-        "default": "#F5F7FF"
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_bar_color",
-        "label": "Texto",
-        "default": "#09184C"
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_bar_fill",
-        "label": "Progreso e ícono",
-        "default": "#3D5AFE"
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_bar_track",
-        "label": "Fondo de la barra de progreso",
-        "default": "#E6E6E6"
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_bar_size",
-        "label": "Tamaño de texto",
-        "min": 11,
-        "max": 22,
-        "step": 1,
-        "unit": "px",
-        "default": 15
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_bar_size_mobile",
-        "label": "Tamaño de texto (móvil)",
-        "min": 11,
-        "max": 22,
-        "step": 1,
-        "unit": "px",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_bar_padding",
-        "label": "Relleno vertical",
-        "min": 0,
-        "max": 32,
-        "step": 2,
-        "unit": "px",
-        "default": 12
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_bar_padding_mobile",
-        "label": "Relleno vertical (móvil)",
-        "min": 0,
-        "max": 32,
-        "step": 2,
-        "unit": "px",
-        "default": 10
-      },
-      {
-        "type": "header",
-        "content": "Garantía (arriba del total)"
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_guarantee_enable",
-        "label": "Mostrar garantía",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_guarantee_mobile",
-        "label": "Mostrar en móvil",
-        "default": true
-      },
-      {
-        "type": "text",
-        "id": "krino_cart_guarantee_text",
-        "label": "Texto",
-        "default": "Garantía de cambio de tono GRATIS"
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_guarantee_color",
-        "label": "Texto",
-        "default": "#252525"
-      },
-      {
-        "type": "color",
-        "id": "krino_cart_guarantee_icon_color",
-        "label": "Ícono",
-        "default": "#3D5AFE"
-      },
-      {
-        "type": "color_background",
-        "id": "krino_cart_guarantee_bg",
-        "label": "Fondo",
-        "default": "transparent"
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_guarantee_size",
-        "label": "Tamaño de texto",
-        "min": 11,
-        "max": 22,
-        "step": 1,
-        "unit": "px",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_guarantee_size_mobile",
-        "label": "Tamaño de texto (móvil)",
-        "min": 11,
-        "max": 22,
-        "step": 1,
-        "unit": "px",
-        "default": 14
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_guarantee_padding",
-        "label": "Relleno vertical",
-        "min": 0,
-        "max": 24,
-        "step": 2,
-        "unit": "px",
-        "default": 8
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_guarantee_padding_mobile",
-        "label": "Relleno vertical (móvil)",
-        "min": 0,
-        "max": 24,
-        "step": 2,
-        "unit": "px",
-        "default": 6
-      },
-      {
-        "type": "header",
-        "content": "Íconos de pago (bajo el botón)"
-      },
-      {
-        "type": "paragraph",
-        "content": "Se muestran los métodos activos de la tienda (Stripe: Visa, Mastercard, Amex, más las billeteras de Shopify si están activadas)."
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_pay_enable",
-        "label": "Mostrar íconos de pago",
-        "default": true
-      },
-      {
-        "type": "checkbox",
-        "id": "krino_cart_pay_mobile",
-        "label": "Mostrar en móvil",
-        "default": true
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_pay_height",
-        "label": "Altura de íconos",
-        "min": 16,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "default": 24
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_pay_height_mobile",
-        "label": "Altura de íconos (móvil)",
-        "min": 16,
-        "max": 40,
-        "step": 1,
-        "unit": "px",
-        "default": 22
-      },
-      {
-        "type": "range",
-        "id": "krino_cart_pay_gap",
-        "label": "Espacio entre íconos",
-        "min": 0,
-        "max": 20,
-        "step": 1,
-        "unit": "px",
-        "default": 6
-      },
-      {
-        "type": "select",
-        "id": "krino_cart_pay_align",
-        "label": "Alineación",
-        "options": [
-          {
-            "value": "flex-start",
-            "label": "Izquierda"
-          },
-          {
-            "value": "center",
-            "label": "Centro"
-          },
-          {
-            "value": "flex-end",
-            "label": "Derecha"
-          }
-        ],
-        "default": "center"
-      }
-    ]
-  },
-  {
     "name": "t:names.drawers",
     "settings": [
       {
@@ -1917,6 +1642,23 @@
         "label": "t:settings.border_color",
         "default": "{{ settings.color_palette.foreground }}",
         "alpha": true
+      },
+      {
+        "type": "select",
+        "id": "drawer_desktop_mode",
+        "label": "Drawers on desktop",
+        "options": [
+          {
+            "value": "overlay",
+            "label": "Over the page"
+          },
+          {
+            "value": "push",
+            "label": "Push the page aside"
+          }
+        ],
+        "default": "overlay",
+        "info": "Over the page = like on mobile, with a dark backdrop."
       }
     ]
   },

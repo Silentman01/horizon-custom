@@ -117,11 +117,50 @@
         "label_minutes": "Min",
         "label_seconds": "Seg"
       }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer-extras",
+      "settings": {
+        "cart_extras_announce_enable": false,
+        "cart_extras_announce_text": "<strong>BUEN FIN:</strong> tu descuento ya está aplicado",
+        "cart_extras_announce_bg": "#09184C",
+        "cart_extras_announce_color": "#FFFFFF",
+        "cart_extras_timer_enable": false,
+        "cart_extras_timer_text": "Tu carrito está reservado por {timer}",
+        "cart_extras_timer_bg": "#FFF1F0",
+        "cart_extras_timer_color": "#C62828",
+        "cart_extras_ship_enable": true,
+        "cart_extras_ship_threshold": 0,
+        "cart_extras_ship_text_unlocked": "¡Tu pedido tiene envío GRATIS!",
+        "cart_extras_ship_text_locked": "Te faltan {amount} para tu envío GRATIS",
+        "cart_extras_ship_bg": "#F5F7FF",
+        "cart_extras_ship_color": "#09184C",
+        "cart_extras_ship_fill": "#3D5AFE",
+        "cart_extras_ship_track": "#E6E6E6",
+        "cart_extras_ship_size": 15,
+        "cart_extras_breakdown_enable": true,
+        "cart_extras_breakdown_compare_at": true,
+        "cart_extras_breakdown_shipping": true,
+        "cart_extras_breakdown_free_color": "#2E7D32",
+        "cart_extras_breakdown_discount_color": "#2E7D32",
+        "cart_extras_hide_tax_note": true,
+        "cart_extras_badges_enable": true,
+        "cart_extras_badge_1_text": "Garantía de cambio de tono GRATIS",
+        "cart_extras_badge_1_icon": "shield",
+        "cart_extras_badge_2_text": "Envío GRATIS",
+        "cart_extras_badge_2_icon": "truck",
+        "cart_extras_badge_3_text": "",
+        "cart_extras_badge_3_icon": "lock",
+        "cart_extras_badges_color": "#252525",
+        "cart_extras_badges_icon_color": "#3D5AFE",
+        "cart_extras_pay_enable": true
+      }
     }
   },
   "order": [
     "krino_promo",
     "header_announcements_9jGBFp",
-    "header_section"
+    "header_section",
+    "cart_drawer"
   ]
 }
