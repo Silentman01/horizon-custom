@@ -267,7 +267,8 @@ Pick a name (or say "more names"). Palette and title are 1:1 for the test; say i
 2. **BRANDING.md:** set the status to VALIDATED with the date, and fill the Decisions section.
 3. **Rename PRODUCT_DIR** `_<competitor-slug>` → `BRAND`. Actually move it (don't copy), then verify the old folder is gone.
 4. **Git branch** (details in `01-intake-and-setup.md` §git and `tools-shopify-cli-and-git.md`): working tree clean → `git checkout main` → `git pull` → `git checkout -b <BRAND_SLUG>`. The operator's instruction was: "make a new branch named after brand name and work on that new branch". Never branch from another brand's branch.
-5. Unblock the Phase 3 streams (copy, build, images, ads).
+5. **Logo set:** next to the logo and the white logo (`01_branding/logo/<slug>-logo(.svg/.png)`, `<slug>-logo-white(...)`, transparent PNG), make the square social logos and the favicon: `python -I scripts/brand_icons.py <logo.png> <logo-white.png> <brand_hex> 01_branding/logo <slug>` → `<slug>-social-square.png` (white logo on the brand color, 1080×1080), `<slug>-social-square-light.png` (dark on white), `<slug>-favicon.png` (512, first letter of the wordmark on a rounded brand-color square) + `.ico`. Check them on a contact sheet; use `--glyph N` if the first glyph is not a clean letter. The operator uploads the favicon in Theme settings > Logo and favicon and the square logo on the social accounts.
+6. Unblock the Phase 3 streams (copy, build, images, ads).
 
 **Done when:** BRIEF.md has every decision, the folder carries the brand name, and `git branch --show-current` prints `BRAND_SLUG`.
 
@@ -347,3 +348,4 @@ Details:
 - [ ] Upgrade variations appear only if they were asked for.
 - [ ] BRANDING.md saved. Gate message sent. **Stopped** (unless the prompt fixed the brand).
 - [ ] After approval: BRIEF.md updated, PRODUCT_DIR renamed (moved), branch `BRAND_SLUG` created from clean `main`.
+- [ ] Logo set complete: logo, white logo, square social logos (brand color + light), favicon PNG + ICO.
