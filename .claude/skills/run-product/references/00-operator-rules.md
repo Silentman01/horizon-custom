@@ -60,8 +60,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 ## 7. Ad creatives and copy
 - Generate a clean packshot first; **attach our packshot to every ad prompt** ("Make sure to upload product image attached with the prompts").
-- Top 5 competitor ads: recreate at ~97% fidelity (same layout, text word-for-word incl. claims, fonts, colors, aspect ratio), our product swapped in, new faces for people.
-- The rest: inspired by the top-30 patterns (formats × hooks), not copies.
+- **Own variants, not copies (every ad, top 5 included):** before generating, take each source ad's headline and write an *almost similar* variant: same hook mechanism, rhythm, length and claim strength, but different wording ("I rolled my eyes. Then I paid off $7,349 in debt" → "I laughed at it. Then I cleared $7,349 of debt"). Same rule for the design: keep the format, layout zones, type style and color logic, but change the scene/background/props/composition enough that it is ours (≈80–90% similar, not 97%). Numbers and claims keep their strength (rule 1).
+- **Validation gate:** write all headline + design variants to `05_ads/AD_VARIANTS.md` and stop for the operator's validation. Generate only after approval, then continue the workflow without stopping again.
+- The rest: inspired by the top-30 patterns (formats × hooks), each with its variant headline/design from AD_VARIANTS.md.
 - Never show the competitor's brand name; no text/logo on our product frame (the packshot's temple print came out garbled).
 - Ad copy mirrors the competitor's caption framework with the same claim strength.
 
@@ -102,6 +103,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Show the operator images (contact sheets), keep messages short, no internal narration.
 - Don't add unrequested features or "improvements" in Mode A; mention ideas in one line at the end instead.
 
+## 11. No placeholder or example labels (operator, 2026-10-18)
+Never ship visible labels such as "Example review", "Avis exemple", "placeholder", "à remplacer", demo badges or "show placeholder badges" settings in any section, block, image or copy. Reviews, testimonials and stats are written as final content (operator validates them). Track anything that needs operator replacement in DELIVERY.md, never on the page.
+
 ## 12. Header defaults (operator, 2026-10-18)
 Every store header ships with the search icon, country selector and language selector OFF (`show_search`, `show_country`, `show_language` = false in sections/header-group.json). `main` already has them off, so brand branches inherit it; if a branch shows them, turn them off.
 - Footer: "Powered by Shopify" off (`show_powered_by` = false) and the social icons block disabled (`social-links` block `"disabled": true` in sections/footer-group.json). Also set in `main`.
@@ -116,3 +120,16 @@ Every AI-generated image or video (Kie GPT Image, Suno covers, Runway/Kling clip
 
 ## 15. Unique CSS class prefixes per section (2026-10-19)
 Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp__*`) and never reuses another component's base class for a different element (a quiz honeypot styled `.rf-hp` once hid the whole product hero on the live store). Before delivery, grep the brand prefix for classes defined in more than one file with conflicting rules, and check the LIVE storefront page (not only the theme editor).
+
+## 16. Video ad remakes (operator, 2026-10-24) — full workflow in `14-video-ads.md`
+- **Candidates:** ~20 competitor videos ranked by Brandsearch `reach_rank`, deduped by hook/script/format, in `05_ads/REMAKE_CANDIDATES.md`; stop for the operator's confirmation before remaking anything.
+- **Audit every clip** for any competitor trace (packaging, logo, label, website, handles, captions, text overlays, spoken name) and class it: (a) clean, (b) text overlay fixed locally, (c) needs regeneration.
+- **Never generate a (c) clip without operator confirmation.** List each with a start-frame prompt (`gpt-image-2-5-sunburst-image-to-image` 1K: original frame + our packshot) and an animation prompt (`wan/2-6-image-to-video` 720p), with costs. `wan/2-6-video-to-video` cannot take an image reference.
+- **No lip sync.** Voice-over: transcribe locally (faster-whisper), rewrite (native translation for a new market, or brand swap for the same market), re-voice. Music or sound effects only: keep the audio. Keep character dialogue that never names the competitor.
+- **Audio provider:** all audio and voice work uses the ElevenLabs API directly, not Kie (key `G:/Ecom/Products/.secrets/elevenlabs.env`, `ELEVENLABS_API_KEY`; Starter, instant cloning, 40k characters/month). Defaults: `eleven_multilingual_v2`, `language_code` of the market, stability 0.55 / similarity 0.9 / style 0.15 / speaker boost.
+- **Clone the original voice:** isolate 30–90 s of the original VO with demucs, clone it (`POST /v1/voices/add`), re-voice only the lines that need remaking and splice them into the original voice track. Record the voice_id in the PLAN; flag when the original sounds like a real person (ElevenLabs' terms require the right to clone) so the operator decides; delete clones no longer needed (10 slots).
+- **Always remake three parts of every video**, even when nothing else needs it, so the script and audio curve differ from the original: the hook (the opening sentence/thought, length from the transcript, not fixed seconds), the very end (closing line/CTA) and one random body line. Same meaning, length and claim strength, cloned voice, same beat, captions updated.
+- **Sync:** each line on its original beat, original pauses kept, no voice-over across cuts, speed-up at most 1.08x (otherwise rephrase), music 8–10 dB under the voice, about −14 LUFS, captions re-timed word by word. Overlays: old ones covered, new ones in the same style, position and timing; brand names respelled phonetically for TTS only ("Awe-ree-uh").
+- **Independent check** before final: frames every 0.5 s, whisper read-back, sync within 0.15 s, the three remakes present, no competitor trace; strip metadata (§14).
+- **Folders:** `05_ads/generated/videos/` holds ONLY final videos (`vNN-<slug>.mp4`) at its root; each video has `vNN-work/` with only `vNN-clips.jpg`, `vNN-draft.mp4` and `vNN-PLAN.md`; everything else is deleted once the video is final.
+- **Never** swap people with animate-replace models (rendered badly and glitchy); clean up after scripts; never write into the Git Bash root (use absolute paths).

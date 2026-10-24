@@ -45,7 +45,7 @@
 ## Credits spent
 | Service | Credits |
 |---|---|
-| Kie (GPT Image 2) | |
+| Kie (GPT Image 2.5) | |
 | Brandsearch | |
 
 ## QA summary

@@ -179,4 +179,4 @@ driver's seat at night, a different man in his late 50s with a grey beard and a 
 and the black fit-over amber night driving glasses, slight smile, rainy windshield and street lights behind. Natural,
 unpolished, real customer photo look, square. No text, no logos.
 ```
-Job: `gpt-image-2-image-to-image`, 1:1, 2K, 10 credits each → 30 credits for the three.
+Job: `gpt-image-2-5-sunburst-image-to-image`, 1:1, 2K, 10 credits each → 30 credits for the three.

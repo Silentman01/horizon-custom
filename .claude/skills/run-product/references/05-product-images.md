@@ -107,7 +107,7 @@ Types and how to treat them:
 **Purpose:** a clean, text-free product image is the product reference for every remake and every ad. Making it first lets the ad stream start in parallel and keeps the product identical everywhere.
 **Do:**
 1. Pick the reference: the competitor image (or supplier photo) with the largest, sharpest, least-occluded view of the product — usually the hero infographic or a plain product slide.
-2. Fill the PACKSHOT template (§13.1); job: `gpt-image-2-image-to-image`, 1:1, 2K, name `<slug>-packshot`. For a transparent PNG, use `"resolution": "1K", "background": "transparent"` instead (6 credits).
+2. Fill the PACKSHOT template (§13.1); job: `gpt-image-2-5-sunburst-image-to-image`, 1:1, 2K, name `<slug>-packshot`. For a transparent PNG, use `"resolution": "1K", "background": "transparent"` instead (6 credits).
 3. Run (Step 7 command) into `03_product-images/`, then Read the result at full size.
 4. Check: exact shape and parts (compare side by side with the reference), colors, **no text, print or logo on the product**, pure white background, soft shadow, nothing else in frame.
 5. If a print or artefact appears, KEEP-EDIT it away ("Remove any text or print from the frame; keep everything else identical") rather than regenerating.
@@ -254,7 +254,7 @@ IMAGES = [  # (our name, competitor file, DESC)
      "eyes\", bottom-left \"Full peripheral protection\", bottom-right \"Fits over normal glasses\"."),
     # … one tuple per kept image
 ]
-jobs = [{"name": n, "model": "gpt-image-2-image-to-image",
+jobs = [{"name": n, "model": "gpt-image-2-5-sunburst-image-to-image",
          "upload": {"field": "input_urls", "files": [M + ref, PACK]},
          "input": {"prompt": BASE + desc, "aspect_ratio": "1:1", "resolution": "2K"}} for n, ref, desc in IMAGES]
 json.dump(jobs, open(sys.argv[1], "w", encoding="utf8"), ensure_ascii=False, indent=1)
@@ -264,7 +264,7 @@ Run: `python -I scratch/mk_gallery_jobs.py scratch/jobs_gallery.json` then the r
 
 Resulting job entry:
 ```json
-{"name": "noxis-product-02", "model": "gpt-image-2-image-to-image",
+{"name": "noxis-product-02", "model": "gpt-image-2-5-sunburst-image-to-image",
  "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
                                             "G:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
  "input": {"prompt": "Reference image 1 shows the concept only: … Square benefits infographic … \"Reduces Nighttime Glare By 85%\" …",
@@ -273,7 +273,7 @@ Resulting job entry:
 
 Fix-round job (KEEP-EDIT, uploading the moved copy):
 ```json
-{"name": "noxis-product-04", "model": "gpt-image-2-image-to-image",
+{"name": "noxis-product-04", "model": "gpt-image-2-5-sunburst-image-to-image",
  "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/03_product-images/superseded/softened/noxis-product-04.png"]},
  "input": {"prompt": "Edit this exact image. Keep everything identical (layout, product, colors, photography, typography style) and change ONLY the text described below. All text crisp and correctly spelled. Change the headline to \"Drive Confidently At Night With Glare-Free Vision\", with \"Glare-Free\" highlighted in amber. Change the three check items in the bottom amber panel to \"Cataracts\", \"Astigmatism\", \"Fit Over Prescription Glasses\".",
            "aspect_ratio": "1:1", "resolution": "2K"}}

@@ -3,6 +3,7 @@
 Goal: 25 launch-ready Meta image ads for our brand: the competitor's 5 longest-running creatives recreated at ~97% fidelity with our product, plus 20 new ads built on the formats and hooks that the competitor's top 30 prove work. Every ad shows our exact product (packshot attached), carries the claims at full strength, and never shows the competitor's name.
 
 Read first: `00-operator-rules.md` §1 (claims) and §7 (ads); `tools-kie.md` (runner, FIDELITY-97 / PATTERN-AD / KEEP-EDIT patterns, 4:5 = 1K).
+Video ads are a separate workflow: `14-video-ads.md`.
 Starts when **both** exist: `05_ads/COMPETITOR_ADS.md` (from the analysts, 07) and `03_product-images/<slug>-packshot.png` (05 Step 5).
 
 ## Contents
@@ -44,6 +45,14 @@ Budget: top 5 at 10 each if their ratio is 1:1/9:16/16:9 (2K) or 6 each if 4:5 (
 **File naming:** `ad-NN-<slug>` — NN two digits, slug 2–5 kebab-case words naming the hook or format (`ad-01-ours-vs-theirs`, `ad-07-rainy-night-poster`). The job `name` is the file name without extension.
 
 ---
+
+## 1b. Variants gate (before ANY generation — operator rule §7)
+For all 25 ads (top 5 included) write `05_ads/AD_VARIANTS.md`, one row per ad:
+`ad-NN | source rank | original headline (verbatim) | our variant headline | original design | our design variant`.
+- Headline variant: same hook mechanism, structure, length and claim/number strength; different words. Never identical, never softened.
+- Design variant: same format, zones, type style, palette logic; different scene, background, props, people, angle (≈80–90% similar).
+- Top 5 use FIDELITY-VARIANT (tools-kie) with the variant text instead of word-for-word text.
+Stop and present the table to the operator. After approval, run Steps 1–9 with the approved text and do not stop again until delivery (except credit shortage).
 
 ## 2. Step 1 — Load the inputs and the claims bank
 **Purpose:** everything the prompts need in one place, so specs are precise and claims consistent.
@@ -91,7 +100,7 @@ Read the comparison (and full-size images for small text).
 **Done when:** 20 rows, matrix covered, no two ads with the same format + hook.
 
 ## 6. Step 5 — Pattern ads: one detailed spec per ad
-**Purpose:** GPT Image 2 follows precise specs well; vague specs produce generic ads with weak text.
+**Purpose:** GPT Image 2.5 follows precise specs well; vague specs produce generic ads with weak text.
 **Do:** for each ad write one paragraph (50–150 words) after the PATTERN-AD base block, containing:
 - **Format** in a few words ("Big-type poster on a light grey-white gradient background").
 - **Layout zones in %** ("Top 65%: … Bottom 35%: …"), or element positions (top / center / bottom-left).
