@@ -36,7 +36,8 @@
       >
         <p class="cart-extras-timer__text">
           {%- if cx.cart_extras_timer_icon -%}{% render 'cart-extras-icon', name: 'clock' %}{%- endif -%}
-          <span>{{ cx.cart_extras_timer_text | replace: '{timer}', cx_timer_html }}</span>
+          {%- assign cx_timer_text = cx.cart_extras_timer_text | replace: '{timer}', cx_timer_html -%}
+          <span>{{ cx_timer_text }}</span>
         </p>
       </cart-extras-timer>
     {%- endif -%}
