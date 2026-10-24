@@ -117,7 +117,7 @@
                 aria-label="{{ 'accessibility.cart' | t }}"
               >
                 {% render 'cart-extras', part: 'top', cx: cx %}
-                <scroll-hint class="cart-drawer__items">
+                <scroll-hint class="cart-drawer__items{% if cx.cart_extras_compact %} cart-extras-compact{% endif %}">
                   {% render 'cart-products', context: 'drawer', cx: cx %}
                 </scroll-hint>
 
