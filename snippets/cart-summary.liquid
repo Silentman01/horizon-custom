@@ -4,6 +4,7 @@
   @param {string} [accelerated_checkout_buttons_layout] - { 'vertical' } Forced layout of the additional checkout buttons, instead of relying on platform's layout.
   @param {string} [section_id] - The section ID for cart discount component.
   @param {boolean} [drawer] - When true, renders the cart drawer extras (price breakdown, badges, payment icons; see snippets/cart-extras).
+  @param {object} [cx] - Settings of the "Cart drawer" section, passed on to snippets/cart-extras.
 {%- enddoc -%}
 
 {% render 'text-component-shimmer-styles' %}
@@ -14,7 +15,7 @@
   <div class="cart-totals__original-container cart-primary-typography">
     {%- liquid
       assign cx_breakdown = false
-      if drawer and settings.cart_extras_breakdown_enable
+      if drawer and cx.cart_extras_breakdown_enable
         assign cx_breakdown = true
       endif
     -%}
@@ -234,7 +235,7 @@
     endif
   -%}
 
-  {% if drawer %}{% render 'cart-extras', part: 'breakdown' %}{% endif %}
+  {% if drawer %}{% render 'cart-extras', part: 'breakdown', cx: cx %}{% endif %}
 
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
     <span
@@ -260,7 +261,7 @@
         {% endform %}
       </span>
     {% endif %}
-    {% unless drawer and settings.cart_extras_hide_tax_note %}
+    {% unless drawer and cx.cart_extras_hide_tax_note %}
       <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
         {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
       </div>
@@ -296,8 +297,8 @@
   {% endif %}
 
   {% if drawer %}
-    {% render 'cart-extras', part: 'badges' %}
-    {% render 'cart-extras', part: 'payments' %}
+    {% render 'cart-extras', part: 'badges', cx: cx %}
+    {% render 'cart-extras', part: 'payments', cx: cx %}
   {% endif %}
 </div>
 

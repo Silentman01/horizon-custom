@@ -26,8 +26,8 @@ html {
 }
 
 @media (min-width: 990px) {
-  html:has(.page-wrapper),
-  html:has(.page-wrapper) body {
+  html:not([data-drawer-overlay]):has(.page-wrapper),
+  html:not([data-drawer-overlay]):has(.page-wrapper) body {
     height: 100dvh;
     overflow: hidden;
   }
@@ -46,7 +46,7 @@ html[scroll-lock] .page-wrapper {
 }
 
 @media (min-width: 990px) {
-  .page-wrapper {
+  html:not([data-drawer-overlay]) .page-wrapper {
     height: 100dvh;
     overflow-y: auto;
     scroll-behavior: smooth;

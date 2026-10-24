@@ -1,0 +1,574 @@
+{%- comment -%}
+  Cart drawer section (header group). Renders the cart drawer so its extras (bars, price details, badges,
+  payment icons) are edited from the theme editor. layout/theme.liquid only renders a plain drawer when this
+  section is missing.
+{%- endcomment -%}
+{% render 'cart-drawer', render_wrapper: false, section_id: section.id, cx: section.settings %}
+
+{%- if request.design_mode -%}
+  <script>
+    (() => {
+      const id = {{ section.id | json }};
+      const drawer = () => document.getElementById('cart-drawer');
+      const mine = (e) => e.detail && e.detail.sectionId === id;
+      document.addEventListener('shopify:section:select', (e) => mine(e) && drawer()?.open?.());
+      document.addEventListener('shopify:section:load', (e) => mine(e) && drawer()?.open?.());
+      document.addEventListener('shopify:section:deselect', (e) => mine(e) && drawer()?.close?.());
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "tag": "div",
+  "class": "cart-drawer-extras",
+  "limit": 1,
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Extras for the cart drawer. Add a product to the cart to preview them. The Shipping, Subtotal, Discounts and FREE labels are translated automatically in the store language."
+    },
+    {
+      "type": "header",
+      "content": "Announcement bar (top)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_announce_enable",
+      "label": "Show announcement bar",
+      "default": false
+    },
+    {
+      "type": "inline_richtext",
+      "id": "cart_extras_announce_text",
+      "label": "Text",
+      "default": "<strong>Limited offer</strong> applied to your cart",
+      "visible_if": "{{ section.settings.cart_extras_announce_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_announce_mobile",
+      "label": "Show on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_announce_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_announce_bg",
+      "label": "Background",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.cart_extras_announce_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_announce_color",
+      "label": "Text",
+      "default": "#FFFFFF",
+      "visible_if": "{{ section.settings.cart_extras_announce_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_announce_size",
+      "label": "Text size",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ section.settings.cart_extras_announce_enable }}"
+    },
+    {
+      "type": "header",
+      "content": "Timer bar (top)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_timer_enable",
+      "label": "Show timer bar",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_timer_text",
+      "label": "Text",
+      "default": "Your cart is reserved for {timer}",
+      "info": "{timer} = countdown (mm:ss). One countdown per visitor; it restarts when it ends.",
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_timer_minutes",
+      "label": "Countdown length",
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "min",
+      "default": 10,
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_timer_icon",
+      "label": "Show clock icon",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_timer_mobile",
+      "label": "Show on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_timer_bg",
+      "label": "Background",
+      "default": "#FFF1F0",
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_timer_color",
+      "label": "Text",
+      "default": "#C62828",
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_timer_size",
+      "label": "Text size",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ section.settings.cart_extras_timer_enable }}"
+    },
+    {
+      "type": "header",
+      "content": "Free shipping bar (top)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_ship_enable",
+      "label": "Show free shipping bar",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_ship_threshold",
+      "label": "Free shipping from",
+      "min": 0,
+      "max": 2000,
+      "step": 20,
+      "unit": "$",
+      "default": 0,
+      "info": "In store currency. 0 = free shipping on every order. Also drives the shipping line of the price details."
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_ship_text_unlocked",
+      "label": "Text when unlocked",
+      "default": "Your order ships FREE!",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_ship_text_locked",
+      "label": "Text when locked",
+      "default": "You are {amount} away from FREE shipping",
+      "info": "{amount} = what is left to reach free shipping.",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_ship_icon",
+      "label": "Show truck icon",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_ship_progress",
+      "label": "Show progress bar",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_ship_mobile",
+      "label": "Show on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_ship_bg",
+      "label": "Background",
+      "default": "#F5F5F5",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_ship_color",
+      "label": "Text",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_ship_fill",
+      "label": "Progress and icon",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_ship_track",
+      "label": "Progress background",
+      "default": "#E0E0E0",
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_ship_size",
+      "label": "Text size",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ section.settings.cart_extras_ship_enable }}"
+    },
+    {
+      "type": "header",
+      "content": "Price details (above the total)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_breakdown_enable",
+      "label": "Show price details",
+      "default": false,
+      "info": "Subtotal, discounts and shipping lines. Replaces the default discount lines in the drawer."
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_breakdown_compare_at",
+      "label": "Count compare-at savings as discounts",
+      "default": true,
+      "info": "The subtotal uses compare-at prices, so bundle savings show on the discounts line.",
+      "visible_if": "{{ section.settings.cart_extras_breakdown_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_breakdown_shipping",
+      "label": "Show shipping line",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_breakdown_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_breakdown_ship_compare",
+      "label": "Crossed-out shipping price",
+      "min": 0,
+      "max": 500,
+      "step": 5,
+      "unit": "$",
+      "default": 0,
+      "info": "Shown struck through before FREE. 0 = hidden.",
+      "visible_if": "{{ section.settings.cart_extras_breakdown_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_breakdown_free_color",
+      "label": "FREE color",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_breakdown_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_breakdown_discount_color",
+      "label": "Discount color",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_breakdown_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_hide_tax_note",
+      "label": "Hide taxes and shipping note",
+      "default": true,
+      "info": "Hides the \"Taxes included. Shipping is calculated at checkout.\" line in the drawer."
+    },
+    {
+      "type": "header",
+      "content": "Badges (under the checkout button)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_badges_enable",
+      "label": "Show badges",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_badge_1_text",
+      "label": "Badge 1 text",
+      "default": "30-day money-back guarantee",
+      "info": "Empty = hidden.",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_extras_badge_1_icon",
+      "label": "Badge 1 icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "shield",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_badge_2_text",
+      "label": "Badge 2 text",
+      "default": "Free shipping",
+      "info": "Empty = hidden.",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_extras_badge_2_icon",
+      "label": "Badge 2 icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "truck",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_badge_3_text",
+      "label": "Badge 3 text",
+      "default": "Secure checkout",
+      "info": "Empty = hidden.",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_extras_badge_3_icon",
+      "label": "Badge 3 icon",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        }
+      ],
+      "default": "lock",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "select",
+      "id": "cart_extras_badges_layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        }
+      ],
+      "default": "row",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_badges_mobile",
+      "label": "Show on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_badges_color",
+      "label": "Text",
+      "default": "#121212",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_badges_icon_color",
+      "label": "Icons",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_badges_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 13,
+      "visible_if": "{{ section.settings.cart_extras_badges_enable }}"
+    },
+    {
+      "type": "header",
+      "content": "Payment icons (under the checkout button)"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_pay_enable",
+      "label": "Show payment icons",
+      "default": false,
+      "info": "Shows the active payment methods of the store."
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_pay_mobile",
+      "label": "Show on mobile",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_pay_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_pay_height",
+      "label": "Icon height",
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ section.settings.cart_extras_pay_enable }}"
+    },
+    {
+      "type": "range",
+      "id": "cart_extras_pay_gap",
+      "label": "Space between icons",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 6,
+      "visible_if": "{{ section.settings.cart_extras_pay_enable }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Cart drawer"
+    }
+  ]
+}
+{% endschema %}

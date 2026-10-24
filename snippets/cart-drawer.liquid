@@ -2,10 +2,16 @@
   Renders reusable cart drawer markup for both initial page loads and Section Rendering API responses.
 
   @param {boolean} [render_wrapper] - When true, wraps the drawer in the section wrapper that the Section Rendering API adds automatically.
+  @param {string} [section_id] - The section that renders the drawer (the "Cart drawer" header-group section). Defaults to 'cart-drawer-section'.
+  @param {object} [cx] - Settings of the "Cart drawer" section, for the cart drawer extras (snippets/cart-extras).
+  @param {string} [section_id] - The section that renders the drawer (the "Cart drawer" header-group section). Defaults to 'cart-drawer-section'.
+  @param {object} [cx] - Settings of the "Cart drawer" section, for the cart drawer extras (snippets/cart-extras).
 {% enddoc %}
 
 {%- liquid
   assign render_wrapper = render_wrapper | default: true, allow_false: true
+  assign cx_section_id = section_id | default: 'cart-drawer-section'
+  assign cx_section_id = section_id | default: 'cart-drawer-section'
 -%}
 
 {%- if settings.cart_type == 'drawer' and template.name != 'cart' -%}
@@ -110,15 +116,13 @@
                 class="cart-drawer__content"
                 aria-label="{{ 'accessibility.cart' | t }}"
               >
-                {% render 'cart-extras', part: 'top' %}
-                {% render 'cart-extras', part: 'top' %}
-                {% render 'cart-extras', part: 'top' %}
+                {% render 'cart-extras', part: 'top', cx: cx %}
                 <scroll-hint class="cart-drawer__items">
                   {% render 'cart-products', context: 'drawer' %}
                 </scroll-hint>
 
                 <div class="cart-drawer__summary">
-                  {% render 'cart-summary', section_id: 'cart-drawer-section', drawer: true %}
+                  {% render 'cart-summary', section_id: cx_section_id, drawer: true, cx: cx %}
                 </div>
               </scroll-hint>
             {%- endif -%}
@@ -126,7 +130,7 @@
           {% render 'cart-items-component',
             children: cart_items_children,
             is_drawer: true,
-            section_id: 'cart-drawer-section'
+            section_id: cx_section_id
           %}
         </div>
       </cart-drawer-component>

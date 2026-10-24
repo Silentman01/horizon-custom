@@ -99,10 +99,15 @@
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false
       }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer-extras",
+      "settings": {}
     }
   },
   "order": [
     "header_announcements_9jGBFp",
-    "header_section"
+    "header_section",
+    "cart_drawer"
   ]
 }

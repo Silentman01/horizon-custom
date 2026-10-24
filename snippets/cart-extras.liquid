@@ -1,13 +1,14 @@
 {%- doc -%}
-  Cart drawer extras (prefix cart-extras). Settings live in Theme settings > "Cart drawer extras".
+  Cart drawer extras (prefix cart-extras). Settings live in the "Cart drawer" section of the header group
+  (sections/cart-drawer-extras.liquid), passed down as cx.
   Rendered inside cart-items-component, so every part re-renders with the drawer on each cart change.
 
   @param {string} part - 'top' (announcement, timer and free-shipping bars above the items),
     'breakdown' (subtotal / discounts / shipping lines above the total),
     'badges' (trust badges under the checkout button), 'payments' (payment icons under the checkout button).
+  @param {object} [cx] - Settings of the "Cart drawer" section. Blank = every extra stays off.
 {%- enddoc -%}
 {%- liquid
-  assign cx = settings
   assign cx_threshold = cx.cart_extras_ship_threshold | default: 0 | times: 100
   if cx_threshold == 0 or cart.total_price >= cx_threshold
     assign cx_free_shipping = true

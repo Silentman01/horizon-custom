@@ -1,5 +1,5 @@
 const PAGE_WRAPPER_SELECTOR = '.page-wrapper';
-const SQUEEZE_QUERY = window.matchMedia('(min-width: 990px)');
+const SQUEEZE_QUERY = window.matchMedia(document.documentElement.hasAttribute('data-drawer-overlay') ? '(min-width: 100000px)' : '(min-width: 990px)');
 
 /**
  * Returns the current page scroll container.
