@@ -1,6 +1,7 @@
 {%- comment -%}
   Krino floating add-to-cart pill (thumb + title + button; title hidden on mobile by default), fixed bottom-centre. Appears once the buy-box button has
-  scrolled above the screen; the button adds the selected pack + shade (same as the main button). Prefix krino-pill.
+  scrolled above the screen. Button action (setting): scroll back to the bundle cards so the visitor picks a pack
+  (they pulse briefly), or add the selected pack + shade straight away (same as the main button). Prefix krino-pill.
 {%- endcomment -%}
 {%- liquid
   assign ss = section.settings
@@ -24,7 +25,7 @@
         </span>
       {%- endif -%}
       {%- if ss.show_title and kp_title != blank -%}<span class="krino-pill__title{% unless ss.show_title_mobile %} krino-pill__title--desk{% endunless %}">{{ kp_title }}</span>{%- endif -%}
-      <button type="button" class="krino-pill__button" data-krino-atc>
+      <button type="button" class="krino-pill__button" {% if ss.action == 'add' %}data-krino-atc{% else %}data-krino-pill-scroll{% endif %}>
         <span class="krino-pill__long">{{ ss.button_label }}</span>
         <span class="krino-pill__short">{{ ss.button_label_short | default: ss.button_label }}</span>
       </button>
@@ -42,6 +43,11 @@
   .krino-pill__button { flex: 0 0 auto; min-height: 40px; padding: 0 18px; border: 0; border-radius: 999px; background: var(--krino-pill-btn, #3d5afe); color: var(--krino-pill-btn-text, #fff); font-family: var(--font-body--family); font-size: var(--krino-pill-size, 14px); font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; white-space: nowrap; cursor: pointer; }
   .krino-pill__button:focus-visible { outline: 2px solid var(--krino-pill-btn, #3d5afe); outline-offset: 3px; }
   .krino-pill__short { display: none; }
+  .krino-bundles.krino-pill-pulse { animation: krino-pill-pulse 1.4s ease-out 1; border-radius: 10px; }
+  @keyframes krino-pill-pulse {
+    0% { box-shadow: 0 0 0 0 rgb(61 90 254 / 0.55); }
+    100% { box-shadow: 0 0 0 16px rgb(61 90 254 / 0); }
+  }
   @media screen and (max-width: 749px) {
     .krino-pill { bottom: calc(var(--krino-pill-bottom-m, 16px) + env(safe-area-inset-bottom)); }
     .krino-pill__title { max-width: 150px; font-size: 13px; }
@@ -67,6 +73,15 @@
         });
         this.bind();
         document.addEventListener('krino:variant', () => this.bind());
+        this.addEventListener('click', (e) => {
+          if (!e.target.closest('[data-krino-pill-scroll]')) return;
+          const t = document.querySelector('.krino-bundles') || document.querySelector('.krino-atc');
+          if (!t) return;
+          t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          t.classList.remove('krino-pill-pulse');
+          setTimeout(() => t.classList.add('krino-pill-pulse'), 450);
+          setTimeout(() => t.classList.remove('krino-pill-pulse'), 2000);
+        });
       }
       bind() {
         const t = document.querySelector('.krino-atc') || document.querySelector('.buy-buttons-block');
@@ -82,28 +97,139 @@
 {% endjavascript %}
 {% schema %}
 {
-  "name": "Krino sticky add to cart",
+  "name": "Krino sticky button",
   "tag": "section",
   "class": "krino-pill-section",
   "settings": [
-    { "type": "paragraph", "content": "Floating pill shown after the buy-box button scrolls out of view. Its button adds the selected pack and shade." },
-    { "type": "checkbox", "id": "enable", "label": "Show the sticky pill", "default": true },
-    { "type": "text", "id": "title", "label": "Title (empty = product title)", "default": "Polvo Rellenador de Cabello 2.0" },
-    { "type": "checkbox", "id": "show_title", "label": "Show title", "default": true },
-    { "type": "checkbox", "id": "show_title_mobile", "label": "Show title on mobile", "default": false },
-    { "type": "checkbox", "id": "show_image", "label": "Show product image", "default": true },
-    { "type": "image_picker", "id": "image", "label": "Image (empty = product image)" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "Agregar al carrito" },
-    { "type": "text", "id": "button_label_short", "label": "Short label (very small screens)", "default": "Agregar" },
-    { "type": "header", "content": "Style" },
-    { "type": "color", "id": "background", "label": "Pill background", "default": "#FFFFFF" },
-    { "type": "color", "id": "text_color", "label": "Title color", "default": "#252525" },
-    { "type": "color", "id": "button_bg", "label": "Button background", "default": "#3D5AFE" },
-    { "type": "color", "id": "button_text", "label": "Button text", "default": "#FFFFFF" },
-    { "type": "range", "id": "text_size", "label": "Text size", "min": 11, "max": 18, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "bottom", "label": "Distance from bottom (desktop)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 24 },
-    { "type": "range", "id": "bottom_mobile", "label": "Distance from bottom (mobile)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 16 }
+    {
+      "type": "paragraph",
+      "content": "Floating pill shown after the buy-box button scrolls out of view."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable",
+      "label": "Show the sticky pill",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (empty = product title)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title",
+      "label": "Show title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_title_mobile",
+      "label": "Show title on mobile",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show product image",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (empty = product image)"
+    },
+    {
+      "type": "select",
+      "id": "action",
+      "label": "Button action",
+      "default": "scroll",
+      "options": [
+        {
+          "value": "scroll",
+          "label": "Scroll back to the bundle selector"
+        },
+        {
+          "value": "add",
+          "label": "Add the selected pack to the cart"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Elige tu paquete"
+    },
+    {
+      "type": "text",
+      "id": "button_label_short",
+      "label": "Short label (very small screens)",
+      "default": "Elegir"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Pill background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Title color",
+      "default": "#252525"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#3D5AFE"
+    },
+    {
+      "type": "color",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "bottom",
+      "label": "Distance from bottom (desktop)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "bottom_mobile",
+      "label": "Distance from bottom (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    }
   ],
-  "presets": [{ "name": "Krino sticky add to cart" }]
+  "presets": [
+    {
+      "name": "Krino sticky button"
+    }
+  ]
 }
 {% endschema %}

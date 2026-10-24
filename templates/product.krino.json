@@ -200,7 +200,7 @@
                     "value": "3 frascos",
                     "quantity": 3,
                     "free_units": 1,
-                    "preselect": true,
+                    "preselect": false,
                     "image_asset": "krino-bundle-3.png",
                     "badge": "BUEN FIN",
                     "title": "Compra 2, llévate 1 GRATIS",
@@ -219,7 +219,7 @@
                     "value": "1 frasco",
                     "quantity": 1,
                     "free_units": 0,
-                    "preselect": false,
+                    "preselect": true,
                     "image_asset": "krino-bundle-1.png",
                     "title": "Básico",
                     "subtitle": "1 frasco",
@@ -1046,9 +1046,9 @@
       "type": "krino-sticky-pill",
       "settings": {
         "enable": true,
-        "title": "Polvo Rellenador de Cabello 2.0",
-        "button_label": "Agregar al carrito",
-        "button_label_short": "Agregar"
+        "title": "Polvo Densificador 2.0",
+        "button_label": "Elige tu paquete",
+        "button_label_short": "Elegir"
       }
     }
   },
