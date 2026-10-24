@@ -54,71 +54,6 @@
         "b2"
       ]
     },
-    "krino_best_sellers": {
-      "type": "krino-best-sellers",
-      "settings": {
-        "heading": "Nuestros más vendidos",
-        "product_handle": "polvo-densificador",
-        "columns": 4,
-        "columns_mobile": 2,
-        "padding_top": 30,
-        "padding_bottom": 50,
-        "padding_top_mobile": 30,
-        "padding_bottom_mobile": 40
-      },
-      "blocks": {
-        "b1": {
-          "type": "card",
-          "settings": {
-            "image_asset": "krino-home-producto.jpg",
-            "badge": "MÁS VENDIDO",
-            "title": "Rellenador Capilar – Negro",
-            "discount": "Hasta 60% OFF ahora mismo",
-            "button_label": "Descúbrelo",
-            "shade": "Negro"
-          }
-        },
-        "b2": {
-          "type": "card",
-          "settings": {
-            "image_asset": "krino-home-producto.jpg",
-            "badge": "MÁS VENDIDO",
-            "title": "Rellenador Capilar – Castaño oscuro",
-            "discount": "Hasta 60% OFF ahora mismo",
-            "button_label": "Descúbrelo",
-            "shade": "Castaño oscuro"
-          }
-        },
-        "b3": {
-          "type": "card",
-          "settings": {
-            "image_asset": "krino-home-producto.jpg",
-            "badge": "MÁS VENDIDO",
-            "title": "Rellenador Capilar – Castaño medio",
-            "discount": "Hasta 60% OFF ahora mismo",
-            "button_label": "Descúbrelo",
-            "shade": "Castaño medio"
-          }
-        },
-        "b4": {
-          "type": "card",
-          "settings": {
-            "image_asset": "krino-home-producto.jpg",
-            "badge": "PARA CANAS",
-            "title": "Rellenador Capilar – Gris",
-            "discount": "Hasta 60% OFF ahora mismo",
-            "button_label": "Descúbrelo",
-            "shade": "Gris"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
-    },
     "krino_band": {
       "type": "krino-band",
       "settings": {
@@ -132,78 +67,6 @@
         "button_bg": "#FFFFFF",
         "button_text": "#000000"
       }
-    },
-    "krino_ugc": {
-      "type": "krino-ugc",
-      "settings": {
-        "heading": "Sin filtros, resultados reales",
-        "text": "Hombres que solo querían volver a sentirse ellos mismos.",
-        "per_view": 5,
-        "per_view_mobile": 2.2,
-        "show_arrows": true,
-        "prev_label": "Anterior",
-        "next_label": "Siguiente"
-      },
-      "blocks": {
-        "video_1": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 1 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_2": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 2 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_3": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 3 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_4": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 4 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_5": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 5 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_6": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 6 de clientes",
-            "play_label": "Reproducir video"
-          }
-        },
-        "video_7": {
-          "type": "_krino-video",
-          "settings": {
-            "label": "Video 7 de clientes",
-            "play_label": "Reproducir video"
-          }
-        }
-      },
-      "block_order": [
-        "video_1",
-        "video_2",
-        "video_3",
-        "video_4",
-        "video_5",
-        "video_6",
-        "video_7"
-      ]
     },
     "krino_highlight": {
       "type": "krino-tech",
@@ -363,9 +226,7 @@
   },
   "order": [
     "krino_hero",
-    "krino_best_sellers",
     "krino_band",
-    "krino_ugc",
     "krino_highlight",
     "krino_barber",
     "krino_support_faq",
