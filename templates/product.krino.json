@@ -213,24 +213,6 @@
                     "save": "Ahorra {percent}%"
                   }
                 },
-                "card_2": {
-                  "type": "_krino-bundle-card",
-                  "settings": {
-                    "value": "2 frascos",
-                    "quantity": 2,
-                    "free_units": 0,
-                    "preselect": false,
-                    "image_asset": "krino-bundle-2.png",
-                    "title": "Dúo",
-                    "subtitle": "2 frascos",
-                    "unit_label": "/ frasco",
-                    "supply": "Para 2 meses",
-                    "perk": "Cambio de tono GRATIS",
-                    "perk_check": true,
-                    "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra {percent}%"
-                  }
-                },
                 "card_3": {
                   "type": "_krino-bundle-card",
                   "settings": {
@@ -251,9 +233,8 @@
                 }
               },
               "block_order": [
-                "card_1",
-                "card_2",
-                "card_3"
+                "card_3",
+                "card_1"
               ]
             },
             "gifts": {
