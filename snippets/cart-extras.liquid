@@ -18,6 +18,7 @@
 -%}
 {%- case part -%}
   {%- when 'top' -%}
+    {%- capture cx_top -%}
     {%- if cx.cart_extras_announce_enable and cx.cart_extras_announce_text != blank -%}
       <div
         class="cart-extras-announce{% unless cx.cart_extras_announce_mobile %} cart-extras--hide-m{% endunless %}"
@@ -68,6 +69,16 @@
             <span class="cart-extras-ship__fill" style="width: {{ cx_pct }}%;"></span>
           </div>
         {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- endcapture -%}
+    {%- if cx_top != blank -%}
+      <div
+        class="cart-extras-top{% if cx.cart_extras_top_divider %} cart-extras-top--divider{% endif %}"
+        style="--cx-top-gap: {{ cx.cart_extras_top_gap | default: 0 }}px; --cx-top-line: {{ cx.cart_extras_top_divider_color }};"
+      >
+        {{ cx_top }}
       </div>
     {%- endif -%}
 
@@ -199,6 +210,16 @@
 {% endjavascript %}
 
 {% stylesheet %}
+  .cart-extras-top {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    margin-block-end: var(--cx-top-gap);
+  }
+  .cart-extras-top--divider {
+    padding-block-end: var(--cx-top-gap);
+    border-block-end: 1px solid var(--cx-top-line, rgb(0 0 0 / 0.12));
+  }
   .cart-extras-announce,
   .cart-extras-timer,
   .cart-extras-ship {
