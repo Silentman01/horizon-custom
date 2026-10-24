@@ -275,6 +275,89 @@
     },
     {
       "type": "header",
+      "content": "Free product highlight"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_free_enable",
+      "label": "Highlight free products",
+      "default": false,
+      "info": "Lines made free by a discount (e.g. Buy 2 get 1 free) get their own design: badge, title, savings and FREE price."
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_free_badge",
+      "label": "Badge on the image",
+      "default": "Gift",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_free_title",
+      "label": "Title",
+      "default": "Your FREE gift!",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_free_sub",
+      "label": "Line under the title",
+      "default": "Included with {discount}",
+      "info": "{discount} = name of the discount.",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "text",
+      "id": "cart_extras_free_save",
+      "label": "Savings pill",
+      "default": "You save {amount}",
+      "info": "{amount} = value of the free product. Empty = hidden.",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "cart_extras_free_hide_qty",
+      "label": "Hide quantity selector on the free line",
+      "default": true,
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_free_bg",
+      "label": "Background",
+      "default": "#F2FBF4",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_free_border",
+      "label": "Dashed border",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_free_accent",
+      "label": "Title and FREE price",
+      "default": "#2E7D32",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_free_badge_from",
+      "label": "Badge gradient start",
+      "default": "#1B5E20",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "color",
+      "id": "cart_extras_free_badge_to",
+      "label": "Badge gradient end",
+      "default": "#43A047",
+      "visible_if": "{{ section.settings.cart_extras_free_enable }}"
+    },
+    {
+      "type": "header",
       "content": "Price details (above the total)"
     },
     {
