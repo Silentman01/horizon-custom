@@ -91,7 +91,7 @@ Read the comparison (and full-size images for small text).
 **Done when:** 20 rows, matrix covered, no two ads with the same format + hook.
 
 ## 6. Step 5 — Pattern ads: one detailed spec per ad
-**Purpose:** GPT Image 2 follows precise specs well; vague specs produce generic ads with weak text.
+**Purpose:** GPT Image 2.5 follows precise specs well; vague specs produce generic ads with weak text.
 **Do:** for each ad write one paragraph (50–150 words) after the PATTERN-AD base block, containing:
 - **Format** in a few words ("Big-type poster on a light grey-white gradient background").
 - **Layout zones in %** ("Top 65%: … Bottom 35%: …"), or element positions (top / center / bottom-left).

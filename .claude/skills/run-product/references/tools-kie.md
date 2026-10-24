@@ -1,6 +1,9 @@
-# Kie.ai (GPT Image 2) — models, runner, pricing, prompt patterns
+# Kie.ai (GPT Image 2.5) — models, runner, pricing, prompt patterns
 
-Every generated image in this skill (packshot, gallery remakes, testimonials, section images, ads) goes through Kie.ai's GPT Image 2 via the bundled batch runner `scripts/kie_jobs.py`. This file is the single reference for how to call it, what it costs, and the canonical prompt blocks that 05, 06 and 08 fill in.
+> **Model (operator, 2026-10-24): GPT Image 2.5 Sunburst** — `gpt-image-2-5-sunburst-image-to-image` (edits/remakes) and `gpt-image-2-5-sunburst-text-to-image` (no reference). Same price as GPT Image 2 (1K 6, 2K 10, 4K 16 credits) and same input fields (`prompt`, `input_urls`, `aspect_ratio`, `resolution`, `background`). The Flare variant was rejected: in a side-by-side packshot test it printed the competitor's name on our label, Sunburst rendered our label correctly (Krino run).
+> **Aspect ratios on 2.5:** `auto, 1:1, 3:2, 2:3, 4:3, 3:4, 16:9, 9:16, 21:9, 27:16, 16:27, 9:8, 8:9` — there is **no 4:5 / 5:4 / 2:1 / 3:1**: where this skill says 4:5 use 3:4 (or 8:9), where it says 5:4 use 4:3 (or 9:8). Older GPT Image 2 notes below (e.g. "4:5 only at 1K") apply only if you fall back to `gpt-image-2-*`.
+
+Every generated image in this skill (packshot, gallery remakes, testimonials, section images, ads) goes through Kie.ai's GPT Image 2.5 via the bundled batch runner `scripts/kie_jobs.py`. This file is the single reference for how to call it, what it costs, and the canonical prompt blocks that 05, 06 and 08 fill in.
 
 `SKILL` below = `~/.claude/skills/run-product` (Windows: `C:\Users\Moi\.claude\skills\run-product`).
 
@@ -8,7 +11,7 @@ Every generated image in this skill (packshot, gallery remakes, testimonials, se
 1. Models and discovery
 2. Key handling
 3. Endpoints
-4. Input schema (GPT Image 2)
+4. Input schema (GPT Image 2.5)
 5. Aspect ratio × resolution matrix and cost
 6. Credit check and budgeting
 7. Uploading reference images
@@ -26,20 +29,20 @@ Every generated image in this skill (packshot, gallery remakes, testimonials, se
 
 | Use | Model id | Notes |
 |---|---|---|
-| Edit / remake from reference images (almost everything) | `gpt-image-2-image-to-image` | `input_urls` (1–16 images) + `prompt` |
-| Pure generation, no reference (editorial photos, scenes) | `gpt-image-2-text-to-image` | `prompt` only |
+| Edit / remake from reference images (almost everything) | `gpt-image-2-5-sunburst-image-to-image` | `input_urls` (1–16 images) + `prompt` |
+| Pure generation, no reference (editorial photos, scenes) | `gpt-image-2-5-sunburst-text-to-image` | `prompt` only |
 
-Why GPT Image 2: it renders long, correctly spelled on-image text, respects layout instructions given in % zones, and keeps a product faithful when the product photo is attached. Those three properties are exactly what infographics and ads need.
+Why GPT Image 2.5: it renders long, correctly spelled on-image text, respects layout instructions given in % zones, and keeps a product faithful when the product photo is attached. Those three properties are exactly what infographics and ads need.
 
 **Rule:** never trust a model name from memory. The catalog changes (it already lists `gpt-image-2-5-*` variants at the same price). Before the first batch of a run, confirm the model still exists and the price is unchanged:
 
 ```bash
 # catalog filtered by keyword (shares a 1 req/s budget with schema/price calls)
-curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models?q=gpt-image-2"
-curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models/gpt-image-2-image-to-image/price"
-curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models/gpt-image-2-image-to-image/schema"
+curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models?q=gpt-image-2-5"
+curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models/gpt-image-2-5-sunburst-image-to-image/price"
+curl -s -H "Authorization: Bearer $KIE_API_KEY" "https://api.kie.ai/api/v1/models/gpt-image-2-5-sunburst-image-to-image/schema"
 ```
-PowerShell: call `curl.exe` (plain `curl` is an alias of Invoke-WebRequest) or use the Python one-liners in §6. Space discovery calls ≥1.1 s apart. Keep using `gpt-image-2-*` unless it is gone or the operator asks; switching models mid-run changes the look across the gallery.
+PowerShell: call `curl.exe` (plain `curl` is an alias of Invoke-WebRequest) or use the Python one-liners in §6. Space discovery calls ≥1.1 s apart. Keep using `gpt-image-2-5-sunburst-*` unless it is gone or the operator asks; switching models mid-run changes the look across the gallery.
 
 ## 2. Key handling
 - The runner reads `KIE_API_KEY` from the environment. Sources, in order: env var already set → project skill/config the operator points to → ask the operator.
@@ -62,7 +65,7 @@ PowerShell: call `curl.exe` (plain `curl` is an alias of Invoke-WebRequest) or u
 
 All responses are `{code, msg, data}`; **HTTP 200 does not mean success — check `code`**. Result images are in `data.response.resultUrls[0]`.
 
-## 4. Input schema (GPT Image 2)
+## 4. Input schema (GPT Image 2.5)
 
 | Field | Type | Notes |
 |---|---|---|
@@ -126,7 +129,7 @@ Job file format (a JSON array):
 [
   {
     "name": "noxis-product-02",
-    "model": "gpt-image-2-image-to-image",
+    "model": "gpt-image-2-5-sunburst-image-to-image",
     "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
                                                "G:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
     "input": {"prompt": "…", "aspect_ratio": "1:1", "resolution": "2K"}
@@ -134,7 +137,7 @@ Job file format (a JSON array):
 ]
 ```
 - `upload.files` are uploaded in order and **prepended** to `input[field]`; any URLs already in `input.input_urls` come after them. Optional `first_url` (string) is inserted at position 0, before the uploads.
-- Text-to-image jobs simply omit `upload` and use `gpt-image-2-text-to-image`.
+- Text-to-image jobs simply omit `upload` and use `gpt-image-2-5-sunburst-text-to-image`.
 - Use forward slashes in paths inside JSON (or escaped backslashes).
 
 Working practice:
