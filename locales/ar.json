@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "accessibility": {
     "account": "الحساب",
@@ -153,6 +162,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "الشحن",
+    "cart_extras_free": "مجاني",
+    "cart_extras_shipping_later": "يُحسب عند الدفع",
     "cancel": "إلغاء",
     "discount": "الخصم",
     "account_title": "الحساب",

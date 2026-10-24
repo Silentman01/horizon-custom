@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "accessibility": {
     "account": "اکاؤنٹ",
@@ -141,6 +150,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "شپنگ",
+    "cart_extras_free": "مفت",
+    "cart_extras_shipping_later": "چیک آؤٹ پر حساب کی جاتی ہے",
     "cancel": "منسوخ کریں",
     "discount": "ڈسکاؤنٹ",
     "account_title": "اکاؤنٹ",

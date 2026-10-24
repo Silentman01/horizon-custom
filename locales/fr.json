@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blocks": {
     "load_video": "Charger la vidéo : {{ description }}",
@@ -123,6 +132,9 @@
     "zoom_media": "Zoom du support multimédia {{ index }}"
   },
   "content": {
+    "cart_extras_shipping": "Livraison",
+    "cart_extras_free": "Gratuite",
+    "cart_extras_shipping_later": "Calculée au paiement",
     "reviews": "avis",
     "language": "Langue",
     "localization_region_and_language": "Région et langue",

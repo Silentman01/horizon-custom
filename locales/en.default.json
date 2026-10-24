@@ -163,6 +163,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "Shipping",
+    "cart_extras_free": "Free",
+    "cart_extras_shipping_later": "Calculated at checkout",
     "cancel": "Cancel",
     "discount": "Discount",
     "account_title": "Account",

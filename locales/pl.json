@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "blocks": {
     "load_video": "Załaduj film: {{ description }}",
@@ -125,6 +134,9 @@
     "back_to_main_menu": "Wróć do menu głównego"
   },
   "content": {
+    "cart_extras_shipping": "Wysyłka",
+    "cart_extras_free": "Za darmo",
+    "cart_extras_shipping_later": "Obliczana przy kasie",
     "reviews": "recenzje",
     "language": "Język",
     "localization_region_and_language": "Region i język",
