@@ -120,7 +120,7 @@ Order inside the window: start A1, B (packshot first), C, D1 and A4's home spec 
 Read `references/10-qa-and-delivery.md`. Visual QA agent compares competitor screenshots vs local renders (`scripts/render_sections.js` + static buy-box mock) at desktop and mobile; master fixes; loop until no unintended discrepancies. Review every image/ad batch through `scripts/contact_sheet.py` before calling it done. `shopify theme check` must show no new offenses.
 
 ### Phase 5 — Delivery (master)
-Commit on the brand branch, pull + merge-check, push to GitHub; push to the draft theme if STORE/THEME_ID are known (never publish). Push the policies with `policies.py push` (needs STORE + SHOPIFY_ADMIN_TOKEN; otherwise deliver the files and add the to-do). Write `DELIVERY.md` (template). Show the operator contact sheets (product images, ads) and a short summary: what was built (product page + home page), image placeholder map, operator to-dos (variants, uploads, gift/bundle app, reviews app, home product links), credits spent.
+Commit on the brand branch, pull + merge-check, push to GitHub; push to the draft theme if STORE/THEME_ID are known (never publish). Push the policies with `policies.py push` (needs STORE + SHOPIFY_ADMIN_TOKEN; otherwise deliver the files and add the to-do). Write `DELIVERY.md` (template). Show the operator contact sheets (product images, ads) and a short summary: what was built (product page + home page), image placeholder map, operator to-dos (shipping rates for every market first: without them Shopify shows every product as sold out and add to cart fails; variants, uploads, gift/bundle app, reviews app, home product links), credits spent.
 
 ## 5. Dependency map
 
