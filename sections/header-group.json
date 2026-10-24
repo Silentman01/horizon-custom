@@ -11,6 +11,32 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
+    "krino_promo": {
+      "type": "krino-promo",
+      "settings": {
+        "headline": "BUEN FIN ANTICIPADO",
+        "offer_strong": "60% OFF",
+        "offer": "+ REGALOS GRATIS",
+        "show_countdown": true,
+        "cycle_hours": 6,
+        "label_days": "Días",
+        "label_hours": "Hrs",
+        "label_minutes": "Min",
+        "label_seconds": "Seg",
+        "gradient_from": "#09184c",
+        "gradient_to": "#3d5afe",
+        "text_color": "#ffffff",
+        "font": "var(--font-body--family)",
+        "headline_size": 12,
+        "headline_size_mobile": 12,
+        "offer_size": 11,
+        "offer_size_mobile": 10,
+        "padding_top": 6,
+        "padding_bottom": 6,
+        "padding_top_mobile": 10,
+        "padding_bottom_mobile": 10
+      }
+    },
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
@@ -23,7 +49,8 @@
             "font_size": "0.75rem",
             "weight": "",
             "letter_spacing": "normal",
-            "case": "none"
+            "case": "none",
+            "text_color": ""
           },
           "blocks": {}
         }
@@ -31,16 +58,17 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
+      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
         "section_width": "page-width",
+        "background_color": "",
         "divider_width": 1,
+        "divider_color": "{{ settings.color_palette.color3 }}",
         "padding-block-start": 15,
-        "padding-block-end": 15,
-        "divider_color": "{{ settings.color_palette.color3 }}"
-      },
-      "disabled": true
+        "padding-block-end": 15
+      }
     },
     "header_section": {
       "type": "header",
@@ -60,6 +88,8 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
+            "background_color": "{{ settings.color_palette.background }}",
+            "text_color": "",
             "type_font_primary_size": "0.875rem",
             "menu_font_style": "inverse",
             "type_font_primary_link": "body",
@@ -69,6 +99,8 @@
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
             "navigation_bar": false,
+            "background_color_navigation_bar": "{{ settings.color_palette.background }}",
+            "text_color_navigation_bar": "",
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
@@ -80,6 +112,7 @@
         "logo_position": "left",
         "menu_position": "center",
         "menu_row": "top",
+        "customer_account_menu": "customer-account-main-menu",
         "show_search": false,
         "search_position": "right",
         "search_row": "top",
@@ -95,65 +128,83 @@
         "enable_sticky_header": "never",
         "divider_width": 0,
         "divider_size": "page-width",
+        "divider_color": "",
         "border_width": 1,
-        "enable_transparent_header_home": true,
-        "enable_transparent_header_product": false,
-        "enable_transparent_header_collection": false,
         "bottom_border_color": "#171717",
+        "actions_display_style": "icon",
+        "actions_font_size": "0.875rem",
+        "actions_font": "body",
+        "actions_text_case": "none",
+        "background_color_top": "",
+        "text_color_top": "",
+        "background_color_bottom": "",
+        "text_color_bottom": "",
+        "bubble_style": "default",
+        "bubble_background_color": "",
+        "bubble_text_color": "",
+        "enable_transparent_header_home": true,
         "home_inverse_logo": true,
-        "text_color_transparent_home": "#FFFFFF"
-      }
-    },
-    "krino_promo": {
-      "type": "krino-promo",
-      "settings": {
-        "headline": "BUEN FIN ANTICIPADO",
-        "offer_strong": "60% OFF",
-        "offer": "+ REGALOS GRATIS",
-        "show_countdown": true,
-        "cycle_hours": 6,
-        "label_days": "Días",
-        "label_hours": "Hrs",
-        "label_minutes": "Min",
-        "label_seconds": "Seg"
+        "text_color_transparent_home": "#ffffff",
+        "enable_transparent_header_product": false,
+        "product_inverse_logo": false,
+        "text_color_transparent_product": "",
+        "enable_transparent_header_collection": false,
+        "collection_inverse_logo": false,
+        "text_color_transparent_collection": ""
       }
     },
     "cart_drawer": {
       "type": "cart-drawer-extras",
       "settings": {
-        "cart_extras_announce_enable": false,
+        "cart_extras_announce_enable": true,
         "cart_extras_announce_text": "<strong>BUEN FIN:</strong> tu descuento ya está aplicado",
-        "cart_extras_announce_bg": "#09184C",
-        "cart_extras_announce_color": "#FFFFFF",
+        "cart_extras_announce_mobile": true,
+        "cart_extras_announce_bg": "#09184c",
+        "cart_extras_announce_color": "#ffffff",
+        "cart_extras_announce_size": 14,
         "cart_extras_timer_enable": false,
         "cart_extras_timer_text": "Tu carrito está reservado por {timer}",
-        "cart_extras_timer_bg": "#FFF1F0",
-        "cart_extras_timer_color": "#C62828",
+        "cart_extras_timer_minutes": 10,
+        "cart_extras_timer_icon": true,
+        "cart_extras_timer_mobile": true,
+        "cart_extras_timer_bg": "#fff1f0",
+        "cart_extras_timer_color": "#c62828",
+        "cart_extras_timer_size": 14,
         "cart_extras_ship_enable": true,
         "cart_extras_ship_threshold": 0,
         "cart_extras_ship_text_unlocked": "¡Tu pedido tiene envío GRATIS!",
         "cart_extras_ship_text_locked": "Te faltan {amount} para tu envío GRATIS",
-        "cart_extras_ship_bg": "#F5F7FF",
-        "cart_extras_ship_color": "#09184C",
-        "cart_extras_ship_fill": "#3D5AFE",
-        "cart_extras_ship_track": "#E6E6E6",
+        "cart_extras_ship_icon": true,
+        "cart_extras_ship_progress": true,
+        "cart_extras_ship_mobile": true,
+        "cart_extras_ship_bg": "#f5f7ff",
+        "cart_extras_ship_color": "#09184c",
+        "cart_extras_ship_fill": "#3d5afe",
+        "cart_extras_ship_track": "#e6e6e6",
         "cart_extras_ship_size": 15,
         "cart_extras_breakdown_enable": true,
         "cart_extras_breakdown_compare_at": true,
         "cart_extras_breakdown_shipping": true,
-        "cart_extras_breakdown_free_color": "#2E7D32",
-        "cart_extras_breakdown_discount_color": "#2E7D32",
+        "cart_extras_breakdown_ship_compare": 0,
+        "cart_extras_breakdown_free_color": "#2e7d32",
+        "cart_extras_breakdown_discount_color": "#2e7d32",
         "cart_extras_hide_tax_note": true,
-        "cart_extras_badges_enable": true,
+        "cart_extras_badges_enable": false,
         "cart_extras_badge_1_text": "Garantía de cambio de tono GRATIS",
         "cart_extras_badge_1_icon": "shield",
         "cart_extras_badge_2_text": "Envío GRATIS",
         "cart_extras_badge_2_icon": "truck",
         "cart_extras_badge_3_text": "",
         "cart_extras_badge_3_icon": "lock",
+        "cart_extras_badges_layout": "row",
+        "cart_extras_badges_mobile": true,
         "cart_extras_badges_color": "#252525",
-        "cart_extras_badges_icon_color": "#3D5AFE",
-        "cart_extras_pay_enable": true
+        "cart_extras_badges_icon_color": "#3d5afe",
+        "cart_extras_badges_size": 13,
+        "cart_extras_pay_enable": true,
+        "cart_extras_pay_mobile": true,
+        "cart_extras_pay_height": 24,
+        "cart_extras_pay_gap": 6
       }
     }
   },
