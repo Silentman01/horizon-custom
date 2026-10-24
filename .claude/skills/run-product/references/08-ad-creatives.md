@@ -46,6 +46,14 @@ Budget: top 5 at 10 each if their ratio is 1:1/9:16/16:9 (2K) or 6 each if 4:5 (
 
 ---
 
+## 1b. Variants gate (before ANY generation — operator rule §7)
+For all 25 ads (top 5 included) write `05_ads/AD_VARIANTS.md`, one row per ad:
+`ad-NN | source rank | original headline (verbatim) | our variant headline | original design | our design variant`.
+- Headline variant: same hook mechanism, structure, length and claim/number strength; different words. Never identical, never softened.
+- Design variant: same format, zones, type style, palette logic; different scene, background, props, people, angle (≈80–90% similar).
+- Top 5 use FIDELITY-VARIANT (tools-kie) with the variant text instead of word-for-word text.
+Stop and present the table to the operator. After approval, run Steps 1–9 with the approved text and do not stop again until delivery (except credit shortage).
+
 ## 2. Step 1 — Load the inputs and the claims bank
 **Purpose:** everything the prompts need in one place, so specs are precise and claims consistent.
 **Do:**

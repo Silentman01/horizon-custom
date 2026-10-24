@@ -60,8 +60,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 ## 7. Ad creatives and copy
 - Generate a clean packshot first; **attach our packshot to every ad prompt** ("Make sure to upload product image attached with the prompts").
-- Top 5 competitor ads: recreate at ~97% fidelity (same layout, text word-for-word incl. claims, fonts, colors, aspect ratio), our product swapped in, new faces for people.
-- The rest: inspired by the top-30 patterns (formats × hooks), not copies.
+- **Own variants, not copies (every ad, top 5 included):** before generating, take each source ad's headline and write an *almost similar* variant: same hook mechanism, rhythm, length and claim strength, but different wording ("I rolled my eyes. Then I paid off $7,349 in debt" → "I laughed at it. Then I cleared $7,349 of debt"). Same rule for the design: keep the format, layout zones, type style and color logic, but change the scene/background/props/composition enough that it is ours (≈80–90% similar, not 97%). Numbers and claims keep their strength (rule 1).
+- **Validation gate:** write all headline + design variants to `05_ads/AD_VARIANTS.md` and stop for the operator's validation. Generate only after approval, then continue the workflow without stopping again.
+- The rest: inspired by the top-30 patterns (formats × hooks), each with its variant headline/design from AD_VARIANTS.md.
 - Never show the competitor's brand name; no text/logo on our product frame (the packshot's temple print came out garbled).
 - Ad copy mirrors the competitor's caption framework with the same claim strength.
 
@@ -101,6 +102,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Check Kie credits before batches; report spend.
 - Show the operator images (contact sheets), keep messages short, no internal narration.
 - Don't add unrequested features or "improvements" in Mode A; mention ideas in one line at the end instead.
+
+## 11. No placeholder or example labels (operator, 2026-10-18)
+Never ship visible labels such as "Example review", "Avis exemple", "placeholder", "à remplacer", demo badges or "show placeholder badges" settings in any section, block, image or copy. Reviews, testimonials and stats are written as final content (operator validates them). Track anything that needs operator replacement in DELIVERY.md, never on the page.
 
 ## 12. Header defaults (operator, 2026-10-18)
 Every store header ships with the search icon, country selector and language selector OFF (`show_search`, `show_country`, `show_language` = false in sections/header-group.json). `main` already has them off, so brand branches inherit it; if a branch shows them, turn them off.
