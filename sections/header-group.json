@@ -188,7 +188,7 @@
         "cart_extras_compact": true,
         "cart_extras_free_enable": true,
         "cart_extras_free_badge": "Regalo",
-        "cart_extras_free_title": "¡Tu frasco de REGALO!",
+        "cart_extras_free_title": "",
         "cart_extras_free_sub": "",
         "cart_extras_free_save": "Ahorras {amount}",
         "cart_extras_free_hide_qty": true,
