@@ -172,6 +172,9 @@
       assign cx_sub = cx.cart_extras_free_sub | replace: '{discount}', cx_offer
     -%}
     <div class="cart-extras-free__note">
+      {%- if cx.cart_extras_free_badge != blank -%}
+        <span class="cart-extras-free__badge">{% render 'cart-extras-icon', name: 'gift' %}{{ cx.cart_extras_free_badge }}</span>
+      {%- endif -%}
       {%- if cx.cart_extras_free_title != blank -%}
         <p class="cart-extras-free__title">{{ cx.cart_extras_free_title }}</p>
       {%- endif -%}
@@ -327,19 +330,16 @@
   .cart-extras-badges__item .cart-extras-icon { color: var(--cx-icon); }
   .cart-drawer__items .cart-items__table-row.cart-extras-free {
     position: relative;
-    margin-top: 6px;
-    padding: 10px;
+    margin-top: 2px;
+    padding: 8px 10px;
     row-gap: 0;
     border: 1.5px dashed var(--cx-free-border);
     border-radius: 12px;
     background: var(--cx-free-bg);
     box-shadow: 0 6px 18px -10px var(--cx-free-accent);
   }
-  .cart-extras-free .cart-items__media { position: relative; }
+  .cart-extras-free .cart-items__media { max-width: 56px; }
   .cart-extras-free__badge {
-    position: absolute;
-    top: -8px;
-    left: -6px;
     display: inline-flex;
     align-items: center;
     gap: 4px;
@@ -353,10 +353,10 @@
     line-height: 1.3;
     text-transform: uppercase;
     white-space: nowrap;
-    box-shadow: 0 2px 6px rgb(0 0 0 / 0.18);
   }
   .cart-extras-free__badge .cart-extras-icon { width: 12px; height: 12px; }
-  .cart-extras-free__note { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin-top: 4px; }
+  .cart-extras-free__note .cart-extras-free__badge, .cart-extras-free__note .cart-extras-free__save { padding: 2px 7px; font-size: 10.5px; white-space: nowrap; }
+  .cart-extras-free__note { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-top: 3px; }
   .cart-extras-free__title { margin: 0; color: var(--cx-free-accent); font-size: 13px; font-weight: 700; line-height: 1.3; }
   .cart-extras-free__sub { flex-basis: 100%; margin: 0; font-size: 12px; line-height: 1.35; opacity: 0.8; }
   .cart-extras-free__save {
@@ -371,6 +371,7 @@
   .cart-extras-free__price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; line-height: 1.2; }
   .cart-extras-free__was { font-size: 12px; opacity: 0.55; }
   .cart-extras-free__now { color: var(--cx-free-accent); font-size: 16px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; }
+  .cart-extras-free .cart-items__variants-wrapper,
   .cart-extras-free .cart-items__unit-price-wrapper,
   .cart-extras-free .cart-items__details .list-unstyled,
   .cart-extras-free--no-qty .cart-items__quantity { display: none; }
