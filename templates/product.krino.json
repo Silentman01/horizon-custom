@@ -25,6 +25,7 @@
             "slideshow_mobile_controls_style": "thumbnails",
             "thumbnail_position": "bottom",
             "thumbnail_width": 72,
+            "thumbnail_radius": 0,
             "aspect_ratio": "1",
             "constrain_to_viewport": false,
             "media_fit": "cover",
@@ -53,11 +54,13 @@
             "gap": 12,
             "sticky_details_desktop": true,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 4,
             "padding-block-end": 24,
@@ -70,17 +73,41 @@
               "settings": {
                 "text": "<strong>Excelente</strong> 4.8/5 — +1,800 reseñas",
                 "link": "",
+                "show_stars": true,
+                "star_color": "#3d5afe",
                 "star_size": 18,
-                "text_size": 12
+                "text_color": "#171717",
+                "font": "var(--font-body--family)",
+                "text_size": 12,
+                "text_size_mobile": 12,
+                "alignment": "flex-start",
+                "gap": 8,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
             "title": {
               "type": "krino-title",
               "settings": {
-                "title": "Rellenador de Densidad Capilar",
+                "title": "Rellenador de Densidad Capilar 2.0",
+                "use_product_title": false,
                 "tag": "h1",
-                "pill": "Buen Fin"
+                "pill": "Buen Fin",
+                "pill_icon": true,
+                "pill_from": "#09184c",
+                "pill_to": "#3d5afe",
+                "pill_text_color": "#ffffff",
+                "pill_size": 11,
+                "pill_radius": 6,
+                "title_color": "#252525",
+                "font": "var(--font-heading--family)",
+                "title_weight": "600",
+                "title_size": 24,
+                "title_size_mobile": 20,
+                "gap": 10,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -89,7 +116,18 @@
               "settings": {
                 "chip_1": "Grip Lock",
                 "chip_2": "No mancha",
-                "chip_3": "A prueba de agua"
+                "chip_3": "A prueba de agua",
+                "chip_4": "",
+                "color": "#3d5afe",
+                "background": "rgba(0,0,0,0)",
+                "border_width": 1.5,
+                "radius": 6,
+                "weight": "500",
+                "text_size": 13,
+                "text_size_mobile": 13,
+                "gap": 8,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -98,7 +136,19 @@
               "settings": {
                 "item_1": "Rellena entradas y zonas despobladas en 10 segundos",
                 "item_2": "A prueba de sudor y agua por +48 hrs",
-                "item_3": "Indetectable: se ve como cabello real"
+                "item_3": "Indetectable: se ve como cabello real",
+                "item_4": "",
+                "item_5": "",
+                "icon": "check-circle",
+                "icon_color": "#3d5afe",
+                "icon_size": 24,
+                "text_color": "#252525",
+                "weight": "500",
+                "text_size": 14,
+                "text_size_mobile": 14,
+                "row_gap": 8,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -106,10 +156,20 @@
               "type": "krino-shade-guide",
               "settings": {
                 "button_label": "Guía de tonos",
+                "show_icon": true,
                 "image_asset": "krino-product-04.jpg",
                 "title": "Guía de tonos",
                 "text": "<p>Elige el tono más parecido a tu color natural para que se funda sin que se note. Si estás entre dos tonos, elige el más oscuro: se ve más natural.</p>",
-                "close_label": "Cerrar"
+                "close_label": "Cerrar",
+                "modal_bg": "#fcfcfc",
+                "modal_text": "#252525",
+                "button_text": "#252525",
+                "button_bg": "rgba(0,0,0,0)",
+                "button_border": "#171717",
+                "radius": 8,
+                "text_size": 14,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -129,50 +189,65 @@
               "type": "krino-shades",
               "settings": {
                 "option_name": "Tono",
-                "label": "Elige tu tono:"
+                "label": "Elige tu tono:",
+                "label_color": "#252525",
+                "label_size": 14,
+                "swatch_size": 30,
+                "swatch_size_mobile": 36,
+                "swatch_radius": 4,
+                "ring_color": "#171717",
+                "gap": 10,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {
                 "shade_1": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Negro",
-                    "color": "#1A1A1A"
-                  }
+                    "color": "#1a1a1a"
+                  },
+                  "blocks": {}
                 },
                 "shade_2": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Castaño oscuro",
-                    "color": "#3B2314"
-                  }
+                    "color": "#3b2314"
+                  },
+                  "blocks": {}
                 },
                 "shade_3": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Castaño medio",
-                    "color": "#5C3A1E"
-                  }
+                    "color": "#5c3a1e"
+                  },
+                  "blocks": {}
                 },
                 "shade_4": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Castaño claro",
-                    "color": "#8B6914"
-                  }
+                    "color": "#8b6914"
+                  },
+                  "blocks": {}
                 },
                 "shade_5": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Rubio",
-                    "color": "#D4A853"
-                  }
+                    "color": "#d4a853"
+                  },
+                  "blocks": {}
                 },
                 "shade_6": {
                   "type": "_krino-shade",
                   "settings": {
                     "value": "Gris",
-                    "color": "#9E9E9E"
-                  }
+                    "color": "#9e9e9e"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -191,9 +266,50 @@
                 "label": "Elige tu paquete:",
                 "hide_native_picker": true,
                 "layout": "row",
-                "layout_mobile": "row"
+                "layout_mobile": "row",
+                "gap": 10,
+                "gap_mobile": 6,
+                "thumb_height": 60,
+                "radius": 8,
+                "label_color": "#252525",
+                "text_color": "#252525",
+                "muted_color": "#757575",
+                "accent_color": "#3d5afe",
+                "card_bg": "#fcfcfc",
+                "card_border": "#00000021",
+                "selected_bg": "#f5f7ff",
+                "selected_border": "#3d5afe",
+                "badge_from": "#09184c",
+                "badge_to": "#3d5afe",
+                "label_size": 14,
+                "title_size": 14,
+                "title_size_mobile": 12,
+                "price_size": 16,
+                "price_size_mobile": 15,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {
+                "card_3": {
+                  "type": "_krino-bundle-card",
+                  "settings": {
+                    "value": "1 frasco",
+                    "quantity": 1,
+                    "free_units": 0,
+                    "preselect": true,
+                    "image_asset": "krino-bundle-1.png",
+                    "badge": "",
+                    "title": "Básico",
+                    "subtitle": "1 frasco",
+                    "unit_label": "/ frasco",
+                    "supply": "Para 1 mes",
+                    "perk": "Cambio de tono GRATIS",
+                    "perk_check": true,
+                    "gift_line": "+ ENVÍO GRATIS",
+                    "save": "Ahorra {percent}%"
+                  },
+                  "blocks": {}
+                },
                 "card_1": {
                   "type": "_krino-bundle-card",
                   "settings": {
@@ -211,25 +327,8 @@
                     "perk_check": true,
                     "gift_line": "+ ENVÍO GRATIS",
                     "save": "Ahorra {percent}%"
-                  }
-                },
-                "card_3": {
-                  "type": "_krino-bundle-card",
-                  "settings": {
-                    "value": "1 frasco",
-                    "quantity": 1,
-                    "free_units": 0,
-                    "preselect": true,
-                    "image_asset": "krino-bundle-1.png",
-                    "title": "Básico",
-                    "subtitle": "1 frasco",
-                    "unit_label": "/ frasco",
-                    "supply": "Para 1 mes",
-                    "perk": "Cambio de tono GRATIS",
-                    "perk_check": true,
-                    "gift_line": "+ ENVÍO GRATIS",
-                    "save": "Ahorra {percent}%"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -241,7 +340,19 @@
               "type": "krino-gifts",
               "settings": {
                 "label": "Regalos GRATIS incluidos:",
-                "option_name": "Paquete"
+                "option_name": "Paquete",
+                "label_color": "#252525",
+                "text_color": "#252525",
+                "accent_color": "#3d5afe",
+                "tile_bg": "#fcfcfc",
+                "tile_border": "#00000021",
+                "radius": 8,
+                "gap": 10,
+                "label_size": 14,
+                "text_size": 12,
+                "text_size_mobile": 11,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {
                 "gift_1": {
@@ -250,8 +361,10 @@
                     "icon": "truck",
                     "title": "Envío",
                     "value": "$129",
-                    "free_label": "GRATIS"
-                  }
+                    "free_label": "GRATIS",
+                    "only_for": ""
+                  },
+                  "blocks": {}
                 },
                 "gift_2": {
                   "type": "_krino-gift",
@@ -259,8 +372,10 @@
                     "icon": "gift",
                     "title": "Aplicador de precisión",
                     "value": "$249",
-                    "free_label": "GRATIS"
-                  }
+                    "free_label": "GRATIS",
+                    "only_for": ""
+                  },
+                  "blocks": {}
                 },
                 "gift_3": {
                   "type": "_krino-gift",
@@ -270,7 +385,8 @@
                     "value": "$769",
                     "free_label": "GRATIS",
                     "only_for": "3 frascos"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -286,7 +402,19 @@
                 "sold_out_label": "Agotado",
                 "show_price": true,
                 "show_compare": true,
-                "hide_native": true
+                "hide_native": true,
+                "background": "#3d5afe",
+                "text_color": "#ffffff",
+                "compare_color": "#ffffffb3",
+                "uppercase": true,
+                "weight": "400",
+                "text_size": 14,
+                "text_size_mobile": 14,
+                "height": 48,
+                "height_mobile": 50,
+                "radius": 8,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -296,7 +424,18 @@
                 "text_1": "Enviamos en 24 hrs",
                 "icon_1": "truck",
                 "text_2": "Cambio de tono GRATIS",
-                "icon_2": "verified"
+                "icon_2": "verified",
+                "text_3": "",
+                "icon_3": "shield",
+                "text_color": "#252525",
+                "icon_color": "#3d5afe",
+                "icon_size": 20,
+                "weight": "500",
+                "text_size": 14,
+                "text_size_mobile": 14,
+                "justify": "space-evenly",
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -317,7 +456,17 @@
               "settings": {
                 "line_1": "ENVÍO ESTIMADO: mañana, {weekday} {day} de {month}",
                 "line_2": "PIDE EN LOS PRÓXIMOS {countdown}",
-                "days": 1
+                "days": 1,
+                "weekdays": "domingo,lunes,martes,miércoles,jueves,viernes,sábado",
+                "months": "enero,febrero,marzo,abril,mayo,junio,julio,agosto,septiembre,octubre,noviembre,diciembre",
+                "show_icon": true,
+                "text_color": "#252525",
+                "muted_color": "#757575",
+                "countdown_color": "#758afd",
+                "icon_color": "#252525",
+                "text_size": 12,
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {}
             },
@@ -325,29 +474,40 @@
               "type": "krino-video-rail",
               "settings": {
                 "per_view": 3,
-                "per_view_mobile": 2.7
+                "per_view_mobile": 2.7,
+                "gap": 10,
+                "radius": 8,
+                "icon_color": "#ffffff",
+                "padding_top": 0,
+                "padding_bottom": 0
               },
               "blocks": {
                 "video_1": {
                   "type": "_krino-video",
                   "settings": {
+                    "poster_asset": "",
                     "label": "Video 1 de clientes",
                     "play_label": "Reproducir video"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "video_2": {
                   "type": "_krino-video",
                   "settings": {
+                    "poster_asset": "",
                     "label": "Video 2 de clientes",
                     "play_label": "Reproducir video"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "video_3": {
                   "type": "_krino-video",
                   "settings": {
+                    "poster_asset": "",
                     "label": "Video 3 de clientes",
                     "play_label": "Reproducir video"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -363,6 +523,13 @@
                 "dividers": true,
                 "divider_color": "#171717",
                 "type_preset": "h5",
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
                 "padding-block-start": 4,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -374,7 +541,8 @@
                   "settings": {
                     "heading": "¿Qué es?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "text": {
@@ -392,6 +560,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -412,7 +581,8 @@
                   "settings": {
                     "heading": "¿Y si tengo zonas completamente calvas?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "text": {
@@ -430,6 +600,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -450,7 +621,8 @@
                   "settings": {
                     "heading": "¿Cómo se aplica?",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "text": {
@@ -468,6 +640,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -488,7 +661,8 @@
                   "settings": {
                     "heading": "Ventajas de tu paquete",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "text": {
@@ -506,6 +680,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -526,7 +701,8 @@
                   "settings": {
                     "heading": "Envíos y devoluciones",
                     "open_by_default": false,
-                    "icon": "none"
+                    "icon": "none",
+                    "width": 20
                   },
                   "blocks": {
                     "text": {
@@ -544,6 +720,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -573,6 +750,15 @@
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -585,8 +771,23 @@
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
+                "text_color": "",
                 "show_pickup_availability": false,
                 "gift_card_form": false,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -596,14 +797,24 @@
                 "quantity": {
                   "type": "quantity",
                   "static": true,
-                  "settings": {},
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
                   "blocks": {}
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
                 },
@@ -646,6 +857,7 @@
         "limit_details_width": false,
         "gap": 48,
         "enable_sticky_add_to_cart": false,
+        "background_color": "",
         "padding-block-start": 30,
         "padding-block-end": 50
       }
@@ -674,10 +886,16 @@
       ],
       "settings": {
         "background": "#000000",
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
+        "font": "var(--font-body--family)",
+        "weight": "500",
         "text_size": 14,
+        "text_size_mobile": 14,
+        "icon_size": 24,
         "gap": 30,
-        "speed": 40
+        "speed": 40,
+        "padding_top": 15,
+        "padding_bottom": 15
       }
     },
     "krino_reviews": {
@@ -689,7 +907,7 @@
             "before_asset": "krino-review-1-before.jpg",
             "after_asset": "krino-review-1-after.jpg",
             "shade": "Negro",
-            "shade_color": "#1A1A1A",
+            "shade_color": "#1a1a1a",
             "date": "09/02/2026",
             "title": "Funciona súper bien",
             "text": "<p>De lo mejor que he descubierto este año. De verdad cubre las zonas despobladas y funciona tal cual lo anuncian. La neta sí me sorprendió jaja</p>",
@@ -702,7 +920,7 @@
             "before_asset": "krino-review-2-before.jpg",
             "after_asset": "krino-review-2-after.jpg",
             "shade": "Castaño medio",
-            "shade_color": "#5C3A1E",
+            "shade_color": "#5c3a1e",
             "date": "12/02/2026",
             "title": "Pensé que era como las fibras",
             "text": "<p>¡Pero no! Se adhiere al cabello y a la raíz porque es polvo compacto. Al principio se siente raro, pero es de lo mejor que hay para recuperar la seguridad rápido y sin complicarte.</p>",
@@ -715,7 +933,7 @@
             "before_asset": "krino-review-3-before.jpg",
             "after_asset": "krino-review-3-after.jpg",
             "shade": "Gris",
-            "shade_color": "#9E9E9E",
+            "shade_color": "#9e9e9e",
             "date": "15/01/2026",
             "title": "producto fantástico",
             "text": "<p>Producto fantástico, fácil de aplicar, una diferencia increíble en el hueco de la coronilla. El color se funde perfecto y vale cada peso. Eso sí, se pasa a la almohada en la noche, así que hay que lavarlo antes de dormir.</p>",
@@ -728,7 +946,7 @@
             "before_asset": "krino-review-4-before.jpg",
             "after_asset": "krino-review-4-after.jpg",
             "shade": "Negro",
-            "shade_color": "#1A1A1A",
+            "shade_color": "#1a1a1a",
             "date": "03/03/2026",
             "title": "¡Funciona mejor!",
             "text": "<p>Ya probé de todo: fibras, sprays, tintes. Es el primero que se ve natural Y aguanta todo el día. Hasta con lluvia.</p>",
@@ -741,7 +959,7 @@
             "before_asset": "krino-review-5-before.jpg",
             "after_asset": "krino-review-5-after.jpg",
             "shade": "Negro",
-            "shade_color": "#1A1A1A",
+            "shade_color": "#1a1a1a",
             "date": "03/03/2026",
             "title": "¡FUNCIONA TAL CUAL LO PROMETEN!",
             "text": "<p>Excelente atención al cliente y el producto funciona tal cual lo prometen. Muy contento con mi compra y, otra vez, la atención al cliente es de primera.</p>",
@@ -754,7 +972,7 @@
             "before_asset": "krino-review-6-before.jpg",
             "after_asset": "krino-review-6-after.jpg",
             "shade": "Castaño oscuro",
-            "shade_color": "#3B2314",
+            "shade_color": "#3b2314",
             "date": "03/03/2026",
             "title": "Ya llevo un buen rato usándolo",
             "text": "<p>…y está buenísimo. Hace poco mi pedido llegó dañado, pero Krino me mandó otro sin costo al momento. Su rapidez y profesionalismo me impresionaron. Cliente de por vida.</p>",
@@ -774,7 +992,25 @@
         "heading": "No lo decimos nosotros",
         "trust_bold": "Excelente",
         "show_trust_stars": true,
-        "trust_text": "Más de 40,000 hombres confían en nosotros"
+        "trust_text": "Más de 40,000 hombres confían en nosotros",
+        "show_dots": true,
+        "background": "#fcfcfc",
+        "text_color": "#252525",
+        "muted_color": "#757575",
+        "star_color": "#3d5afe",
+        "card_bg": "#fcfcfc",
+        "card_border": "#0000001f",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "card_width": 395,
+        "card_width_mobile": 82,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "krino_tech": {
@@ -814,9 +1050,28 @@
         "image_asset": "krino-tecnologia.jpg",
         "ratio": "5 / 4",
         "image_side": "left",
+        "image_width": 48,
         "kicker": "NUESTRA TECNOLOGÍA",
         "heading": "Tecnología Grip-Lock 48™",
-        "text": "<p>Tres capas de ciencia trabajando juntas para lograr el rellenador capilar más natural y duradero jamás creado.</p>"
+        "text": "<p>Tres capas de ciencia trabajando juntas para lograr el rellenador capilar más natural y duradero jamás creado.</p>",
+        "button_label": "",
+        "button_link": "",
+        "product_handle": "polvo-densificador",
+        "button_icon": true,
+        "background": "#fcfcfc",
+        "text_color": "#252525",
+        "accent_color": "#3d5afe",
+        "button_bg": "#3d5afe",
+        "button_text": "#ffffff",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "padding_top": 26,
+        "padding_bottom": 36,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 30
       }
     },
     "krino_lifestyle": {
@@ -859,7 +1114,22 @@
       ],
       "settings": {
         "heading": "Te retamos a que se te caiga",
-        "subheading": "Desaparecemos tus entradas. Legalmente."
+        "subheading": "Desaparecemos tus entradas. Legalmente.",
+        "ratio": "1 / 1",
+        "columns": 4,
+        "columns_mobile": 2,
+        "gap": 15,
+        "background": "#fcfcfc",
+        "text_color": "#252525",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 20
       }
     },
     "krino_howto": {
@@ -906,7 +1176,20 @@
       ],
       "settings": {
         "heading": "Si sabes abrir un frasco, ya la armaste",
-        "subheading": "Una rutina tan fácil que vas a sentir que haces trampa."
+        "subheading": "Una rutina tan fácil que vas a sentir que haces trampa.",
+        "background": "#000000",
+        "text_color": "#ffffff",
+        "tab_active_bg": "#ffffff",
+        "tab_active_text": "#000000",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "padding_top": 30,
+        "padding_bottom": 30,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 30
       }
     },
     "krino_zones": {
@@ -953,16 +1236,43 @@
       ],
       "settings": {
         "heading": "Funciona literal donde sea",
-        "subheading": "Krino rellena donde lo necesites: coronilla, entradas o barba."
+        "subheading": "Krino rellena donde lo necesites: coronilla, entradas o barba.",
+        "show_dots": true,
+        "slide_width": 600,
+        "slide_width_mobile": 69,
+        "background": "#fcfcfc",
+        "text_color": "#252525",
+        "accent_color": "#3d5afe",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "padding_top": 46,
+        "padding_bottom": 46,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "krino_barber": {
       "type": "krino-barber",
       "settings": {
         "image_asset": "krino-barberia.jpg",
+        "image_position": "center",
         "heading": "Muy pronto en tu barbería",
         "text": "Krino ya está en más de 100 barberías profesionales en todo México.",
-        "overlay_opacity": 50
+        "overlay_color": "#000000",
+        "overlay_opacity": 50,
+        "text_color": "#ffffff",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "height": 50,
+        "height_mobile": 50,
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "krino_support_faq": {
@@ -1029,16 +1339,36 @@
       ],
       "settings": {
         "heading": "Preguntas frecuentes",
+        "exclusive": false,
+        "show_card": true,
+        "card_side": "left",
         "card_heading": "¿Necesitas ayuda?",
         "card_text": "Nuestro equipo te atiende de lunes a sábado, de 10:00 a 20:00 hrs.",
         "button_label": "Contacta a soporte",
+        "button_link": "",
         "badge": "Cambio de tono GRATIS",
-        "heading_weight": "600"
+        "background": "#fcfcfc",
+        "text_color": "#252525",
+        "card_bg": "#fcfcfc",
+        "button_bg": "#3d5afe",
+        "button_text": "#ffffff",
+        "divider_color": "#171717",
+        "heading_font": "var(--font-heading--family)",
+        "heading_weight": "600",
+        "heading_size": 32,
+        "heading_size_mobile": 24,
+        "body_size": 14,
+        "padding_top": 50,
+        "padding_bottom": 50,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "krino_reviews_app": {
       "type": "krino-apps",
       "settings": {
+        "background": "#fcfcfc",
+        "max_width": 1400,
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -1048,9 +1378,19 @@
       "settings": {
         "enable": true,
         "title": "Polvo Densificador 2.0",
+        "show_title": true,
+        "show_title_mobile": false,
+        "show_image": true,
         "action": "scroll",
         "button_label": "Elige tu paquete",
-        "button_label_short": "Elegir"
+        "button_label_short": "Elegir",
+        "background": "#ffffff",
+        "text_color": "#252525",
+        "button_bg": "#3d5afe",
+        "button_text": "#ffffff",
+        "text_size": 14,
+        "bottom": 24,
+        "bottom_mobile": 16
       }
     }
   },
