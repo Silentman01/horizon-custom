@@ -18,6 +18,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 - **Mode B:** zero *unintended* discrepancies; every intentional improvement is logged with a reason.
 - Every image/ad batch reviewed on a contact sheet; no misspellings, no competitor brand names, no logo on product images, claims at full strength.
 - `shopify theme check` shows no new offenses compared with the baseline on `main`.
+- **Every Phase 3 stream has its output on disk** before delivery: check the SKILL.md stream table row by row (spec, copy deck, theme, home, product images, page images, `05_ads/COMPETITOR_ADS.md`, `05_ads/AD_COPY.md`, ads, policies, checkout header, logo set). A stop instruction like "stop at remaking ads" skips only that stream; the others still run. A missing file = not done (Krino shipped without AD_COPY.md, 2026-10-25).
 
 ## 2. Page QA
 **Inputs:** competitor screenshots (`02_competitor/page/desk*.png`, mobile sheets if available), SECTION_SPEC.md, the built theme files.
