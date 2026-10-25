@@ -49,7 +49,13 @@
     {%- endif -%}
   </div>
 
-  {% if settings.show_cart_note or settings.show_add_discount_code %}
+  {%- liquid
+    assign cx_show_code = settings.show_add_discount_code
+    if drawer and cx.cart_extras_hide_discount_code
+      assign cx_show_code = false
+    endif
+  -%}
+  {% if settings.show_cart_note or cx_show_code %}
     <div class="cart-actions">
       {% if settings.show_cart_note %}
         <script
@@ -100,10 +106,10 @@
           %}
         </cart-note>
       {% endif %}
-      {% if settings.show_cart_note and settings.show_add_discount_code %}
+      {% if settings.show_cart_note and cx_show_code %}
         <div class="cart-actions__divider"></div>
       {% endif %}
-      {% if settings.show_add_discount_code %}
+      {% if cx_show_code %}
         {% liquid
           assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
           for item in cart.items
