@@ -2,6 +2,8 @@
 
 Goal: Meta ad copy for our brand that mirrors the competitor's proven caption structure beat for beat, with claims at the same strength, in the market's language: primary text Version A (1:1 structure), Version B (short), 5 headlines with top picks, link description, CTA rotation. Output: `05_ads/AD_COPY.md` from `templates/AD_COPY.md`.
 
+**One shared file:** `05_ads/AD_COPY.md` sits at the root of `05_ads/` and is the only copy set for the brand: every ad uses it, image and video alike, until the operator says otherwise. Never put copy files inside `generated/`, batch or video folders, and new batches (images or videos) reuse it instead of writing new primary texts or headlines.
+
 Read first: `00-operator-rules.md` §1 (claims — no softening, no caveat notes), §11 (copy style).
 Starts when `05_ads/competitor/ranking.json` (captions) and `COMPETITOR_ADS.md` exist. Sub-agents return the document as text; the master saves it.
 

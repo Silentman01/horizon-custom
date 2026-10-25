@@ -109,7 +109,7 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 | D1 Ad analysis | 2 analyst agents (ranks 1–15, 16–30) | 07 | text → master compiles `05_ads/COMPETITOR_ADS.md` |
 | D2a Ad variants | ad-creative agent (after D1) | 08 §1b | `05_ads/AD_VARIANTS.md` → **operator gate** |
 | D2 Ad creatives | ad-creative agent or master (after approval + packshot) | 08, tools-kie | 25 ads → `05_ads/generated/` |
-| E Ad copy | copy agent (after D1) | 09 | `05_ads/AD_COPY.md` |
+| E Ad copy | copy agent (after D1) | 09 | `05_ads/AD_COPY.md` (root of 05_ads, one copy set shared by image and video ads) |
 | G Video ads (on request) | video agent (after the packshot + operator-confirmed candidates) | 14 | `05_ads/generated/videos/vNN-<slug>.mp4` + `vNN-work/` (clips sheet, draft, PLAN) |
 | H Checkout header | master (small, after branding + C) | `scripts/checkout_header.py`, mockup `templates/checkout-header-mockup.png` | `07_checkout/<brand>-checkout-header.png` (+@2x): logo, "trusted by" gradient bar (brand colors) with 3 real-looking customer faces cropped from our page images, 3 trust points in the store language. Config `07_checkout/checkout_header.json`; strip metadata; operator uploads it in Settings > Checkout > Customize > Header |
 | F Policies | master (small) | 12 | `policies.py transform` → `06_policies/<handle>.html` + REVIEW.md (1:1 text, brand/domain/email swapped, addresses/phones/registration numbers removed) |
