@@ -362,5 +362,15 @@
       "success_moderated": "Comentario publicado y a la espera de moderación",
       "success": "Comentario publicado"
     }
+  },
+  "shopify": {
+    "checkout": {
+      "localized_fields": {
+        "additional_information": {
+          "shipping_credential_mx": "XAXX010101000",
+          "tax_credential_mx": "XAXX010101000"
+        }
+      }
+    }
   }
 }
