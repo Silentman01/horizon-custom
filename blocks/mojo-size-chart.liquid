@@ -1,0 +1,80 @@
+{%- assign s = block.settings -%}
+<div class="mojo-sc" style="{% render 'mojo-vars' %}" {{ block.shopify_attributes }}>
+  <button type="button" class="mojo-sc__open" data-mojo-size-open>{% render 'mojo-icon', name: 'ruler', size: 16 %}<span>{{ s.link_text }}</span></button>
+  <dialog class="mojo-sc__dialog" data-mojo-size-dialog aria-label="{{ s.link_text | escape }}">
+    <button type="button" class="mojo-sc__close" data-mojo-size-close aria-label="Close">{% render 'mojo-icon', name: 'close', size: 20 %}</button>
+    {% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: s.ratio, placeholder: 'product-1', alt: s.link_text, sizes: '(min-width: 750px) 720px, 92vw' %}
+  </dialog>
+</div>
+
+{% stylesheet %}
+.mojo-sc { font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-sc__open { display: inline-flex; align-items: center; gap: 8px; background: none; border: 0; padding: 4px 0; font: inherit; font-size: 12px; color: inherit; text-decoration: underline; cursor: pointer; min-height: 44px; }
+.mojo-sc__dialog { padding: 0; border: 0; width: min(92vw, 720px); max-height: 90vh; overflow: auto; background: #fff; }
+.mojo-sc__dialog::backdrop { background: rgb(0 0 0 / 55%); }
+.mojo-sc__close { position: absolute; top: 8px; right: 8px; z-index: 2; width: 40px; height: 40px; border: 0; border-radius: 50%; background: #fff; color: #000; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  const init = () => document.querySelectorAll('.mojo-sc:not([data-mojo-ready])').forEach((root) => {
+    root.dataset.mojoReady = '1';
+    const dlg = root.querySelector('[data-mojo-size-dialog]');
+    root.querySelector('[data-mojo-size-open]').addEventListener('click', () => dlg.showModal());
+    root.querySelector('[data-mojo-size-close]').addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:block:select', init);
+  document.addEventListener('shopify:section:load', init);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo size chart link",
+  "settings": [
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Size Chart"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Size chart image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Size chart theme file name (optional)"
+    },
+    {
+      "type": "select",
+      "id": "ratio",
+      "label": "Image ratio",
+      "default": "1.22 / 1",
+      "options": [
+        {
+          "value": "1.22 / 1",
+          "label": "Landscape"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo size chart link"
+    }
+  ]
+}
+{% endschema %}

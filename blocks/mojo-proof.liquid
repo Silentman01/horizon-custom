@@ -1,0 +1,38 @@
+{%- assign s = block.settings -%}
+<div class="mojo-pf" style="{% render 'mojo-vars' %}--mojo-gold:{{ s.star_color }};" {{ block.shopify_attributes }}>
+  {%- if s.lead != blank -%}<strong class="mojo-pf__lead">{{ s.lead }}</strong>{%- endif -%}
+  <span class="mojo-pf__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'mojo-icon', name: 'star', size: 16 %}{%- endfor -%}</span>
+  <span class="mojo-pf__text">{{ s.text }}</span>
+</div>
+
+{% stylesheet %}
+.mojo-pf { display: flex; align-items: center; gap: 8px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-pf__lead { font-size: 13px; font-weight: 600; }
+.mojo-pf__stars { display: inline-flex; gap: 1px; color: var(--mojo-gold); }
+.mojo-pf__text { font-size: 12px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo proof line",
+  "settings": [
+    {
+      "type": "text",
+      "id": "lead",
+      "label": "Bold word before the stars (e.g. Excellent)"
+    },
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "175,000+ Men Made the Switch"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star colour",
+      "default": "#E8B130"
+    }
+  ]
+}
+{% endschema %}

@@ -9,25 +9,25 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
+    "mojo_hero": {
       "type": "hero",
       "blocks": {
-        "text_YLPk4p": {
+        "eyebrow": {
           "type": "text",
           "name": "t:names.heading",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
+            "text": "<p>SILK UNDERWEAR</p>",
             "width": "fit-content",
             "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
+            "alignment": "center",
+            "type_preset": "paragraph",
             "font": "var(--font-body--family)",
-            "font_size": "1rem",
+            "font_size": "0.875rem",
             "line_height": "normal",
             "letter_spacing": "normal",
-            "case": "none",
+            "case": "uppercase",
             "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
+            "text_color": "#FFFFFF",
             "background": false,
             "background_color": "#00000026",
             "corner_radius": 0,
@@ -38,17 +38,69 @@
           },
           "blocks": {}
         },
-        "button_H9gpTf": {
+        "headline": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h1>Get up to 60% off</h1>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "h1",
+            "font": "var(--font-body--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#FFFFFF",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "sub": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<p>100% mulberry silk boxers. Built for balls. Backed by science.</p>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "center",
+            "type_preset": "paragraph",
+            "font": "var(--font-body--family)",
+            "font_size": "1rem",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "text_color": "#FFFFFF",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "cta": {
           "type": "button",
           "name": "t:names.button",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
+            "label": "SHOP NOW →",
+            "link": "/products/mojo-silk-boxers-sustainable-comfort",
             "open_in_new_tab": false,
             "style_class": "button-custom",
             "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
+            "custom_button_text": "#FFFFFF",
+            "custom_button_border": "#FFFFFF",
             "width": "fit-content",
             "custom_width": 100,
             "width_mobile": "fit-content",
@@ -58,8 +110,10 @@
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "eyebrow",
+        "headline",
+        "sub",
+        "cta"
       ],
       "name": "t:names.hero",
       "settings": {
@@ -73,22 +127,110 @@
         "vertical_alignment": "flex-end",
         "align_baseline": true,
         "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
+        "vertical_alignment_flex_direction_column": "center",
+        "gap": 16,
+        "section_width": "full-width",
+        "section_height": "large",
         "section_height_custom": 50,
-        "toggle_overlay": true,
+        "toggle_overlay": false,
         "overlay_color": "#12121266",
         "overlay_style": "solid",
         "gradient_direction": "to bottom",
         "blurred_reflection": false,
         "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "padding-block-start": 40,
+        "padding-block-end": 40,
+        "custom_mobile_media": true,
+        "media_type_1_mobile": "image",
+        "background_color": "#111111"
       }
     },
-    "product_list_fa6P9H": {
+    "mojo_stats": {
+      "type": "mojo-home-stats",
+      "settings": {},
+      "blocks": {
+        "s1": {
+          "type": "stat",
+          "settings": {
+            "value": "175k+",
+            "caption": "5-Star Reviews"
+          }
+        },
+        "s2": {
+          "type": "stat",
+          "settings": {
+            "value": "1 Million+",
+            "caption": "Trusted Customers"
+          }
+        },
+        "s3": {
+          "type": "stat",
+          "settings": {
+            "value": "45-Day",
+            "caption": "Guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "s1",
+        "s2",
+        "s3"
+      ]
+    },
+    "mojo_press": {
+      "type": "mojo-press",
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "publication": "Men's Health",
+            "quote": "“Hands down the best boxers our office has tested. Well done, Mojo.”"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "publication": "GQ",
+            "quote": "“Ten hours in, no sweat and no odour. Honestly impressive.”"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "publication": "Forbes",
+            "quote": "“They sit snug and never shift. Easily the best boxers money can buy.”"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "mojo_story_1": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-i6-standing-beige.jpg",
+        "image_side": "left",
+        "image_ratio": "1 / 1",
+        "image_alt": "Man in Mojo cream silk boxers against a beige studio wall",
+        "heading": "The silk boxer that moves and breathes with you.",
+        "text": "<p>Natural silk keeps your temperature in check and stops chafing before it starts. Mojo is made for confidence: light, sweat-free and built to move with you.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "bullet_color": "#000000"
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "mojo_bestsellers": {
       "type": "product-list",
       "blocks": {
         "static-header": {
@@ -96,14 +238,14 @@
           "name": "t:names.header",
           "static": true,
           "settings": {
-            "content_direction": "row",
+            "content_direction": "column",
             "vertical_on_mobile": false,
             "horizontal_alignment": "space-between",
             "vertical_alignment": "flex-end",
             "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
+            "horizontal_alignment_flex_direction_column": "center",
             "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
+            "gap": 16,
             "width": "fill",
             "custom_width": 100,
             "width_mobile": "fill",
@@ -127,11 +269,11 @@
               "type": "_product-list-text",
               "name": "t:names.collection_title",
               "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
+                "text": "<h2>Our Bestsellers</h2>",
                 "width": "fit-content",
                 "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
+                "alignment": "center",
+                "type_preset": "h3",
                 "font": "var(--font-body--family)",
                 "font_size": "",
                 "line_height": "normal",
@@ -152,9 +294,9 @@
               "type": "_product-list-button",
               "name": "t:names.product_list_button",
               "settings": {
-                "label": "View all",
+                "label": "VIEW ALL",
                 "open_in_new_tab": false,
-                "style_class": "button-unstyled",
+                "style_class": "button",
                 "width": "fit-content",
                 "custom_width": 100,
                 "width_mobile": "fit-content",
@@ -188,7 +330,7 @@
               "type": "_product-card-gallery",
               "name": "t:names.product_card_media",
               "settings": {
-                "image_ratio": "adapt",
+                "image_ratio": "square",
                 "border": "none",
                 "border_width": 1,
                 "border_opacity": 100,
@@ -206,10 +348,10 @@
               "settings": {
                 "width": "100%",
                 "max_width": "normal",
-                "alignment": "left",
+                "alignment": "center",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
-                "font_size": "1rem",
+                "font_size": "0.9375rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -233,7 +375,7 @@
                 "show_tax_info": false,
                 "type_preset": "h6",
                 "width": "100%",
-                "alignment": "left",
+                "alignment": "center",
                 "font": "var(--font-body--family)",
                 "font_size": "1rem",
                 "line_height": "normal",
@@ -259,24 +401,368 @@
         "collection": "all",
         "layout_type": "grid",
         "carousel_on_mobile": false,
-        "max_products": 8,
+        "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
-        "columns_gap": 8,
+        "columns_gap": 15,
         "rows_gap": 24,
         "icons_style": "arrow",
         "icons_shape": "none",
         "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
+        "horizontal_alignment": "center",
         "gap": 28,
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "mojo_story_2": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-polaroid-02.jpg",
+        "image_side": "right",
+        "image_ratio": "1 / 1",
+        "image_alt": "Man in Mojo silk boxers smiling in a sunlit garden",
+        "heading": "Your Balls Deserve Better.",
+        "text": "<p>Feel good down there and you move differently. Mojo gives you the freedom, freshness and support to take on whatever the day throws at you.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "bullet_color": "#000000"
+      },
+      "blocks": {},
+      "block_order": []
+    },
+    "mojo_bundles": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "name": "t:names.header",
+          "static": true,
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": false,
+            "horizontal_alignment": "space-between",
+            "vertical_alignment": "flex-end",
+            "align_baseline": true,
+            "horizontal_alignment_flex_direction_column": "center",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 16,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_list_text_YFtzcL": {
+              "type": "_product-list-text",
+              "name": "t:names.collection_title",
+              "settings": {
+                "text": "<h2>Bundles</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_list_button_MWeP9V": {
+              "type": "_product-list-button",
+              "name": "t:names.product_list_button",
+              "settings": {
+                "label": "VIEW ALL",
+                "open_in_new_tab": false,
+                "style_class": "button",
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_list_text_YFtzcL",
+            "product_list_button_MWeP9V"
+          ]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 4,
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_677WP3": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "square",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_YXxMTj": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "center",
+                "type_preset": "paragraph",
+                "font": "var(--font-body--family)",
+                "font_size": "0.9375rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_JQzVV4": {
+              "type": "price",
+              "name": "t:names.product_price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "center",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_677WP3",
+            "product_title_YXxMTj",
+            "price_JQzVV4"
+          ]
+        }
+      },
+      "name": "t:names.featured_collection",
+      "settings": {
+        "collection": "all",
+        "layout_type": "carousel",
+        "carousel_on_mobile": true,
+        "max_products": 3,
+        "columns": 3,
+        "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
+        "columns_gap": 15,
+        "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "horizontal_alignment": "center",
+        "gap": 28,
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    },
+    "mojo_reviews": {
+      "type": "mojo-testimonials",
+      "settings": {
+        "heading": "Trusted by 175k+ Men",
+        "rating": 5,
+        "count_text": "Based on 4,276 reviews",
+        "star_color": "#00B67A",
+        "padding_top": 60,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "r1": {
+          "type": "review",
+          "settings": {
+            "title": "Surprisingly Comfortable",
+            "text": "I wasn't sure what to expect, but these silk boxers caught me off guard. Soft, light, and they stay put. Perfect for lounging at home.",
+            "name": "Mark T.",
+            "date": "3 days ago"
+          }
+        },
+        "r2": {
+          "type": "review",
+          "settings": {
+            "title": "Way Better Than I Expected",
+            "text": "I'm a cotton guy. These feel completely different, in a good way. So light and smooth it's like wearing nothing. No sweat, no sticking. After a few wears and washes they still look great. I didn't think I'd convert, but here we are.",
+            "name": "Samuel O.",
+            "date": "1 week ago"
+          }
+        },
+        "r3": {
+          "type": "review",
+          "settings": {
+            "title": "Perfect for Everyday Wear",
+            "text": "I bought them out of curiosity and now I won't wear anything else. The silk is incredibly smooth, they breathe, and they look great. I wear them through long office days and they stay comfortable. Give them a go.",
+            "name": "Stuart M.",
+            "date": "2 days ago"
+          }
+        },
+        "r4": {
+          "type": "review",
+          "settings": {
+            "title": "Cleared Out My Drawer for These",
+            "text": "The most comfortable boxers I've ever owned. I binned every other pair I had.",
+            "name": "James F.",
+            "date": "2 weeks ago"
+          }
+        },
+        "r5": {
+          "type": "review",
+          "settings": {
+            "title": "Definitely Buying More",
+            "text": "I sleep in these and they're very comfortable. They feel well made. I'll be ordering again, no doubt.",
+            "name": "Mike D.",
+            "date": "5 days ago"
+          }
+        },
+        "r6": {
+          "type": "review",
+          "settings": {
+            "title": "Partner Loves Them",
+            "text": "My partner says they're the most comfortable he has ever worn. After many washes they keep their shape and softness. And, honestly, I love how he looks in them.",
+            "name": "Camelia J.",
+            "date": "3 weeks ago"
+          }
+        },
+        "r7": {
+          "type": "review",
+          "settings": {
+            "title": "Pricey but Worth It",
+            "text": "So comfortable. The first pair didn't fit, but customer service swapped them quickly. Light, soft, no irritation, fresh all day. A touch pricey, but worth every penny.",
+            "name": "John R.",
+            "date": "1 month ago"
+          }
+        },
+        "r8": {
+          "type": "review",
+          "settings": {
+            "title": "Happy Husband",
+            "text": "I bought these for my husband and he is genuinely impressed. I wasn't sure silk was his thing, but now he's asking for more colours. A great gift. I hope you bring out even more shades.",
+            "name": "Sarah F.",
+            "date": "4 days ago"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3",
+        "r4",
+        "r5",
+        "r6",
+        "r7",
+        "r8"
+      ]
+    },
+    "mojo_guarantee": {
+      "type": "mojo-guarantee",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 50
+      },
+      "blocks": {
+        "g1": {
+          "type": "column",
+          "settings": {
+            "icon": "refund",
+            "title": "45-Day Money-Back Guarantee",
+            "text": "Not happy for any reason? We'll send you a fresh pair or give you a full refund on any unworn pairs. No questions asked."
+          }
+        },
+        "g2": {
+          "type": "column",
+          "settings": {
+            "icon": "parcel",
+            "title": "Express Shipping",
+            "text": "Orders are processed within 1 day. Order today and it ships the next working day."
+          }
+        },
+        "g3": {
+          "type": "column",
+          "settings": {
+            "icon": "chat",
+            "title": "24/7 Customer Support",
+            "text": "Got a question or a problem? Email us any time. Our support team is here 24/7 to help."
+          }
+        }
+      },
+      "block_order": [
+        "g1",
+        "g2",
+        "g3"
+      ]
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "mojo_hero",
+    "mojo_stats",
+    "mojo_press",
+    "mojo_story_1",
+    "mojo_bestsellers",
+    "mojo_story_2",
+    "mojo_bundles",
+    "mojo_reviews",
+    "mojo_guarantee"
   ]
 }

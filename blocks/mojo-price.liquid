@@ -1,0 +1,73 @@
+{%- assign s = block.settings -%}
+<div class="mojo-pr{% if s.order == 'compare_first' %} mojo-pr--cf{% endif %}" style="{% render 'mojo-vars' %}--mojo-pr-size:{{ s.price_size }}px;" {{ block.shopify_attributes }}>
+  <span class="mojo-pr__now">{{ s.price }}</span>
+  {%- if s.compare != blank -%}<s class="mojo-pr__was">{{ s.compare }}</s>{%- endif -%}
+  {%- if s.badge != blank -%}<span class="mojo-pr__badge">{{ s.badge }}</span>{%- endif -%}
+  {%- if s.chip != blank -%}<span class="mojo-pr__chip">{% render 'mojo-icon', name: 'tag', size: 12 %}{{ s.chip }}</span>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-pr { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-pr--cf .mojo-pr__was { order: -1; }
+.mojo-pr__now { font-weight: 600; font-size: var(--mojo-pr-size, 20px); }
+.mojo-pr__was { font-size: 14px; color: var(--mojo-muted); }
+.mojo-pr__badge { background: var(--mojo-fg); color: var(--mojo-bg); font-weight: 600; font-size: 10px; line-height: 1; padding: 5px 7px; border-radius: 3px; letter-spacing: 0.3px; }
+.mojo-pr__chip { display: inline-flex; align-items: center; gap: 5px; background: #ececec; color: #333; font-size: 10px; line-height: 1; padding: 5px 8px; border-radius: 3px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo price + badge",
+  "settings": [
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "£24.95"
+    },
+    {
+      "type": "text",
+      "id": "compare",
+      "label": "Compare-at price",
+      "default": "£50.00"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge",
+      "default": "50% OFF"
+    },
+    {
+      "type": "text",
+      "id": "chip",
+      "label": "Grey chip with tag icon (e.g. only £9.99 per pair)"
+    },
+    {
+      "type": "select",
+      "id": "order",
+      "label": "Order",
+      "default": "price_first",
+      "options": [
+        {
+          "value": "price_first",
+          "label": "Price, then struck price"
+        },
+        {
+          "value": "compare_first",
+          "label": "Struck price, then price"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "price_size",
+      "label": "Price size",
+      "default": 20,
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "unit": "px"
+    }
+  ]
+}
+{% endschema %}

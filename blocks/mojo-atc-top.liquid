@@ -1,0 +1,55 @@
+{%- assign s = block.settings -%}
+{%- if s.enabled -%}
+  <div class="mojo-atct" style="{% render 'mojo-vars' %}" {{ block.shopify_attributes }}>
+    <button type="button" class="mojo-atct__btn" data-mojo-atc-top>{{ s.label }}</button>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+.mojo-atct { display: none; }
+@media screen and (max-width: 749px) {
+  .mojo-atct { display: block; width: 100%; font-family: var(--mojo-font); }
+  .mojo-atct__btn { display: block; width: 100%; min-height: 48px; padding: 0 20px; border: 0; border-radius: 0; background: var(--mojo-fg); color: var(--mojo-bg); font-family: inherit; font-size: 13px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; cursor: pointer; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+if (!window.mojoAtcTop) {
+  window.mojoAtcTop = true;
+  document.addEventListener('click', (e) => {
+    const t = e.target.closest('[data-mojo-atc-top]');
+    if (!t) return;
+    const scope = t.closest('product-information, .shopify-section') || document;
+    const real = scope.querySelector('add-to-cart-component [ref="addToCartButton"]') || document.querySelector('add-to-cart-component [ref="addToCartButton"]');
+    if (!real) return;
+    if (real.disabled) { real.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
+    real.click();
+  });
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo mobile top ATC",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Show on mobile",
+      "default": true,
+      "info": "Mobile only. Submits the buy box with the selected bundle."
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Button label",
+      "default": "Add to cart"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo mobile top ATC"
+    }
+  ]
+}
+{% endschema %}

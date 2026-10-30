@@ -1,0 +1,255 @@
+{%- assign s = section.settings -%}
+<section class="mojo-gu" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;">
+  <div class="mojo-gu__wrap" data-mojo-rail-wrap data-mojo-overflow="0">
+    <div class="mojo-gu__rail" data-mojo-rail>
+      {%- for block in section.blocks -%}
+        <div class="mojo-gu__col" {{ block.shopify_attributes }}>
+          <div class="mojo-gu__icon">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60, 120', sizes: '40px', alt: block.settings.title }}
+            {%- elsif block.settings.image_asset != blank -%}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="60" height="60">
+            {%- else -%}
+              {% render 'mojo-icon', name: block.settings.icon, size: 34 %}
+            {%- endif -%}
+          </div>
+          <h3 class="mojo-gu__title">{{ block.settings.title }}</h3>
+          <p class="mojo-gu__text">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="mojo-gu__dots" data-mojo-dots></div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-gu { background: var(--mojo-bg); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-gu__wrap { max-width: 1260px; margin: 0 auto; padding-inline: 20px; }
+.mojo-gu__rail { margin: 0 -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+.mojo-gu__col { flex: 0 0 100%; scroll-snap-align: start; box-sizing: border-box; text-align: center; padding: 0 12px; }
+.mojo-gu__icon { display: flex; justify-content: center; margin-bottom: 12px; }
+.mojo-gu__icon img { width: 34px; height: 34px; object-fit: contain; }
+.mojo-gu__title { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 16px; margin: 0 0 8px; }
+.mojo-gu__text { font-size: 14px; line-height: 1.6; margin: 0; }
+
+.mojo-gu__rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-overflow-scrolling: touch; }
+.mojo-gu__rail::-webkit-scrollbar { display: none; }
+.mojo-gu__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.mojo-gu__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.mojo-gu__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
+.mojo-gu__dots button[aria-current='true'] { background: #000; }
+[data-mojo-overflow='0'] > .mojo-gu__dots { display: none; }
+@media screen and (min-width: 750px) {
+  .mojo-gu__rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; overflow: visible; cursor: auto; margin: 0; padding: 0; }
+  .mojo-gu__col { padding: 0 20px; }
+  .mojo-gu__icon img { width: 32px; height: 32px; }
+  .mojo-gu__title { font-size: 12px; }
+  .mojo-gu__text { font-size: 11px; }
+  .mojo-gu__dots { display: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+if (!window.mojoRails) {
+  window.mojoRails = true;
+  const setup = (rail) => {
+    if (rail.dataset.mojoReady) return;
+    rail.dataset.mojoReady = '1';
+    const wrap = rail.closest('[data-mojo-rail-wrap]') || rail.parentElement;
+    const dots = wrap.querySelector('[data-mojo-dots]');
+    const prev = wrap.querySelector('[data-mojo-prev]');
+    const next = wrap.querySelector('[data-mojo-next]');
+    const cards = () => [...rail.children];
+    const step = () => {
+      const c = cards();
+      if (c.length > 1) return c[1].getBoundingClientRect().left - c[0].getBoundingClientRect().left;
+      return c[0] ? c[0].getBoundingClientRect().width : 0;
+    };
+    const index = () => { const s = step(); return s ? Math.round(rail.scrollLeft / s) : 0; };
+    const sync = () => {
+      const over = rail.scrollWidth > rail.clientWidth + 2;
+      wrap.dataset.mojoOverflow = over ? '1' : '0';
+      if (dots) {
+        if (dots.children.length !== cards().length) {
+          dots.textContent = '';
+          cards().forEach((_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Go to item ' + (i + 1));
+            b.addEventListener('click', () => rail.scrollTo({ left: i * step(), behavior: 'smooth' }));
+            dots.appendChild(b);
+          });
+        }
+        const at = index();
+        [...dots.children].forEach((b, i) => b.setAttribute('aria-current', i === at ? 'true' : 'false'));
+      }
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+    };
+    if (prev) prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+    rail.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    window.addEventListener('resize', sync);
+    rail.addEventListener('dragstart', (e) => e.preventDefault());
+    let x0 = 0, s0 = 0, id = -1, moved = false;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0 || rail.scrollWidth <= rail.clientWidth) return;
+      id = e.pointerId; x0 = e.clientX; s0 = rail.scrollLeft; moved = false;
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) { moved = true; rail.setAttribute('data-mojo-dragging', ''); rail.setPointerCapture(id); }
+      rail.scrollLeft = s0 - dx;
+    });
+    const end = () => {
+      if (id === -1) return;
+      id = -1;
+      if (!moved) return;
+      const left = rail.scrollLeft;
+      rail.removeAttribute('data-mojo-dragging');
+      rail.scrollLeft = left;
+      const s = step();
+      if (s) rail.scrollTo({ left: Math.round(left / s) * s, behavior: 'smooth' });
+    };
+    rail.addEventListener('pointerup', end);
+    rail.addEventListener('pointercancel', end);
+    rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    sync();
+    setTimeout(sync, 400);
+  };
+  const init = () => document.querySelectorAll('[data-mojo-rail]').forEach(setup);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:section:load', init);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo guarantee columns",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 50,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Column",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Built-in icon",
+          "default": "refund",
+          "options": [
+            {
+              "value": "refund",
+              "label": "Refund card"
+            },
+            {
+              "value": "parcel",
+              "label": "Parcel"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "return",
+              "label": "Returns"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom icon (replaces built-in)"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Custom icon (replaces built-in): theme file name (optional, e.g. mojo-hero.webp)",
+          "info": "Used when no image is uploaded above."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "45-Day Money-Back Guarantee"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "If you're not happy for any reason, we'll send you a new pair or refund any unworn pairs in full, no questions asked."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Mojo guarantee columns",
+      "blocks": [
+        {
+          "type": "column",
+          "settings": {
+            "icon": "refund",
+            "title": "45-Day Money-Back Guarantee",
+            "text": "If you're not happy for any reason, we'll send you a new pair or refund any unworn pairs in full, no questions asked."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "parcel",
+            "title": "Express shipping",
+            "text": "Orders are processed within 1 day. Order today and it ships the next working day."
+          }
+        },
+        {
+          "type": "column",
+          "settings": {
+            "icon": "chat",
+            "title": "24/7 Customer Support",
+            "text": "Got a question or a problem? Email us any time. Our team is here 24/7 to help."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

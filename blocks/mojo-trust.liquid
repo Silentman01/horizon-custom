@@ -1,0 +1,54 @@
+{%- assign s = block.settings -%}
+<ul class="mojo-tr" style="{% render 'mojo-vars' %}--mojo-hot:{{ s.scarcity_color }};" role="list" {{ block.shopify_attributes }}>
+  {%- if s.line_1 != blank -%}<li class="mojo-tr__li">{% render 'mojo-icon', name: 'return', size: 16 %}<span>{{ s.line_1 }}</span></li>{%- endif -%}
+  {%- if s.line_2 != blank -%}<li class="mojo-tr__li">{% render 'mojo-icon', name: 'truck', size: 16 %}<span>{{ s.line_2 }}</span></li>{%- endif -%}
+  {%- if s.scarcity != blank -%}<li class="mojo-tr__li mojo-tr__hot"><span class="mojo-tr__dot" aria-hidden="true"></span><span>{{ s.scarcity }}</span></li>{%- endif -%}
+</ul>
+
+{% stylesheet %}
+.mojo-tr { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-tr__li { display: flex; align-items: center; gap: 10px; font-size: 12px; }
+.mojo-tr__li svg { flex: none; }
+.mojo-tr__hot { color: var(--mojo-hot); }
+.mojo-tr__dot { width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; flex: none; }
+.mojo-tr__dot::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--mojo-hot); animation: mojo-tr-pulse 1.6s ease-in-out infinite; }
+@keyframes mojo-tr-pulse { 0%, 100% { box-shadow: 0 0 0 0 rgb(225 6 0 / 45%); } 50% { box-shadow: 0 0 0 6px rgb(225 6 0 / 0%); } }
+@media (prefers-reduced-motion: reduce) { .mojo-tr__dot::before { animation: none; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo trust lines",
+  "settings": [
+    {
+      "type": "text",
+      "id": "line_1",
+      "label": "Line 1 (returns icon)",
+      "default": "45-Day Free Returns"
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Line 2 (truck icon)",
+      "default": "Free shipping on orders over £40"
+    },
+    {
+      "type": "text",
+      "id": "scarcity",
+      "label": "Scarcity line (empty = hidden)",
+      "default": "Almost sold out!"
+    },
+    {
+      "type": "color",
+      "id": "scarcity_color",
+      "label": "Scarcity colour",
+      "default": "#E10600"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo trust lines"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,520 @@
+{%- assign s = block.settings -%}
+<div class="mojo-gl mojo-gl--m{{ s.columns_mobile }}" style="{% render 'mojo-vars' %}" {{ block.shopify_attributes }}>
+  {%- if s.heading != blank -%}<p class="mojo-gl__heading">{{ s.heading }}</p>{%- endif -%}
+  <ul class="mojo-gl__list" role="list">
+    {%- for i in (1..4) -%}
+      {%- liquid
+        assign k_cap = 'caption_' | append: i
+        assign k_icon = 'icon_' | append: i
+        assign cap = s[k_cap]
+        assign ico = s[k_icon]
+      -%}
+      {%- if cap != blank -%}<li class="mojo-gl__li"><span class="mojo-gl__icon">{% render 'mojo-icon', name: ico, size: 26 %}</span><span class="mojo-gl__cap">{{ cap }}</span></li>{%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+.mojo-gl { font-family: var(--mojo-font); color: var(--mojo-fg); border-top: 1px solid var(--mojo-line); border-bottom: 1px solid var(--mojo-line); padding: 12px 0; }
+.mojo-gl__heading { margin: 0 0 10px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.mojo-gl__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.mojo-gl--m4 .mojo-gl__list { grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.mojo-gl__li { display: flex; align-items: center; gap: 8px; font-size: 11px; line-height: 1.25; }
+.mojo-gl--m4 .mojo-gl__li { flex-direction: column; text-align: center; }
+.mojo-gl__icon { display: inline-flex; flex: none; }
+.mojo-gl__cap { min-width: 0; }
+@media screen and (min-width: 750px) {
+  .mojo-gl__list, .mojo-gl--m4 .mojo-gl__list { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .mojo-gl__li, .mojo-gl--m4 .mojo-gl__li { flex-direction: row; text-align: left; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo glance icons",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "At a quick glance:"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "default": "2",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 (2x2 grid)"
+        },
+        {
+          "value": "4",
+          "label": "4 (one row)"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Item 1"
+    },
+    {
+      "type": "select",
+      "id": "icon_1",
+      "label": "Icon",
+      "default": "stretch",
+      "options": [
+        {
+          "value": "boxer",
+          "label": "Boxer"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "snow",
+          "label": "Cool"
+        },
+        {
+          "value": "drop",
+          "label": "Droplet"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "wind",
+          "label": "Airflow"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "person",
+          "label": "Person"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "ring",
+          "label": "Waistband"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud"
+        },
+        {
+          "value": "refund",
+          "label": "Refund"
+        },
+        {
+          "value": "parcel",
+          "label": "Parcel"
+        },
+        {
+          "value": "chat",
+          "label": "Chat"
+        },
+        {
+          "value": "thermometer",
+          "label": "Thermometer"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "caption_1",
+      "label": "Caption",
+      "default": "4-Way Stretch"
+    },
+    {
+      "type": "header",
+      "content": "Item 2"
+    },
+    {
+      "type": "select",
+      "id": "icon_2",
+      "label": "Icon",
+      "default": "wind",
+      "options": [
+        {
+          "value": "boxer",
+          "label": "Boxer"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "snow",
+          "label": "Cool"
+        },
+        {
+          "value": "drop",
+          "label": "Droplet"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "wind",
+          "label": "Airflow"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "person",
+          "label": "Person"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "ring",
+          "label": "Waistband"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud"
+        },
+        {
+          "value": "refund",
+          "label": "Refund"
+        },
+        {
+          "value": "parcel",
+          "label": "Parcel"
+        },
+        {
+          "value": "chat",
+          "label": "Chat"
+        },
+        {
+          "value": "thermometer",
+          "label": "Thermometer"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "caption_2",
+      "label": "Caption",
+      "default": "Breathable Silk"
+    },
+    {
+      "type": "header",
+      "content": "Item 3"
+    },
+    {
+      "type": "select",
+      "id": "icon_3",
+      "label": "Icon",
+      "default": "drop",
+      "options": [
+        {
+          "value": "boxer",
+          "label": "Boxer"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "snow",
+          "label": "Cool"
+        },
+        {
+          "value": "drop",
+          "label": "Droplet"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "wind",
+          "label": "Airflow"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "person",
+          "label": "Person"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "ring",
+          "label": "Waistband"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud"
+        },
+        {
+          "value": "refund",
+          "label": "Refund"
+        },
+        {
+          "value": "parcel",
+          "label": "Parcel"
+        },
+        {
+          "value": "chat",
+          "label": "Chat"
+        },
+        {
+          "value": "thermometer",
+          "label": "Thermometer"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "caption_3",
+      "label": "Caption",
+      "default": "Odour-Neutralising"
+    },
+    {
+      "type": "header",
+      "content": "Item 4"
+    },
+    {
+      "type": "select",
+      "id": "icon_4",
+      "label": "Icon",
+      "default": "shield",
+      "options": [
+        {
+          "value": "boxer",
+          "label": "Boxer"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "snow",
+          "label": "Cool"
+        },
+        {
+          "value": "drop",
+          "label": "Droplet"
+        },
+        {
+          "value": "feather",
+          "label": "Feather"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "stretch",
+          "label": "Stretch"
+        },
+        {
+          "value": "wind",
+          "label": "Airflow"
+        },
+        {
+          "value": "tag",
+          "label": "Tag"
+        },
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "person",
+          "label": "Person"
+        },
+        {
+          "value": "lock",
+          "label": "Lock"
+        },
+        {
+          "value": "leaf",
+          "label": "Leaf"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "ring",
+          "label": "Waistband"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "gift",
+          "label": "Gift"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud"
+        },
+        {
+          "value": "refund",
+          "label": "Refund"
+        },
+        {
+          "value": "parcel",
+          "label": "Parcel"
+        },
+        {
+          "value": "chat",
+          "label": "Chat"
+        },
+        {
+          "value": "thermometer",
+          "label": "Thermometer"
+        },
+        {
+          "value": "return",
+          "label": "Return"
+        },
+        {
+          "value": "truck",
+          "label": "Truck"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "caption_4",
+      "label": "Caption",
+      "default": "Anti-Chafing Fit"
+    }
+  ]
+}
+{% endschema %}

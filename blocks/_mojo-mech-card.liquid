@@ -1,0 +1,74 @@
+{%- assign s = block.settings -%}
+<article class="mojo-mc__card" {{ block.shopify_attributes }}>
+  <div class="mojo-mc__img">
+    {% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: '16 / 9', placeholder: 'lifestyle-1', alt: s.title, sizes: '(min-width: 750px) 440px, 92vw' %}
+    <span class="mojo-mc__num" aria-hidden="true"></span>
+  </div>
+  {%- if s.tag != blank -%}<p class="mojo-mc__tag">{{ s.tag }}</p>{%- endif -%}
+  {%- if s.title != blank -%}<h3 class="mojo-mc__title">{{ s.title }}</h3>{%- endif -%}
+  {%- if s.body != blank -%}<div class="mojo-mc__body">{{ s.body }}</div>{%- endif -%}
+  {%- if s.italic_line != blank -%}<p class="mojo-mc__italic">{{ s.italic_line }}</p>{%- endif -%}
+</article>
+
+{% stylesheet %}
+.mojo-mc__card { counter-increment: mojo-mc; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-mc__img { position: relative; }
+.mojo-mc__img .mojo-media { aspect-ratio: var(--mojo-mc-rd, 16 / 9) !important; }
+.mojo-mc__num { position: absolute; top: 12px; left: 12px; width: 28px; height: 28px; border-radius: 50%; background: #fff; color: #000; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+.mojo-mc__num::before { content: counter(mojo-mc, decimal-leading-zero); }
+.mojo-mc__tag { display: inline-block; margin: 14px 0 0; padding: 5px 9px; background: #f0f0f5; font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+.mojo-mc__title { margin: 10px 0 8px; font-family: var(--mojo-font-heading); font-size: 19px; font-weight: 600; line-height: 1.3; }
+.mojo-mc__body { font-size: 13px; line-height: 1.6; color: var(--mojo-muted); }
+.mojo-mc__body p { margin: 0; }
+.mojo-mc__body strong { color: var(--mojo-fg); }
+.mojo-mc__italic { margin: 8px 0 0; font-size: 13px; font-style: italic; line-height: 1.5; }
+@media screen and (max-width: 749px) { .mojo-mc__img .mojo-media { aspect-ratio: var(--mojo-mc-rm, 1.22 / 1) !important; } }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo mechanism card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (16:9)"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image (16:9): theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Tag pill"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Text</p>"
+    },
+    {
+      "type": "text",
+      "id": "italic_line",
+      "label": "Italic last line (optional)"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1889 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "carousel",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "thumbnails",
+            "slideshow_mobile_controls_style": "thumbnails",
+            "thumbnail_position": "left",
+            "thumbnail_width": 56,
+            "aspect_ratio": "1",
+            "constrain_to_viewport": true,
+            "media_fit": "cover",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 14,
+            "sticky_details_desktop": false,
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "stock": {
+              "type": "mojo-stock-bar",
+              "settings": {
+                "left_text": "12% stock left",
+                "right_text": "Offer ends soon",
+                "percent": 12,
+                "bar_color": "#000000",
+                "track_color": "#E6E6E6",
+                "font_size": 13
+              },
+              "blocks": {}
+            },
+            "chips": {
+              "type": "mojo-offer-chips",
+              "settings": {
+                "chip_1_text": "BLACK FRIDAY",
+                "chip_1_style": "outline",
+                "chip_2_text": "BUY 2 GET 3 FREE TODAY",
+                "chip_2_style": "solid"
+              },
+              "blocks": {}
+            },
+            "proof": {
+              "type": "mojo-proof",
+              "settings": {
+                "lead": "Excellent",
+                "text": "4,276+ reviews",
+                "star_color": "#000000"
+              },
+              "blocks": {}
+            },
+            "title": {
+              "type": "text",
+              "name": "t:names.title",
+              "settings": {
+                "text": "<h1>{{ closest.product.title }}</h1>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "h3",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "sub": {
+              "type": "text",
+              "name": "t:names.product_description",
+              "settings": {
+                "text": "<p>Made from 100% mulberry silk in a fitted boxer-trunk cut for men 40+. They breathe in the heat, stay put when you move, and feel so light you'll forget you're wearing them.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "0.8125rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price": {
+              "type": "mojo-price",
+              "settings": {
+                "price": "£49.95",
+                "compare": "£150.00",
+                "badge": "Save 67% OFF",
+                "chip": "only £9.99 per pair",
+                "order": "compare_first",
+                "price_size": 22
+              },
+              "blocks": {}
+            },
+            "glance": {
+              "type": "mojo-glance",
+              "settings": {
+                "heading": "At a quick glance:",
+                "columns_mobile": "2",
+                "icon_1": "stretch",
+                "caption_1": "4-Way Stretch",
+                "icon_2": "wind",
+                "caption_2": "Breathable Silk",
+                "icon_3": "drop",
+                "caption_3": "Odour-Neutralising",
+                "icon_4": "shield",
+                "caption_4": "Anti-Chafing Fit"
+              },
+              "blocks": {}
+            },
+            "variant_picker": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": true,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "size_chart": {
+              "type": "mojo-size-chart",
+              "settings": {
+                "link_text": "size chart",
+                "image_asset": "mojo-size-chart.jpg",
+                "ratio": "4 / 3"
+              },
+              "blocks": {}
+            },
+            "fit": {
+              "type": "mojo-fit-strip",
+              "settings": {
+                "text": "<p>Men say this fits <strong>true to size</strong> based on 5,210 reviews</p>",
+                "icon": "person",
+                "background": "#F4F4F4"
+              },
+              "blocks": {}
+            },
+            "warning": {
+              "type": "mojo-warning-card",
+              "settings": {
+                "icon": "info",
+                "title": "WARNING: Low Stock Notice",
+                "text": "<p>This product sold out <strong>12 times</strong> last year. We encourage you to take advantage of the limited <strong>Black Friday sale</strong> and buy now. Ordering now helps you avoid future stock outs.</p>",
+                "ps_text": "<p><strong>PS:</strong> Only available <strong>here</strong>, don't buy fakes on Amazon/eBay</p>",
+                "border_color": "#D9D9D9",
+                "title_color": "#000000",
+                "radius": 0
+              },
+              "blocks": {}
+            },
+            "bundle": {
+              "type": "mojo-bundle-tiers",
+              "settings": {
+                "heading": "CHOOSE YOUR OFFER:",
+                "heading_accent": "(BLACK FRIDAY PRICING)",
+                "heading_style": "left",
+                "tier_gap": 8,
+                "countdown": false
+              },
+              "blocks": {
+                "tier_1": {
+                  "type": "_mojo-bundle-tier",
+                  "settings": {
+                    "quantity": 1,
+                    "title": "SINGLE",
+                    "saving": "",
+                    "price": "£29.95",
+                    "price_suffix": "/pair",
+                    "compare": "£50.00",
+                    "badge": "",
+                    "preselect": false,
+                    "show_pickers": false,
+                    "picker_label": ""
+                  },
+                  "blocks": {}
+                },
+                "tier_2": {
+                  "type": "_mojo-bundle-tier",
+                  "settings": {
+                    "quantity": 2,
+                    "title": "2 PACK – BUY 1 + GET 1 FREE",
+                    "saving": "Save £35.05",
+                    "saving_style": "pill",
+                    "price": "£24.95",
+                    "compare": "£60.00",
+                    "per_pair": "£12.48 /pair",
+                    "badge": "",
+                    "preselect": false,
+                    "show_pickers": true,
+                    "picker_label": "Colour, Size",
+                    "chips": "1x Black, 1x Midnight Blue",
+                    "free_lines": "Pair 1 | £30.00\nPair 2 | £30.00 | FREE"
+                  },
+                  "blocks": {}
+                },
+                "tier_3": {
+                  "type": "_mojo-bundle-tier",
+                  "settings": {
+                    "quantity": 5,
+                    "title": "5 PACK – BUY 2 + GET 3 FREE",
+                    "saving": "Save £100.05",
+                    "saving_style": "pill",
+                    "price": "£49.95",
+                    "compare": "£150.00",
+                    "per_pair": "£9.99 /pair",
+                    "badge": "MOST POPULAR",
+                    "badge_style": "grey",
+                    "preselect": true,
+                    "show_pickers": true,
+                    "picker_label": "Colour, Size",
+                    "chips": "2x Black, 1x Midnight Blue, 1x Beige, 1x White",
+                    "free_lines": "Pairs 1–2 | £30.00\nPairs 3–5 | £30.00 | FREE"
+                  },
+                  "blocks": {}
+                },
+                "tier_4": {
+                  "type": "_mojo-bundle-tier",
+                  "settings": {
+                    "quantity": 8,
+                    "title": "8 PACK – BUY 3 + GET 5 FREE",
+                    "saving": "Save £165.05",
+                    "saving_style": "pill",
+                    "price": "£74.95",
+                    "compare": "£240.00",
+                    "per_pair": "£9.37 /pair",
+                    "badge": "BEST VALUE",
+                    "badge_style": "black",
+                    "preselect": false,
+                    "show_pickers": true,
+                    "picker_label": "Colour, Size",
+                    "gift_line": "+ Free Mystery Gift (Valued at £39.99)",
+                    "chips": "2x Black, 2x Midnight Blue, 2x Beige, 2x White",
+                    "free_lines": "Pairs 1–3 | £30.00\nPairs 4–8 | £30.00 | FREE"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "tier_1",
+                "tier_2",
+                "tier_3",
+                "tier_4"
+              ]
+            },
+            "ship_line": {
+              "type": "mojo-ship-line",
+              "settings": {
+                "text": "<p>Ships today — <strong>39 left at this price</strong></p>",
+                "show_dot": true,
+                "dot_color": "#22A559"
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "payment": {
+              "type": "payment-icons",
+              "settings": {
+                "horizontal_alignment": "center",
+                "gap": 8
+              },
+              "blocks": {}
+            },
+            "usps": {
+              "type": "mojo-usps",
+              "settings": {
+                "heading": "Made By Men,",
+                "heading_accent": "Craved By Women",
+                "icon_1": "boxer",
+                "caption_1": "Perfect Snug Fit",
+                "icon_2": "snow",
+                "caption_2": "Freshness Guaranteed",
+                "icon_3": "shield",
+                "caption_3": "Anti-Chafing Patent Design",
+                "icon_4": "drop",
+                "caption_4": "Odourless & Hygienic"
+              },
+              "blocks": {}
+            },
+            "avatars": {
+              "type": "mojo-avatars",
+              "settings": {
+                "text": "Mojo is trusted by over 175k+ men",
+                "image_asset": "mojo-avatars.jpg",
+                "image_height": 28
+              },
+              "blocks": {}
+            },
+            "mechanism": {
+              "type": "mojo-mechanism",
+              "settings": {
+                "eyebrow": "35°C SILK COOLING SYSTEM™",
+                "heading": "Why Mojo Feels Unlike Any Other Boxer",
+                "card_bg": "#FFFFFF",
+                "border_color": "#D9D9D9",
+                "ratio_desktop": "16 / 9",
+                "ratio_mobile": "1.22 / 1",
+                "gap": 30,
+                "padding": 22
+              },
+              "blocks": {
+                "k1": {
+                  "type": "_mojo-mech-card",
+                  "settings": {
+                    "image_asset": "mojo-mech-01-fit.jpg",
+                    "tag": "Adaptive Silk Balance Fit™",
+                    "title": "Stays Put Without the Squeeze",
+                    "body": "<p>Most boxers pull the same tension everywhere, so they squeeze or they ride up. Mojo grips <strong>firm at the waist and thigh openings</strong> and <strong>stretches freely around the pouch and sides</strong>. Two fits in one boxer. Nothing to adjust, ever.</p>"
+                  }
+                },
+                "k2": {
+                  "type": "_mojo-mech-card",
+                  "settings": {
+                    "image_asset": "mojo-mech-02-airflow.jpg",
+                    "tag": "Silk Airflow Weave™",
+                    "title": "Built-In Cooling Where Heat Builds",
+                    "body": "<p>Most boxers are one sealed sheet of fabric, with zero airflow where it matters. Mojo's fine mulberry silk weave <strong>moves air and pulls moisture away</strong> right where heat builds most. You can feel it. The pouch zone holds <strong>~35°C</strong>. No more trapped heat.</p>"
+                  }
+                },
+                "k3": {
+                  "type": "_mojo-mech-card",
+                  "settings": {
+                    "image_asset": "mojo-mech-03-smooth.jpg",
+                    "tag": "SecondSkin Mulberry™",
+                    "title": "Irresistibly Smooth. For Her to Touch.",
+                    "body": "<p>Ultra-fine mulberry silk filaments, long and continuous, with a naturally smooth round surface. <strong>Lighter, smoother and softer</strong> than cotton or synthetics. The smooth surface eliminates micro-friction against your skin, and the fine fibres cut weight. <strong>40% lighter than cotton.</strong> Real silk, not plastic: no polyester shedding against you.</p>",
+                    "italic_line": "So soft she'll notice. So light you won't. Like wearing nothing."
+                  }
+                },
+                "k4": {
+                  "type": "_mojo-mech-card",
+                  "settings": {
+                    "image_asset": "mojo-mech-04-fibre.jpg",
+                    "tag": "6-Month No-Holes Guarantee",
+                    "title": "If Your Thighs Win, We Pay.",
+                    "body": "<p>Most boxers die where it matters most. If yours gets a <strong>hole, loose stitching, dead elastic or fading within 6 months</strong>, we send a brand new pair to your door. Free. No return. No questions.</p>"
+                  }
+                }
+              },
+              "block_order": [
+                "k1",
+                "k2",
+                "k3",
+                "k4"
+              ]
+            },
+            "ugc": {
+              "type": "mojo-ugc-strip",
+              "settings": {
+                "heading": "See What Others Are Saying",
+                "radius": 0
+              },
+              "blocks": {
+                "k1": {
+                  "type": "_mojo-ugc-photo",
+                  "settings": {
+                    "image_asset": "mojo-ugc-01.jpg",
+                    "caption": ""
+                  }
+                },
+                "k2": {
+                  "type": "_mojo-ugc-photo",
+                  "settings": {
+                    "image_asset": "mojo-ugc-02.jpg",
+                    "caption": ""
+                  }
+                },
+                "k3": {
+                  "type": "_mojo-ugc-photo",
+                  "settings": {
+                    "image_asset": "mojo-ugc-03.jpg",
+                    "caption": "The best underwear for men 🔥"
+                  }
+                }
+              },
+              "block_order": [
+                "k1",
+                "k2",
+                "k3"
+              ]
+            },
+            "accordion": {
+              "type": "accordion",
+              "settings": {
+                "icon": "plus",
+                "dividers": true,
+                "type_preset": "h6",
+                "border": "none"
+              },
+              "blocks": {
+                "row_details": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "The Boxer Every Man's Been Waiting For",
+                    "open_by_default": true,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "p1": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Mojo silk boxers were built from the feedback of over <strong>50,000 men</strong>. We rethought the classic boxer from scratch to deliver the comfort, performance and confidence real men asked for.</p><p>The <strong>fitted trunk legs</strong> hug the thigh to stop chafing and ride-up. The redesigned <strong>contour pouch</strong>, with its double front seam, gives more room, better support and a subtle enhancement to your profile. It's engineered not just for comfort, but for appeal.</p><p>Crafted from <strong>100% mulberry silk</strong>, Mojo is <strong>up to 89% more durable</strong> than ordinary boxers, yet softer, more breathable and better at regulating temperature. It keeps your crown jewels cooler, fresher and hormonally balanced all day long. Silk is natural, not plastic, so nothing synthetic sits against the area that matters most.</p><p>And yes, the design was tested with real women, who called it <strong>“the sexiest fit on a man”</strong> they've seen. This isn't just underwear. It's your new daily standard.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "d": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong><u>Details:</u></strong></p><ul><li><strong>Irresistible Design</strong> – Voted the sexiest by thousands of women</li><li><strong>Fitted Legs</strong> – No chafing, no ride-up, no pulling. Just all-day comfort that stays in place.</li><li><strong>Contour Pouch</strong> – Lifts, separates and secures everything in place.</li><li><strong>Cut Based on Real Feedback</strong> – True-to-size fit refined by thousands of men.</li><li><strong>Cooling Silk Fabric</strong> – Keeps your crown jewels cool and dry to support optimal T-levels.</li><li><strong>No-Roll Waistband</strong> that won't pinch or bunch</li><li><strong>Hypoallergenic</strong> skin-safe silk</li><li><strong>Anti-odour</strong> mulberry silk</li><li><strong>35°C Silk Cooling Zones</strong></li><li><strong>Silk, Not Plastic</strong> zero polyester against your skin</li><li><strong>Pre-shrunk</strong> so no laundry shrinking</li></ul>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "p1",
+                    "d"
+                  ]
+                },
+                "row_diff": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "What makes Mojo different from ordinary boxers?",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong>Fitted Trunk Legs</strong><br>More coverage. Less chafing. They hug the thigh, so no riding up and no pulling down.</p><p><strong>Redesigned Contour Pouch</strong><br>Extra room, better support, double front seam. No crushing, no sweating. Comfort that adjusts with you.</p><p><strong>No-Roll Waistband</strong><br>Upgraded wide flat elastic that actually stays in place. No folding. No sliding. No distractions.</p><p><strong>Sexier Fit (Chosen by Women)</strong><br>Refined silhouette, close cut, minimalist branding. Built to turn heads, even under clothes.</p><p><strong>Natural Silk, Not Plastic</strong><br>Ordinary boxers are cotton or polyester, which is plastic. Mojo is 100% silk, so nothing synthetic touches your skin.</p><p><strong>Upgraded Quality</strong><br>100% mulberry silk for long-lasting wear.</p><p><em>*After conducting a detailed study, we found that women overwhelmingly chose this design as the most attractive. It's a look that delivers on comfort and truly makes a statement.</em></p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                },
+                "row_size": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Size & Fit",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "t1": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Mojo silk boxers have a snug, supportive fitted-trunk cut, designed to stay in place throughout the day. Take your normal size in boxer briefs.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "t2": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong>Body measurements (waist)</strong></p><ul><li><strong>S</strong> 28–30 in / 71–76 cm</li><li><strong>M</strong> 31–33 in / 79–84 cm</li><li><strong>L</strong> 34–36 in / 86–91 cm</li><li><strong>XL</strong> 37–39 in / 94–99 cm</li><li><strong>2XL</strong> 40–42 in / 102–107 cm</li><li><strong>3XL</strong> 43–45 in / 109–114 cm</li></ul>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "t3": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong>PRO TIP:</strong> If you're in between sizes, go up one size.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "size": {
+                      "type": "mojo-size-chart",
+                      "settings": {
+                        "link_text": "Size chart",
+                        "image_asset": "mojo-size-chart.jpg",
+                        "ratio": "4 / 3"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t1",
+                    "t2",
+                    "t3",
+                    "size"
+                  ]
+                },
+                "row_fabric": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Fabrics & Care",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "bars": {
+                      "type": "mojo-bars",
+                      "settings": {
+                        "heading": "",
+                        "label_1": "SOFTNESS",
+                        "value_1": 92,
+                        "label_2": "STRETCH",
+                        "value_2": 78,
+                        "label_3": "BREATHABILITY",
+                        "value_3": 94,
+                        "label_4": "WEIGHT",
+                        "value_4": 22,
+                        "bar_color": "#000000",
+                        "track_color": "#E6E6E6"
+                      },
+                      "blocks": {}
+                    },
+                    "t": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Our 100% mulberry silk fabric gives a buttery soft feel with real stretch, support and breathability, making it one of our most-loved and sold-out boxers of all time. Machine wash at 30°C.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "bars",
+                    "t"
+                  ]
+                },
+                "row_guarantee": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "45 Day Perfect Fit Money Guarantee",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "t1": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong>Did you know?</strong> Silk is one of the strongest natural fibres on earth, which is why we chose it for Mojo.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "t2": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p><strong>About our guarantee:</strong> We're confident in our quality, so we offer a 45-Day Guarantee. Try them, and if they don't fit or feel right, just email us for a new pair or a full refund. No questions asked.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    },
+                    "t3": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Customer Email: contact@mojo-underwear.com</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t1",
+                    "t2",
+                    "t3"
+                  ]
+                },
+                "row_holes": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "6-Month No-Holes Guarantee",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>Got a hole in your boxers? No problem! If your Mojo develops a hole or tear within 6 months, tell us and we'll send a replacement for free. Mojo is built to last, and we stand by it.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                },
+                "row_returns": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Free Returns & Exchanges",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "t": {
+                      "type": "text",
+                      "name": "t:names.product_description",
+                      "settings": {
+                        "text": "<p>We believe in hassle-free shopping. That's why Mojo silk boxers come with free returns and exchanges. If they don't fit just right or you're not completely satisfied, return or exchange them at no cost to you. Enjoy comfort without any risk.</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "t"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_details",
+                "row_diff",
+                "row_size",
+                "row_fabric",
+                "row_guarantee",
+                "row_holes",
+                "row_returns"
+              ]
+            },
+            "reviews": {
+              "type": "mojo-review-rail",
+              "settings": {
+                "heading": "Reviews",
+                "rating_line": "Rated 4.8/5 based on 4,276+ customers."
+              },
+              "blocks": {
+                "k1": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "The most comfortable…",
+                    "body": "Honestly the most comfortable pants I've ever owned. Snug fit, nothing rides up, and they feel like a second skin.",
+                    "name": "Liam H.",
+                    "badge": "Verified Buyer"
+                  }
+                },
+                "k2": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "I've tried every brand",
+                    "body": "Cotton, bamboo, the lot. Nothing comes close. Soft, supportive, and still perfect after a dozen washes.",
+                    "name": "Oliver J.",
+                    "badge": "Verified Buyer"
+                  }
+                },
+                "k3": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "As a runner",
+                    "body": "Sweat used to ruin my long runs. These keep me dry, support everything and don't chafe at mile twelve.",
+                    "name": "Andrew N.",
+                    "badge": "Verified Buyer"
+                  }
+                },
+                "k4": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "No sweat or smell, this silk really works!",
+                    "body": "My husband says they're the most comfortable he's ever worn. After loads of washes they keep their shape and softness.",
+                    "name": "Camelia J.",
+                    "badge": "Verified Buyer"
+                  }
+                },
+                "k5": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "Satisfied beyond belief!!!!",
+                    "body": "Two weeks of walking round Europe, sweating and adjusting constantly. Switched to Mojo and the comfort blew me away. 100% satisfied!",
+                    "name": "Marcus C.",
+                    "badge": "Verified Buyer"
+                  }
+                },
+                "k6": {
+                  "type": "_mojo-review-card",
+                  "settings": {
+                    "title": "UNREAL comfort",
+                    "body": "Like a hug: soft, supportive, luxurious. They stay put all day, even after countless washes.",
+                    "name": "Jack K.",
+                    "badge": "Verified Buyer"
+                  }
+                }
+              },
+              "block_order": [
+                "k1",
+                "k2",
+                "k3",
+                "k4",
+                "k5",
+                "k6"
+              ]
+            }
+          },
+          "block_order": [
+            "stock",
+            "chips",
+            "proof",
+            "title",
+            "sub",
+            "price",
+            "glance",
+            "variant_picker",
+            "size_chart",
+            "fit",
+            "warning",
+            "bundle",
+            "ship_line",
+            "buy_buttons",
+            "payment",
+            "usps",
+            "avatars",
+            "mechanism",
+            "ugc",
+            "accordion",
+            "reviews"
+          ]
+        },
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "padding-block-start": 0,
+            "padding-block-end": 0
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "disclosures"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 40,
+        "padding-block-start": 0,
+        "padding-block-end": 0,
+        "enable_sticky_add_to_cart": false
+      }
+    },
+    "mojo_press": {
+      "type": "mojo-press",
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "publication": "Men's Health",
+            "quote": "By far the best silk boxers our team at the office has ever tested. Well done, Mojo."
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "publication": "GQ",
+            "quote": "Ten hours in, no sweat and no odour down there. Honestly impressive stuff."
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "publication": "Forbes",
+            "quote": "They don't move around, they fit snug. We think these are the best boxers money can buy right now."
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3"
+      ]
+    },
+    "mojo_tech": {
+      "type": "mojo-cta-banner",
+      "settings": {
+        "variant": "card",
+        "bg_color": "#0B0B0B",
+        "eyebrow": "Innovation In Men's Essentials",
+        "heading": "35°C Silk Cooling Technology",
+        "text": "<p>We've all dealt with boxers that bunch up, trap heat or fall apart. That's why we created Mojo, in 100% mulberry silk with 35°C Silk Cooling Technology. Say goodbye to rolling up, sweating and uncomfortable fits. Bin those old boxers and step into something built for you, by guys who get it.</p>",
+        "bg_image_asset": "mojo-tech-banner.jpg",
+        "overlay_opacity": 55,
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_target": "#mojo-buybox",
+        "button_bg": "#FFFFFF",
+        "button_fg": "#000000",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "heading_size": 38,
+        "heading_size_m": 26,
+        "text_color": "#FFFFFF",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "padding_top_m": 0,
+        "padding_bottom_m": 0
+      }
+    },
+    "mojo_features": {
+      "type": "mojo-feature-wheel",
+      "settings": {
+        "heading": "Your New Favourite Boxers—For Real",
+        "subheading": "Built with Every Must-Have Feature You've Been Waiting for in a Boxer—Plus a Few Extras..",
+        "image_asset": "mojo-feature-center.jpg",
+        "image_ratio": "1 / 1",
+        "image_max_width": 340,
+        "bg_color": "#F4F4F4",
+        "accent_color": "#000000",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_target": "#mojo-buybox",
+        "button_bg": "#000000",
+        "button_fg": "#FFFFFF",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "heading_size": 34,
+        "heading_size_m": 24,
+        "text_color": "#000000"
+      },
+      "blocks": {
+        "b_1": {
+          "type": "feature",
+          "settings": {
+            "icon": "feather",
+            "title": "Ultimate Comfort",
+            "text": "Real mulberry silk that feels like a second skin, soft and breathable from the first wear."
+          }
+        },
+        "b_2": {
+          "type": "feature",
+          "settings": {
+            "icon": "wind",
+            "title": "Breathes With You",
+            "text": "No more hot spots. The silk airflow weave keeps air moving at 35°C, so you stay fresh."
+          }
+        },
+        "b_3": {
+          "type": "feature",
+          "settings": {
+            "icon": "drop",
+            "title": "Moisture-Wicking",
+            "text": "No more swampy situations. Silk pulls moisture away and keeps your boys dry."
+          }
+        },
+        "b_4": {
+          "type": "feature",
+          "settings": {
+            "icon": "snow",
+            "title": "Odour-Neutralising",
+            "text": "Smell as fresh at hour 12 as you did at hour 1, thanks to naturally odour-neutralising silk."
+          }
+        },
+        "b_5": {
+          "type": "feature",
+          "settings": {
+            "icon": "shield",
+            "title": "Antimicrobial & hypoallergenic",
+            "text": "Stay fresh and itch-free. Natural silk keeps your skin feeling great all day."
+          }
+        },
+        "b_6": {
+          "type": "feature",
+          "settings": {
+            "icon": "ring",
+            "title": "Anti-Roll Waistband",
+            "text": "Enjoy 100% snug fit. The no-roll waistband keeps everything in place with zero chafing."
+          }
+        }
+      },
+      "block_order": [
+        "b_1",
+        "b_2",
+        "b_3",
+        "b_4",
+        "b_5",
+        "b_6"
+      ]
+    },
+    "mojo_derm": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-derm.jpg",
+        "image_alt": "Mojo silk boxers",
+        "image_ratio": "3 / 4",
+        "image_side": "right",
+        "image_max_width": 440,
+        "bg_color": "#F4F4F4",
+        "heading": "Dermatologist-Backed Comfort You Can Trust",
+        "text": "",
+        "bullet_color": "#000000",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_link": "#mojo-buybox",
+        "button_bg": "#000000",
+        "button_fg": "#FFFFFF",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "Keeps bad smells at bay, so you stay fresh around the clock"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Itch-free, irritation-free comfort that's got your back (and your front)."
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "Gentle on the skin, tough on the problems, perfect for those sensitive spots."
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "Step up your game with confidence that turns heads, especially hers."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4"
+      ]
+    },
+    "mojo_fresh": {
+      "type": "mojo-checklist",
+      "settings": {
+        "heading": "Keep that fresh-from-the-pack feel, wash after wash",
+        "text": "<p>Remember slipping into a brand-new pair of boxers? The soft fabric, the perfect fit, that fresh feel. A few washes later, the magic fades, right? Not anymore. Mojo lasts up to 3x longer than regular boxers, so you'll love:</p>",
+        "columns": "3",
+        "bg_color": "#F4F4F4",
+        "card_bg": "#FFFFFF",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_target": "#mojo-buybox",
+        "button_bg": "#000000",
+        "button_fg": "#FFFFFF",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "heading_size": 34,
+        "heading_size_m": 24,
+        "text_color": "#000000",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "check_1": {
+          "type": "check",
+          "settings": {
+            "text": "Retains Shape"
+          }
+        },
+        "check_2": {
+          "type": "check",
+          "settings": {
+            "text": "Colours Stay Vibrant"
+          }
+        },
+        "check_3": {
+          "type": "check",
+          "settings": {
+            "text": "No Shrinking"
+          }
+        },
+        "check_4": {
+          "type": "check",
+          "settings": {
+            "text": "Remains Smooth"
+          }
+        },
+        "check_5": {
+          "type": "check",
+          "settings": {
+            "text": "Holds Structure"
+          }
+        },
+        "check_6": {
+          "type": "check",
+          "settings": {
+            "text": "No Colour Transfer"
+          }
+        },
+        "check_7": {
+          "type": "check",
+          "settings": {
+            "text": "Softens with Every Wash"
+          }
+        }
+      },
+      "block_order": [
+        "check_1",
+        "check_2",
+        "check_3",
+        "check_4",
+        "check_5",
+        "check_6",
+        "check_7"
+      ]
+    },
+    "mojo_washes": {
+      "type": "mojo-cta-banner",
+      "settings": {
+        "variant": "dark",
+        "bg_color": "#000000",
+        "top_image_asset": "mojo-washes-fan.jpg",
+        "top_ratio": "16 / 9",
+        "top_max_width": 800,
+        "eyebrow": "",
+        "heading": "180 Washes Guarantee",
+        "text": "<p>Our boxers come with a 180 Wash Guarantee, promising 100% shape and fabric retention, lasting up to 3x longer than other brands!</p>",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_target": "#mojo-buybox",
+        "button_bg": "#FFFFFF",
+        "button_fg": "#000000",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "heading_size": 36,
+        "heading_size_m": 26,
+        "text_color": "#FFFFFF",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_m": 0,
+        "padding_bottom_m": 0
+      }
+    },
+    "mojo_tlevels": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-tlevels.jpg",
+        "image_alt": "Mojo silk boxers",
+        "image_ratio": "3 / 4",
+        "image_side": "right",
+        "image_max_width": 440,
+        "bg_color": "#F4F4F4",
+        "heading": "Unique Men Deserve More Than Just Ordinary Underwear",
+        "text": "<p><strong>Built for men with balls.</strong> Mojo lets your boys breathe, stay cool and move freely, all while creating the perfect environment for your hormones to thrive.</p>",
+        "subheading": "Here's How Mojo Helps Support Your T-Levels:",
+        "bullet_color": "#000000",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_link": "#mojo-buybox",
+        "button_bg": "#000000",
+        "button_fg": "#FFFFFF",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "title": "Temperature-Regulating Pouch",
+            "detail": "Keeps your balls in the optimal range (~35°C), avoiding the overheating that lowers testosterone and sperm count. In a Harvard study of 656 men, boxer wearers had 25% higher sperm concentration."
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "title": "Comfort & Freedom of Movement",
+            "detail": "No restriction, no compression, just better blood flow and natural support."
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "title": "Silk = Free from endocrine disruptors",
+            "detail": "Naturally breathable, antibacterial and hypoallergenic. Scientists found microplastics in every human testicle they tested. Polyester is plastic. Silk isn't."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3"
+      ]
+    },
+    "mojo_pricing": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-transparent.jpg",
+        "image_alt": "Mulberry silk",
+        "image_ratio": "10 / 9",
+        "image_side": "left",
+        "image_max_width": 0,
+        "bg_color": "#FFFFFF",
+        "heading": "Transparent Pricing",
+        "text": "<p>At Mojo, we're all about fairness:</p>",
+        "bullet_color": "#000000",
+        "footer_text": "<p>We keep our costs low by cutting out the middlemen, so you get premium silk without the premium price tag.</p>",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "Fair Manufacturing"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "Fair Sustainability Practices"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "Fair Prices"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3"
+      ]
+    },
+    "mojo_compare": {
+      "type": "mojo-compare-table",
+      "settings": {
+        "heading": "See how Mojo compares..",
+        "subtitle": "Why Mojo Stands Above the Rest",
+        "col_1": "Mojo",
+        "col_2": "Cotton",
+        "col_3": "Polyester",
+        "col_4": "Bamboo viscose",
+        "bg_color": "#F4F4F4",
+        "good_color": "#000000",
+        "bad_color": "#B3261E",
+        "table_max_width": 820,
+        "heading_size": 34,
+        "heading_size_m": 24,
+        "text_color": "#000000",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "PRICE",
+            "cell_1": "£49.95 (Pack of 5)",
+            "good_1": true,
+            "cell_2": "£8–£12 per pair",
+            "good_2": false,
+            "cell_3": "£5–£9 per pair",
+            "good_3": false,
+            "cell_4": "£10–£15 per pair",
+            "good_4": false
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "FABRIC",
+            "cell_1": "100% Mulberry Silk",
+            "good_1": true,
+            "cell_2": "100% Cotton",
+            "good_2": false,
+            "cell_3": "85% Polyester, 15% Elastane",
+            "good_3": false,
+            "cell_4": "95% Bamboo Viscose, 5% Elastane",
+            "good_4": false
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "DURABILITY",
+            "cell_1": "180 Washes Guarantee",
+            "good_1": true,
+            "cell_2": "Shrinking can occur",
+            "good_2": false,
+            "cell_3": "Pills & loses shape",
+            "good_3": false,
+            "cell_4": "Weakens when wet",
+            "good_4": false
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "BREATHABLE & ANTI-ODOUR",
+            "cell_1": "Yes",
+            "good_1": true,
+            "cell_2": "No",
+            "good_2": false,
+            "cell_3": "No",
+            "good_3": false,
+            "cell_4": "No",
+            "good_4": false
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "45 DAY FIT GUARANTEE",
+            "cell_1": "45 At-home Free Trial",
+            "good_1": true,
+            "cell_2": "14 Days",
+            "good_2": false,
+            "cell_3": "14 Days",
+            "good_3": false,
+            "cell_4": "14 Days",
+            "good_4": false
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "DR RECOMMENDED",
+            "cell_1": "Yes",
+            "good_1": true,
+            "cell_2": "No",
+            "good_2": false,
+            "cell_3": "No",
+            "good_3": false,
+            "cell_4": "No",
+            "good_4": false
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "mojo_polaroid": {
+      "type": "mojo-ugc-carousel",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "ratio": "4 / 5",
+        "polaroid": true,
+        "per_row": 7,
+        "padding_top": 40,
+        "padding_bottom": 8
+      },
+      "blocks": {
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-01.jpg",
+            "alt": "Mojo customer photo 1"
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-02.jpg",
+            "alt": "Mojo customer photo 2"
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-03.jpg",
+            "alt": "Mojo customer photo 3"
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-04.jpg",
+            "alt": "Mojo customer photo 4"
+          }
+        },
+        "photo_5": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-05.jpg",
+            "alt": "Mojo customer photo 5"
+          }
+        },
+        "photo_6": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-06.jpg",
+            "alt": "Mojo customer photo 6"
+          }
+        },
+        "photo_7": {
+          "type": "photo",
+          "settings": {
+            "image_asset": "mojo-polaroid-07.jpg",
+            "alt": "Mojo customer photo 7"
+          }
+        }
+      },
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "photo_3",
+        "photo_4",
+        "photo_5",
+        "photo_6",
+        "photo_7"
+      ]
+    },
+    "mojo_reviews": {
+      "type": "mojo-testimonials",
+      "settings": {
+        "heading": "175,000+ Happy Customers",
+        "rating": 5,
+        "count_text": "4.8/5 based on 4,276 reviews",
+        "star_color": "#000000",
+        "layout": "stacked",
+        "card_style": "boxed",
+        "footer_text": "Verified buyer",
+        "cards_desktop": 4,
+        "padding_top": 8,
+        "padding_bottom": 60
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "title": "ultra soft, I need 20 more pairs!",
+            "text": "The silk is so soft I no longer get that irritating rubbing from other pairs that cost me twice as much. Plus they stay fresh all day, even after weeks of washing. 10/10 for comfort and durability!",
+            "name": "Samuel P.",
+            "date": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "title": "no sweat or smell, this really works!",
+            "text": "After a full day at work, there's no sweat and no smell. I feel fresh from morning till night. Best pair I've ever owned, and I wish I'd bought them years ago. I'm ordering five more pairs next month.",
+            "name": "Ron D.",
+            "date": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "title": "Husband Approves, and so do I ;)",
+            "text": "We'd been trying for a baby for over a year. I read the Harvard study on boxers and swapped his whole drawer for Mojo. He loves how soft they are, even after loads of washes. The best part? We're expecting in March!",
+            "name": "Carole J.",
+            "date": ""
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "title": "wife approves, and I love them",
+            "text": "My wife binned my entire underwear drawer and bought the 8-pack. I was annoyed for about five minutes. The breathability is exceptional, I feel fresh whatever I'm doing, and yes, she approves.",
+            "name": "Alex N.",
+            "date": ""
+          }
+        },
+        "review_5": {
+          "type": "review",
+          "settings": {
+            "title": "I'm a big guy, and these stay put!",
+            "text": "I'm a big guy, and these fit great. No riding up, they stay in place. They feel amazing and there's no chafing, even on heavy workdays. My second set, and the first still looks and feels the same after six months. All my old boxers are going in the bin.",
+            "name": "John M.",
+            "date": ""
+          }
+        },
+        "review_6": {
+          "type": "review",
+          "settings": {
+            "title": "all day comfort and no moisture",
+            "text": "Natural soft feel and excellent at wicking moisture. My son showed me the burn test: polyester melts into a plastic bead, silk turns to ash. I know which one I want against my skin. The most comfortable pair I've ever worn.",
+            "name": "Walt F.",
+            "date": ""
+          }
+        },
+        "review_7": {
+          "type": "review",
+          "settings": {
+            "title": "Finally boxers that don't rip... and smell GOOD!",
+            "text": "Finally, boxers that don't rip and smell good. Super comfortable. I've worn designer-label pairs for years but these are far superior. They fit perfectly and don't ride up all day. Love that feeling of being cradled. Thoroughly recommended.",
+            "name": "Jeff C.",
+            "date": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4",
+        "review_5",
+        "review_6",
+        "review_7"
+      ]
+    },
+    "mojo_guarantee": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-guarantee.jpg",
+        "image_alt": "Mojo silk boxers",
+        "image_ratio": "4 / 5",
+        "image_side": "right",
+        "image_max_width": 400,
+        "bg_color": "#F4F4F4",
+        "heading": "The Mojo Guarantee",
+        "text": "",
+        "bullet_color": "#000000",
+        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_link": "#mojo-buybox",
+        "button_bg": "#000000",
+        "button_fg": "#FFFFFF",
+        "show_assurance_row": true,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "icon": "leaf",
+            "title": "Ethically Sourced Mulberry Silk",
+            "detail": "Made with responsibly sourced silk, so you can feel good about what you're wearing."
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "icon": "refund",
+            "title": "45 Day Money Back Guarantee",
+            "detail": "We're sure you'll love your new Mojo. If not, we'll replace them for free or give you your money back."
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "icon": "chat",
+            "title": "24/7 Support for all of your inquiries",
+            "detail": "We're here for you anytime you need us, no matter what."
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "",
+            "icon": "lock",
+            "title": "SSL Encryption for Safe and Secure Payments",
+            "detail": "Shop with confidence. Our SSL encryption keeps your information safe."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4"
+      ]
+    },
+    "mojo_faq": {
+      "type": "mojo-faq",
+      "settings": {
+        "heading": "FAQ",
+        "subheading": "Still have questions? Check here",
+        "open_first": true,
+        "padding_top": 60,
+        "padding_bottom": 50
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "question": "What is mulberry silk and why is it used for boxer shorts?",
+            "answer": "<p>Mulberry silk is the finest natural fibre, loved for its softness, breathability and gentle feel. We use it in Mojo for premium comfort, better intimate hygiene and a smooth fit that never traps heat.</p>"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "question": "Why do dermatologists recommend silk boxers?",
+            "answer": "<p>Dermatologists recommend silk because it is smooth, hypoallergenic and cuts unpleasant friction, keeping intimate areas comfortable, fresh and irritation-free. Unlike polyester, it's natural, with nothing synthetic against your skin.</p>"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "question": "How does the breathability of silk boxers differ from other materials?",
+            "answer": "<p>Silk's weave lets air circulate and moves moisture away, reducing humidity and sweat. Cotton soaks it up and holds it, polyester traps it. You stay cool, dry and fresh whatever you're doing.</p>"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "question": "What does the “buy 2 + get 3 free” offer mean?",
+            "answer": "<p>Buy 2 pairs and get 3 more free: five pairs for £49.95, just £9.99 each. It's our limited Black Friday offer, a perfect chance to replace your whole drawer. Spend over £40 and shipping is free. Not to be missed!</p>"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "question": "How does the durability of silk boxers compare to traditional boxers?",
+            "answer": "<p>Mojo boxers are built for durability. They resist wear better than regular boxers, come with a 180 Wash Guarantee and last up to 3x longer. A hole within 6 months? We replace them free.</p>"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "question": "Are silk boxers suitable for sensitive skin?",
+            "answer": "<p>Yes. 100% mulberry silk is hypoallergenic and soft, so it suits sensitive skin and reduces irritation. Its smooth fibres cut friction, helping you stay comfortable and fresh all day.</p>"
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "question": "Can I wash silk boxers in the washing machine?",
+            "answer": "<p>Yes, Mojo boxers are machine-washable. Wash at 30°C and they keep their shape and softness for 180 washes.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7"
+      ]
+    },
+    "mojo_sticky": {
+      "type": "mojo-sticky-atc",
+      "settings": {
+        "enabled": false,
+        "title": "",
+        "price_text": "From £24.95",
+        "button_text": "Add to cart"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "mojo_press",
+    "mojo_tech",
+    "mojo_features",
+    "mojo_derm",
+    "mojo_fresh",
+    "mojo_washes",
+    "mojo_tlevels",
+    "mojo_pricing",
+    "mojo_compare",
+    "mojo_polaroid",
+    "mojo_reviews",
+    "mojo_guarantee",
+    "mojo_faq",
+    "mojo_sticky"
+  ]
+}

@@ -1,0 +1,65 @@
+{%- assign s = block.settings -%}
+<div class="mojo-qt" style="{% render 'mojo-vars' %}--mojo-gold:{{ s.star_color }};" {{ block.shopify_attributes }}>
+  {%- if s.avatar != blank -%}
+    {{ s.avatar | image_url: width: 120 | image_tag: loading: 'lazy', widths: '76, 120', sizes: '38px', alt: s.name, class: 'mojo-qt__avatar' }}
+  {%- elsif s.avatar_asset != blank -%}
+    <img class="mojo-qt__avatar" src="{{ s.avatar_asset | asset_url }}" alt="{{ s.name | escape }}" loading="lazy" width="38" height="38">
+  {%- else -%}
+    <span class="mojo-qt__avatar mojo-qt__avatar--blank" aria-hidden="true"></span>
+  {%- endif -%}
+  <div class="mojo-qt__body">
+    <p class="mojo-qt__text">{{ s.quote }}</p>
+    <p class="mojo-qt__by"><strong>{{ s.name }}</strong>
+      <span class="mojo-qt__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'mojo-icon', name: 'star', size: 11 %}{%- endfor -%}</span>
+    </p>
+  </div>
+</div>
+
+{% stylesheet %}
+.mojo-qt { display: flex; align-items: center; gap: 12px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-qt__avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; flex: none; background: #e6e6e6; }
+.mojo-qt__text { margin: 0 0 4px; font-size: 12px; line-height: 1.45; font-style: italic; }
+.mojo-qt__by { margin: 0; font-size: 11px; display: flex; align-items: center; gap: 6px; }
+.mojo-qt__stars { display: inline-flex; gap: 1px; color: var(--mojo-gold); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo quote line",
+  "settings": [
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Quote",
+      "default": "“Ten hours at my desk and I still feel fresh. I'm not going back to anything else.”"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Name",
+      "default": "Daniel M."
+    },
+    {
+      "type": "image_picker",
+      "id": "avatar",
+      "label": "Avatar"
+    },
+    {
+      "type": "text",
+      "id": "avatar_asset",
+      "label": "Avatar theme file name (optional)"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star colour",
+      "default": "#E8B130"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo quote line"
+    }
+  ]
+}
+{% endschema %}

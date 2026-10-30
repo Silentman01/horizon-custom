@@ -1,0 +1,93 @@
+{%- assign s = section.settings -%}
+{%- if s.enabled -%}
+<div class="mojo-sa" data-mojo-sticky hidden style="{% render 'mojo-vars' %}" {{ section.shopify_attributes }}>
+  <div class="mojo-sa__inner">
+    <div class="mojo-sa__info">
+      <span class="mojo-sa__title">{{ s.title | default: product.title }}</span>
+      {%- if s.price_text != blank -%}<span class="mojo-sa__price">{{ s.price_text }}</span>{%- endif -%}
+    </div>
+    <button type="button" class="mojo-sa__btn" data-mojo-sticky-go>{{ s.button_text }}</button>
+  </div>
+</div>
+{%- endif -%}
+
+{% stylesheet %}
+.mojo-sa { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--mojo-bg); border-top: 1px solid var(--mojo-line); font-family: var(--mojo-font); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform 0.25s ease; }
+.mojo-sa[data-visible] { transform: translateY(0); }
+.mojo-sa__inner { display: flex; align-items: center; gap: 12px; }
+.mojo-sa__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.mojo-sa__title { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--mojo-fg); }
+.mojo-sa__price { font-size: 12px; color: var(--mojo-muted); }
+.mojo-sa__btn { flex: none; background: var(--mojo-fg); color: var(--mojo-bg); border: 0; border-radius: 0; min-height: 44px; padding: 0 22px; font-family: var(--mojo-font); font-weight: 600; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
+.mojo-sa__btn:focus-visible { outline: 2px solid var(--mojo-fg); outline-offset: 2px; }
+@media screen and (min-width: 750px) { .mojo-sa { display: none; } }
+@media (prefers-reduced-motion: reduce) { .mojo-sa { transition: none; } }
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  const init = () => {
+    const bar = document.querySelector('[data-mojo-sticky]');
+    if (!bar || bar.dataset.mojoReady) return;
+    bar.dataset.mojoReady = '1';
+    bar.hidden = false;
+    const find = () => document.querySelector('mojo-bundle') || document.querySelector('.buy-buttons-block') || document.querySelector('product-form-component');
+    const watch = document.querySelector('product-form-component add-to-cart-component') || find();
+    if (watch && 'IntersectionObserver' in window) {
+      new IntersectionObserver(([en]) => {
+        if (en.isIntersecting) bar.removeAttribute('data-visible'); else bar.setAttribute('data-visible', '');
+      }, { threshold: 0 }).observe(watch);
+    } else {
+      bar.setAttribute('data-visible', '');
+    }
+    bar.querySelector('[data-mojo-sticky-go]').addEventListener('click', () => {
+      const t = find();
+      if (t) t.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    });
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:section:load', init);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo sticky add to cart",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Mobile-only bar. Appears when the buy box scrolls out of view and scrolls back to the offer."
+    },
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Enable sticky bar",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title (empty = product title)"
+    },
+    {
+      "type": "text",
+      "id": "price_text",
+      "label": "Price line",
+      "default": "From £24.95"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Add to cart"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo sticky add to cart"
+    }
+  ]
+}
+{% endschema %}

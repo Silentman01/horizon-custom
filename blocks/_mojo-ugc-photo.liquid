@@ -1,0 +1,35 @@
+{%- assign s = block.settings -%}
+<figure class="mojo-up__item" {{ block.shopify_attributes }}>
+  {% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: '3 / 4', placeholder: 'lifestyle-1', alt: s.caption, sizes: '140px' %}
+  {%- if s.caption != blank -%}<figcaption class="mojo-up__cap">{{ s.caption }}</figcaption>{%- endif -%}
+</figure>
+
+{% stylesheet %}
+.mojo-up__item { position: relative; margin: 0; min-width: 0; font-family: var(--mojo-font); }
+.mojo-up__item .mojo-media { border-radius: var(--mojo-up-r, 0); }
+.mojo-up__cap { position: absolute; left: 6px; right: 6px; bottom: 8px; padding: 5px 7px; background: #fff; color: #000; font-size: 10px; font-weight: 600; line-height: 1.25; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo UGC photo",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo (3:4)"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Photo (3:4): theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Caption on the photo (optional)"
+    }
+  ]
+}
+{% endschema %}

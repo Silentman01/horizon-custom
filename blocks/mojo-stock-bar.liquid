@@ -1,0 +1,74 @@
+{%- assign s = block.settings -%}
+<div class="mojo-sk" style="{% render 'mojo-vars' %}--mojo-sk-fill:{{ s.bar_color }};--mojo-sk-track:{{ s.track_color }};--mojo-sk-pct:{{ s.percent }}%;--mojo-sk-fs:{{ s.font_size }}px;" {{ block.shopify_attributes }}>
+  <span class="mojo-sk__track" aria-hidden="true"><span class="mojo-sk__fill"></span></span>
+  <span class="mojo-sk__row"><strong class="mojo-sk__left">{{ s.left_text }}</strong><span class="mojo-sk__right">{{ s.right_text }}</span></span>
+</div>
+
+{% stylesheet %}
+.mojo-sk { font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-sk__track { display: block; height: 8px; background: var(--mojo-sk-track); border-radius: 0; overflow: hidden; }
+.mojo-sk__fill { display: block; height: 100%; width: var(--mojo-sk-pct); background: var(--mojo-sk-fill); }
+.mojo-sk__row { display: flex; justify-content: space-between; gap: 12px; margin-top: 6px; font-size: var(--mojo-sk-fs); }
+.mojo-sk__left { font-weight: 700; }
+.mojo-sk__right { font-weight: 500; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo stock bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "left_text",
+      "label": "Left text",
+      "default": "12% stock left"
+    },
+    {
+      "type": "text",
+      "id": "right_text",
+      "label": "Right text",
+      "default": "Offer ends soon"
+    },
+    {
+      "type": "header",
+      "content": "Bar"
+    },
+    {
+      "type": "range",
+      "id": "percent",
+      "label": "Filled share",
+      "default": 12,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bar_color",
+      "label": "Bar colour",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "track_color",
+      "label": "Track colour",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Text size",
+      "default": 13,
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px"
+    }
+  ]
+}
+{% endschema %}

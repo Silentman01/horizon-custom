@@ -1,0 +1,411 @@
+{%- assign s = section.settings -%}
+{%- liquid
+  assign total = section.blocks.size
+  assign half = total | plus: 1 | divided_by: 2
+-%}
+<section class="mojo-fw" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;--mojo-ptm:{{ s.padding_top_m }}px;--mojo-pbm:{{ s.padding_bottom_m }}px;--mojo-tc:{{ s.text_color }};--mojo-hs:{{ s.heading_size }}px;--mojo-hsm:{{ s.heading_size_m }}px;--mojo-fw-bg:{{ s.bg_color }};--mojo-fw-mw:{{ s.image_max_width }}px;--mojo-fw-line:{{ s.accent_color }};">
+  <div class="mojo-fw__wrap">
+    <div class="mojo-fw__head">
+      {%- if s.heading != blank -%}<h2 class="mojo-fw__heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.subheading != blank -%}<p class="mojo-fw__sub">{{ s.subheading }}</p>{%- endif -%}
+    </div>
+    <div class="mojo-fw__grid">
+      <ul class="mojo-fw__col mojo-fw__col--l" role="list">
+        {%- for block in section.blocks -%}{%- if forloop.index <= half -%}
+          <li class="mojo-fw__item" {{ block.shopify_attributes }}><span class="mojo-fw__icon">{% render 'mojo-icon', name: block.settings.icon, size: 28 %}</span><span class="mojo-fw__copy"><strong class="mojo-fw__title">{{ block.settings.title }}</strong><span class="mojo-fw__text">{{ block.settings.text }}</span></span></li>
+        {%- endif -%}{%- endfor -%}
+      </ul>
+      <div class="mojo-fw__media">{% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: s.image_ratio, placeholder: 'product-1', alt: s.heading, sizes: '(min-width: 750px) 360px, 80vw' %}</div>
+      <ul class="mojo-fw__col mojo-fw__col--r" role="list">
+        {%- for block in section.blocks -%}{%- if forloop.index > half -%}
+          <li class="mojo-fw__item" {{ block.shopify_attributes }}><span class="mojo-fw__icon">{% render 'mojo-icon', name: block.settings.icon, size: 28 %}</span><span class="mojo-fw__copy"><strong class="mojo-fw__title">{{ block.settings.title }}</strong><span class="mojo-fw__text">{{ block.settings.text }}</span></span></li>
+        {%- endif -%}{%- endfor -%}
+      </ul>
+    </div>
+    <div class="mojo-fw__cta">{% render 'mojo-cta', label: s.button_label, target: s.button_target, bg: s.button_bg, fg: s.button_fg, show: s.show_assurance_row, a1: s.assurance_1, a2: s.assurance_2, align: 'center' %}</div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-fw { padding: var(--mojo-ptm) 0 var(--mojo-pbm); font-family: var(--mojo-font); color: var(--mojo-tc); }
+@media screen and (min-width: 750px) { .mojo-fw { padding: var(--mojo-pt) 0 var(--mojo-pb); } }
+
+.mojo-fw { background: var(--mojo-fw-bg); }
+.mojo-fw__wrap { max-width: 1040px; margin: 0 auto; padding-inline: 20px; }
+.mojo-fw__head { text-align: center; margin-bottom: 28px; }
+.mojo-fw__heading { margin: 0 0 10px; font-family: var(--mojo-font-heading); font-weight: 700; font-size: var(--mojo-hsm); line-height: 1.2; text-transform: uppercase; }
+.mojo-fw__sub { margin: 0 auto; max-width: 560px; font-size: 14px; line-height: 1.5; color: var(--mojo-muted); }
+.mojo-fw__grid { display: grid; grid-template-columns: 1fr; gap: 22px; align-items: center; }
+.mojo-fw__media { order: -1; width: min(100%, var(--mojo-fw-mw)); margin-inline: auto; }
+.mojo-fw__col { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.mojo-fw__item { display: flex; align-items: flex-start; gap: 14px; }
+.mojo-fw__icon { display: inline-flex; flex: none; }
+.mojo-fw__copy { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.mojo-fw__title { align-self: flex-start; font-size: 14px; font-weight: 700; padding-bottom: 4px; border-bottom: 2px solid var(--mojo-fw-line); }
+.mojo-fw__text { font-size: 12px; line-height: 1.55; color: var(--mojo-muted); }
+.mojo-fw__cta { margin-top: 32px; }
+@media screen and (min-width: 750px) {
+  .mojo-fw__heading { font-size: var(--mojo-hs); }
+  .mojo-fw__grid { grid-template-columns: 1fr minmax(0, var(--mojo-fw-mw)) 1fr; gap: 36px; }
+  .mojo-fw__media { order: 0; }
+  .mojo-fw__col { gap: 34px; }
+  .mojo-fw__col--l .mojo-fw__item { flex-direction: row-reverse; text-align: right; }
+  .mojo-fw__col--l .mojo-fw__title { align-self: flex-end; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo feature wheel",
+  "tag": "section",
+  "class": "mojo-section",
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "feather",
+          "options": [
+            {
+              "value": "boxer",
+              "label": "Boxer"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "snow",
+              "label": "Cool"
+            },
+            {
+              "value": "drop",
+              "label": "Droplet"
+            },
+            {
+              "value": "feather",
+              "label": "Feather"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "stretch",
+              "label": "Stretch"
+            },
+            {
+              "value": "wind",
+              "label": "Airflow"
+            },
+            {
+              "value": "tag",
+              "label": "Tag"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "ring",
+              "label": "Waistband"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud"
+            },
+            {
+              "value": "refund",
+              "label": "Refund"
+            },
+            {
+              "value": "parcel",
+              "label": "Parcel"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "thermometer",
+              "label": "Thermometer"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your New Favourite Boxers—For Real"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading",
+      "default": "Built with Every Must-Have Feature You've Been Waiting for in a Boxer—Plus a Few Extras.."
+    },
+    {
+      "type": "header",
+      "content": "Centre image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Centre image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Centre image: theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "1 / 1",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "5 / 4",
+          "label": "Landscape 5:4"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image width on desktop",
+      "default": 340,
+      "min": 200,
+      "max": 560,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colours"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Title underline colour",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF"
+    },
+    {
+      "type": "text",
+      "id": "button_target",
+      "label": "Button link (scrolls to the buy box by default)",
+      "default": "#mojo-buybox"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_fg",
+      "label": "Button text colour",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_assurance_row",
+      "label": "Show the assurance row under the button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "assurance_1",
+      "label": "Assurance 1",
+      "default": "45-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "assurance_2",
+      "label": "Assurance 2",
+      "default": "Free returns, NO QUESTIONS ASKED"
+    },
+    {
+      "type": "header",
+      "content": "Typography and colours"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "default": 34,
+      "min": 18,
+      "max": 56,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_m",
+      "label": "Heading size (mobile)",
+      "default": 24,
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "default": 56,
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "default": 56,
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_m",
+      "label": "Top padding (mobile)",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_m",
+      "label": "Bottom padding (mobile)",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo feature wheel",
+      "blocks": [
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        },
+        {
+          "type": "feature"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

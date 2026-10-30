@@ -1,0 +1,51 @@
+{%- assign s = block.settings -%}
+<div class="mojo-nt" style="{% render 'mojo-vars' %}--mojo-nt-bg:{{ s.background }};" {{ block.shopify_attributes }}>
+  {%- if s.image != blank -%}
+    {{ s.image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '68, 120', sizes: '34px', alt: '', class: 'mojo-nt__img' }}
+  {%- elsif s.image_asset != blank -%}
+    <img class="mojo-nt__img" src="{{ s.image_asset | asset_url }}" alt="" loading="lazy" width="34" height="34">
+  {%- endif -%}
+  <div class="mojo-nt__text">{{ s.text }}</div>
+</div>
+
+{% stylesheet %}
+.mojo-nt { display: flex; align-items: center; gap: 12px; background: var(--mojo-nt-bg); border-radius: 4px; padding: 12px 14px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-nt__img { width: 34px; height: 34px; object-fit: contain; flex: none; }
+.mojo-nt__text { font-size: 12px; line-height: 1.45; }
+.mojo-nt__text p { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo promo note",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p><strong>Our Black Friday sale is going fast!</strong> Order today and your pairs arrive with a free mesh laundry bag.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (laundry bag)"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image theme file name (optional)"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#FCEBD6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo promo note"
+    }
+  ]
+}
+{% endschema %}

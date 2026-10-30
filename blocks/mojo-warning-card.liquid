@@ -1,0 +1,96 @@
+{%- assign s = block.settings -%}
+<div class="mojo-wc" style="{% render 'mojo-vars' %}--mojo-wc-border:{{ s.border_color }};--mojo-wc-title:{{ s.title_color }};--mojo-wc-r:{{ s.radius }}px;" {{ block.shopify_attributes }}>
+  <p class="mojo-wc__title">{% if s.icon != 'none' %}<span class="mojo-wc__icon">{% render 'mojo-icon', name: s.icon, size: 20 %}</span>{% endif %}{{ s.title }}</p>
+  {%- if s.text != blank -%}<div class="mojo-wc__text">{{ s.text }}</div>{%- endif -%}
+  {%- if s.ps_text != blank -%}<div class="mojo-wc__ps">{{ s.ps_text }}</div>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-wc { box-sizing: border-box; border: 1px solid var(--mojo-wc-border); border-radius: var(--mojo-wc-r); padding: 16px 18px; background: var(--mojo-bg); font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-wc__title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; font-size: 15px; font-weight: 700; color: var(--mojo-wc-title); }
+.mojo-wc__icon { display: inline-flex; flex: none; }
+.mojo-wc__text, .mojo-wc__ps { font-size: 12px; line-height: 1.55; color: var(--mojo-muted); }
+.mojo-wc__text p, .mojo-wc__ps p { margin: 0 0 8px; }
+.mojo-wc__text strong, .mojo-wc__ps strong { color: var(--mojo-fg); }
+.mojo-wc__ps p { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo warning card",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "info",
+      "options": [
+        {
+          "value": "info",
+          "label": "Info"
+        },
+        {
+          "value": "clock",
+          "label": "Clock"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "WARNING: Low Stock Notice"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>This product sold out <strong>12 times</strong> last year. We encourage you to take advantage of the limited <strong>Black Friday sale</strong> and buy now. Ordering now helps you avoid future stock outs.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "ps_text",
+      "label": "PS line",
+      "default": "<p><strong>PS:</strong> Only available here, don't buy fakes on Amazon/eBay</p>"
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border colour",
+      "default": "#D9D9D9"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title colour",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Corner radius",
+      "default": 0,
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "unit": "px"
+    }
+  ]
+}
+{% endschema %}

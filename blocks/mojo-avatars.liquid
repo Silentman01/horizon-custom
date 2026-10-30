@@ -1,0 +1,52 @@
+{%- assign s = block.settings -%}
+<div class="mojo-av" style="{% render 'mojo-vars' %}--mojo-av-h:{{ s.image_height }}px;" {{ block.shopify_attributes }}>
+  <span class="mojo-av__check">{% render 'mojo-icon', name: 'check', size: 18 %}</span>
+  <span class="mojo-av__text">{{ s.text }}</span>
+  {%- if s.image != blank -%}
+    {{ s.image | image_url: width: 600 | image_tag: loading: 'lazy', class: 'mojo-av__img', widths: '300, 600', alt: '' }}
+  {%- elsif s.image_asset != blank -%}
+    <img class="mojo-av__img" src="{{ s.image_asset | asset_url }}" alt="" loading="lazy" width="{{ s.image_height | times: 5 }}" height="{{ s.image_height }}">
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-av { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 10px; font-family: var(--mojo-font); color: var(--mojo-fg); font-size: 12px; }
+.mojo-av__check { display: inline-flex; flex: none; }
+.mojo-av__text { font-weight: 500; }
+.mojo-av__img { height: var(--mojo-av-h); width: auto; max-width: 100%; display: block; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo avatars trust line",
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Mojo is trusted by over 175k+ men"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Avatars strip (about 5:1)"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Avatars strip (about 5:1): theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "label": "Avatars height",
+      "default": 28,
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px"
+    }
+  ]
+}
+{% endschema %}

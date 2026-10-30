@@ -1,0 +1,61 @@
+{%- assign s = section.settings -%}
+<section class="mojo-hs" style="{% render 'mojo-vars' %}--mojo-hs-bg:{{ s.band_color }};--mojo-hs-fg:{{ s.text_color }};--mojo-hs-cap:{{ s.caption_color }};--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;">
+  <div class="mojo-hs__row">
+    {%- for block in section.blocks -%}
+      <div class="mojo-hs__item" {{ block.shopify_attributes }}>
+        <p class="mojo-hs__value">{{ block.settings.value }}</p>
+        {%- if block.settings.caption != blank -%}<p class="mojo-hs__caption">{{ block.settings.caption }}</p>{%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-hs { background: var(--mojo-hs-bg); color: var(--mojo-hs-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-hs__row { display: flex; justify-content: center; max-width: 1260px; margin: 0 auto; padding-inline: 8px; }
+.mojo-hs__item { flex: 1 1 0; min-width: 0; text-align: center; padding: 0 6px; }
+.mojo-hs__value { margin: 0; font-weight: 600; font-size: 15px; line-height: 1.3; }
+.mojo-hs__caption { margin: 2px 0 0; font-size: 11px; line-height: 1.3; color: var(--mojo-hs-cap); }
+@media screen and (min-width: 750px) {
+  .mojo-hs__value { font-size: 16px; }
+  .mojo-hs__caption { font-size: 12px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo stats band",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "band_color", "label": "Band background", "default": "#F3F4F6" },
+    { "type": "color", "id": "text_color", "label": "Value colour", "default": "#0B0B0B" },
+    { "type": "color", "id": "caption_color", "label": "Caption colour", "default": "#555555" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "default": 12, "min": 0, "max": 60, "step": 2, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "default": 12, "min": 0, "max": 60, "step": 2, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Value", "default": "175k+" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "5-Star Reviews" }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Mojo stats band",
+      "blocks": [
+        { "type": "stat", "settings": { "value": "175k+", "caption": "5-Star Reviews" } },
+        { "type": "stat", "settings": { "value": "1 Million+", "caption": "Trusted Customers" } },
+        { "type": "stat", "settings": { "value": "45-Day", "caption": "Guarantee" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

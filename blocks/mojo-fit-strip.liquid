@@ -1,0 +1,55 @@
+{%- assign s = block.settings -%}
+<div class="mojo-ft" style="{% render 'mojo-vars' %}--mojo-ft-bg:{{ s.background }};" {{ block.shopify_attributes }}>
+  {%- if s.icon != 'none' -%}<span class="mojo-ft__icon">{% render 'mojo-icon', name: s.icon, size: 18 %}</span>{%- endif -%}
+  <span class="mojo-ft__text">{{ s.text }}</span>
+</div>
+
+{% stylesheet %}
+.mojo-ft { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 10px 14px; background: var(--mojo-ft-bg); font-family: var(--mojo-font); color: var(--mojo-fg); font-size: 12px; text-align: center; }
+.mojo-ft__icon { display: inline-flex; flex: none; }
+.mojo-ft__text p { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo fit strip",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Men say this fits <strong>true to size</strong> based on 5,210 reviews</p>"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon",
+      "default": "person",
+      "options": [
+        {
+          "value": "person",
+          "label": "Person"
+        },
+        {
+          "value": "check",
+          "label": "Check"
+        },
+        {
+          "value": "ruler",
+          "label": "Ruler"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    }
+  ]
+}
+{% endschema %}

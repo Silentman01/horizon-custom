@@ -1,0 +1,64 @@
+{%- assign s = block.settings -%}
+<div class="mojo-oc" style="{% render 'mojo-vars' %}" {{ block.shopify_attributes }}>
+  {%- if s.chip_1_text != blank -%}<span class="mojo-oc__chip mojo-oc__chip--{{ s.chip_1_style }}">{{ s.chip_1_text }}</span>{%- endif -%}
+  {%- if s.chip_2_text != blank -%}<span class="mojo-oc__chip mojo-oc__chip--{{ s.chip_2_style }}">{{ s.chip_2_text }}</span>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-oc { display: flex; flex-wrap: wrap; gap: 6px; font-family: var(--mojo-font); }
+.mojo-oc__chip { display: inline-block; padding: 5px 9px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.2; border: 1px solid var(--mojo-fg); border-radius: 0; text-transform: uppercase; }
+.mojo-oc__chip--outline { background: var(--mojo-bg); color: var(--mojo-fg); }
+.mojo-oc__chip--solid { background: var(--mojo-fg); color: var(--mojo-bg); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo offer chips",
+  "settings": [
+    {
+      "type": "text",
+      "id": "chip_1_text",
+      "label": "Chip 1 text",
+      "default": "BLACK FRIDAY"
+    },
+    {
+      "type": "select",
+      "id": "chip_1_style",
+      "label": "Chip 1 style",
+      "default": "outline",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "solid",
+          "label": "Solid black"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "chip_2_text",
+      "label": "Chip 2 text",
+      "default": "BUY 2 GET 3 FREE TODAY"
+    },
+    {
+      "type": "select",
+      "id": "chip_2_style",
+      "label": "Chip 2 style",
+      "default": "solid",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Outline"
+        },
+        {
+          "value": "solid",
+          "label": "Solid black"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

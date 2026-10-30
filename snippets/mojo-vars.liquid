@@ -1,0 +1,10 @@
+{%- comment -%} Mojo brand tokens from the theme palette. Usage: style="{% render 'mojo-vars' %}" {%- endcomment -%}
+{%- liquid
+  echo '--mojo-bg:' | append: settings.color_palette.background | append: ';'
+  echo '--mojo-fg:' | append: settings.color_palette.foreground | append: ';'
+  echo '--mojo-panel:' | append: settings.color_palette.color1 | append: ';'
+  echo '--mojo-accent:' | append: settings.color_palette.color2 | append: ';'
+  echo '--mojo-line:' | append: settings.color_palette.color3 | append: ';'
+  echo '--mojo-muted:#555555;--mojo-soft:#7b7b7b;'
+  echo '--mojo-font:var(--font-body--family);--mojo-font-heading:var(--font-heading--family);'
+-%}

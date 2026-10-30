@@ -1,0 +1,235 @@
+{%- assign s = section.settings -%}
+<section class="mojo-st" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;--mojo-num:{{ s.number_color }};--mojo-card:{{ s.card_color }};">
+  <div class="mojo-st__wrap" data-mojo-rail-wrap data-mojo-overflow="0">
+    {%- if s.heading != blank -%}
+      <h2 class="mojo-st__heading">{{ s.heading }}
+        <svg class="mojo-st__scribble" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 14" width="180" height="12" aria-hidden="true" focusable="false"><path d="M3 5c40-4 90-4 140-2s55 1 74-1M6 11c45-4 85-4 130-2s60 1 80-1" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </h2>
+    {%- endif -%}
+    <div class="mojo-st__rail" data-mojo-rail>
+      {%- for block in section.blocks -%}
+        <div class="mojo-st__card" {{ block.shopify_attributes }}>
+          <p class="mojo-st__num">{{ block.settings.number }}</p>
+          <p class="mojo-st__claim">{{ block.settings.claim }}</p>
+          {%- if block.settings.footnote != blank -%}<p class="mojo-st__note">{{ block.settings.footnote }}</p>{%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+    <div class="mojo-st__dots" data-mojo-dots></div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-st { background: var(--mojo-bg); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-st__wrap { max-width: 1440px; margin: 0 auto; padding-inline: 20px; }
+.mojo-st__heading { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 30px; line-height: 1.2; text-align: center; margin: 0 0 24px; }
+.mojo-st__scribble { display: block; margin: 6px auto 0; }
+.mojo-st__rail { margin: 0 -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+.mojo-st__card { flex: 0 0 88%; scroll-snap-align: start; box-sizing: border-box; background: var(--mojo-card); border-radius: 4px; padding: 32px 24px; text-align: center; }
+.mojo-st__num { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 44px; line-height: 1; margin: 0 0 14px; color: var(--mojo-num); }
+.mojo-st__claim { font-weight: 600; font-size: 14px; line-height: 1.5; margin: 0 0 14px; }
+.mojo-st__note { font-size: 10px; line-height: 1.4; margin: 0; color: var(--mojo-soft); }
+
+.mojo-st__rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-overflow-scrolling: touch; }
+.mojo-st__rail::-webkit-scrollbar { display: none; }
+.mojo-st__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.mojo-st__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.mojo-st__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
+.mojo-st__dots button[aria-current='true'] { background: #000; }
+[data-mojo-overflow='0'] > .mojo-st__dots { display: none; }
+@media screen and (min-width: 750px) {
+  .mojo-st__wrap { padding-inline: 12px; }
+  .mojo-st__heading { font-size: 22px; }
+  .mojo-st__scribble { display: none; }
+  .mojo-st__rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; overflow: visible; cursor: auto; margin: 0; padding: 0; }
+  .mojo-st__card { padding: 36px 28px; }
+  .mojo-st__claim { font-size: 13px; }
+  .mojo-st__dots { display: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+if (!window.mojoRails) {
+  window.mojoRails = true;
+  const setup = (rail) => {
+    if (rail.dataset.mojoReady) return;
+    rail.dataset.mojoReady = '1';
+    const wrap = rail.closest('[data-mojo-rail-wrap]') || rail.parentElement;
+    const dots = wrap.querySelector('[data-mojo-dots]');
+    const prev = wrap.querySelector('[data-mojo-prev]');
+    const next = wrap.querySelector('[data-mojo-next]');
+    const cards = () => [...rail.children];
+    const step = () => {
+      const c = cards();
+      if (c.length > 1) return c[1].getBoundingClientRect().left - c[0].getBoundingClientRect().left;
+      return c[0] ? c[0].getBoundingClientRect().width : 0;
+    };
+    const index = () => { const s = step(); return s ? Math.round(rail.scrollLeft / s) : 0; };
+    const sync = () => {
+      const over = rail.scrollWidth > rail.clientWidth + 2;
+      wrap.dataset.mojoOverflow = over ? '1' : '0';
+      if (dots) {
+        if (dots.children.length !== cards().length) {
+          dots.textContent = '';
+          cards().forEach((_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Go to item ' + (i + 1));
+            b.addEventListener('click', () => rail.scrollTo({ left: i * step(), behavior: 'smooth' }));
+            dots.appendChild(b);
+          });
+        }
+        const at = index();
+        [...dots.children].forEach((b, i) => b.setAttribute('aria-current', i === at ? 'true' : 'false'));
+      }
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+    };
+    if (prev) prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+    rail.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    window.addEventListener('resize', sync);
+    rail.addEventListener('dragstart', (e) => e.preventDefault());
+    let x0 = 0, s0 = 0, id = -1, moved = false;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0 || rail.scrollWidth <= rail.clientWidth) return;
+      id = e.pointerId; x0 = e.clientX; s0 = rail.scrollLeft; moved = false;
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) { moved = true; rail.setAttribute('data-mojo-dragging', ''); rail.setPointerCapture(id); }
+      rail.scrollLeft = s0 - dx;
+    });
+    const end = () => {
+      if (id === -1) return;
+      id = -1;
+      if (!moved) return;
+      const left = rail.scrollLeft;
+      rail.removeAttribute('data-mojo-dragging');
+      rail.scrollLeft = left;
+      const s = step();
+      if (s) rail.scrollTo({ left: Math.round(left / s) * s, behavior: 'smooth' });
+    };
+    rail.addEventListener('pointerup', end);
+    rail.addEventListener('pointercancel', end);
+    rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    sync();
+    setTimeout(sync, 400);
+  };
+  const init = () => document.querySelectorAll('[data-mojo-rail]').forEach(setup);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:section:load', init);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo stat cards",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Proven benefits, proven results"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number colour",
+      "default": "#C9B28A"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 16,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "95%"
+        },
+        {
+          "type": "textarea",
+          "id": "claim",
+          "label": "Claim",
+          "default": "Felt clearly cooler and more comfortable all day"
+        },
+        {
+          "type": "text",
+          "id": "footnote",
+          "label": "Footnote",
+          "default": "*Based on an independent customer panel over four weeks"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Mojo stat cards",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "claim": "Felt clearly cooler and more comfortable all day",
+            "footnote": "*Based on an independent customer panel over four weeks"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "89%",
+            "claim": "Noticed less friction and chafing than with their old underwear",
+            "footnote": "*Based on an independent customer panel over four weeks"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "88%",
+            "claim": "Felt more confident and got compliments from their partner",
+            "footnote": "*Based on an independent customer panel over four weeks"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

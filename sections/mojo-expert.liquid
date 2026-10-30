@@ -1,0 +1,115 @@
+{%- assign s = section.settings -%}
+<section class="mojo-ex" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;">
+  <div class="mojo-ex__grid">
+    <div class="mojo-ex__media">{% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: s.image_ratio, placeholder: 'lifestyle-2', alt: s.heading, sizes: '(min-width: 750px) 50vw, 100vw' %}</div>
+    <div class="mojo-ex__body">
+      {%- if s.heading != blank -%}<h2 class="mojo-ex__heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.quote != blank -%}<div class="mojo-ex__quote">{{ s.quote }}</div>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-ex { background: var(--mojo-bg); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 20px var(--mojo-pb); }
+.mojo-ex__grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center; }
+.mojo-ex__media { filter: grayscale(1); }
+.mojo-ex__body { text-align: center; }
+.mojo-ex__heading { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 22px; line-height: 1.3; margin: 0 0 14px; }
+.mojo-ex__quote { font-size: 13px; line-height: 1.7; }
+.mojo-ex__quote p { margin: 0; }
+@media screen and (min-width: 750px) {
+  .mojo-ex__grid { grid-template-columns: 1.55fr 1fr; gap: 64px; }
+  .mojo-ex__heading { font-size: 20px; }
+  .mojo-ex__quote { font-size: 12px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo expert quote",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image: theme file name (optional, e.g. mojo-hero.webp)",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "3 / 2",
+      "options": [
+        {
+          "value": "3 / 2",
+          "label": "Landscape 3:2"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait 4:5"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Dr. James Carter on Mojo Silk Boxers"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": "Quote",
+      "default": "<p>\"Friction, heat and moisture cause real discomfort and can lead to skin problems. Mojo Silk Boxers deal with all three.\"</p>"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 56,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 56,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo expert quote"
+    }
+  ]
+}
+{% endschema %}

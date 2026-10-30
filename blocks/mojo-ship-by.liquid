@@ -1,0 +1,71 @@
+{%- liquid
+  assign s = block.settings
+  assign ts = 'now' | date: '%s' | plus: 0
+  assign add_secs = s.days | times: 86400
+  assign ts = ts | plus: add_secs
+  assign wd = ts | date: '%w'
+  if wd == '6'
+    assign ts = ts | plus: 172800
+  elsif wd == '0'
+    assign ts = ts | plus: 86400
+  endif
+  assign ship_date = ts | date: '%a, %-d %b'
+-%}
+<div class="mojo-sb" style="{% render 'mojo-vars' %}--mojo-sb-bg:{{ s.background }};--mojo-sb-dot:{{ s.dot_color }};" {{ block.shopify_attributes }}>
+  <span class="mojo-sb__left"><span class="mojo-sb__dot" aria-hidden="true"></span>{{ s.label }} <strong>{{ ship_date }}</strong></span>
+  {%- if s.right_text != blank -%}<span class="mojo-sb__right">{{ s.right_text }}</span>{%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-sb { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--mojo-sb-bg); font-family: var(--mojo-font); color: var(--mojo-fg); font-size: 12px; padding: 10px 14px; }
+.mojo-sb__left { display: inline-flex; align-items: center; gap: 8px; }
+.mojo-sb__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mojo-sb-dot); flex: none; }
+.mojo-sb__right { font-weight: 500; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo ship-by date",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Ships by"
+    },
+    {
+      "type": "range",
+      "id": "days",
+      "label": "Days from today",
+      "default": 3,
+      "min": 1,
+      "max": 14,
+      "step": 1,
+      "unit": " days"
+    },
+    {
+      "type": "text",
+      "id": "right_text",
+      "label": "Right text",
+      "default": "Fast UK Shipping"
+    },
+    {
+      "type": "color",
+      "id": "background",
+      "label": "Background",
+      "default": "#F4F4F4"
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot colour",
+      "default": "#22A559"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo ship-by date"
+    }
+  ]
+}
+{% endschema %}

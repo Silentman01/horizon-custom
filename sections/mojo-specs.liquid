@@ -1,0 +1,178 @@
+{%- assign s = section.settings -%}
+<section class="mojo-sp" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;">
+  <div class="mojo-sp__wrap">
+    {%- if s.heading != blank -%}<h2 class="mojo-sp__heading">{{ s.heading }}</h2>{%- endif -%}
+    <div class="mojo-sp__grid">
+      {%- for block in section.blocks -%}
+        <div class="mojo-sp__item" {{ block.shopify_attributes }}>
+          <div class="mojo-sp__icon">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 160 | image_tag: loading: 'lazy', widths: '80, 160', sizes: '48px', alt: block.settings.title }}
+            {%- elsif block.settings.image_asset != blank -%}
+              <img src="{{ block.settings.image_asset | asset_url }}" alt="{{ block.settings.title | escape }}" loading="lazy" width="80" height="80">
+            {%- else -%}
+              {% render 'mojo-icon', name: block.settings.icon, size: 36 %}
+            {%- endif -%}
+          </div>
+          <div class="mojo-sp__copy">
+            <h3 class="mojo-sp__title">{{ block.settings.title }}</h3>
+            <p class="mojo-sp__text">{{ block.settings.text }}</p>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-sp { background: var(--mojo-bg); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 20px var(--mojo-pb); }
+.mojo-sp__wrap { max-width: 1260px; margin: 0 auto; }
+.mojo-sp__heading { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 18px; text-align: center; margin: 0 0 28px; }
+.mojo-sp__grid { display: grid; grid-template-columns: 1fr; gap: 22px; }
+.mojo-sp__item { display: flex; align-items: flex-start; gap: 16px; }
+.mojo-sp__icon { flex: none; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+.mojo-sp__icon img { width: 48px; height: 48px; object-fit: contain; }
+.mojo-sp__title { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 14px; margin: 0 0 4px; }
+.mojo-sp__text { font-size: 13px; line-height: 1.5; margin: 0; color: var(--mojo-soft); }
+@media screen and (min-width: 750px) {
+  .mojo-sp__heading { font-size: 14px; margin-bottom: 32px; }
+  .mojo-sp__grid { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .mojo-sp__title { font-size: 12px; }
+  .mojo-sp__text { font-size: 11px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo specifications",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Specifications:"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 50,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "Specification",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Built-in icon",
+          "default": "feather",
+          "options": [
+            {
+              "value": "feather",
+              "label": "Feather"
+            },
+            {
+              "value": "thermometer",
+              "label": "Thermometer"
+            },
+            {
+              "value": "boxer",
+              "label": "Boxer"
+            },
+            {
+              "value": "check",
+              "label": "Check circle"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Animated icon (GIF / WebP, replaces built-in icon)"
+        },
+        {
+          "type": "text",
+          "id": "image_asset",
+          "label": "Animated icon (GIF / WebP, replaces built-in icon): theme file name (optional, e.g. mojo-hero.webp)",
+          "info": "Used when no image is uploaded above."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Silky Soft"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "Supple silk that stays soft wash after wash."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Mojo specifications",
+      "blocks": [
+        {
+          "type": "spec",
+          "settings": {
+            "icon": "feather",
+            "title": "Silky Soft",
+            "text": "Supple silk that stays soft wash after wash."
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "icon": "thermometer",
+            "title": "Thermo Control",
+            "text": "Naturally breathable and temperature regulating. Our silk keeps you cool."
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "icon": "boxer",
+            "title": "Smart Support",
+            "text": "Support where you need it. The pouch does the lifting for you."
+          }
+        },
+        {
+          "type": "spec",
+          "settings": {
+            "icon": "check",
+            "title": "Premium Quality",
+            "text": "A comfortable fit in top-grade 100% mulberry silk, made to last."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

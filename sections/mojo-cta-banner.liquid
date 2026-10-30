@@ -1,0 +1,295 @@
+{%- assign s = section.settings -%}
+<section class="mojo-cb mojo-cb--{{ s.variant }}" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;--mojo-ptm:{{ s.padding_top_m }}px;--mojo-pbm:{{ s.padding_bottom_m }}px;--mojo-tc:{{ s.text_color }};--mojo-hs:{{ s.heading_size }}px;--mojo-hsm:{{ s.heading_size_m }}px;--mojo-cb-bg:{{ s.bg_color }};--mojo-cb-ov:{{ s.overlay_opacity }}%;{% if s.top_max_width > 0 %}--mojo-cb-tw:{{ s.top_max_width }}px;{% endif %}">
+  <div class="mojo-cb__box">
+    {%- assign has_bg = false -%}{%- if s.bg_image != blank or s.bg_image_asset != blank -%}{%- assign has_bg = true -%}{%- endif -%}
+    {%- if s.variant == 'card' and has_bg -%}
+      <div class="mojo-cb__bg" aria-hidden="true">{% render 'mojo-media', image: s.bg_image, asset: s.bg_image_asset, ratio: '21 / 9', alt: '', sizes: '100vw' %}</div>
+      <span class="mojo-cb__ov"></span>
+    {%- endif -%}
+    <div class="mojo-cb__inner">
+      {%- if s.variant == 'dark' -%}
+        <div class="mojo-cb__top">{% render 'mojo-media', image: s.top_image, asset: s.top_image_asset, ratio: s.top_ratio, placeholder: 'lifestyle-1', alt: s.heading, sizes: '(min-width: 750px) 800px, 100vw' %}</div>
+      {%- endif -%}
+      {%- if s.eyebrow != blank -%}<p class="mojo-cb__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="mojo-cb__heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<div class="mojo-cb__text">{{ s.text }}</div>{%- endif -%}
+      {% render 'mojo-cta', label: s.button_label, target: s.button_target, bg: s.button_bg, fg: s.button_fg, show: s.show_assurance_row, a1: s.assurance_1, a2: s.assurance_2, as_color: s.text_color, align: 'center' %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-cb { padding: var(--mojo-ptm) 0 var(--mojo-pbm); font-family: var(--mojo-font); color: var(--mojo-tc); }
+@media screen and (min-width: 750px) { .mojo-cb { padding: var(--mojo-pt) 0 var(--mojo-pb); } }
+
+.mojo-cb--dark { background: var(--mojo-cb-bg); }
+.mojo-cb__box { position: relative; overflow: hidden; background: var(--mojo-cb-bg); text-align: center; }
+.mojo-cb--dark .mojo-cb__box { background: transparent; }
+.mojo-cb__bg { position: absolute; inset: 0; }
+.mojo-cb__bg .mojo-media { aspect-ratio: auto !important; height: 100%; }
+.mojo-cb__ov { position: absolute; inset: 0; background: #000; opacity: var(--mojo-cb-ov); }
+.mojo-cb__inner { position: relative; max-width: 760px; margin: 0 auto; padding: 44px 20px; }
+.mojo-cb__top { max-width: var(--mojo-cb-tw, 760px); margin: 0 auto 24px; }
+.mojo-cb__eyebrow { margin: 0 0 10px; font-size: 14px; letter-spacing: 0.02em; }
+.mojo-cb__heading { margin: 0 0 14px; font-family: var(--mojo-font-heading); font-weight: 600; font-size: var(--mojo-hsm); line-height: 1.2; text-transform: none; }
+.mojo-cb__text { margin: 0 auto 22px; font-size: 14px; line-height: 1.6; }
+.mojo-cb__text p { margin: 0 0 10px; }
+@media screen and (min-width: 750px) {
+  .mojo-cb--card .mojo-cb__box { max-width: 1280px; margin-inline: auto; }
+  .mojo-cb__heading { font-size: var(--mojo-hs); }
+  .mojo-cb__inner { padding: 56px 40px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo CTA banner",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Variant",
+      "default": "card",
+      "options": [
+        {
+          "value": "card",
+          "label": "Card with background image"
+        },
+        {
+          "value": "dark",
+          "label": "Full-width band with top image"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background colour",
+      "default": "#0B0B0B"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Innovation In Men's Essentials"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "35°C Silk Cooling Technology"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>We've all dealt with boxers that bunch up, trap heat or fall apart. That's why we created Mojo.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Background image (card variant)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "bg_image_asset",
+      "label": "Background image: theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Dark overlay",
+      "default": 55,
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Top image (band variant)"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_image",
+      "label": "Top image"
+    },
+    {
+      "type": "text",
+      "id": "top_image_asset",
+      "label": "Top image: theme file name",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "select",
+      "id": "top_ratio",
+      "label": "Top image ratio",
+      "default": "16 / 9",
+      "options": [
+        {
+          "value": "16 / 9",
+          "label": "16:9"
+        },
+        {
+          "value": "3 / 2",
+          "label": "3:2"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "top_max_width",
+      "label": "Top image max width on desktop (0 = full)",
+      "default": 0,
+      "min": 0,
+      "max": 1000,
+      "step": 20,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF"
+    },
+    {
+      "type": "text",
+      "id": "button_target",
+      "label": "Button link (scrolls to the buy box by default)",
+      "default": "#mojo-buybox"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_fg",
+      "label": "Button text colour",
+      "default": "#000000"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_assurance_row",
+      "label": "Show the assurance row under the button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "assurance_1",
+      "label": "Assurance 1",
+      "default": "45-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "assurance_2",
+      "label": "Assurance 2",
+      "default": "Free returns, NO QUESTIONS ASKED"
+    },
+    {
+      "type": "header",
+      "content": "Typography and colours"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (desktop)",
+      "default": 38,
+      "min": 18,
+      "max": 56,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_m",
+      "label": "Heading size (mobile)",
+      "default": 26,
+      "min": 16,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text colour",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding (desktop)",
+      "default": 40,
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding (desktop)",
+      "default": 40,
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_m",
+      "label": "Top padding (mobile)",
+      "default": 0,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_m",
+      "label": "Bottom padding (mobile)",
+      "default": 0,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo CTA banner"
+    }
+  ]
+}
+{% endschema %}

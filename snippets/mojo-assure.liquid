@@ -1,0 +1,15 @@
+{%- comment -%} Assurance row under a CTA. Params: a1, a2, align ('center' default or 'left'), color {%- endcomment -%}
+{%- if a1 != blank or a2 != blank -%}
+  <ul class="mojo-as mojo-as--{{ align | default: 'center' }}" role="list"{% if color != blank %} style="color:{{ color }}"{% endif %}>
+    {%- if a1 != blank -%}<li class="mojo-as__li">{% render 'mojo-icon', name: 'shield', size: 18 %}<span>{{ a1 }}</span></li>{%- endif -%}
+    {%- if a2 != blank -%}<li class="mojo-as__li">{% render 'mojo-icon', name: 'refund', size: 18 %}<span>{{ a2 }}</span></li>{%- endif -%}
+  </ul>
+{%- endif -%}
+
+{% stylesheet %}
+.mojo-as { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; font-family: var(--mojo-font); font-size: 11px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; }
+.mojo-as--center { justify-content: center; }
+.mojo-as--left { justify-content: flex-start; }
+.mojo-as__li { display: inline-flex; align-items: center; gap: 8px; }
+.mojo-as__li svg { flex: none; }
+{% endstylesheet %}

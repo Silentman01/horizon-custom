@@ -1,0 +1,37 @@
+{%- assign s = block.settings -%}
+<div class="mojo-sl" style="{% render 'mojo-vars' %}--mojo-sl-dot:{{ s.dot_color }};" {{ block.shopify_attributes }}>
+  {%- if s.show_dot -%}<i class="mojo-sl__dot" aria-hidden="true"></i>{%- endif -%}
+  <span class="mojo-sl__text">{{ s.text }}</span>
+</div>
+
+{% stylesheet %}
+.mojo-sl { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 0; font-family: var(--mojo-font); color: var(--mojo-fg); font-size: 12px; text-align: center; }
+.mojo-sl__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mojo-sl-dot); flex: none; }
+.mojo-sl__text p { margin: 0; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo ship line",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Ships today — <strong>39 left at this price</strong></p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dot",
+      "label": "Show the coloured dot",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "dot_color",
+      "label": "Dot colour",
+      "default": "#22A559"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,263 @@
+{%- liquid
+  assign p = closest.product
+  assign bs = block.settings
+  assign ci = 1
+  assign si = 2
+  for o in p.options_with_values
+    assign oname = o.name | downcase
+    if oname contains 'colo'
+      assign ci = o.position
+    elsif oname contains 'size'
+      assign si = o.position
+    endif
+  endfor
+  assign qty = bs.quantity
+  assign pickers = bs.show_pickers
+  if p.options_with_values.size < 2
+    assign pickers = false
+  endif
+  assign cidx = ci | minus: 1
+  assign sidx = si | minus: 1
+  assign col_option = p.options_with_values[cidx]
+  assign size_option = p.options_with_values[sidx]
+  assign col_values = col_option.values
+  assign size_values = size_option.values
+  assign chip_list = bs.chips | split: ','
+  assign line_list = bs.free_lines | newline_to_br | split: '<br />'
+-%}
+<div class="mojo-tier mojo-tier--{{ bs.badge_style | default: 'black' }}" data-qty="{{ qty }}" data-title="{{ bs.title | escape }}" {{ block.shopify_attributes }}>
+  <label class="mojo-tier__head">
+    <input class="mojo-tier__input" type="radio" name="mojo-tier-{{ section.id }}" value="{{ qty }}" data-mojo-tier{% if bs.preselect %} checked data-preselect{% endif %}>
+    <span class="mojo-tier__radio" aria-hidden="true"></span>
+    <span class="mojo-tier__main">
+      <span class="mojo-tier__title">{{ bs.title }}</span>
+      {%- if bs.saving != blank -%}<span class="mojo-tier__save{% if bs.saving_style == 'pill' %} mojo-tier__save--pill{% endif %}">{{ bs.saving }}</span>{%- endif -%}
+      {%- if bs.gift_line != blank -%}<span class="mojo-tier__gift"><i aria-hidden="true"></i>{{ bs.gift_line }}</span>{%- endif -%}
+      {%- if bs.chips != blank -%}
+        <span class="mojo-tier__chips">
+          {%- for c in chip_list -%}
+            {%- assign cn = c | strip -%}
+            {%- if cn != blank -%}
+              {%- liquid
+                assign cl = cn | downcase
+                assign dot = '#9a9a9a'
+                if cl contains 'black'
+                  assign dot = '#111111'
+                elsif cl contains 'midnight' or cl contains 'blue'
+                  assign dot = '#1f2d52'
+                elsif cl contains 'beige'
+                  assign dot = '#d6c2a0'
+                elsif cl contains 'white'
+                  assign dot = '#ffffff'
+                endif
+              -%}
+              <span class="mojo-tier__chip"><i style="background:{{ dot }}" aria-hidden="true"></i>{{ cn }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </span>
+      {%- endif -%}
+    </span>
+    <span class="mojo-tier__prices">
+      <span class="mojo-tier__price">{{ bs.price }}{% if bs.price_suffix != blank %}<small class="mojo-tier__suffix"> {{ bs.price_suffix }}</small>{% endif %}</span>
+      {%- if bs.compare != blank -%}<s class="mojo-tier__was">{{ bs.compare }}</s>{%- endif -%}
+      {%- if bs.per_pair != blank -%}<span class="mojo-tier__pp">{{ bs.per_pair }}</span>{%- endif -%}
+    </span>
+    {%- if bs.badge != blank -%}<span class="mojo-tier__badge">{{ bs.badge }}</span>{%- endif -%}
+  </label>
+  {%- if bs.free_lines != blank -%}
+    <ul class="mojo-tier__lines" role="list">
+      {%- for l in line_list -%}
+        {%- assign parts = l | split: '|' -%}
+        {%- assign lbl = parts[0] | strip -%}
+        {%- if lbl != blank -%}
+          <li class="mojo-tier__line"><span>{{ lbl }}</span>{% if parts[1] != blank %} <s>{{ parts[1] | strip }}</s>{% endif %}{% if parts[2] != blank %} <em class="mojo-tier__free">{{ parts[2] | strip }}</em>{% endif %}</li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+  {%- if pickers -%}
+    <div class="mojo-tier__units">
+      {%- if bs.picker_label != blank -%}<p class="mojo-tier__plabel">{{ bs.picker_label }}</p>{%- endif -%}
+      {%- for i in (1..qty) -%}
+        <div class="mojo-tier__unit" data-unit>
+          <span class="mojo-tier__thumb">
+            {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 96', sizes: '24px', alt: '', width: 24, height: 24 }}{%- endif -%}
+          </span>
+          <select class="mojo-tier__sel" data-opt="colour" aria-label="Colour, pair {{ i }}">
+            {%- for v in col_values -%}<option value="{{ v | escape }}">{{ v }}</option>{%- endfor -%}
+          </select>
+          <select class="mojo-tier__sel mojo-tier__sel--size" data-opt="size" aria-label="Size, pair {{ i }}">
+            {%- for v in size_values -%}<option value="{{ v | escape }}">{{ v }}</option>{%- endfor -%}
+          </select>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.mojo-tier { position: relative; background: rgb(228 228 228 / 40%); border: 1px solid transparent; border-radius: 6px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-tier:has(.mojo-tier__input:checked) { background: var(--mojo-bg); border: 2px solid var(--mojo-fg); margin: -1px; }
+.mojo-tier:has(.mojo-tier__input:focus-visible) { outline: 2px solid var(--mojo-fg); outline-offset: 2px; }
+.mojo-tier__head { display: flex; align-items: center; gap: 12px; padding: 14px; cursor: pointer; }
+.mojo-tier__input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+.mojo-tier__radio { width: 16px; height: 16px; flex: none; border: 1px solid var(--mojo-fg); border-radius: 50%; background: var(--mojo-bg); box-sizing: border-box; }
+.mojo-tier__input:checked ~ .mojo-tier__radio { border: 4px solid var(--mojo-bg); background: var(--mojo-fg); box-shadow: 0 0 0 1px var(--mojo-fg); }
+.mojo-tier__main { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.mojo-tier__title { font-weight: 600; font-size: 13px; line-height: 1.3; }
+.mojo-tier__save { font-size: 11px; color: var(--mojo-muted); }
+.mojo-tier__save--pill { background: #fdeceb; color: #b3261e; font-weight: 600; padding: 3px 7px; border-radius: 3px; line-height: 1.2; }
+.mojo-tier__gift { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; }
+.mojo-tier__gift i { width: 8px; height: 8px; border-radius: 50%; background: #22a559; flex: none; }
+.mojo-tier__chips { display: flex; flex-wrap: wrap; gap: 4px; }
+.mojo-tier__chip { display: inline-flex; align-items: center; gap: 5px; background: #ececec; border-radius: 10px; padding: 2px 8px; font-size: 10px; line-height: 1.5; color: #333; }
+.mojo-tier__chip i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgb(0 0 0 / 25%); flex: none; box-sizing: border-box; }
+.mojo-tier__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
+.mojo-tier__price { font-weight: 600; font-size: 14px; }
+.mojo-tier__suffix { font-size: 10px; font-weight: 400; color: var(--mojo-muted); }
+.mojo-tier__was { font-size: 11px; color: var(--mojo-muted); }
+.mojo-tier__pp { font-size: 10px; color: var(--mojo-muted); }
+.mojo-tier__badge { position: absolute; top: -9px; right: 12px; background: var(--mojo-fg); color: var(--mojo-bg); font-weight: 600; font-size: 9px; line-height: 1; letter-spacing: 0.4px; text-transform: uppercase; padding: 5px 8px; border-radius: 3px; }
+.mojo-tier--grey .mojo-tier__badge { background: #555; }
+.mojo-tier__lines { list-style: none; margin: -4px 0 0; padding: 0 14px 14px 42px; display: grid; gap: 3px; font-size: 11px; color: var(--mojo-muted); }
+.mojo-tier__line { display: flex; align-items: center; gap: 8px; }
+.mojo-tier__line s { color: var(--mojo-soft); }
+.mojo-tier__free { font-style: normal; font-weight: 700; font-size: 9px; letter-spacing: 0.4px; background: #22a559; color: #fff; padding: 2px 6px; border-radius: 3px; line-height: 1.2; }
+.mojo-tier__units { display: none; padding: 0 14px 14px 42px; gap: 8px; }
+.mojo-tier:has(.mojo-tier__input:checked) .mojo-tier__units { display: grid; }
+.mojo-tier__plabel { margin: 0; font-size: 11px; font-weight: 600; }
+.mojo-tier__unit { display: grid; grid-template-columns: 24px minmax(0, 1fr) 72px; gap: 8px; align-items: center; }
+.mojo-tier__thumb { width: 24px; height: 24px; display: block; }
+.mojo-tier__thumb img { width: 24px; height: 24px; object-fit: cover; display: block; }
+.mojo-tier__sel { width: 100%; min-height: 36px; border: 1px solid #d9d9d9; border-radius: 3px; background: var(--mojo-bg); color: var(--mojo-fg); font: inherit; font-size: 12px; padding: 0 6px; }
+@media screen and (min-width: 750px) {
+  .mojo-tier__unit { grid-template-columns: 24px 120px 56px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo bundle tier",
+  "settings": [
+    {
+      "type": "range",
+      "id": "quantity",
+      "label": "Pairs in this tier",
+      "default": 5,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "unit": ""
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "(5 Pack) Buy 2 get 3 Free"
+    },
+    {
+      "type": "text",
+      "id": "saving",
+      "label": "Saving line",
+      "default": "You save £100.05"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "£49.95"
+    },
+    {
+      "type": "text",
+      "id": "compare",
+      "label": "Compare-at price",
+      "default": "£150.00"
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge (empty = none)",
+      "default": "MOST POPULAR"
+    },
+    {
+      "type": "checkbox",
+      "id": "preselect",
+      "label": "Preselected",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pickers",
+      "label": "Show colour + size picker for each pair",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "picker_label",
+      "label": "Picker label",
+      "default": "Colour, Size"
+    },
+    {
+      "type": "header",
+      "content": "Optional extras"
+    },
+    {
+      "type": "select",
+      "id": "saving_style",
+      "label": "Saving line style",
+      "default": "text",
+      "options": [
+        {
+          "value": "text",
+          "label": "Plain text"
+        },
+        {
+          "value": "pill",
+          "label": "Pill"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "price_suffix",
+      "label": "Text after the price (e.g. /pair)"
+    },
+    {
+      "type": "text",
+      "id": "per_pair",
+      "label": "Per-pair line under the price (e.g. £9.99 /pair)"
+    },
+    {
+      "type": "text",
+      "id": "gift_line",
+      "label": "Gift line (text only, green dot)"
+    },
+    {
+      "type": "text",
+      "id": "chips",
+      "label": "Colour chips (comma separated, e.g. 2x Black, 1x Midnight Blue)"
+    },
+    {
+      "type": "textarea",
+      "id": "free_lines",
+      "label": "Pair lines (one per line: label | struck price | tag, e.g. Pair 2 | £30.00 | FREE)"
+    },
+    {
+      "type": "select",
+      "id": "badge_style",
+      "label": "Badge colour",
+      "default": "black",
+      "options": [
+        {
+          "value": "black",
+          "label": "Black"
+        },
+        {
+          "value": "grey",
+          "label": "Dark grey"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

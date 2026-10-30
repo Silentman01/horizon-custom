@@ -1,0 +1,215 @@
+<section class="mojo-press" style="{% render 'mojo-vars' %}--mojo-pt:{{ section.settings.padding_top }}px;--mojo-pb:{{ section.settings.padding_bottom }}px;">
+  <div class="mojo-press__wrap" data-mojo-rail-wrap data-mojo-overflow="0">
+    <div class="mojo-press__rail" data-mojo-rail>
+      {%- for block in section.blocks -%}
+        <figure class="mojo-press__item" {{ block.shopify_attributes }}>
+          <div class="mojo-press__logo">
+            {%- if block.settings.logo != blank -%}
+              {{ block.settings.logo | image_url: width: 480 | image_tag: loading: 'lazy', widths: '240, 480', sizes: '240px', alt: block.settings.publication }}
+            {%- elsif block.settings.logo_asset != blank -%}
+              <img src="{{ block.settings.logo_asset | asset_url }}" alt="{{ block.settings.publication | escape }}" loading="lazy" width="240" height="56">
+            {%- else -%}
+              <span class="mojo-press__name">{{ block.settings.publication }}</span>
+            {%- endif -%}
+          </div>
+          <blockquote class="mojo-press__quote">{{ block.settings.quote }}</blockquote>
+        </figure>
+      {%- endfor -%}
+    </div>
+    <div class="mojo-press__dots" data-mojo-dots></div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-press { background: var(--mojo-bg); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-press__wrap { max-width: 1260px; margin: 0 auto; padding-inline: 20px; }
+.mojo-press__rail { margin: 0 -20px; padding-inline: 20px; scroll-padding-inline: 20px; }
+.mojo-press__item { flex: 0 0 84%; scroll-snap-align: start; margin: 0; text-align: center; padding: 8px 12px; box-sizing: border-box; }
+.mojo-press__logo { height: 56px; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+.mojo-press__logo img { max-height: 44px; width: auto; max-width: 180px; object-fit: contain; filter: grayscale(1); opacity: 0.75; }
+.mojo-press__name { font-family: Georgia, 'Times New Roman', serif; font-size: 28px; font-weight: 700; color: #6b6b6b; letter-spacing: -0.5px; }
+.mojo-press__quote { margin: 0; font-size: 13px; line-height: 1.55; }
+
+.mojo-press__rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-overflow-scrolling: touch; }
+.mojo-press__rail::-webkit-scrollbar { display: none; }
+.mojo-press__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.mojo-press__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
+.mojo-press__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
+.mojo-press__dots button[aria-current='true'] { background: #000; }
+[data-mojo-overflow='0'] > .mojo-press__dots { display: none; }
+@media screen and (min-width: 750px) {
+  .mojo-press__rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; overflow: visible; cursor: auto; margin: 0; padding: 0; }
+  .mojo-press__item { padding: 0; }
+  .mojo-press__quote { font-size: 12px; }
+  .mojo-press__dots { display: none; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+if (!window.mojoRails) {
+  window.mojoRails = true;
+  const setup = (rail) => {
+    if (rail.dataset.mojoReady) return;
+    rail.dataset.mojoReady = '1';
+    const wrap = rail.closest('[data-mojo-rail-wrap]') || rail.parentElement;
+    const dots = wrap.querySelector('[data-mojo-dots]');
+    const prev = wrap.querySelector('[data-mojo-prev]');
+    const next = wrap.querySelector('[data-mojo-next]');
+    const cards = () => [...rail.children];
+    const step = () => {
+      const c = cards();
+      if (c.length > 1) return c[1].getBoundingClientRect().left - c[0].getBoundingClientRect().left;
+      return c[0] ? c[0].getBoundingClientRect().width : 0;
+    };
+    const index = () => { const s = step(); return s ? Math.round(rail.scrollLeft / s) : 0; };
+    const sync = () => {
+      const over = rail.scrollWidth > rail.clientWidth + 2;
+      wrap.dataset.mojoOverflow = over ? '1' : '0';
+      if (dots) {
+        if (dots.children.length !== cards().length) {
+          dots.textContent = '';
+          cards().forEach((_, i) => {
+            const b = document.createElement('button');
+            b.type = 'button';
+            b.setAttribute('aria-label', 'Go to item ' + (i + 1));
+            b.addEventListener('click', () => rail.scrollTo({ left: i * step(), behavior: 'smooth' }));
+            dots.appendChild(b);
+          });
+        }
+        const at = index();
+        [...dots.children].forEach((b, i) => b.setAttribute('aria-current', i === at ? 'true' : 'false'));
+      }
+      if (prev) prev.disabled = rail.scrollLeft <= 2;
+      if (next) next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 2;
+    };
+    if (prev) prev.addEventListener('click', () => rail.scrollBy({ left: -step(), behavior: 'smooth' }));
+    if (next) next.addEventListener('click', () => rail.scrollBy({ left: step(), behavior: 'smooth' }));
+    rail.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    window.addEventListener('resize', sync);
+    rail.addEventListener('dragstart', (e) => e.preventDefault());
+    let x0 = 0, s0 = 0, id = -1, moved = false;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0 || rail.scrollWidth <= rail.clientWidth) return;
+      id = e.pointerId; x0 = e.clientX; s0 = rail.scrollLeft; moved = false;
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) { moved = true; rail.setAttribute('data-mojo-dragging', ''); rail.setPointerCapture(id); }
+      rail.scrollLeft = s0 - dx;
+    });
+    const end = () => {
+      if (id === -1) return;
+      id = -1;
+      if (!moved) return;
+      const left = rail.scrollLeft;
+      rail.removeAttribute('data-mojo-dragging');
+      rail.scrollLeft = left;
+      const s = step();
+      if (s) rail.scrollTo({ left: Math.round(left / s) * s, behavior: 'smooth' });
+    };
+    rail.addEventListener('pointerup', end);
+    rail.addEventListener('pointercancel', end);
+    rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    sync();
+    setTimeout(sync, 400);
+  };
+  const init = () => document.querySelectorAll('[data-mojo-rail]').forEach(setup);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:section:load', init);
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo press quotes",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 60,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Quote",
+      "settings": [
+        {
+          "type": "text",
+          "id": "publication",
+          "label": "Publication name (grey wordmark when no logo)",
+          "default": "Men's Health"
+        },
+        {
+          "type": "image_picker",
+          "id": "logo",
+          "label": "Logo (shown greyscale)"
+        },
+        {
+          "type": "text",
+          "id": "logo_asset",
+          "label": "Logo theme file name (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "By far the best boxers our team at the office has ever tested. Well done, Mojo."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Mojo press quotes",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "publication": "Men's Health",
+            "quote": "By far the best boxers our team at the office has ever tested. Well done, Mojo."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "publication": "GQ",
+            "quote": "Ten hours in, no sweat and no odour at all. Honestly impressive."
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "publication": "Forbes",
+            "quote": "They don't shift, they hold snug. We think these are the best boxers you can buy right now."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

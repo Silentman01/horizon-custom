@@ -1,0 +1,298 @@
+{%- liquid
+  assign p = closest.product
+  if request.visual_preview_mode and p == blank
+    assign p = collections.all.products.first
+  endif
+-%}
+{%- unless p == blank -%}
+  {%- liquid
+    assign ci = 1
+    assign si = 2
+    for o in p.options_with_values
+      assign oname = o.name | downcase
+      if oname contains 'colo'
+        assign ci = o.position
+      elsif oname contains 'size'
+        assign si = o.position
+      endif
+    endfor
+  -%}
+  <mojo-bundle class="mojo-bn" id="mojo-buybox" style="{% render 'mojo-vars' %}--mojo-bn-gap:{{ block.settings.tier_gap | default: 14 }}px;" {% if block.settings.countdown %}data-countdown{% endif %} {{ block.shopify_attributes }}>
+    {%- if block.settings.heading != blank -%}
+      <p class="mojo-bn__heading{% if block.settings.heading_style == 'left' %} mojo-bn__heading--left{% endif %}"><span class="mojo-bn__rule" aria-hidden="true"></span><span class="mojo-bn__text">{{ block.settings.heading }}{% if block.settings.heading_accent != blank %} <span class="mojo-bn__accent">{{ block.settings.heading_accent }}</span>{% endif %}{% if block.settings.countdown %} <span class="mojo-bn__count" data-mojo-count></span>{% endif %}</span><span class="mojo-bn__rule" aria-hidden="true"></span></p>
+    {%- endif -%}
+    <div class="mojo-bn__tiers" role="radiogroup" aria-label="{{ block.settings.heading | default: 'Choose your bundle' | escape }}">
+      {% content_for 'blocks', closest.product: p %}
+    </div>
+    <script type="application/json" data-mojo-variants>
+      {"ci": {{ ci }}, "si": {{ si }}, "variants": [
+      {%- for v in p.variants -%}
+        {"id": {{ v.id }}, "o": [{{ v.option1 | json }}, {{ v.option2 | json }}, {{ v.option3 | json }}], "a": {{ v.available | json }}, "img": {% if v.featured_image %}{{ v.featured_image | image_url: width: 96 | json }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+      ]}
+    </script>
+  </mojo-bundle>
+{%- endunless -%}
+
+{% stylesheet %}
+.mojo-bn { display: block; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-bn__heading { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
+.mojo-bn__rule { flex: 1; height: 1px; background: var(--mojo-line); }
+.mojo-bn__text { font-weight: 600; font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; text-align: center; }
+.mojo-bn__tiers { display: grid; gap: var(--mojo-bn-gap, 14px); }
+.mojo-bn { scroll-margin-top: 90px; }
+.mojo-bn__heading--left { justify-content: flex-start; }
+.mojo-bn__heading--left .mojo-bn__rule { display: none; }
+.mojo-bn__heading--left .mojo-bn__text { text-align: left; font-size: 12px; font-weight: 700; }
+.mojo-bn__accent { color: #8f1d1d; }
+.shopify-section:has(mojo-bundle) .quantity-selector-wrapper, .shopify-section:has(mojo-bundle) .quantity-label, .shopify-section:has(mojo-bundle) .quantity-rules { display: none; }
+{% endstylesheet %}
+
+{% javascript %}
+if (!customElements.get('mojo-bundle')) {
+  customElements.define('mojo-bundle', class extends HTMLElement {
+    connectedCallback() {
+      try { this.data = JSON.parse(this.querySelector('[data-mojo-variants]').textContent); } catch (e) { this.data = { variants: [], ci: 1, si: 2 }; }
+      this.scope = this.closest('.shopify-section') || document;
+      this.pass = false;
+      if (!this.querySelector('[data-mojo-tier]:checked')) {
+        const pre = this.querySelector('[data-mojo-tier][data-preselect]') || this.querySelector('[data-mojo-tier]');
+        if (pre) pre.checked = true;
+      }
+      this.addEventListener('change', this.onChange);
+      this.scope.addEventListener('change', this.onNative);
+      document.addEventListener('submit', this.onSubmit, true);
+      this.syncUnits();
+      this.startCountdown();
+    }
+    disconnectedCallback() {
+      this.removeEventListener('change', this.onChange);
+      this.scope.removeEventListener('change', this.onNative);
+      document.removeEventListener('submit', this.onSubmit, true);
+      clearInterval(this.timer);
+    }
+    form() { return this.scope.querySelector('product-form-component form') || this.scope.querySelector('form[action*="cart/add"]'); }
+    nativeId() { const f = this.form(); const i = f && f.querySelector('input[name="id"]'); return i ? i.value : ''; }
+    variantById(id) { return this.data.variants.find((v) => String(v.id) === String(id)); }
+    resolve(colour, size) {
+      const { ci, si } = this.data;
+      const v = this.data.variants.find((x) => x.o[ci - 1] === colour && x.o[si - 1] === size);
+      return v ? v.id : this.nativeId();
+    }
+    setThumb(unit, colour, size) {
+      const img = unit.querySelector('.mojo-tier__thumb img');
+      const { ci, si } = this.data;
+      const v = this.data.variants.find((x) => x.o[ci - 1] === colour && x.o[si - 1] === size) || this.data.variants.find((x) => x.o[ci - 1] === colour);
+      if (img && v && v.img) { img.src = v.img; img.removeAttribute('srcset'); }
+    }
+    syncUnits() {
+      const v = this.variantById(this.nativeId());
+      this.querySelectorAll('[data-unit]').forEach((u) => {
+        const c = u.querySelector('[data-opt="colour"]'), s = u.querySelector('[data-opt="size"]');
+        if (v && !u.dataset.touched) {
+          c.value = v.o[this.data.ci - 1]; s.value = v.o[this.data.si - 1];
+        }
+        this.setThumb(u, c.value, s.value);
+      });
+    }
+    onChange = (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLElement)) return;
+      const unit = t.closest('[data-unit]');
+      if (unit) {
+        unit.dataset.touched = '1';
+        this.setThumb(unit, unit.querySelector('[data-opt="colour"]').value, unit.querySelector('[data-opt="size"]').value);
+      } else if (t.matches('[data-mojo-tier]')) {
+        this.syncUnits();
+      }
+    };
+    onNative = (e) => {
+      if (this.contains(e.target)) return;
+      if (e.target.closest && e.target.closest('variant-picker')) setTimeout(() => this.syncUnits(), 450);
+    };
+    plan() {
+      const checked = this.querySelector('[data-mojo-tier]:checked');
+      if (!checked) return null;
+      const tier = checked.closest('.mojo-tier');
+      const qty = Number(tier.dataset.qty) || 1;
+      const units = tier.querySelectorAll('[data-unit]');
+      const ids = [];
+      if (units.length) units.forEach((u) => ids.push(this.resolve(u.querySelector('[data-opt="colour"]').value, u.querySelector('[data-opt="size"]').value)));
+      else for (let i = 0; i < qty; i++) ids.push(this.nativeId());
+      const groups = [];
+      ids.forEach((id) => { const g = groups.find((x) => x.id === id); if (g) g.qty += 1; else groups.push({ id, qty: 1 }); });
+      return { title: tier.dataset.title, qty, groups };
+    }
+    onSubmit = (e) => {
+      const form = e.target;
+      if (this.pass || !(form instanceof HTMLFormElement) || !this.scope.contains(form) || !form.matches('[action*="cart/add"]')) return;
+      const plan = this.plan();
+      if (!plan || plan.qty < 2) return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      const submitter = e.submitter;
+      const [first, ...rest] = plan.groups;
+      const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+      const props = { _Bundle: plan.title };
+      const addRest = rest.length
+        ? fetch(root + 'cart/add.js', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ items: rest.map((g) => ({ id: Number(g.id), quantity: g.qty, properties: props })) }),
+          }).then((r) => { if (!r.ok) throw new Error('add failed'); })
+        : Promise.resolve();
+      addRest.then(() => {
+        const idIn = form.querySelector('input[name="id"]');
+        const oldId = idIn.value;
+        idIn.value = first.id;
+        let q = form.querySelector('input[name="quantity"]');
+        const madeQ = !q;
+        if (madeQ) { q = document.createElement('input'); q.type = 'hidden'; q.name = 'quantity'; form.appendChild(q); }
+        const oldQ = q.value;
+        q.value = first.qty;
+        const pr = document.createElement('input');
+        pr.type = 'hidden'; pr.name = 'properties[_Bundle]'; pr.value = plan.title;
+        form.appendChild(pr);
+        this.pass = true;
+        try { if (submitter && form.contains(submitter)) form.requestSubmit(submitter); else form.requestSubmit(); } finally { this.pass = false; }
+        setTimeout(() => { idIn.value = oldId; if (madeQ) q.remove(); else q.value = oldQ; pr.remove(); }, 0);
+      }).catch(() => { this.pass = true; try { form.requestSubmit(); } finally { this.pass = false; } });
+    };
+    startCountdown() {
+      const out = this.querySelector('[data-mojo-count]');
+      if (!out || !this.hasAttribute('data-countdown')) return;
+      const tick = () => {
+        const end = new Date(); end.setHours(23, 59, 59, 0);
+        let s = Math.max(0, Math.floor((end - new Date()) / 1000));
+        const h = String(Math.floor(s / 3600)).padStart(2, '0'); s %= 3600;
+        out.textContent = '\u00b7 ' + h + ':' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+      };
+      tick();
+      this.timer = setInterval(tick, 1000);
+    }
+  });
+}
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Mojo bundle tiers",
+  "blocks": [
+    {
+      "type": "_mojo-bundle-tier"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Each card adds N pairs to the cart (per-pair colour and size). Card prices are text; apply the matching automatic discount in Shopify so the cart total equals the card price."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading line",
+      "default": "BLACK FRIDAY SALE ENDS AT 23:59"
+    },
+    {
+      "type": "checkbox",
+      "id": "countdown",
+      "label": "Show live countdown to 23:59 next to the heading",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "heading_style",
+      "label": "Heading style",
+      "default": "rules",
+      "options": [
+        {
+          "value": "rules",
+          "label": "Centred between lines"
+        },
+        {
+          "value": "left",
+          "label": "Left aligned"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading accent text (dark red, after the heading)"
+    },
+    {
+      "type": "range",
+      "id": "tier_gap",
+      "label": "Gap between cards",
+      "default": 14,
+      "min": 4,
+      "max": 24,
+      "step": 2,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo bundle tiers",
+      "blocks": [
+        {
+          "type": "_mojo-bundle-tier",
+          "settings": {
+            "quantity": 1,
+            "title": "Single pair",
+            "saving": "",
+            "price": "£29.95",
+            "compare": "",
+            "badge": "",
+            "preselect": false,
+            "show_pickers": false,
+            "picker_label": ""
+          }
+        },
+        {
+          "type": "_mojo-bundle-tier",
+          "settings": {
+            "quantity": 2,
+            "title": "(2 Pack) Buy 1 get 1 Free",
+            "saving": "You save £35.05",
+            "price": "£24.95",
+            "compare": "£60.00",
+            "badge": "",
+            "preselect": false,
+            "show_pickers": true,
+            "picker_label": "Colour, Size"
+          }
+        },
+        {
+          "type": "_mojo-bundle-tier",
+          "settings": {
+            "quantity": 5,
+            "title": "(5 Pack) Buy 2 get 3 Free",
+            "saving": "You save £100.05",
+            "price": "£49.95",
+            "compare": "£150.00",
+            "badge": "MOST POPULAR",
+            "preselect": true,
+            "show_pickers": true,
+            "picker_label": "Colour, Size"
+          }
+        },
+        {
+          "type": "_mojo-bundle-tier",
+          "settings": {
+            "quantity": 8,
+            "title": "(8 Pack) Buy 3 get 5 Free",
+            "saving": "You save £165.05",
+            "price": "£74.95",
+            "compare": "£240.00",
+            "badge": "BEST VALUE",
+            "preselect": false,
+            "show_pickers": true,
+            "picker_label": "Colour, Size"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

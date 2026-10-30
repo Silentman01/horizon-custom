@@ -1,0 +1,434 @@
+{%- liquid
+  assign s = section.settings
+-%}
+<section class="mojo-it mojo-it--{{ s.image_side }}" style="{% render 'mojo-vars' %}--mojo-pt:{{ s.padding_top }}px;--mojo-pb:{{ s.padding_bottom }}px;--mojo-tick:{{ s.bullet_color }};{% if s.bg_color != blank %}--mojo-it-bg:{{ s.bg_color }};{% endif %}{% if s.image_max_width > 0 %}--mojo-it-mw:{{ s.image_max_width }}px;{% endif %}">
+  <div class="mojo-it__grid">
+    <div class="mojo-it__media">
+      {% render 'mojo-media', image: s.image, asset: s.image_asset, ratio: s.image_ratio, placeholder: 'lifestyle-1', alt: s.image_alt, sizes: '(min-width: 750px) 50vw, 100vw' %}
+    </div>
+    <div class="mojo-it__body">
+      {%- if s.eyebrow != blank -%}<p class="mojo-it__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.heading != blank -%}<h2 class="mojo-it__heading">{{ s.heading }}</h2>{%- endif -%}
+      {%- if s.text != blank -%}<div class="mojo-it__text">{{ s.text }}</div>{%- endif -%}
+      {%- if s.subheading != blank -%}<h3 class="mojo-it__sub">{{ s.subheading }}</h3>{%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <ul class="mojo-it__list" role="list">
+          {%- for block in section.blocks -%}
+            {%- assign b = block.settings -%}
+            <li class="mojo-it__li{% if b.title != blank %} mojo-it__li--rich{% endif %}" {{ block.shopify_attributes }}>
+              {%- if b.icon != blank -%}
+                <span class="mojo-it__tick mojo-it__tick--ico" aria-hidden="true">{% render 'mojo-icon', name: b.icon, size: 20 %}</span>
+              {%- else -%}
+                <span class="mojo-it__tick" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.6 8.3l2.2 2.2 4.6-4.8" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              {%- endif -%}
+              <span class="mojo-it__li-body">
+                {%- if b.title != blank -%}<strong class="mojo-it__li-title">{{ b.title }}</strong>{%- endif -%}
+                {%- if b.text != blank -%}<span>{{ b.text }}</span>{%- endif -%}
+                {%- if b.detail != blank -%}<span class="mojo-it__li-detail">{{ b.detail }}</span>{%- endif -%}
+              </span>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      {%- if s.footer_text != blank -%}<div class="mojo-it__foot">{{ s.footer_text }}</div>{%- endif -%}
+      {%- if s.button_label != blank and s.button_link != blank -%}
+        <a class="mojo-it__btn" href="{{ s.button_link }}" style="--mojo-btn-bg:{{ s.button_bg }};--mojo-btn-fg:{{ s.button_fg }};">{{ s.button_label }}</a>
+      {%- endif -%}
+      {%- if s.show_assurance_row -%}{% render 'mojo-assure', a1: s.assurance_1, a2: s.assurance_2, align: 'left' %}{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-it { background: var(--mojo-it-bg, var(--mojo-bg)); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-it__grid { display: grid; grid-template-columns: 1fr; align-items: center; }
+.mojo-it__media { width: 100%; max-width: var(--mojo-it-mw, none); justify-self: center; }
+.mojo-it__body { padding: 28px 20px 0; }
+.mojo-it__eyebrow { margin: 0 0 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--mojo-muted); }
+.mojo-it__heading { font-family: var(--mojo-font-heading); font-weight: 600; font-size: 26px; line-height: 1.25; margin: 0 0 16px; color: var(--mojo-fg); }
+.mojo-it__text { font-size: 13px; line-height: 1.65; }
+.mojo-it__text p { margin: 0 0 12px; }
+.mojo-it__sub { margin: 6px 0 0; font-family: var(--mojo-font-heading); font-size: 14px; font-weight: 600; line-height: 1.4; }
+.mojo-it__list { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+.mojo-it__li { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+.mojo-it__li--rich { align-items: flex-start; gap: 12px; }
+.mojo-it__li-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; line-height: 1.5; }
+.mojo-it__li-title { font-weight: 700; }
+.mojo-it__li-detail { color: var(--mojo-muted); font-size: 12px; }
+.mojo-it__foot { margin-top: 16px; font-size: 13px; line-height: 1.6; }
+.mojo-it__foot p { margin: 0; }
+.mojo-it__btn { display: inline-block; margin-top: 22px; padding: 14px 30px; background: var(--mojo-btn-bg, #000); color: var(--mojo-btn-fg, #fff); font-size: 13px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border-radius: 0; }
+.mojo-it__tick { display: inline-flex; color: var(--mojo-tick); flex: none; }
+.mojo-it__tick--ico { width: 40px; height: 40px; align-items: center; justify-content: center; border: 1px solid var(--mojo-fg); border-radius: 50%; color: var(--mojo-fg); box-sizing: border-box; }
+@media screen and (min-width: 750px) {
+  .mojo-it__grid { grid-template-columns: 1fr 1fr; }
+  .mojo-it--right .mojo-it__media { order: 2; }
+  .mojo-it__body { padding: 40px 96px; }
+  .mojo-it__heading { font-size: 32px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo image with text",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_asset",
+      "label": "Image: theme file name (optional, e.g. mojo-hero.webp)",
+      "info": "Used when no image is uploaded above."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "label": "Image ratio",
+      "default": "1 / 1",
+      "options": [
+        {
+          "value": "1 / 1",
+          "label": "Square"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait 4:5"
+        },
+        {
+          "value": "3 / 2",
+          "label": "Landscape 3:2"
+        },
+        {
+          "value": "3 / 4",
+          "label": "Portrait 3:4"
+        },
+        {
+          "value": "10 / 9",
+          "label": "Landscape 10:9"
+        },
+        {
+          "value": "4 / 3",
+          "label": "Landscape 4:3"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image side (desktop)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Unique Men Deserve More Than Ordinary Underwear"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Mojo 100% mulberry silk boxers give you total comfort. The silk is breathable, ultra-soft and feels like a second skin.</p>"
+    },
+    {
+      "type": "color",
+      "id": "bullet_color",
+      "label": "Bullet icon colour",
+      "default": "#C9B28A"
+    },
+    {
+      "type": "header",
+      "content": "Button (optional)"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color",
+      "id": "button_bg",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_fg",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "default": 0,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "default": 0,
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Extras (optional)"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background colour"
+    },
+    {
+      "type": "range",
+      "id": "image_max_width",
+      "label": "Image max width on desktop (0 = full column)",
+      "default": 0,
+      "min": 0,
+      "max": 800,
+      "step": 20,
+      "unit": "px"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small caps line above the heading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Sub-heading (after the text, before the list)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_assurance_row",
+      "label": "Show the assurance row under the button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "assurance_1",
+      "label": "Assurance 1",
+      "default": "45-day money-back guarantee"
+    },
+    {
+      "type": "text",
+      "id": "assurance_2",
+      "label": "Assurance 2",
+      "default": "Free returns, NO QUESTIONS ASKED"
+    },
+    {
+      "type": "richtext",
+      "id": "footer_text",
+      "label": "Closing text (after the list, before the button)"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "No Ride-Up"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bold title (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "detail",
+          "label": "Detail line (optional)"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon (blank = tick)",
+          "default": "",
+          "options": [
+            {
+              "value": "",
+              "label": "Tick"
+            },
+            {
+              "value": "boxer",
+              "label": "Boxer"
+            },
+            {
+              "value": "shield",
+              "label": "Shield"
+            },
+            {
+              "value": "snow",
+              "label": "Cool"
+            },
+            {
+              "value": "drop",
+              "label": "Droplet"
+            },
+            {
+              "value": "feather",
+              "label": "Feather"
+            },
+            {
+              "value": "check",
+              "label": "Check"
+            },
+            {
+              "value": "stretch",
+              "label": "Stretch"
+            },
+            {
+              "value": "wind",
+              "label": "Airflow"
+            },
+            {
+              "value": "tag",
+              "label": "Tag"
+            },
+            {
+              "value": "info",
+              "label": "Info"
+            },
+            {
+              "value": "person",
+              "label": "Person"
+            },
+            {
+              "value": "lock",
+              "label": "Lock"
+            },
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "heart",
+              "label": "Heart"
+            },
+            {
+              "value": "ring",
+              "label": "Waistband"
+            },
+            {
+              "value": "clock",
+              "label": "Clock"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            },
+            {
+              "value": "cloud",
+              "label": "Cloud"
+            },
+            {
+              "value": "refund",
+              "label": "Refund"
+            },
+            {
+              "value": "parcel",
+              "label": "Parcel"
+            },
+            {
+              "value": "chat",
+              "label": "Chat"
+            },
+            {
+              "value": "thermometer",
+              "label": "Thermometer"
+            },
+            {
+              "value": "return",
+              "label": "Return"
+            },
+            {
+              "value": "truck",
+              "label": "Truck"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Mojo image with text",
+      "blocks": [
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "No Ride-Up"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "Sweat-Free Comfort"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "Ball Support Built In"
+          }
+        },
+        {
+          "type": "bullet",
+          "settings": {
+            "text": "Chafe-Free & Breathable"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
