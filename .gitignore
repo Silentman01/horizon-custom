@@ -3,3 +3,6 @@ PROMPT_1-1.MD
 inspiration/
 product-images/
 __pycache__/
+
+# run-product local files
+.claude/skills/run-product/scripts/__pycache__/
