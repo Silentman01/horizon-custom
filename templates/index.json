@@ -351,7 +351,7 @@
                 "alignment": "center",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
+                "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -555,7 +555,7 @@
                 "alignment": "center",
                 "type_preset": "paragraph",
                 "font": "var(--font-body--family)",
-                "font_size": "0.9375rem",
+                "font_size": "1rem",
                 "line_height": "normal",
                 "letter_spacing": "normal",
                 "case": "none",
@@ -719,7 +719,7 @@
       "type": "mojo-guarantee",
       "settings": {
         "padding_top": 40,
-        "padding_bottom": 50
+        "padding_bottom": 52
       },
       "blocks": {
         "g1": {
