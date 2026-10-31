@@ -34,8 +34,8 @@
 .mojo-st__rail::-webkit-scrollbar { display: none; }
 .mojo-st__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .mojo-st__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-st__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
-.mojo-st__dots button[aria-current='true'] { background: #000; }
+.mojo-st__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
+.mojo-st__dots button[aria-current='true'] { background: var(--mojo-primary); }
 [data-mojo-overflow='0'] > .mojo-st__dots { display: none; }
 @media screen and (min-width: 750px) {
   .mojo-st__wrap { padding-inline: 12px; }
@@ -140,13 +140,13 @@ if (!window.mojoRails) {
       "type": "color",
       "id": "number_color",
       "label": "Number colour",
-      "default": "#C9B28A"
+      "default": "#6B1E2E"
     },
     {
       "type": "color",
       "id": "card_color",
       "label": "Card background",
-      "default": "#F4F4F4"
+      "default": "#E9D7CF"
     },
     {
       "type": "header",

@@ -77,16 +77,16 @@
     "palette_input_border": "{{ settings.color_palette.color3 }}",
     "palette_variant_border": "{{ settings.color_palette.color3 }}",
     "color_palette": {
-      "background": "#FFFFFF",
-      "foreground": "#000000",
-      "color1": "#F4F4F4",
-      "color2": "#C9B28A",
-      "color3": "#D9D9D9"
+      "background": "#FAF6F1",
+      "foreground": "#1C1C1C",
+      "color1": "#E9D7CF",
+      "color2": "#6B1E2E",
+      "color3": "#E2D3CC"
     },
-    "palette_primary_button_background": "{{ settings.color_palette.foreground }}",
+    "palette_primary_button_background": "{{ settings.color_palette.color2 }}",
     "palette_primary_button_text": "{{ settings.color_palette.background }}",
-    "palette_primary_button_border": "{{ settings.color_palette.foreground }}",
-    "badge_sale_background_color": "{{ settings.color_palette.foreground }}",
+    "palette_primary_button_border": "{{ settings.color_palette.color2 }}",
+    "badge_sale_background_color": "{{ settings.color_palette.color2 }}",
     "badge_sold_out_text_color": "{{ settings.color_palette.foreground }}"
   },
   "presets": {
@@ -158,16 +158,16 @@
       "palette_input_border": "{{ settings.color_palette.color3 }}",
       "palette_variant_border": "{{ settings.color_palette.color3 }}",
       "color_palette": {
-        "background": "#FFFFFF",
-        "foreground": "#000000",
-        "color1": "#F4F4F4",
-        "color2": "#C9B28A",
-        "color3": "#D9D9D9"
+        "background": "#FAF6F1",
+        "foreground": "#1C1C1C",
+        "color1": "#E9D7CF",
+        "color2": "#6B1E2E",
+        "color3": "#E2D3CC"
       },
-      "palette_primary_button_background": "{{ settings.color_palette.foreground }}",
+      "palette_primary_button_background": "{{ settings.color_palette.color2 }}",
       "palette_primary_button_text": "{{ settings.color_palette.background }}",
-      "palette_primary_button_border": "{{ settings.color_palette.foreground }}",
-      "badge_sale_background_color": "{{ settings.color_palette.foreground }}",
+      "palette_primary_button_border": "{{ settings.color_palette.color2 }}",
+      "badge_sale_background_color": "{{ settings.color_palette.color2 }}",
       "badge_sold_out_text_color": "{{ settings.color_palette.foreground }}"
     }
   }

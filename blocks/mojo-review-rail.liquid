@@ -22,7 +22,7 @@
 .mojo-rv { font-family: var(--mojo-font); color: var(--mojo-fg); min-width: 0; }
 .mojo-rv__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
 .mojo-rv__heading { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-.mojo-rv__next { width: 32px; height: 32px; border-radius: 50%; border: 0; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.mojo-rv__next { width: 32px; height: 32px; border-radius: 50%; border: 0; background: var(--mojo-primary); color: var(--mojo-cream); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
 .mojo-rv__next:disabled { opacity: 0.35; cursor: default; }
 .mojo-rv__arrows { display: flex; gap: 8px; }
 .mojo-rv__rail > .mojo-rv__card { flex: 0 0 100%; }
@@ -33,8 +33,8 @@
 .mojo-rv__rail::-webkit-scrollbar { display: none; }
 .mojo-rv__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .mojo-rv__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-rv__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
-.mojo-rv__dots button[aria-current='true'] { background: #000; }
+.mojo-rv__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
+.mojo-rv__dots button[aria-current='true'] { background: var(--mojo-primary); }
 [data-mojo-overflow='0'] > .mojo-rv__dots { display: none; }
 {% endstylesheet %}
 

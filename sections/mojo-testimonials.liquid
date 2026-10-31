@@ -35,7 +35,7 @@
 .mojo-tm__stars { display: inline-flex; gap: 3px; }
 .mojo-tm__bigstar, .mojo-tm__sq { display: inline-flex; align-items: center; justify-content: center; background: var(--mojo-star); color: #fff; }
 .mojo-tm__bigstar { width: 30px; height: 30px; }
-.mojo-tm__bigstar.is-off { background: #dcdce6; }
+.mojo-tm__bigstar.is-off { background: var(--mojo-line); }
 .mojo-tm__sq { width: 20px; height: 20px; }
 .mojo-tm__count { margin: 8px 0 0; font-size: 13px; }
 .mojo-tm__stage { position: relative; min-width: 0; }
@@ -55,7 +55,7 @@
 .mojo-tm--boxed .mojo-tm__cstars { margin-top: 16px; }
 .mojo-tm--boxed .mojo-tm__body { flex: 1; }
 .mojo-tm--boxed .mojo-tm__meta { display: none; }
-.mojo-tm__bar { display: none; margin: 0; padding: 10px 16px; background: #000; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; justify-content: space-between; align-items: center; gap: 8px; }
+.mojo-tm__bar { display: none; margin: 0; padding: 10px 16px; background: var(--mojo-primary); color: var(--mojo-cream); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; justify-content: space-between; align-items: center; gap: 8px; }
 .mojo-tm--boxed .mojo-tm__bar { display: flex; }
 .mojo-tm__ver { display: inline-flex; align-items: center; gap: 5px; }
 
@@ -63,8 +63,8 @@
 .mojo-tm__rail::-webkit-scrollbar { display: none; }
 .mojo-tm__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .mojo-tm__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-tm__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
-.mojo-tm__dots button[aria-current='true'] { background: #000; }
+.mojo-tm__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
+.mojo-tm__dots button[aria-current='true'] { background: var(--mojo-primary); }
 [data-mojo-overflow='0'] > .mojo-tm__dots { display: none; }
 @media screen and (min-width: 750px) {
   .mojo-tm__wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 40px; align-items: center; }
@@ -193,7 +193,7 @@ if (!window.mojoRails) {
       "type": "color",
       "id": "star_color",
       "label": "Star colour",
-      "default": "#00B67A"
+      "default": "#6B1E2E"
     },
     {
       "type": "header",

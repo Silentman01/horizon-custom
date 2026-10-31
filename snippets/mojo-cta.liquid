@@ -1,6 +1,6 @@
 {%- comment -%} Black CTA button that scrolls to the buy box + assurance row. Params: label, target, bg, fg, show, a1, a2, as_color, align {%- endcomment -%}
 {%- if label != blank -%}
-  <div class="mojo-ct mojo-ct--{{ align | default: 'center' }}" style="--mojo-ct-bg:{{ bg | default: '#000000' }};--mojo-ct-fg:{{ fg | default: '#ffffff' }};">
+  <div class="mojo-ct mojo-ct--{{ align | default: 'center' }}" style="--mojo-ct-bg:{{ bg | default: '#6B1E2E' }};--mojo-ct-fg:{{ fg | default: '#FAF6F1' }};">
     <a class="mojo-ct__btn" href="{{ target | default: '#mojo-buybox' }}">{{ label }}</a>
     {%- if show -%}{% render 'mojo-assure', a1: a1, a2: a2, align: align, color: as_color %}{%- endif -%}
   </div>

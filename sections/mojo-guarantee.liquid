@@ -36,8 +36,8 @@
 .mojo-gu__rail::-webkit-scrollbar { display: none; }
 .mojo-gu__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .mojo-gu__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-gu__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
-.mojo-gu__dots button[aria-current='true'] { background: #000; }
+.mojo-gu__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
+.mojo-gu__dots button[aria-current='true'] { background: var(--mojo-primary); }
 [data-mojo-overflow='0'] > .mojo-gu__dots { display: none; }
 @media screen and (min-width: 750px) {
   .mojo-gu__rail { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; overflow: visible; cursor: auto; margin: 0; padding: 0; }

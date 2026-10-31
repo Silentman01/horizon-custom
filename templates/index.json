@@ -23,8 +23,8 @@
         "subline": "100% mulberry silk boxers. Built for balls. Backed by science.",
         "cta_label": "SHOP NOW →",
         "cta_link": "/products/mojo-silk-boxers-sustainable-comfort",
-        "text_color": "#FFFFFF",
-        "button_color": "#FFFFFF",
+        "text_color": "#FAF6F1",
+        "button_color": "#FAF6F1",
         "overlay": 30,
         "text_top_mobile": 4
       }
@@ -105,7 +105,7 @@
         "image_side": "left",
         "heading": "The silk boxer that moves and breathes with you.",
         "text": "<p>Natural silk keeps your temperature in check and stops chafing before it starts. Mojo is made for confidence: light, sweat-free and built to move with you.</p>",
-        "bullet_color": "#000000",
+        "bullet_color": "#6B1E2E",
         "button_label": "SHOP NOW",
         "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
         "padding_top": 0,
@@ -194,10 +194,10 @@
         "image_ratio": "1 / 1",
         "view_all_label": "VIEW ALL",
         "view_all_link": "/products/mojo-silk-boxers-sustainable-comfort",
-        "bg_color": "#FFFFFF",
-        "card_bg": "#F3F4F6",
-        "badge_bg": "#000000",
-        "badge_fg": "#FFFFFF",
+        "bg_color": "#FAF6F1",
+        "card_bg": "#E9D7CF",
+        "badge_bg": "#6B1E2E",
+        "badge_fg": "#FAF6F1",
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -211,7 +211,7 @@
         "image_side": "right",
         "heading": "Your Balls Deserve Better.",
         "text": "<p>Feel good down there and you move differently. Mojo gives you the freedom, freshness and support to take on whatever the day throws at you.</p>",
-        "bullet_color": "#000000",
+        "bullet_color": "#6B1E2E",
         "button_label": "SHOP NOW",
         "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
         "padding_top": 0,
@@ -286,10 +286,10 @@
         "image_ratio": "1 / 1",
         "view_all_label": "VIEW ALL",
         "view_all_link": "/products/mojo-silk-boxers-sustainable-comfort",
-        "bg_color": "#FFFFFF",
-        "card_bg": "#F3F4F6",
-        "badge_bg": "#000000",
-        "badge_fg": "#FFFFFF",
+        "bg_color": "#FAF6F1",
+        "card_bg": "#E9D7CF",
+        "badge_bg": "#6B1E2E",
+        "badge_fg": "#FAF6F1",
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -384,7 +384,7 @@
         "heading": "Trusted by 175k+ Men",
         "rating": 5,
         "count_text": "Based on 4,276 reviews",
-        "star_color": "#00B67A",
+        "star_color": "#6B1E2E",
         "padding_top": 60,
         "padding_bottom": 60
       }
