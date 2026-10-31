@@ -38,8 +38,8 @@
 .mojo-ugc__rail::-webkit-scrollbar { display: none; }
 .mojo-ugc__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
 .mojo-ugc__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-ugc__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: #d9d9d9; cursor: pointer; }
-.mojo-ugc__dots button[aria-current='true'] { background: #000; }
+.mojo-ugc__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
+.mojo-ugc__dots button[aria-current='true'] { background: var(--mojo-primary); }
 [data-mojo-overflow='0'] > .mojo-ugc__dots { display: none; }
 {% endstylesheet %}
 
