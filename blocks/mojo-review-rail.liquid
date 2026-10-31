@@ -2,7 +2,10 @@
 <div class="mojo-rv" style="{% render 'mojo-vars' %}" data-mojo-rail-wrap data-mojo-overflow="0" {{ block.shopify_attributes }}>
   <div class="mojo-rv__head">
     <h2 class="mojo-rv__heading">{{ s.heading }}</h2>
-    <button type="button" class="mojo-rv__next" data-mojo-next aria-label="Next reviews">{% render 'mojo-icon', name: 'next', size: 16 %}</button>
+    <div class="mojo-rv__arrows">
+      <button type="button" class="mojo-rv__next" data-mojo-prev aria-label="Previous reviews" disabled>{% render 'mojo-icon', name: 'prev', size: 16 %}</button>
+      <button type="button" class="mojo-rv__next" data-mojo-next aria-label="Next reviews">{% render 'mojo-icon', name: 'next', size: 16 %}</button>
+    </div>
   </div>
   <div class="mojo-rv__rail" data-mojo-rail>{% content_for 'blocks' %}</div>
   {%- if s.rating_line != blank -%}<p class="mojo-rv__line">{{ s.rating_line }}</p>{%- endif -%}
@@ -14,6 +17,9 @@
 .mojo-rv__heading { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
 .mojo-rv__next { width: 32px; height: 32px; border-radius: 50%; border: 0; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
 .mojo-rv__next:disabled { opacity: 0.35; cursor: default; }
+.mojo-rv__arrows { display: flex; gap: 8px; }
+.mojo-rv__rail > .mojo-rv__card { flex: 0 0 100%; }
+@media screen and (min-width: 750px) { .mojo-rv__rail > .mojo-rv__card { flex: 0 0 calc((100% - 12px) / 2); } }
 .mojo-rv__line { margin: 12px 0 0; font-size: 12px; text-align: center; }
 
 .mojo-rv__rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-overflow-scrolling: touch; }
