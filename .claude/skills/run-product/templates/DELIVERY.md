@@ -34,7 +34,7 @@
 |---|---|---|---|
 
 ## Operator to-dos
-- [ ] Create variants: <Buy 1 / Buy 2 / Buy 3 at $…> with compare-at prices
+- [ ] Import the products: Admin > Products > Import > `08_shopify/<slug>-products.csv`, then follow `08_shopify/<slug>-products.UPLOAD.md` (template suffix, images in order, variant images, set Active)
 - [ ] Upload product images in this order: …
 - [ ] Free gift / bundle discount setup (display-only until configured)
 - [ ] Install/enable reviews app and place its block

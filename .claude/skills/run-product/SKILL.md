@@ -111,6 +111,7 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 | D2 Ad creatives | ad-creative agent or master (after approval + packshot) | 08, tools-kie | 25 ads → `05_ads/generated/` |
 | E Ad copy | copy agent (after D1) | 09 | `05_ads/AD_COPY.md` (root of 05_ads, one copy set shared by image and video ads) |
 | G Video ads (on request) | video agent (after the packshot + operator-confirmed candidates) | 14 | `05_ads/generated/videos/vNN-<slug>.mp4` + `vNN-work/` (clips sheet, draft, PLAN) |
+| I Product import file | master (small, after B gallery + BRIEF offer) | `scripts/product_csv.py` | `08_shopify/products.spec.json` → `08_shopify/<slug>-products.csv` (Shopify Admin > Products > Import: every product to create, title/handle/vendor/type/tags/description, options + all variants, price + compare-at, SKUs, inventory not tracked, status draft, SEO) + `<slug>-products.UPLOAD.md` (template suffix to set, gallery upload order, variant images by colour, shipping-rates reminder). Image cells filled only with `--image-base-url`; otherwise images are listed for upload |
 | H Checkout header | master (small, after branding + C) | `scripts/checkout_header.py`, mockup `templates/checkout-header-mockup.png` | `07_checkout/<brand>-checkout-header.png` (+@2x): logo, "trusted by" gradient bar (brand colors) with 3 real-looking customer faces cropped from our page images, 3 trust points in the store language. Config `07_checkout/checkout_header.json`; strip metadata; operator uploads it in Settings > Checkout > Customize > Header |
 | F Policies | master (small) | 12 | `policies.py transform` → `06_policies/<handle>.html` + REVIEW.md (1:1 text, brand/domain/email swapped, addresses/phones/registration numbers removed) |
 
@@ -153,6 +154,7 @@ BRIEF.md · DELIVERY.md
 05_ads/REMAKE_CANDIDATES.md · 05_ads/remake-candidates/ (source videos)
 05_ads/generated/videos/  (ONLY final vNN-<slug>.mp4 at the root; vNN-work/ = vNN-clips.jpg, vNN-draft.mp4, vNN-PLAN.md; all other work files in scratch/ and deleted when final)
 06_policies/          (source/ raw competitor policies, <handle>.html ours, REVIEW.md)
+08_shopify/           (products.spec.json, <slug>-products.csv ready to import, <slug>-products.UPLOAD.md)
 ```
 Theme repo: only theme files, on branch `BRAND_SLUG`, files prefixed with the brand slug.
 
@@ -162,6 +164,7 @@ Scripts (`scripts/`, run Python with `-I`; all have `--help`):
 - `fetch_media.py --out DIR --from-capture capture.json --kinds images,gifs,videos [--by-kind] [--webp-dir DIR]` — raw byte-identical downloads (manifest, skips existing) + animated GIF→WebP (q62).
 - `contact_sheet.py IMAGES|GLOBS|DIRS --out sheet.jpg [--cols 5 --cell 300]` — labelled review grids (splits into sheet_1, sheet_2…).
 - `rank_ads.py --dumps FILES --out DIR --keyword K [--top 30] [--sheet] [--extra-image ID=PATH]` — merge Brandsearch dumps, download, hash/near-dup merge, rank by impressions rank (`--sort rank` default; `spend`/`reach` EU only; `days`), captions summary, sheets. Run it in the same session as the pull (media URLs expire).
+- `product_csv.py spec.json --out 08_shopify/<slug>-products.csv [--image-base-url URL]` — Shopify product import CSV for every product the run needs (variants from the option lists, BRIEF prices, draft status, untracked inventory) + an UPLOAD.md checklist (template suffix, image order, variant images).
 - `policies.py fetch|transform|push` — clone competitor policies 1:1 (identity swapped, private info removed, leftovers check) and publish them via Admin GraphQL `shopPolicyUpdate`.
 - `kie_jobs.py jobs.json OUT_DIR` / `kie_jobs.py --credits` — batch Kie GPT Image 2.5 jobs (uploads local refs, polls, downloads). Needs `KIE_API_KEY`.
 - `render_sections.js --theme DIR --template templates/product.json --sections ALL --out page.html [--shot] [--buybox --product p.json --prefix <slug>]` — local Liquid render of custom sections (and a mocked buy box) with the theme's real palette; needs liquidjs (`npm i liquidjs@10` in a scratch dir, pass `--modules` or NODE_PATH).
