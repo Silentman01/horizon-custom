@@ -1,5 +1,12 @@
 {%- assign s = block.settings -%}
-<div class="mojo-rv" style="{% render 'mojo-vars' %}" data-mojo-rail-wrap data-mojo-overflow="0" {{ block.shopify_attributes }}>
+<style>
+  #mojo-rv-{{ block.id }} .mojo-rv__rail { display: flex; flex-wrap: nowrap; overflow-x: auto; }
+  #mojo-rv-{{ block.id }} .mojo-rv__rail > * { flex: 0 0 100% !important; max-width: 100% !important; width: 100% !important; min-width: 0; }
+  @media screen and (min-width: 750px) {
+    #mojo-rv-{{ block.id }} .mojo-rv__rail > * { flex: 0 0 calc((100% - 12px) / 2) !important; max-width: calc((100% - 12px) / 2) !important; width: calc((100% - 12px) / 2) !important; }
+  }
+</style>
+<div class="mojo-rv" id="mojo-rv-{{ block.id }}" style="{% render 'mojo-vars' %}" data-mojo-rail-wrap data-mojo-overflow="0" {{ block.shopify_attributes }}>
   <div class="mojo-rv__head">
     <h2 class="mojo-rv__heading">{{ s.heading }}</h2>
     <div class="mojo-rv__arrows">
