@@ -1,0 +1,120 @@
+{%- liquid
+  assign s = section.settings
+  assign d_url = ''
+  if s.image_desktop != blank
+    assign d_url = s.image_desktop | image_url: width: 2000
+  elsif s.asset_desktop != blank
+    assign d_url = s.asset_desktop | asset_url
+  endif
+  assign m_url = ''
+  if s.image_mobile != blank
+    assign m_url = s.image_mobile | image_url: width: 1100
+  elsif s.asset_mobile != blank
+    assign m_url = s.asset_mobile | asset_url
+  endif
+  if m_url == blank
+    assign m_url = d_url
+  endif
+  if d_url == blank
+    assign d_url = m_url
+  endif
+  assign cta_link = s.cta_link | default: all_products['mojo-silk-boxers-sustainable-comfort'].url | default: routes.all_products_collection_url
+-%}
+<section class="mojo-hh" style="{% render 'mojo-vars' %}--mojo-hh-dr:{{ s.ratio_desktop }};--mojo-hh-mr:{{ s.ratio_mobile }};--mojo-hh-ov:{{ s.overlay | divided_by: 100.0 }};--mojo-hh-fg:{{ s.text_color }};--mojo-hh-btn:{{ s.button_color }};--mojo-hh-top:{{ s.text_top_mobile }}%;--mojo-hh-pos:{{ s.focus_y }}%;">
+  <div class="mojo-hh__frame">
+    {%- if d_url != blank -%}
+      <picture>
+        <source media="(min-width: 750px)" srcset="{{ d_url }}">
+        {%- if s.image_mobile != blank -%}
+          {{ s.image_mobile | image_url: width: 1100 | image_tag: class: 'mojo-hh__img', alt: s.image_alt, loading: 'eager', fetchpriority: 'high', widths: '600, 900, 1100', sizes: '100vw' }}
+        {%- elsif s.asset_mobile != blank -%}
+          <img class="mojo-hh__img" src="{{ s.asset_mobile | asset_url }}" alt="{{ s.image_alt | escape }}" width="1100" height="1467" loading="eager" fetchpriority="high" decoding="async">
+        {%- elsif s.image_desktop != blank -%}
+          {{ s.image_desktop | image_url: width: 2000 | image_tag: class: 'mojo-hh__img', alt: s.image_alt, loading: 'eager', fetchpriority: 'high' }}
+        {%- else -%}
+          <img class="mojo-hh__img" src="{{ s.asset_desktop | asset_url }}" alt="{{ s.image_alt | escape }}" width="1920" height="1072" loading="eager" fetchpriority="high" decoding="async">
+        {%- endif -%}
+      </picture>
+    {%- else -%}
+      <div class="mojo-hh__ph"></div>
+    {%- endif -%}
+    <div class="mojo-hh__shade"></div>
+    <div class="mojo-hh__text">
+      {%- if s.eyebrow != blank -%}<p class="mojo-hh__eyebrow">{{ s.eyebrow }}</p>{%- endif -%}
+      {%- if s.headline != blank -%}<h1 class="mojo-hh__headline">{{ s.headline }}</h1>{%- endif -%}
+      {%- if s.subline != blank -%}<p class="mojo-hh__sub">{{ s.subline }}</p>{%- endif -%}
+      {%- if s.cta_label != blank -%}<a class="mojo-hh__cta" href="{{ cta_link }}">{{ s.cta_label }}</a>{%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.mojo-hh { background: #0b0b0b; color: var(--mojo-hh-fg, #fff); font-family: var(--mojo-font); }
+.mojo-hh__frame { position: relative; width: 100%; aspect-ratio: var(--mojo-hh-mr, 3 / 4); overflow: hidden; }
+.mojo-hh__img, .mojo-hh__ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% var(--mojo-hh-pos, 30%); display: block; }
+.mojo-hh__ph { background: linear-gradient(135deg, #1a1208, #3a2a16); }
+.mojo-hh__shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, var(--mojo-hh-ov, 0.3)) 0%, rgba(0, 0, 0, 0) 60%); pointer-events: none; }
+.mojo-hh__text { position: absolute; left: 0; right: 0; top: var(--mojo-hh-top, 8%); display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px; gap: 10px; }
+.mojo-hh__eyebrow { margin: 0; font-size: 12px; font-weight: 400; letter-spacing: 0.4em; text-transform: uppercase; opacity: 0.9; }
+.mojo-hh__headline { margin: 0; font-family: var(--mojo-font-heading); font-size: 38px; font-weight: 700; line-height: 1.05; }
+.mojo-hh__sub { margin: 0; max-width: 300px; font-size: 13px; line-height: 1.5; opacity: 0.92; }
+.mojo-hh__cta { display: inline-block; margin-top: 8px; padding: 12px 28px; border: 1px solid var(--mojo-hh-btn, #fff); color: var(--mojo-hh-btn, #fff); background: rgba(0, 0, 0, 0.25); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; border-radius: 0; }
+.mojo-hh__cta:hover { background: var(--mojo-hh-btn, #fff); color: #000; }
+@media screen and (min-width: 750px) {
+  .mojo-hh__frame { aspect-ratio: var(--mojo-hh-dr, 2 / 1); }
+  .mojo-hh__text { top: 0; bottom: 0; justify-content: center; gap: 14px; }
+  .mojo-hh__eyebrow { font-size: 16px; }
+  .mojo-hh__headline { font-size: clamp(48px, 6vw, 84px); }
+  .mojo-hh__sub { max-width: 460px; font-size: 16px; }
+  .mojo-hh__cta { padding: 14px 40px; font-size: 14px; }
+  .mojo-hh__shade { background: rgba(0, 0, 0, calc(var(--mojo-hh-ov, 0.3) * 0.5)); }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Mojo home hero",
+  "tag": "section",
+  "class": "mojo-section",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "image_desktop", "label": "Desktop image (wide)" },
+    { "type": "text", "id": "asset_desktop", "label": "Desktop image: theme file name", "info": "Used when no image is uploaded above.", "default": "mojo-home-hero-desktop.jpg" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Mobile image (portrait 3:4)" },
+    { "type": "text", "id": "asset_mobile", "label": "Mobile image: theme file name", "info": "Used when no image is uploaded above.", "default": "mojo-home-hero-mobile.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Man wearing Mojo silk boxers in beige, black and white" },
+    {
+      "type": "select", "id": "ratio_desktop", "label": "Desktop image ratio", "default": "2 / 1",
+      "options": [
+        { "value": "8 / 3", "label": "Ultra wide 8:3" },
+        { "value": "5 / 2", "label": "Wide 5:2" },
+        { "value": "2 / 1", "label": "Wide 2:1" },
+        { "value": "16 / 9", "label": "Landscape 16:9" }
+      ]
+    },
+    {
+      "type": "select", "id": "ratio_mobile", "label": "Mobile image ratio", "default": "3 / 4",
+      "options": [
+        { "value": "3 / 4", "label": "Portrait 3:4" },
+        { "value": "4 / 5", "label": "Portrait 4:5" },
+        { "value": "1 / 1", "label": "Square" }
+      ]
+    },
+    { "type": "range", "id": "focus_y", "label": "Vertical focus of the crop", "default": 30, "min": 0, "max": 100, "step": 5, "unit": "%" },
+    { "type": "header", "content": "Text" },
+    { "type": "text", "id": "eyebrow", "label": "Small line above the headline", "default": "SILK UNDERWEAR" },
+    { "type": "text", "id": "headline", "label": "Headline", "default": "Get up to 60% off" },
+    { "type": "text", "id": "subline", "label": "Sub line", "default": "100% mulberry silk boxers. Built for balls. Backed by science." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "SHOP NOW →" },
+    { "type": "url", "id": "cta_link", "label": "Button link", "info": "Blank = the Mojo product page." },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "text_color", "label": "Text colour", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_color", "label": "Button colour", "default": "#FFFFFF" },
+    { "type": "range", "id": "overlay", "label": "Dark overlay strength", "default": 30, "min": 0, "max": 80, "step": 5, "unit": "%" },
+    { "type": "range", "id": "text_top_mobile", "label": "Text distance from top (mobile)", "default": 8, "min": 0, "max": 60, "step": 2, "unit": "%" }
+  ],
+  "presets": [
+    { "name": "Mojo home hero" }
+  ]
+}
+{% endschema %}
