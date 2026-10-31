@@ -5,29 +5,39 @@
       {%- if s.heading != blank -%}<h2 class="mojo-cm__heading">{{ s.heading }}</h2>{%- endif -%}
       {%- if s.subtitle != blank -%}<p class="mojo-cm__sub">{{ s.subtitle }}</p>{%- endif -%}
     </div>
-    <div class="mojo-cm__arrows">
-      <button type="button" class="mojo-cm__btn" data-mojo-prev aria-label="Previous">{% render 'mojo-icon', name: 'prev', size: 16 %}</button>
-      <button type="button" class="mojo-cm__btn" data-mojo-next aria-label="Next">{% render 'mojo-icon', name: 'next', size: 16 %}</button>
-    </div>
-    <div class="mojo-cm__rail" data-mojo-rail>
-      <table class="mojo-cm__table">
-        <thead>
-          <tr><th class="mojo-cm__corner"></th><th class="mojo-cm__th mojo-cm__th--hl">{{ s.col_1 }}</th><th class="mojo-cm__th">{{ s.col_2 }}</th><th class="mojo-cm__th">{{ s.col_3 }}</th><th class="mojo-cm__th">{{ s.col_4 }}</th></tr>
-        </thead>
-        <tbody>
-          {%- for block in section.blocks -%}
-            {%- assign b = block.settings -%}
-            <tr class="mojo-cm__tr" {{ block.shopify_attributes }}>
-              <th class="mojo-cm__label" scope="row">{{ b.label }}</th>
-              <td class="mojo-cm__td mojo-cm__td--hl"><span class="mojo-cm__dot mojo-cm__dot--{% if b.good_1 %}good{% else %}bad{% endif %}"></span><span class="mojo-cm__val mojo-cm__val--strong">{{ b.cell_1 }}</span></td>
-              <td class="mojo-cm__td"><span class="mojo-cm__dot mojo-cm__dot--{% if b.good_2 %}good{% else %}bad{% endif %}"></span><span class="mojo-cm__val">{{ b.cell_2 }}</span></td>
-              <td class="mojo-cm__td"><span class="mojo-cm__dot mojo-cm__dot--{% if b.good_3 %}good{% else %}bad{% endif %}"></span><span class="mojo-cm__val">{{ b.cell_3 }}</span></td>
-              <td class="mojo-cm__td"><span class="mojo-cm__dot mojo-cm__dot--{% if b.good_4 %}good{% else %}bad{% endif %}"></span><span class="mojo-cm__val">{{ b.cell_4 }}</span></td>
-            </tr>
+    <table class="mojo-cm__table">
+      <thead>
+        <tr>
+          <th class="mojo-cm__corner"></th>
+          <th class="mojo-cm__th mojo-cm__th--hl">{{ s.col_1 }}</th>
+          {%- for i in (2..4) -%}
+            {%- assign full = 'col_' | append: i -%}
+            {%- assign short = 'col_' | append: i | append: '_short' -%}
+            <th class="mojo-cm__th"><span class="mojo-cm__full">{{ s[full] }}</span><span class="mojo-cm__short">{{ s[short] | default: s[full] }}</span></th>
           {%- endfor -%}
-        </tbody>
-      </table>
-    </div>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <tr class="mojo-cm__tr" {{ block.shopify_attributes }}>
+            <th class="mojo-cm__label" scope="row">{{ b.label }}</th>
+            <td class="mojo-cm__td mojo-cm__td--hl">
+              <span class="mojo-cm__mark mojo-cm__mark--{% if b.good_1 %}good{% else %}bad{% endif %}">{% if b.good_1 %}{% render 'mojo-icon', name: 'check', size: 18 %}{% else %}{% render 'mojo-icon', name: 'close', size: 14 %}{% endif %}</span>
+              <span class="mojo-cm__val mojo-cm__val--strong">{{ b.cell_1 }}</span>
+            </td>
+            {%- for i in (2..4) -%}
+              {%- assign cell = 'cell_' | append: i -%}
+              {%- assign good = 'good_' | append: i -%}
+              <td class="mojo-cm__td">
+                <span class="mojo-cm__mark mojo-cm__mark--{% if b[good] %}good{% else %}bad{% endif %}">{% if b[good] %}{% render 'mojo-icon', name: 'check', size: 18 %}{% else %}{% render 'mojo-icon', name: 'close', size: 14 %}{% endif %}</span>
+                <span class="mojo-cm__val mojo-cm__val--other">{{ b[cell] }}</span>
+              </td>
+            {%- endfor -%}
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
   </div>
 </section>
 
@@ -40,37 +50,37 @@
 .mojo-cm__head { text-align: center; margin-bottom: 20px; }
 .mojo-cm__heading { margin: 0 0 8px; font-family: var(--mojo-font-heading); font-weight: 600; font-size: var(--mojo-hsm); line-height: 1.2; }
 .mojo-cm__sub { margin: 0; font-size: 14px; font-weight: 700; }
-.mojo-cm__arrows { display: flex; justify-content: flex-end; gap: 8px; margin-bottom: 10px; }
-.mojo-cm__btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--mojo-line); background: #fff; color: var(--mojo-fg); display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
-.mojo-cm__btn:disabled { opacity: 0.35; cursor: default; }
-.mojo-cm__table { flex: 0 0 auto; min-width: 560px; width: 100%; border-collapse: separate; border-spacing: 0; font-size: 11px; text-align: center; scroll-snap-align: start; }
-.mojo-cm__corner { width: 30%; }
-.mojo-cm__th { padding: 14px 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
-.mojo-cm__th--hl { background: #fff; border: 1px solid var(--mojo-primary); border-bottom: 0; font-size: 14px; letter-spacing: 0.02em; text-transform: none; }
-.mojo-cm__label { padding: 14px 6px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; border-top: 1px solid var(--mojo-line); }
-.mojo-cm__td { padding: 14px 6px; border-top: 1px solid var(--mojo-line); vertical-align: middle; }
-.mojo-cm__td--hl { background: #fff; border-left: 1px solid var(--mojo-primary); border-right: 1px solid var(--mojo-primary); font-weight: 700; }
-.mojo-cm__tr:last-child .mojo-cm__td--hl { border-bottom: 1px solid var(--mojo-primary); }
-.mojo-cm__dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; vertical-align: middle; }
-.mojo-cm__dot--good { background: var(--mojo-cm-good); }
-.mojo-cm__dot--bad { background: var(--mojo-cm-bad); }
-.mojo-cm__val { vertical-align: middle; }
-.mojo-cm__val--strong { font-weight: 700; }
+/* Fits the screen at every width: mobile = icon-only competitor columns + short headers; desktop = full values. */
+.mojo-cm__table { width: 100%; table-layout: fixed; border-collapse: separate; border-spacing: 0; font-size: 11px; text-align: center; }
+.mojo-cm__corner { width: 34%; }
+.mojo-cm__th--hl { width: 26%; }
+.mojo-cm__th { padding: 12px 2px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; overflow-wrap: anywhere; }
+.mojo-cm__th--hl { background: var(--mojo-primary); color: var(--mojo-cream, #F7F3EC); border-radius: 10px 10px 0 0; font-size: 14px; letter-spacing: 0.02em; text-transform: none; }
+.mojo-cm__full { display: none; }
+.mojo-cm__label { padding: 12px 6px 12px 0; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; line-height: 1.3; border-top: 1px solid var(--mojo-line); overflow-wrap: anywhere; }
+.mojo-cm__td { padding: 10px 2px; border-top: 1px solid var(--mojo-line); vertical-align: middle; }
+.mojo-cm__td--hl { background: #fff; border-left: 2px solid var(--mojo-primary); border-right: 2px solid var(--mojo-primary); font-weight: 700; }
+.mojo-cm__tr:last-child .mojo-cm__td--hl { border-bottom: 2px solid var(--mojo-primary); border-radius: 0 0 10px 10px; }
+.mojo-cm__mark { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; vertical-align: middle; }
+.mojo-cm__mark--good { color: var(--mojo-cm-good); }
+.mojo-cm__mark--bad { color: var(--mojo-cm-bad); background: color-mix(in srgb, var(--mojo-cm-bad) 10%, transparent); }
+.mojo-cm__val { display: block; margin-top: 4px; line-height: 1.3; overflow-wrap: anywhere; }
+.mojo-cm__val--strong { font-size: 10.5px; font-weight: 700; color: var(--mojo-primary); }
+.mojo-cm__val--other { display: none; }
 @media screen and (min-width: 750px) {
   .mojo-cm__heading { font-size: var(--mojo-hs); }
-  .mojo-cm__arrows { display: none; }
-  .mojo-cm__table { font-size: 12px; min-width: 0; }
-  .mojo-cm__th { font-size: 12px; }
-  .mojo-cm__label { font-size: 11px; }
+  .mojo-cm__table { font-size: 12.5px; }
+  .mojo-cm__corner { width: 22%; }
+  .mojo-cm__th--hl { width: 24%; font-size: 16px; }
+  .mojo-cm__th { padding: 16px 8px; font-size: 11.5px; }
+  .mojo-cm__full { display: inline; }
+  .mojo-cm__short { display: none; }
+  .mojo-cm__label { padding: 16px 8px 16px 0; font-size: 11px; }
+  .mojo-cm__td { padding: 14px 8px; }
+  .mojo-cm__val--strong { font-size: 12.5px; }
+  .mojo-cm__val--other { display: block; color: var(--mojo-muted, #5E6470); font-size: 12px; }
 }
 
-.mojo-cm__rail { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; -webkit-overflow-scrolling: touch; }
-.mojo-cm__rail::-webkit-scrollbar { display: none; }
-.mojo-cm__rail[data-mojo-dragging] { scroll-snap-type: none; cursor: grabbing; user-select: none; }
-.mojo-cm__dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-.mojo-cm__dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--mojo-line); cursor: pointer; }
-.mojo-cm__dots button[aria-current='true'] { background: var(--mojo-primary); }
-[data-mojo-overflow='0'] > .mojo-cm__dots { display: none; }
 {% endstylesheet %}
 
 {% javascript %}
@@ -257,6 +267,24 @@ if (!window.mojoRails) {
       "id": "col_4",
       "label": "Column 4",
       "default": "Bamboo viscose"
+    },
+    {
+      "type": "text",
+      "id": "col_2_short",
+      "label": "Column 2 short name (mobile)",
+      "default": "Cotton"
+    },
+    {
+      "type": "text",
+      "id": "col_3_short",
+      "label": "Column 3 short name (mobile)",
+      "default": "Poly"
+    },
+    {
+      "type": "text",
+      "id": "col_4_short",
+      "label": "Column 4 short name (mobile)",
+      "default": "Bamboo"
     },
     {
       "type": "header",
