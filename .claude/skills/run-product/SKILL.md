@@ -103,7 +103,7 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 | A1 Section spec + funnel psychology | conversion-architect agent | 03 | `02_competitor/page/SECTION_SPEC.md` |
 | A2 Page copy | copywriter agent (after A1) | 03 §copy rules, 04 | copy deck (returned text → master saves) |
 | A3 Build | master (or builder agent) | 04, tools-shopify-cli-and-git | theme settings, sections, blocks, template |
-| A4 Home page | home-page agent (after A3's shared settings + reusable sections exist; can start with spec/copy right after the gate) | 11, 04 | `templates/index.json` + `<slug>-*` home sections, 1:1 with the competitor home |
+| A4 Home page | home-page agent (after A3's shared settings + reusable sections exist; can start with spec/copy right after the gate) | 11, 04 | `templates/index.json` + `<slug>-*` home sections, 1:1 with the competitor home, **complete with no admin setup** (hero + product cards from theme assets/static settings, no native product-list/hero; 11 §4) |
 | B Product images | image agent | 05, tools-kie | packshot first, then gallery remakes → `03_product-images/` |
 | C Page images + GIFs | image agent | 06, tools-kie | testimonials/section remakes, WebP → `04_page-images/`, theme assets |
 | D1 Ad analysis | 2 analyst agents (ranks 1–15, 16–30) | 07 | text → master compiles `05_ads/COMPETITOR_ADS.md` |
@@ -118,7 +118,7 @@ Read `references/02-branding.md`. From capture data: competitor snapshot table, 
 Order inside the window: start A1, B (packshot first), C, D1 and A4's home spec at once; A2 when A1 lands; A3 when A2 lands (settings/header/footer can start immediately); A4 builds once A3's settings and reusable sections (testimonials, image-text, comparison, FAQ) exist, reusing them and the gallery images from B; D2 when D1 + packshot land; E when D1 lands.
 
 ### Phase 4 — QA loop
-Read `references/10-qa-and-delivery.md`. Visual QA agent compares competitor screenshots vs local renders (`scripts/render_sections.js` + static buy-box mock) at desktop and mobile; master fixes; loop until no unintended discrepancies. Review every image/ad batch through `scripts/contact_sheet.py` before calling it done. `shopify theme check` must show no new offenses.
+Read `references/10-qa-and-delivery.md`. Visual QA agent compares competitor screenshots vs local renders (`scripts/render_sections.js` + static buy-box mock) at desktop and mobile; master fixes; loop until no unintended discrepancies. Review every image/ad batch through `scripts/contact_sheet.py` before calling it done. `validate_schemas.py` must report 0 errors and `shopify theme check` no new offenses. After every push, read the push log ("pushed with errors" = not delivered: fix and re-push) and pull `templates/*` from the theme to confirm the product and home templates exist remotely.
 
 ### Phase 5 — Delivery (master)
 Commit on the brand branch, pull + merge-check, push to GitHub; push to the draft theme if STORE/THEME_ID are known (never publish). Push the policies with `policies.py push` (needs STORE + SHOPIFY_ADMIN_TOKEN; otherwise deliver the files and add the to-do). Write `DELIVERY.md` (template). Show the operator contact sheets (product images, ads) and a short summary: what was built (product page + home page), image placeholder map, operator to-dos (shipping rates for every market first: without them Shopify shows every product as sold out and add to cart fails; variants, uploads, gift/bundle app, reviews app, home product links), credits spent.

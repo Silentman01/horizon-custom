@@ -36,6 +36,10 @@ Write `02_competitor/home/HOME_SPEC.md` in the same per-section format as SECTIO
 Typical one-product home (check against the real page, don't assume): hero (headline + subhead + CTA + product visual or lifestyle), trust strip / marquee, featured product (buy box or product card), benefits/how-it-works, testimonials, comparison table, image-with-text story blocks, FAQ, guarantee, final CTA.
 
 ## 4. Map components to the theme
+**Rule (operator, 2026-10-31): the home page must render COMPLETE on the store with zero admin setup** — no image to upload, no collection to create, no product to pick. The Mojo home shipped with a native `hero` (empty until an image is uploaded) and two native `product-list` sections on the empty "all" collection, so the live home looked unfinished. Therefore:
+- Every image slot = `image_picker` + theme-asset fallback (`<slug>-media` snippet) with the asset filled in index.json.
+- **Never** a native section that needs uploads or store data to show something (hero without image, product-list / collection grid, featured-collection). Use `<slug>-home-hero` and `<slug>-home-products` (cards as blocks: product picker + fallback handle + static image/title/price/compare-at/badge/link; live product data when the product exists, the static settings otherwise).
+- Bestseller cards = the product's colourways; bundle cards = the BRIEF tiers (badges, prices). CTAs → `/products/<handle>` from BRIEF.
 For each HOME SPEC section decide **native vs custom**:
 - **Reuse your own `<slug>-*` sections first** (built for the product page; same look, already QA'd): testimonials, image-with-text (supports theme-file assets such as GIF→WebP), comparison, FAQ, guarantee.
 - **Native theme sections** when they match closely: Horizon `hero`, `featured-product` / `product-information`-style product block, `product-list` / collection grid, marquee/announcements, `rich-text`, `media-with-content`. Read their schema to set every setting from the spec.
@@ -49,7 +53,7 @@ Same rules as the product page: original wording paraphrasing the competitor's k
 - Prefer what already exists: gallery remakes (stream B), page images and GIF WebPs (stream C), the packshot.
 - Copy theme-ready versions into `assets/<slug>-home-*.jpg` (~1200 px, JPG q82 progressive).
 - Generate with Kie only for an essential visual with no equivalent (hero lifestyle, banner): attach the packshot, no logo/text on the frame, 2K; keep it to a few images and report credits.
-- Product images inside product cards/featured product come from the Shopify product — leave the product setting for the operator if the store/product doesn't exist yet (previews show a placeholder) and list it in the delivery to-dos.
+- Product cards show theme-asset images (`assets/<slug>-home-card-*.jpg`, colourway/gallery images) so they render before the product exists; once the product is imported they can switch to live product images via the product picker.
 
 ## 7. Build `templates/index.json`
 - Generate it with a Python builder like the product template (04): keep the JSON header comment, deep-copy proven section configs where useful, wrap rich text in `<p>`/`<ul>`/`<h*>`, consistent section keys (`<slug>_hero`, `<slug>_reviews` …), `order` = HOME SPEC order.
@@ -62,11 +66,11 @@ Same loop as 10: render custom sections with `scripts/render_sections.js --templ
 ## 9. Pitfalls
 - Don't break the product page when extending shared sections (new settings must be optional with defaults).
 - Competitor home pages often include app widgets (reviews carousels, Instagram feeds, countdowns): rebuild natively only what the spec needs; list app blocks as operator to-dos.
-- Product grids need real products/collections — they render empty until the operator creates the product; say so.
+- Native product grids / collections render EMPTY until the operator creates products: don't use them on the home (rule in §4). The Mojo home shipped half-empty because of this.
 - Keep the hero image light (WebP/JPG, sized); it's the LCP element.
 
 ## 10. Done when
-Every HOME SPEC section exists in order with our copy and images (or labeled placeholders), links route to the product, theme check is clean, and the side-by-side comparison shows no unintended structural differences.
+Every HOME SPEC section exists in order with our copy and real images (no placeholders, nothing to upload), product cards show prices/images without any store data, links route to the product, `validate_schemas.py` = 0 errors, theme check is clean, the home is pushed with the theme, and the side-by-side comparison shows no unintended structural differences.
 
 ## 11. Worked example and learnings (Noxis ← plaims.com)
 **What the competitor home actually was:** an empty Dawn slideshow (renders nothing) + one Dawn "Featured product" section (1:1 rounded image ~55% left; right column ~400px: tiny uppercase vendor caption, big Poppins title, full-width amber pill Add to cart adding the first variant, "View full details →"). No price, no rating, no other copy. Built as: Horizon `featured-product-information` + a tiny `blocks/noxis-view-details.liquid`. 0 Kie credits.

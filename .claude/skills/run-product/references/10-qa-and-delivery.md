@@ -33,7 +33,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 
 **Step 2.3 — Behaviour checks** (read the code if you can't click): bundle cards select the right variant and update price/form; preselected tier on load; `?variant=` respected; ATC adds the selected variant; accordions exclusive; nothing depends on `window.scrollTo` if the theme scrolls a wrapper (`scrollIntoView` instead).
 
-**Step 2.4 — Static checks:** `shopify theme check` (only baseline offenses allowed); JSON templates valid; rich text settings wrapped in `<p>`; no hard-coded competitor names, prices in the wrong currency, or leftover placeholder copy.
+**Step 2.4 — Static checks:** `python -I <SKILL>/scripts/validate_schemas.py <theme_root>` = 0 errors (Mojo: theme check was clean but Shopify rejected 25 schema errors, so the product and home templates never reached the store); `shopify theme check` (only baseline offenses allowed); JSON templates valid; rich text settings wrapped in `<p>`; no hard-coded competitor names, prices in the wrong currency, or leftover placeholder copy.
 
 **Known harness artefacts (don't "fix" the theme for these):** fonts fall back to serif when offline; lazy images blank inside headless iframes; colors empty if snippet globals aren't passed; text-glyph icons rendering in colour on some systems (use SVG icons in the theme anyway).
 
