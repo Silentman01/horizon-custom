@@ -1113,6 +1113,23 @@
         "padding_bottom_m": 0
       }
     },
+    "mojo_mech_anim": {
+      "type": "mojo-image-text",
+      "settings": {
+        "image_asset": "mojo-mechanism-anim.webp",
+        "image_alt": "Animation of cool air flowing through Mojo mulberry silk boxers, with the pouch zone shifting from warm to cool at 35°C",
+        "image_ratio": "1 / 1",
+        "image_side": "left",
+        "image_max_width": 440,
+        "bg_color": "#FFFFFF",
+        "heading": "See Your Silk Cooling in Action",
+        "text": "<p>Watch the airflow weave at work. Cool air moves through fine mulberry silk while trapped heat is drawn away from the pouch zone.</p><p><strong>The result: a steady ~35°C, so you stay fresh and cool all day.</strong></p>",
+        "padding_top": 40,
+        "padding_bottom": 40
+      },
+      "blocks": {},
+      "block_order": []
+    },
     "mojo_features": {
       "type": "mojo-feature-wheel",
       "settings": {
@@ -1197,7 +1214,7 @@
       "type": "mojo-image-text",
       "settings": {
         "image_asset": "mojo-derm.jpg",
-        "image_alt": "Mojo silk boxers",
+        "image_alt": "A man in black Mojo silk boxers getting ready while his partner smiles at him admiringly",
         "image_ratio": "3 / 4",
         "image_side": "right",
         "image_max_width": 440,
@@ -1354,7 +1371,7 @@
       "type": "mojo-image-text",
       "settings": {
         "image_asset": "mojo-tlevels.jpg",
-        "image_alt": "Mojo silk boxers",
+        "image_alt": "Cartoon audience of women swooning over Mojo silk boxers on a spotlit stage",
         "image_ratio": "3 / 4",
         "image_side": "right",
         "image_max_width": 440,
@@ -1873,6 +1890,7 @@
     "main",
     "mojo_press",
     "mojo_tech",
+    "mojo_mech_anim",
     "mojo_features",
     "mojo_derm",
     "mojo_fresh",
