@@ -816,7 +816,7 @@
                       "type": "text",
                       "name": "t:names.product_description",
                       "settings": {
-                        "text": "<p>Customer Email: contact@mojo-underwear.com</p>",
+                        "text": "<p>Customer Email: hello@mojo-underwear.com</p>",
                         "width": "100%",
                         "max_width": "normal",
                         "alignment": "left",
