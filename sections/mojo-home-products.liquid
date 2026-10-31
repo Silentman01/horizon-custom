@@ -105,7 +105,7 @@
 </script>
 
 {% stylesheet %}
-.mojo-hp { background: var(--mojo-hp-bg, #FAF6F1); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
+.mojo-hp { background: var(--mojo-hp-bg, #F7F3EC); color: var(--mojo-fg); font-family: var(--mojo-font); padding: var(--mojo-pt) 0 var(--mojo-pb); }
 .mojo-hp__inner { max-width: 1400px; margin: 0 auto; padding: 0 16px; }
 .mojo-hp__heading { margin: 0 0 24px; text-align: center; font-family: var(--mojo-font-heading); font-size: 28px; font-weight: 600; line-height: 1.2; }
 .mojo-hp__track { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px var(--mojo-hp-gap, 12px); }
@@ -117,7 +117,7 @@
 .mojo-hp__link { display: block; color: inherit; text-decoration: none; }
 .mojo-hp__img { position: relative; aspect-ratio: var(--mojo-hp-ratio, 1 / 1); background: var(--mojo-hp-card-bg, var(--mojo-panel)); overflow: hidden; }
 .mojo-hp__img img, .mojo-hp__ph { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; mix-blend-mode: multiply; }
-.mojo-hp__badge { position: absolute; top: 6px; left: 6px; z-index: 1; padding: 4px 6px; background: var(--mojo-hp-badge, #6B1E2E); color: var(--mojo-hp-badge-fg, #FAF6F1); font-size: 10px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.2; }
+.mojo-hp__badge { position: absolute; top: 6px; left: 6px; z-index: 1; padding: 4px 6px; background: var(--mojo-hp-badge, #0F1B2D); color: var(--mojo-hp-badge-fg, #F7F3EC); font-size: 10px; font-weight: 600; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1.2; }
 .mojo-hp__corner { position: absolute; z-index: 1; top: 8px; right: 8px; font-size: 11px; font-weight: 600; }
 .mojo-hp__corner--round { top: 6px; right: 6px; display: flex; align-items: center; justify-content: center; width: 58px; height: 58px; padding: 6px; border-radius: 50%; background: var(--mojo-primary); color: var(--mojo-cream); font-size: 9px; line-height: 1.15; text-align: center; text-transform: uppercase; box-sizing: border-box; }
 .mojo-hp__plus { position: absolute; right: 8px; bottom: 8px; z-index: 1; display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; background: #fff; color: var(--mojo-fg); font-size: 20px; line-height: 1; box-shadow: 0 0 0 1px var(--mojo-line); }
@@ -172,10 +172,10 @@
     { "type": "text", "id": "view_all_label", "label": "Button label", "default": "VIEW ALL" },
     { "type": "url", "id": "view_all_link", "label": "Button link", "info": "Blank = the Mojo product page." },
     { "type": "header", "content": "Style" },
-    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FAF6F1" },
-    { "type": "color", "id": "card_bg", "label": "Card image background", "default": "#E9D7CF" },
-    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#6B1E2E" },
-    { "type": "color", "id": "badge_fg", "label": "Badge text", "default": "#FAF6F1" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#F7F3EC" },
+    { "type": "color", "id": "card_bg", "label": "Card image background", "default": "#EFE6D6" },
+    { "type": "color", "id": "badge_bg", "label": "Badge background", "default": "#0F1B2D" },
+    { "type": "color", "id": "badge_fg", "label": "Badge text", "default": "#F7F3EC" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "default": 48, "min": 0, "max": 120, "step": 4, "unit": "px" },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "default": 48, "min": 0, "max": 120, "step": 4, "unit": "px" }
   ],
