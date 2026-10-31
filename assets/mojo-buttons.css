@@ -75,6 +75,21 @@
 .mojo-sa__btn:hover::after,
 .mojo-atct__btn:hover::after { transform: translateX(3px); }
 
+/* "added" state: keep the label readable and show a small champagne check where the arrow sits,
+   instead of Horizon's large centred check that covers the text */
+.button.add-to-cart-button { position: relative; }
+.button.add-to-cart-button .add-to-cart__added {
+  left: auto !important;
+  right: 20px;
+  translate: 0 -50% !important;
+  color: #C8A96A !important;
+}
+.button.add-to-cart-button .add-to-cart__added-icon { width: 22px; height: 22px; }
+.button.add-to-cart-button[data-added='true'] { color: var(--mojo-silk-text) !important; }
+.button.add-to-cart-button[data-added='true'] .add-to-cart-text { clip-path: none !important; filter: none !important; opacity: 1 !important; translate: none !important; }
+.button.add-to-cart-button[data-added='true']::after { opacity: 0; transform: scale(0.6); }
+.button.add-to-cart-button::after { transition: transform 0.25s ease, opacity 0.2s ease; }
+
 /* hide Horizon's cart icon so the arrow is the only icon */
 .button.add-to-cart-button .add-to-cart-icon { display: none; }
 
