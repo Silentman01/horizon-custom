@@ -31,7 +31,6 @@
     },
     "mojo_stats": {
       "type": "mojo-home-stats",
-      "settings": {},
       "blocks": {
         "s1": {
           "type": "stat",
@@ -59,14 +58,11 @@
         "s1",
         "s2",
         "s3"
-      ]
+      ],
+      "settings": {}
     },
     "mojo_press": {
       "type": "mojo-press",
-      "settings": {
-        "padding_top": 48,
-        "padding_bottom": 48
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -94,25 +90,27 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
     "mojo_story_1": {
       "type": "mojo-image-text",
       "settings": {
         "image_asset": "mojo-i6-standing-beige.jpg",
-        "image_side": "left",
-        "image_ratio": "1 / 1",
         "image_alt": "Man in Mojo cream silk boxers against a beige studio wall",
+        "image_ratio": "1 / 1",
+        "image_side": "left",
         "heading": "The silk boxer that moves and breathes with you.",
         "text": "<p>Natural silk keeps your temperature in check and stops chafing before it starts. Mojo is made for confidence: light, sweat-free and built to move with you.</p>",
+        "bullet_color": "#000000",
         "button_label": "SHOP NOW",
         "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
         "padding_top": 0,
-        "padding_bottom": 0,
-        "bullet_color": "#000000"
-      },
-      "blocks": {},
-      "block_order": []
+        "padding_bottom": 0
+      }
     },
     "mojo_bestsellers": {
       "type": "mojo-home-products",
@@ -208,19 +206,17 @@
       "type": "mojo-image-text",
       "settings": {
         "image_asset": "mojo-polaroid-02.jpg",
-        "image_side": "right",
-        "image_ratio": "1 / 1",
         "image_alt": "Man in Mojo silk boxers smiling in a sunlit garden",
+        "image_ratio": "1 / 1",
+        "image_side": "right",
         "heading": "Your Balls Deserve Better.",
         "text": "<p>Feel good down there and you move differently. Mojo gives you the freedom, freshness and support to take on whatever the day throws at you.</p>",
+        "bullet_color": "#000000",
         "button_label": "SHOP NOW",
         "button_link": "/products/mojo-silk-boxers-sustainable-comfort",
         "padding_top": 0,
-        "padding_bottom": 0,
-        "bullet_color": "#000000"
-      },
-      "blocks": {},
-      "block_order": []
+        "padding_bottom": 0
+      }
     },
     "mojo_bundles": {
       "type": "mojo-home-products",
@@ -300,14 +296,6 @@
     },
     "mojo_reviews": {
       "type": "mojo-testimonials",
-      "settings": {
-        "heading": "Trusted by 175k+ Men",
-        "rating": 5,
-        "count_text": "Based on 4,276 reviews",
-        "star_color": "#00B67A",
-        "padding_top": 60,
-        "padding_bottom": 60
-      },
       "blocks": {
         "r1": {
           "type": "review",
@@ -391,14 +379,18 @@
         "r6",
         "r7",
         "r8"
-      ]
+      ],
+      "settings": {
+        "heading": "Trusted by 175k+ Men",
+        "rating": 5,
+        "count_text": "Based on 4,276 reviews",
+        "star_color": "#00B67A",
+        "padding_top": 60,
+        "padding_bottom": 60
+      }
     },
     "mojo_guarantee": {
       "type": "mojo-guarantee",
-      "settings": {
-        "padding_top": 40,
-        "padding_bottom": 52
-      },
       "blocks": {
         "g1": {
           "type": "column",
@@ -429,7 +421,11 @@
         "g1",
         "g2",
         "g3"
-      ]
+      ],
+      "settings": {
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
