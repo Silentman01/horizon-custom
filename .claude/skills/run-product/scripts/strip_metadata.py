@@ -40,7 +40,14 @@ def strip_image(src, dst):
 
 
 def strip_video(src, dst):
-    ff = os.environ.get("FFMPEG") or shutil.which("ffmpeg") or "ffmpeg"
+    ff = os.environ.get("FFMPEG") or shutil.which("ffmpeg")
+    if not ff:
+        # no system ffmpeg (the 2026 PC): fall back to the imageio-ffmpeg binary
+        try:
+            import imageio_ffmpeg
+            ff = imageio_ffmpeg.get_ffmpeg_exe()
+        except Exception:
+            ff = "ffmpeg"
     cmd = [ff, "-v", "error", "-y", "-i", src, "-map", "0", "-c", "copy",
            "-map_metadata", "-1", "-map_chapters", "-1", "-fflags", "+bitexact",
            "-flags:v", "+bitexact", "-flags:a", "+bitexact"]

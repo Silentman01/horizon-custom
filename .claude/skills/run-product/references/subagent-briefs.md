@@ -153,7 +153,7 @@ Task: produce <BRAND>'s product gallery.
    <PRODUCT_DIR>\scratch\jobs_gallery.json using the CONCEPT-REMAKE template from 05 (same idea/layout/claims/text
    structure with our product; NO brand logo or wordmark; correct spelling; 1:1 2K).
 3. python -I <skill>\scripts\kie_jobs.py <jobs> "<PRODUCT_DIR>\03_product-images"
-4. Contact sheet → Read → fix with KEEP-EDIT jobs (text-only fixes) → keep superseded versions in a subfolder.
+4. Contact sheet → Read → fix with KEEP-EDIT jobs (text-only fixes) → move replaced versions once to <area>rchive<N>_<reason>\.
 Return: final file list in gallery order (one line each: what it shows), credits spent, any flaw left.
 ```
 

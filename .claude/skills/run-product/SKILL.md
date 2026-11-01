@@ -146,7 +146,7 @@ BRIEF.md · DELIVERY.md
 02_competitor/page/   (p.json, p.html, capture.json/.md, copy.txt, screenshots, SECTION_SPEC.md)
 02_competitor/home/   (home HTML, copy, media URLs, screenshots, HOME_SPEC.md)
 02_competitor/media/  (RAW gallery images, RAW GIFs, testimonials, section images, home images)
-03_product-images/    (packshot, remakes, superseded/ subfolders)
+03_product-images/    (packshot, remakes, archive/v<N>_<reason>/)
 04_page-images/       (testimonial/section remakes, GIF→WebP)
 05_ads/competitor/    (raw/ dumps, ranked NN_<id>.<ext>, ranking.json)
 05_ads/generated/     (ad-NN-<slug>.png)
@@ -157,6 +157,7 @@ BRIEF.md · DELIVERY.md
 08_shopify/           (products.spec.json, <slug>-products.csv ready to import, <slug>-products.UPLOAD.md)
 ```
 Theme repo: only theme files, on branch `BRAND_SLUG`, files prefixed with the brand slug.
+**Folder hygiene:** never create or keep `superseded/` or duplicate media folders (`out*/`, `fix*/`, copies of finals). A replaced version moves once to `<area>/archive/v<N>_<reason>/` (e.g. `04_page-images/archive/v1_ugc-prop_rejected/`); one home per final file, work files in `<area>/_work/`. Delete `*_sheet*` contact/preview sheets once generation is done. At delivery, hash every file (SHA-256) and delete byte duplicates outside the final folders.
 
 Scripts (`scripts/`, run Python with `-I`; all have `--help`):
 - `capture_page.py URL --out DIR [--html-file saved.html]` — product JSON, HTML, copy (+word count), colors/CSS vars, fonts, apps (Kaching tiers, reviews apps…), Shopify sections in order, media URLs (gallery, GIFs, videos, testimonials). Prices come from the product JSON (screenshots show the visitor's local currency).

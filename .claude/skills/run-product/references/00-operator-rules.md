@@ -45,7 +45,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - **No brand logo or wordmark** on product images. "plaims don't have their logo on them and ours lose space because of logo you added."
 - Skip images that only make sense for the competitor (e.g. "IMPORTANT NOTICE — buy only from plaims.com").
 - When only text must change, **edit the existing image** with a keep-everything prompt instead of regenerating (cheaper, keeps the approved look).
-- Keep superseded versions in subfolders (`with-logo/`, `softened/` …) so nothing approved is lost.
+- Keep replaced versions once in `<area>/archive/v<N>_<reason>/` (`v1_with-logo/`, `v1_softened/` …) so nothing approved is lost; never a `superseded/` or duplicate folder.
 
 ## 5. Page media and GIFs
 - Download competitor GIFs **raw** (original files) and keep them untouched in `02_competitor/media/`. The operator asked to reuse the competitor's two GIFs on our page.

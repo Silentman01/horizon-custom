@@ -18,6 +18,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 - **Mode B:** zero *unintended* discrepancies; every intentional improvement is logged with a reason.
 - Every image/ad batch reviewed on a contact sheet; no misspellings, no competitor brand names, no logo on product images, claims at full strength.
 - `shopify theme check` shows no new offenses compared with the baseline on `main`.
+- **Folder hygiene:** no `superseded/` or duplicate media folders; each replaced version sits once in `<area>/archive/v<N>_<reason>/`, one home per final file; `*_sheet*` contact/preview sheets deleted once generation is done; a SHA-256 pass over PRODUCT_DIR finds no duplicates (delete the copy outside the final folder).
 - **Every Phase 3 stream has its output on disk** before delivery: check the SKILL.md stream table row by row (spec, copy deck, theme, home, product images, page images, `05_ads/COMPETITOR_ADS.md`, `05_ads/AD_COPY.md`, ads, policies, checkout header, logo set, `08_shopify/<slug>-products.csv` product import file). A stop instruction like "stop at remaking ads" skips only that stream; the others still run. A missing file = not done (Krino shipped without AD_COPY.md, 2026-10-25).
 
 ## 2. Page QA
@@ -41,7 +42,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 For every batch (gallery remakes, page images, top-5 ads, 20 ads):
 1. `python -I scripts/contact_sheet.py "<dir>/*.png" --out <dir>/_sheet.jpg` and Read it.
 2. Checklist per image: product matches the packshot (frame shape, amber lenses, side shields); text spelled correctly and identical to the spec; claims exactly as specified; no competitor brand; no logo/wordmark on product images; no text on the product frame; people look natural; layout matches the reference (top-5: side-by-side with the original).
-3. Fix by editing (keep-everything prompt) when only text/small elements are wrong; regenerate only when composition is wrong. Keep superseded files in a subfolder.
+3. Fix by editing (keep-everything prompt) when only text/small elements are wrong; regenerate only when composition is wrong. Move the replaced file once to `<area>/archive/v<N>_<reason>/` (never a `superseded/` folder).
 4. Note leftover minor flaws honestly in the delivery (e.g. "ad-25 body text is decorative filler").
 
 ## 4. Discrepancy log and loop

@@ -36,7 +36,7 @@ Starts when **both** exist: `05_ads/COMPETITOR_ADS.md` (from the analysts, 07) a
 |---|---|
 | 25 ads | `05_ads/generated/ad-NN-<slug>.png` (01–05 recreations in rank order, 06–25 pattern ads) |
 | Contact sheets | `05_ads/generated/_top5_compare.jpg`, `_sheet1.jpg`, `_sheet2.jpg` |
-| Superseded versions | `05_ads/generated/superseded/<reason>/` |
+| Replaced versions | `05_ads/generated/archive/v<N>_<reason>/` |
 | Builders, job JSONs, logs | `PRODUCT_DIR/scratch/` (`mk_ads_top5.py`, `jobs_ads_top5.json`, `mk_ads_20.py`, `jobs_ads_20.json`) |
 | Ad map table | in the return → master adds to COMPETITOR_ADS.md / DELIVERY.md |
 
@@ -136,7 +136,7 @@ Checklist per ad:
 ## 9. Step 8 — Fix list and fix round
 - Text wrong / small artefact / stray print → KEEP-EDIT on the existing ad.
 - Composition, product or person wrong → regenerate with the corrected spec (packshot still attached).
-- Move each old version to `05_ads/generated/superseded/<reason>/` first and upload from there (the runner overwrites same-name files).
+- Move each old version to `05_ads/generated/archive/v<N>_<reason>/` first and upload from there (the runner overwrites same-name files).
 - One job file per round (`scratch/jobs_ads_fix1.json`); re-sheet; re-check. After two failed edits on one ad, regenerate.
 **Done when:** the checklist passes for all 25, or remaining minor flaws are listed honestly in the return (e.g. "ad-25 body text is decorative filler").
 

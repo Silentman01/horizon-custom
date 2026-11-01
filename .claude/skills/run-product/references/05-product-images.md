@@ -38,7 +38,7 @@ Runs after the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses 
 | Raw competitor gallery | `02_competitor/media/<comp>-product-NN.<ext>` (untouched) |
 | Packshot | `03_product-images/<slug>-packshot.png` (1:1 2K) |
 | Remakes | `03_product-images/<slug>-product-NN.png` (1:1 2K, NN = our gallery position) |
-| Superseded versions | `03_product-images/superseded/<reason>/` |
+| Replaced versions | `03_product-images/archive/v<N>_<reason>/` |
 | Review sheets | `03_product-images/_sheet*.jpg`, `03_product-images/_compare.jpg` |
 | Builders, job JSONs, logs | `PRODUCT_DIR/scratch/` |
 
@@ -157,9 +157,9 @@ python -I "<SKILL>/scripts/kie_jobs.py" "<PRODUCT_DIR>/scratch/jobs_gallery.json
    - **Text-only** (wrong word, softened claim, typo, wrong number) → KEEP-EDIT (§13.3) on the existing image, listing every change as `Change "<old>" to "<new>"` and the lines to keep.
    - **Remove an element** (logo, wordmark, stray badge) → NO-LOGO (§13.4) with reflow so no empty gap remains.
    - **Composition or product wrong** → regenerate the remake job with a corrected DESC.
-2. Before running, move each current version to `03_product-images/superseded/<reason>/` (e.g. `softened/`, `with-logo/`, `round1/`) and point the edit job's `upload.files` at that moved copy — the runner overwrites same-name files in the output folder.
+2. Before running, move each current version to `03_product-images/archive/v<N>_<reason>/` (e.g. `v1_softened/`, `v1_with-logo/`) and point the edit job's `upload.files` at that moved copy — the runner overwrites same-name files in the output folder.
 3. Batch all fixes of one round into one job file (`scratch/jobs_gallery_fix1.json`), run into `03_product-images/`, re-sheet, re-check.
-**Output:** corrected images; superseded versions kept (nothing approved is ever lost).
+**Output:** corrected images; replaced versions kept once in archive/ (nothing approved is ever lost).
 **Done when:** the checklist passes on every image.
 **Pitfalls:** regenerating from scratch for a text fix (new composition = new problems); forgetting to move the old file first (it gets overwritten and the history is lost); editing an edited image many times — after 2 failed edits of the same image, regenerate.
 
@@ -274,7 +274,7 @@ Resulting job entry:
 Fix-round job (KEEP-EDIT, uploading the moved copy):
 ```json
 {"name": "noxis-product-04", "model": "gpt-image-2-5-sunburst-image-to-image",
- "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/03_product-images/superseded/softened/noxis-product-04.png"]},
+ "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/03_product-images/archive/v1_softened/noxis-product-04.png"]},
  "input": {"prompt": "Edit this exact image. Keep everything identical (layout, product, colors, photography, typography style) and change ONLY the text described below. All text crisp and correctly spelled. Change the headline to \"Drive Confidently At Night With Glare-Free Vision\", with \"Glare-Free\" highlighted in amber. Change the three check items in the bottom amber panel to \"Cataracts\", \"Astigmatism\", \"Fit Over Prescription Glasses\".",
            "aspect_ratio": "1:1", "resolution": "2K"}}
 ```
@@ -283,8 +283,8 @@ Fix-round job (KEEP-EDIT, uploading the moved copy):
 
 **What happened (130 credits for 5 images instead of 50):**
 1. Round 1 builder had a `BRAND` block ("write \"noxis\" in a bold, rounded lowercase sans-serif wordmark") and paraphrased the text: "Cuts Headlight Glare at Night" instead of "Reduces Nighttime Glare By 85%"; "Rainy nights / Sensitive eyes" instead of "Cataracts / Astigmatism"; "CHEAP TINTS" instead of "THEIRS".
-2. Operator: *"Never told you to do this, revert any claims adjustments you made. every claims we have are validated and running."* → KEEP-EDIT on 02/03/04 restoring the exact text (old files → `superseded/softened/`).
-3. Operator: *"remake product images, plaims don't have their logo on them and ours lose space because of logo you added"* → NO-LOGO edit with reflow on all 5 (old files → `superseded/with-logo/`).
+2. Operator: *"Never told you to do this, revert any claims adjustments you made. every claims we have are validated and running."* → KEEP-EDIT on 02/03/04 restoring the exact text (old files → `archive/v1_softened/`).
+3. Operator: *"remake product images, plaims don't have their logo on them and ours lose space because of logo you added"* → NO-LOGO edit with reflow on all 5 (old files → `archive/v1_with-logo/`).
 4. Final accepted set: logo-free, claims verbatim, product consistent; the competitor's anti-replica slide skipped.
 
 **Corrected first-time DESCs (use as the quality bar):**

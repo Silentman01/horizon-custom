@@ -121,7 +121,7 @@ python -I "<SKILL>/scripts/kie_jobs.py" <jobs.json> <out_dir>
 ```
 - Reads `KIE_API_KEY`; creates all tasks (0.6 s apart — inside the 20/10 s limit), polls every 5 s, downloads each result to `<out_dir>/<name>.<ext>` (ext from the result URL, normally `.png`), prints `name: saved … (N credits)`.
 - Stops waiting after **900 s** for the whole batch and prints `name: timed out, task <taskId>` for anything still running (recover with §13).
-- **Overwrites** an existing file with the same name in `out_dir`. Before an edit round, move the current version to a `superseded/<reason>/` folder and upload it from there (see 05 §9).
+- **Overwrites** an existing file with the same name in `out_dir`. Before an edit round, move the current version to `<area>/archive/v<N>_<reason>/` and upload it from there (see 05 §9).
 - Create failures print `name: create failed {…}` and the batch continues; task failures print `name: FAILED <failCode> <failMsg>`.
 
 Job file format (a JSON array):

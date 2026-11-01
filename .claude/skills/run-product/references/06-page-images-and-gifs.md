@@ -154,7 +154,7 @@ Check file sizes: a real animated GIF is usually several MB; a 50–200 KB `.gif
 **Pitfalls:** editing the live template that receives ad traffic (operator rule 11 — build `product.<slug>-v2`); forgetting to commit the asset files with the template; GIF in `assets/` instead of the WebP.
 
 ## 10. Step 9 — Review
-**Do:** `python -I "<SKILL>/scripts/contact_sheet.py" "<PRODUCT_DIR>/04_page-images/*.png" --out "<PRODUCT_DIR>/04_page-images/_sheet.jpg"` and a competitor-vs-ours pair sheet; Read both. Checklist: same framing/emotion as the competitor; different faces; product matches the packshot (no print on it); no text or logos; copy-match passed; theme files within size targets. Fix with KEEP-EDIT (small element) or regenerate (wrong person/framing); move old versions to `04_page-images/superseded/<reason>/` first.
+**Do:** `python -I "<SKILL>/scripts/contact_sheet.py" "<PRODUCT_DIR>/04_page-images/*.png" --out "<PRODUCT_DIR>/04_page-images/_sheet.jpg"` and a competitor-vs-ours pair sheet; Read both. Checklist: same framing/emotion as the competitor; different faces; product matches the packshot (no print on it); no text or logos; copy-match passed; theme files within size targets. Fix with KEEP-EDIT (small element) or regenerate (wrong person/framing); move old versions to `04_page-images/archive/v<N>_<reason>/` first.
 **Done when:** the checklist passes and the master has the slot → file mapping and credits spent.
 
 ## 11. Optional — Editorial photos for advertorial/listicle pages
