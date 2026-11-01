@@ -47,7 +47,7 @@ Phase 3 streams are listed in stream-table order; their real start order and dep
 **Phase 3 — Production streams** (parallel after the gate) · [17 P3 stream table + order inside the window](references/17-phases-and-streams.md#phase-3--production-parallel-streams-after-the-gate)
 - A1 Section spec + funnel psychology → `PD/02_competitor/page/SECTION_SPEC.md` · [03 §6–13](references/03-competitor-page-analysis.md#6-step-4-build-the-section-inventory) · `templates/SECTION_SPEC.md` · brief 4
 - A2 Page copy (after A1) → copy deck (returned text, saved by coordinator) · [03 §14](references/03-competitor-page-analysis.md#14-copy-rules-for-the-copywriter-downstream) · [04](references/04-product-page-build.md) · [13](references/13-copy-playbooks.md) · brief 5, copy chief
-- A3 Build product page → theme settings, sections, blocks, template · [04](references/04-product-page-build.md) · [tools-shopify](references/tools-shopify-cli-and-git.md) · brief 6 (optional)
+- A3 Build product page → theme settings, sections, blocks, template, bundle selector ([04 §5.4](references/04-product-page-build.md#54-bundle-picker-parent-block--tier-blocks--js-driver)), cart drawer ([04 §5.12](references/04-product-page-build.md#512-cart-drawer)) · [04](references/04-product-page-build.md) · [tools-shopify](references/tools-shopify-cli-and-git.md) · brief 6 (optional)
 - A4 Home page → `templates/index.json` + `<slug>-*` home sections · [11](references/11-home-page.md) · [04](references/04-product-page-build.md) · brief 13
 - B Product images (packshot first, then gallery remakes) → `PD/03_product-images/` · [05](references/05-product-images.md) · [tools-kie](references/tools-kie.md) · `kie_jobs.py`, `contact_sheet.py` · brief 7
 - C Page images + GIFs → `PD/04_page-images/`, theme assets · [06](references/06-page-images-and-gifs.md) · [tools-kie](references/tools-kie.md) · brief 8
@@ -76,7 +76,7 @@ Every Phase 3 stream needs its output on disk; a stop instruction skips only tha
 - [ ] 0.1–0.4 BRIEF.md with inputs, tooling, credits; PD tree exists; Phase 1 launched
 - [ ] 1.1 product + home capture and screenshots · 1.2 raw media + WebP · 1.3 dumps + ranking · 1.4 policy sources
 - [ ] 2.1 BRANDING.md · 2.2 gate approved · 2.3 BRIEF updated, PD renamed, logo set, brand branch
-- [ ] A1 SECTION_SPEC.md · A2 copy deck · A3 product page built · A4 home page built (no admin setup)
+- [ ] A1 SECTION_SPEC.md · A2 copy deck · A3 product page built (bundle selector + cart drawer configured) · A4 home page built (no admin setup)
 - [ ] B packshot + gallery · C page images + WebP · D1 COMPETITOR_ADS.md · D2a AD_VARIANTS.md approved · D2 25 ads · E AD_COPY.md
 - [ ] G video finals (only if requested) · I products CSV + UPLOAD.md · H checkout header · F policies transformed
 - [ ] 4.1 page QA + `validate_schemas.py` 0 errors + theme check no new offenses · 4.2 every batch on a contact sheet · 4.3 QA log only fixed/intentional

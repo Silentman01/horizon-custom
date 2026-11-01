@@ -11,7 +11,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 3. Header, announcement bar, footer
 4. Component inventory: native vs custom
 5. Build the custom blocks and sections (patterns)
-   5.1 Naming and file layout · 5.2 Vars snippet · 5.3 Media snippet · 5.4 Bundle picker (parent + tier + JS driver) · 5.5 Small buy-box blocks · 5.6 Testimonials rail · 5.7 Image with text · 5.8 Comparison table · 5.9 FAQ · 5.10 Scroll-to-offer CTA · 5.11 Wiring to Dawn
+   5.1 Naming and file layout · 5.2 Vars snippet · 5.3 Media snippet · 5.4 Bundle picker (parent + tier + JS driver) · 5.5 Small buy-box blocks · 5.6 Testimonials rail · 5.7 Image with text · 5.8 Comparison table · 5.9 FAQ · 5.10 Scroll-to-offer CTA · 5.11 Wiring to Dawn · 5.12 Cart drawer
 6. Generate the template JSON with a Python builder
 7. Theme check
 8. Local QA render + buy-box mock
@@ -31,7 +31,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 2. **The merchant edits everything.** Every text, image, color choice, toggle and repeatable item is a schema setting or block, with presets. Never hard-code copy in Liquid. Labeled placeholders show where each image goes.
 3. **Native first.** If a theme block or section already matches the competitor component (title, price, variant picker, buy buttons, accordion, rich text), configure it. Build `<slug>-*` custom files only for components the theme lacks (bundle cards, comparison table, rating line, testimonial cards, …).
 4. **1:1 in Mode A.** Same sections, order, proportions, colors and claims as the competitor (00-operator-rules §1–2). No "improvements". List ideas in one line at delivery.
-5. **Variants are the source of truth.** Bundle cards read price and compare-at from the product variants (Buy 1 / Buy 2 / Buy 3). The cards never compute prices the checkout doesn't know about.
+5. **Variants are the source of truth.** Bundle cards read price and compare-at from the product variants (Buy 1 / Buy 2 / Buy 3). The cards never compute prices the checkout doesn't know about. In quantity mode: the variant price plus one native automatic discount per tier.
 6. **Performance and accessibility by default.** Use WebP for GIFs, lazy images below the fold, explicit width/height, no third-party fonts or scripts, real radio inputs, visible `:focus-visible`, and aria labels on icon-only content.
 
 ---
@@ -252,6 +252,8 @@ Styling to copy from the competitor: radius (Noxis 18 px), border in the accent 
 **Why drive the native picker instead of writing `input[name=id]` yourself:** the theme then updates price, sticky add-to-cart, media, URL and availability exactly as with its own buttons. Writing the form id directly leaves the rest of the page stale.
 **Limits:** this works for single-option products (one "Bundle" option). With two options (color × bundle), a card must set both option inputs. Build that only if the spec needs it.
 
+**Quantity mode (colour × size products, or no pack variants) — like Kaching quantity breaks.** No pack variants. Copy the competitor's tiers 1:1 (titles, pack prices, struck "was" prices, badges, preselected tier, countdown/sale line above the cards). Reference: branch `mojo`, `blocks/mojo-bundle-tiers.liquid` + `_mojo-bundle-tier.liquid` (single-option version: `krino`, `_krino-bundle-card.liquid` + `snippets/krino-sync.liquid`). Each card = N units with an option picker per unit; prices in Liquid = variant price × N and a "Bundle price" setting, save/%/per-unit from tokens. Add flow: listen for `submit` on **window** in capture phase (Horizon's `on:submit` is document-capture), add the extra lines with `/cart/add.js`, then in a new task (`setTimeout`) set the form `id`/`quantity` and `requestSubmit()` so Horizon re-renders and opens the drawer. Mark lines with hidden property `_Bundle`. Checkout price comes from native automatic discounts: one per card, Amount off products, fixed amount = full − bundle price, once per order, minimum quantity N, no combinations; show the amount under each card in the editor. Set `auto_open_cart_drawer: true`. Offer table + discount setup → `PD/08_shopify/BUNDLE_OFFERS.md`.
+
 ### 5.5 Small buy-box blocks
 - `<slug>-rating`: 5 SVG stars filled with the accent + one text setting ("Rated 4.8/5 by 1,300+ drivers", carried 1:1 from the competitor pattern).
 - `<slug>-checklist`: `item_1..item_6` text settings, rendering only the non-blank ones, with an outline check SVG. Copy letter-spacing and size from the competitor (Noxis: 14 px, 0.04 em).
@@ -314,6 +316,9 @@ Native `<details name="nxf-{{ section.id }}">` gives an **exclusive accordion** 
 
 ### 5.10 Scroll-to-offer CTA (when the spec has "Get yours" buttons below the fold)
 Horizon scrolls `.page-wrapper` on desktop, not `window`, so `window.scrollTo` does nothing there. Use `target.scrollIntoView({behavior:'smooth', block:'start'})` with `scroll-margin-top` = header height + 16. Target the bundle block (`.nxb`) → `.buy-buttons-block` → `[id^="ProductInformation-"]`, then flash it briefly. Pattern: `assets/ceriva.js` on branch `ceriva` (`git show ceriva:assets/ceriva.js`) with the `ceriva-cta` snippet (`data-cv-action="offer|cart"`). Respect `prefers-reduced-motion`.
+
+### 5.12 Cart drawer
+Always configure the theme's Cart drawer section (`cart_drawer` in `sections/header-group.json`, `sections/cart-drawer-extras.liquid`) in the store language and brand colours: announcement + timer, free-shipping bar at the competitor's threshold for the target market (same as the shipping rate), compact rows, free-gift highlight when the offer has gifts, price details (`breakdown_compare_at` off when cards anchor on the variant price), badges, payment icons. Everything defaults off: `settings: {}` = plain drawer (Mojo shipped like that). The checkout button takes the brand CTA via `.cart__checkout-button`.
 
 ### 5.11 Wiring to Dawn (and Dawn-likes)
 - Dawn has no theme blocks inside `main-product`. Either (a) add a block type `{"type":"<slug>_bundle","name":"Bundle & save","settings":[...]}` to `main-product`'s schema and render it with `{% when '<slug>_bundle' %}{% render '<slug>-bundle', block: block, product: product %}` (tier data as `tier_1_*`…`tier_3_*` settings), or (b) use an `@app`-style section below the main section if the spec allows. (a) edits a core file, so keep the diff minimal and note it in delivery (theme updates will conflict).
@@ -406,6 +411,7 @@ Paste into DELIVERY.md, filled in:
 - [ ] **Upload product media** in gallery order (`03_product-images/` remakes, packshot first). The gallery comes from the Shopify product, not the theme.
 - [ ] **Page images**: either already shipped as theme assets (list `assets/<slug>-*`), or upload them in the editor into the labeled placeholders (map: section → placeholder label → file in `04_page-images/`).
 - [ ] **Free gifts are display-only.** The gift strips ("+ 2 FREE Glasses Cases") don't add anything to the cart. Configure a bundle app (e.g. Kaching-style) or an automatic discount / free-gift rule, or remove the strips.
+- [ ] **Quantity-mode bundles**: create the tier discounts (table in `08_shopify/BUNDLE_OFFERS.md`) and a free shipping rate at the drawer threshold.
 - [ ] **Reviews app** if the competitor shows a review widget (stars count, review list): install and place its app block. The rating line is static text.
 - [ ] **Store connection**: store domain + draft theme id (if pushed to GitHub only), or connect the branch via Shopify's GitHub integration.
 - [ ] Global settings changed (palette, fonts, buttons, announcement): confirm on a shared store.
