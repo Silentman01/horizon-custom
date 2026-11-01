@@ -133,3 +133,18 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 - **Independent check** before final: frames every 0.5 s, whisper read-back, sync within 0.15 s, the three remakes present, no competitor trace; strip metadata (§14).
 - **Folders:** `05_ads/generated/videos/` holds ONLY final videos (`vNN-<slug>.mp4`) at its root; each video has `vNN-work/` with only `vNN-clips.jpg`, `vNN-draft.mp4` and `vNN-PLAN.md`; everything else is deleted once the video is final.
 - **Never** swap people with animate-replace models (rendered badly and glitchy); clean up after scripts; never write into the Git Bash root (use absolute paths).
+
+## Operator rules (summary — full text in the sections above)
+
+- **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
+- **1:1 for tests.** Title = competitor's title pattern with our brand; palette = competitor's exact hex; page structure = competitor's (Mode A). Don't reinvent; upgrade later only when asked.
+- **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
+- **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
+- **GIFs raw**: download originals, keep them, use animated WebP in the theme.
+- **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
+- **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).
+- **Every ad prompt attaches our packshot**; no competitor brand names. **Before generating any ad**, write `05_ads/AD_VARIANTS.md` (each source headline → our almost-similar variant; each design → our close-but-different variant) and stop for operator validation; after approval generate and keep going (08 §1b).
+- **Video ads** (on request, `references/14-video-ads.md`): ~20 candidates by `reach_rank` → operator confirms; per video, audit every clip (a clean / b overlay fixed locally / c regenerate); no lip sync; re-voice with an ElevenLabs clone of the original voice (never Kie for audio); always remake the hook, the end and one random body line; (c) clips only after operator confirmation; `generated/videos/` holds finals only.
+- **Git:** branch named after the brand from clean `main`; commit → pull → merge-check → push; never publish; never overwrite a template with live ad traffic.
+- **Assets live in `PRODUCT_DIR`** (shop folder), not in the theme repo.
+- **Mobile first:** build and QA at 390px first; every horizontal rail scrolls by touch *and* mouse drag (editor mobile preview has no touch).

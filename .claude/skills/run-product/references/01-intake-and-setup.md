@@ -43,7 +43,7 @@ Run these quickly (one Bash call where possible). Record results in BRIEF.md "To
 | Python + Pillow | `python -I -c "import PIL; print(PIL.__version__)"` | `pip install pillow` |
 | Node + liquidjs | `node -v`; liquidjs in a scratch dir (`npm i liquidjs@10`) | skip local render QA, rely on theme check + mocks |
 | Browser | Edge `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` or Chrome | screenshots unavailable → use competitor PDF/screens if the operator provides them |
-| Kie key + credits | `KIE_API_KEY` env, project skill config, or operator; `curl -s -H "Authorization: Bearer $KEY" https://api.kie.ai/api/v1/chat/credit` | ask for the key; if balance < ~260, warn and plan priorities (SKILL §7) |
+| Kie key + credits | `KIE_API_KEY` env, project skill config, or operator; `curl -s -H "Authorization: Bearer $KEY" https://api.kie.ai/api/v1/chat/credit` | ask for the key; if balance < ~260, warn and plan priorities (18 §2) |
 | Brandsearch MCP | `ToolSearch` query "brandsearch" → tools `mcp__claude_ai_Brandsearch__*` | tell the operator to connect it (`claude mcp add` / MCP menu) and run everything else |
 | Shopify Admin token (policies) | `SHOPIFY_ADMIN_TOKEN` env (custom app, `write_legal_policies`) | policies delivered as files + operator to-do |
 

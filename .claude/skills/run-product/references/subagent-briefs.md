@@ -1,6 +1,6 @@
 # Sub-agent briefs (copy, fill the <…>, launch)
 
-Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see SKILL.md §3. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
+Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see 16-orchestration.md §1. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
 
 ## Contents
 - Common header
