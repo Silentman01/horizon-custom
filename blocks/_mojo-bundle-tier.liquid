@@ -3,7 +3,7 @@
   {quantity} pairs, with a colour + size choice per pair. Prices are computed from the product variant:
   full = variant price x pairs, bundle price = "Bundle price" setting (empty = full price).
   Checkout charges the bundle price only when the matching automatic discount exists in Shopify:
-  fixed amount off = full - bundle price, minimum quantity = pairs (shown in the editor under the card).
+  fixed amount off = full - bundle price, minimum quantity = pairs (see BUNDLE_OFFERS.md; never shown on the page).
   Text tokens: {total} {compare} {saving} {percent} {unit} {price}.
 {%- endcomment -%}
 {%- liquid
@@ -72,7 +72,6 @@
   assign f_saving = mt_saving | money
   assign f_unit = mt_unit | money
   assign f_price = v.price | money
-  assign f_off = mt_off | money
 
   assign t_save = bs.saving | replace: '{saving}', f_saving | replace: '{percent}', mt_pct | replace: '{unit}', f_unit | replace: '{total}', f_total | replace: '{compare}', f_compare
   if mt_saving == 0 and bs.saving contains '{'
@@ -176,9 +175,6 @@
       {%- endfor -%}
     </div>
   {%- endif -%}
-  {%- if request.design_mode and mt_off > 0 -%}
-    <p class="mojo-tier__admin">Editor only: create an automatic discount in Shopify (Discounts) of <b>{{ f_off }} off</b> for <b>{{ qty }}+ pairs</b> of this product, or checkout charges {{ mt_full | money }}.</p>
-  {%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -222,7 +218,6 @@
 .mojo-tier__sel { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; border: 1px solid #C9C9C9; border-radius: 0; background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23111'/%3E%3C/svg%3E") no-repeat right 9px center / 9px 6px; color: #111111; font: inherit; font-size: 13px; padding: 0 26px 0 8px; cursor: pointer; }
 .mojo-tier__sel--size { width: 64px; }
 .mojo-tier__sel:focus-visible { outline: 2px solid var(--mojo-tier-ink); outline-offset: 1px; }
-.mojo-tier__admin { margin: 0; padding: 0 18px 12px 54px; font-size: 10px; line-height: 1.4; color: #8a5a00; }
 {% endstylesheet %}
 
 {% schema %}
@@ -242,7 +237,7 @@
       "type": "number",
       "id": "pack_price",
       "label": "Bundle price (store currency, e.g. 49.95)",
-      "info": "Empty = full price (variant price x pairs). Create the matching automatic discount in Shopify (fixed amount off = full price - bundle price, minimum quantity = pairs). The editor shows the amount under the card."
+      "info": "Empty = full price (variant price x pairs). Create the matching automatic discount in Shopify (fixed amount off = full price - bundle price, minimum quantity = pairs). Amounts: 2 pairs £34.95, 5 pairs £99.80, 8 pairs £164.65 (see BUNDLE_OFFERS.md)."
     },
     {
       "type": "number",
