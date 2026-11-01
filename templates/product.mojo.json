@@ -150,11 +150,14 @@
               "type": "mojo-price",
               "settings": {
                 "price": "£49.95",
-                "compare": "£150.00",
+                "compare": "£149.75",
                 "badge": "Save 67% OFF",
                 "chip": "only £9.99 per pair",
                 "order": "compare_first",
-                "price_size": 22
+                "price_size": 22,
+                "follow_bundle": true,
+                "badge_follow": "Save {percent}% OFF",
+                "chip_follow": "only {unit} per pair"
               },
               "blocks": {}
             },
@@ -234,13 +237,13 @@
                     "quantity": 1,
                     "title": "SINGLE",
                     "saving": "",
-                    "price": "£29.95",
                     "price_suffix": "/pair",
-                    "compare": "£50.00",
                     "badge": "",
                     "preselect": false,
                     "show_pickers": false,
-                    "picker_label": ""
+                    "picker_label": "",
+                    "anchor": "price",
+                    "per_pair": ""
                   },
                   "blocks": {}
                 },
@@ -249,17 +252,17 @@
                   "settings": {
                     "quantity": 2,
                     "title": "2 PACK – BUY 1 + GET 1 FREE",
-                    "saving": "Save £35.05",
+                    "saving": "Save {saving}",
                     "saving_style": "pill",
-                    "price": "£24.95",
-                    "compare": "£60.00",
-                    "per_pair": "£12.48 /pair",
+                    "per_pair": "{unit} /pair",
                     "badge": "",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
                     "chips": "1x Black, 1x Midnight Blue",
-                    "free_lines": "Pair 1 | £30.00\nPair 2 | £30.00 | FREE"
+                    "free_lines": "Pair 1 | {price}\nPair 2 | {price} | FREE",
+                    "anchor": "price",
+                    "pack_price": 24.95
                   },
                   "blocks": {}
                 },
@@ -268,18 +271,18 @@
                   "settings": {
                     "quantity": 5,
                     "title": "5 PACK – BUY 2 + GET 3 FREE",
-                    "saving": "Save £100.05",
+                    "saving": "Save {saving}",
                     "saving_style": "pill",
-                    "price": "£49.95",
-                    "compare": "£150.00",
-                    "per_pair": "£9.99 /pair",
+                    "per_pair": "{unit} /pair",
                     "badge": "MOST POPULAR",
                     "badge_style": "grey",
                     "preselect": true,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
                     "chips": "2x Black, 1x Midnight Blue, 1x Beige, 1x White",
-                    "free_lines": "Pairs 1–2 | £30.00\nPairs 3–5 | £30.00 | FREE"
+                    "free_lines": "Pairs 1–2 | {price}\nPairs 3–5 | {price} | FREE",
+                    "anchor": "price",
+                    "pack_price": 49.95
                   },
                   "blocks": {}
                 },
@@ -288,19 +291,18 @@
                   "settings": {
                     "quantity": 8,
                     "title": "8 PACK – BUY 3 + GET 5 FREE",
-                    "saving": "Save £165.05",
+                    "saving": "Save {saving}",
                     "saving_style": "pill",
-                    "price": "£74.95",
-                    "compare": "£240.00",
-                    "per_pair": "£9.37 /pair",
+                    "per_pair": "{unit} /pair",
                     "badge": "BEST VALUE",
                     "badge_style": "black",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "gift_line": "+ Free Mystery Gift (Valued at £39.99)",
                     "chips": "2x Black, 2x Midnight Blue, 2x Beige, 2x White",
-                    "free_lines": "Pairs 1–3 | £30.00\nPairs 4–8 | £30.00 | FREE"
+                    "free_lines": "Pairs 1–3 | {price}\nPairs 4–8 | {price} | FREE",
+                    "anchor": "price",
+                    "pack_price": 74.95
                   },
                   "blocks": {}
                 }

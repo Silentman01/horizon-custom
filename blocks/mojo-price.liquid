@@ -1,9 +1,9 @@
 {%- assign s = block.settings -%}
-<div class="mojo-pr{% if s.order == 'compare_first' %} mojo-pr--cf{% endif %}" style="{% render 'mojo-vars' %}--mojo-pr-size:{{ s.price_size }}px;" {{ block.shopify_attributes }}>
+<div class="mojo-pr{% if s.order == 'compare_first' %} mojo-pr--cf{% endif %}" style="{% render 'mojo-vars' %}--mojo-pr-size:{{ s.price_size }}px;"{% if s.follow_bundle %} data-mojo-follow data-badge-tpl="{{ s.badge_follow | escape }}" data-chip-tpl="{{ s.chip_follow | escape }}"{% endif %} {{ block.shopify_attributes }}>
   <span class="mojo-pr__now">{{ s.price }}</span>
-  {%- if s.compare != blank -%}<s class="mojo-pr__was">{{ s.compare }}</s>{%- endif -%}
+  {%- if s.compare != blank or s.follow_bundle -%}<s class="mojo-pr__was"{% if s.compare == blank %} hidden{% endif %}>{{ s.compare }}</s>{%- endif -%}
   {%- if s.badge != blank -%}<span class="mojo-pr__badge">{{ s.badge }}</span>{%- endif -%}
-  {%- if s.chip != blank -%}<span class="mojo-pr__chip">{% render 'mojo-icon', name: 'tag', size: 12 %}{{ s.chip }}</span>{%- endif -%}
+  {%- if s.chip != blank -%}<span class="mojo-pr__chip">{% render 'mojo-icon', name: 'tag', size: 12 %}<span data-chip-text>{{ s.chip }}</span></span>{%- endif -%}
 </div>
 
 {% stylesheet %}
@@ -12,6 +12,7 @@
 .mojo-pr__now { font-weight: 600; font-size: var(--mojo-pr-size, 20px); }
 .mojo-pr__was { font-size: 14px; color: var(--mojo-muted); }
 .mojo-pr__badge { background: var(--mojo-primary); color: var(--mojo-bg); font-weight: 600; font-size: 10px; line-height: 1; padding: 5px 7px; border-radius: 3px; letter-spacing: 0.3px; }
+.mojo-pr [hidden] { display: none !important; }
 .mojo-pr__chip { display: inline-flex; align-items: center; gap: 5px; background: var(--mojo-panel); color: var(--mojo-fg); font-size: 10px; line-height: 1; padding: 5px 8px; border-radius: 3px; }
 {% endstylesheet %}
 
@@ -67,6 +68,30 @@
       "max": 36,
       "step": 1,
       "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Follow the bundle cards"
+    },
+    {
+      "type": "checkbox",
+      "id": "follow_bundle",
+      "label": "Show the selected bundle card's price",
+      "default": false,
+      "info": "Needs a Mojo bundle tiers block in the same buy box. The texts above show until the page script runs: keep them equal to the preselected card."
+    },
+    {
+      "type": "text",
+      "id": "badge_follow",
+      "label": "Badge text when following",
+      "default": "Save {percent}% OFF",
+      "info": "{percent}, {saving}, {unit}, {total}, {compare}. Hidden when there is no saving."
+    },
+    {
+      "type": "text",
+      "id": "chip_follow",
+      "label": "Chip text when following",
+      "default": "only {unit} per pair"
     }
   ]
 }

@@ -1,3 +1,11 @@
+{%- comment -%}
+  One Mojo bundle card. Quantity mode (no pack variants, like Kaching quantity breaks): the card adds
+  {quantity} pairs, with a colour + size choice per pair. Prices are computed from the product variant:
+  full = variant price x pairs, bundle price = "Bundle price" setting (empty = full price).
+  Checkout charges the bundle price only when the matching automatic discount exists in Shopify:
+  fixed amount off = full - bundle price, minimum quantity = pairs (shown in the editor under the card).
+  Text tokens: {total} {compare} {saving} {percent} {unit} {price}.
+{%- endcomment -%}
 {%- liquid
   assign p = closest.product
   assign bs = block.settings
@@ -11,9 +19,9 @@
       assign si = o.position
     endif
   endfor
-  assign qty = bs.quantity
+  assign qty = bs.quantity | at_least: 1
   assign pickers = bs.show_pickers
-  if p.options_with_values.size < 2
+  if p.options_with_values.size < 2 or qty < 2
     assign pickers = false
   endif
   assign cidx = ci | minus: 1
@@ -24,15 +32,83 @@
   assign size_values = size_option.values
   assign chip_list = bs.chips | split: ','
   assign line_list = bs.free_lines | newline_to_br | split: '<br />'
+
+  assign v = p.selected_or_first_available_variant
+  assign mt_full = v.price | times: qty
+  assign mt_total = mt_full
+  if bs.pack_price != blank and bs.pack_price > 0
+    assign mt_total = bs.pack_price | times: 100 | round
+  endif
+  if mt_total > mt_full
+    assign mt_total = mt_full
+  endif
+  assign mt_off = mt_full | minus: mt_total
+  assign mt_cmp_unit = v.price
+  if bs.anchor == 'compare_at' and v.compare_at_price > v.price
+    assign mt_cmp_unit = v.compare_at_price
+  endif
+  assign mt_compare = mt_cmp_unit | times: qty
+  if mt_compare <= mt_total
+    assign mt_compare = v.compare_at_price | default: 0 | times: qty
+  endif
+  if mt_compare <= mt_total
+    assign mt_compare = 0
+  endif
+  assign mt_saving = 0
+  assign mt_pct = 0
+  if mt_compare > 0
+    assign mt_saving = mt_compare | minus: mt_total
+    assign mt_pct = mt_saving | times: 100.0 | divided_by: mt_compare | round
+  endif
+  assign mt_unit = mt_total | times: 1.0 | divided_by: qty | round
+
+  assign f_total = mt_total | money
+  assign f_compare = mt_compare | money
+  assign f_saving = mt_saving | money
+  assign f_unit = mt_unit | money
+  assign f_price = v.price | money
+  assign f_off = mt_off | money
+
+  assign t_save = bs.saving | replace: '{saving}', f_saving | replace: '{percent}', mt_pct | replace: '{unit}', f_unit | replace: '{total}', f_total | replace: '{compare}', f_compare
+  if mt_saving == 0 and bs.saving contains '{'
+    assign t_save = ''
+  endif
+  assign t_unit = bs.per_pair | replace: '{unit}', f_unit | replace: '{total}', f_total | replace: '{price}', f_price
+  assign t_gift = bs.gift_line | replace: '{price}', f_price
+
+  comment
+    Chips like "2x Black, 1x Midnight Blue" also prefill the per-pair colours (pair 1-2 Black, pair 3 Midnight Blue).
+  endcomment
+  assign chip_cols = ''
+  for c in chip_list
+    assign cparts = c | strip | split: 'x '
+    assign cn_count = cparts[0] | strip | plus: 0
+    assign cn_name = cparts | slice: 1, 9 | join: 'x ' | strip
+    if cn_count > 0 and cn_name != blank and col_values contains cn_name
+      for n in (1..cn_count)
+        assign chip_cols = chip_cols | append: cn_name | append: '|'
+      endfor
+    endif
+  endfor
 -%}
-<div class="mojo-tier mojo-tier--{{ bs.badge_style | default: 'black' }}" data-qty="{{ qty }}" data-title="{{ bs.title | escape }}" {{ block.shopify_attributes }}>
+<div
+  class="mojo-tier mojo-tier--{{ bs.badge_style | default: 'black' }}"
+  data-qty="{{ qty }}"
+  data-off="{{ mt_off }}"
+  data-anchor="{{ bs.anchor | default: 'price' }}"
+  data-title="{{ bs.title | escape }}"
+  data-save-tpl="{{ bs.saving | escape }}"
+  data-unit-tpl="{{ bs.per_pair | escape }}"
+  {% if chip_cols != blank %}data-colours="{{ chip_cols | escape }}"{% endif %}
+  {{ block.shopify_attributes }}
+>
   <label class="mojo-tier__head">
     <input class="mojo-tier__input" type="radio" name="mojo-tier-{{ section.id }}" value="{{ qty }}" data-mojo-tier{% if bs.preselect %} checked data-preselect{% endif %}>
     <span class="mojo-tier__radio" aria-hidden="true"></span>
     <span class="mojo-tier__main">
       <span class="mojo-tier__title">{{ bs.title }}</span>
-      {%- if bs.saving != blank -%}<span class="mojo-tier__save{% if bs.saving_style == 'pill' %} mojo-tier__save--pill{% endif %}">{{ bs.saving }}</span>{%- endif -%}
-      {%- if bs.gift_line != blank -%}<span class="mojo-tier__gift"><i aria-hidden="true"></i>{{ bs.gift_line }}</span>{%- endif -%}
+      <span class="mojo-tier__save{% if bs.saving_style == 'pill' %} mojo-tier__save--pill{% endif %}" data-save{% if t_save == blank %} hidden{% endif %}>{{ t_save }}</span>
+      {%- if t_gift != blank -%}<span class="mojo-tier__gift"><i aria-hidden="true"></i>{{ t_gift }}</span>{%- endif -%}
       {%- if bs.chips != blank -%}
         <span class="mojo-tier__chips">
           {%- for c in chip_list -%}
@@ -58,16 +134,16 @@
       {%- endif -%}
     </span>
     <span class="mojo-tier__prices">
-      <span class="mojo-tier__price">{{ bs.price }}{% if bs.price_suffix != blank %}<small class="mojo-tier__suffix"> {{ bs.price_suffix }}</small>{% endif %}</span>
-      {%- if bs.compare != blank -%}<s class="mojo-tier__was">{{ bs.compare }}</s>{%- endif -%}
-      {%- if bs.per_pair != blank -%}<span class="mojo-tier__pp">{{ bs.per_pair }}</span>{%- endif -%}
+      <span class="mojo-tier__price"><span data-total>{{ f_total }}</span>{% if bs.price_suffix != blank %}<small class="mojo-tier__suffix"> {{ bs.price_suffix }}</small>{% endif %}</span>
+      <s class="mojo-tier__was" data-compare{% if mt_compare == 0 %} hidden{% endif %}>{{ f_compare }}</s>
+      {%- if t_unit != blank -%}<span class="mojo-tier__pp" data-unit>{{ t_unit }}</span>{%- endif -%}
     </span>
     {%- if bs.badge != blank -%}<span class="mojo-tier__badge">{{ bs.badge }}</span>{%- endif -%}
   </label>
   {%- if bs.free_lines != blank -%}
     <ul class="mojo-tier__lines" role="list">
       {%- for l in line_list -%}
-        {%- assign parts = l | split: '|' -%}
+        {%- assign parts = l | replace: '{price}', f_price | split: '|' -%}
         {%- assign lbl = parts[0] | strip -%}
         {%- if lbl != blank -%}
           <li class="mojo-tier__line"><span>{{ lbl }}</span>{% if parts[1] != blank %} <s>{{ parts[1] | strip }}</s>{% endif %}{% if parts[2] != blank %} <em class="mojo-tier__free">{{ parts[2] | strip }}</em>{% endif %}</li>
@@ -79,24 +155,28 @@
     <div class="mojo-tier__units">
       {%- if bs.picker_label != blank -%}<p class="mojo-tier__plabel">{{ bs.picker_label }}</p>{%- endif -%}
       {%- for i in (1..qty) -%}
-        <div class="mojo-tier__unit" data-unit>
+        <div class="mojo-tier__unit" data-unit-row>
           <span class="mojo-tier__thumb">
             {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 96', sizes: '24px', alt: '', width: 24, height: 24 }}{%- endif -%}
           </span>
           <select class="mojo-tier__sel" data-opt="colour" aria-label="Colour, pair {{ i }}">
-            {%- for v in col_values -%}<option value="{{ v | escape }}">{{ v }}</option>{%- endfor -%}
+            {%- for cv in col_values -%}<option value="{{ cv | escape }}">{{ cv }}</option>{%- endfor -%}
           </select>
           <select class="mojo-tier__sel mojo-tier__sel--size" data-opt="size" aria-label="Size, pair {{ i }}">
-            {%- for v in size_values -%}<option value="{{ v | escape }}">{{ v }}</option>{%- endfor -%}
+            {%- for sv in size_values -%}<option value="{{ sv | escape }}">{{ sv }}</option>{%- endfor -%}
           </select>
         </div>
       {%- endfor -%}
     </div>
   {%- endif -%}
+  {%- if request.design_mode and mt_off > 0 -%}
+    <p class="mojo-tier__admin">Editor only: create an automatic discount in Shopify (Discounts) of <b>{{ f_off }} off</b> for <b>{{ qty }}+ pairs</b> of this product, or checkout charges {{ mt_full | money }}.</p>
+  {%- endif -%}
 </div>
 
 {% stylesheet %}
 .mojo-tier { position: relative; background: rgb(233 215 207 / 55%); border: 1px solid transparent; border-radius: 6px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+.mojo-tier [hidden] { display: none !important; }
 .mojo-tier:has(.mojo-tier__input:checked) { background: var(--mojo-bg); border: 2px solid var(--mojo-primary); margin: -1px; }
 .mojo-tier:has(.mojo-tier__input:focus-visible) { outline: 2px solid var(--mojo-primary); outline-offset: 2px; }
 .mojo-tier__head { display: flex; align-items: center; gap: 12px; padding: 14px; cursor: pointer; }
@@ -130,6 +210,7 @@
 .mojo-tier__thumb { width: 24px; height: 24px; display: block; }
 .mojo-tier__thumb img { width: 24px; height: 24px; object-fit: cover; display: block; }
 .mojo-tier__sel { width: 100%; min-height: 36px; border: 1px solid var(--mojo-line); border-radius: 3px; background: var(--mojo-bg); color: var(--mojo-fg); font: inherit; font-size: 12px; padding: 0 6px; }
+.mojo-tier__admin { margin: 0; padding: 0 14px 12px 42px; font-size: 10px; line-height: 1.4; color: #8a5a00; }
 @media screen and (min-width: 750px) {
   .mojo-tier__unit { grid-template-columns: 24px 120px 56px; }
 }
@@ -149,6 +230,29 @@
       "step": 1
     },
     {
+      "type": "number",
+      "id": "pack_price",
+      "label": "Bundle price (store currency, e.g. 49.95)",
+      "info": "Empty = full price (variant price x pairs). Create the matching automatic discount in Shopify (fixed amount off = full price - bundle price, minimum quantity = pairs). The editor shows the amount under the card."
+    },
+    {
+      "type": "select",
+      "id": "anchor",
+      "label": "Crossed-out price per pair",
+      "default": "price",
+      "options": [
+        {
+          "value": "price",
+          "label": "Variant price (Revolt style)"
+        },
+        {
+          "value": "compare_at",
+          "label": "Variant compare-at price"
+        }
+      ],
+      "info": "Falls back to the compare-at price when the card has no discount (single pair)."
+    },
+    {
       "type": "text",
       "id": "title",
       "label": "Title",
@@ -158,19 +262,8 @@
       "type": "text",
       "id": "saving",
       "label": "Saving line",
-      "default": "You save £100.05"
-    },
-    {
-      "type": "text",
-      "id": "price",
-      "label": "Price",
-      "default": "£49.95"
-    },
-    {
-      "type": "text",
-      "id": "compare",
-      "label": "Compare-at price",
-      "default": "£150.00"
+      "default": "You save {saving}",
+      "info": "{saving} = crossed-out total - bundle price, {percent} = saving in %, {unit} = price per pair. Hidden when there is no saving."
     },
     {
       "type": "text",
@@ -224,12 +317,14 @@
     {
       "type": "text",
       "id": "per_pair",
-      "label": "Per-pair line under the price (e.g. £9.99 /pair)"
+      "label": "Per-pair line under the price",
+      "info": "{unit} = bundle price / pairs, e.g. \"{unit} /pair\"."
     },
     {
       "type": "text",
       "id": "gift_line",
-      "label": "Gift line (text only, green dot)"
+      "label": "Gift line (green dot)",
+      "info": "Display only: it adds nothing to the cart. Use it only with a real gift (product + automatic discount)."
     },
     {
       "type": "text",
@@ -240,7 +335,7 @@
       "type": "textarea",
       "id": "free_lines",
       "label": "Pair lines",
-      "info": "One per line: label | struck price | tag, e.g. Pair 2 | £30.00 | FREE"
+      "info": "One per line: label | struck price | tag, e.g. Pair 2 | {price} | FREE. {price} = variant price."
     },
     {
       "type": "select",
