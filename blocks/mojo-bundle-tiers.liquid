@@ -26,11 +26,15 @@
       endif
     endfor
   -%}
-  <mojo-bundle class="mojo-bn" id="mojo-buybox" style="{% render 'mojo-vars' %}--mojo-bn-gap:{{ block.settings.tier_gap | default: 14 }}px;" {% if block.settings.countdown %}data-countdown{% endif %} {{ block.shopify_attributes }}>
-    {%- if block.settings.heading != blank -%}
-      <p class="mojo-bn__heading{% if block.settings.heading_style == 'left' %} mojo-bn__heading--left{% endif %}"><span class="mojo-bn__rule" aria-hidden="true"></span><span class="mojo-bn__text">{{ block.settings.heading }}{% if block.settings.heading_accent != blank %} <span class="mojo-bn__accent">{{ block.settings.heading_accent }}</span>{% endif %}{% if block.settings.countdown %} <span class="mojo-bn__count" data-mojo-count></span>{% endif %}</span><span class="mojo-bn__rule" aria-hidden="true"></span></p>
+  {%- liquid
+    assign bs = block.settings
+    assign bn_event = bs.event_name | strip
+  -%}
+  <mojo-bundle class="mojo-bn" id="mojo-buybox" style="{% render 'mojo-vars' %}--mojo-bn-gap:{{ bs.tier_gap | default: 14 }}px;"{% if bs.countdown %} data-countdown data-ends-in="{{ bs.ends_in | escape }}"{% endif %} {{ block.shopify_attributes }}>
+    {%- if bn_event != blank or bs.ends_at != blank -%}
+      <p class="mojo-bn__heading{% if bs.heading_style == 'left' %} mojo-bn__heading--left{% endif %}"><span class="mojo-bn__rule" aria-hidden="true"></span><span class="mojo-bn__text">{{ bn_event }} <span class="mojo-bn__when" data-mojo-when>{{ bs.ends_at }}</span></span><span class="mojo-bn__rule" aria-hidden="true"></span></p>
     {%- endif -%}
-    <div class="mojo-bn__tiers" role="radiogroup" aria-label="{{ block.settings.heading | default: 'Choose your bundle' | escape }}">
+    <div class="mojo-bn__tiers" role="radiogroup" aria-label="{{ bs.event_name | default: 'Choose your bundle' | escape }}">
       {% content_for 'blocks', closest.product: p %}
     </div>
     <p class="mojo-bn__error" data-mojo-error role="alert" hidden></p>
@@ -46,9 +50,10 @@
 
 {% stylesheet %}
 .mojo-bn { display: block; font-family: var(--mojo-font); color: var(--mojo-fg); }
-.mojo-bn__heading { display: flex; align-items: center; gap: 10px; margin: 0 0 14px; }
-.mojo-bn__rule { flex: 1; height: 1px; background: var(--mojo-line); }
-.mojo-bn__text { font-weight: 600; font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; text-align: center; }
+.mojo-bn__heading { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; }
+.mojo-bn__rule { flex: 1; min-width: 16px; height: 1px; background: #BDB8AE; }
+.mojo-bn__text { font-weight: 700; font-size: 13px; letter-spacing: 0.2px; line-height: 1.3; text-transform: uppercase; text-align: center; color: #111111; }
+.mojo-bn__when { font-variant-numeric: tabular-nums; }
 .mojo-bn__tiers { display: grid; gap: var(--mojo-bn-gap, 14px); }
 .mojo-bn { scroll-margin-top: 90px; }
 .mojo-bn__heading--left { justify-content: flex-start; }
@@ -158,6 +163,8 @@ if (!customElements.get('mojo-bundle')) {
       const anchor = tier.dataset.anchor === 'compare_at';
       let compare = vs.reduce((t, v) => t + (anchor && v.c > v.p ? v.c : v.p), 0);
       if (compare <= total) compare = vs.reduce((t, v) => t + (v.c || 0), 0);
+      const was = Number(tier.dataset.was) || 0;
+      if (was) compare = was * qty;
       if (compare <= total) compare = 0;
       const saving = compare ? compare - total : 0;
       const pct = compare ? Math.round((saving * 100) / compare) : 0;
@@ -265,14 +272,17 @@ if (!customElements.get('mojo-bundle')) {
         setTimeout(() => { idIn.value = oldId; if (madeQ) q.remove(); else q.value = oldQ; pr.remove(); }, 0);
       }).catch((err) => { this.error(err && err.message ? err.message : 'Could not add the bundle. Please try again.'); });
     };
+    /* "<EVENT> ENDS IN 05:12:33": counts down to midnight local time, every day (the sale "ends today") */
     startCountdown() {
-      const out = this.querySelector('[data-mojo-count]');
+      const out = this.querySelector('[data-mojo-when]');
       if (!out || !this.hasAttribute('data-countdown')) return;
+      const label = this.dataset.endsIn || 'ENDS IN';
+      const pad = (n) => String(n).padStart(2, '0');
       const tick = () => {
-        const end = new Date(); end.setHours(23, 59, 59, 0);
+        const end = new Date(); end.setHours(24, 0, 0, 0);
         let s = Math.max(0, Math.floor((end - new Date()) / 1000));
-        const h = String(Math.floor(s / 3600)).padStart(2, '0'); s %= 3600;
-        out.textContent = '· ' + h + ':' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+        const h = Math.floor(s / 3600); s %= 3600;
+        out.textContent = label + ' ' + pad(h) + ':' + pad(Math.floor(s / 60)) + ':' + pad(s % 60);
       };
       tick();
       this.timer = setInterval(tick, 1000);
@@ -296,15 +306,28 @@ if (!customElements.get('mojo-bundle')) {
     },
     {
       "type": "text",
-      "id": "heading",
-      "label": "Heading line",
-      "default": "BLACK FRIDAY SALE ENDS AT 23:59"
+      "id": "event_name",
+      "label": "Sale name (heading line)",
+      "default": "BLACK FRIDAY SALE"
     },
     {
       "type": "checkbox",
       "id": "countdown",
-      "label": "Show live countdown to 23:59 next to the heading",
-      "default": false
+      "label": "Live countdown to midnight",
+      "default": true,
+      "info": "On: \"BLACK FRIDAY SALE ENDS IN 05:12:33\", counting down to midnight (visitor's time) every day. Off: the text below."
+    },
+    {
+      "type": "text",
+      "id": "ends_in",
+      "label": "Countdown label",
+      "default": "ENDS IN"
+    },
+    {
+      "type": "text",
+      "id": "ends_at",
+      "label": "Text without countdown (also shown before the timer starts)",
+      "default": "ENDS AT 23:59"
     },
     {
       "type": "select",
@@ -321,11 +344,6 @@ if (!customElements.get('mojo-bundle')) {
           "label": "Left aligned"
         }
       ]
-    },
-    {
-      "type": "text",
-      "id": "heading_accent",
-      "label": "Heading accent text (brand colour, after the heading)"
     },
     {
       "type": "range",
@@ -348,6 +366,7 @@ if (!customElements.get('mojo-bundle')) {
             "quantity": 2,
             "title": "(2 Pack) Buy 1 get 1 Free",
             "pack_price": 24.95,
+            "was_per_pair": 25,
             "saving": "You save {saving}",
             "badge": "",
             "preselect": false,
@@ -361,6 +380,7 @@ if (!customElements.get('mojo-bundle')) {
             "quantity": 5,
             "title": "(5 Pack) Buy 2 get 3 Free",
             "pack_price": 49.95,
+            "was_per_pair": 25,
             "saving": "You save {saving}",
             "badge": "MOST POPULAR",
             "preselect": true,
@@ -374,6 +394,7 @@ if (!customElements.get('mojo-bundle')) {
             "quantity": 8,
             "title": "(8 Pack) Buy 3 get 5 Free",
             "pack_price": 74.95,
+            "was_per_pair": 25,
             "saving": "You save {saving}",
             "badge": "BEST VALUE",
             "preselect": false,
