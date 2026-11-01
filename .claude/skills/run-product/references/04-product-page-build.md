@@ -11,7 +11,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 3. Header, announcement bar, footer
 4. Component inventory: native vs custom
 5. Build the custom blocks and sections (patterns)
-   5.1 Naming and file layout · 5.2 Vars snippet · 5.3 Media snippet · 5.4 Bundle picker (parent + tier + JS driver) · 5.5 Small buy-box blocks · 5.6 Testimonials rail · 5.7 Image with text · 5.8 Comparison table · 5.9 FAQ · 5.10 Scroll-to-offer CTA · 5.11 Wiring to Dawn · 5.12 Cart drawer
+   5.1 Naming and file layout · 5.2 Vars snippet · 5.3 Media snippet · 5.4 Bundle picker (parent + tier + JS driver) · 5.5 Small buy-box blocks · 5.6 Testimonials rail · 5.7 Image with text · 5.8 Comparison table · 5.9 FAQ · 5.10 Scroll-to-offer CTA · 5.11 Wiring to Dawn · 5.12 Cart drawer · 5.13 Sticky add to cart
 6. Generate the template JSON with a Python builder
 7. Theme check
 8. Local QA render + buy-box mock
@@ -319,6 +319,9 @@ Horizon scrolls `.page-wrapper` on desktop, not `window`, so `window.scrollTo` d
 
 ### 5.12 Cart drawer
 Always configure the theme's Cart drawer section (`cart_drawer` in `sections/header-group.json`, `sections/cart-drawer-extras.liquid`) in the store language and brand colours: announcement + timer, free-shipping bar at the competitor's threshold for the target market (same as the shipping rate), compact rows, free-gift highlight when the offer has gifts, price details (`breakdown_compare_at` off when cards anchor on the variant price), badges, payment icons. Everything defaults off: `settings: {}` = plain drawer (Mojo shipped like that). The checkout button takes the brand CTA via `.cart__checkout-button`.
+
+### 5.13 Sticky add to cart
+Always, desktop and mobile, even when the competitor has none (operator 2026-11-01). A `<slug>-sticky-atc` section at the end of the product template, enabled by default in the schema and the template: bottom bar with product thumb (desktop), title, rating line (desktop, same claim as the page), the selected pack/variant and its live price + struck price, and the brand CTA. Appears once the main add to cart button scrolls above the viewport, hides over the footer. Button action setting: add the selected bundle (clicks the main add to cart, so bundle logic runs) or scroll back to the offer. Reference: branch `mojo`, `sections/mojo-sticky-atc.liquid`. The theme's native sticky bar (`enable_sticky_add_to_cart`) stays off so there is only one bar.
 
 ### 5.11 Wiring to Dawn (and Dawn-likes)
 - Dawn has no theme blocks inside `main-product`. Either (a) add a block type `{"type":"<slug>_bundle","name":"Bundle & save","settings":[...]}` to `main-product`'s schema and render it with `{% when '<slug>_bundle' %}{% render '<slug>-bundle', block: block, product: product %}` (tier data as `tier_1_*`…`tier_3_*` settings), or (b) use an `@app`-style section below the main section if the spec allows. (a) edits a core file, so keep the diff minimal and note it in delivery (theme updates will conflict).

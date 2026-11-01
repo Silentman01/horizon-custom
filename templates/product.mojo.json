@@ -1873,10 +1873,11 @@
     "mojo_sticky": {
       "type": "mojo-sticky-atc",
       "settings": {
-        "enabled": false,
+        "enabled": true,
         "title": "",
-        "price_text": "From £24.95",
-        "button_text": "Add to cart"
+        "rating_text": "4.8/5 from 4,276+ reviews",
+        "button_text": "Add to cart",
+        "action": "add"
       }
     }
   },

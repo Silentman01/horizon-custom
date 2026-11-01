@@ -1,10 +1,19 @@
 {%- assign s = section.settings -%}
 {%- if s.enabled -%}
-<div class="mojo-sa" data-mojo-sticky hidden style="{% render 'mojo-vars' %}" {{ section.shopify_attributes }}>
+{%- assign sa_img = product.featured_image -%}
+<div class="mojo-sa" data-mojo-sticky data-action="{{ s.action }}" hidden style="{% render 'mojo-vars' %}" {{ section.shopify_attributes }}>
   <div class="mojo-sa__inner">
+    {%- if sa_img != blank -%}
+      <span class="mojo-sa__thumb">{{ sa_img | image_url: width: 120 | image_tag: loading: 'lazy', alt: product.title }}</span>
+    {%- endif -%}
     <div class="mojo-sa__info">
       <span class="mojo-sa__title">{{ s.title | default: product.title }}</span>
-      {%- if s.price_text != blank -%}<span class="mojo-sa__price">{{ s.price_text }}</span>{%- endif -%}
+      {%- if s.rating_text != blank -%}<span class="mojo-sa__rating"><span class="mojo-sa__stars" aria-hidden="true">★★★★★</span> {{ s.rating_text }}</span>{%- endif -%}
+      <span class="mojo-sa__pack" data-sa-pack hidden></span>
+    </div>
+    <div class="mojo-sa__prices">
+      <span class="mojo-sa__price" data-sa-price>{{ product.price | money }}</span>
+      <s class="mojo-sa__was" data-sa-was{% if product.compare_at_price <= product.price %} hidden{% endif %}>{{ product.compare_at_price | money }}</s>
     </div>
     <button type="button" class="mojo-sa__btn" data-mojo-sticky-go>{{ s.button_text }}</button>
   </div>
@@ -12,16 +21,30 @@
 {%- endif -%}
 
 {% stylesheet %}
-.mojo-sa { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--mojo-bg); border-top: 1px solid var(--mojo-line); font-family: var(--mojo-font); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform 0.25s ease; }
+.mojo-sa { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--mojo-bg, #fff); border-top: 1px solid var(--mojo-line, #e3dccd); box-shadow: 0 -6px 20px rgba(15, 27, 45, 0.1); font-family: var(--mojo-font); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform 0.25s ease; }
 .mojo-sa[data-visible] { transform: translateY(0); }
-.mojo-sa__inner { display: flex; align-items: center; gap: 12px; }
-.mojo-sa__info { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.mojo-sa__title { font-weight: 600; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--mojo-fg); }
-.mojo-sa__price { font-size: 12px; color: var(--mojo-muted); }
-.mojo-sa__btn { flex: none; background: var(--mojo-primary); color: var(--mojo-bg); border: 0; border-radius: 0; min-height: 44px; padding: 0 22px; font-family: var(--mojo-font); font-weight: 600; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; }
-.mojo-sa__btn:hover { background: #08111E; }
-.mojo-sa__btn:focus-visible { outline: 2px solid var(--mojo-primary); outline-offset: 2px; }
-@media screen and (min-width: 750px) { .mojo-sa { display: none; } }
+.mojo-sa__inner { display: flex; align-items: center; gap: 12px; max-width: 1100px; margin: 0 auto; }
+.mojo-sa__thumb { flex: none; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background: var(--mojo-cream, #f7f3ec); }
+.mojo-sa__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mojo-sa__info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.mojo-sa__title { font-weight: 700; font-size: 13px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--mojo-fg, #111); }
+.mojo-sa__rating { font-size: 11px; color: var(--mojo-muted, #555); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mojo-sa__stars { color: #C8A96A; letter-spacing: 1px; }
+.mojo-sa__pack { font-size: 11px; color: var(--mojo-muted, #555); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mojo-sa__prices { flex: none; display: flex; flex-direction: column; align-items: flex-end; line-height: 1.2; }
+.mojo-sa__price { font-weight: 700; font-size: 15px; color: var(--mojo-fg, #111); }
+.mojo-sa__was { font-size: 12px; color: var(--mojo-muted, #777); }
+.mojo-sa__btn { flex: none; min-height: 46px; padding: 0 22px; font-family: var(--mojo-font); font-weight: 700; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; white-space: nowrap; }
+@media screen and (max-width: 749px) {
+  .mojo-sa__thumb { display: none; }
+  .mojo-sa__rating { display: none; }
+  .mojo-sa__btn { padding: 0 16px; font-size: 12px; }
+}
+@media screen and (min-width: 750px) {
+  .mojo-sa { padding: 12px 24px; }
+  .mojo-sa__title { font-size: 15px; }
+  .mojo-sa__btn { min-width: 240px; }
+}
 @media (prefers-reduced-motion: reduce) { .mojo-sa { transition: none; } }
 {% endstylesheet %}
 
@@ -32,17 +55,42 @@
     if (!bar || bar.dataset.mojoReady) return;
     bar.dataset.mojoReady = '1';
     bar.hidden = false;
-    const find = () => document.querySelector('mojo-bundle') || document.querySelector('.buy-buttons-block') || document.querySelector('product-form-component');
-    const watch = document.querySelector('product-form-component add-to-cart-component') || find();
+    const bundle = () => document.querySelector('mojo-bundle');
+    const offer = () => bundle() || document.querySelector('.buy-buttons-block') || document.querySelector('product-form-component');
+    const mainBtn = () => document.querySelector('product-form-component .add-to-cart-button, .buy-buttons-block .add-to-cart-button');
+
+    // show once the add to cart button has scrolled above the viewport; hide near the footer
+    const watch = mainBtn() || offer();
+    let past = false, footer = false;
+    const show = () => (past && !footer ? bar.setAttribute('data-visible', '') : bar.removeAttribute('data-visible'));
     if (watch && 'IntersectionObserver' in window) {
-      new IntersectionObserver(([en]) => {
-        if (en.isIntersecting) bar.removeAttribute('data-visible'); else bar.setAttribute('data-visible', '');
-      }, { threshold: 0 }).observe(watch);
-    } else {
-      bar.setAttribute('data-visible', '');
-    }
+      new IntersectionObserver(([en]) => { past = !en.isIntersecting && en.boundingClientRect.top < 0; show(); }, { threshold: 0 }).observe(watch);
+      const foot = document.querySelector('footer');
+      if (foot) new IntersectionObserver(([en]) => { footer = en.isIntersecting; show(); }, { threshold: 0 }).observe(foot);
+    } else { past = true; show(); }
+
+    // mirror the selected pack and its price
+    const pack = bar.querySelector('[data-sa-pack]');
+    const price = bar.querySelector('[data-sa-price]');
+    const was = bar.querySelector('[data-sa-was]');
+    const sync = () => {
+      const b = bundle();
+      const tier = b && b.querySelector('[data-mojo-tier]:checked')?.closest('.mojo-tier');
+      if (!tier) return;
+      const t = tier.querySelector('.mojo-tier__title');
+      const total = tier.querySelector('[data-total]');
+      const cmp = tier.querySelector('[data-compare]');
+      if (t) { pack.textContent = t.textContent.trim(); pack.hidden = false; }
+      if (total) price.textContent = total.textContent.trim();
+      if (cmp) { was.textContent = cmp.textContent.trim(); was.hidden = cmp.hidden; }
+    };
+    sync();
+    document.addEventListener('change', (e) => { if (e.target.closest && e.target.closest('mojo-bundle')) requestAnimationFrame(sync); });
+
     bar.querySelector('[data-mojo-sticky-go]').addEventListener('click', () => {
-      const t = find();
+      const btn = mainBtn();
+      if (bar.dataset.action === 'add' && btn && !btn.disabled) { btn.click(); return; }
+      const t = offer();
       if (t) t.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
     });
   };
@@ -59,13 +107,13 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Mobile-only bar. Appears when the buy box scrolls out of view and scrolls back to the offer."
+      "content": "Bar at the bottom of the screen (desktop and mobile). Appears once the add to cart button scrolls out of view and shows the selected pack and its price."
     },
     {
       "type": "checkbox",
       "id": "enabled",
       "label": "Enable sticky bar",
-      "default": false
+      "default": true
     },
     {
       "type": "text",
@@ -74,15 +122,25 @@
     },
     {
       "type": "text",
-      "id": "price_text",
-      "label": "Price line",
-      "default": "From £24.95"
+      "id": "rating_text",
+      "label": "Rating line (desktop)",
+      "default": "4.8/5 from 4,276+ reviews"
     },
     {
       "type": "text",
       "id": "button_text",
       "label": "Button text",
       "default": "Add to cart"
+    },
+    {
+      "type": "select",
+      "id": "action",
+      "label": "Button action",
+      "options": [
+        { "value": "add", "label": "Add the selected pack to cart" },
+        { "value": "scroll", "label": "Scroll back to the offer" }
+      ],
+      "default": "add"
     }
   ],
   "presets": [
