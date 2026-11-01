@@ -224,7 +224,10 @@
             "bundle": {
               "type": "mojo-bundle-tiers",
               "settings": {
+                "event_name": "BLACK FRIDAY SALE",
                 "countdown": true,
+                "ends_in": "ENDS IN",
+                "ends_at": "ENDS AT 23:59",
                 "heading_style": "rules",
                 "tier_gap": 14
               },
@@ -233,22 +236,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 2,
+                    "title": "(2 Pack) Buy 1 get 1 Free",
                     "pack_price": 24.95,
                     "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "(2 Pack) Buy 1 get 1 Free",
                     "saving": "You save {saving}",
+                    "saving_style": "text",
                     "badge": "",
+                    "badge_style": "black",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": "",
-                    "badge_style": "black"
+                    "free_lines": ""
                   },
                   "blocks": {}
                 },
@@ -256,22 +259,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 5,
+                    "title": "(5 Pack) Buy 2 get 3 Free",
                     "pack_price": 49.95,
                     "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "(5 Pack) Buy 2 get 3 Free",
                     "saving": "You save {saving}",
+                    "saving_style": "text",
                     "badge": "MOST POPULAR",
+                    "badge_style": "black",
                     "preselect": true,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": "",
-                    "badge_style": "black"
+                    "free_lines": ""
                   },
                   "blocks": {}
                 },
@@ -279,22 +282,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 8,
+                    "title": "(8 Pack) Buy 3 get 5 Free",
                     "pack_price": 74.95,
                     "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "(8 Pack) Buy 3 get 5 Free",
                     "saving": "You save {saving}",
+                    "saving_style": "text",
                     "badge": "BEST VALUE",
+                    "badge_style": "black",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": "",
-                    "badge_style": "black"
+                    "free_lines": ""
                   },
                   "blocks": {}
                 }
