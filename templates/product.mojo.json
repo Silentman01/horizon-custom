@@ -80,7 +80,7 @@
             "chips": {
               "type": "mojo-offer-chips",
               "settings": {
-                "chip_1_text": "BLACK FRIDAY",
+                "chip_1_text": "EARLY BLACK FRIDAY",
                 "chip_1_style": "outline",
                 "chip_2_text": "BUY 2 GET 3 FREE TODAY",
                 "chip_2_style": "solid"
@@ -213,7 +213,7 @@
               "settings": {
                 "icon": "info",
                 "title": "WARNING: Low Stock Notice",
-                "text": "<p>This product sold out <strong>12 times</strong> last year. We encourage you to take advantage of the limited <strong>Black Friday sale</strong> and buy now. Ordering now helps you avoid future stock outs.</p>",
+                "text": "<p>This product sold out <strong>12 times</strong> last year. We encourage you to take advantage of the limited <strong>Early Black Friday sale</strong> and buy now. Ordering now helps you avoid future stock outs.</p>",
                 "ps_text": "<p><strong>PS:</strong> Only available <strong>here</strong>, don't buy fakes on Amazon/eBay</p>",
                 "border_color": "#E3DCCD",
                 "title_color": "#111111",
@@ -224,7 +224,7 @@
             "bundle": {
               "type": "mojo-bundle-tiers",
               "settings": {
-                "event_name": "BLACK FRIDAY SALE",
+                "event_name": "EARLY BLACK FRIDAY SALE",
                 "countdown": true,
                 "ends_in": "ENDS IN",
                 "ends_at": "ENDS AT 23:59",
@@ -1093,7 +1093,7 @@
         "text": "<p>We've all dealt with boxers that bunch up, trap heat or fall apart. That's why we created Mojo, in 100% mulberry silk with 35°C Silk Cooling Technology. Say goodbye to rolling up, sweating and uncomfortable fits. Bin those old boxers and step into something built for you, by guys who get it.</p>",
         "bg_image_asset": "mojo-tech-banner.jpg",
         "overlay_opacity": 55,
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
         "button_bg": "#F7F3EC",
         "button_fg": "#0F1B2D",
@@ -1192,7 +1192,7 @@
         "image_max_width": 340,
         "bg_color": "#EFE6D6",
         "accent_color": "#0F1B2D",
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
         "button_bg": "#0F1B2D",
         "button_fg": "#F7F3EC",
@@ -1246,7 +1246,7 @@
         "heading": "Dermatologist-Backed Comfort You Can Trust",
         "text": "",
         "bullet_color": "#0F1B2D",
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
         "button_bg": "#0F1B2D",
         "button_fg": "#F7F3EC",
@@ -1320,7 +1320,7 @@
         "columns": "3",
         "bg_color": "#EFE6D6",
         "card_bg": "#FFFFFF",
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
         "button_bg": "#0F1B2D",
         "button_fg": "#F7F3EC",
@@ -1345,7 +1345,7 @@
         "top_image_asset": "mojo-washes-fan.jpg",
         "top_ratio": "16 / 9",
         "top_max_width": 800,
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
         "button_bg": "#F7F3EC",
         "button_fg": "#0F1B2D",
@@ -1402,7 +1402,7 @@
         "heading": "Unique Men Deserve More Than Just Ordinary Underwear",
         "text": "<p><strong>Built for men with balls.</strong> Mojo lets your boys breathe, stay cool and move freely, all while creating the perfect environment for your hormones to thrive.</p>",
         "bullet_color": "#0F1B2D",
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
         "button_bg": "#0F1B2D",
         "button_fg": "#F7F3EC",
@@ -1787,7 +1787,7 @@
         "heading": "The Mojo Guarantee",
         "text": "",
         "bullet_color": "#0F1B2D",
-        "button_label": "TRY IT RISK-FREE – BLACK FRIDAY, UP TO 50% OFF",
+        "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
         "button_bg": "#0F1B2D",
         "button_fg": "#F7F3EC",
@@ -1828,7 +1828,7 @@
           "type": "item",
           "settings": {
             "question": "What does the “buy 2 + get 3 free” offer mean?",
-            "answer": "<p>Buy 2 pairs and get 3 more free: five pairs for £49.95, just £9.99 each. It's our limited Black Friday offer, a perfect chance to replace your whole drawer. Spend over £35 and shipping is free. Not to be missed!</p>"
+            "answer": "<p>Buy 2 pairs and get 3 more free: five pairs for £49.95, just £9.99 each. It's our limited Early Black Friday offer, a perfect chance to replace your whole drawer. Spend over £35 and shipping is free. Not to be missed!</p>"
           }
         },
         "item_5": {

@@ -17,7 +17,7 @@
         "announcement_1": {
           "type": "_announcement",
           "settings": {
-            "text": "BLACK FRIDAY SALE: UP TO 70% OFF | LAST HOURS",
+            "text": "EARLY BLACK FRIDAY SALE: UP TO 70% OFF | LAST HOURS",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -135,7 +135,7 @@
       "type": "cart-drawer-extras",
       "settings": {
         "cart_extras_announce_enable": true,
-        "cart_extras_announce_text": "<strong>BLACK FRIDAY:</strong> your bundle saving is applied",
+        "cart_extras_announce_text": "<strong>EARLY BLACK FRIDAY:</strong> your bundle saving is applied",
         "cart_extras_announce_mobile": true,
         "cart_extras_announce_bg": "#0F1B2D",
         "cart_extras_announce_color": "#F7F3EC",
