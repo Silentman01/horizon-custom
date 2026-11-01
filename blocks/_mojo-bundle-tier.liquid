@@ -215,19 +215,14 @@
 .mojo-tier:has(.mojo-tier__input:checked) .mojo-tier__units { display: grid; }
 .mojo-tier__head:has(+ .mojo-tier__units) { padding-bottom: 10px; }
 .mojo-tier__plabel { margin: 0; font-size: 12px; color: #555555; }
-/* pair row: thumbnail, wide colour select, narrow size select (stacked under it on phones, like Revolt) */
-.mojo-tier__unit { display: grid; grid-template-columns: 40px minmax(0, 224px); grid-template-rows: auto auto; column-gap: 8px; row-gap: 6px; align-items: center; }
-.mojo-tier__thumb { grid-row: 1 / span 2; width: 40px; height: 40px; display: block; overflow: hidden; }
+/* pair row: thumbnail, wide colour select, narrow size select, one row like Revolt */
+.mojo-tier__unit { display: grid; grid-template-columns: 40px minmax(0, 1fr) 64px; column-gap: 8px; align-items: center; max-width: 340px; }
+.mojo-tier__thumb { width: 40px; height: 40px; display: block; overflow: hidden; }
 .mojo-tier__thumb img { width: 40px; height: 40px; object-fit: cover; display: block; }
 .mojo-tier__sel { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; border: 1px solid #C9C9C9; border-radius: 0; background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23111'/%3E%3C/svg%3E") no-repeat right 9px center / 9px 6px; color: #111111; font: inherit; font-size: 13px; padding: 0 26px 0 8px; cursor: pointer; }
-.mojo-tier__sel--size { width: 56px; }
+.mojo-tier__sel--size { width: 64px; }
 .mojo-tier__sel:focus-visible { outline: 2px solid var(--mojo-tier-ink); outline-offset: 1px; }
 .mojo-tier__admin { margin: 0; padding: 0 18px 12px 54px; font-size: 10px; line-height: 1.4; color: #8a5a00; }
-@media screen and (min-width: 750px) {
-  .mojo-tier__unit { grid-template-columns: 40px 180px 64px; grid-template-rows: auto; }
-  .mojo-tier__thumb { grid-row: auto; }
-  .mojo-tier__sel--size { width: 64px; }
-}
 {% endstylesheet %}
 
 {% schema %}
