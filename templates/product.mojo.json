@@ -12,6 +12,24 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "heading": "Disclosures",
+            "heading_preset": "h4",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h5",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -25,6 +43,7 @@
             "slideshow_mobile_controls_style": "thumbnails",
             "thumbnail_position": "left",
             "thumbnail_width": 56,
+            "thumbnail_radius": 0,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "cover",
@@ -53,11 +72,13 @@
             "gap": 14,
             "sticky_details_desktop": false,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 24,
             "padding-block-end": 24,
@@ -71,8 +92,8 @@
                 "left_text": "12% stock left",
                 "right_text": "Offer ends soon",
                 "percent": 12,
-                "bar_color": "#0F1B2D",
-                "track_color": "#E3DCCD",
+                "bar_color": "#0f1b2d",
+                "track_color": "#e3dccd",
                 "font_size": 13
               },
               "blocks": {}
@@ -92,7 +113,7 @@
               "settings": {
                 "lead": "Excellent",
                 "text": "4,276+ reviews",
-                "star_color": "#C8A96A"
+                "star_color": "#c8a96a"
               },
               "blocks": {}
             },
@@ -111,6 +132,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -136,6 +158,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -182,6 +205,15 @@
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": true,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -204,7 +236,7 @@
               "settings": {
                 "text": "<p>Men say this fits <strong>true to size</strong> based on 5,210 reviews</p>",
                 "icon": "person",
-                "background": "#EFE6D6"
+                "background": "#efe6d6"
               },
               "blocks": {}
             },
@@ -215,7 +247,7 @@
                 "title": "WARNING: Low Stock Notice",
                 "text": "<p>This product sold out <strong>12 times</strong> last year. We encourage you to take advantage of the limited <strong>Early Black Friday sale</strong> and buy now. Ordering now helps you avoid future stock outs.</p>",
                 "ps_text": "<p><strong>PS:</strong> Only available <strong>here</strong>, don't buy fakes on Amazon/eBay</p>",
-                "border_color": "#E3DCCD",
+                "border_color": "#e3dccd",
                 "title_color": "#111111",
                 "radius": 0
               },
@@ -236,22 +268,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 2,
-                    "title": "(2 Pack) Buy 1 get 1 Free",
-                    "pack_price": 24.95,
+                    "pack_price": 25.0,
                     "was_per_pair": 25,
                     "anchor": "price",
+                    "title": "(2 Pack) Buy 1 get 1 Free",
                     "saving": "You save {saving}",
-                    "saving_style": "text",
                     "badge": "",
-                    "badge_style": "black",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
+                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": ""
+                    "free_lines": "",
+                    "badge_style": "black"
                   },
                   "blocks": {}
                 },
@@ -259,22 +291,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 5,
-                    "title": "(5 Pack) Buy 2 get 3 Free",
-                    "pack_price": 49.95,
+                    "pack_price": 50.0,
                     "was_per_pair": 25,
                     "anchor": "price",
+                    "title": "(5 Pack) Buy 2 get 3 Free",
                     "saving": "You save {saving}",
-                    "saving_style": "text",
                     "badge": "MOST POPULAR",
-                    "badge_style": "black",
                     "preselect": true,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
+                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": ""
+                    "free_lines": "",
+                    "badge_style": "black"
                   },
                   "blocks": {}
                 },
@@ -282,22 +314,22 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 8,
-                    "title": "(8 Pack) Buy 3 get 5 Free",
-                    "pack_price": 74.95,
+                    "pack_price": 75.0,
                     "was_per_pair": 25,
                     "anchor": "price",
+                    "title": "(8 Pack) Buy 3 get 5 Free",
                     "saving": "You save {saving}",
-                    "saving_style": "text",
                     "badge": "BEST VALUE",
-                    "badge_style": "black",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
+                    "saving_style": "text",
                     "price_suffix": "",
                     "per_pair": "",
                     "gift_line": "",
                     "chips": "",
-                    "free_lines": ""
+                    "free_lines": "",
+                    "badge_style": "black"
                   },
                   "blocks": {}
                 }
@@ -313,7 +345,7 @@
               "settings": {
                 "text": "<p>Ships today — <strong>39 left at this price</strong></p>",
                 "show_dot": true,
-                "dot_color": "#22A559"
+                "dot_color": "#22a559"
               },
               "blocks": {}
             },
@@ -321,8 +353,23 @@
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
+                "text_color": "",
                 "show_pickup_availability": false,
                 "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -332,14 +379,24 @@
                 "quantity": {
                   "type": "quantity",
                   "static": true,
-                  "settings": {},
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
                   "blocks": {}
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
                 },
@@ -356,7 +413,11 @@
               "type": "payment-icons",
               "settings": {
                 "horizontal_alignment": "center",
-                "gap": 8
+                "gap": 8,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -366,12 +427,16 @@
                 "heading": "Made By Men,",
                 "heading_accent": "Craved By Women",
                 "icon_1": "boxer",
+                "asset_1": "",
                 "caption_1": "Perfect Snug Fit",
                 "icon_2": "snow",
+                "asset_2": "",
                 "caption_2": "Freshness Guaranteed",
                 "icon_3": "shield",
+                "asset_3": "",
                 "caption_3": "Anti-Chafing Patent Design",
                 "icon_4": "drop",
+                "asset_4": "",
                 "caption_4": "Odourless & Hygienic"
               },
               "blocks": {}
@@ -390,8 +455,8 @@
               "settings": {
                 "eyebrow": "35°C SILK COOLING SYSTEM™",
                 "heading": "Why Mojo Feels Unlike Any Other Boxer",
-                "card_bg": "#FFFFFF",
-                "border_color": "#E3DCCD",
+                "card_bg": "#ffffff",
+                "border_color": "#e3dccd",
                 "ratio_desktop": "16 / 9",
                 "ratio_mobile": "1.22 / 1",
                 "gap": 30,
@@ -404,8 +469,10 @@
                     "image_asset": "mojo-mech-01-fit.jpg",
                     "tag": "Adaptive Silk Balance Fit™",
                     "title": "Stays Put Without the Squeeze",
-                    "body": "<p>Most boxers pull the same tension everywhere, so they squeeze or they ride up. Mojo grips <strong>firm at the waist and thigh openings</strong> and <strong>stretches freely around the pouch and sides</strong>. Two fits in one boxer. Nothing to adjust, ever.</p>"
-                  }
+                    "body": "<p>Most boxers pull the same tension everywhere, so they squeeze or they ride up. Mojo grips <strong>firm at the waist and thigh openings</strong> and <strong>stretches freely around the pouch and sides</strong>. Two fits in one boxer. Nothing to adjust, ever.</p>",
+                    "italic_line": ""
+                  },
+                  "blocks": {}
                 },
                 "k2": {
                   "type": "_mojo-mech-card",
@@ -413,8 +480,10 @@
                     "image_asset": "mojo-mech-02-airflow.jpg",
                     "tag": "Silk Airflow Weave™",
                     "title": "Built-In Cooling Where Heat Builds",
-                    "body": "<p>Most boxers are one sealed sheet of fabric, with zero airflow where it matters. Mojo's fine mulberry silk weave <strong>moves air and pulls moisture away</strong> right where heat builds most. You can feel it. The pouch zone holds <strong>~35°C</strong>. No more trapped heat.</p>"
-                  }
+                    "body": "<p>Most boxers are one sealed sheet of fabric, with zero airflow where it matters. Mojo's fine mulberry silk weave <strong>moves air and pulls moisture away</strong> right where heat builds most. You can feel it. The pouch zone holds <strong>~35°C</strong>. No more trapped heat.</p>",
+                    "italic_line": ""
+                  },
+                  "blocks": {}
                 },
                 "k3": {
                   "type": "_mojo-mech-card",
@@ -424,7 +493,8 @@
                     "title": "Irresistibly Smooth. For Her to Touch.",
                     "body": "<p>Ultra-fine mulberry silk filaments, long and continuous, with a naturally smooth round surface. <strong>Lighter, smoother and softer</strong> than cotton or synthetics. The smooth surface eliminates micro-friction against your skin, and the fine fibres cut weight. <strong>40% lighter than cotton.</strong> Real silk, not plastic: no polyester shedding against you.</p>",
                     "italic_line": "So soft she'll notice. So light you won't. Like wearing nothing."
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k4": {
                   "type": "_mojo-mech-card",
@@ -432,8 +502,10 @@
                     "image_asset": "mojo-mech-04-fibre.jpg",
                     "tag": "6-Month No-Holes Guarantee",
                     "title": "If Your Thighs Win, We Pay.",
-                    "body": "<p>Most boxers die where it matters most. If yours gets a <strong>hole, loose stitching, dead elastic or fading within 6 months</strong>, we send a brand new pair to your door. Free. No return. No questions.</p>"
-                  }
+                    "body": "<p>Most boxers die where it matters most. If yours gets a <strong>hole, loose stitching, dead elastic or fading within 6 months</strong>, we send a brand new pair to your door. Free. No return. No questions.</p>",
+                    "italic_line": ""
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -455,21 +527,24 @@
                   "settings": {
                     "image_asset": "mojo-ugc-01.jpg",
                     "caption": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k2": {
                   "type": "_mojo-ugc-photo",
                   "settings": {
                     "image_asset": "mojo-ugc-02.jpg",
                     "caption": ""
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k3": {
                   "type": "_mojo-ugc-photo",
                   "settings": {
                     "image_asset": "mojo-ugc-03.jpg",
                     "caption": "The best underwear for men 🔥"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -483,8 +558,19 @@
               "settings": {
                 "icon": "plus",
                 "dividers": true,
+                "divider_color": "",
                 "type_preset": "h6",
-                "border": "none"
+                "background_color": "",
+                "text_color": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "row_details": {
@@ -511,6 +597,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -536,6 +623,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -576,6 +664,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -615,6 +704,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -640,6 +730,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -665,6 +756,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -713,8 +805,8 @@
                         "value_3": 94,
                         "label_4": "WEIGHT",
                         "value_4": 22,
-                        "bar_color": "#0F1B2D",
-                        "track_color": "#E3DCCD"
+                        "bar_color": "#0f1b2d",
+                        "track_color": "#e3dccd"
                       },
                       "blocks": {}
                     },
@@ -733,6 +825,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -773,6 +866,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -798,6 +892,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -823,6 +918,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -864,6 +960,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -903,6 +1000,7 @@
                         "letter_spacing": "normal",
                         "case": "none",
                         "wrap": "pretty",
+                        "text_color": "",
                         "background": false,
                         "background_color": "#00000026",
                         "corner_radius": 0,
@@ -943,7 +1041,8 @@
                     "body": "Honestly the most comfortable pants I've ever owned. Snug fit, nothing rides up, and they feel like a second skin.",
                     "name": "Liam H.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k2": {
                   "type": "_mojo-review-card",
@@ -952,7 +1051,8 @@
                     "body": "Cotton, bamboo, the lot. Nothing comes close. Soft, supportive, and still perfect after a dozen washes.",
                     "name": "Oliver J.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k3": {
                   "type": "_mojo-review-card",
@@ -961,7 +1061,8 @@
                     "body": "Sweat used to ruin my long runs. These keep me dry, support everything and don't chafe at mile twelve.",
                     "name": "Andrew N.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k4": {
                   "type": "_mojo-review-card",
@@ -970,7 +1071,8 @@
                     "body": "My husband says they're the most comfortable he's ever worn. After loads of washes they keep their shape and softness.",
                     "name": "Camelia J.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k5": {
                   "type": "_mojo-review-card",
@@ -979,7 +1081,8 @@
                     "body": "Two weeks of walking round Europe, sweating and adjusting constantly. Switched to Mojo and the comfort blew me away. 100% satisfied!",
                     "name": "Marcus C.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "k6": {
                   "type": "_mojo-review-card",
@@ -988,7 +1091,8 @@
                     "body": "Like a hug: soft, supportive, luxurious. They stay put all day, even after countless washes.",
                     "name": "Jack K.",
                     "badge": "Verified Buyer"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -1024,14 +1128,6 @@
             "accordion",
             "reviews"
           ]
-        },
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
@@ -1044,6 +1140,7 @@
         "limit_details_width": false,
         "gap": 40,
         "enable_sticky_add_to_cart": false,
+        "background_color": "",
         "padding-block-start": 0,
         "padding-block-end": 0
       }
@@ -1055,6 +1152,7 @@
           "type": "item",
           "settings": {
             "publication": "Men's Health",
+            "logo_asset": "",
             "quote": "By far the best silk boxers our team at the office has ever tested. Well done, Mojo."
           }
         },
@@ -1062,6 +1160,7 @@
           "type": "item",
           "settings": {
             "publication": "GQ",
+            "logo_asset": "",
             "quote": "Ten hours in, no sweat and no odour down there. Honestly impressive stuff."
           }
         },
@@ -1069,6 +1168,7 @@
           "type": "item",
           "settings": {
             "publication": "Forbes",
+            "logo_asset": "",
             "quote": "They don't move around, they fit snug. We think these are the best boxers money can buy right now."
           }
         }
@@ -1087,22 +1187,25 @@
       "type": "mojo-cta-banner",
       "settings": {
         "variant": "card",
-        "bg_color": "#0F1B2D",
+        "bg_color": "#0f1b2d",
         "eyebrow": "Innovation In Men's Essentials",
         "heading": "35°C Silk Cooling Technology",
         "text": "<p>We've all dealt with boxers that bunch up, trap heat or fall apart. That's why we created Mojo, in 100% mulberry silk with 35°C Silk Cooling Technology. Say goodbye to rolling up, sweating and uncomfortable fits. Bin those old boxers and step into something built for you, by guys who get it.</p>",
         "bg_image_asset": "mojo-tech-banner.jpg",
         "overlay_opacity": 55,
+        "top_image_asset": "",
+        "top_ratio": "16 / 9",
+        "top_max_width": 0,
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
-        "button_bg": "#F7F3EC",
-        "button_fg": "#0F1B2D",
+        "button_bg": "#f7f3ec",
+        "button_fg": "#0f1b2d",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
         "assurance_2": "Free returns, NO QUESTIONS ASKED",
         "heading_size": 38,
         "heading_size_m": 26,
-        "text_color": "#F7F3EC",
+        "text_color": "#f7f3ec",
         "padding_top": 40,
         "padding_bottom": 40,
         "padding_top_m": 0,
@@ -1118,10 +1221,21 @@
         "image_side": "left",
         "heading": "See Your Silk Cooling in Action",
         "text": "<p>Watch the airflow weave at work. Cool air moves through fine mulberry silk while trapped heat is drawn away from the pouch zone.</p><p><strong>The result: a steady ~35°C, so you stay fresh and cool all day.</strong></p>",
+        "bullet_color": "#0f1b2d",
+        "button_label": "",
+        "button_link": "",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "padding_top": 40,
         "padding_bottom": 40,
-        "bg_color": "#F7F3EC",
-        "image_max_width": 440
+        "bg_color": "#f7f3ec",
+        "image_max_width": 440,
+        "eyebrow": "",
+        "subheading": "",
+        "show_assurance_row": false,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "footer_text": ""
       }
     },
     "mojo_features": {
@@ -1190,18 +1304,22 @@
         "image_asset": "mojo-feature-center.jpg",
         "image_ratio": "1 / 1",
         "image_max_width": 340,
-        "bg_color": "#EFE6D6",
-        "accent_color": "#0F1B2D",
+        "bg_color": "#efe6d6",
+        "accent_color": "#0f1b2d",
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
-        "button_bg": "#0F1B2D",
-        "button_fg": "#F7F3EC",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
         "assurance_2": "Free returns, NO QUESTIONS ASKED",
         "heading_size": 34,
         "heading_size_m": 24,
-        "text_color": "#111111"
+        "text_color": "#111111",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_m": 40,
+        "padding_bottom_m": 40
       }
     },
     "mojo_derm": {
@@ -1210,25 +1328,37 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "Keeps bad smells at bay, so you stay fresh around the clock"
+            "text": "Keeps bad smells at bay, so you stay fresh around the clock",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "Itch-free, irritation-free comfort that's got your back (and your front)."
+            "text": "Itch-free, irritation-free comfort that's got your back (and your front).",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "Gentle on the skin, tough on the problems, perfect for those sensitive spots."
+            "text": "Gentle on the skin, tough on the problems, perfect for those sensitive spots.",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         },
         "bullet_4": {
           "type": "bullet",
           "settings": {
-            "text": "Step up your game with confidence that turns heads, especially hers."
+            "text": "Step up your game with confidence that turns heads, especially hers.",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         }
       },
@@ -1245,18 +1375,21 @@
         "image_side": "right",
         "heading": "Dermatologist-Backed Comfort You Can Trust",
         "text": "",
-        "bullet_color": "#0F1B2D",
+        "bullet_color": "#0f1b2d",
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
-        "button_bg": "#0F1B2D",
-        "button_fg": "#F7F3EC",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "padding_top": 40,
         "padding_bottom": 40,
-        "bg_color": "#EFE6D6",
+        "bg_color": "#efe6d6",
         "image_max_width": 440,
+        "eyebrow": "",
+        "subheading": "",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
-        "assurance_2": "Free returns, NO QUESTIONS ASKED"
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "footer_text": ""
       }
     },
     "mojo_fresh": {
@@ -1318,12 +1451,12 @@
         "heading": "Keep that fresh-from-the-pack feel, wash after wash",
         "text": "<p>Remember slipping into a brand-new pair of boxers? The soft fabric, the perfect fit, that fresh feel. A few washes later, the magic fades, right? Not anymore. Mojo lasts up to 3x longer than regular boxers, so you'll love:</p>",
         "columns": "3",
-        "bg_color": "#EFE6D6",
-        "card_bg": "#FFFFFF",
+        "bg_color": "#efe6d6",
+        "card_bg": "#ffffff",
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
-        "button_bg": "#0F1B2D",
-        "button_fg": "#F7F3EC",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
         "assurance_2": "Free returns, NO QUESTIONS ASKED",
@@ -1331,30 +1464,34 @@
         "heading_size_m": 24,
         "text_color": "#111111",
         "padding_top": 40,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "padding_top_m": 24,
+        "padding_bottom_m": 24
       }
     },
     "mojo_washes": {
       "type": "mojo-cta-banner",
       "settings": {
         "variant": "dark",
-        "bg_color": "#0F1B2D",
+        "bg_color": "#0f1b2d",
         "eyebrow": "",
         "heading": "180 Washes Guarantee",
         "text": "<p>Our boxers come with a 180 Wash Guarantee, promising 100% shape and fabric retention, lasting up to 3x longer than other brands!</p>",
+        "bg_image_asset": "",
+        "overlay_opacity": 55,
         "top_image_asset": "mojo-washes-fan.jpg",
         "top_ratio": "16 / 9",
         "top_max_width": 800,
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_target": "#mojo-buybox",
-        "button_bg": "#F7F3EC",
-        "button_fg": "#0F1B2D",
+        "button_bg": "#f7f3ec",
+        "button_fg": "#0f1b2d",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
         "assurance_2": "Free returns, NO QUESTIONS ASKED",
         "heading_size": 36,
         "heading_size_m": 26,
-        "text_color": "#F7F3EC",
+        "text_color": "#f7f3ec",
         "padding_top": 0,
         "padding_bottom": 0,
         "padding_top_m": 0,
@@ -1369,7 +1506,8 @@
           "settings": {
             "text": "",
             "title": "Temperature-Regulating Pouch",
-            "detail": "Keeps your balls in the optimal range (~35°C), avoiding the overheating that lowers testosterone and sperm count. In a Harvard study of 656 men, boxer wearers had 25% higher sperm concentration."
+            "detail": "Keeps your balls in the optimal range (~35°C), avoiding the overheating that lowers testosterone and sperm count. In a Harvard study of 656 men, boxer wearers had 25% higher sperm concentration.",
+            "icon": ""
           }
         },
         "bullet_2": {
@@ -1377,7 +1515,8 @@
           "settings": {
             "text": "",
             "title": "Comfort & Freedom of Movement",
-            "detail": "No restriction, no compression, just better blood flow and natural support."
+            "detail": "No restriction, no compression, just better blood flow and natural support.",
+            "icon": ""
           }
         },
         "bullet_3": {
@@ -1385,7 +1524,8 @@
           "settings": {
             "text": "",
             "title": "Silk = Free from endocrine disruptors",
-            "detail": "Naturally breathable, antibacterial and hypoallergenic. Scientists found microplastics in every human testicle they tested. Polyester is plastic. Silk isn't."
+            "detail": "Naturally breathable, antibacterial and hypoallergenic. Scientists found microplastics in every human testicle they tested. Polyester is plastic. Silk isn't.",
+            "icon": ""
           }
         }
       },
@@ -1401,19 +1541,21 @@
         "image_side": "right",
         "heading": "Unique Men Deserve More Than Just Ordinary Underwear",
         "text": "<p><strong>Built for men with balls.</strong> Mojo lets your boys breathe, stay cool and move freely, all while creating the perfect environment for your hormones to thrive.</p>",
-        "bullet_color": "#0F1B2D",
+        "bullet_color": "#0f1b2d",
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
-        "button_bg": "#0F1B2D",
-        "button_fg": "#F7F3EC",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "padding_top": 40,
         "padding_bottom": 40,
-        "bg_color": "#EFE6D6",
+        "bg_color": "#efe6d6",
         "image_max_width": 440,
+        "eyebrow": "",
         "subheading": "Here's How Mojo Helps Support Your T-Levels:",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
-        "assurance_2": "Free returns, NO QUESTIONS ASKED"
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "footer_text": ""
       }
     },
     "mojo_pricing": {
@@ -1422,19 +1564,28 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "Fair Manufacturing"
+            "text": "Fair Manufacturing",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "Fair Sustainability Practices"
+            "text": "Fair Sustainability Practices",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "Fair Prices"
+            "text": "Fair Prices",
+            "title": "",
+            "detail": "",
+            "icon": ""
           }
         }
       },
@@ -1450,11 +1601,20 @@
         "image_side": "left",
         "heading": "Transparent Pricing",
         "text": "<p>At Mojo, we're all about fairness:</p>",
-        "bullet_color": "#0F1B2D",
+        "bullet_color": "#0f1b2d",
+        "button_label": "",
+        "button_link": "",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "padding_top": 0,
         "padding_bottom": 0,
-        "bg_color": "#F7F3EC",
+        "bg_color": "#f7f3ec",
         "image_max_width": 0,
+        "eyebrow": "",
+        "subheading": "",
+        "show_assurance_row": false,
+        "assurance_1": "45-day money-back guarantee",
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
         "footer_text": "<p>We keep our costs low by cutting out the middlemen, so you get premium silk without the premium price tag.</p>"
       }
     },
@@ -1561,15 +1721,20 @@
         "col_2": "Cotton",
         "col_3": "Polyester",
         "col_4": "Bamboo viscose",
-        "bg_color": "#EFE6D6",
-        "good_color": "#0F1B2D",
-        "bad_color": "#B3261E",
+        "col_2_short": "Cotton",
+        "col_3_short": "Poly",
+        "col_4_short": "Bamboo",
+        "bg_color": "#efe6d6",
+        "good_color": "#0f1b2d",
+        "bad_color": "#b3261e",
         "table_max_width": 820,
         "heading_size": 34,
         "heading_size_m": 24,
         "text_color": "#111111",
         "padding_top": 56,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "padding_top_m": 40,
+        "padding_bottom_m": 40
       }
     },
     "mojo_polaroid": {
@@ -1724,7 +1889,7 @@
         "heading": "175,000+ Happy Customers",
         "rating": 5,
         "count_text": "4.8/5 based on 4,276 reviews",
-        "star_color": "#C8A96A",
+        "star_color": "#c8a96a",
         "padding_top": 8,
         "padding_bottom": 60,
         "layout": "stacked",
@@ -1786,18 +1951,21 @@
         "image_side": "right",
         "heading": "The Mojo Guarantee",
         "text": "",
-        "bullet_color": "#0F1B2D",
+        "bullet_color": "#0f1b2d",
         "button_label": "TRY IT RISK-FREE – EARLY BLACK FRIDAY, UP TO 50% OFF",
         "button_link": "#mojo-buybox",
-        "button_bg": "#0F1B2D",
-        "button_fg": "#F7F3EC",
+        "button_bg": "#0f1b2d",
+        "button_fg": "#f7f3ec",
         "padding_top": 40,
         "padding_bottom": 40,
-        "bg_color": "#EFE6D6",
+        "bg_color": "#efe6d6",
         "image_max_width": 400,
+        "eyebrow": "",
+        "subheading": "",
         "show_assurance_row": true,
         "assurance_1": "45-day money-back guarantee",
-        "assurance_2": "Free returns, NO QUESTIONS ASKED"
+        "assurance_2": "Free returns, NO QUESTIONS ASKED",
+        "footer_text": ""
       }
     },
     "mojo_faq": {
@@ -1876,7 +2044,7 @@
         "enabled": true,
         "title": "",
         "rating_text": "4.8/5 from 4,276+ reviews",
-        "button_text": "Add to cart",
+        "button_text": "Choose bundle",
         "action": "add"
       }
     }
