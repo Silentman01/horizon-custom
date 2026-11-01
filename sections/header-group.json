@@ -31,7 +31,7 @@
         "announcement_2": {
           "type": "_announcement",
           "settings": {
-            "text": "FREE SHIPPING ON ORDERS OVER £40",
+            "text": "FREE SHIPPING ON ORDERS OVER £35",
             "link": "",
             "font": "var(--font-subheading--family)",
             "font_size": "0.75rem",
@@ -149,7 +149,7 @@
         "cart_extras_timer_color": "#0F1B2D",
         "cart_extras_timer_size": 13,
         "cart_extras_ship_enable": true,
-        "cart_extras_ship_threshold": 40,
+        "cart_extras_ship_threshold": 35,
         "cart_extras_ship_text_unlocked": "You've unlocked FREE UK shipping!",
         "cart_extras_ship_text_locked": "You're {amount} away from FREE UK shipping",
         "cart_extras_ship_icon": true,
@@ -186,7 +186,7 @@
         "cart_extras_badges_enable": true,
         "cart_extras_badge_1_text": "45-day money-back guarantee",
         "cart_extras_badge_1_icon": "shield",
-        "cart_extras_badge_2_text": "Free UK shipping over £40",
+        "cart_extras_badge_2_text": "Free UK shipping over £35",
         "cart_extras_badge_2_icon": "truck",
         "cart_extras_badge_3_text": "Secure checkout",
         "cart_extras_badge_3_icon": "lock",
