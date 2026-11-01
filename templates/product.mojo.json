@@ -150,8 +150,8 @@
               "type": "mojo-price",
               "settings": {
                 "price": "£49.95",
-                "compare": "£149.75",
-                "badge": "Save 67% OFF",
+                "compare": "£125.00",
+                "badge": "Save 60% OFF",
                 "chip": "only £9.99 per pair",
                 "order": "compare_first",
                 "price_size": 22,
@@ -224,45 +224,31 @@
             "bundle": {
               "type": "mojo-bundle-tiers",
               "settings": {
-                "heading": "CHOOSE YOUR OFFER:",
-                "countdown": false,
-                "heading_style": "left",
-                "heading_accent": "(BLACK FRIDAY PRICING)",
-                "tier_gap": 8
+                "countdown": true,
+                "heading_style": "rules",
+                "tier_gap": 14
               },
               "blocks": {
-                "tier_1": {
-                  "type": "_mojo-bundle-tier",
-                  "settings": {
-                    "quantity": 1,
-                    "anchor": "price",
-                    "title": "SINGLE",
-                    "saving": "",
-                    "badge": "",
-                    "preselect": false,
-                    "show_pickers": false,
-                    "picker_label": "",
-                    "price_suffix": "/pair",
-                    "per_pair": ""
-                  },
-                  "blocks": {}
-                },
                 "tier_2": {
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 2,
                     "pack_price": 24.95,
+                    "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "2 PACK – BUY 1 + GET 1 FREE",
-                    "saving": "Save {saving}",
+                    "title": "(2 Pack) Buy 1 get 1 Free",
+                    "saving": "You save {saving}",
                     "badge": "",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "pill",
-                    "per_pair": "{unit} /pair",
-                    "chips": "1x Black, 1x Midnight Blue",
-                    "free_lines": "Pair 1 | {price}\nPair 2 | {price} | FREE"
+                    "saving_style": "text",
+                    "price_suffix": "",
+                    "per_pair": "",
+                    "gift_line": "",
+                    "chips": "",
+                    "free_lines": "",
+                    "badge_style": "black"
                   },
                   "blocks": {}
                 },
@@ -271,18 +257,21 @@
                   "settings": {
                     "quantity": 5,
                     "pack_price": 49.95,
+                    "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "5 PACK – BUY 2 + GET 3 FREE",
-                    "saving": "Save {saving}",
+                    "title": "(5 Pack) Buy 2 get 3 Free",
+                    "saving": "You save {saving}",
                     "badge": "MOST POPULAR",
                     "preselect": true,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "pill",
-                    "per_pair": "{unit} /pair",
-                    "chips": "2x Black, 1x Midnight Blue, 1x Beige, 1x White",
-                    "free_lines": "Pairs 1–2 | {price}\nPairs 3–5 | {price} | FREE",
-                    "badge_style": "grey"
+                    "saving_style": "text",
+                    "price_suffix": "",
+                    "per_pair": "",
+                    "gift_line": "",
+                    "chips": "",
+                    "free_lines": "",
+                    "badge_style": "black"
                   },
                   "blocks": {}
                 },
@@ -291,24 +280,26 @@
                   "settings": {
                     "quantity": 8,
                     "pack_price": 74.95,
+                    "was_per_pair": 25,
                     "anchor": "price",
-                    "title": "8 PACK – BUY 3 + GET 5 FREE",
-                    "saving": "Save {saving}",
+                    "title": "(8 Pack) Buy 3 get 5 Free",
+                    "saving": "You save {saving}",
                     "badge": "BEST VALUE",
                     "preselect": false,
                     "show_pickers": true,
                     "picker_label": "Colour, Size",
-                    "saving_style": "pill",
-                    "per_pair": "{unit} /pair",
-                    "chips": "2x Black, 2x Midnight Blue, 2x Beige, 2x White",
-                    "free_lines": "Pairs 1–3 | {price}\nPairs 4–8 | {price} | FREE",
+                    "saving_style": "text",
+                    "price_suffix": "",
+                    "per_pair": "",
+                    "gift_line": "",
+                    "chips": "",
+                    "free_lines": "",
                     "badge_style": "black"
                   },
                   "blocks": {}
                 }
               },
               "block_order": [
-                "tier_1",
                 "tier_2",
                 "tier_3",
                 "tier_4"
@@ -1834,7 +1825,7 @@
           "type": "item",
           "settings": {
             "question": "What does the “buy 2 + get 3 free” offer mean?",
-            "answer": "<p>Buy 2 pairs and get 3 more free: five pairs for £49.95, just £9.99 each. It's our limited Black Friday offer, a perfect chance to replace your whole drawer. Spend over £40 and shipping is free. Not to be missed!</p>"
+            "answer": "<p>Buy 2 pairs and get 3 more free: five pairs for £49.95, just £9.99 each. It's our limited Black Friday offer, a perfect chance to replace your whole drawer. Spend over £35 and shipping is free. Not to be missed!</p>"
           }
         },
         "item_5": {

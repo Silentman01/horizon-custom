@@ -51,6 +51,11 @@
   if mt_compare <= mt_total
     assign mt_compare = v.compare_at_price | default: 0 | times: qty
   endif
+  assign mt_was = 0
+  if bs.was_per_pair != blank and bs.was_per_pair > 0
+    assign mt_was = bs.was_per_pair | times: 100 | round
+    assign mt_compare = mt_was | times: qty
+  endif
   if mt_compare <= mt_total
     assign mt_compare = 0
   endif
@@ -96,6 +101,7 @@
   data-qty="{{ qty }}"
   data-off="{{ mt_off }}"
   data-anchor="{{ bs.anchor | default: 'price' }}"
+  data-was="{{ mt_was }}"
   data-title="{{ bs.title | escape }}"
   data-save-tpl="{{ bs.saving | escape }}"
   data-unit-tpl="{{ bs.per_pair | escape }}"
@@ -157,7 +163,8 @@
       {%- for i in (1..qty) -%}
         <div class="mojo-tier__unit" data-unit-row>
           <span class="mojo-tier__thumb">
-            {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 96', sizes: '24px', alt: '', width: 24, height: 24 }}{%- endif -%}
+            {%- assign th = v.featured_image | default: p.featured_image -%}
+            {%- if th -%}{{ th | image_url: width: 96 | image_tag: loading: 'lazy', widths: '48, 96', sizes: '40px', alt: '', width: 40, height: 40 }}{%- endif -%}
           </span>
           <select class="mojo-tier__sel" data-opt="colour" aria-label="Colour, pair {{ i }}">
             {%- for cv in col_values -%}<option value="{{ cv | escape }}">{{ cv }}</option>{%- endfor -%}
@@ -175,45 +182,47 @@
 </div>
 
 {% stylesheet %}
-.mojo-tier { position: relative; background: rgb(233 215 207 / 55%); border: 1px solid transparent; border-radius: 6px; font-family: var(--mojo-font); color: var(--mojo-fg); }
+/* Revolt / Kaching card: grey card + thin grey border, selected = white + 2px near-black border */
+.mojo-tier { --mojo-tier-ink: #0F1B2D; position: relative; background: #F2F0EC; border: 1px solid #D9D6CF; border-radius: 2px; font-family: var(--mojo-font); color: var(--mojo-fg); }
 .mojo-tier [hidden] { display: none !important; }
-.mojo-tier:has(.mojo-tier__input:checked) { background: var(--mojo-bg); border: 2px solid var(--mojo-primary); margin: -1px; }
-.mojo-tier:has(.mojo-tier__input:focus-visible) { outline: 2px solid var(--mojo-primary); outline-offset: 2px; }
-.mojo-tier__head { display: flex; align-items: center; gap: 12px; padding: 14px; cursor: pointer; }
+.mojo-tier:has(.mojo-tier__input:checked) { background: #FFFFFF; border: 2px solid var(--mojo-tier-ink); margin: -1px; }
+.mojo-tier:has(.mojo-tier__input:focus-visible) { outline: 2px solid var(--mojo-tier-ink); outline-offset: 2px; }
+.mojo-tier__head { display: flex; align-items: center; gap: 14px; padding: 16px 18px; cursor: pointer; }
 .mojo-tier__input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
-.mojo-tier__radio { width: 16px; height: 16px; flex: none; border: 1px solid var(--mojo-primary); border-radius: 50%; background: var(--mojo-bg); box-sizing: border-box; }
-.mojo-tier__input:checked ~ .mojo-tier__radio { border: 4px solid var(--mojo-bg); background: var(--mojo-primary); box-shadow: 0 0 0 1px var(--mojo-primary); }
-.mojo-tier__main { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
-.mojo-tier__title { font-weight: 600; font-size: 13px; line-height: 1.3; }
-.mojo-tier__save { font-size: 11px; color: var(--mojo-muted); }
-.mojo-tier__save--pill { background: var(--mojo-panel); color: var(--mojo-primary); font-weight: 600; padding: 3px 7px; border-radius: 3px; line-height: 1.2; }
+.mojo-tier__radio { width: 22px; height: 22px; flex: none; border: 1.5px solid #9A9A9A; border-radius: 50%; background: #FFFFFF; box-sizing: border-box; }
+.mojo-tier__input:checked ~ .mojo-tier__radio { border: 2px solid var(--mojo-tier-ink); background: radial-gradient(circle, var(--mojo-tier-ink) 0 5px, #FFFFFF 5.5px); }
+.mojo-tier__main { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.mojo-tier__title { font-weight: 600; font-size: 16px; line-height: 1.35; color: #111111; }
+.mojo-tier__save { font-size: 13px; color: #555555; }
+.mojo-tier__save--pill { background: var(--mojo-panel); color: var(--mojo-tier-ink); font-weight: 600; padding: 3px 7px; border-radius: 3px; line-height: 1.2; }
 .mojo-tier__gift { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; }
 .mojo-tier__gift i { width: 8px; height: 8px; border-radius: 50%; background: #22a559; flex: none; }
 .mojo-tier__chips { display: flex; flex-wrap: wrap; gap: 4px; }
 .mojo-tier__chip { display: inline-flex; align-items: center; gap: 5px; background: var(--mojo-panel); border-radius: 10px; padding: 2px 8px; font-size: 10px; line-height: 1.5; color: var(--mojo-fg); }
 .mojo-tier__chip i { width: 8px; height: 8px; border-radius: 50%; border: 1px solid rgb(0 0 0 / 25%); flex: none; box-sizing: border-box; }
 .mojo-tier__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
-.mojo-tier__price { font-weight: 600; font-size: 14px; }
-.mojo-tier__suffix { font-size: 10px; font-weight: 400; color: var(--mojo-muted); }
-.mojo-tier__was { font-size: 11px; color: var(--mojo-muted); }
-.mojo-tier__pp { font-size: 10px; color: var(--mojo-muted); }
-.mojo-tier__badge { position: absolute; top: -9px; right: 12px; background: var(--mojo-primary); color: var(--mojo-bg); font-weight: 600; font-size: 9px; line-height: 1; letter-spacing: 0.4px; text-transform: uppercase; padding: 5px 8px; border-radius: 3px; }
-.mojo-tier--grey .mojo-tier__badge { background: var(--mojo-muted); }
-.mojo-tier__lines { list-style: none; margin: -4px 0 0; padding: 0 14px 14px 42px; display: grid; gap: 3px; font-size: 11px; color: var(--mojo-muted); }
+.mojo-tier__price { font-weight: 700; font-size: 15px; color: #111111; }
+.mojo-tier__suffix { font-size: 10px; font-weight: 400; color: #555555; }
+.mojo-tier__was { font-size: 13px; color: #555555; }
+.mojo-tier__pp { font-size: 11px; color: #555555; }
+.mojo-tier__badge { position: absolute; top: -12px; right: 8px; background: var(--mojo-tier-ink); color: #FFFFFF; font-weight: 700; font-size: 11px; line-height: 1; letter-spacing: 0.3px; text-transform: uppercase; padding: 6px 9px; border-radius: 3px 3px 0 0; }
+.mojo-tier--grey .mojo-tier__badge { background: #555555; }
+.mojo-tier__lines { list-style: none; margin: -4px 0 0; padding: 0 18px 14px 54px; display: grid; gap: 3px; font-size: 11px; color: #555555; }
 .mojo-tier__line { display: flex; align-items: center; gap: 8px; }
 .mojo-tier__line s { color: var(--mojo-soft); }
 .mojo-tier__free { font-style: normal; font-weight: 700; font-size: 9px; letter-spacing: 0.4px; background: #22a559; color: #fff; padding: 2px 6px; border-radius: 3px; line-height: 1.2; }
-.mojo-tier__units { display: none; padding: 0 14px 14px 42px; gap: 8px; }
+.mojo-tier__units { display: none; padding: 0 18px 16px; gap: 10px; }
 .mojo-tier:has(.mojo-tier__input:checked) .mojo-tier__units { display: grid; }
-.mojo-tier__plabel { margin: 0; font-size: 11px; font-weight: 600; }
-.mojo-tier__unit { display: grid; grid-template-columns: 24px minmax(0, 1fr) 72px; gap: 8px; align-items: center; }
-.mojo-tier__thumb { width: 24px; height: 24px; display: block; }
-.mojo-tier__thumb img { width: 24px; height: 24px; object-fit: cover; display: block; }
-.mojo-tier__sel { width: 100%; min-height: 36px; border: 1px solid var(--mojo-line); border-radius: 3px; background: var(--mojo-bg); color: var(--mojo-fg); font: inherit; font-size: 12px; padding: 0 6px; }
-.mojo-tier__admin { margin: 0; padding: 0 14px 12px 42px; font-size: 10px; line-height: 1.4; color: #8a5a00; }
-@media screen and (min-width: 750px) {
-  .mojo-tier__unit { grid-template-columns: 24px 120px 56px; }
-}
+.mojo-tier__head:has(+ .mojo-tier__units) { padding-bottom: 10px; }
+.mojo-tier__plabel { margin: 0; font-size: 12px; color: #555555; }
+/* pair row: thumbnail, wide colour select, narrow size select, one row like Revolt */
+.mojo-tier__unit { display: grid; grid-template-columns: 40px minmax(0, 1fr) 64px; column-gap: 8px; align-items: center; max-width: 340px; }
+.mojo-tier__thumb { width: 40px; height: 40px; display: block; overflow: hidden; }
+.mojo-tier__thumb img { width: 40px; height: 40px; object-fit: cover; display: block; }
+.mojo-tier__sel { -webkit-appearance: none; appearance: none; width: 100%; height: 34px; border: 1px solid #C9C9C9; border-radius: 0; background: #FFFFFF url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23111'/%3E%3C/svg%3E") no-repeat right 9px center / 9px 6px; color: #111111; font: inherit; font-size: 13px; padding: 0 26px 0 8px; cursor: pointer; }
+.mojo-tier__sel--size { width: 64px; }
+.mojo-tier__sel:focus-visible { outline: 2px solid var(--mojo-tier-ink); outline-offset: 1px; }
+.mojo-tier__admin { margin: 0; padding: 0 18px 12px 54px; font-size: 10px; line-height: 1.4; color: #8a5a00; }
 {% endstylesheet %}
 
 {% schema %}
@@ -236,9 +245,15 @@
       "info": "Empty = full price (variant price x pairs). Create the matching automatic discount in Shopify (fixed amount off = full price - bundle price, minimum quantity = pairs). The editor shows the amount under the card."
     },
     {
+      "type": "number",
+      "id": "was_per_pair",
+      "label": "Crossed-out price per pair (e.g. 25.00)",
+      "info": "Was price = this x pairs; \"You save\" = was price - bundle price. Empty = use the option below."
+    },
+    {
       "type": "select",
       "id": "anchor",
-      "label": "Crossed-out price per pair",
+      "label": "Crossed-out price per pair (if the field above is empty)",
       "default": "price",
       "options": [
         {
