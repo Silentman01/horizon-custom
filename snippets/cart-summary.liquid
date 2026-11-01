@@ -3,6 +3,8 @@
 
   @param {string} [accelerated_checkout_buttons_layout] - { 'vertical' } Forced layout of the additional checkout buttons, instead of relying on platform's layout.
   @param {string} [section_id] - The section ID for cart discount component.
+  @param {boolean} [drawer] - When true, renders the cart drawer extras (price breakdown, badges, payment icons; see snippets/cart-extras).
+  @param {object} [cx] - Settings of the "Cart drawer" section, passed on to snippets/cart-extras.
 {%- enddoc -%}
 
 {% render 'text-component-shimmer-styles' %}
@@ -11,7 +13,13 @@
 <div class="cart-totals">
   {% # We need to keep this node in place to allow morphing to work properly # %}
   <div class="cart-totals__original-container cart-primary-typography">
-    {%- if cart.cart_level_discount_applications.size > 0 -%}
+    {%- liquid
+      assign cx_breakdown = false
+      if drawer and cx.cart_extras_breakdown_enable
+        assign cx_breakdown = true
+      endif
+    -%}
+    {%- if cart.cart_level_discount_applications.size > 0 and cx_breakdown == false -%}
       <span class="cart-totals__item cart-totals__original">
         <span class="cart-totals__original-label">{{ 'content.cart_subtotal' | t }}</span>
         <span
@@ -41,7 +49,13 @@
     {%- endif -%}
   </div>
 
-  {% if settings.show_cart_note or settings.show_add_discount_code %}
+  {%- liquid
+    assign cx_show_code = settings.show_add_discount_code
+    if drawer and cx.cart_extras_hide_discount_code
+      assign cx_show_code = false
+    endif
+  -%}
+  {% if settings.show_cart_note or cx_show_code %}
     <div class="cart-actions">
       {% if settings.show_cart_note %}
         <script
@@ -92,10 +106,10 @@
           %}
         </cart-note>
       {% endif %}
-      {% if settings.show_cart_note and settings.show_add_discount_code %}
+      {% if settings.show_cart_note and cx_show_code %}
         <div class="cart-actions__divider"></div>
       {% endif %}
-      {% if settings.show_add_discount_code %}
+      {% if cx_show_code %}
         {% liquid
           assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
           for item in cart.items
@@ -227,6 +241,8 @@
     endif
   -%}
 
+  {% if drawer %}{% render 'cart-extras', part: 'breakdown', cx: cx %}{% endif %}
+
   <div class="cart-totals__container{% if settings.show_installments %} cart-totals__container--has-installments{% endif %}">
     <span
       class="cart-totals__item cart-totals__total"
@@ -251,9 +267,11 @@
         {% endform %}
       </span>
     {% endif %}
-    <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
-      {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
-    </div>
+    {% unless drawer and cx.cart_extras_hide_tax_note %}
+      <div class="cart-totals__item cart-totals__tax-note cart-primary-typography">
+        {% render 'tax-info', has_discounts_enabled: settings.show_add_discount_code %}
+      </div>
+    {% endunless %}
   </div>
 </div>
 
@@ -282,6 +300,11 @@
     >
       {{ content_for_additional_checkout_buttons }}
     </div>
+  {% endif %}
+
+  {% if drawer %}
+    {% render 'cart-extras', part: 'badges', cx: cx %}
+    {% render 'cart-extras', part: 'payments', cx: cx %}
   {% endif %}
 </div>
 

@@ -1,0 +1,95 @@
+{%- comment -%}
+  Old Tom's announcement bar: orange gradient, two headline lines on the left and a rolling countdown (DYS : HRS : MIN : SEC)
+  in a white box on the right. The countdown restarts every "cycle" so it never reaches zero.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<div class="ot-announcement{% if s.torn_edge %} ot-announcement--torn{% endif %}" style="--ot-ann-from: {{ s.color_dark }}; --ot-ann-mid: {{ s.color_light }}; --ot-ann-text: {{ s.text_color }}; --ot-ann-pt: {{ s.padding_top }}px; --ot-ann-pb: {{ s.padding_bottom }}px;" {{ section.shopify_attributes }}>
+  <div class="ot-announcement__inner">
+    <div class="ot-announcement__text">
+      {%- if s.line_1 != blank -%}<p class="ot-announcement__line1">{{ s.line_1 }}</p>{%- endif -%}
+      {%- if s.line_2 != blank -%}<p class="ot-announcement__line2">{{ s.line_2 }}</p>{%- endif -%}
+    </div>
+    {%- if s.show_countdown -%}
+      <ot-countdown class="ot-announcement__timer" data-cycle="{{ s.cycle_days }}" role="timer" aria-label="{{ s.line_1 | escape }}">
+        {%- assign labels = s.labels | split: ',' -%}
+        {%- for i in (0..3) -%}
+          <span class="ot-announcement__unit">
+            <span class="ot-announcement__digits" data-ot-unit="{{ i }}">00</span>
+            <span class="ot-announcement__label">{{ labels[i] | strip }}</span>
+          </span>
+          {%- unless forloop.last -%}<span class="ot-announcement__sep" aria-hidden="true">:</span>{%- endunless -%}
+        {%- endfor -%}
+      </ot-countdown>
+    {%- endif -%}
+  </div>
+</div>
+{% stylesheet %}
+.ot-announcement { position: relative; width: 100%; padding: var(--ot-ann-pt, 14px) 16px var(--ot-ann-pb, 14px); background: linear-gradient(270deg, var(--ot-ann-from, #d85800) 0.9%, var(--ot-ann-mid, #f59432) 11.5%, var(--ot-ann-from, #d85800) 28.1%, var(--ot-ann-from, #d85800) 100%); color: var(--ot-ann-text, #fff); }
+.ot-announcement--torn { padding-bottom: calc(var(--ot-ann-pb, 14px) + 8px); clip-path: polygon(0 0, 100% 0, 100% 86%, 97% 94%, 94% 87%, 90% 96%, 86% 88%, 82% 95%, 78% 87%, 73% 96%, 69% 89%, 64% 95%, 60% 87%, 55% 96%, 51% 88%, 46% 95%, 42% 87%, 37% 96%, 33% 89%, 28% 95%, 24% 87%, 19% 96%, 15% 88%, 10% 95%, 6% 87%, 3% 94%, 0 87%); }
+.ot-announcement__inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; max-width: 1300px; margin-inline: auto; }
+.ot-announcement__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; text-transform: uppercase; }
+.ot-announcement__text p { margin: 0; }
+.ot-announcement__line1 { font-family: var(--font-heading--family); font-size: 18px; font-weight: 700; letter-spacing: 0.5px; line-height: 1.15; }
+.ot-announcement__line2 { font-size: 13px; font-weight: 600; letter-spacing: 0.5px; line-height: 1.2; }
+.ot-announcement__timer { flex: none; display: inline-flex; align-items: flex-start; gap: 3px; padding: 6px 10px 5px; border-radius: 8px; background: #fff; color: #111805; }
+.ot-announcement__unit { display: flex; flex-direction: column; align-items: center; min-width: 26px; }
+.ot-announcement__digits { font-size: 22px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+.ot-announcement__label { margin-top: 2px; font-size: 8px; font-weight: 700; letter-spacing: 0.4px; line-height: 1; }
+.ot-announcement__sep { font-size: 20px; font-weight: 800; line-height: 1; }
+@media screen and (min-width: 750px) {
+  .ot-announcement { padding-inline: 20px; }
+  .ot-announcement__line1 { font-size: 22px; }
+  .ot-announcement__line2 { font-size: 14px; }
+  .ot-announcement__digits { font-size: 24px; }
+  .ot-announcement__unit { min-width: 34px; }
+}
+@media screen and (max-width: 389px) { .ot-announcement__line1 { font-size: 16px; } .ot-announcement__unit { min-width: 22px; } .ot-announcement__digits { font-size: 19px; } }
+{% endstylesheet %}
+{% javascript %}
+if (!customElements.get('ot-countdown')) {
+  customElements.define('ot-countdown', class extends HTMLElement {
+    connectedCallback() { this.tick(); this.timer = setInterval(() => this.tick(), 1000); }
+    disconnectedCallback() { clearInterval(this.timer); }
+    tick() {
+      const DAY = 86400000;
+      const cycle = Math.max(2, parseInt(this.dataset.cycle, 10) || 3);
+      const now = new Date();
+      const midnight = new Date(now); midnight.setHours(24, 0, 0, 0);
+      const dayIndex = Math.floor(midnight.getTime() / DAY);
+      // time to the next midnight plus the remaining whole days of the cycle (+1 so days never shows 00)
+      const daysAfter = cycle - 1 - (dayIndex % cycle);
+      let left = midnight - now + (daysAfter + 1) * DAY;
+      const d = Math.floor(left / DAY); left -= d * DAY;
+      const h = Math.floor(left / 3600000); left -= h * 3600000;
+      const m = Math.floor(left / 60000); left -= m * 60000;
+      const s = Math.floor(left / 1000);
+      [d, h, m, s].forEach((v, i) => {
+        const el = this.querySelector(`[data-ot-unit="${i}"]`);
+        if (el) el.textContent = String(v).padStart(2, '0');
+      });
+    }
+  });
+}
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Old Tom's announcement",
+  "tag": "div",
+  "class": "ot-announcement-section",
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "Headline", "default": "SALE NOW LIVE" },
+    { "type": "text", "id": "line_2", "label": "Second line", "default": "UP TO 72% OFF!" },
+    { "type": "checkbox", "id": "show_countdown", "label": "Show countdown", "default": true },
+    { "type": "text", "id": "labels", "label": "Countdown labels (comma separated)", "default": "DYS,HRS,MIN,SEC", "visible_if": "{{ section.settings.show_countdown }}" },
+    { "type": "range", "id": "cycle_days", "label": "Countdown cycle", "min": 2, "max": 14, "step": 1, "unit": "d", "default": 3, "info": "The countdown restarts every cycle so it never reaches zero.", "visible_if": "{{ section.settings.show_countdown }}" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "color_dark", "label": "Gradient dark", "default": "#D85800" },
+    { "type": "color", "id": "color_light", "label": "Gradient light", "default": "#F59432" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "torn_edge", "label": "Torn bottom edge", "default": true },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 14 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 14 }
+  ],
+  "presets": [{ "name": "Old Tom's announcement" }]
+}
+{% endschema %}

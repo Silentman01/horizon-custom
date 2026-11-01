@@ -39,7 +39,8 @@
 
     <div class="page-wrapper">
       <div id="header-group">
-        {% sections 'header-group' %}
+        {%- capture header_group_html -%}{% sections 'header-group' %}{%- endcapture -%}
+        {{ header_group_html }}
       </div>
 
       <script>
@@ -165,7 +166,9 @@
       </footer>
     </div>
 
-    {% render 'cart-drawer', render_wrapper: true %}
+    {% unless header_group_html contains '<cart-drawer-component' %}
+      {% render 'cart-drawer', render_wrapper: true %}
+    {% endunless %}
     {% render 'theme-drawer' %}
 
     {% render 'search-modal' %}

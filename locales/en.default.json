@@ -70,7 +70,7 @@
   "actions": {
     // Quick add button on product cards, shortened version of add to cart
     "add": "Add",
-    "add_to_cart": "Add to cart",
+    "add_to_cart": "Add to basket",
     // Success message shown after adding item to cart
     "added": "Added",
     // Button to apply discount code to cart
@@ -163,6 +163,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "Shipping",
+    "cart_extras_free": "Free",
+    "cart_extras_shipping_later": "Calculated at checkout",
     "cancel": "Cancel",
     "discount": "Discount",
     "account_title": "Account",
@@ -356,7 +359,7 @@
   },
   "products": {
     "product": {
-      "add_to_cart": "Add to cart",
+      "add_to_cart": "Add to basket",
       "adding_to_cart": "Adding...",
       "added_to_cart": "Added to cart",
       "add_to_cart_error": "Error adding to cart",

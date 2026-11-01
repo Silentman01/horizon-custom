@@ -2116,5 +2116,23 @@
         "default": "equal-width-buttons"
       }
     ]
+  },
+  {
+    "name": "Old Tom's header",
+    "settings": [
+      {
+        "type": "text",
+        "id": "ot_track_label",
+        "label": "Track Order button text",
+        "default": "Track Order",
+        "info": "Lime pill in the header. Empty = hidden."
+      },
+      {
+        "type": "text",
+        "id": "ot_track_url",
+        "label": "Track Order button link",
+        "default": "/pages/track-order"
+      }
+    ]
   }
 ]

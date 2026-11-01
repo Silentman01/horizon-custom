@@ -1,0 +1,113 @@
+{%- comment -%}
+  Old Tom's bundle tiers (variant-driven). Child cards: _oldtoms-bundle-tier. Each card is a product variant
+  (option "Bundle": Buy 1 / Buy 2 Get 1 Free / Buy 3 Get 2 Free). Prices come from the variants; when the product has no
+  matching variants, the cards fall back to the static price settings on each card. The native variant picker stays in
+  the DOM (hidden) and is driven by the cards, so price, form id and cart update through the theme's own code.
+{%- endcomment -%}
+{%- liquid
+  assign product_resource = closest.product
+  if request.visual_preview_mode and product_resource == blank
+    assign product_resource = collections.all.products.first
+  endif
+  assign bs = block.settings
+-%}
+{%- unless product_resource == blank -%}
+  <ot-tiers class="ot-tiers" style="{% render 'oldtoms-vars' %}--ot-tiers-gap: {{ bs.tier_gap }}px;" {% if bs.hide_native_picker %}data-hide-native{% endif %} {% if bs.hide_quantity %}data-hide-quantity{% endif %} {{ block.shopify_attributes }}>
+    {%- if bs.heading != blank -%}
+      <p class="ot-tiers__heading"><span class="ot-tiers__rule" aria-hidden="true"></span><span class="ot-tiers__heading-text">{{ bs.heading }}</span><span class="ot-tiers__rule" aria-hidden="true"></span></p>
+    {%- endif -%}
+    {%- if bs.urgency_line != blank -%}
+      <p class="ot-tiers__urgency">{{ bs.urgency_line }}</p>
+    {%- endif -%}
+    <div class="ot-tiers__list" role="radiogroup" aria-label="{{ bs.heading | default: 'Choose your bundle' | escape }}">
+      {% content_for 'blocks', closest.product: product_resource %}
+    </div>
+    {%- if bs.guarantee != blank -%}
+      <p class="ot-tiers__guarantee">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false"><path d="M12 2.8l7.5 2.8v5.6c0 4.7-3.1 8.5-7.5 10-4.4-1.5-7.5-5.3-7.5-10V5.6L12 2.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M8.6 12.2l2.5 2.5 4.4-4.9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>{{ bs.guarantee }}</span>
+      </p>
+    {%- endif -%}
+  </ot-tiers>
+{%- endunless -%}
+{% stylesheet %}
+.ot-tiers { display: block; width: 100%; color: #121212; }
+.ot-tiers__heading { display: flex; align-items: center; gap: 12px; margin: 0 0 12px; font-size: 14px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: #000; }
+.ot-tiers__rule { flex: 1; height: 1px; background: #121212; }
+.ot-tiers__heading-text { flex: none; text-align: center; }
+.ot-tiers__urgency { margin: -4px 0 10px; text-align: center; font-size: 11px; font-style: italic; color: #666; }
+.ot-tiers__list { display: grid; gap: var(--ot-tiers-gap, 10px); }
+.ot-tiers__guarantee { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0 0; padding: 10px 12px; min-height: 44px; border-radius: 6px; background: #e6e6e6; font-size: 12px; font-weight: 500; color: #121212; }
+.ot-tiers__guarantee svg { flex: none; color: var(--ot-green, #24433d); }
+.product-details:has(.ot-tiers[data-hide-native]) variant-picker { display: none; }
+.product-details:has(.ot-tiers[data-hide-quantity]) .quantity-selector-wrapper { display: none; }
+{% endstylesheet %}
+{% javascript %}
+if (!customElements.get('ot-tiers')) {
+  customElements.define('ot-tiers', class extends HTMLElement {
+    connectedCallback() {
+      this.addEventListener('change', this.onChange);
+      customElements.whenDefined('variant-picker').then(() => this.syncInitialState());
+    }
+    disconnectedCallback() { this.removeEventListener('change', this.onChange); }
+    picker() { return (this.closest('.shopify-section') || document).querySelector('variant-picker'); }
+    syncInitialState() {
+      const inputs = [...this.querySelectorAll('.ot-tier__input')];
+      const checked = inputs.find((i) => i.checked);
+      if (checked && checked.dataset.preselect !== undefined && checked.dataset.variantId && !new URL(location.href).searchParams.has('variant')) {
+        const p = this.picker();
+        const cur = p && (p.querySelector('input:checked')?.dataset.variantId || p.querySelector('option:checked')?.dataset.variantId);
+        if (p && cur !== checked.dataset.variantId) this.select(checked.dataset.variantId);
+        return;
+      }
+      if (!checked) {
+        const p = this.picker();
+        const cur = p && (p.querySelector('input:checked')?.dataset.variantId || p.querySelector('option:checked')?.dataset.variantId);
+        const m = inputs.find((i) => i.dataset.variantId && i.dataset.variantId === cur) || inputs[0];
+        if (m) { m.checked = true; m.closest('.ot-tier')?.classList.add('is-selected'); }
+      }
+    }
+    onChange = (e) => {
+      const i = e.target;
+      if (!(i instanceof HTMLInputElement) || !i.classList.contains('ot-tier__input')) return;
+      this.querySelectorAll('.ot-tier').forEach((t) => t.classList.toggle('is-selected', t.contains(i)));
+      if (i.dataset.variantId) this.select(i.dataset.variantId);
+    };
+    select(id) {
+      const p = this.picker();
+      if (!p) return;
+      const r = p.querySelector(`input[type="radio"][data-variant-id="${id}"]`);
+      if (r) { if (!r.checked) r.click(); return; }
+      const o = p.querySelector(`option[data-variant-id="${id}"]`);
+      const s = o && o.closest('select');
+      if (o && s && s.value !== o.value) { s.value = o.value; s.dispatchEvent(new Event('change', { bubbles: true })); }
+    }
+  });
+}
+{% endjavascript %}
+{% schema %}
+{
+  "name": "Old Tom's bundle tiers",
+  "tag": null,
+  "blocks": [{ "type": "_oldtoms-bundle-tier" }],
+  "settings": [
+    { "type": "paragraph", "content": "Each card is a product variant (option \"Bundle\": Buy 1 / Buy 2 Get 1 Free / Buy 3 Get 2 Free). Prices come from the variants. Keep the Variant picker block: it is hidden and driven by these cards. If the product has no matching variants, each card shows its own fallback price." },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "BUY MORE AND SAVE MORE" },
+    { "type": "text", "id": "urgency_line", "label": "Line under heading (optional)", "info": "Leave empty to hide." },
+    { "type": "text", "id": "guarantee", "label": "Guarantee strip", "default": "30-Day Money Back Guarantee", "info": "Leave empty to hide." },
+    { "type": "range", "id": "tier_gap", "label": "Gap between cards", "min": 4, "max": 24, "step": 2, "unit": "px", "default": 10 },
+    { "type": "checkbox", "id": "hide_native_picker", "label": "Hide the native variant picker", "default": true },
+    { "type": "checkbox", "id": "hide_quantity", "label": "Hide the quantity selector", "default": true }
+  ],
+  "presets": [
+    {
+      "name": "Old Tom's bundle tiers",
+      "blocks": [
+        { "type": "_oldtoms-bundle-tier", "settings": { "option_value": "Buy 1", "variant_position": 1, "title": "Buy 1", "label": "1x Pack | 12 Pouches", "pouches": 12, "fallback_price": "35.00", "fallback_compare": "68.00" } },
+        { "type": "_oldtoms-bundle-tier", "settings": { "option_value": "Buy 2 Get 1 Free", "variant_position": 2, "title": "Buy 2, Get 1 Free", "label": "3x Pack | 36 Pouches", "pouches": 36, "badge": "Most Popular", "preselect": true, "fallback_price": "63.00", "fallback_compare": "136.00" } },
+        { "type": "_oldtoms-bundle-tier", "settings": { "option_value": "Buy 3 Get 2 Free", "variant_position": 3, "title": "Buy 3, Get 2 Free", "label": "5x Pack | 60 Pouches", "pouches": 60, "badge": "Best Seller", "fallback_price": "86.00", "fallback_compare": "204.00" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

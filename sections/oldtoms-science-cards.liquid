@@ -1,0 +1,108 @@
+{%- assign s = section.settings -%}
+<div class="ot-science" style="{% render 'oldtoms-vars' %}--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;">
+  <div class="ot-science__head">
+    {%- if s.heading != blank -%}<h2 class="ot-science__heading">{{ s.heading }}</h2>{%- endif -%}
+    {%- if s.subheading != blank -%}<p class="ot-science__sub">{{ s.subheading }}</p>{%- endif -%}
+  </div>
+  <div class="ot-science__grid">
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      <article class="ot-science__card" {{ block.shopify_attributes }}>
+        <div class="ot-science__bg" aria-hidden="true">
+          {%- if b.image != blank -%}
+            {{ b.image | image_url: width: 1400 | image_tag: loading: 'lazy', widths: '700, 1000, 1400', sizes: '(min-width: 750px) 48vw, 94vw', alt: '', class: 'ot-science__img' }}
+          {%- elsif b.asset != blank -%}
+            <img class="ot-science__img" src="{{ b.asset | asset_url }}" alt="" loading="lazy" decoding="async" width="1322" height="438" onerror="this.remove()">
+          {%- endif -%}
+        </div>
+        <div class="ot-science__body">
+          {%- if b.concentration != blank -%}<p class="ot-science__conc">{{ b.concentration }}</p>{%- endif -%}
+          <h3 class="ot-science__name">{{ b.name }}</h3>
+          {%- assign tag_list = b.tags | split: ',' -%}
+          {%- if tag_list.size > 0 and b.tags != blank -%}
+            <ul class="ot-science__tags">{%- for tag in tag_list -%}<li class="ot-science__tag">{{ tag | strip }}</li>{%- endfor -%}</ul>
+          {%- endif -%}
+          <p class="ot-science__desc">{{ b.description }}</p>
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if s.show_cta -%}
+    <div class="ot-science__cta">{% render 'oldtoms-cta', label: s.cta_label, guarantee: s.cta_guarantee %}</div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.ot-science { background: radial-gradient(ellipse at 50% 35%, #1b3a2c 0%, #0a1510 55%, #000 100%); color: #fff; font-family: var(--ot-font); padding: var(--ot-pt, 56px) 12px var(--ot-pb, 48px); }
+.ot-science__head { text-align: center; margin-bottom: 24px; }
+.ot-science__heading { margin: 0 0 12px; font-family: var(--ot-font-heading); font-weight: 400; font-size: 40px; line-height: 1.1; color: #fff; }
+.ot-science__sub { margin: 0 auto; max-width: 340px; font-size: 14px; line-height: 1.45; }
+.ot-science__grid { display: grid; gap: 12px; max-width: 1330px; margin: 0 auto; }
+.ot-science__card { position: relative; display: flex; align-items: flex-end; min-height: 190px; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 12px; overflow: hidden; background: #1b2a22; }
+.ot-science__bg { position: absolute; inset: 0; }
+.ot-science__bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%); }
+.ot-science__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ot-science__body { position: relative; width: 100%; padding: 18px 16px; }
+.ot-science__conc { margin: 0 0 2px; font-size: 12px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; }
+.ot-science__name { margin: 0 0 10px; font-family: var(--ot-font-heading); font-weight: 400; font-size: 26px; line-height: 1.1; color: #fff; }
+.ot-science__tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
+.ot-science__tag { padding: 5px 13px; border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px; background: rgba(0, 0, 0, 0.45); font-family: var(--ot-font-heading); font-size: 13px; line-height: 1.2; }
+.ot-science__desc { margin: 0; font-size: 12px; font-weight: 700; line-height: 1.4; }
+.ot-science__cta { max-width: 700px; margin: 28px auto 0; }
+.ot-science__cta .ot-cta__guarantee, .ot-science__cta .ot-cta__guarantee svg { color: #fff; }
+@media screen and (min-width: 750px) {
+  .ot-science { padding-inline: 56px; }
+  .ot-science__heading { font-size: 56px; }
+  .ot-science__head { margin-bottom: 40px; }
+  .ot-science__grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .ot-science__card { min-height: 216px; }
+  .ot-science__body { padding: 20px; }
+  .ot-science__name { font-size: 28px; }
+  .ot-science__cta { margin-top: 44px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Old Tom's oil cards",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Science of Nature" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Before Traps. Before Poison. Nature Already Had The Answer." },
+    { "type": "header", "content": "Button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show add to basket button", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Add to basket" },
+    { "type": "text", "id": "cta_guarantee", "label": "Guarantee line", "default": "30-Day Money Back Guarantee" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 140, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "oil",
+      "name": "Oil card",
+      "settings": [
+        { "type": "text", "id": "concentration", "label": "Concentration line", "default": "40% concentration" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Peppermint Oil" },
+        { "type": "text", "id": "tags", "label": "Tags (comma separated)", "default": "Nerve-Trigger, Scent-Activated, Instinct-Driven" },
+        { "type": "text", "id": "description", "label": "Description", "default": "Sets off a mouse's survival instinct. Instantly." },
+        { "type": "image_picker", "id": "image", "label": "Background image" },
+        { "type": "text", "id": "asset", "label": "Theme asset filename (used when no image is picked)", "default": "oldtoms-oil-peppermint.jpg" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Old Tom's oil cards",
+      "blocks": [
+        { "type": "oil", "settings": { "concentration": "40% concentration", "name": "Peppermint Oil", "tags": "Nerve-Trigger, Scent-Activated, Instinct-Driven", "description": "Sets off a mouse's survival instinct. Instantly.", "asset": "oldtoms-oil-peppermint.jpg" } },
+        { "type": "oil", "settings": { "concentration": "5% concentration", "name": "Cinnamon Oil", "tags": "Trail-Wrecker, Pheromone-Blocker", "description": "Wipes out their navigation. They can't find their way in.", "asset": "oldtoms-oil-cinnamon.jpg" } },
+        { "type": "oil", "settings": { "concentration": "4% concentration", "name": "Cedarwood Oil", "tags": "Nest-Blocker, Territory-Stopper", "description": "Stops nesting before it starts. Used for centuries.", "asset": "oldtoms-oil-cedarwood.jpg" } },
+        { "type": "oil", "settings": { "concentration": "", "name": "Castor Oil", "tags": "90-Day Strength, Slow-Release, Full Coverage", "description": "Keeps protection working for 90 days straight.", "asset": "oldtoms-oil-castor.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -9,274 +9,678 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "ot_home_hero": {
+      "type": "oldtoms-home-hero",
+      "settings": {
+        "rating_label": "Excellent",
+        "rating_text": "2,753 verified reviews",
+        "button_label": "SHOP NOW",
+        "button_link": "/products/mouse-repellent-pouches",
+        "verified_label": "Verified Buyer",
+        "autoplay_seconds": 6,
+        "desktop_height": 860,
+        "panel_color": "#5D824E",
+        "padding_top": 0,
+        "padding_bottom": 0
+      },
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "b1": {
+          "type": "slide",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "asset": "oldtoms-hero-01.jpg",
+            "image_alt": "Woman in a tidy garage holding the black Old Tom's bag",
+            "heading": "Keep Rodents Out, Naturally.",
+            "body": "Protect your home with our plant-based, essential oil pouches. Safe for your family, tough on mice and rats.",
+            "tags": "Plant-Based · Long-Lasting · Indoor Protection",
+            "quote": "At last, a natural fix that actually works! I put these in my garage and haven't seen a mouse since. Smells lovely too, unlike those chemical traps. Customer for life!",
+            "name": "Eliza H.",
+            "location": "Cheltenham",
+            "avatar_asset": "oldtoms-hero-avatar-01.jpg",
+            "sticker_asset": "oldtoms-sticker-mouse.png"
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "b2": {
+          "type": "slide",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "asset": "oldtoms-hero-02.jpg",
+            "image_alt": "Woman on a sofa in a bright lounge, spider pouch bag on the side table",
+            "heading": "Say Goodbye to Spiders, Naturally.",
+            "body": "Keep your corners clear. Our plant-based formula sees off spiders without harsh chemicals, keeping your home safe and calm.",
+            "tags": "Repels Spiders Naturally · Pet Safe · Plant-Based Formula",
+            "quote": "I hate spiders, but I hate toxic sprays even more. These pouches are a lifesaver. Popped a few in the cellar and the house is completely spider-free now!",
+            "name": "Sarah M.",
+            "location": "Bristol",
+            "avatar_asset": "oldtoms-hero-avatar-02.jpg",
+            "sticker_asset": "oldtoms-sticker-spider.png"
+          }
+        },
+        "b3": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-03.jpg",
+            "image_alt": "Man spraying along a kitchen skirting board",
+            "heading": "Instant Protection From Bugs",
+            "body": "Our powerful essential oil spray kills bugs on contact. The ultimate plant-based defence for a pest-free home.",
+            "tags": "Kills on Contact · Free From Harsh Chemicals · Multi-Bug Defence",
+            "quote": "This spray is brilliant! Used it on an ant trail in the kitchen and it worked instantly. Love that it's natural so I don't worry about my pets.",
+            "name": "Michael T.",
+            "location": "Norwich",
+            "avatar_asset": "oldtoms-hero-avatar-03.jpg",
+            "sticker_asset": "oldtoms-sticker-ant.png"
+          }
+        },
+        "b4": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-04.jpg",
+            "image_alt": "Mum and two children at a campsite by a loch",
+            "heading": "Enjoy the Outdoors, Bite-Free!",
+            "body": "Just peel, stick and play. Our citronella-powered patches keep the whole family safe, naturally.",
+            "tags": "Safe Around Kids · Outdoor Friendly · Citronella Powered",
+            "quote": "A total game changer for our family camping trips. Stuck one on the kids' tops and they didn't get a single bite all evening. Highly recommend!",
+            "name": "Emily R.",
+            "location": "Fort William",
+            "avatar_asset": "oldtoms-hero-avatar-04.jpg",
+            "sticker_asset": "oldtoms-sticker-mosquito.png"
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
-      ],
-      "name": "t:names.hero",
-      "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
-      }
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "ot_home_benefits": {
+      "type": "oldtoms-home-benefits",
+      "settings": {
+        "bg_color": "#7FA93F",
+        "text_color": "#FFFFFF",
+        "speed": 24,
+        "padding_top": 12,
+        "padding_bottom": 12
+      },
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "b1": {
+          "type": "item",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "glyph": "◎",
+            "text": "100% Plant-Based Formula"
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "b2": {
+          "type": "item",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "glyph": "☞",
+            "text": "Long-Lasting Protection"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "glyph": "♡",
+            "text": "Safe For Kids & Pets"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "glyph": "♕",
+            "text": "30 Day Money Back Guarantee"
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "ot_home_proof": {
+      "type": "oldtoms-home-proof",
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "number": "37,129+",
+        "label": "Properties Protected",
+        "bg_color": "#F4F4F0",
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "b1": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-01.jpg",
+            "alt": "Pouch behind a fridge"
+          }
+        },
+        "b2": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-02.jpg",
+            "alt": "Pouch in a caravan locker"
+          }
+        },
+        "b3": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-03.jpg",
+            "alt": "Pouch on a shed shelf"
+          }
+        },
+        "b4": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-04.jpg",
+            "alt": "Pouch in a stable corner"
+          }
+        },
+        "b5": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-05.jpg",
+            "alt": "Pouch under the sink"
+          }
+        },
+        "b6": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-06.jpg",
+            "alt": "Pouch in the loft"
+          }
+        },
+        "b7": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-07.jpg",
+            "alt": "Pouches by the garage door"
+          }
+        },
+        "b8": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-08.jpg",
+            "alt": "Pouch in a wardrobe"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ]
+    },
+    "ot_home_bestsellers": {
+      "type": "oldtoms-home-bestsellers",
+      "settings": {
+        "heading": "Our Bestsellers",
+        "button_label": "Shop All Products",
+        "button_link": "/collections/all",
+        "bg_color": "#FFFFFF",
+        "padding_top": 48,
+        "padding_bottom": 48
+      },
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-packshot.png",
+            "title": "Rodent Repellent Pouches",
+            "tag": "12 Pouches",
+            "flag": "UK Shipping",
+            "price": "£35.00",
+            "compare_at": "£68.00",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-bestseller-02.jpg",
+            "title": "Spider Repellent Pouches",
+            "tag": "6 Pouches",
+            "flag": "",
+            "price": "£13.00",
+            "compare_at": "",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-bestseller-03.jpg",
+            "title": "Critter Control Spray",
+            "tag": "1 Bottle",
+            "flag": "",
+            "price": "£25.00",
+            "compare_at": "",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b4": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-bestseller-04.jpg",
+            "title": "Midge & Mosquito Patches",
+            "tag": "78 Patches",
+            "flag": "",
+            "price": "£13.00",
+            "compare_at": "",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "ot_home_cards": {
+      "type": "oldtoms-home-cards",
+      "settings": {
+        "eyebrow": "Four Products",
+        "tag_text": "Every Homeowner",
+        "suffix": "Trusts",
+        "button_label": "Shop Now",
+        "bg_color": "#F4F4F0",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "b1": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-packshot.png",
+            "title": "Rodent Repellent Pouches",
+            "reviews": "1357 reviews",
+            "bullet_1": "Easy to place around house and garden",
+            "bullet_2": "Keeps burrowing pests away for weeks",
+            "bullet_3": "Safe around plants & pets",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b2": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-card-02.png",
+            "title": "Midge & Mosquito Patches",
+            "reviews": "899 reviews",
+            "bullet_1": "Hassle-free, drop-and-go defence",
+            "bullet_2": "Masks scent trails effectively",
+            "bullet_3": "Ideal for indoors & enclosed spaces",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b3": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-card-03.png",
+            "title": "Critter Control Spray",
+            "reviews": "400 reviews",
+            "bullet_1": "Kills & repels bugs on contact",
+            "bullet_2": "Water-based, non-staining formula",
+            "bullet_3": "Free from harsh chemicals",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        },
+        "b4": {
+          "type": "card",
+          "settings": {
+            "asset": "oldtoms-card-04.png",
+            "title": "Spider Repellent Pouches",
+            "reviews": "265 reviews",
+            "bullet_1": "Stops spiders webbing & nesting",
+            "bullet_2": "Easy to pop in wardrobes & corners",
+            "bullet_3": "Long-lasting, non-stop protection",
+            "link": "/products/mouse-repellent-pouches"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "ot_home_collage": {
+      "type": "oldtoms-home-collage",
+      "settings": {
+        "heading": "What Our Customers Say",
+        "verified_label": "Verified Buyer",
+        "bg_color": "#FFFFFF",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "b1": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-01.jpg",
+            "alt": "Man on a patio with the spray bottle",
+            "title": "Works instantly!",
+            "text": "I used the Critter Control Spray round the patio and kitchen. It works so fast and there's no harsh chemical smell left behind. Highly recommend!",
+            "name": "Ryan S.",
+            "location": "Swindon"
+          }
+        },
+        "b2": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-02.jpg",
+            "alt": "Pouches lined along a garage skirting board next to a bike",
+            "title": "Finally, peace of mind!",
+            "text": "We had a bit of a mouse problem in the garage. Dropped a few pouches by the skirting and the problem vanished completely. So glad it's natural and safe.",
+            "name": "James D.",
+            "location": "Chester"
+          }
+        },
+        "b3": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-03.jpg",
+            "alt": "Spider pouch tucked in the corner of a utility room",
+            "title": "No more spiders!",
+            "text": "We always had spiders in the utility room. Since putting pouches in the corners I haven't seen a single spider or web. The essential oil smell is a nice bonus!",
+            "name": "Rhys B.",
+            "location": "Cardiff"
+          }
+        },
+        "b4": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-04.jpg",
+            "alt": "Child's jacket sleeve with a patch on a countryside path",
+            "title": "Perfect for our kids!",
+            "text": "These patches are a lifesaver on evening walks. I stick them on the kids' clothes and we don't worry about bites. So much better than sticky sprays!",
+            "name": "Ken K.",
+            "location": "Inverness"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ]
+    },
+    "ot_home_reasons": {
+      "type": "oldtoms-home-reasons",
+      "settings": {
+        "heading": "5 Reasons Why Homeowners Trust",
+        "brand_tag": "OLD TOM'S",
+        "bg_color": "#F5FAE8",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "b1": {
+          "type": "reason",
+          "settings": {
+            "title": "Proven to Work",
+            "text": "92% of users see a visible drop in pest activity within the first 48 hours."
+          }
+        },
+        "b2": {
+          "type": "reason",
+          "settings": {
+            "title": "Plant-Based Power",
+            "text": "Made with 100% botanical actives like Peppermint and Lemongrass oil."
+          }
+        },
+        "b3": {
+          "type": "reason",
+          "settings": {
+            "title": "Long-Lasting Shield",
+            "text": "Our extended-release formula gives non-stop protection for your home for up to 60 days."
+          }
+        },
+        "b4": {
+          "type": "reason",
+          "settings": {
+            "title": "Family & Pet Safe",
+            "text": "Non-toxic and DEET-free, so it's safe to use around your children and pets when used as directed."
+          }
+        },
+        "b5": {
+          "type": "reason",
+          "settings": {
+            "title": "Less than 1% Return Rate",
+            "text": "Our customers love the results — fewer than 1% of orders are ever returned."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ]
+    },
+    "ot_home_compare": {
+      "type": "oldtoms-home-compare",
+      "settings": {
+        "heading": "How We Stack Up",
+        "brand_name": "OLD TOM'S",
+        "others_name": "OTHER SOLUTIONS",
+        "bg_color": "#FFFFFF",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "feature": "Natural & ZERO Chemicals or Toxins",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "feature": "Works Within 72 Hours",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "feature": "Safe for Kids, Pets & Livestock",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "feature": "No Clean-Up / No Bodies",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "feature": "90-Day Cover Per Pouch",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "feature": "Cost Per Day of Protection",
+            "ours": "£0.22",
+            "theirs": "£0.48 to £1.95/day"
+          }
+        },
+        "b7": {
+          "type": "row",
+          "settings": {
+            "feature": "Zero Tolerance Build-Up",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ]
+    },
+    "ot_home_stats": {
+      "type": "oldtoms-home-stats",
+      "settings": {
+        "pattern_asset": "oldtoms-stats-pattern.jpg",
+        "bg_color": "#4F9A4C",
+        "padding_top": 56,
+        "padding_bottom": 56
+      },
+      "blocks": {
+        "b1": {
+          "type": "stat",
+          "settings": {
+            "icon": "star",
+            "value": "4.8/5",
+            "label": "Rated Excellent"
+          }
+        },
+        "b2": {
+          "type": "stat",
+          "settings": {
+            "icon": "cart",
+            "value": "1M+",
+            "label": "Repellents Sold"
+          }
+        },
+        "b3": {
+          "type": "stat",
+          "settings": {
+            "icon": "people",
+            "value": "500K+",
+            "label": "Customers"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3"
+      ]
+    },
+    "ot_home_faq": {
+      "type": "oldtoms-home-faq",
+      "settings": {
+        "heading": "FAQ",
+        "bg_color": "#FFFFFF",
+        "padding_top": 56,
+        "padding_bottom": 40
+      },
+      "blocks": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "question": "Are Old Tom's products really safe around kids and pets?",
+            "answer": "Yes, absolutely! All our products are made with 100% plant-based essential oils (like peppermint, lemongrass and citronella) and are completely free from harsh, toxic chemicals. They're built to be a safe, natural alternative for your home, family and furry friends."
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "question": "How long do the repellent pouches last?",
+            "answer": "Our pouches give long-lasting, non-stop protection. Generally they work for 30 to 60 days depending on airflow and room size. We recommend replacing them once the natural scent starts to fade."
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "question": "Do I need to leave the house after using the Critter Control Spray?",
+            "answer": "Not at all! Our spray has no toxic fumes or harsh chemicals, so you don't need to clear the room. It kills bugs on contact and leaves a fresh mint and cinnamon scent behind."
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "question": "Where's the best place for the Spider and Rodent Repellent Pouches?",
+            "answer": "For best results, put pouches in enclosed spaces or wherever you spot pest activity. Great spots include corners, cellars, lofts, wardrobes, under sinks, garages, sheds and near doors and windows."
+          }
+        },
+        "b5": {
+          "type": "item",
+          "settings": {
+            "question": "How do the Midge & Mosquito Patches work?",
+            "answer": "Our patches are infused with natural citronella oil. Just peel and stick onto clothing, a rucksack or a pushchair. It makes a natural, invisible barrier that keeps biters away — perfect for days out."
+          }
+        },
+        "b6": {
+          "type": "item",
+          "settings": {
+            "question": "Will the Rodent Repellent Pouches leave a bad smell in my house?",
+            "answer": "No, quite the opposite! Mice and rats hate the smell, but people love it. Our rodent pouches use a blend of peppermint, cinnamon and cedarwood oils that works as a natural air freshener and even helps soak up bad odours."
+          }
+        },
+        "b7": {
+          "type": "item",
+          "settings": {
+            "question": "What if the product doesn't work for me?",
+            "answer": "We're confident in our natural formulas, which is why every order is backed by our 30-Day Money Back Guarantee. If you're not completely happy with your results, just contact our support team within 30 days for a full refund."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ]
+    },
+    "ot_home_support": {
+      "type": "oldtoms-home-support",
+      "settings": {
+        "heading": "Still Need Help? Contact Us",
+        "body": "Our experts are here to help — from placement tips to picking the right pack size.",
+        "button_label": "Contact Us",
+        "button_link": "/pages/contact",
+        "hours": "Our customer support is open Monday to Friday, 8am–8pm.",
+        "avatar_asset": "oldtoms-support-agent.jpg",
+        "bg_color": "#FFFFFF",
+        "card_color": "#F0F0E6",
+        "padding_top": 24,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "ot_home_hero",
+    "ot_home_benefits",
+    "ot_home_proof",
+    "ot_home_bestsellers",
+    "ot_home_cards",
+    "ot_home_collage",
+    "ot_home_reasons",
+    "ot_home_compare",
+    "ot_home_stats",
+    "ot_home_faq",
+    "ot_home_support"
   ]
 }

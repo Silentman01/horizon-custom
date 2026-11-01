@@ -1,0 +1,99 @@
+{%- assign s = section.settings -%}
+<section class="ot-home-cards" style="{% render 'oldtoms-vars' %}--ot-bg:{{ s.bg_color }};--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;">
+  <h2 class="ot-home-cards__heading">
+    <span class="ot-home-cards__eyebrow">{{ s.eyebrow }}</span>
+    <span class="ot-home-cards__tag">{{ s.tag_text }}</span>
+    {%- if s.suffix != blank -%}<span class="ot-home-cards__eyebrow">{{ s.suffix }}</span>{%- endif -%}
+  </h2>
+  <div class="ot-home-cards__rail" data-ot-drag>
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      <article class="ot-home-cards__card" {{ block.shopify_attributes }}>
+        <div class="ot-home-cards__pic">
+          {% render 'oldtoms-media', image: b.image, asset: b.asset, ratio: '4 / 3', alt: b.title %}
+        </div>
+        <p class="ot-home-cards__rating"><span class="ot-home-cards__stars" aria-hidden="true">★★★★★</span> {{ b.reviews }}</p>
+        <h3 class="ot-home-cards__title">{{ b.title }}</h3>
+        <ul class="ot-home-cards__list">
+          {%- if b.bullet_1 != blank -%}<li>{{ b.bullet_1 }}</li>{%- endif -%}
+          {%- if b.bullet_2 != blank -%}<li>{{ b.bullet_2 }}</li>{%- endif -%}
+          {%- if b.bullet_3 != blank -%}<li>{{ b.bullet_3 }}</li>{%- endif -%}
+        </ul>
+        {%- if b.price != blank -%}<p class="ot-home-cards__price">{{ b.price }}{% if b.compare_at != blank %} <s>{{ b.compare_at }}</s>{% endif %}</p>{%- endif -%}
+        <a class="ot-home-cards__button" href="{{ b.link | default: '/products/mouse-repellent-pouches' }}" draggable="false">{{ s.button_label }}</a>
+      </article>
+    {%- endfor -%}
+  </div>
+</section>
+{% render 'oldtoms-home-drag' %}
+
+{% stylesheet %}
+.ot-home-cards { background: var(--ot-bg); padding: var(--ot-pt) 0 var(--ot-pb); font-family: var(--ot-font); color: #121212; }
+.ot-home-cards__heading { margin: 0 0 20px; padding-inline: 16px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; text-align: center; font-family: var(--ot-font-heading); font-weight: 400; font-size: 28px; line-height: 1.2; color: var(--ot-green); }
+.ot-home-cards__tag { display: inline-block; background: var(--ot-lime); border: 1px solid var(--ot-green); border-radius: 10px; box-shadow: 0 3px 0 var(--ot-green); padding: 2px 14px; transform: rotate(-2deg); font-weight: 700; }
+.ot-home-cards__rail { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; padding: 70px 16px 8px; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }
+.ot-home-cards__rail::-webkit-scrollbar { display: none; }
+.ot-home-cards__rail.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.ot-home-cards__card { flex: 0 0 clamp(250px, 78vw, 320px); scroll-snap-align: start; position: relative; display: flex; flex-direction: column; background: #F3F1EE; border: 1.5px solid var(--ot-green); border-radius: 24px; padding: 74px 22px 22px; }
+.ot-home-cards__pic { position: absolute; left: 50%; top: -60px; width: 190px; transform: translateX(-50%); }
+.ot-home-cards__pic .ot-media { background: transparent; }
+.ot-home-cards__pic img { object-fit: contain; pointer-events: none; }
+.ot-home-cards__rating { margin: 0 0 6px; font-size: 12px; letter-spacing: 1px; }
+.ot-home-cards__stars { color: var(--ot-lime); -webkit-text-stroke: 0.8px var(--ot-green); font-size: 15px; }
+.ot-home-cards__title { margin: 0 0 12px; font-family: var(--ot-font); font-weight: 600; font-size: 18px; line-height: 1.25; }
+.ot-home-cards__list { margin: 0 0 16px; padding-left: 18px; font-size: 13px; line-height: 1.5; flex: 1; }
+.ot-home-cards__list li::marker { color: var(--ot-green); }
+.ot-home-cards__price { margin: 0 0 12px; font-weight: 600; font-size: 15px; }
+.ot-home-cards__price s { color: var(--ot-muted); font-weight: 400; }
+.ot-home-cards__button { display: flex; align-items: center; justify-content: center; height: 42px; border: 1.5px solid var(--ot-green); border-radius: 999px; background: var(--ot-lime); color: var(--ot-green); font-weight: 700; font-size: 14px; text-transform: uppercase; text-decoration: none; }
+@media screen and (min-width: 990px) {
+  .ot-home-cards__heading { font-size: 30px; }
+  .ot-home-cards__rail { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1384px; margin: 0 auto; padding: 80px 28px 8px; overflow: visible; cursor: auto; }
+  .ot-home-cards__card { flex: none; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Old Tom's product cards",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Heading start", "default": "Four Products" },
+    { "type": "text", "id": "tag_text", "label": "Highlighted words", "default": "Every Homeowner" },
+    { "type": "text", "id": "suffix", "label": "Heading end", "default": "Trusts" },
+    { "type": "text", "id": "button_label", "label": "Card button", "default": "Shop Now" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F4F4F0" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "default": 56, "min": 0, "max": 120, "step": 4, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "default": 56, "min": 0, "max": 120, "step": 4, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Product card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Cut-out image" },
+        { "type": "text", "id": "asset", "label": "Image: theme file", "info": "Used when no image is uploaded." },
+        { "type": "text", "id": "title", "label": "Title", "default": "Rodent Repellent Pouches" },
+        { "type": "text", "id": "reviews", "label": "Review count text", "default": "1357 reviews" },
+        { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Easy to place around house and garden" },
+        { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Keeps burrowing pests away for weeks" },
+        { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Safe around plants & pets" },
+        { "type": "text", "id": "price", "label": "Price (optional)" },
+        { "type": "text", "id": "compare_at", "label": "Compare-at price (optional)" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Blank = /products/mouse-repellent-pouches." }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Old Tom's product cards",
+      "blocks": [
+        { "type": "card", "settings": { "asset": "oldtoms-packshot.png" } },
+        { "type": "card", "settings": { "asset": "oldtoms-card-02.png", "title": "Midge & Mosquito Patches", "reviews": "899 reviews", "bullet_1": "Hassle-free, drop-and-go defence", "bullet_2": "Masks scent trails effectively", "bullet_3": "Ideal for indoors & enclosed spaces" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

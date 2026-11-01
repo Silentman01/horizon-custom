@@ -1,0 +1,43 @@
+{%- comment -%} Old Tom's pill row: reassurance pill + live stock pill. {%- endcomment -%}
+{%- liquid
+  assign p = closest.product
+  if request.visual_preview_mode and p == blank
+    assign p = collections.all.products.first
+  endif
+  assign bs = block.settings
+  assign in_stock = true
+  if p != blank and p.available == false
+    assign in_stock = false
+  endif
+-%}
+<div class="ot-pills" style="{% render 'oldtoms-vars' %}" {{ block.shopify_attributes }}>
+  {%- if bs.pill_text != blank -%}
+    <span class="ot-pills__pill ot-pills__pill--safe">{{ bs.pill_text }}</span>
+  {%- endif -%}
+  {%- if bs.show_stock -%}
+    <span class="ot-pills__pill ot-pills__pill--stock{% unless in_stock %} is-out{% endunless %}">
+      <span class="ot-pills__dot" aria-hidden="true"></span>
+      {%- if in_stock %}{{ bs.in_stock_text }}{% else %}{{ bs.out_of_stock_text }}{% endif -%}
+    </span>
+  {%- endif -%}
+</div>
+{% stylesheet %}
+.ot-pills { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; width: 100%; }
+.ot-pills__pill { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 1.2; color: var(--ot-fg, #000); background: var(--ot-cream, #f4f4f0); }
+.ot-pills__pill--stock { background: #ececec; color: #121212; }
+.ot-pills__dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e44; flex: none; }
+.ot-pills__pill--stock.is-out .ot-pills__dot { background: #c0392b; }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Old Tom's pills",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "pill_text", "label": "Reassurance pill", "default": "🌿 Safe Around Kids, Pets & Livestock" },
+    { "type": "checkbox", "id": "show_stock", "label": "Show stock pill", "default": true },
+    { "type": "text", "id": "in_stock_text", "label": "In stock text", "default": "In stock", "visible_if": "{{ block.settings.show_stock }}" },
+    { "type": "text", "id": "out_of_stock_text", "label": "Out of stock text", "default": "Out of stock", "visible_if": "{{ block.settings.show_stock }}" }
+  ],
+  "presets": [{ "name": "Old Tom's pills" }]
+}
+{% endschema %}

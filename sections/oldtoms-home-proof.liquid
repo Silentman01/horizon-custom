@@ -1,0 +1,71 @@
+<section class="ot-home-proof" style="{% render 'oldtoms-vars' %}--ot-bg:{{ section.settings.bg_color }};--ot-pt:{{ section.settings.padding_top }}px;--ot-pb:{{ section.settings.padding_bottom }}px;">
+  <div class="ot-home-proof__head">
+    <p class="ot-home-proof__stars" aria-hidden="true">★★★★★</p>
+    <h2 class="ot-home-proof__heading"><span class="ot-home-proof__num">{{ section.settings.number }}</span> <span class="ot-home-proof__label">{{ section.settings.label }}</span></h2>
+  </div>
+  <div class="ot-home-proof__rail" data-ot-drag="free">
+    {%- for block in section.blocks -%}
+      <div class="ot-home-proof__tile" {{ block.shopify_attributes }}>
+        {% render 'oldtoms-media', image: block.settings.image, asset: block.settings.asset, ratio: '4 / 5', alt: block.settings.alt %}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+{% render 'oldtoms-home-drag' %}
+
+{% stylesheet %}
+.ot-home-proof { background: var(--ot-bg); padding: var(--ot-pt) 0 var(--ot-pb); font-family: var(--ot-font); overflow: hidden; }
+.ot-home-proof__head { text-align: center; padding-inline: 16px; margin-bottom: 20px; }
+.ot-home-proof__stars { margin: 0 0 8px; font-size: 24px; letter-spacing: 3px; color: var(--ot-lime); -webkit-text-stroke: 1px var(--ot-green); }
+.ot-home-proof__heading { margin: 0; color: var(--ot-green); font-weight: 400; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.ot-home-proof__num { font-family: var(--ot-font-heading); font-size: 56px; line-height: 1.05; }
+.ot-home-proof__label { font-size: 22px; line-height: 1.2; color: #121212; }
+.ot-home-proof__rail { display: grid; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: 100px; gap: 8px; overflow-x: auto; padding-inline: 16px; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }
+.ot-home-proof__rail::-webkit-scrollbar { display: none; }
+.ot-home-proof__rail.is-dragging { cursor: grabbing; user-select: none; }
+.ot-home-proof__tile { border: 1px solid var(--ot-green); border-radius: 6px; overflow: hidden; }
+.ot-home-proof__tile img { pointer-events: none; }
+@media screen and (min-width: 750px) {
+  .ot-home-proof__heading { flex-direction: row; justify-content: center; gap: 10px; align-items: baseline; }
+  .ot-home-proof__num, .ot-home-proof__label { font-family: var(--ot-font-heading); font-size: 40px; color: var(--ot-green); }
+  .ot-home-proof__rail { grid-template-rows: auto; grid-auto-columns: 172px; padding-inline: 24px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Old Tom's proof rail",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Big number", "default": "37,129+" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Properties Protected" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F4F4F0" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "default": 48, "min": 0, "max": 120, "step": 4, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "default": 48, "min": 0, "max": 120, "step": 4, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "tile",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "asset", "label": "Image: theme file", "info": "Used when no image is uploaded." },
+        { "type": "text", "id": "alt", "label": "Alt text" }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Old Tom's proof rail",
+      "blocks": [
+        { "type": "tile", "settings": { "asset": "oldtoms-proof-01.jpg" } },
+        { "type": "tile", "settings": { "asset": "oldtoms-proof-02.jpg" } },
+        { "type": "tile", "settings": { "asset": "oldtoms-proof-03.jpg" } },
+        { "type": "tile", "settings": { "asset": "oldtoms-proof-04.jpg" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

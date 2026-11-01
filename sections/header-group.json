@@ -12,33 +12,19 @@
   "name": "t:names.header",
   "sections": {
     "header_announcements_9jGBFp": {
-      "type": "header-announcements",
-      "blocks": {
-        "announcement_BxgCk9": {
-          "type": "_announcement",
-          "settings": {
-            "text": "Welcome to our store",
-            "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
-            "letter_spacing": "normal",
-            "case": "none"
-          },
-          "blocks": {}
-        }
-      },
-      "block_order": [
-        "announcement_BxgCk9"
-      ],
-      "name": "t:names.announcement_bar",
+      "type": "oldtoms-announcement",
       "settings": {
-        "speed": 5,
-        "section_width": "page-width",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15,
-        "divider_color": "{{ settings.color_palette.color3 }}"
+        "line_1": "SALE NOW LIVE",
+        "line_2": "UP TO 72% OFF!",
+        "show_countdown": true,
+        "labels": "DYS,HRS,MIN,SEC",
+        "cycle_days": 3,
+        "color_dark": "#D85800",
+        "color_light": "#F59432",
+        "text_color": "#FFFFFF",
+        "torn_edge": true,
+        "padding_top": 14,
+        "padding_bottom": 14
       }
     },
     "header_section": {
@@ -82,9 +68,9 @@
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
-        "show_country": true,
+        "show_country": false,
         "country_selector_style": false,
-        "show_language": true,
+        "show_language": false,
         "localization_font": "heading",
         "localization_font_size": "0.875rem",
         "localization_position": "right",
@@ -99,10 +85,53 @@
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false
       }
+    },
+    "cart_drawer": {
+      "type": "cart-drawer-extras",
+      "settings": {
+        "cart_extras_announce_enable": false,
+        "cart_extras_timer_enable": false,
+        "cart_extras_ship_enable": true,
+        "cart_extras_ship_threshold": 45,
+        "cart_extras_ship_text_unlocked": "You've unlocked FREE UK delivery!",
+        "cart_extras_ship_text_locked": "Add {amount} to unlock FREE UK delivery",
+        "cart_extras_ship_icon": true,
+        "cart_extras_ship_progress": true,
+        "cart_extras_ship_mobile": true,
+        "cart_extras_ship_bg": "#EBF5ED",
+        "cart_extras_ship_color": "#24433D",
+        "cart_extras_ship_fill": "#CCF46F",
+        "cart_extras_ship_track": "#D9E4C8",
+        "cart_extras_ship_size": 14,
+        "cart_extras_top_divider": true,
+        "cart_extras_compact": true,
+        "cart_extras_breakdown_enable": true,
+        "cart_extras_breakdown_compare_at": false,
+        "cart_extras_breakdown_shipping": true,
+        "cart_extras_hide_tax_note": true,
+        "cart_extras_hide_discount_code": true,
+        "cart_extras_badges_enable": true,
+        "cart_extras_badge_1_text": "30-Day Money Back Guarantee",
+        "cart_extras_badge_1_icon": "shield",
+        "cart_extras_badge_2_text": "Free UK delivery over £45",
+        "cart_extras_badge_2_icon": "truck",
+        "cart_extras_badge_3_text": "Secure checkout",
+        "cart_extras_badge_3_icon": "lock",
+        "cart_extras_badges_layout": "row",
+        "cart_extras_badges_mobile": true,
+        "cart_extras_badges_color": "#24433D",
+        "cart_extras_badges_icon_color": "#7FA93F",
+        "cart_extras_badges_size": 12,
+        "cart_extras_pay_enable": true,
+        "cart_extras_pay_mobile": true,
+        "cart_extras_pay_height": 22,
+        "cart_extras_pay_gap": 6
+      }
     }
   },
   "order": [
     "header_announcements_9jGBFp",
-    "header_section"
+    "header_section",
+    "cart_drawer"
   ]
 }

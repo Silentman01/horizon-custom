@@ -1,0 +1,123 @@
+{%- comment -%}
+  One bundle card. Finds its variant by exact variant title (option_value) or by position; falls back to the static
+  price settings when the product has no matching variant.
+{%- endcomment -%}
+{%- liquid
+  assign p = closest.product
+  assign bs = block.settings
+  assign v = null
+  if bs.option_value != blank
+    assign wanted = bs.option_value | strip | downcase
+    for x in p.variants
+      assign t = x.title | strip | downcase
+      if t == wanted
+        assign v = x
+        break
+      endif
+    endfor
+  endif
+  if v == null and bs.variant_position > 0
+    assign idx = bs.variant_position | minus: 1
+    if p.variants.size > idx
+      assign v = p.variants[idx]
+    endif
+  endif
+  assign matched = true
+  if v == null or p.has_only_default_variant
+    assign matched = false
+    assign v = p.selected_or_first_available_variant
+  endif
+
+  assign price = v.price
+  assign compare = v.compare_at_price | default: 0
+  if matched == false and bs.fallback_price != blank
+    assign price = bs.fallback_price | times: 100
+    assign compare = bs.fallback_compare | default: 0 | times: 100
+  endif
+  assign pouches = bs.pouches | at_least: 1
+  assign per_pouch = price | times: 1.0 | divided_by: pouches | round
+  assign pct = 0
+  if compare > price and compare > 0
+    assign pct = compare | minus: price | times: 100.0 | divided_by: compare | round
+  endif
+
+  assign selected = false
+  if p.selected_variant
+    if matched and v.id == p.selected_variant.id
+      assign selected = true
+    endif
+  elsif bs.preselect
+    assign selected = true
+  endif
+-%}
+<label class="ot-tier{% if selected %} is-selected{% endif %}{% unless v.available %} is-unavailable{% endunless %}" {{ block.shopify_attributes }}>
+  <input
+    class="ot-tier__input visually-hidden"
+    type="radio"
+    name="ot-tiers-{{ section.id }}"
+    value="{{ v.id }}"
+    {% if matched %}data-variant-id="{{ v.id }}"{% endif %}
+    {% if selected %}checked{% endif %}
+    {% if bs.preselect %}data-preselect{% endif %}
+    {% unless v.available %}disabled{% endunless %}
+  >
+  {%- if bs.badge != blank -%}<span class="ot-tier__badge">{{ bs.badge }}</span>{%- endif -%}
+  <span class="ot-tier__radio" aria-hidden="true"></span>
+  <span class="ot-tier__main">
+    <span class="ot-tier__title">{{ bs.title | default: v.title }}</span>
+    {%- if bs.label != blank -%}<span class="ot-tier__label">{{ bs.label }}</span>{%- endif -%}
+    {%- if pct > 0 and bs.show_pill -%}<span class="ot-tier__pill">{{ pct }}% OFF</span>{%- endif -%}
+  </span>
+  <span class="ot-tier__prices">
+    <span class="ot-tier__per"><strong>{{ per_pouch | money }}</strong><span class="ot-tier__unit">/pouch</span></span>
+    <span class="ot-tier__totals">
+      {%- if compare > price %}<s class="ot-tier__was">{{ compare | money }}</s>{% endif -%}
+      <span class="ot-tier__total">{{ price | money }}</span>
+    </span>
+  </span>
+</label>
+{% stylesheet %}
+.ot-tier { position: relative; display: flex; align-items: center; gap: 12px; min-height: 76px; padding: 14px; border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; color: #24433d; cursor: pointer; transition: background-color 0.15s ease, border-color 0.15s ease; }
+.ot-tier.is-selected { padding: 13px; border: 2px solid #24433d; background: #f4f4f0; }
+.ot-tier:has(.ot-tier__input:focus-visible) { outline: 2px solid #000; outline-offset: 2px; }
+.ot-tier.is-unavailable { opacity: 0.55; cursor: not-allowed; }
+.ot-tier__radio { flex: none; width: 22px; height: 22px; border: 2px solid #24433d; border-radius: 50%; background: #fff; box-shadow: inset 0 0 0 4px #fff; }
+.ot-tier.is-selected .ot-tier__radio { background: #24433d; }
+.ot-tier__main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; }
+.ot-tier__title { font-size: 15px; font-weight: 700; line-height: 1.2; text-transform: uppercase; color: #24433d; }
+.ot-tier__label { font-size: 13px; line-height: 1.25; color: #24433d; }
+.ot-tier__pill { margin-top: 2px; padding: 3px 8px; border-radius: 4px; background: #24433d; color: #ccf46f; font-size: 12px; font-weight: 700; line-height: 1.2; }
+.ot-tier__prices { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
+.ot-tier__per { display: flex; align-items: baseline; gap: 2px; color: #cb6600; }
+.ot-tier__per strong { font-size: 22px; font-weight: 700; line-height: 1.1; }
+.ot-tier__unit { font-size: 12px; font-weight: 600; }
+.ot-tier__totals { display: flex; align-items: baseline; gap: 6px; }
+.ot-tier__was { font-size: 13px; color: #808887; }
+.ot-tier__total { font-size: 14px; font-weight: 700; color: #121212; }
+.ot-tier__badge { position: absolute; top: -10px; right: 12px; padding: 3px 8px; border-radius: 4px; background: #ccf46f; color: #24433d; font-size: 11px; font-weight: 700; line-height: 1.2; text-transform: uppercase; }
+@media screen and (max-width: 389px) {
+  .ot-tier { gap: 8px; padding: 12px; }
+  .ot-tier.is-selected { padding: 11px; }
+  .ot-tier__per strong { font-size: 19px; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Old Tom's bundle card",
+  "tag": null,
+  "settings": [
+    { "type": "text", "id": "option_value", "label": "Variant name (exact)", "default": "Buy 1", "info": "Matches the variant title, e.g. Buy 2 Get 1 Free." },
+    { "type": "range", "id": "variant_position", "label": "Variant position (fallback)", "min": 1, "max": 10, "step": 1, "default": 1, "info": "Used when no variant name matches." },
+    { "type": "text", "id": "title", "label": "Title", "default": "Buy 1" },
+    { "type": "text", "id": "label", "label": "Line under title", "default": "1x Pack | 12 Pouches" },
+    { "type": "range", "id": "pouches", "label": "Pouches in this card", "min": 1, "max": 100, "step": 1, "default": 12, "info": "Used for the per-pouch price." },
+    { "type": "checkbox", "id": "show_pill", "label": "Show % OFF pill", "default": true },
+    { "type": "text", "id": "badge", "label": "Badge" },
+    { "type": "checkbox", "id": "preselect", "label": "Preselected", "default": false },
+    { "type": "header", "content": "Fallback prices" },
+    { "type": "paragraph", "content": "Only used when the product has no variant matching this card. Enter plain numbers such as 35.00." },
+    { "type": "text", "id": "fallback_price", "label": "Fallback price", "default": "35.00" },
+    { "type": "text", "id": "fallback_compare", "label": "Fallback compare-at price", "default": "68.00" }
+  ]
+}
+{% endschema %}

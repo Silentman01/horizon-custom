@@ -1,0 +1,144 @@
+{%- comment -%}
+  Old Tom's footer (green band): socials, "Sign Up & Save" newsletter, "FYI" links, payment icons, copyright.
+  Renders complete with zero admin setup. Links default to Shopify's own policy pages; links with an empty URL are hidden.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign fallback_payments = 'visa,master,american_express,apple_pay,google_pay,shopify_pay,discover,diners_club,maestro' | split: ','
+-%}
+<footer class="ot-footer" style="--ot-footer-bg: {{ s.background_color }}; --ot-footer-fg: {{ s.text_color }}; --ot-footer-pt: {{ s.padding_top }}px; --ot-footer-pb: {{ s.padding_bottom }}px;" {{ section.shopify_attributes }}>
+  <div class="ot-footer__inner">
+    <div class="ot-footer__cols">
+      <div class="ot-footer__col ot-footer__col--social">
+        <ul class="ot-footer__social" role="list">
+          <li>
+            {%- if s.facebook_url != blank -%}<a class="ot-footer__social-link" href="{{ s.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook">{%- else -%}<span class="ot-footer__social-link" role="img" aria-label="Facebook">{%- endif -%}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M13.5 21v-7.7h2.6l.4-3h-3V8.4c0-.9.3-1.5 1.5-1.5h1.6V4.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1z"/></svg>
+            {%- if s.facebook_url != blank -%}</a>{%- else -%}</span>{%- endif -%}
+          </li>
+          <li>
+            {%- if s.instagram_url != blank -%}<a class="ot-footer__social-link" href="{{ s.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">{%- else -%}<span class="ot-footer__social-link" role="img" aria-label="Instagram">{%- endif -%}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>
+            {%- if s.instagram_url != blank -%}</a>{%- else -%}</span>{%- endif -%}
+          </li>
+        </ul>
+      </div>
+
+      <div class="ot-footer__col ot-footer__col--news">
+        {%- if s.news_heading != blank -%}<h2 class="ot-footer__heading">{{ s.news_heading }}</h2>{%- endif -%}
+        {%- if s.news_text != blank -%}<p class="ot-footer__text">{{ s.news_text }}</p>{%- endif -%}
+        {%- form 'customer', class: 'ot-footer__form' -%}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <label class="visually-hidden" for="ot-footer-email-{{ section.id }}">{{ s.news_placeholder }}</label>
+          <input id="ot-footer-email-{{ section.id }}" class="ot-footer__input" type="email" name="contact[email]" autocomplete="email" required placeholder="{{ s.news_placeholder | escape }}" value="{{ form.email }}">
+          <button class="ot-footer__submit" type="submit">{{ s.news_button }}</button>
+          {%- if form.posted_successfully? -%}<p class="ot-footer__note" role="status">{{ s.news_success }}</p>{%- endif -%}
+          {%- if form.errors -%}<p class="ot-footer__note" role="alert">{{ form.errors | default_errors }}</p>{%- endif -%}
+        {%- endform -%}
+      </div>
+
+      <div class="ot-footer__col ot-footer__col--links">
+        {%- if s.links_heading != blank -%}<h2 class="ot-footer__heading">{{ s.links_heading }}</h2>{%- endif -%}
+        <ul class="ot-footer__links" role="list">
+          {%- for i in (1..8) -%}
+            {%- assign lk = 'link_' | append: i | append: '_label' -%}
+            {%- assign uk = 'link_' | append: i | append: '_url' -%}
+            {%- assign label = s[lk] -%}
+            {%- assign url = s[uk] -%}
+            {%- if label != blank and url != blank -%}
+              <li><a class="ot-footer__link" href="{{ url }}">{{ label }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+
+    <hr class="ot-footer__rule">
+
+    {%- if s.show_payments -%}
+      <ul class="ot-footer__pay" role="list" aria-label="{{ 'blocks.payment_methods' | t }}">
+        {%- if shop.enabled_payment_types.size > 0 -%}
+          {%- for type in shop.enabled_payment_types -%}
+            <li>{{ type | payment_type_svg_tag: class: 'ot-footer__pay-icon' }}</li>
+          {%- endfor -%}
+        {%- else -%}
+          {%- for type in fallback_payments -%}
+            <li>{{ type | payment_type_svg_tag: class: 'ot-footer__pay-icon' }}</li>
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    {%- endif -%}
+
+    {%- if s.copyright != blank -%}<p class="ot-footer__copy">{{ s.copyright }}</p>{%- endif -%}
+  </div>
+</footer>
+{% stylesheet %}
+.ot-footer { width: 100%; padding: var(--ot-footer-pt, 48px) 20px var(--ot-footer-pb, 32px); background: var(--ot-footer-bg, #7fa93f); color: var(--ot-footer-fg, #fff); font-family: var(--font-body--family); }
+.ot-footer__inner { max-width: 1100px; margin-inline: auto; }
+.ot-footer__cols { display: grid; grid-template-columns: 1fr; gap: 32px; }
+.ot-footer__social { display: flex; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.ot-footer__social-link { display: grid; place-items: center; width: 44px; height: 44px; color: inherit; }
+.ot-footer__heading { margin: 0 0 8px; font-family: var(--font-body--family); font-size: 18px; font-weight: 600; line-height: 1.3; color: inherit; }
+.ot-footer__text { margin: 0 0 16px; font-size: 13px; line-height: 1.6; letter-spacing: 0.8px; }
+.ot-footer__form { display: grid; gap: 12px; max-width: 420px; }
+.ot-footer__input { box-sizing: border-box; width: 100%; height: 44px; padding: 0 14px; border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 6px; background: transparent; color: inherit; font-size: 14px; }
+.ot-footer__input::placeholder { color: rgba(255, 255, 255, 0.8); }
+.ot-footer__input:focus-visible, .ot-footer__submit:focus-visible, .ot-footer__link:focus-visible, .ot-footer__social-link:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.ot-footer__submit { height: 48px; padding: 0 24px; border: 0; border-radius: 6px; background: #fff; color: var(--ot-footer-bg, #7fa93f); font-size: 14px; font-weight: 600; cursor: pointer; }
+.ot-footer__note { margin: 0; font-size: 13px; }
+.ot-footer__links { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
+.ot-footer__link { display: flex; align-items: center; min-height: 44px; color: inherit; font-size: 13px; letter-spacing: 0.8px; text-decoration: none; }
+.ot-footer__link:hover { text-decoration: underline; }
+.ot-footer__rule { margin: 32px 0 24px; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.35); }
+.ot-footer__pay { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 0 0 20px; padding: 0; list-style: none; }
+.ot-footer__pay-icon { width: 38px; height: 24px; display: block; }
+.ot-footer__copy { margin: 0; text-align: center; font-size: 12px; line-height: 1.5; }
+@media screen and (min-width: 750px) {
+  .ot-footer { padding-inline: 48px; }
+  .ot-footer__cols { grid-template-columns: 1fr 1.4fr 1fr; gap: 48px; }
+}
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Old Tom's footer",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Social" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook link" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+    { "type": "header", "content": "Newsletter" },
+    { "type": "text", "id": "news_heading", "label": "Heading", "default": "Sign Up & Save" },
+    { "type": "text", "id": "news_text", "label": "Text", "default": "Subscribe for special offers, free giveaways and once-in-a-lifetime deals." },
+    { "type": "text", "id": "news_placeholder", "label": "Field placeholder", "default": "Email" },
+    { "type": "text", "id": "news_button", "label": "Button", "default": "Sign up" },
+    { "type": "text", "id": "news_success", "label": "Success message", "default": "Thanks for subscribing!" },
+    { "type": "header", "content": "Links" },
+    { "type": "text", "id": "links_heading", "label": "Heading", "default": "FYI" },
+    { "type": "text", "id": "link_1_label", "label": "Link 1 label", "default": "Contact Us" },
+    { "type": "text", "id": "link_1_url", "label": "Link 1 URL", "default": "/pages/contact" },
+    { "type": "text", "id": "link_2_label", "label": "Link 2 label", "default": "Privacy Policy" },
+    { "type": "text", "id": "link_2_url", "label": "Link 2 URL", "default": "/policies/privacy-policy" },
+    { "type": "text", "id": "link_3_label", "label": "Link 3 label", "default": "Refund Policy" },
+    { "type": "text", "id": "link_3_url", "label": "Link 3 URL", "default": "/policies/refund-policy" },
+    { "type": "text", "id": "link_4_label", "label": "Link 4 label", "default": "Manage Refills" },
+    { "type": "text", "id": "link_4_url", "label": "Link 4 URL", "info": "Hidden while empty. Add the page of your subscription app." },
+    { "type": "text", "id": "link_5_label", "label": "Link 5 label", "default": "Terms of Service" },
+    { "type": "text", "id": "link_5_url", "label": "Link 5 URL", "default": "/policies/terms-of-service" },
+    { "type": "text", "id": "link_6_label", "label": "Link 6 label", "default": "Search" },
+    { "type": "text", "id": "link_6_url", "label": "Link 6 URL", "default": "/search" },
+    { "type": "text", "id": "link_7_label", "label": "Link 7 label", "default": "Cookie Policy" },
+    { "type": "text", "id": "link_7_url", "label": "Link 7 URL", "info": "Hidden while empty. Add the URL of your cookie policy page." },
+    { "type": "text", "id": "link_8_label", "label": "Link 8 label" },
+    { "type": "text", "id": "link_8_url", "label": "Link 8 URL" },
+    { "type": "header", "content": "Bottom" },
+    { "type": "checkbox", "id": "show_payments", "label": "Show payment icons", "default": true },
+    { "type": "text", "id": "copyright", "label": "Copyright", "default": "© 2026, Old Tom's" },
+    { "type": "header", "content": "Appearance" },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#7FA93F" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 16, "max": 96, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 16, "max": 96, "step": 4, "unit": "px", "default": 32 }
+  ],
+  "presets": [{ "name": "Old Tom's footer" }]
+}
+{% endschema %}
