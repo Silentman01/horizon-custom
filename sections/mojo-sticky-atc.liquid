@@ -23,6 +23,7 @@
 {% stylesheet %}
 .mojo-sa { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--mojo-bg, #fff); border-top: 1px solid var(--mojo-line, #e3dccd); box-shadow: 0 -6px 20px rgba(15, 27, 45, 0.1); font-family: var(--mojo-font); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); transform: translateY(110%); transition: transform 0.25s ease; }
 .mojo-sa[data-visible] { transform: translateY(0); }
+mojo-bundle, .buy-buttons-block { scroll-margin-top: 16px; }
 .mojo-sa__inner { display: flex; align-items: center; gap: 12px; max-width: 1100px; margin: 0 auto; }
 .mojo-sa__thumb { flex: none; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background: var(--mojo-cream, #f7f3ec); }
 .mojo-sa__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -89,9 +90,9 @@
 
     bar.querySelector('[data-mojo-sticky-go]').addEventListener('click', () => {
       const btn = mainBtn();
-      if (bar.dataset.action === 'add' && btn && !btn.disabled) { btn.click(); return; }
+      if (!bundle() && bar.dataset.action === 'add' && btn && !btn.disabled) { btn.click(); return; }
       const t = offer();
-      if (t) t.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      if (t) t.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
     });
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
@@ -107,7 +108,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "Bar at the bottom of the screen (desktop and mobile). Appears once the add to cart button scrolls out of view and shows the selected pack and its price."
+      "content": "Bar at the bottom of the screen (desktop and mobile). Appears once the add to cart button scrolls out of view and shows the selected pack and its price. The button scrolls to the bundle selector when there is one."
     },
     {
       "type": "checkbox",
@@ -135,7 +136,8 @@
     {
       "type": "select",
       "id": "action",
-      "label": "Button action",
+      "label": "Button action (no bundle selector)",
+      "info": "With a bundle selector on the page, the button always scrolls to it.",
       "options": [
         { "value": "add", "label": "Add the selected pack to cart" },
         { "value": "scroll", "label": "Scroll back to the offer" }
