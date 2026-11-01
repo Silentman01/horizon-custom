@@ -89,7 +89,8 @@
       "color1": "#EFE6D6",
       "color2": "#0F1B2D",
       "color3": "#E3DCCD"
-    }
+    },
+    "auto_open_cart_drawer": true
   },
   "presets": {
     "Default": {
