@@ -1,3 +1,12 @@
+{%- comment -%}
+  Mojo bundle tiers (app-free quantity breaks, Kaching style). Child cards: _mojo-bundle-tier.
+  - Each card adds N pairs to the cart, colour + size chosen per pair (multiple cart lines when they differ).
+  - Card prices are computed from the variant prices and the card's bundle price; the tier discount itself is a
+    native Shopify automatic discount (fixed amount off, minimum quantity = pairs), so the cart and checkout charge
+    exactly the card price. Lines carry the hidden property _Bundle.
+  - Add to cart goes through Horizon's own product form (drawer refresh, auto-open, errors stay native).
+  - "Mojo price + badge" blocks set to follow the bundle show the selected card's price.
+{%- endcomment -%}
 {%- liquid
   assign p = closest.product
   if request.visual_preview_mode and p == blank
@@ -24,10 +33,11 @@
     <div class="mojo-bn__tiers" role="radiogroup" aria-label="{{ block.settings.heading | default: 'Choose your bundle' | escape }}">
       {% content_for 'blocks', closest.product: p %}
     </div>
+    <p class="mojo-bn__error" data-mojo-error role="alert" hidden></p>
     <script type="application/json" data-mojo-variants>
-      {"ci": {{ ci }}, "si": {{ si }}, "variants": [
+      {"ci": {{ ci }}, "si": {{ si }}, "fmt": {{ shop.money_format | json }}, "variants": [
       {%- for v in p.variants -%}
-        {"id": {{ v.id }}, "o": [{{ v.option1 | json }}, {{ v.option2 | json }}, {{ v.option3 | json }}], "a": {{ v.available | json }}, "img": {% if v.featured_image %}{{ v.featured_image | image_url: width: 96 | json }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}
+        {"id": {{ v.id }}, "o": [{{ v.option1 | json }}, {{ v.option2 | json }}, {{ v.option3 | json }}], "a": {{ v.available | json }}, "p": {{ v.price | json }}, "c": {{ v.compare_at_price | default: 0 | json }}, "img": {% if v.featured_image %}{{ v.featured_image | image_url: width: 96 | json }}{% else %}""{% endif %}}{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
       ]}
     </script>
@@ -45,6 +55,9 @@
 .mojo-bn__heading--left .mojo-bn__rule { display: none; }
 .mojo-bn__heading--left .mojo-bn__text { text-align: left; font-size: 12px; font-weight: 700; }
 .mojo-bn__accent { color: var(--mojo-primary); }
+.mojo-bn__error { margin: 10px 0 0; font-size: 12px; color: #b3261e; }
+.mojo-bn__error[hidden] { display: none; }
+.mojo-tier__sel option:disabled { color: #9a9a9a; }
 .shopify-section:has(mojo-bundle) .quantity-selector-wrapper, .shopify-section:has(mojo-bundle) .quantity-label, .shopify-section:has(mojo-bundle) .quantity-rules { display: none; }
 {% endstylesheet %}
 
@@ -61,47 +74,134 @@ if (!customElements.get('mojo-bundle')) {
       }
       this.addEventListener('change', this.onChange);
       this.scope.addEventListener('change', this.onNative);
-      document.addEventListener('submit', this.onSubmit, true);
+      /* window capture runs before Horizon's document-level (capture) submit delegate, so a bundle add is never doubled */
+      window.addEventListener('submit', this.onSubmit, true);
       this.syncUnits();
       this.startCountdown();
     }
     disconnectedCallback() {
       this.removeEventListener('change', this.onChange);
       this.scope.removeEventListener('change', this.onNative);
-      document.removeEventListener('submit', this.onSubmit, true);
+      window.removeEventListener('submit', this.onSubmit, true);
       clearInterval(this.timer);
     }
     form() { return this.scope.querySelector('product-form-component form') || this.scope.querySelector('form[action*="cart/add"]'); }
     nativeId() { const f = this.form(); const i = f && f.querySelector('input[name="id"]'); return i ? i.value : ''; }
     variantById(id) { return this.data.variants.find((v) => String(v.id) === String(id)); }
-    resolve(colour, size) {
+    find(colour, size) {
       const { ci, si } = this.data;
-      const v = this.data.variants.find((x) => x.o[ci - 1] === colour && x.o[si - 1] === size);
-      return v ? v.id : this.nativeId();
+      return this.data.variants.find((x) => x.o[ci - 1] === colour && x.o[si - 1] === size);
+    }
+    resolve(colour, size) { const v = this.find(colour, size); return v ? v.id : this.nativeId(); }
+    money(cents) {
+      const fmt = this.data.fmt || '£{' + '{amount}}';
+      const m = fmt.match(/\{\{\s*(\w+)\s*\}\}/);
+      const key = m ? m[1] : 'amount';
+      const fix = (d, ts, ds) => {
+        const [i, f] = (cents / 100).toFixed(d).split('.');
+        return i.replace(/\B(?=(\d{3})+(?!\d))/g, ts) + (f ? ds + f : '');
+      };
+      let s;
+      if (key === 'amount_no_decimals') s = fix(0, ',', '.');
+      else if (key === 'amount_with_comma_separator') s = fix(2, '.', ',');
+      else if (key === 'amount_no_decimals_with_comma_separator') s = fix(0, '.', ',');
+      else if (key === 'amount_with_apostrophe_separator') s = fix(2, "'", '.');
+      else s = fix(2, ',', '.');
+      return fmt.replace(/\{\{\s*\w+\s*\}\}/, s);
     }
     setThumb(unit, colour, size) {
       const img = unit.querySelector('.mojo-tier__thumb img');
-      const { ci, si } = this.data;
-      const v = this.data.variants.find((x) => x.o[ci - 1] === colour && x.o[si - 1] === size) || this.data.variants.find((x) => x.o[ci - 1] === colour);
+      const { ci } = this.data;
+      const v = this.find(colour, size) || this.data.variants.find((x) => x.o[ci - 1] === colour);
       if (img && v && v.img) { img.src = v.img; img.removeAttribute('srcset'); }
+    }
+    markSizes(unit) {
+      const c = unit.querySelector('[data-opt="colour"]').value;
+      unit.querySelectorAll('[data-opt="size"] option').forEach((o) => {
+        const v = this.find(c, o.value);
+        o.disabled = !!v && !v.a;
+      });
     }
     syncUnits() {
       const v = this.variantById(this.nativeId());
-      this.querySelectorAll('[data-unit]').forEach((u) => {
+      this.querySelectorAll('.mojo-tier').forEach((tier) => {
+        /* chips ("2x Black, 1x Beige") prefill the pair colours; size follows the main size picker */
+        const preset = (tier.dataset.colours || '').split('|').filter(Boolean);
+        tier.querySelectorAll('[data-unit-row]').forEach((u, i) => { if (preset[i]) u.dataset.colour = preset[i]; });
+      });
+      this.querySelectorAll('[data-unit-row]').forEach((u) => {
         const c = u.querySelector('[data-opt="colour"]'), s = u.querySelector('[data-opt="size"]');
-        if (v && !u.dataset.touched) {
-          c.value = v.o[this.data.ci - 1]; s.value = v.o[this.data.si - 1];
+        if (!u.dataset.touched) {
+          if (u.dataset.colour) c.value = u.dataset.colour; else if (v) c.value = v.o[this.data.ci - 1];
+          if (v) s.value = v.o[this.data.si - 1];
         }
+        this.markSizes(u);
         this.setThumb(u, c.value, s.value);
+      });
+      this.refresh();
+    }
+    idsFor(tier) {
+      const qty = Number(tier.dataset.qty) || 1;
+      const units = tier.querySelectorAll('[data-unit-row]');
+      const ids = [];
+      if (units.length) units.forEach((u) => ids.push(this.resolve(u.querySelector('[data-opt="colour"]').value, u.querySelector('[data-opt="size"]').value)));
+      else for (let i = 0; i < qty; i++) ids.push(this.nativeId());
+      return ids;
+    }
+    /* recompute every card from the chosen variants: total = sum of prices - fixed tier discount (what checkout charges) */
+    price(tier) {
+      const qty = Number(tier.dataset.qty) || 1;
+      const vs = this.idsFor(tier).map((id) => this.variantById(id)).filter(Boolean);
+      if (vs.length !== qty) return null;
+      const full = vs.reduce((t, v) => t + v.p, 0);
+      const total = Math.max(0, full - (Number(tier.dataset.off) || 0));
+      const anchor = tier.dataset.anchor === 'compare_at';
+      let compare = vs.reduce((t, v) => t + (anchor && v.c > v.p ? v.c : v.p), 0);
+      if (compare <= total) compare = vs.reduce((t, v) => t + (v.c || 0), 0);
+      if (compare <= total) compare = 0;
+      const saving = compare ? compare - total : 0;
+      const pct = compare ? Math.round((saving * 100) / compare) : 0;
+      const unit = Math.round(total / qty);
+      return { qty, total, compare, saving, pct, unit };
+    }
+    fill(tpl, r) {
+      return (tpl || '').replace(/\{saving\}/g, this.money(r.saving)).replace(/\{percent\}/g, r.pct).replace(/\{unit\}/g, this.money(r.unit))
+        .replace(/\{total\}/g, this.money(r.total)).replace(/\{compare\}/g, this.money(r.compare));
+    }
+    refresh() {
+      let current = null;
+      this.querySelectorAll('.mojo-tier').forEach((tier) => {
+        const r = this.price(tier);
+        if (!r) return;
+        const set = (sel, text, hide) => { const el = tier.querySelector(sel); if (!el) return; if (text !== null) el.textContent = text; el.hidden = !!hide; };
+        set('[data-total]', this.money(r.total));
+        set('[data-compare]', this.money(r.compare), !r.compare);
+        const st = tier.dataset.saveTpl || '';
+        set('[data-save]', this.fill(st, r), !st || (st.includes('{') && !r.saving));
+        if (tier.dataset.unitTpl) set('[data-unit]', this.fill(tier.dataset.unitTpl, r).replace(/\{price\}/g, this.money(r.total / r.qty)));
+        if (tier.querySelector('[data-mojo-tier]:checked')) current = r;
+      });
+      if (!current) return;
+      this.scope.querySelectorAll('[data-mojo-follow]').forEach((box) => {
+        const set = (sel, text, hide) => { const el = box.querySelector(sel); if (!el) return; el.textContent = text; el.hidden = !!hide; };
+        set('.mojo-pr__now', this.money(current.total));
+        set('.mojo-pr__was', this.money(current.compare), !current.compare);
+        if (box.dataset.badgeTpl) set('.mojo-pr__badge', this.fill(box.dataset.badgeTpl, current), !current.pct);
+        if (box.dataset.chipTpl) {
+          const chip = box.querySelector('[data-chip-text]');
+          if (chip) chip.textContent = this.fill(box.dataset.chipTpl, current);
+        }
       });
     }
     onChange = (e) => {
       const t = e.target;
       if (!(t instanceof HTMLElement)) return;
-      const unit = t.closest('[data-unit]');
+      const unit = t.closest('[data-unit-row]');
       if (unit) {
         unit.dataset.touched = '1';
+        this.markSizes(unit);
         this.setThumb(unit, unit.querySelector('[data-opt="colour"]').value, unit.querySelector('[data-opt="size"]').value);
+        this.refresh();
       } else if (t.matches('[data-mojo-tier]')) {
         this.syncUnits();
       }
@@ -115,13 +215,15 @@ if (!customElements.get('mojo-bundle')) {
       if (!checked) return null;
       const tier = checked.closest('.mojo-tier');
       const qty = Number(tier.dataset.qty) || 1;
-      const units = tier.querySelectorAll('[data-unit]');
-      const ids = [];
-      if (units.length) units.forEach((u) => ids.push(this.resolve(u.querySelector('[data-opt="colour"]').value, u.querySelector('[data-opt="size"]').value)));
-      else for (let i = 0; i < qty; i++) ids.push(this.nativeId());
       const groups = [];
-      ids.forEach((id) => { const g = groups.find((x) => x.id === id); if (g) g.qty += 1; else groups.push({ id, qty: 1 }); });
+      this.idsFor(tier).forEach((id) => { const g = groups.find((x) => x.id === id); if (g) g.qty += 1; else groups.push({ id, qty: 1 }); });
       return { title: tier.dataset.title, qty, groups };
+    }
+    error(msg) {
+      const el = this.querySelector('[data-mojo-error]');
+      if (!el) return;
+      el.textContent = msg || '';
+      el.hidden = !msg;
     }
     onSubmit = (e) => {
       const form = e.target;
@@ -130,6 +232,9 @@ if (!customElements.get('mojo-bundle')) {
       if (!plan || plan.qty < 2) return;
       e.preventDefault();
       e.stopImmediatePropagation();
+      this.error('');
+      const off = plan.groups.map((g) => this.variantById(g.id)).find((v) => v && !v.a);
+      if (off) { this.error('One of the chosen sizes is sold out. Please pick another size.'); return; }
       const submitter = e.submitter;
       const [first, ...rest] = plan.groups;
       const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
@@ -139,9 +244,11 @@ if (!customElements.get('mojo-bundle')) {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({ items: rest.map((g) => ({ id: Number(g.id), quantity: g.qty, properties: props })) }),
-          }).then((r) => { if (!r.ok) throw new Error('add failed'); })
+          }).then((r) => { if (!r.ok) return r.json().then((j) => { throw new Error((j && (j.description || j.message)) || 'add failed'); }); })
         : Promise.resolve();
-      addRest.then(() => {
+      /* defer to a new task: requestSubmit() is ignored while the browser is still firing the original submit event */
+      addRest.then(() => new Promise((r) => setTimeout(r, 0))).then(() => {
+        /* the first line goes through Horizon's form: it re-renders the cart drawer with every line and auto-opens it */
         const idIn = form.querySelector('input[name="id"]');
         const oldId = idIn.value;
         idIn.value = first.id;
@@ -156,7 +263,7 @@ if (!customElements.get('mojo-bundle')) {
         this.pass = true;
         try { if (submitter && form.contains(submitter)) form.requestSubmit(submitter); else form.requestSubmit(); } finally { this.pass = false; }
         setTimeout(() => { idIn.value = oldId; if (madeQ) q.remove(); else q.value = oldQ; pr.remove(); }, 0);
-      }).catch(() => { this.pass = true; try { form.requestSubmit(); } finally { this.pass = false; } });
+      }).catch((err) => { this.error(err && err.message ? err.message : 'Could not add the bundle. Please try again.'); });
     };
     startCountdown() {
       const out = this.querySelector('[data-mojo-count]');
@@ -165,7 +272,7 @@ if (!customElements.get('mojo-bundle')) {
         const end = new Date(); end.setHours(23, 59, 59, 0);
         let s = Math.max(0, Math.floor((end - new Date()) / 1000));
         const h = String(Math.floor(s / 3600)).padStart(2, '0'); s %= 3600;
-        out.textContent = '\u00b7 ' + h + ':' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+        out.textContent = '· ' + h + ':' + String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
       };
       tick();
       this.timer = setInterval(tick, 1000);
@@ -185,7 +292,7 @@ if (!customElements.get('mojo-bundle')) {
   "settings": [
     {
       "type": "paragraph",
-      "content": "Each card adds N pairs to the cart (per-pair colour and size). Card prices are text; apply the matching automatic discount in Shopify so the cart total equals the card price."
+      "content": "App-free quantity breaks. Each card adds N pairs (colour and size per pair). Card prices come from the variant price and each card's bundle price. For checkout to charge the card price, create one automatic discount per card in Shopify (fixed amount off, minimum quantity = pairs); the editor shows the amount under each card."
     },
     {
       "type": "text",
@@ -218,7 +325,7 @@ if (!customElements.get('mojo-bundle')) {
     {
       "type": "text",
       "id": "heading_accent",
-      "label": "Heading accent text (dark red, after the heading)"
+      "label": "Heading accent text (brand colour, after the heading)"
     },
     {
       "type": "range",
@@ -238,25 +345,10 @@ if (!customElements.get('mojo-bundle')) {
         {
           "type": "_mojo-bundle-tier",
           "settings": {
-            "quantity": 1,
-            "title": "Single pair",
-            "saving": "",
-            "price": "£29.95",
-            "compare": "",
-            "badge": "",
-            "preselect": false,
-            "show_pickers": false,
-            "picker_label": ""
-          }
-        },
-        {
-          "type": "_mojo-bundle-tier",
-          "settings": {
             "quantity": 2,
             "title": "(2 Pack) Buy 1 get 1 Free",
-            "saving": "You save £35.05",
-            "price": "£24.95",
-            "compare": "£60.00",
+            "pack_price": 24.95,
+            "saving": "You save {saving}",
             "badge": "",
             "preselect": false,
             "show_pickers": true,
@@ -268,9 +360,8 @@ if (!customElements.get('mojo-bundle')) {
           "settings": {
             "quantity": 5,
             "title": "(5 Pack) Buy 2 get 3 Free",
-            "saving": "You save £100.05",
-            "price": "£49.95",
-            "compare": "£150.00",
+            "pack_price": 49.95,
+            "saving": "You save {saving}",
             "badge": "MOST POPULAR",
             "preselect": true,
             "show_pickers": true,
@@ -282,9 +373,8 @@ if (!customElements.get('mojo-bundle')) {
           "settings": {
             "quantity": 8,
             "title": "(8 Pack) Buy 3 get 5 Free",
-            "saving": "You save £165.05",
-            "price": "£74.95",
-            "compare": "£240.00",
+            "pack_price": 74.95,
+            "saving": "You save {saving}",
             "badge": "BEST VALUE",
             "preselect": false,
             "show_pickers": true,
