@@ -268,8 +268,8 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 2,
-                    "pack_price": 25.0,
-                    "was_per_pair": 25,
+                    "pack_price": "24.95",
+                    "was_per_pair": "25.00",
                     "anchor": "price",
                     "title": "(2 Pack) Buy 1 get 1 Free",
                     "saving": "You save {saving}",
@@ -291,8 +291,8 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 5,
-                    "pack_price": 50.0,
-                    "was_per_pair": 25,
+                    "pack_price": "49.95",
+                    "was_per_pair": "25.00",
                     "anchor": "price",
                     "title": "(5 Pack) Buy 2 get 3 Free",
                     "saving": "You save {saving}",
@@ -314,8 +314,8 @@
                   "type": "_mojo-bundle-tier",
                   "settings": {
                     "quantity": 8,
-                    "pack_price": 75.0,
-                    "was_per_pair": 25,
+                    "pack_price": "74.95",
+                    "was_per_pair": "25.00",
                     "anchor": "price",
                     "title": "(8 Pack) Buy 3 get 5 Free",
                     "saving": "You save {saving}",

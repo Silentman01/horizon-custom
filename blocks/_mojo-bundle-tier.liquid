@@ -36,8 +36,15 @@
   assign v = p.selected_or_first_available_variant
   assign mt_full = v.price | times: qty
   assign mt_total = mt_full
-  if bs.pack_price != blank and bs.pack_price > 0
-    assign mt_total = bs.pack_price | times: 100 | round
+  comment
+    Prices are text settings: Shopify number settings only keep whole numbers (24.95 became 25).
+  endcomment
+  assign pp = bs.pack_price | append: '' | remove: '£' | remove: ',' | strip
+  if pp != blank
+    assign pp_c = pp | times: 100 | round
+    if pp_c > 0
+      assign mt_total = pp_c
+    endif
   endif
   if mt_total > mt_full
     assign mt_total = mt_full
@@ -52,9 +59,13 @@
     assign mt_compare = v.compare_at_price | default: 0 | times: qty
   endif
   assign mt_was = 0
-  if bs.was_per_pair != blank and bs.was_per_pair > 0
-    assign mt_was = bs.was_per_pair | times: 100 | round
-    assign mt_compare = mt_was | times: qty
+  assign wp = bs.was_per_pair | append: '' | remove: '£' | remove: ',' | strip
+  if wp != blank
+    assign wp_c = wp | times: 100 | round
+    if wp_c > 0
+      assign mt_was = wp_c
+      assign mt_compare = mt_was | times: qty
+    endif
   endif
   if mt_compare <= mt_total
     assign mt_compare = 0
@@ -234,13 +245,13 @@
       "step": 1
     },
     {
-      "type": "number",
+      "type": "text",
       "id": "pack_price",
       "label": "Bundle price (store currency, e.g. 49.95)",
       "info": "Empty = full price (variant price x pairs). Create the matching automatic discount in Shopify (fixed amount off = full price - bundle price, minimum quantity = pairs). Amounts: 2 pairs £34.95, 5 pairs £99.80, 8 pairs £164.65 (see BUNDLE_OFFERS.md)."
     },
     {
-      "type": "number",
+      "type": "text",
       "id": "was_per_pair",
       "label": "Crossed-out price per pair (e.g. 25.00)",
       "info": "Was price = this x pairs; \"You save\" = was price - bundle price. Empty = use the option below."
