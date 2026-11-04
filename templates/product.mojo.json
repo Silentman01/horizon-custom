@@ -171,6 +171,7 @@
             },
             "price": {
               "type": "mojo-price",
+              "disabled": true,
               "settings": {
                 "price": "£49.95",
                 "compare": "£125.00",
