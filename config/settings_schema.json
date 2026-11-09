@@ -2131,7 +2131,8 @@
         "type": "text",
         "id": "ot_track_url",
         "label": "Track Order button link",
-        "default": "/pages/track-order"
+        "default": "/apps/17TRACK",
+        "info": "17TRACK tracking page."
       }
     ]
   }
