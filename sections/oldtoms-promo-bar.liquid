@@ -6,7 +6,7 @@
   assign s = section.settings
   assign copies = 6
 -%}
-{{ s.font | font_face: font_display: 'swap' }}
+<style>{{ s.font | font_face: font_display: 'swap' }}</style>
 <div
   class="ot-promo{% if s.pause_on_hover %} ot-promo--pausable{% endif %}"
   role="region"
