@@ -151,7 +151,7 @@
               "settings": {
                 "heading": "BUY MORE AND SAVE MORE",
                 "urgency_line": "",
-                "guarantee": "30-Day Money Back Guarantee",
+                "guarantee": "",
                 "tier_gap": 10,
                 "hide_native_picker": true,
                 "hide_quantity": true
@@ -164,11 +164,10 @@
                     "variant_position": 1,
                     "title": "Buy 1",
                     "label": "1x Pack | 12 Pouches",
-                    "pouches": 12,
                     "show_pill": true,
                     "badge": "",
                     "preselect": false,
-                    "fallback_price": "35.00",
+                    "fallback_price": "29.90",
                     "fallback_compare": "68.00"
                   },
                   "blocks": {}
@@ -180,11 +179,10 @@
                     "variant_position": 2,
                     "title": "Buy 2, Get 1 Free",
                     "label": "3x Pack | 36 Pouches",
-                    "pouches": 36,
                     "show_pill": true,
                     "badge": "Most Popular",
                     "preselect": true,
-                    "fallback_price": "63.00",
+                    "fallback_price": "49.90",
                     "fallback_compare": "136.00"
                   },
                   "blocks": {}
@@ -196,11 +194,10 @@
                     "variant_position": 3,
                     "title": "Buy 3, Get 2 Free",
                     "label": "5x Pack | 60 Pouches",
-                    "pouches": 60,
                     "show_pill": true,
                     "badge": "Best Seller",
                     "preselect": false,
-                    "fallback_price": "86.00",
+                    "fallback_price": "69.90",
                     "fallback_compare": "204.00"
                   },
                   "blocks": {}
@@ -222,15 +219,6 @@
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "subscribe": {
-              "type": "oldtoms-subscribe",
-              "settings": {
-                "title": "Save 30% With Automatic Refills",
-                "subtitle": "No Commitment, Cancel Anytime",
-                "checked": true
               },
               "blocks": {}
             },
@@ -273,6 +261,7 @@
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
                   "static": true,
+                  "disabled": true,
                   "settings": {},
                   "blocks": {}
                 }
@@ -483,7 +472,6 @@
             "bullets",
             "bundle",
             "variant_picker",
-            "subscribe",
             "delivery",
             "buy_buttons",
             "trust",
@@ -611,7 +599,7 @@
         "hint": "Tap each box to read more success stories",
         "badge": "Verified Buyer",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 48,
         "padding_bottom": 48
@@ -779,7 +767,7 @@
         "asset": "oldtoms-how-it-works.jpg",
         "image_alt": "Old Tom's pouch bag with a sachet, cinnamon, oil bottles and leaves",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 48,
         "padding_bottom": 48
@@ -855,7 +843,7 @@
         "heading": "The Science of Nature",
         "subheading": "Before Traps. Before Poison. Nature Already Had The Answer.",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 56,
         "padding_bottom": 48
@@ -920,7 +908,7 @@
         "asset": "oldtoms-safe-home.jpg",
         "image_alt": "A hand dropping Old Tom's sachets over three pouch bags with cinnamon sticks and mint",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 48,
         "padding_bottom": 48
@@ -1023,7 +1011,7 @@
         "banner_label": "Our recommendation",
         "banner_text": "We recommend replacing pouches every 90 days for continuous protection",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 32,
         "padding_bottom": 48
@@ -1105,7 +1093,7 @@
         "brand": "OLD TOM'S",
         "others_head": "Other Solutions",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 48,
         "padding_bottom": 48
@@ -1188,7 +1176,7 @@
         "asset": "oldtoms-guarantee.jpg",
         "image_alt": "Old Tom's pouch bag with test tubes, sachets and a 30-day money-back seal",
         "show_cta": true,
-        "cta_label": "Add to basket",
+        "cta_label": "Add to cart",
         "cta_guarantee": "30-Day Money Back Guarantee",
         "padding_top": 0,
         "padding_bottom": 32

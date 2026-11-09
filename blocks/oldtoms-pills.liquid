@@ -24,7 +24,9 @@
 {% stylesheet %}
 .ot-pills { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; width: 100%; }
 .ot-pills__pill { display: inline-flex; align-items: center; gap: 6px; min-height: 28px; padding: 5px 12px; border-radius: 999px; font-size: 11px; font-weight: 600; line-height: 1.2; color: var(--ot-fg, #000); background: var(--ot-cream, #f4f4f0); }
+.ot-pills__pill--safe { min-height: 0; padding: 2px 17px 2px 11px; background: #e5e9dd; color: #24433d; font-size: 12px; font-weight: 400; line-height: 1.58; }
 .ot-pills__pill--stock { background: #ececec; color: #121212; }
+@media screen and (min-width: 750px) { .ot-pills__pill--safe { padding: 6px 18px 7px 13px; font-size: 14px; line-height: 1.36; } }
 .ot-pills__dot { width: 8px; height: 8px; border-radius: 50%; background: #2f9e44; flex: none; }
 .ot-pills__pill--stock.is-out .ot-pills__dot { background: #c0392b; }
 {% endstylesheet %}

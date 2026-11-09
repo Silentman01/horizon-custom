@@ -11,20 +11,20 @@
   "type": "header",
   "name": "t:names.header",
   "sections": {
-    "header_announcements_9jGBFp": {
-      "type": "oldtoms-announcement",
+    "ot_promo_bar": {
+      "type": "oldtoms-promo-bar",
       "settings": {
-        "line_1": "SALE NOW LIVE",
-        "line_2": "UP TO 72% OFF!",
-        "show_countdown": true,
-        "labels": "DYS,HRS,MIN,SEC",
-        "cycle_days": 3,
-        "color_dark": "#D85800",
-        "color_light": "#F59432",
+        "text": "🚨 BLACK FRIDAY + CYBER MONDAY - UP TO 66% OFF! 🚨",
+        "link": "",
+        "font": "anton_n4",
+        "size_mobile": 14,
+        "size_desktop": 20,
+        "duration": 30,
+        "pause_on_hover": true,
+        "background": "#000000",
         "text_color": "#FFFFFF",
-        "torn_edge": true,
-        "padding_top": 14,
-        "padding_bottom": 14
+        "show_grid": true,
+        "grid_color": "#D80000"
       }
     },
     "header_section": {
@@ -130,7 +130,7 @@
     }
   },
   "order": [
-    "header_announcements_9jGBFp",
+    "ot_promo_bar",
     "header_section",
     "cart_drawer"
   ]

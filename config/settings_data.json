@@ -87,7 +87,8 @@
     "palette_primary_button_text": "{{ settings.color_palette.color2 }}",
     "palette_primary_button_border": "{{ settings.color_palette.color1 }}",
     "badge_sale_background_color": "{{ settings.color_palette.color1 }}",
-    "auto_open_cart_drawer": true
+    "auto_open_cart_drawer": true,
+    "show_accelerated_checkout_buttons": false
   },
   "presets": {
     "Default": {

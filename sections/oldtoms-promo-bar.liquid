@@ -1,0 +1,75 @@
+{%- comment -%}
+  Old Tom's promo bar: black strip with a red perspective grid and one sale line scrolling right to left (seasonal bar).
+  Two identical tracks move by -100% so the loop is seamless; the second track is hidden from screen readers.
+{%- endcomment -%}
+{%- liquid
+  assign s = section.settings
+  assign copies = 6
+-%}
+{{ s.font | font_face: font_display: 'swap' }}
+<div
+  class="ot-promo{% if s.pause_on_hover %} ot-promo--pausable{% endif %}"
+  role="region"
+  aria-label="{{ s.text | strip_html | escape }}"
+  style="--ot-promo-bg: {{ s.background }}; --ot-promo-fg: {{ s.text_color }}; --ot-promo-grid: {{ s.grid_color }}; --ot-promo-font: {{ s.font.family }}, {{ s.font.fallback_families }}; --ot-promo-size-m: {{ s.size_mobile }}px; --ot-promo-size-d: {{ s.size_desktop }}px; --ot-promo-duration: {{ s.duration }}s; --ot-promo-mask-m: url('{{ 'oldtoms-promo-grid-mobile.svg' | asset_url }}'); --ot-promo-mask-d: url('{{ 'oldtoms-promo-grid-desktop.svg' | asset_url }}');"
+  {{ section.shopify_attributes }}
+>
+  {%- if s.show_grid -%}<span class="ot-promo__grid" aria-hidden="true"></span>{%- endif -%}
+  <div class="ot-promo__marquee">
+    {%- for t in (1..2) -%}
+      <ul class="ot-promo__track" role="list"{% if forloop.last %} aria-hidden="true"{% endif %}>
+        {%- for i in (1..copies) -%}
+          <li class="ot-promo__item"{% if forloop.first == false or t == 2 %} aria-hidden="true"{% endif %}>
+            {%- if s.link != blank -%}
+              <a class="ot-promo__text" href="{{ s.link }}"{% if forloop.first == false or t == 2 %} tabindex="-1"{% endif %}>{{ s.text }}</a>
+            {%- else -%}
+              <p class="ot-promo__text">{{ s.text }}</p>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</div>
+{% stylesheet %}
+.ot-promo { position: relative; overflow: hidden; padding: 14px 0; background: var(--ot-promo-bg, #000); color: var(--ot-promo-fg, #fff); }
+.ot-promo__grid { position: absolute; inset: 0; background: var(--ot-promo-grid, #d80000); pointer-events: none; -webkit-mask: var(--ot-promo-mask-m) center bottom / max(100%, 390px) 67px no-repeat; mask: var(--ot-promo-mask-m) center bottom / max(100%, 390px) 67px no-repeat; }
+.ot-promo__marquee { position: relative; display: flex; width: max-content; }
+.ot-promo__track { display: flex; flex: 0 0 auto; align-items: center; margin: 0; padding: 0; list-style: none; animation: ot-promo-scroll var(--ot-promo-duration, 30s) linear infinite; }
+.ot-promo--pausable .ot-promo__marquee:hover .ot-promo__track,
+.ot-promo--pausable .ot-promo__marquee:focus-within .ot-promo__track { animation-play-state: paused; }
+.ot-promo__item { flex: 0 0 auto; padding-inline-end: 48px; }
+.ot-promo__text { display: block; margin: 0; font-family: var(--ot-promo-font); font-size: var(--ot-promo-size-m, 14px); font-weight: 400; font-style: normal; line-height: 1; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; color: inherit; text-decoration: none; }
+a.ot-promo__text:hover { text-decoration: underline; text-underline-offset: 3px; }
+a.ot-promo__text:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@keyframes ot-promo-scroll { to { transform: translateX(-100%); } }
+@media screen and (min-width: 750px) {
+  .ot-promo { padding: 20px 0; }
+  .ot-promo__grid { -webkit-mask-image: var(--ot-promo-mask-d); mask-image: var(--ot-promo-mask-d); -webkit-mask-size: max(100%, 1440px) 78px; mask-size: max(100%, 1440px) 78px; }
+  .ot-promo__item { padding-inline-end: 56px; }
+  .ot-promo__text { font-size: var(--ot-promo-size-d, 20px); }
+}
+@media (prefers-reduced-motion: reduce) { .ot-promo__track { animation: none; } }
+{% endstylesheet %}
+{% schema %}
+{
+  "name": "Old Tom's promo bar",
+  "tag": "div",
+  "class": "ot-promo-section",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Sale line", "default": "🚨 BLACK FRIDAY + CYBER MONDAY - UP TO 66% OFF! 🚨" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "font_picker", "id": "font", "label": "Font", "default": "anton_n4" },
+    { "type": "range", "id": "size_mobile", "label": "Text size (mobile)", "min": 10, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "size_desktop", "label": "Text size (desktop)", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 20 },
+    { "type": "range", "id": "duration", "label": "Scroll time for one loop", "min": 10, "max": 60, "step": 1, "unit": "s", "default": 30 },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "background", "label": "Background", "default": "#000000" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "checkbox", "id": "show_grid", "label": "Show grid", "default": true },
+    { "type": "color", "id": "grid_color", "label": "Grid", "default": "#D80000" }
+  ],
+  "presets": [{ "name": "Old Tom's promo bar" }]
+}
+{% endschema %}
