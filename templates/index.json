@@ -11,18 +11,6 @@
   "sections": {
     "ot_home_hero": {
       "type": "oldtoms-home-hero",
-      "settings": {
-        "rating_label": "Excellent",
-        "rating_text": "2,753 verified reviews",
-        "button_label": "SHOP NOW",
-        "button_link": "/products/mouse-repellent-pouches",
-        "verified_label": "Verified Buyer",
-        "autoplay_seconds": 6,
-        "desktop_height": 860,
-        "panel_color": "#5D824E",
-        "padding_top": 0,
-        "padding_bottom": 0
-      },
       "blocks": {
         "b1": {
           "type": "slide",
@@ -31,6 +19,7 @@
             "image_alt": "Woman in a tidy garage holding the black Old Tom's bag",
             "heading": "Keep Rodents Out, Naturally.",
             "body": "Protect your home with our plant-based, essential oil pouches. Safe for your family, tough on mice and rats.",
+            "link": "",
             "tags": "Plant-Based · Long-Lasting · Indoor Protection",
             "quote": "At last, a natural fix that actually works! I put these in my garage and haven't seen a mouse since. Smells lovely too, unlike those chemical traps. Customer for life!",
             "name": "Eliza H.",
@@ -46,6 +35,7 @@
             "image_alt": "Woman on a sofa in a bright lounge, spider pouch bag on the side table",
             "heading": "Say Goodbye to Spiders, Naturally.",
             "body": "Keep your corners clear. Our plant-based formula sees off spiders without harsh chemicals, keeping your home safe and calm.",
+            "link": "",
             "tags": "Repels Spiders Naturally · Pet Safe · Plant-Based Formula",
             "quote": "I hate spiders, but I hate toxic sprays even more. These pouches are a lifesaver. Popped a few in the cellar and the house is completely spider-free now!",
             "name": "Sarah M.",
@@ -61,6 +51,7 @@
             "image_alt": "Man spraying along a kitchen skirting board",
             "heading": "Instant Protection From Bugs",
             "body": "Our powerful essential oil spray kills bugs on contact. The ultimate plant-based defence for a pest-free home.",
+            "link": "",
             "tags": "Kills on Contact · Free From Harsh Chemicals · Multi-Bug Defence",
             "quote": "This spray is brilliant! Used it on an ant trail in the kitchen and it worked instantly. Love that it's natural so I don't worry about my pets.",
             "name": "Michael T.",
@@ -76,6 +67,7 @@
             "image_alt": "Mum and two children at a campsite by a loch",
             "heading": "Enjoy the Outdoors, Bite-Free!",
             "body": "Just peel, stick and play. Our citronella-powered patches keep the whole family safe, naturally.",
+            "link": "",
             "tags": "Safe Around Kids · Outdoor Friendly · Citronella Powered",
             "quote": "A total game changer for our family camping trips. Stuck one on the kids' tops and they didn't get a single bite all evening. Highly recommend!",
             "name": "Emily R.",
@@ -90,17 +82,23 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "rating_label": "Excellent",
+        "rating_text": "2,753 verified reviews",
+        "rating_link": "",
+        "button_label": "SHOP NOW",
+        "button_link": "/products/mouse-repellent-pouches",
+        "verified_label": "Verified Buyer",
+        "autoplay_seconds": 6,
+        "desktop_height": 860,
+        "panel_color": "#5d824e",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
     },
     "ot_home_benefits": {
       "type": "oldtoms-home-benefits",
-      "settings": {
-        "bg_color": "#7FA93F",
-        "text_color": "#FFFFFF",
-        "speed": 24,
-        "padding_top": 12,
-        "padding_bottom": 12
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -136,17 +134,17 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "bg_color": "#7fa93f",
+        "text_color": "#ffffff",
+        "speed": 24,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
     },
     "ot_home_proof": {
       "type": "oldtoms-home-proof",
-      "settings": {
-        "number": "37,129+",
-        "label": "Properties Protected",
-        "bg_color": "#F4F4F0",
-        "padding_top": 48,
-        "padding_bottom": 48
-      },
       "blocks": {
         "b1": {
           "type": "tile",
@@ -214,152 +212,17 @@
         "b6",
         "b7",
         "b8"
-      ]
-    },
-    "ot_home_bestsellers": {
-      "type": "oldtoms-home-bestsellers",
+      ],
       "settings": {
-        "heading": "Our Bestsellers",
-        "button_label": "Shop All Products",
-        "button_link": "/collections/all",
-        "bg_color": "#FFFFFF",
+        "number": "37,129+",
+        "label": "Properties Protected",
+        "bg_color": "#f4f4f0",
         "padding_top": 48,
         "padding_bottom": 48
-      },
-      "blocks": {
-        "b1": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-packshot.png",
-            "title": "Rodent Repellent Pouches",
-            "tag": "12 Pouches",
-            "flag": "UK Shipping",
-            "price": "£29.90",
-            "compare_at": "£68.00",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b2": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-bestseller-02.jpg",
-            "title": "Spider Repellent Pouches",
-            "tag": "6 Pouches",
-            "flag": "",
-            "price": "£13.00",
-            "compare_at": "",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b3": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-bestseller-03.jpg",
-            "title": "Critter Control Spray",
-            "tag": "1 Bottle",
-            "flag": "",
-            "price": "£25.00",
-            "compare_at": "",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b4": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-bestseller-04.jpg",
-            "title": "Midge & Mosquito Patches",
-            "tag": "78 Patches",
-            "flag": "",
-            "price": "£13.00",
-            "compare_at": "",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
-    },
-    "ot_home_cards": {
-      "type": "oldtoms-home-cards",
-      "settings": {
-        "eyebrow": "Four Products",
-        "tag_text": "Every Homeowner",
-        "suffix": "Trusts",
-        "button_label": "Shop Now",
-        "bg_color": "#F4F4F0",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
-      "blocks": {
-        "b1": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-packshot.png",
-            "title": "Rodent Repellent Pouches",
-            "reviews": "1357 reviews",
-            "bullet_1": "Easy to place around house and garden",
-            "bullet_2": "Keeps burrowing pests away for weeks",
-            "bullet_3": "Safe around plants & pets",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b2": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-card-02.png",
-            "title": "Midge & Mosquito Patches",
-            "reviews": "899 reviews",
-            "bullet_1": "Hassle-free, drop-and-go defence",
-            "bullet_2": "Masks scent trails effectively",
-            "bullet_3": "Ideal for indoors & enclosed spaces",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b3": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-card-03.png",
-            "title": "Critter Control Spray",
-            "reviews": "400 reviews",
-            "bullet_1": "Kills & repels bugs on contact",
-            "bullet_2": "Water-based, non-staining formula",
-            "bullet_3": "Free from harsh chemicals",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        },
-        "b4": {
-          "type": "card",
-          "settings": {
-            "asset": "oldtoms-card-04.png",
-            "title": "Spider Repellent Pouches",
-            "reviews": "265 reviews",
-            "bullet_1": "Stops spiders webbing & nesting",
-            "bullet_2": "Easy to pop in wardrobes & corners",
-            "bullet_3": "Long-lasting, non-stop protection",
-            "link": "/products/mouse-repellent-pouches"
-          }
-        }
-      },
-      "block_order": [
-        "b1",
-        "b2",
-        "b3",
-        "b4"
-      ]
+      }
     },
     "ot_home_collage": {
       "type": "oldtoms-home-collage",
-      "settings": {
-        "heading": "What Our Customers Say",
-        "verified_label": "Verified Buyer",
-        "bg_color": "#FFFFFF",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "b1": {
           "type": "review",
@@ -411,17 +274,17 @@
         "b2",
         "b3",
         "b4"
-      ]
+      ],
+      "settings": {
+        "heading": "What Our Customers Say",
+        "verified_label": "Verified Buyer",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "ot_home_reasons": {
       "type": "oldtoms-home-reasons",
-      "settings": {
-        "heading": "5 Reasons Why Homeowners Trust",
-        "brand_tag": "OLD TOM'S",
-        "bg_color": "#F5FAE8",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "b1": {
           "type": "reason",
@@ -465,18 +328,17 @@
         "b3",
         "b4",
         "b5"
-      ]
+      ],
+      "settings": {
+        "heading": "5 Reasons Why Homeowners Trust",
+        "brand_tag": "OLD TOM'S",
+        "bg_color": "#f5fae8",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "ot_home_compare": {
       "type": "oldtoms-home-compare",
-      "settings": {
-        "heading": "How We Stack Up",
-        "brand_name": "OLD TOM'S",
-        "others_name": "OTHER SOLUTIONS",
-        "bg_color": "#FFFFFF",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "b1": {
           "type": "row",
@@ -543,16 +405,18 @@
         "b5",
         "b6",
         "b7"
-      ]
+      ],
+      "settings": {
+        "heading": "How We Stack Up",
+        "brand_name": "OLD TOM'S",
+        "others_name": "OTHER SOLUTIONS",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "ot_home_stats": {
       "type": "oldtoms-home-stats",
-      "settings": {
-        "pattern_asset": "oldtoms-stats-pattern.jpg",
-        "bg_color": "#4F9A4C",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
       "blocks": {
         "b1": {
           "type": "stat",
@@ -583,16 +447,16 @@
         "b1",
         "b2",
         "b3"
-      ]
+      ],
+      "settings": {
+        "pattern_asset": "oldtoms-stats-pattern.jpg",
+        "bg_color": "#4f9a4c",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
     },
     "ot_home_faq": {
       "type": "oldtoms-home-faq",
-      "settings": {
-        "heading": "FAQ",
-        "bg_color": "#FFFFFF",
-        "padding_top": 56,
-        "padding_bottom": 40
-      },
       "blocks": {
         "b1": {
           "type": "item",
@@ -652,7 +516,13 @@
         "b5",
         "b6",
         "b7"
-      ]
+      ],
+      "settings": {
+        "heading": "FAQ",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
     },
     "ot_home_support": {
       "type": "oldtoms-home-support",
@@ -663,8 +533,8 @@
         "button_link": "/pages/contact",
         "hours": "Our customer support is open Monday to Friday, 8am–8pm.",
         "avatar_asset": "oldtoms-support-agent.jpg",
-        "bg_color": "#FFFFFF",
-        "card_color": "#F0F0E6",
+        "bg_color": "#ffffff",
+        "card_color": "#f0f0e6",
         "padding_top": 24,
         "padding_bottom": 56
       }
@@ -674,8 +544,6 @@
     "ot_home_hero",
     "ot_home_benefits",
     "ot_home_proof",
-    "ot_home_bestsellers",
-    "ot_home_cards",
     "ot_home_collage",
     "ot_home_reasons",
     "ot_home_compare",
