@@ -84,6 +84,7 @@
     "variant_button_border_width": 1,
     "variant_button_radius": 14,
     "variant_button_width": "equal-width-buttons",
+    "ot_track_url": "/apps/17TRACK",
     "sections": {
       "password-footer": {
         "type": "password-footer",
@@ -93,14 +94,20 @@
       }
     },
     "content_for_index": [],
+    "blocks": {
+      "16156609502398088594": {
+        "type": "shopify://apps/omega-facebook-pixel/blocks/app-embed-block/ecdcc423-3dbd-480c-85e8-fdb9789cf058",
+        "disabled": false,
+        "settings": {}
+      }
+    },
     "color_palette": {
       "background": "#FFFFFF",
       "foreground": "#000000",
       "color1": "#CCF46F",
       "color2": "#24433D",
       "color3": "#7FA93F"
-    },
-    "ot_track_url": "/apps/17TRACK"
+    }
   },
   "presets": {
     "Default": {
