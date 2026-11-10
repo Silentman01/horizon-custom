@@ -12,7 +12,7 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
 5. Step 3: Verify the capture
 6. Step 4: Build the section inventory
 7. Step 5: Write the SECTION SPEC, section by section
-8. Step 6: FUNNEL PSYCHOLOGY summary
+8. Step 6: FUNNEL PSYCHOLOGY summary + ANGLE ARCHITECTURE (Step Alpha)
 9. Step 7: IMAGE MAP
 10. Step 8: COPY INVENTORY
 11. Step 9: APPS and the native-rebuild plan
@@ -33,6 +33,7 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
 | SECTION SPEC | for each section: LAYOUT / COMPONENTS / TYPOGRAPHY / VISUAL DETAILS / IMAGE POSITIONS / CONVERSION ROLE / MOBILE BEHAVIOR | builder (04), visual QA (10) |
 | Non-obvious elements | sticky ATC, cart drawer, popups, timers, progress bars | builder |
 | FUNNEL PSYCHOLOGY | offer, urgency, trust, social proof, upsell architecture, plus the price math | copywriter, builder, ad agents |
+| ANGLE ARCHITECTURE | which Step Alpha angle card(s), avatar and objection each section serves; what sits above the fold; one page vs angle landing pages | copywriter, builder, image agents, ad agents |
 | IMAGE MAP | every image position with ratio, content, source and plan | image agents (05, 06) |
 | COPY INVENTORY | every text string per section, verbatim, tagged [CLAIM]/[OFFER]/[NUM], with word counts | copywriter |
 | APPS | each app, what it renders, its config facts, and the rebuild plan | builder, operator to-dos |
@@ -40,14 +41,25 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
 
 **Roles**
 - **Capture agent (Phase 1):** runs Steps 1–3 and writes the capture files (data files; no report needed).
-- **Conversion-architect agent (Phase 3, A1):** runs Steps 4–10 from the capture files and **returns the spec as text**. Sub-agents may be blocked from writing .md files ("Subagents should return findings as text"), so the **master saves** the text to `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md`.
-- The spec describes the competitor and does **not** need our brand, so the master may launch A1 as soon as capture lands, even before the branding gate.
+- **Conversion-architect agent (Phase 3, A1):** runs Steps 4–10 from the capture files and the Step Alpha dossier, and **returns the spec as text**. Sub-agents may be blocked from writing .md files ("Subagents should return findings as text"), so the **master saves** the text to `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md`.
+- A1 starts only after the **Step Alpha gate has passed** (it reads the dossier) **and the branding gate is approved** (operator 2026-11-10), like every Phase 3 stream.
 
 ---
 
 ## 2. Inputs, outputs, file layout
 
-**Inputs:** `COMPETITOR_URL` (#1 = the page being cloned), `MARKET`, `MODE` (A by default), `PRODUCT_DIR` (before the gate this is `PRODUCTS_ROOT/_<competitor-slug>`).
+**Inputs:** `COMPETITOR_URL` (#1 = the page being cloned), `MARKET`, `MODE` (A by default), `PRODUCT_DIR` (before the gate this is `PRODUCTS_ROOT/_<competitor-slug>`), and the Step Alpha dossier `PRODUCT_DIR/00_alpha/ALPHA_DOSSIER.md`.
+
+**Inputs from Step Alpha** (Steps 4–10 can't start until the Alpha gate passed):
+| Dossier section | What it changes in the spec |
+|---|---|
+| 3.1 Angle Cards (validated `V#` + opportunity `O#`) | the ANGLE ARCHITECTURE (Step 6) and the ANGLE ROLE field of every section |
+| 1.10 Funnel Congruence · 2.4 Funnel Congruence Gaps | what sits above the fold; one page or angle landing pages; which gap angles need a home |
+| 3.2 Avatar Cards | the avatar each section and each testimonial persona speaks to |
+| 1.4 Objections · 2.6 Language Bank / 3.5 Customer Language Bank (objection-ready) | the FAQ and objection-handling map |
+| 1.6 Unique Mechanism | the mechanism section |
+| 3.5 Customer Language Bank | the phrases the copywriter uses per section (§14 rule 11) |
+| 1.1 Avatars (awareness state) | the awareness stage in the narrative arc |
 
 **Outputs** in `PRODUCT_DIR/02_competitor/page/`:
 ```
@@ -213,7 +225,12 @@ CONVERSION ROLE:
 
 MOBILE BEHAVIOR (~390px):
   — Stack direction, hidden/reordered elements, touch interactions  (observed | inferred)
+
+ANGLE ROLE (Step Alpha, our page):
+  — Angle card(s) served (V#/O#) · avatar (AV#) · objection handled (1.4) · congruence role
+    (above-the-fold validation / home for a gap angle / objection handling / mechanism proof / offer / none)
 ```
+The first seven fields are PROMPT_1-1's. ANGLE ROLE is the one field about our page; fill it from the ANGLE ARCHITECTURE (Step 6).
 
 **How to get each value (prefer CSS truth over measuring):**
 - **Scale:** `scale = desk.png width ÷ chunk width` (1440 ÷ 720 = 2). Pixels measured on a chunk × scale = CSS px. Prefix measured values with `~`.
@@ -225,7 +242,7 @@ MOBILE BEHAVIOR (~390px):
 
 **Rules**
 - Cover **every** section, including the announcement bar, header and footer. No "same as above". Repeat the values.
-- Describe the competitor **as is**. In Mode A the spec is the target. Improvements belong only in a Mode B spec, marked `MODE B CHANGE:` with a reason.
+- Describe the competitor **as is** (ANGLE ROLE excepted). In Mode A the spec is the target. Improvements belong only in a Mode B spec, marked `MODE B CHANGE:` with a reason.
 - Don't write our copy here. Quote theirs in the COPY INVENTORY.
 - Keep CONVERSION ROLE concrete: name the trigger, the objection and the proof in this page's words.
 
@@ -244,9 +261,29 @@ MOBILE BEHAVIOR (~390px):
 3. **Trust architecture:** guarantee terms (length, refund type, keep-the-product), certifications, badges, payment icons, review scores, endorsements, "Track your order" links, and honesty or anti-hype used as a trust device.
 4. **Social proof architecture:** rating line (score + count + placement), testimonial format (photo / video / text, persona per testimonial), UGC, reviews app (count, average), and "thousands of customers" claims.
 5. **Upsell architecture:** quantity breaks, gifts scaling with quantity, "MOST POPULAR" and the preselected tier, the "BEST VALUE" anchor, the free-shipping threshold relative to tier prices, cart progress bars, post-purchase offers.
-6. **Narrative arc:** map the sections to Attention → Interest → Desire → Action. State the awareness stage the page assumes (Schwartz) and where the buy decision is gated.
+6. **Narrative arc:** map the sections to Attention → Interest → Desire → Action. State the awareness stage the page assumes (Schwartz) and where the buy decision is gated, and compare it with the avatars' awareness states (dossier 1.1).
 
 **Done when:** the copywriter could explain, for each section, which mechanism it carries, and the price math reproduces the competitor's displayed SAVE and compare-at values.
+
+### ANGLE ARCHITECTURE (Step Alpha)
+**Purpose:** the competitor sends many angles to one page, and the page drops some of them (spec 1.3). Every angle we advertise must land on a page that confirms it. This block decides which section carries which angle card, so the copy, the images and the ads line up. Read 3.1, 1.10 and 2.4 first, and the congruence insights in [19 CONGRUENCE INSIGHTS](19-step-alpha.md#congruence-insights) (spec lines 353–367).
+
+**Mode A stays 1:1.** Same sections, order, components and word budget. The architecture decides which angle each existing slot speaks to: a subtitle, a bullet, an accordion row, a testimonial persona, an FAQ question, an image-with-text block, a comparison row, a gallery image.
+
+**Do**
+1. **Angle table.** One row per card in 3.1: ID, name, confidence, avatar, competitor congruence (1.10 HIGH/MED/LOW), gap angle (2.4) yes/no, and its home on our page (S#.## string or image ID).
+2. **Above the fold validates the highest-confidence angle(s).** The buy box zone seen first on a phone (rating line, subtitle, bullets, first gallery image) confirms the validated card(s) with HIGH confidence, the ones most ad traffic arrives on. With two such cards, the subtitle carries one and the bullets or the first image the other. The title stays 1:1 (02 Step 6).
+3. **Every HIGH angle and every congruence-gap opportunity angle gets a home.** A gap angle (the competitor's ad works, its page doesn't follow through) is where we win the traffic the competitor leaks. Its home is a slot that confirms its promise in its avatar's words: a bullet, a testimonial persona of that avatar, an FAQ question on its objection, an image-with-text block on its pain. Use the slot whose job is closest; never leave such an angle without a home.
+4. **One page or angle landing pages.** Decide from the congruence insights and write the decision with one line of reason:
+   - **One page with multi-angle architecture** (default): every angle above fits a slot, and the above-the-fold angles cover most of the ad traffic.
+   - **Angle landing pages** when an angle's promise can't be confirmed above the fold without pushing out the main angle, and that angle gets its own ads (a HIGH validated card, or a gap angle with HIGH potential). Each landing page is a copy of the product template (`product.<slug>-<angle-id>.json`, 04 §6) with the same sections; only its above-the-fold strings, section images and section order aim at that angle. The product gallery is shared by every template (Shopify product media), so it stays the same. List each landing page with its angle card ID; the ads of that card link to it (08, 09).
+5. **Objections → FAQ and objection handling.** Map each objection in 1.4 (type, competitor handling, STRENGTH) to its slot: FAQ question, accordion row, comparison row or testimonial. Objections the competitor handles weakly (STRENGTH 1–3) or not at all come first. Questions are written in the skeptic's own words from the objection-ready phrases (2.6 / 3.5). Same FAQ count as the competitor: a top objection with no home takes the slot of a question that maps to no objection in 1.4.
+6. **Mechanism → the mechanism section.** The section that explains why the product works (an accordion row "How do they work?", an image-with-text block, a comparison row) carries the mechanism from 1.6: name, story and proof, at the competitor's claim strength.
+7. **Customer language → copy.** For each section, list the language bank lines (3.5: hook-ready, headline-ready, objection-ready, testimony-ready) the copywriter should use.
+8. Fill the ANGLE ROLE field of every section block from this table.
+
+**Output:** the ANGLE ARCHITECTURE block in SECTION_SPEC.md (template §3b) + ANGLE ROLE in every section block.
+**Done when:** every card in 3.1 with HIGH confidence and every gap angle from 2.4 has a home or a landing page, every 1.4 objection has a slot or a stated reason why not, and the landing decision is written.
 
 ---
 
@@ -254,7 +291,7 @@ MOBILE BEHAVIOR (~390px):
 
 **Purpose:** one table that turns every visual on the page into a production task, so nothing is forgotten and every image ends up in the right ratio.
 
-**Columns:** `ID | Section | Position | Ratio / px | Type (static / GIF / video / icon / logo) | Content (what it shows, text on it, claims) | Source (URL → raw file in 02_competitor/media) | Plan | Ref`
+**Columns:** `ID | Section | Position | Ratio / px | Type (static / GIF / video / icon / logo) | Content (what it shows, text on it, claims) | Source (URL → raw file in 02_competitor/media) | Plan | Ref | Angle / avatar (V#/O# · AV#, from the ANGLE ARCHITECTURE; people shown = that avatar)`
 
 **Plans** (from the operator rules):
 | Image kind | Plan | Ref |
@@ -298,7 +335,7 @@ MOBILE BEHAVIOR (~390px):
 **Default plans**
 - **Bundle / quantity-break app** (Kaching, Bundler, Fast Bundle…): **rebuild natively** as variant-driven cards (e.g. Horizon: a custom block that drives the hidden native variant picker; the operator creates variants per quantity at the tier prices). Record the tiers, badges, preselected tier, gifts and card styles.
 - **Free gifts:** an operator to-do (gift product + automatic discount, or an app). Show the gift strip natively.
-- **Cart drawer extras** (progress bar, upsells): note the threshold and texts. Use a native shipping rate at the same threshold, and add a native bar only if the theme supports it.
+- **Cart drawer extras** (progress bar, upsells): note the threshold and texts. Use a native shipping rate at the same threshold. The theme has a built-in cart drawer mockup: the "Cart drawer" section in the header group (`sections/cart-drawer-extras.liquid` + `snippets/cart-extras.liquid`), editable in the theme editor; selecting it opens the drawer: announcement bar, timer bar, free-shipping bar, price details (subtotal / discounts / shipping, labels auto-translated), badges and payment icons under the checkout button, tax note hidden. Everything is off by default: turn on and fill in the copy in the `cart_drawer` entry of `sections/header-group.json` to match the competitor's drawer, in the store language. Never fork it into a brand snippet.
 - **Sticky ATC:** native if the theme has one or the builder adds a light block. Record its label and target.
 - **Reviews app** (Judge.me, Loox…): an operator to-do (install + import). Build a placeholder in the same position. Static rating lines and testimonial cards are theme content. Rebuild them.
 - **Popups / email capture:** note them. Don't rebuild them in Mode A unless the operator asks.
@@ -319,9 +356,9 @@ MOBILE BEHAVIOR (~390px):
    - **Currency** shown in the screenshot vs the JSON: JSON wins.
 2. **Master** saves the returned text to `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md` and links it in BRIEF.md.
 3. Hand off:
-   - **Copywriter:** the spec (FUNNEL PSYCHOLOGY + COPY INVENTORY), §14 copy rules, BRIEF.md (brand, title, market).
-   - **Builder:** the spec (sections, non-obvious elements, APPS) + the copy deck + BRANDING.md.
-   - **Image agents:** the IMAGE MAP + raw media folder + packshot.
+   - **Copywriter:** the spec (FUNNEL PSYCHOLOGY + ANGLE ARCHITECTURE + COPY INVENTORY), §14 copy rules, BRIEF.md (brand, title, market), the dossier (3.1, 3.2, 3.5, 1.4, 1.6).
+   - **Builder:** the spec (sections, non-obvious elements, APPS, landing decision) + the copy deck + BRANDING.md.
+   - **Image agents:** the IMAGE MAP + ANGLE ARCHITECTURE + raw media folder + packshot + the dossier (3.1, 3.2).
    - **Visual QA:** the spec + competitor chunks.
 
 **Done when:** SECTION_SPEC.md is saved and each downstream brief points to it.
@@ -338,15 +375,21 @@ Read first:
   - <SKILL_DIR>/references/03-competitor-page-analysis.md  (Steps 4–10, §15 worked example)
   - <SKILL_DIR>/templates/SECTION_SPEC.md                   (output format, follow it exactly)
   - <SKILL_DIR>/references/00-operator-rules.md §1 (claims)
+  - <SKILL_DIR>/references/19-step-alpha.md CONGRUENCE INSIGHTS (spec lines 353–367)
 Inputs (all in <PRODUCT_DIR>/02_competitor/page/):
   capture.md, capture.json, copy.txt, p.json, p.html, desk.png, d1.png…dN.png, mob.png (mobile status: <captured|blocked → infer>)
+Step Alpha dossier (gate passed): <PRODUCT_DIR>/00_alpha/ALPHA_DOSSIER.md: 3.1 Angle Cards, 1.10 Funnel Congruence,
+  2.4 Funnel Congruence Gaps, 3.2 Avatar Cards, 1.4 Objections, 1.6 Unique Mechanism, 2.6/3.5 Language Bank, 1.1 Avatars
 Market: <MARKET>. Competitor: <COMPETITOR_URL>.
 Task: produce the complete SECTION SPEC of the competitor page: section inventory, one PROMPT_1-1 block per
 section (header to footer, nothing skipped, px and #hex values; '~' = measured on chunks at scale <S>), non-obvious
 elements (check app configs for sticky ATC, cart drawer bars, popups, timers), FUNNEL PSYCHOLOGY with a price-math
-table, IMAGE MAP (every image, ratio, content, source URL, plan), COPY INVENTORY (every string verbatim, tagged
-[CLAIM]/[OFFER]/[NUM]/[BOLD], word counts per section), APPS with rebuild plan, inconsistencies with defaults.
-Describe the competitor as it is; don't improve it (Mode A). Don't write our copy. Keep claims verbatim.
+table, ANGLE ARCHITECTURE (Step 6: angle table, above the fold, a home for every HIGH and gap angle, one page vs
+angle landing pages, objection map, mechanism section, language bank lines per section) and an ANGLE ROLE field in
+every section block, IMAGE MAP (every image, ratio, content, source URL, plan), COPY INVENTORY (every string verbatim,
+tagged [CLAIM]/[OFFER]/[NUM]/[BOLD], word counts per section), APPS with rebuild plan, inconsistencies with defaults.
+Describe the competitor as it is; don't improve it (Mode A). ANGLE ROLE and ANGLE ARCHITECTURE are about our page.
+Don't write our copy. Keep claims verbatim.
 Mark mobile lines (observed) or (inferred). Write 'unknown — check live' rather than guessing.
 Return the whole document as TEXT in your final message (don't write .md files; the master saves it).
 ```
@@ -370,6 +413,8 @@ These rules travel with the spec to the copywriter agent (Phase 3, A2). PROMPT_1
 8. **Offer terms consistent.** One guarantee length, one shipping threshold, matching the offer, everywhere.
 9. **Testimonials match their photos** (mother vs father, age, setting). Keep the persona and the objection each testimonial answers.
 10. **Mode A:** improve wording inside the same strings only (a sharper headline, a "so that…" bridge in an existing bullet). Restructuring is Mode B only.
+11. **Customer language from the Language Bank** (dossier 3.5 / 2.6). Headlines and subtitles use hook-ready and headline-ready phrases, FAQ questions and objection answers use objection-ready phrases (the skeptic's exact words), testimonials are modelled on testimony-ready phrases. Use the phrase as the customer said it, fitted to the string's length budget. Claims still come from the competitor (rules 2–3).
+12. **Write each string for its section's angle.** Follow the section's ANGLE ROLE (angle card, avatar, objection). Tag every string in the copy deck with its angle card ID(s) (`S3.03 [V1]`), so QA and the ads can check congruence.
 
 **Paraphrase examples (Plaims → Noxis, real run)**
 | Plaims | Noxis | Note |
@@ -603,6 +648,17 @@ Not present: popups, exit intent, countdown timers, stock counters.
 **Upsell.** Free-shipping threshold of $30 sits between the 1-unit and 2-unit prices. The 2-unit tier is preselected and badged MOST POPULAR. BEST VALUE anchors the 3-unit tier. Gifts scale with quantity. The cart progress bar repeats the threshold.
 **Arc.** Attention: rating + title + pain subtitle → Interest: bullets + mechanism accordions → Desire: testimonials → identity story (S5) → comparison (S6) → honesty (S7) → Action: bundles sit above the fold, the FAQ removes the last objections, and the sticky ATC brings the visitor back to the bundles. The page assumes a problem-aware older driver arriving from an ad.
 
+### ANGLE ARCHITECTURE (illustrative: Step Alpha did not exist in the Plaims run; card names are examples)
+| Card | Angle | Confidence / potential | Avatar | Competitor congruence | Gap (2.4) | Home on our page |
+|---|---|---|---|---|---|---|
+| V1 | "It's not your age, it's LED headlights" | HIGH | AV1 older driver who quietly stopped driving at night | HIGH | no | above the fold: S3.03 subtitle, P1; S5 story |
+| V2 | Cataract / astigmatism drivers | HIGH | AV2 driver with an eye condition | LOW (ads name the condition, the page never does) | yes | S3 bullet S3.04, FAQ S8 question 1, testimonial T3 persona |
+| O1 | Adult child buying for an aging parent | HIGH potential | AV3 gift buyer, 40s | none | yes | testimonial T2 persona, S3 gift strip wording |
+
+Landing decision: one page with multi-angle architecture (V2 and O1 fit existing slots; V1 already owns the fold).
+Objection map: "my eye doctor says these don't work" (1.4, STRENGTH 3) → FAQ 1 in the skeptic's words · "cheap yellow tints" → S7 + comparison row.
+Mechanism (1.6): GlareCut Technology™ → accordion S3.15–S3.16 + comparison row S6.08.
+
 ### IMAGE MAP (Plaims, abridged)
 | ID | Section | Position | Ratio / px | Type | Content | Source | Plan |
 |---|---|---|---|---|---|---|---|
@@ -681,6 +737,7 @@ TOTAL brand copy ≈ 1,050 words (reviews excluded)
 | Copy inventory without counts | copy grows ("big and heavy to read") | word count per section, ±10% budget |
 | Claims softened by the copywriter | operator-mandated rewrite | `[CLAIM]` tags + §14 rule 2 |
 | Spec written by a sub-agent as a file | write refused | the agent returns text, the master saves |
+| An advertised angle with no home on the page | the ad's promise hits a wall (LOW congruence), visitors bounce | ANGLE ARCHITECTURE: every HIGH and gap angle has a home or a landing page |
 
 ---
 
@@ -689,6 +746,7 @@ TOTAL brand copy ≈ 1,050 words (reviews excluded)
 - [ ] Inventory covers announcement bar → footer, plus invisible app elements.
 - [ ] Every section has all seven PROMPT_1-1 fields with px and #hex values (`~` measured, CSS/config exact, or "unknown — check live").
 - [ ] FUNNEL PSYCHOLOGY has all five blocks, the arc, and a price-math table that reproduces the displayed SAVE and compare-at values.
+- [ ] ANGLE ARCHITECTURE done from the dossier (Alpha gate passed): above the fold validates the highest-confidence angle(s), every HIGH and gap angle has a home or a landing page, landing decision written, objection map, mechanism section; every section block has ANGLE ROLE.
 - [ ] IMAGE MAP has every image, GIF, video, icon set and logo, with ratio, content, source and plan; competitor-only images are marked skip.
 - [ ] COPY INVENTORY lists every string verbatim with tags and per-section word counts, with noise stripped.
 - [ ] APPS table has a plan per app and the operator to-dos listed.

@@ -4,7 +4,7 @@ Usage:
   python -I kie_jobs.py jobs.json OUT_DIR
   python -I kie_jobs.py --credits            # print the account balance and exit
 
-jobs.json: [{"name": "...", "model": "gpt-image-2-image-to-image",
+jobs.json: [{"name": "...", "model": "gpt-image-2-5-sunburst-image-to-image",
              "input": {"prompt": "...", "aspect_ratio": "1:1", "resolution": "2K"},
              "upload": {"field": "input_urls", "files": ["local/ref1.png", "local/packshot.png"]}}]
 Local files in "upload.files" are uploaded (Kie temp storage, 24 h) and prepended to input[field].

@@ -4,7 +4,9 @@
      Written by the conversion-architect agent and RETURNED AS TEXT; the master saves it to
      PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md. Describe the competitor AS IS (Mode A).
      '~' = measured on screenshot chunks × scale · exact values from CSS/app config · 'unknown — check live' if unsure.
-     Never write "same as above": repeat the values. Remove these comments when done. -->
+     Never write "same as above": repeat the values. ANGLE ROLE and §3b are about OUR page and come from the
+     Step Alpha dossier (00_alpha/ALPHA_DOSSIER.md; A1 starts only after the Alpha gate passed).
+     Remove these comments when done. -->
 
 | Meta | Value |
 |---|---|
@@ -17,6 +19,7 @@
 | Currency | JSON {{USD}} · screenshot {{€ (geo)}} → use JSON |
 | Word count | brand copy ≈ {{N}} · reviews-app ≈ {{N}} |
 | Capture files | p.json, p.html, capture.json/.md, copy.txt, desk.png, d1–d{{N}}.png, mob.png |
+| Step Alpha | `00_alpha/ALPHA_DOSSIER.md` · gate PASS {{YYYY-MM-DD}} · cards used {{V1–Vn, O1–On}} |
 
 ---
 
@@ -75,6 +78,12 @@ CONVERSION ROLE:
 
 MOBILE BEHAVIOR (~390px):  ({{observed | inferred}})
   — {{stack direction · hidden/reordered elements · carousel/scroll · touch interactions}}
+
+ANGLE ROLE (Step Alpha, our page):
+  — Angle card(s) served: {{V1, O2 or none}}
+  — Avatar: {{AV1}}
+  — Objection handled (1.4): {{objection or none}}
+  — Congruence role: {{above-the-fold validation of V1 / home for gap angle O2 / objection handling / mechanism proof / offer / none}}
 ```
 
 ---
@@ -105,6 +114,26 @@ X3 {{Popup / exit intent / timer / floating badge}}: {{… or "none found"}}
 **Upsell architecture:** {{quantity breaks, gifts scaling, MOST POPULAR / preselected, BEST VALUE, free-shipping threshold vs tier prices, cart bar}}
 **Narrative arc:** Attention {{S…}} → Interest {{S…}} → Desire {{S…}} → Action {{S…}} · awareness stage: {{…}} · buy decision gated at: {{…}}
 
+## 3b. ANGLE ARCHITECTURE (Step Alpha)
+
+<!-- How: references/03-competitor-page-analysis.md Step 6 § ANGLE ARCHITECTURE. Inputs: dossier 3.1, 1.10, 2.4, 3.2, 1.4,
+     1.6, 2.6/3.5. Mode A: same sections and word budget; this decides which angle each existing slot speaks to. -->
+
+| Card | Angle | Confidence / potential | Avatar | Competitor congruence (1.10) | Gap angle (2.4) | Home on our page (S#.## / image ID) |
+|---|---|---|---|---|---|---|
+| {{V1}} | {{…}} | {{HIGH}} | {{AV1}} | {{HIGH/MED/LOW}} | {{yes/no}} | {{S3.03 subtitle, P1}} |
+| {{O1}} | {{…}} | {{HIGH potential}} | {{AV3}} | {{none}} | {{yes}} | {{T2 persona, FAQ 2}} |
+
+**Above the fold validates:** {{V1 (+ V2)}} via {{rating line / subtitle / bullets / first gallery image}}
+**Landing decision:** {{one page with multi-angle architecture | angle landing pages: product.<slug>-<angle-id>.json for O1, …}} · reason: {{one line from the congruence insights}}
+
+| Objection (1.4) | Competitor handling · strength | Our slot | Objection-ready phrase (2.6 / 3.5, verbatim) |
+|---|---|---|---|
+| {{"I've tried … before"}} | {{FAQ · 3}} | {{S8 Q1}} | {{"…"}} |
+
+**Mechanism (1.6):** {{mechanism name}} → {{section / strings}}
+**Language bank lines per section (3.5):** {{S3: hook-ready "…" · S4: testimony-ready "…" · S8: objection-ready "…"}}
+
 ---
 
 ## 4. IMAGE MAP
@@ -112,13 +141,13 @@ X3 {{Popup / exit intent / timer / floating badge}}: {{… or "none found"}}
 <!-- Every <img>, background image, GIF, video, icon set, logo. Plans: remake (05) · skip competitor-only ·
      from packshot (05) · Kie i2i new people, copy matches photo (06) · raw + animated WebP (06) · native SVG/theme (04). -->
 
-| ID | Section | Position | Ratio / px | Type | Content (incl. text/claims on image) | Source (URL → media/ file) | Plan | Ref |
-|---|---|---|---|---|---|---|---|---|
-| P1 | S3 | gallery 1 | 1:1 · {{1080}} | {{infographic}} | {{…}} | {{…}} | remake | 05 |
-| B1 | S3 | bundle card | {{~48px}} | static | {{1 unit}} | {{app media}} | from packshot | 05 |
-| T1 | {{S4}} | card top | {{1:1}} | photo | {{persona, setting}} | {{…}} | Kie i2i | 06 |
-| M1 | {{S5}} | {{right}} | {{1:1 · 1500}} | GIF | {{…}} | {{….gif}} | raw + WebP | 06 |
-| IC | {{…}} | icons | SVG | icons | {{checks, ?, stars, chevrons}} | n/a | native | 04 |
+| ID | Section | Position | Ratio / px | Type | Content (incl. text/claims on image) | Source (URL → media/ file) | Plan | Ref | Angle / avatar |
+|---|---|---|---|---|---|---|---|---|---|
+| P1 | S3 | gallery 1 | 1:1 · {{1080}} | {{infographic}} | {{…}} | {{…}} | remake | 05 | {{V1 · AV1}} |
+| B1 | S3 | bundle card | {{~48px}} | static | {{1 unit}} | {{app media}} | from packshot | 05 | none |
+| T1 | {{S4}} | card top | {{1:1}} | photo | {{persona, setting}} | {{…}} | Kie i2i | 06 | {{O1 · AV3}} |
+| M1 | {{S5}} | {{right}} | {{1:1 · 1500}} | GIF | {{…}} | {{….gif}} | raw + WebP | 06 | {{V1 · AV1}} |
+| IC | {{…}} | icons | SVG | icons | {{checks, ?, stars, chevrons}} | n/a | native | 04 | none |
 
 ---
 

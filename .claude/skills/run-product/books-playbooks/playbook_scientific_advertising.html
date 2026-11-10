@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scientific Advertising — The Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f1e9d4;
+    --paper-deep: #e6dcc0;
+    --paper-soft: #f7f0dd;
+    --ink: #1a1613;
+    --ink-soft: #3d342c;
+    --muted: #7a6a58;
+    --rule: #c4b793;
+    --rule-soft: #d9ceb0;
+    --accent: #8b2e2e;
+    --accent-deep: #6b1f1f;
+    --accent-soft: #b55a5a;
+    --gold: #9a7a2e;
+    --sidebar-w: 300px;
+  }
+ 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { scroll-behavior: smooth; }
+  
+  body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    background-image: 
+      radial-gradient(ellipse at top left, rgba(139, 46, 46, 0.03), transparent 40%),
+      radial-gradient(ellipse at bottom right, rgba(154, 122, 46, 0.04), transparent 40%);
+  }
+ 
+  /* Paper grain texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.35;
+    background-image: 
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.4 0 0 0 0 0.35 0 0 0 0 0.25 0 0 0 0.06 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  }
+ 
+  /* Progress bar */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: var(--accent);
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+  }
+ 
+  /* Layout */
+  .container {
+    display: grid;
+    grid-template-columns: var(--sidebar-w) 1fr;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+  }
+ 
+  /* Sidebar */
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    background: var(--paper-deep);
+    border-right: 1px solid var(--rule);
+    padding: 2.5rem 1.75rem 2rem;
+    font-family: 'Source Serif 4', Georgia, serif;
+  }
+ 
+  aside::-webkit-scrollbar { width: 6px; }
+  aside::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 3px; }
+ 
+  .sidebar-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 0.15rem;
+  }
+ 
+  .sidebar-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.75rem;
+    font-weight: 500;
+  }
+ 
+  .sidebar-divider {
+    height: 1px;
+    background: var(--rule);
+    margin: 0 0 1.25rem;
+    position: relative;
+  }
+  .sidebar-divider::after {
+    content: '§';
+    position: absolute;
+    top: -0.7rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--paper-deep);
+    padding: 0 0.5rem;
+    color: var(--accent);
+    font-family: 'Fraunces', serif;
+    font-size: 0.9rem;
+  }
+ 
+  aside nav ol {
+    list-style: none;
+    counter-reset: chap;
+  }
+ 
+  aside nav li {
+    counter-increment: chap;
+    margin-bottom: 0.1rem;
+  }
+ 
+  aside nav a {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.4rem 0.35rem;
+    text-decoration: none;
+    color: var(--ink-soft);
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    transition: all 0.15s ease;
+    font-size: 0.88rem;
+    line-height: 1.35;
+  }
+ 
+  aside nav a::before {
+    content: counter(chap, decimal-leading-zero);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-weight: 500;
+  }
+ 
+  aside nav a:hover {
+    color: var(--accent);
+    background: rgba(139, 46, 46, 0.05);
+  }
+ 
+  aside nav a.active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 600;
+  }
+  aside nav a.active::before { color: var(--accent); }
+ 
+  .nav-section {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 1.25rem 0 0.5rem 0.5rem;
+    font-weight: 500;
+  }
+  .nav-section:first-child { margin-top: 0; }
+ 
+  /* Main content */
+  main {
+    padding: 0;
+    max-width: 100%;
+    position: relative;
+  }
+ 
+  .content-wrap {
+    max-width: 740px;
+    margin: 0 auto;
+    padding: 5rem 3.5rem 6rem;
+  }
+ 
+  /* Hero */
+  .hero {
+    padding: 7rem 3.5rem 4rem;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+ 
+  .hero-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 500;
+  }
+ 
+  .hero-kicker::before,
+  .hero-kicker::after {
+    content: '';
+    flex: 0 0 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-kicker::after { flex: 1; }
+ 
+  .hero h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-size: clamp(3rem, 8vw, 5.5rem);
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    color: var(--ink);
+    margin-bottom: 0.3rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 500;
+  }
+ 
+  .hero-sub {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.01em;
+  }
+ 
+  .hero-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.25rem;
+    padding: 1.5rem 0;
+    border-top: 1px solid var(--rule-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .hero-meta b {
+    display: block;
+    color: var(--ink);
+    font-weight: 700;
+    margin-top: 0.2rem;
+    letter-spacing: 0.05em;
+    font-size: 0.8rem;
+  }
+ 
+  .hero-thesis {
+    margin-top: 2.5rem;
+    padding: 1.75rem 2rem;
+    border-left: 3px solid var(--accent);
+    background: rgba(139, 46, 46, 0.04);
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+  .hero-thesis strong {
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 700;
+  }
+ 
+  /* Chapter sections */
+  section.chapter {
+    padding: 5rem 3.5rem;
+    max-width: 960px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--rule-soft);
+    scroll-margin-top: 2rem;
+  }
+  section.chapter:last-of-type { border-bottom: none; }
+ 
+  .ch-head {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--rule);
+  }
+ 
+  .ch-num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: 5rem;
+    line-height: 0.85;
+    color: var(--accent);
+    letter-spacing: -0.05em;
+    flex-shrink: 0;
+  }
+ 
+  .ch-title-wrap {
+    flex: 1;
+  }
+ 
+  .ch-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+    font-weight: 500;
+  }
+ 
+  .ch-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 2.1rem;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+ 
+  /* Principle block */
+  .principle {
+    margin: 0 0 2rem;
+    padding: 0;
+    position: relative;
+  }
+ 
+  .principle-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+ 
+  .principle-text {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 1.55rem;
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .principle-text em {
+    font-style: italic;
+    color: var(--accent);
+  }
+ 
+  /* Content body */
+  .ch-body h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .ch-body h3::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    transform: translateY(-3px);
+  }
+ 
+  .ch-body p {
+    margin-bottom: 1.1rem;
+    color: var(--ink-soft);
+  }
+ 
+  .insights {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+ 
+  .insights li {
+    position: relative;
+    padding-left: 2.25rem;
+    margin-bottom: 1.1rem;
+    color: var(--ink-soft);
+  }
+ 
+  .insights li::before {
+    content: counter(insight);
+    counter-increment: insight;
+    position: absolute;
+    left: 0;
+    top: 0.15rem;
+    width: 1.5rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent);
+    border-right: 1px solid var(--rule);
+    padding-right: 0.5rem;
+    text-align: right;
+  }
+ 
+  .insights {
+    counter-reset: insight;
+  }
+ 
+  .insights strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+ 
+  /* Example box */
+  .example {
+    margin: 2rem 0;
+    padding: 1.5rem 1.75rem;
+    background: var(--paper-soft);
+    border: 1px solid var(--rule);
+    position: relative;
+  }
+  .example::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px;
+    width: 24px;
+    height: 24px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+  }
+  .example::after {
+    content: '';
+    position: absolute;
+    bottom: -1px; right: -1px;
+    width: 24px;
+    height: 24px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+  }
+ 
+  .example-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .example p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: 1.02rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    font-style: italic;
+    margin: 0;
+  }
+  .example p strong {
+    color: var(--accent-deep);
+    font-weight: 600;
+    font-style: normal;
+  }
+ 
+  /* Modern application */
+  .modern {
+    margin: 2rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px dashed var(--rule);
+  }
+  .modern-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+  }
+  .modern p {
+    margin: 0;
+    color: var(--ink-soft);
+  }
+ 
+  /* Pull quote */
+  .quote {
+    margin: 2.5rem auto;
+    padding: 1.25rem 0;
+    max-width: 560px;
+    text-align: center;
+    position: relative;
+  }
+  .quote::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+    margin: 0 auto 1rem;
+  }
+  .quote::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--accent);
+    margin: 1rem auto 0;
+  }
+  .quote p {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.4;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+ 
+  /* Summary section */
+  .summary-section {
+    background: var(--paper-deep);
+    padding: 5rem 3.5rem;
+    border-top: 3px double var(--rule);
+    border-bottom: 3px double var(--rule);
+  }
+ 
+  .summary-inner {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+ 
+  .summary-kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+ 
+  .summary-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-style: italic;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+  }
+  .summary-title em {
+    color: var(--accent);
+    font-style: italic;
+  }
+ 
+  .laws-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--rule);
+    border-left: 1px solid var(--rule);
+  }
+ 
+  .law {
+    padding: 1.5rem 1.5rem 1.75rem;
+    border-right: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    background: var(--paper);
+    transition: background 0.2s;
+  }
+  .law:hover { background: var(--paper-soft); }
+ 
+  .law-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+ 
+  .law-title {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+ 
+  .law-text {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-soft);
+  }
+ 
+  /* Footer */
+  footer {
+    padding: 3rem 3.5rem 4rem;
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  footer p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  footer .colophon {
+    font-family: 'Fraunces', Georgia, serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink-soft);
+    margin-bottom: 1rem;
+  }
+ 
+  /* Drop cap on intro paragraph */
+  .ch-body > p:first-of-type::first-letter,
+  .has-dropcap::first-letter {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 900;
+    font-size: 3.75rem;
+    float: left;
+    line-height: 0.85;
+    padding: 0.4rem 0.6rem 0 0;
+    color: var(--accent);
+  }
+ 
+  /* Mobile sidebar */
+  .menu-toggle {
+    display: none;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 100;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 0.6rem 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    font-weight: 600;
+  }
+ 
+  @media (max-width: 900px) {
+    .container { grid-template-columns: 1fr; }
+    aside {
+      position: fixed;
+      top: 0; left: 0;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      z-index: 50;
+      box-shadow: 2px 0 20px rgba(0,0,0,0.15);
+    }
+    aside.open { transform: translateX(0); }
+    .menu-toggle { display: block; }
+    .hero, section.chapter, .summary-section, footer { padding-left: 1.75rem; padding-right: 1.75rem; }
+    .hero { padding-top: 5rem; }
+    .ch-head { flex-direction: column; gap: 0.5rem; align-items: flex-start; }
+    .ch-num { font-size: 3.5rem; }
+    .ch-title { font-size: 1.7rem; }
+    .principle-text { font-size: 1.3rem; }
+  }
+ 
+  /* Selection */
+  ::selection { background: var(--accent); color: var(--paper); }
+</style>
+</head>
+<body>
+ 
+<div class="progress" id="progress"></div>
+<button class="menu-toggle" id="menuToggle">☰ Menu</button>
+ 
+<div class="container">
+ 
+<aside id="sidebar">
+  <div class="sidebar-title">Scientific<br>Advertising</div>
+  <div class="sidebar-sub">Field Manual · 1923</div>
+  <div class="sidebar-divider"></div>
+  
+  <nav>
+    <div class="nav-section">Start Here</div>
+    <ol style="counter-reset: chap 0;">
+      <li style="counter-increment: none;"><a href="#intro" data-n="—">The Core Thesis</a></li>
+    </ol>
+    
+    <div class="nav-section">Part I · Foundations</div>
+    <ol>
+      <li><a href="#ch1">Advertising as Science</a></li>
+      <li><a href="#ch2">Just Salesmanship</a></li>
+      <li><a href="#ch3">Offer Service</a></li>
+      <li><a href="#ch4">What Mail Order Teaches</a></li>
+    </ol>
+    
+    <div class="nav-section">Part II · Craft</div>
+    <ol style="counter-reset: chap 4;">
+      <li><a href="#ch5">Headlines</a></li>
+      <li><a href="#ch6">Psychology</a></li>
+      <li><a href="#ch7">Being Specific</a></li>
+      <li><a href="#ch8">Tell Your Full Story</a></li>
+      <li><a href="#ch9">Art in Advertising</a></li>
+    </ol>
+    
+    <div class="nav-section">Part III · Strategy</div>
+    <ol style="counter-reset: chap 9;">
+      <li><a href="#ch10">Things Too Costly</a></li>
+      <li><a href="#ch11">Information</a></li>
+      <li><a href="#ch12">Strategy</a></li>
+      <li><a href="#ch13">Use of Samples</a></li>
+      <li><a href="#ch14">Getting Distribution</a></li>
+      <li><a href="#ch15">Test Campaigns</a></li>
+      <li><a href="#ch16">Leaning on Dealers</a></li>
+    </ol>
+    
+    <div class="nav-section">Part IV · The Finish</div>
+    <ol style="counter-reset: chap 16;">
+      <li><a href="#ch17">Individuality</a></li>
+      <li><a href="#ch18">Negative Advertising</a></li>
+      <li><a href="#ch19">Letter Writing</a></li>
+      <li><a href="#ch20">A Name That Helps</a></li>
+      <li><a href="#ch21">Good Business</a></li>
+    </ol>
+    
+    <div class="nav-section">Reference</div>
+    <ol style="counter-reset: chap 0;">
+      <li style="counter-increment: none;"><a href="#laws" data-n="∎">The 21 Laws</a></li>
+    </ol>
+  </nav>
+</aside>
+ 
+<main>
+ 
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-kicker">Claude C. Hopkins · 1923</div>
+  <h1>Scientific<br><em>Advertising</em></h1>
+  <p class="hero-sub">Every principle in the book that built modern marketing — distilled for the reader who wants the knowledge, not the page count.</p>
+  
+  <div class="hero-meta">
+    <div>Original pages<br><b>61</b></div>
+    <div>Chapters<br><b>21</b></div>
+    <div>Reading time<br><b>~45 min</b></div>
+    <div>Written<br><b>A century ago</b></div>
+  </div>
+  
+  <div class="hero-thesis" id="intro">
+    <strong>The core thesis —</strong> Advertising is not an art, not a gamble, and not a branding exercise. It is <em>salesmanship in print</em>, multiplied across thousands of readers, and its results can be measured with the same rigor you'd use to measure a factory. Every principle that follows comes from one discipline: <em>track what happens, compare it to what else could have happened, and let the numbers — not your taste — decide.</em>
+  </div>
+</section>
+ 
+<!-- CHAPTER 1 -->
+<section class="chapter" id="ch1">
+  <div class="ch-head">
+    <div class="ch-num">01</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">How Advertising Laws Are Established</div>
+      <h2 class="ch-title">Advertising Is a Science</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Advertising has moved from a gamble to a <em>science</em> — governed by laws as fixed as gravity, provable through measured tests.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">For most of history, advertisers were sailors without charts. Every man guessed his own course, and most were wrecked on the same reefs the previous man had missed. Hopkins' claim is that those days are over. What was once opinion is now measurable — and once you measure, principles emerge that never change.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Test, record, compare.</strong> Run two versions of an ad against each other, track which produced more orders per dollar, and the better one becomes the new baseline. Repeat forever.</li>
+      <li><strong>Cost per customer is the only scoreboard.</strong> Replies are cheap; customers are what you're buying. An ad that brings many worthless replies is worse than one that brings fewer valuable ones.</li>
+      <li><strong>Coupons made the science possible.</strong> Before analytics, a cut-out coupon was the only way to trace exactly which ad produced which sale. The coupon was Hopkins' Google Analytics.</li>
+      <li><strong>The uncertainty is people and products, not methods.</strong> You can't predict whether consumers will love a new flavor — but you <em>can</em> know the cheapest, fastest way to sell whatever they love.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Large agencies had run thousands of campaigns and recorded the results of every one. <strong>"Nearly every selling question which arises in business is accurately answered by many experiences."</strong> The wrecks had finally been charted.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>A/B testing, conversion tracking, attribution models, ROAS dashboards — all are modern names for Hopkins' method. If you run ads without knowing cost-per-acquisition, you are a pre-1900 advertiser with better fonts.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 2 -->
+<section class="chapter" id="ch2">
+  <div class="ch-head">
+    <div class="ch-num">02</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Just Salesmanship</div>
+      <h2 class="ch-title">An Ad Is a Salesman, Multiplied</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Advertising is salesmanship. Every question about it should be answered by the salesman's standards — <em>not by art, oratory, or entertainment.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is the chapter Hopkins calls the most important in the book, and everything else descends from it. The confusion between advertising and "creative writing" has cost companies billions. An ad exists to make a sale — nothing else — and judging it by any other standard (cleverness, awards, likability) is to miss the point of the exercise entirely.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Fine writing is a disadvantage.</strong> When literary style shows through, it "reveals the hook." The reader senses they're being sold and resists.</li>
+      <li><strong>Great ad writers are often ex-canvassers, not ex-poets.</strong> They've argued with real customers at real doors; they know which words convince and which just sound good.</li>
+      <li><strong>The test question:</strong> "Would this help a salesman sell the goods if he met a buyer in person?" If no, cut it.</li>
+      <li><strong>Think of one person, not the masses.</strong> "Thinking of people in the mass gives you a blurred view." Picture a specific likely buyer and write to them.</li>
+      <li><strong>Entertainment attracts the wrong audience.</strong> People who come for the joke don't stay for the purchase.</li>
+    </ol>
+ 
+    <div class="quote">
+      <p>"Ads are planned and written with some utterly wrong conception. They are written to please the seller. The interests of the buyer are forgotten."</p>
+    </div>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>"Some advertising men go out in person and sell to people before they plan to write an ad. One of the ablest of them has spent weeks on one article, selling from house to house. In this way they learn the reactions from different forms of argument and approach."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Before writing a landing page, call ten customers. Before writing a cold email, work a week in sales. The modern marketing playbook — Jobs to Be Done, voice-of-customer mining, customer interviews — is Hopkins' advice with a rebrand.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 3 -->
+<section class="chapter" id="ch3">
+  <div class="ch-head">
+    <div class="ch-num">03</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Offer Service</div>
+      <h2 class="ch-title">People Are Selfish — Lead With What They Get</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">The best ads <em>ask no one to buy.</em> They offer samples, trials, information, or some other service — and the sale follows naturally.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is a psychological reversal that most advertisers still miss: demanding a purchase activates resistance, while offering value activates reciprocity. The ad that says "Let me help you" outperforms the ad that says "Give me your money" almost every time it's tested.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Drop the command.</strong> "Buy my brand" is the worst opening move. It's selfish, obvious, and puts the reader on guard.</li>
+      <li><strong>Remove the risk.</strong> Free samples, free trials, money-back guarantees, "pay after you try" offers — all collapse the prospect's reason to delay.</li>
+      <li><strong>The seller should court, not demand.</strong> "People can be coaxed but not driven."</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>A brush company had 2,000 door-to-door salesmen. They didn't ask housewives to buy — they said: <strong>"I was sent here to give you a brush. Pick the one you want."</strong> The housewife, now holding a gift and feeling the pull of reciprocation, would almost always buy others she noticed. Same product, opposite framing, radically different results.</p>
+    </div>
+ 
+    <div class="quote">
+      <p>"The good salesman does not merely cry a name. He pictures the customer's side of his service until the natural result is to buy."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Every free-trial SaaS, every lead magnet, every "get our guide, no email required" landing page is this chapter in action. Modern offers that still read "SIGN UP NOW!" are still fighting Hopkins' dead letter.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 4 -->
+<section class="chapter" id="ch4">
+  <div class="ch-head">
+    <div class="ch-num">04</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Mail Order Advertising · What It Teaches</div>
+      <h2 class="ch-title">Trust the Medium That Tracks Everything</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Mail order is the severest school of advertising — every ad's merit is visible in the returns. What works there works everywhere; <em>what doesn't work there is lying to you elsewhere.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">A mail order advertiser cannot fool himself. If the ad doesn't pay, no returns come in, and the mistake is exposed within weeks. This is why mail order established most of advertising's fixed laws — it was the only place where they could be proven. Every other form of advertising should pay attention to what mail order discovered, because mail order had no choice but to discover it.</p>
+ 
+    <h3>What Mail Order Proves</h3>
+    <ol class="insights">
+      <li><strong>Small type works.</strong> Mail order ads are set in small type because large type doesn't pay. When you double your space with larger type instead of more content, you've just doubled your cost for zero gain.</li>
+      <li><strong>No wasted space.</strong> No borders, no decoration, no palaver. Every inch earns its place or gets cut.</li>
+      <li><strong>"The more you tell, the more you sell."</strong> Longer ads out-pull short ones when the extra length is substantive — tests have never shown otherwise.</li>
+      <li><strong>Pictures must sell.</strong> A decorative image that adds 50% more space must produce 50% more orders. Usually it doesn't.</li>
+      <li><strong>The coupon captures intent.</strong> Readers forget decisions within minutes; the coupon converts "I'll do this later" into action now.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>An incubator advertiser added a striking row of chickens in silhouette, increasing his ad size by 50% for the visual. <strong>"The new ad, costing one-half more for every insertion, brought not one added sale."</strong> The practical buyers wanted a good offer, not pictures.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Direct-response marketers (Google Ads buyers, DTC brands, affiliate marketers) are Hopkins' descendants. Brand advertisers who sneer at them are repeating the 1910s mistake of mistaking applause for sales.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 5 -->
+<section class="chapter" id="ch5">
+  <div class="ch-head">
+    <div class="ch-num">05</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Headlines</div>
+      <h2 class="ch-title">Headlines Are Filters, Not Titles</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">A headline's job is not to describe the ad. Its job is to <em>call out the right reader from a crowd</em> — and turn everyone else away.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Hopkins says he often spent hours on a single headline, discarding dozens. The reason is arithmetic: an ad with a 10% stronger headline doesn't produce 10% more sales — it often produces 500% to 1000% more, because the headline determines whether the ad is read at all. Everything else in the ad is wasted ink if no one gets past the top line.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Don't try to attract everyone.</strong> "A double-page ad on women's dresses will not gain a glance from a man." You want your buyers reading, not everyone.</li>
+      <li><strong>Clever beats clear — except it doesn't.</strong> A blind or witty headline might pull more eyes, but the wrong eyes. "Egyptian Psychology" won't reach the woman being told she's the most beautiful in the city.</li>
+      <li><strong>The same ad with a different headline can pull 10× returns.</strong> Hopkins has the records of 2,000 headlines tested on a single product. The difference between the best and worst is enormous.</li>
+      <li><strong>Run multiple headlines across placements.</strong> Different readers respond to different angles of the same product.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>An automobile ad with the headline <strong>"A Good Universal Joint"</strong> would fall flat — buyers don't think about universal joints. The same ad with <strong>"The Sportiest of Sport Bodies"</strong> could outpull it fifty to one. Same product, same features, same copy — different filter at the top.</p>
+    </div>
+ 
+    <div class="quote">
+      <p>"Address the people you seek, and them only."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Email subject lines, YouTube thumbnails, Google ad headlines, landing page H1s, Amazon product titles — each is Hopkins' headline in a new costume. Test them with the same ferocity he did. A bad headline doesn't just cost a little; it costs everything.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 6 -->
+<section class="chapter" id="ch6">
+  <div class="ch-head">
+    <div class="ch-num">06</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Psychology</div>
+      <h2 class="ch-title">The Machinery of Human Nature</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Human nature is constant. An advertiser who knows its levers can multiply results without changing the product or the budget — <em>only the frame.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is the densest chapter in the book, and worth reading twice. Hopkins catalogs the psychological principles he's watched work in hundreds of campaigns. Almost everything in modern behavioral economics — scarcity, social proof, anchoring, loss aversion, reciprocity — appears here, decades before those terms existed, described in plain merchant English.</p>
+ 
+    <h3>The Psychological Levers</h3>
+    <ol class="insights">
+      <li><strong>Curiosity is the strongest incentive.</strong> Puffed Wheat was a failure until it became "Foods shot from guns" — a line that made people want to see for themselves.</li>
+      <li><strong>Cheapness repels; bargains attract.</strong> Americans want value, not to look poor. Offering low price reads as offering low quality.</li>
+      <li><strong>People judge by price.</strong> A painting ignored until people read it cost $750,000 is then surrounded by a crowd. The price changed the object.</li>
+      <li><strong>"Pay after you try" beats "money-back."</strong> Two men offer the same horse on a week's trial. One says "if you don't like it, come back for your money." The other says "try the horse, and pay me after a week." Hopkins buys from the second man every time. Same risk, different feeling.</li>
+      <li><strong>Specific guarantees destroy generic ones.</strong> "Signed warrant from the dealer you paid" beats "money-back guaranteed" — because the warrant is concrete, local, and a stranger-neighbor is standing behind it.</li>
+      <li><strong>Personalization is disproportionately powerful.</strong> A book-sales campaign added one detail — the buyer's name in gilt on the cover — and sold hundreds of thousands of additional books. Same content, same price.</li>
+      <li><strong>Ownership primes action.</strong> "We have a leather book with your name on it waiting for you." People will move heaven and earth to claim something that's already "theirs."</li>
+      <li><strong>Exclusive offers outpull general ones.</strong> "For veterans only," "for members only" — the right to an advantage creates the urge to exercise it.</li>
+      <li><strong>Disarm substitution by inviting comparison.</strong> "Try our rivals too" — the advertiser who says this sounds confident, and confidence is contagious.</li>
+      <li><strong>Paid samples beat free samples.</strong> "An article good enough for the maker to buy is good enough for the user to buy." When you <em>give</em> a 15-cent package, you teach people it's worth nothing. When you <em>pay retail</em> to hand them one, you teach them it's worth getting.</li>
+      <li><strong>Framing alters perception.</strong> Show five identical objects and ask someone to choose. Now point out specific virtues of one, and everyone will "find" those virtues. The object didn't change; the attention did.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Two stores sold women's clothes on installment, side by side. One treated customers like poor girls and made "the bare business offer." The other <strong>put a motherly woman in charge</strong>, used her picture, had her sign every ad and letter as a friend who knew what it meant not to dress your best. The first store went out of business. <em>The offer was identical. Only the framing differed.</em></p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Read any modern book on persuasion (Cialdini, Kahneman, Ariely) and you'll find Hopkins' observations wearing lab coats. Every A/B test showing that a different frame doubles conversions is a fresh confirmation of this chapter.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 7 -->
+<section class="chapter" id="ch7">
+  <div class="ch-head">
+    <div class="ch-num">07</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Being Specific</div>
+      <h2 class="ch-title">Generalities Are Ignored. Specifics Are Believed.</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">"Best in the world" is worth nothing. A precise claim — a real number, a real test, a real fact — is worth <em>many times</em> its equivalent generality.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is one of Hopkins' most quoted ideas, and the one most consistently violated. Most marketing copy is generalities — "high quality," "leading brand," "trusted by many" — because generalities are easy and safe. But easy and safe means ignored. A specific claim forces the reader to either believe or disbelieve you; either is a stronger reaction than the nothing you get from a cliché.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Superlatives are discounted.</strong> Readers automatically discount "best," "finest," "greatest" — they've heard them too often from people lying.</li>
+      <li><strong>A specific claim is either true or false.</strong> People assume true, because advertisers can be held to specific claims in court, in reviews, and in memory.</li>
+      <li><strong>Convert every vague claim to a number.</strong> "Brighter light" is air; "3⅓ times the light" proves you tested it.</li>
+      <li><strong>The space cost is identical.</strong> A generality occupies the same page as a specific. The specific does 10× the selling work.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Every brewery advertised "pure beer" — the words meant nothing from repetition. Then one brewer described exactly how the beer was made: <strong>"filtered through white wood pulp, cooled in a plate-glass room, bottles washed four times by machinery, 4,000-foot-deep wells, 1,018 yeast experiments to achieve the flavor."</strong> Every claim was true of every brewer. He was simply the first to say them. He made the greatest success in the history of beer advertising.</p>
+    </div>
+ 
+    <div class="quote">
+      <p>"If a claim is worth making, make it in the most impressive way."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>"Helps you sleep better" → "Users fall asleep 23 minutes faster on average." "Fast loading" → "Loads in 1.2 seconds." "Trusted by thousands" → "Used by 47,281 companies in 62 countries." Always convert. Always.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 8 -->
+<section class="chapter" id="ch8">
+  <div class="ch-head">
+    <div class="ch-num">08</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Tell Your Full Story</div>
+      <h2 class="ch-title">One Reader. One Chance. Tell Them Everything.</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Brevity for its own sake is a myth. The only people reading your ad are the ones interested, and their interest is a gift you cannot afford to waste — <em>give them every reason to buy.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">The advice "people won't read long copy" is the most damaging half-truth in advertising. Hopkins' correction: people won't read <em>irrelevant</em> long copy, but a buyer considering a real purchase will read columns, books, even encyclopedias about it. The question isn't length. The question is whether every sentence is working.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Assume each reader reads the ad once, ever.</strong> No sequels, no "continued next month." Make this ad complete.</li>
+      <li><strong>Write to the unconverted.</strong> Current users aren't reading — they've already decided. Waste nothing addressing them.</li>
+      <li><strong>Every traced ad tells a complete story.</strong> Short ads are never keyed — because no one can verify whether short sells better than complete. Complete always wins when measured.</li>
+      <li><strong>Consider the cost of the reader's attention.</strong> Getting a prospect to read you at all is expensive. Once you have them, say everything.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>A man shopping for a luxury car considered the Rolls-Royce, Pierce-Arrow, and Locomobile. Their ads were brief — <strong>"evidently the makers considered it undignified to argue comparative merits."</strong> The Marmon told a complete story, columns long. He read everything, and bought a Marmon. He later learned a competitor had features that would have sold him — but that competitor never told him about them.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>This is why long-form sales pages, detailed product pages, comprehensive case studies, and in-depth YouTube reviews still convert. "Keep it short" is often "keep it unconvincing." Write for the one person who is ready to be convinced.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 9 -->
+<section class="chapter" id="ch9">
+  <div class="ch-head">
+    <div class="ch-num">09</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Art in Advertising</div>
+      <h2 class="ch-title">Pictures Must Sell, Not Decorate</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Art in advertising is not decoration — it is expensive real estate. A picture must do <em>more selling</em> than the same space filled with type. If it doesn't, cut it.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Between a third and a half of an advertising budget often goes to imagery. Hopkins' test for whether a picture is worth the cost is ruthless: is the picture outselling the words it replaced? If you can't prove yes, you're decorating at your own expense.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Show what the buyer wants to become.</strong> Correspondence schools show the promoted executive. Beauty ads show the admired woman — ideally with an admiring man nearby, because that's what she's actually buying.</li>
+      <li><strong>No jokes, no eccentricity.</strong> "There are two things about which men should not joke. One is business, one is home." A humorous picture may win attention but lose respect.</li>
+      <li><strong>Expensive art doesn't reliably outperform cheap art.</strong> The cost of preparing an ad is small next to the cost of running it. Don't confuse aesthetic quality with selling quality.</li>
+      <li><strong>Color pays for food, not always otherwise.</strong> Test it. Oranges and desserts benefit. Many other categories don't.</li>
+      <li><strong>Don't let the picture upstage the headline.</strong> Your main appeal lives in the headline. An eccentric picture robs the headline of focus.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>An advertiser of Puffed Grains tested figure drawings against simple pictures of the grains themselves. The grains won. <strong>"They awake curiosity. No figure drawing in that case compared in results with these grains."</strong> The product itself — odd, puffy, unlike anything else on a shelf — was the best possible illustration.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>The era of stock photos picked to "brand" a page should have ended when Hopkins wrote this chapter. Every image on a commercial page should either show the product, show the user's aspiration, or be deleted.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 10 -->
+<section class="chapter" id="ch10">
+  <div class="ch-head">
+    <div class="ch-num">10</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Things Too Costly</div>
+      <h2 class="ch-title">Don't Change Habits. Tap Existing Desires.</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Teaching people new habits — to brush their teeth, eat a new food, adopt a new behavior — is almost always too expensive for a single advertiser. <em>Ride demand that already exists.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is the chapter that anticipates what modern marketers call "product-market fit." You can't afford to create the market you want to sell to. Every dollar spent convincing people to care about your category benefits every competitor in it. The winning strategy is to find a desire that already exists and satisfy it better than anyone else.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Habit change is uneconomical.</strong> Teaching someone to brush their teeth costs $20-25 per convert. No toothpaste makes that back in a lifetime of purchases.</li>
+      <li><strong>Category education benefits everyone.</strong> When you pay to expand a habit, your competitors share the harvest.</li>
+      <li><strong>Prevention sells worse than cure.</strong> "People will do much to cure trouble, but people in general will do little to prevent it." This is observed across decades.</li>
+      <li><strong>Appeals to 1% are 100× more expensive per reach than appeals to 50%.</strong> Pick the broadest honest claim, not the narrowest impressive one.</li>
+      <li><strong>Trade associations can do what individual advertisers can't.</strong> Ten thousand orange growers funding "Drink Orange Juice" is possible. One grower funding it is suicide.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Two toothpaste advertisers: one focused on preventing decay, one focused on beautiful teeth. <strong>Tests proved the beauty claim pulled many times better.</strong> People won't pay to prevent rot, but they'll pay to look attractive. The products were identical. The framing was everything.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>This is why category-creating startups almost always die and the second-mover wins. Find a wave, surf it. Don't try to make the ocean move.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 11 -->
+<section class="chapter" id="ch11">
+  <div class="ch-head">
+    <div class="ch-num">11</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Information</div>
+      <h2 class="ch-title">The Simple Ad Comes From Complex Research</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">The best advertising isn't written — it's <em>discovered</em>. Weeks of research produce the one fact that reframes the product.</div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">An advertising novice sees a finished ad and thinks the writer sat down and produced it. Hopkins insists the reality is the opposite: the finished ad is the last 1% of the work, after months of reading, interviews, surveys, laboratory tests, and competitive analysis. The simplicity of the final message is what it looks like after all the complexity has been burned off.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Read until you find the key.</strong> Read medical journals, scientific papers, trade press, internal documents — one fact out of a thousand may be the campaign's foundation.</li>
+      <li><strong>Interview customers directly.</strong> 130 canvassers into homes. 12,000 physicians polled by mail. 1,000 men asked what they want in a shaving cream. This is normal preparation.</li>
+      <li><strong>Study competitors systematically.</strong> Request their literature, read their claims, map what's already been said.</li>
+      <li><strong>Convert abstract claims to concrete ones.</strong> A laboratory test turns "nutritious" into "425 calories per pint — equal to six eggs." The second is memorable; the first is noise.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Caffeine-free coffee had failed for years — consumers dismissed it as weak or medicinal. Hopkins spent weeks reading scientific literature and found one critical fact: <strong>caffeine's stimulating effect doesn't kick in until two hours after drinking.</strong> So the "bracing morning effect" people credit to caffeine isn't caffeine at all. Removing caffeine doesn't remove the kick. That single insight rebuilt the product's story and saved the brand.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Modern market research, customer interviews, review mining, JTBD studies, competitive teardowns — all the same work. If you're writing copy without doing research, you're guessing. Hopkins has a word for guessing: expensive.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 12 -->
+<section class="chapter" id="ch12">
+  <div class="ch-head">
+    <div class="ch-num">12</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Strategy</div>
+      <h2 class="ch-title">Advertising Is Chess, Not Painting</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Before you write a word, plan the campaign: the name, the price, the position, the competition, the distribution, and the defenses. <em>One early mistake can prohibit success entirely.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Most advertising failures are strategic, not creative. The copy was fine, but the name invited substitution, or the price was wrong, or the distribution wasn't in place when demand arrived. Hopkins treats the advertiser's job as a chess player's: anticipate the whole game before the first move.</p>
+ 
+    <h3>The Strategic Dimensions</h3>
+    <ol class="insights">
+      <li><strong>The name is a permanent headline.</strong> Descriptive names (Cream of Wheat, Shredded Wheat) sell themselves. Coined names (Kodak, Karo) are exclusive but need years of advertising to mean something. Generic names (Toasted Corn Flakes) leave the demand you create wide open to competitors.</li>
+      <li><strong>Price is positioning.</strong> Volume at small profit often beats high margin — but in categories judged by price (corn remedies, luxury goods), higher price is itself an inducement. Know which category yours is in.</li>
+      <li><strong>Study the incumbent.</strong> What's currently satisfying your prospect? What would it take to pry them loose? Don't plan in a vacuum.</li>
+      <li><strong>Prevent substitution in advance.</strong> Vaseline owned "petroleum jelly" because it named the product itself, not a brand of it. Many first-movers lost their advantage by leaving the category name generic.</li>
+      <li><strong>Distribution must match advertising.</strong> Running ads before products are on shelves burns demand.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Vaseline "established a new demand, then almost monopolized that demand through wisdom at the start." Had it been called a "different brand of petroleum jelly," competitors could have sold the same category under their own names. Naming the category itself — becoming the category — was worth millions.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Brand strategy, category design (Play Bigger), positioning (Al Ries), go-to-market planning — all modern frameworks for what Hopkins called "strategy." The best advertising in the world can't save a badly positioned product.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 13 -->
+<section class="chapter" id="ch13">
+  <div class="ch-head">
+    <div class="ch-num">13</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Use of Samples</div>
+      <h2 class="ch-title">Samples Are Almost Always the Cheapest Customer</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">A sample seems expensive until you compare it to the cost of persuading without one. In most categories, <em>giving the product is cheaper than describing it.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Hopkins built much of his career on sampling strategies. The insight: the product is its own best salesman, and anything that gets it into a prospect's hands while their attention is still engaged outperforms almost any amount of copy. But there's a craft to sampling — not everyone who asks should receive, not every sample should be free, and not every sample is worth sending.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>"Free" multiplies readership.</strong> A free sample offer can double or triple the people who read your ad, without increasing the space cost.</li>
+      <li><strong>Samples capture intent.</strong> A reader half-convinced by your ad will often cut out a coupon — creating a name, an address, and a follow-up opportunity that would otherwise vanish.</li>
+      <li><strong>Don't charge for samples.</strong> "Asking ten cents for a sample" might save a small amount but will kill most of the response. Three in four people will refuse to pay even pennies.</li>
+      <li><strong>Give samples only to interested people.</strong> A sample handed to a bored housewife in a mall demonstration gets no respect. A sample delivered to someone who asked for it is already half-sold.</li>
+      <li><strong>In-store samples outpull mail samples.</strong> Writing a letter requires effort and a stamp. Picking one up at the corner store is easy — and multiplies redemption rates several times over.</li>
+      <li><strong>Samples also A/B test your ads.</strong> Sample requests are a direct measurement of ad performance. Use them to compare headlines, offers, and placements.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Two food brands both offered free packages as introduction. One gave samples away. The other made a coupon redeemable at any store, and <strong>paid retail price</strong> to that dealer for every package redeemed. The first brand failed — cheapening its product by giving it away. The second gained respect: "An article good enough for the maker to buy is good enough for the user to buy."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Free trials, freemium tiers, demo accounts, sample sizes in DTC, tasting programs — all Hopkins. The modern twist: digital samples cost almost nothing to deliver, which should make sampling even more obviously correct than it was in 1923.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 14 -->
+<section class="chapter" id="ch14">
+  <div class="ch-head">
+    <div class="ch-num">14</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Getting Distribution</div>
+      <h2 class="ch-title">Advertise Where the Product Is</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">A successful ad that leads to an empty shelf is a wasted ad. <em>Secure distribution first, or let the advertising itself force it.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">There's no point in creating demand you can't satisfy. Hopkins describes several clever mechanisms for using advertising itself to pressure dealers into stocking — essentially weaponizing consumer interest to crack channel resistance — but the underlying principle is universal: never separate marketing from availability.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Start local, prove it, then go national.</strong> A town-by-town rollout is safer and teaches you what national will cost.</li>
+      <li><strong>Use coupons to force stocking.</strong> If customers walk into a store holding a coupon worth cash, the dealer orders the product rather than lose the sale.</li>
+      <li><strong>Name stocked dealers in early ads.</strong> Other dealers, watching their competitors get named, rush to be included.</li>
+      <li><strong>Dealer fear of losing customers is stronger than dealer laziness.</strong> Activate the first and you defeat the second.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Palmolive Soap and Puffed Grains achieved rapid national distribution with this trick: publish a coupon redeemable at any store for a full-size package. Send a proof of the ad to dealers in advance, with the list of magazines running it. Every dealer realizes <strong>his customers will walk in with a coupon worth cash</strong> — and he has a week to order stock or watch them walk to his competitor.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Amazon Buy Box. App store placement. Retail shelf space. API availability. Same problem, different surface. Advertising that drives traffic to broken or unavailable experiences is worse than no advertising at all.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 15 -->
+<section class="chapter" id="ch15">
+  <div class="ch-head">
+    <div class="ch-num">15</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Test Campaigns</div>
+      <h2 class="ch-title">Let Thousands Decide What Millions Will Do</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Almost any question in advertising — offer, copy, price, form factor, even whether to run the campaign at all — can be answered by a cheap test. <em>Answer them there, not in a conference room.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">This is the chapter that most anticipates modern startup methodology. A $3,000 test in a handful of towns can save a company from a $3 million national failure. The averages produced from a few thousand prospects hold when scaled — meaning the question isn't whether to test, it's what to test next.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>You can't predict what consumers will want.</strong> Even the most experienced advertisers guess wrong most of the time. Stop trying.</li>
+      <li><strong>Small tests give reliable averages.</strong> 1,000 customers' behavior predicts 1,000,000. This is statistical fact, not hope.</li>
+      <li><strong>A failed test is nearly breakeven.</strong> Some sales occur even in the worst tests. The "loss" of testing is almost zero compared to the gain of avoiding disaster.</li>
+      <li><strong>Test forms, offers, and even agencies.</strong> Unsure which agency is better? Give each a town. Let results settle the argument.</li>
+      <li><strong>Keep testing after you've won.</strong> Hopkins' team ran 50+ variants over five years on one food product. The final winning plan was <strong>4× better</strong> than the original "best" plan.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>A food advertiser was certain his product would sell better in a new form. His entire team agreed. They were about to go national. Wiser advice prevailed — they ran a test with a coupon and a letter to a few thousand women. <strong>The consumers were almost unanimously against the change.</strong> The test cost $1,000 and saved a catastrophic national rollout. Later, the same advertiser tested a third form — and 91% voted for it. Same method, opposite result. Only tests can tell you which.</p>
+    </div>
+ 
+    <div class="quote">
+      <p>"Suppose a chemist would say in an arbitrary way that this compound was best, or that better. You would little respect his opinion. He makes tests — sometimes hundreds of tests."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>MVPs, growth experiments, A/B tests, geo-testing, concept testing, fake-door tests — all direct descendants. The startup doctrine "fail fast, test cheaply" is Hopkins with a venture capitalist's accent.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 16 -->
+<section class="chapter" id="ch16">
+  <div class="ch-head">
+    <div class="ch-num">16</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Leaning on Dealers</div>
+      <h2 class="ch-title">Dealers Won't Sell For You. Do It Yourself.</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Channel incentives — discounts, loader offers, promotional displays — rarely grow total sales. <em>Your only real job is buying new customers profitably.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">An entire class of marketing spend goes to the channel — retailer allowances, loading offers, display programs, sales spiffs. Hopkins' field observation is that most of this money moves sales around between stores without increasing the total. The dealer who gets your bonus sells your product instead of his competitor's — but the competitor takes a customer who would have bought you anyway. Net: zero.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Dealers don't care about your brand.</strong> They care about their own margins, their own displays, their own customers. This is rational, and you should expect it.</li>
+      <li><strong>"Extra effort" is rarely extra sales.</strong> A retailer pushing your brand over another is usually just redirecting demand that existed anyway.</li>
+      <li><strong>Window displays may not move the needle.</strong> Test one town with them, one without. Compare total sales. The results often surprise.</li>
+      <li><strong>Sales by conviction stick. Sales by recommendation don't.</strong> A customer who bought because your ad convinced them will buy again. A customer who bought because the dealer pushed it will switch the moment a different dealer pushes something else.</li>
+      <li><strong>Every dollar sent to the channel is a dollar not buying new customers.</strong> Know your cost per customer. Know your cost per channel dollar. Compare.</li>
+    </ol>
+ 
+    <div class="quote">
+      <p>"Your object in all advertising is to buy new customers at a price which pays a profit."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Retail trade spending, marketplace advertising, affiliate commissions, platform co-marketing — all need the same test Hopkins prescribed a century ago: does this grow the total, or just move it around? Measure it. Most of it fails.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 17 -->
+<section class="chapter" id="ch17">
+  <div class="ch-head">
+    <div class="ch-num">17</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Individuality</div>
+      <h2 class="ch-title">Character, Not Weirdness</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">An advertiser needs a distinct personality that endures. Not loud, not weird — <em>consistent, recognizable, and suited to the buyer you want.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">People trust things they recognize. An advertiser who changes tone, voice, and style every campaign forces readers to get to know them all over again — and most readers won't bother. Character is built by repetition, and once built, it becomes compounding capital. Protect it.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Distinctive, not eccentric.</strong> Being different for its own sake is the opposite of this principle. You want a character your buyer recognizes and trusts.</li>
+      <li><strong>Signed ads have authority.</strong> A real person taking pride in a real creation is more credible than a "soulless corporation."</li>
+      <li><strong>Don't change what's working.</strong> A new writer should learn the existing voice and play it like an actor, not replace it.</li>
+      <li><strong>Mannerisms matter.</strong> Readers know you by style as much as by name. Appear different every time, and your equity resets to zero.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>The installment-clothing advertiser (see Chapter 6) won by putting a specific motherly woman in charge of the business, signing every ad in her name. <strong>Her character — not the company's — became the brand.</strong> Customers trusted her specifically, and that trust was transferable to the adjacent furniture business. A consistent personality earned compounding returns.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Brand voice guides, founder-led marketing, personality-driven newsletters, consistent character across channels. A scattered brand is a forgettable brand. The companies with the strongest identities — Apple, Liquid Death, Patagonia — all sound unmistakably like themselves for decades.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 18 -->
+<section class="chapter" id="ch18">
+  <div class="ch-head">
+    <div class="ch-num">18</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Negative Advertising</div>
+      <h2 class="ch-title">Show the Bright Side</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Paint what the reader wants to become, not what they're trying to escape. <em>Positive beats negative by roughly 4:1 in every test Hopkins ever saw.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Fear-based and problem-based advertising feels compelling to the writer, because problems are easier to describe than aspirations. But the reader has been living with the problem their whole life. They don't need it explained. What they need is a vision of what life looks like after you've fixed it — and the faith that you can deliver that future.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Show the smooth face, not the wrinkles.</strong> "Your customers know all about wrinkles." They're buying the after, not the before.</li>
+      <li><strong>Attack no rival.</strong> Negative advertising looks unfair, selfish, and unsporting. It's banned in good publications for a reason.</li>
+      <li><strong>"Before and after" is for afflictions only.</strong> Most products are lifestyle improvements — show the lifestyle.</li>
+      <li><strong>Assume the sale.</strong> "Send now for this sample" outperforms "Why do you neglect this offer?" The second implies the reader has been bad; the first invites them to participate.</li>
+      <li><strong>Paint the envied, not the envious.</strong> Show success, not failure.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>"Compare the results of two ads, one negative, one positive. One presenting the dark side, one the bright side. One warning, the other inviting. <strong>You will be surprised. You will find that the positive ad outpulls the other four to one.</strong>"</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>The best fitness ads show fit people. The best finance ads show freedom. The best software ads show teams shipping, not teams suffering. Always paint the destination, not the current pain.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 19 -->
+<section class="chapter" id="ch19">
+  <div class="ch-head">
+    <div class="ch-num">19</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Letter Writing</div>
+      <h2 class="ch-title">Direct Mail Is Just Advertising in an Envelope</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Every letter needs a headline, must be tested, and must push for action. The rules don't change because the form is mail — <em>they only get stricter.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">A letter lives or dies in the first two seconds. The reader glances, decides "waste basket, file, or act," and moves on. The writer who respects this — who treats the first line as a headline, who tests openings like ad copy, who follows up inquiry with the same argument that created it — wins. Everyone else produces trash mail.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Letters need headlines too.</strong> The subject, the first line, the visible opening — all must earn the read.</li>
+      <li><strong>Test before you roll out.</strong> Before mailing five million, test 25 versions of 1,000 each. Use the winner.</li>
+      <li><strong>Stick to the argument that created the interest.</strong> A follow-up letter to an inquirer should complete what the ad started — not introduce a new argument.</li>
+      <li><strong>Force action with deadlines.</strong> "Offer expires Friday" exists because delay kills sales. Make the reader decide now.</li>
+      <li><strong>Fancy stationery doesn't outperform plain.</strong> The matter is the message. Two-cent stamps get the same attention as one-cent. Don't spend on signaling that doesn't sell.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>A mail order house, competing against several rival catalogs, enclosed a personal card with each catalog. <strong>"You are a new customer, and we want to make you welcome. Enclose this card with your order — the writer wants to see that you get a gift."</strong> The gift's cost was paid back many times over by the preference it created.</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Email subject lines, cold outreach first lines, nurture sequences, re-engagement campaigns — all the same mechanics. The medium changed from paper to pixels; the human glance remains two seconds long.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 20 -->
+<section class="chapter" id="ch20">
+  <div class="ch-head">
+    <div class="ch-num">20</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">A Name That Helps</div>
+      <h2 class="ch-title">Your Name Is Advertising Real Estate</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">The product's name will appear on every ad, package, and shelf forever. <em>Make it pay rent.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">A name is either free advertising or a self-inflicted tax. A descriptive name (Cream of Wheat) sells itself every time it's seen. A generic name (Toasted Corn Flakes) leaves the category wide open to anyone else. A coined name (Kodak) is exclusive but needs years of expensive advertising to build meaning. The naming choice is usually made quickly and casually, and then lived with for decades.</p>
+ 
+    <h3>The Four Types of Names</h3>
+    <ol class="insights">
+      <li><strong>Descriptive and protected.</strong> Cream of Wheat, Dutch Cleanser, 3-in-One Oil. The best of both worlds: tells the story <em>and</em> belongs to you.</li>
+      <li><strong>Coined and meaningless.</strong> Kodak, Karo, Sapolio. Exclusive forever, but expensive to imbue with meaning. Most never succeed.</li>
+      <li><strong>Ingredient-based and generic.</strong> Coconut Oil Shampoo, Tar Soap. Can't own the name; must compete on price forever.</li>
+      <li><strong>Category-generic and disastrous.</strong> Toasted Corn Flakes, Malted Milk. You created the demand; anyone can satisfy it.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Hopkins identifies the same mistake across multiple categories: the pioneer creates a new demand, names it too generically, and watches competitors flood in using the same name. <strong>"It is interesting to speculate on how much more profitable a coined name might have been."</strong></p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>"Xerox" became a verb. "Google" became a verb. "Kleenex" became the tissue category. These companies extract billions from their naming decisions, decades later. Your name is a trademark bet you can only place once — place it carefully.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- CHAPTER 21 -->
+<section class="chapter" id="ch21">
+  <div class="ch-head">
+    <div class="ch-num">21</div>
+    <div class="ch-title-wrap">
+      <div class="ch-label">Good Business</div>
+      <h2 class="ch-title">The Age of Guessing Is Over</h2>
+    </div>
+  </div>
+ 
+  <div class="principle">
+    <div class="principle-label">The Principle</div>
+    <div class="principle-text">Advertising that can't be measured is a luxury, not a business function. <em>The advertisers who can prove returns will replace the ones who merely presume them.</em></div>
+  </div>
+ 
+  <div class="ch-body">
+    <p class="has-dropcap">Hopkins closes the book with a warning that turned out to be correct. He describes walking into the office of an advertiser spending $700,000 a year who admitted, candidly, that he had no idea whether it worked — he thought the business might be doing just as well without it. This level of ignorance was normal in 1923, Hopkins says, and it will not survive. The advertisers who measure will outlast the advertisers who guess.</p>
+ 
+    <h3>Key Insights</h3>
+    <ol class="insights">
+      <li><strong>Presumed ROI is not ROI.</strong> "It must be working because we're doing well" is not an argument; it's a hope.</li>
+      <li><strong>Good business principles apply to advertising too.</strong> You wouldn't run a factory without cost accounting. Don't run advertising without cost accounting.</li>
+      <li><strong>Small store owners already measure.</strong> The local storekeeper with a $20 ad knows whether it pays. Only "national" advertisers have the luxury of ignorance — and that luxury is ending.</li>
+      <li><strong>Scientific advertising is a competitive weapon.</strong> When your rivals start measuring and you don't, you will lose — not because their ads are better, but because their allocation is better.</li>
+    </ol>
+ 
+    <div class="example">
+      <div class="example-label">From the Book</div>
+      <p>Hopkins' challenge to the $700,000-a-year advertiser: <strong>"End an ad with an offer to pay five dollars to anyone who writes you that he read the ad through. The scarcity of replies will amaze you."</strong> A simple test that would instantly reveal whether anyone was reading. Most advertisers of the era would rather not know.</p>
+    </div>
+ 
+    <div class="quote">
+      <p>"Men and methods will be measured by the known returns, and only competent men can survive."</p>
+    </div>
+ 
+    <div class="modern">
+      <div class="modern-label">Apply It Today</div>
+      <p>Hopkins would be at home in any modern growth team. Attribution, ROAS, LTV:CAC, incrementality testing, MMM — all the tools that didn't exist when he wrote this, and all the tools he was demanding. If you can't answer "what does a customer cost me?" within 10 seconds, you are the $700,000 advertiser.</p>
+    </div>
+  </div>
+</section>
+ 
+<!-- 21 LAWS SUMMARY -->
+<section class="summary-section" id="laws">
+  <div class="summary-inner">
+    <div class="summary-kicker">The Distillation</div>
+    <h2 class="summary-title">The 21 Laws of <em>Scientific Advertising</em></h2>
+    <p style="font-family: 'Fraunces', serif; font-style: italic; font-size: 1.15rem; color: var(--muted); margin-bottom: 3rem; max-width: 620px;">One line per chapter. If you forget everything else, remember these.</p>
+    
+    <div class="laws-grid">
+      <div class="law">
+        <div class="law-num">LAW 01</div>
+        <div class="law-title">Track Everything</div>
+        <div class="law-text">If you don't measure the result of each ad, you are guessing. Guessing is expensive.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 02</div>
+        <div class="law-title">Salesmanship in Print</div>
+        <div class="law-text">Every sentence must earn a sale, not applause. Ask: would a salesman say this to a buyer?</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 03</div>
+        <div class="law-title">Offer Service</div>
+        <div class="law-text">Lead with what the reader gets. Never with "buy my brand."</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 04</div>
+        <div class="law-title">Learn From Mail Order</div>
+        <div class="law-text">Trackable advertising tells you what works. Untrackable advertising lets you lie to yourself.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 05</div>
+        <div class="law-title">Headlines Filter</div>
+        <div class="law-text">Call out your exact buyer. Everyone else ignoring the ad is efficiency, not failure.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 06</div>
+        <div class="law-title">Psychology Is Constant</div>
+        <div class="law-text">Curiosity, reciprocity, specificity, ownership, exclusivity — use them. They still work.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 07</div>
+        <div class="law-title">Be Specific</div>
+        <div class="law-text">"Best" is ignored. "3× faster" is believed. Convert every generality into a number.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 08</div>
+        <div class="law-title">Tell the Full Story</div>
+        <div class="law-text">The reader only reads this ad once. Make this ad complete.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 09</div>
+        <div class="law-title">Pictures Must Sell</div>
+        <div class="law-text">No decoration. If a picture isn't doing more selling than the words it replaced, cut it.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 10</div>
+        <div class="law-title">Ride Existing Demand</div>
+        <div class="law-text">Don't pay to change habits. Find what people already want and satisfy it better.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 11</div>
+        <div class="law-title">Research Before Writing</div>
+        <div class="law-text">The simple ad comes from weeks of preparation. Find the one fact that reframes everything.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 12</div>
+        <div class="law-title">Plan the Whole Campaign</div>
+        <div class="law-text">Name, price, position, distribution, defenses — before the first word of copy.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 13</div>
+        <div class="law-title">Sample Generously</div>
+        <div class="law-text">The product is its own best salesman. Let people try before you describe.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 14</div>
+        <div class="law-title">Match Advertising to Availability</div>
+        <div class="law-text">Don't create demand you can't fulfill. Distribution first, or force it via the ad.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 15</div>
+        <div class="law-title">Test Before You Scale</div>
+        <div class="law-text">Small tests produce reliable averages. Never bet millions on what thousands can answer.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 16</div>
+        <div class="law-title">Do Your Own Selling</div>
+        <div class="law-text">Channel incentives shuffle sales around. Buying new customers is your only real job.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 17</div>
+        <div class="law-title">Consistent Character</div>
+        <div class="law-text">A recognizable voice compounds trust. Reinventing it resets you to zero every time.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 18</div>
+        <div class="law-title">Paint the Bright Side</div>
+        <div class="law-text">Show what the reader wants to become. Never what they're trying to escape.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 19</div>
+        <div class="law-title">Letters Need Headlines Too</div>
+        <div class="law-text">Every message has two seconds to earn the read. Test openings. Use deadlines.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 20</div>
+        <div class="law-title">Name Deliberately</div>
+        <div class="law-text">A good name is free advertising forever. A bad name is a permanent tax.</div>
+      </div>
+      <div class="law">
+        <div class="law-num">LAW 21</div>
+        <div class="law-title">Measure or Perish</div>
+        <div class="law-text">If you can't answer "what does a customer cost me?" in ten seconds, you're pre-1923.</div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<footer>
+  <p class="colophon">A distillation of Claude C. Hopkins' 1923 classic, for the modern reader who wants the principles without the archaic prose.</p>
+  <p>Scroll to top · <a href="#top" style="color: var(--accent);">Begin Again</a></p>
+</footer>
+ 
+</main>
+</div>
+ 
+<script>
+  // Reading progress
+  const progress = document.getElementById('progress');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+    progress.style.width = pct + '%';
+  });
+ 
+  // Active chapter highlighting
+  const sections = document.querySelectorAll('section.chapter, section.hero, .summary-section');
+  const navLinks = document.querySelectorAll('aside nav a');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+ 
+  sections.forEach(s => observer.observe(s));
+ 
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    toggle.textContent = sidebar.classList.contains('open') ? '✕ Close' : '☰ Menu';
+  });
+  
+  // Close sidebar on link click (mobile)
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 900) {
+        sidebar.classList.remove('open');
+        toggle.textContent = '☰ Menu';
+      }
+    });
+  });
+</script>
+ 
+</body>
+</html>

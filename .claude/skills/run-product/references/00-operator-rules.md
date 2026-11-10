@@ -17,6 +17,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 11. Copy style
 11b. Mobile first
 12. Working style and reporting
+17. Step Alpha before anything is built
 
 ---
 
@@ -45,7 +46,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - **No brand logo or wordmark** on product images. "plaims don't have their logo on them and ours lose space because of logo you added."
 - Skip images that only make sense for the competitor (e.g. "IMPORTANT NOTICE — buy only from plaims.com").
 - When only text must change, **edit the existing image** with a keep-everything prompt instead of regenerating (cheaper, keeps the approved look).
-- Keep superseded versions in subfolders (`with-logo/`, `softened/` …) so nothing approved is lost.
+- Keep replaced versions once in `<area>/archive/v<N>_<reason>/` (`v1_with-logo/`, `v1_softened/` …) so nothing approved is lost; never a `superseded/` or duplicate folder.
 
 ## 5. Page media and GIFs
 - Download competitor GIFs **raw** (original files) and keep them untouched in `02_competitor/media/`. The operator asked to reuse the competitor's two GIFs on our page.
@@ -53,6 +54,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Testimonial and lifestyle photos: remake with Kie (same framing, different people). Testimonial text must match its photo (the photo showed a mother, the copy said "dad" → fixed).
 
 ## 6. Competitor ads research (Brandsearch)
+- **Pull the complete footprint (2026-11-10):** every ad of the competitor (active and inactive, every platform Brandsearch has) plus a transcript of every video ad, for Step Alpha (§17). The top-30 ranking below is still made for the creative and video remakes.
 - **Primary ranking = Brandsearch "Top rank (by impressions)"** (`reach_rank`, ascending; request the field). It works for US ads too. "An ad might be longest running but very low spent" — so days running is only a tie-breaker, together with duplicate copies + `duplicate_count`.
 - **Spend/reach sorting only when targeting EU markets** (`eu_total_spend` / `eu_total_reach` exist only for EU-delivered ads). The operator stopped a spend-ranked download of US ads: "don't save top 10 by spend because they sell US and Meta US doesn't show impressions."
 - Days running = max of `total_active_time` and end−start dates (the two endpoints disagree).
@@ -60,8 +62,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 ## 7. Ad creatives and copy
 - Generate a clean packshot first; **attach our packshot to every ad prompt** ("Make sure to upload product image attached with the prompts").
-- Top 5 competitor ads: recreate at ~97% fidelity (same layout, text word-for-word incl. claims, fonts, colors, aspect ratio), our product swapped in, new faces for people.
-- The rest: inspired by the top-30 patterns (formats × hooks), not copies.
+- **Own variants, not copies (every ad, top 5 included):** before generating, take each source ad's headline and write an *almost similar* variant: same hook mechanism, rhythm, length and claim strength, but different wording ("I rolled my eyes. Then I paid off $7,349 in debt" → "I laughed at it. Then I cleared $7,349 of debt"). Same rule for the design: keep the format, layout zones, type style and color logic, but change the scene/background/props/composition enough that it is ours (≈80–90% similar, not 97%). Numbers and claims keep their strength (rule 1).
+- **Validation gate:** write all headline + design variants to `05_ads/AD_VARIANTS.md` and stop for the operator's validation. Generate only after approval, then continue the workflow without stopping again.
+- The rest: inspired by the top-30 patterns (formats × hooks), each with its variant headline/design from AD_VARIANTS.md.
 - Never show the competitor's brand name; no text/logo on our product frame (the packshot's temple print came out garbled).
 - Ad copy mirrors the competitor's caption framework with the same claim strength.
 
@@ -96,8 +99,78 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 **Why:** the operator reported "section 'What Our Drivers Say' cannot scroll on mobile" on Noxis; Ceriva's video rail had the same bug earlier.
 
 ## 12. Working style and reporting
-- Branding first, then wait for validation, then build.
+- Step Alpha first (§17), then branding, then wait for validation, then build.
 - Use a master + parallel sub-agents; be efficient; don't stall waiting when other streams can run.
 - Check Kie credits before batches; report spend.
 - Show the operator images (contact sheets), keep messages short, no internal narration.
 - Don't add unrequested features or "improvements" in Mode A; mention ideas in one line at the end instead.
+
+## 11. No placeholder or example labels (operator, 2026-10-18)
+Never ship visible labels such as "Example review", "Avis exemple", "placeholder", "à remplacer", demo badges or "show placeholder badges" settings in any section, block, image or copy. Reviews, testimonials and stats are written as final content (operator validates them). Track anything that needs operator replacement in DELIVERY.md, never on the page.
+
+## 12. Header defaults (operator, 2026-10-18)
+Every store header ships with the search icon, country selector and language selector OFF (`show_search`, `show_country`, `show_language` = false in sections/header-group.json). `main` already has them off, so brand branches inherit it; if a branch shows them, turn them off.
+- Footer: "Powered by Shopify" off (`show_powered_by` = false) and the social icons block disabled (`social-links` block `"disabled": true` in sections/footer-group.json). Also set in `main`.
+- Header is not sticky (`enable_sticky_header` = "never"). Also set in `main`.
+
+## 13. Fully customizable sections and blocks (operator, 2026-10-18)
+Every NEW section or block exposes all of its content and styling in the schema, so the operator can change everything in the theme editor without code: every text, image (image_picker + asset fallback), link, icon, color (text, accent, background, buttons, borders), font family/size/weight for headings and body, alignment, spacing/padding (top/bottom, desktop and mobile), layout options (columns, image side, order), visibility toggles per element, and mobile-specific overrides. Group settings with headers and keep them under Shopify limits (max 40 settings per section/block: use blocks for repeated items). Applies to future builds only.
+- Ads deliverable = creatives (per placement) + ad copy only. No media plan, budgets, campaign/ad-set structure, targeting or kill/scale rules: the operator runs Ads Manager.
+
+## 14. Strip metadata from AI-generated media (operator, 2026-10-18)
+Every AI-generated image or video (Kie GPT Image, Suno covers, Runway/Kling clips, ffmpeg ad videos built from them) has its metadata removed BEFORE it is saved as final or uploaded/pushed anywhere: run `python -I <SKILL>/scripts/strip_metadata.py <files-or-folder> --inplace` (images re-encoded without EXIF/XMP/C2PA provenance; videos remuxed with `-map_metadata -1`). Raw Kie downloads stay in scratch/raw; only cleaned copies go to 03_product-images, 04_page-images, 05_ads and theme assets. Every agent brief that generates media includes this step. Applies to new media only.
+
+## 15. Unique CSS class prefixes per section (2026-10-19)
+Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp__*`) and never reuses another component's base class for a different element (a quiz honeypot styled `.rf-hp` once hid the whole product hero on the live store). Before delivery, grep the brand prefix for classes defined in more than one file with conflicting rules, and check the LIVE storefront page (not only the theme editor).
+
+## 16. Video ad remakes (operator, 2026-10-24) — full workflow in `14-video-ads.md`
+- **Candidates:** ~20 competitor videos ranked by Brandsearch `reach_rank`, deduped by hook/script/format, in `05_ads/REMAKE_CANDIDATES.md`; stop for the operator's confirmation before remaking anything.
+- **Audit every clip** for any competitor trace (packaging, logo, label, website, handles, captions, text overlays, spoken name) and class it: (a) clean, (b) text overlay fixed locally, (c) needs regeneration.
+- **Never generate a (c) clip without operator confirmation.** List each with a start-frame prompt (`gpt-image-2-5-sunburst-image-to-image` 1K: original frame + our packshot) and an animation prompt (`wan/2-6-image-to-video` 720p), with costs. `wan/2-6-video-to-video` cannot take an image reference.
+- **Video analysis (operator, 2026-11-01):** scenes, the a/b/c trace audit, framework/beat map, hook, overlays and the VO are read by Gemini Flash through ArgoLink (`scripts/video_gemini.py`, `gemini-3.8-flash`); whisper stays for word timings and the sync check, and the full-resolution keyframe look stays as the backstop for clips Gemini marks clean.
+- **Only (c) clips are regenerated (operator, 2026-11-04).** (a) clips keep the original footage and (b) clips get a local fix. A video with 6 (c) shots costs about $1.26, not $7+. This is the biggest cost lever in the remake.
+- **Burned-in subtitles are REMOVED, never covered (operator, 2026-11-04).** Run `scripts/video_desub.py` (EAST text detection + LAMA inpainting on the local GPU, free) so the background behind the text is reconstructed. A blur band, a dark bar and a full-width delogo all fail — they hide the footage and the original text still ghosts through. Process is always: clear the original subtitles, then write the new ones at the same measured position.
+- **Pipeline order (2026-11-04):** insert the (c) clips FIRST, then de-subtitle, then burn the new captions and audio. Burning captions before the inserts leaves the generated clips with no captions.
+- **No lip sync.** Voice-over: transcribe locally (faster-whisper), rewrite (native translation for a new market, or brand swap for the same market), re-voice. Music or sound effects only: keep the audio. Keep character dialogue that never names the competitor.
+- **Audio provider:** all audio and voice work uses the ElevenLabs API directly, not Kie (key `D:/Ecom/Products/.secrets/elevenlabs.env`, `ELEVENLABS_API_KEY`; Starter, instant cloning, 40k characters/month). Defaults: `eleven_multilingual_v2`, `language_code` of the market, stability 0.55 / similarity 0.9 / style 0.15 / speaker boost.
+- **Clone the original voice:** isolate 30–90 s of the original VO with demucs, clone it (`POST /v1/voices/add`), re-voice only the lines that need remaking and splice them into the original voice track. Record the voice_id in the PLAN; flag when the original sounds like a real person (ElevenLabs' terms require the right to clone) so the operator decides; delete clones no longer needed (10 slots).
+- **Always remake three parts of every video**, even when nothing else needs it, so the script and audio curve differ from the original: the hook (the opening sentence/thought, length from the transcript, not fixed seconds), the very end (closing line/CTA) and one random body line. Same meaning, length and claim strength, cloned voice, same beat, captions updated.
+- **Sync:** each line on its original beat, original pauses kept, no voice-over across cuts, speed-up at most 1.08x (otherwise rephrase), music 8–10 dB under the voice, about −14 LUFS, captions re-timed word by word. Overlays: old ones covered, new ones in the same style, position and timing; brand names respelled phonetically for TTS only ("Awe-ree-uh").
+- **Independent check** before final: frames every 0.5 s, whisper read-back, sync within 0.15 s, the three remakes present, no competitor trace; strip metadata (§14).
+- **Folders:** `05_ads/generated/videos/` holds ONLY final videos (`vNN-<slug>.mp4`) at its root; each video has `vNN-work/` with only `vNN-clips.jpg`, `vNN-draft.mp4` and `vNN-PLAN.md`; everything else is deleted once the video is final.
+- **Never** swap people with animate-replace models (rendered badly and glitchy); clean up after scripts; never write into the Git Bash root (use absolute paths).
+
+## 17. Step Alpha before anything is built (operator 2026-11-10)
+**Rule:** after the competitor capture (Phase 1, raw data only), run Step Alpha, the pre-launch intelligence dossier, and pass its quality gate before anything is built or generated: no branding, names, copy, section spec, pages, images, ads, ad copy, videos, product CSV, checkout header or policies transform. Spec (authoritative, verbatim): `references/19-step-alpha.md`; how to run it: `references/20-step-alpha-runbook.md`. The run stops once inside Alpha (GATE α): the operator runs our tailored prompt in ChatGPT and pastes the result back; the synthesis, dossier and quality gate come after it. Every downstream step reads the dossier sections it names.
+**Why (operator's words, spec lines 1–26):**
+> STEP ALPHA — PRE-LAUNCH INTELLIGENCE
+> Runs BEFORE any asset is created.
+> Nothing is built until Alpha is complete.
+>
+> This step produces the intelligence foundation that every downstream step in the workflow consumes. Product pages, ad copy, video scripts, image creatives, branding — all of it inherits from Alpha's output. The quality of every asset the workflow produces is capped by the quality of this intelligence. Treat it accordingly.
+>
+> Step Alpha has TWO ANALYSES:
+>
+> ANALYSIS 1 — COMPETITOR INTELLIGENCE — "What are they doing, who are they selling to, and how is their funnel constructed?"
+>
+> ANALYSIS 2 — OPPORTUNITY INTELLIGENCE — "What can WE do that they aren't — hidden angles, underserved audiences, untapped emotional territories, and raw customer language we can weaponize?"
+>
+> Both analyses must complete before ANY downstream step fires.
+
+Also: "before building anything, we must run step alpha". The old Phase 3 ad analysis is removed fully: "you can remove the ad analysis phase 3 since we do every analysis in step alpha now" and "it doesn't move, remove it fully, step alpha is a way better and improved way and contains everything that needs to be analyzed". Step Alpha is the only ad and customer analysis in this skill.
+
+## Operator rules (summary — full text in the sections above)
+
+- **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
+- **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
+- **1:1 for tests.** Title = competitor's title pattern with our brand; palette = competitor's exact hex; page structure = competitor's (Mode A). Don't reinvent; upgrade later only when asked.
+- **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
+- **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
+- **GIFs raw**: download originals, keep them, use animated WebP in the theme.
+- **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
+- **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).
+- **Every ad prompt attaches our packshot**; no competitor brand names. **Before generating any ad**, write `05_ads/AD_VARIANTS.md` (each source headline → our almost-similar variant; each design → our close-but-different variant) and stop for operator validation; after approval generate and keep going (08 §1b).
+- **Video ads** (on request, `references/14-video-ads.md`): ~20 candidates by `reach_rank` → operator confirms; per video, audit every clip (a clean / b overlay fixed locally / c regenerate); no lip sync; re-voice with an ElevenLabs clone of the original voice (never Kie for audio); always remake the hook, the end and one random body line; (c) clips only after operator confirmation; `generated/videos/` holds finals only.
+- **Git:** branch named after the brand from clean `main`; commit → pull → merge-check → push; never publish; never overwrite a template with live ad traffic.
+- **Assets live in `PRODUCT_DIR`** (shop folder), not in the theme repo.
+- **Mobile first:** build and QA at 390px first; every horizontal rail scrolls by touch *and* mouse drag (editor mobile preview has no touch).

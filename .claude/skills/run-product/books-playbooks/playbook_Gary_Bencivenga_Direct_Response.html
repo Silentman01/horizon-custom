@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gary Bencivenga — The Complete Direct Response Playbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:wght@400;600;700&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0a09;
+  --bg2: #1c1917;
+  --bg3: #292524;
+  --gold: #f59e0b;
+  --gold-dim: #b45309;
+  --cream: #fef3c7;
+  --white: #fafaf9;
+  --muted: #a8a29e;
+  --red: #ef4444;
+  --green: #22c55e;
+  --blue: #3b82f6;
+  --purple: #a855f7;
+  --teal: #14b8a6;
+}
+ 
+* { margin:0; padding:0; box-sizing:border-box; }
+ 
+html { scroll-behavior: smooth; }
+ 
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+ 
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 30% 20%, rgba(245,158,11,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, rgba(245,158,11,0.05) 0%, transparent 50%);
+}
+ 
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 100px,
+    rgba(245,158,11,0.03) 100px, rgba(245,158,11,0.03) 101px
+  );
+  pointer-events: none;
+}
+ 
+.hero-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s forwards;
+}
+ 
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: clamp(42px, 7vw, 88px);
+  line-height: 1.05;
+  color: var(--cream);
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s forwards;
+}
+ 
+.hero h1 span {
+  color: var(--gold);
+  display: block;
+}
+ 
+.hero-sub {
+  font-family: 'Source Serif 4', serif;
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 600px;
+  margin-top: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s forwards;
+}
+ 
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 56px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s forwards;
+}
+ 
+.hero-stat {
+  text-align: center;
+}
+ 
+.hero-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 48px;
+  font-weight: 900;
+  color: var(--gold);
+}
+ 
+.hero-stat .label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 4px;
+}
+ 
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ 
+/* NAV */
+.toc {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(12,10,9,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245,158,11,0.15);
+  padding: 0 24px;
+  overflow-x: auto;
+}
+ 
+.toc-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 12px 0;
+}
+ 
+.toc a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+ 
+.toc a:hover {
+  color: var(--gold);
+  background: rgba(245,158,11,0.1);
+}
+ 
+/* MAIN */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+ 
+/* SECTION */
+.section {
+  padding: 80px 0;
+  border-bottom: 1px solid var(--bg3);
+}
+ 
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--gold-dim);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+ 
+.section h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 32px;
+}
+ 
+.section h3 {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--gold);
+  margin: 40px 0 16px 0;
+}
+ 
+.section p {
+  color: var(--white);
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+ 
+/* CARDS */
+.card {
+  background: var(--bg2);
+  border: 1px solid var(--bg3);
+  border-radius: 12px;
+  padding: 28px 32px;
+  margin: 24px 0;
+  position: relative;
+  transition: border-color 0.3s;
+}
+ 
+.card:hover {
+  border-color: var(--gold-dim);
+}
+ 
+.card.gold-accent {
+  border-left: 3px solid var(--gold);
+}
+ 
+.card.red-accent {
+  border-left: 3px solid var(--red);
+}
+ 
+.card.green-accent {
+  border-left: 3px solid var(--green);
+}
+ 
+.card.blue-accent {
+  border-left: 3px solid var(--blue);
+}
+ 
+.card.purple-accent {
+  border-left: 3px solid var(--purple);
+}
+ 
+.card-title {
+  font-family: 'Source Serif 4', serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+ 
+/* FORMULA BOX */
+.formula {
+  background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(245,158,11,0.02));
+  border: 1px solid rgba(245,158,11,0.25);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 28px 0;
+  text-align: center;
+}
+ 
+.formula-eq {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  margin-bottom: 12px;
+}
+ 
+.formula-note {
+  font-size: 14px;
+  color: var(--muted);
+  font-style: italic;
+}
+ 
+/* DO / DON'T */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+ 
+@media (max-width: 640px) {
+  .split { grid-template-columns: 1fr; }
+}
+ 
+.do-box, .dont-box {
+  padding: 24px;
+  border-radius: 12px;
+}
+ 
+.do-box {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.2);
+}
+ 
+.dont-box {
+  background: rgba(239,68,68,0.06);
+  border: 1px solid rgba(239,68,68,0.2);
+}
+ 
+.do-box .tag { color: var(--green); }
+.dont-box .tag { color: var(--red); }
+ 
+.tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+ 
+.do-box li, .dont-box li {
+  margin: 8px 0;
+  padding-left: 20px;
+  position: relative;
+  font-size: 15px;
+}
+ 
+.do-box li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+.dont-box li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+ 
+ul { list-style: none; }
+ 
+/* NUMBERED LIST */
+.steps {
+  counter-reset: step;
+  margin: 24px 0;
+}
+ 
+.step {
+  display: flex;
+  gap: 20px;
+  margin: 16px 0;
+  padding: 20px 24px;
+  background: var(--bg2);
+  border-radius: 10px;
+  border: 1px solid var(--bg3);
+  align-items: flex-start;
+}
+ 
+.step-num {
+  counter-increment: step;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold);
+  min-width: 36px;
+}
+ 
+.step-num::before {
+  content: counter(step);
+}
+ 
+.step-content {
+  font-size: 15px;
+  color: var(--white);
+}
+ 
+.step-content strong {
+  color: var(--cream);
+}
+ 
+/* HIGHLIGHT */
+.highlight {
+  background: rgba(245,158,11,0.1);
+  border-radius: 6px;
+  padding: 3px 8px;
+  color: var(--gold);
+  font-weight: 600;
+}
+ 
+/* QUOTE */
+.quote {
+  border-left: 3px solid var(--gold-dim);
+  padding: 16px 24px;
+  margin: 24px 0;
+  font-family: 'Source Serif 4', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--cream);
+  background: rgba(245,158,11,0.03);
+  border-radius: 0 8px 8px 0;
+}
+ 
+.quote-attr {
+  font-size: 13px;
+  color: var(--muted);
+  font-style: normal;
+  margin-top: 8px;
+}
+ 
+/* GRID */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+ 
+@media (max-width: 640px) {
+  .grid-2 { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; gap: 24px; }
+}
+ 
+/* CHECKLIST */
+.checklist {
+  margin: 24px 0;
+}
+ 
+.check-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--bg3);
+  font-size: 15px;
+  align-items: flex-start;
+}
+ 
+.check-item:last-child { border-bottom: none; }
+ 
+.check-box {
+  width: 22px;
+  height: 22px;
+  border: 2px solid var(--gold-dim);
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+ 
+.check-box.checked {
+  background: var(--gold);
+  border-color: var(--gold);
+}
+ 
+.check-box.checked::after {
+  content: '✓';
+  color: var(--bg);
+  font-size: 14px;
+  font-weight: 700;
+}
+ 
+/* PILL TAGS */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+ 
+.pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  padding: 5px 12px;
+  border-radius: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+ 
+.pill-gold { background: rgba(245,158,11,0.15); color: var(--gold); }
+.pill-red { background: rgba(239,68,68,0.15); color: var(--red); }
+.pill-green { background: rgba(34,197,94,0.15); color: var(--green); }
+.pill-blue { background: rgba(59,130,246,0.15); color: var(--blue); }
+.pill-purple { background: rgba(168,85,247,0.15); color: var(--purple); }
+ 
+/* SCORE TABLE */
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  font-size: 15px;
+}
+ 
+.score-table th {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 2px solid var(--gold-dim);
+}
+ 
+.score-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--bg3);
+  color: var(--white);
+}
+ 
+.score-table tr:hover td {
+  background: var(--bg2);
+}
+ 
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 60px 24px;
+  color: var(--muted);
+  font-size: 13px;
+  border-top: 1px solid var(--bg3);
+}
+ 
+.footer a {
+  color: var(--gold);
+  text-decoration: none;
+}
+ 
+/* ACCORDION */
+.accordion-trigger {
+  width: 100%;
+  background: var(--bg2);
+  border: 1px solid var(--bg3);
+  border-radius: 10px;
+  padding: 20px 24px;
+  color: var(--cream);
+  font-family: 'Source Serif 4', serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0 0 0;
+  transition: all 0.2s;
+}
+ 
+.accordion-trigger:hover {
+  border-color: var(--gold-dim);
+}
+ 
+.accordion-trigger .arrow {
+  color: var(--gold);
+  transition: transform 0.3s;
+  font-size: 20px;
+}
+ 
+.accordion-trigger.open .arrow {
+  transform: rotate(180deg);
+}
+ 
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+  background: var(--bg2);
+  border: 1px solid var(--bg3);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  margin-top: -4px;
+}
+ 
+.accordion-body.open {
+  max-height: 3000px;
+}
+ 
+.accordion-body-inner {
+  padding: 24px;
+}
+ 
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-dim); }
+</style>
+</head>
+<body>
+ 
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">The Complete Direct Response Playbook</div>
+  <h1>Gary Bencivenga<span>Decoded</span></h1>
+  <p class="hero-sub">Every tactic, formula, checklist, and technique from the greatest direct response copywriter who ever lived. Zero theory. All action.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">29</div>
+      <div class="label">Marketing Bullets</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">10</div>
+      <div class="label">Core Maxims</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">80%+</div>
+      <div class="label">Hit Ratio</div>
+    </div>
+  </div>
+</div>
+ 
+<!-- STICKY NAV -->
+<nav class="toc">
+  <div class="toc-inner">
+    <a href="#persuasion-eq">Persuasion Eq.</a>
+    <a href="#headlines">Headlines</a>
+    <a href="#proof">Proof</a>
+    <a href="#offers">Offers</a>
+    <a href="#copy-tools">Copy Tools</a>
+    <a href="#research">Research</a>
+    <a href="#10-maxims">10 Maxims</a>
+    <a href="#10-questions">10 Questions</a>
+    <a href="#scamper">SCAMPER</a>
+    <a href="#online">Online Formula</a>
+    <a href="#grading">Ad Grading</a>
+    <a href="#swipe">Swipe File</a>
+  </div>
+</nav>
+ 
+<div class="container">
+ 
+<!-- =========================================== -->
+<!-- SECTION 1: PERSUASION EQUATION -->
+<!-- =========================================== -->
+<div class="section" id="persuasion-eq">
+  <div class="section-num">Core System</div>
+  <h2>The Bencivenga Persuasion Equation®</h2>
+  <p>The master framework Gary used to create (and grade) every ad. 4 components, 25 points each. Score your ad out of 100.</p>
+ 
+  <div class="formula">
+    <div class="formula-eq">UP + USP + PF + IO = 100</div>
+    <div class="formula-note">Urgent Problem + Unique Solution Promise + Unquestionable Proof + Irresistible Offer</div>
+  </div>
+ 
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th>Component</th>
+        <th>What It Means</th>
+        <th>Points</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong style="color:var(--gold)">Urgent Problem</strong></td>
+        <td>Does your ad target a real, burning problem your audience already has? Are they actively searching for a solution?</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--gold)">Unique Solution Promise</strong></td>
+        <td>Does your product offer something different from every competitor? Can you articulate why YOUR solution is the one?</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--gold)">Unquestionable Proof</strong></td>
+        <td>Case studies, testimonials, endorsements, data, demonstrations — does the reader believe you beyond doubt?</td>
+        <td>25</td>
+      </tr>
+      <tr>
+        <td><strong style="color:var(--gold)">Irresistible Offer</strong></td>
+        <td>Guarantee, bonuses, urgency, risk-reversal — is it so good only a fool would refuse?</td>
+        <td>25</td>
+      </tr>
+    </tbody>
+  </table>
+ 
+  <div class="card gold-accent">
+    <div class="card-title">How to Use This</div>
+    <p>After writing your ad, score each component 0–25. Any component below 20 = that's where your ad is weak. Fix it before you run it. Most losing ads score below 60. Controls almost always score 85+.</p>
+  </div>
+ 
+  <div class="card blue-accent">
+    <div class="card-title">The 4 Sales Objections This Overcomes</div>
+    <p>Every prospect has 4 universal objections. The Equation is designed to crush each one:</p>
+    <div class="steps">
+      <div class="step"><div class="step-num"></div><div class="step-content"><strong>"I don't have a problem."</strong> → Urgent Problem shows them they do</div></div>
+      <div class="step"><div class="step-num"></div><div class="step-content"><strong>"Why should I pick you?"</strong> → Unique Promise differentiates you</div></div>
+      <div class="step"><div class="step-num"></div><div class="step-content"><strong>"I don't believe you."</strong> → Proof makes it undeniable</div></div>
+      <div class="step"><div class="step-num"></div><div class="step-content"><strong>"I'll do it later."</strong> → Irresistible Offer forces action NOW</div></div>
+    </div>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 2: HEADLINES -->
+<!-- =========================================== -->
+<div class="section" id="headlines">
+  <div class="section-num">Bullet #3, #7, #24</div>
+  <h2>Headlines That Pull</h2>
+ 
+  <div class="formula">
+    <div class="formula-eq">Interest = Benefit + Curiosity</div>
+    <div class="formula-note">If the reader can predict what your article says, they'll skip it. Curiosity demands the unexpected.</div>
+  </div>
+ 
+  <h3>The "Yeah, Sure" Test</h3>
+  <p>After every big claim in your headline or copy, ask: could the reader respond with "Yeah, sure..."? If yes, your proof isn't strong enough. Add more proof or tone down the claim until no reasonable person could dismiss it.</p>
+ 
+  <h3>The IF…THEN Bypass</h3>
+  <p>Sandwich your big promise inside an IF-THEN construction to bypass skepticism:</p>
+ 
+  <div class="split">
+    <div class="do-box">
+      <div class="tag">Winner — IF/THEN format</div>
+      <ul>
+        <li>"If you've got 20 minutes a month, I guarantee to work a financial miracle in your life."</li>
+        <li>"If you can follow simple instructions, you can cook like a 5-star chef."</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <div class="tag">Loser — Naked claim</div>
+      <ul>
+        <li>"The Millionaire Maker — Can he make YOU rich too?"</li>
+        <li>"Become a master chef overnight!"</li>
+      </ul>
+    </div>
+  </div>
+ 
+  <h3>The Borden Formula (Headline Checklist)</h3>
+  <p>Run every headline through these 4 filters:</p>
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>"Ho-hum!"</strong> — Is it boring? If you'd skip past it, rewrite.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>"Why bring that up?"</strong> — Is it relevant to your reader's life right now?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>"For instance?"</strong> — Does it include or imply a concrete example?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>"So what?"</strong> — Does it make the reader want to DO something?</div></div>
+  </div>
+ 
+  <h3>Proven Headline Formulas</h3>
+  <div class="card gold-accent">
+    <div class="card-title">The "Doctors" Formula</div>
+    <p><strong>"When [Authority Figures] have [Problem], what do they do?"</strong></p>
+    <p>This beat "Tension Headache?" by 71% in Caples' test. The word "doctors" automatically raises the proof level. Adapt it: "When top CEOs face burnout…" / "When Navy SEALs need to recover fast…"</p>
+  </div>
+ 
+  <div class="card green-accent">
+    <div class="card-title">The "Do You Make These Mistakes" Formula</div>
+    <p><strong>"Do You Make These Mistakes in [Your Niche]?"</strong></p>
+    <p>Oldest control-beating formula in history. Adapt freely to any market.</p>
+  </div>
+ 
+  <div class="card blue-accent">
+    <div class="card-title">Name With a Built-In Benefit</div>
+    <p>Best product names have a benefit baked in: <strong>Blu Blockers</strong> (blocks blue rays), <strong>Easy-Off</strong> (oven cleaner), <strong>Way Cool</strong> (car shade). Never underestimate naming.</p>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 3: PROOF -->
+<!-- =========================================== -->
+<div class="section" id="proof">
+  <div class="section-num">Bullet #9, #29</div>
+  <h2>Proof Arsenal</h2>
+  <p>Without belief, nobody buys. Yelling is not selling. Build proof like a lawyer builds a case.</p>
+ 
+  <h3>The 3 Areas of Reason-Why Copy</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Why your product is superior</strong> — to every other option, including doing nothing</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Why what you say is true</strong> — evidence, credentials, data, third-party validation</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Why they should act today</strong> — urgency, scarcity, bonuses expiring, prices rising</div></div>
+  </div>
+ 
+  <h3>The Proof Toolkit (Rank by Power)</h3>
+  <div class="grid-2">
+    <div class="card gold-accent">
+      <div class="card-title">Tier 1 — Heavyweight</div>
+      <ul>
+        <li>✦ Proven outcomes with specific numbers</li>
+        <li>✦ Case histories with before/after</li>
+        <li>✦ Expert endorsements (named authorities)</li>
+        <li>✦ "When Doctors…" borrowed authority</li>
+      </ul>
+    </div>
+    <div class="card green-accent">
+      <div class="card-title">Tier 2 — Strong</div>
+      <ul>
+        <li>✦ Customer testimonials (specific results)</li>
+        <li>✦ Mechanism explanation (HOW it works)</li>
+        <li>✦ Industry reputation / track record</li>
+        <li>✦ Demonstrations / free samples</li>
+      </ul>
+    </div>
+    <div class="card blue-accent">
+      <div class="card-title">Tier 3 — Supporting</div>
+      <ul>
+        <li>✦ Areas of specialization</li>
+        <li>✦ Candor / admitting limitations</li>
+        <li>✦ Reason-why copy ("because…")</li>
+        <li>✦ Exposé-style framing</li>
+      </ul>
+    </div>
+    <div class="card purple-accent">
+      <div class="card-title">Tier 4 — Amplifiers</div>
+      <ul>
+        <li>✦ Specificity (exact numbers, dates, names)</li>
+        <li>✦ Story / narrative proof</li>
+        <li>✦ Metaphors for memorability</li>
+        <li>✦ Photographs / visual evidence</li>
+      </ul>
+    </div>
+  </div>
+ 
+  <h3>The "Because" Trigger</h3>
+  <div class="card gold-accent">
+    <div class="card-title">The Most Powerful Compliance Word</div>
+    <p>Harvard experiment: adding "because" to a request boosted compliance from 60% to 93% — even when the reason was nonsensical. Fill your copy with "becauses" followed by compelling reasons. Every claim needs a "because."</p>
+  </div>
+ 
+  <h3>Proof Lawyer Test</h3>
+  <div class="quote">
+    "What proof would I need to persuade a fair-minded jury beyond a reasonable doubt that my copy rings true?"
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 4: OFFERS -->
+<!-- =========================================== -->
+<div class="section" id="offers">
+  <div class="section-num">Bullet #15, #16, #21</div>
+  <h2>Offers That Convert</h2>
+ 
+  <h3>The Offer Hierarchy (by importance)</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>The List</strong> — Who you're selling to is more important than anything else</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>The Offer</strong> — What you're giving them and at what terms</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>The Copy</strong> — How you present it (most marketers obsess here first — wrong)</div></div>
+  </div>
+ 
+  <h3>Split-Test Winner</h3>
+  <div class="split">
+    <div class="do-box">
+      <div class="tag">Winner (+40%)</div>
+      <ul>
+        <li>"Buy One, Get One FREE!"</li>
+      </ul>
+    </div>
+    <div class="dont-box">
+      <div class="tag">Losers</div>
+      <ul>
+        <li>"50% Off"</li>
+        <li>"Half Price!"</li>
+      </ul>
+    </div>
+  </div>
+ 
+  <h3>Offer Boosters Checklist</h3>
+  <div class="checklist" id="offer-checklist">
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Give a <strong>believable reason</strong> for your offer (why so generous? clearance, anniversary, overstocked)</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Never sell more than <strong>one thing at a time</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Always create a <strong>deluxe version</strong> of your offer</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Make your <strong>guarantee as strong as humanly possible</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Test prices ending in <strong>7</strong> (reported by Ted Nicholas as highest-converting)</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Use <strong>takeaway deadlines</strong> — and actually remove the offer when it expires</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>If prices are going up, <strong>say so</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Add an <strong>early-bird bonus</strong> for prompt response</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Add a <strong>"mystery bonus"</strong> — curiosity drives action</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Offer an <strong>alluring premium</strong> — something tangible they keep even if they return</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Build toward <strong>subscriptions/recurring</strong> — repeat business is where the real money lies</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div>Test whatever <strong>offer your competitor keeps repeating</strong> — they repeat it because it works</div></div>
+  </div>
+ 
+  <h3>The Monkey's Fist</h3>
+  <div class="card gold-accent">
+    <div class="card-title">Make the First Step Irresistibly Easy</div>
+    <p>Don't try to sell your main product from the get-go. Create an offer so easy to say yes to that it lowers their guard: free + shipping, free report, free trial, free sample. Then nurture the relationship. Make the first step easy, nonthreatening, enjoyable, irresistible.</p>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 5: COPY TOOLS -->
+<!-- =========================================== -->
+<div class="section" id="copy-tools">
+  <div class="section-num">Bullet #1, #4, #25, #27</div>
+  <h2>Copy Weapons</h2>
+ 
+  <h3>The Credo Technique</h3>
+  <div class="card gold-accent">
+    <div class="card-title">"Stand for something and you'll never stand alone."</div>
+    <p>In your Welcome Letter, landing page, or first touch — state boldly what you believe in and specialize in. This is not a technique, it's an expression of your core values that attracts kindred spirits and repels the wrong customers. It differentiates you from me-too competitors instantly.</p>
+  </div>
+ 
+  <h3>The 5-Word Power Question</h3>
+  <div class="formula">
+    <div class="formula-eq">"What are we really selling?"</div>
+    <div class="formula-note">You're not selling grass seed — you're selling a greener lawn. You're not selling boilers — you're selling warmer winter nights at 27% savings.</div>
+  </div>
+  <p>Make a long list of answers to this question. Test an ad built around each of your best answers. The difference in response will often astonish you.</p>
+ 
+  <h3>Metaphors as Weapons</h3>
+  <div class="card green-accent">
+    <div class="card-title">The Golden Key of Persuasion</div>
+    <p>Metaphors make your copy more memorable and persuasive. Use the formula: <strong>Point you're making + Add a metaphor.</strong></p>
+    <p>"Your current system is a leaky bucket" — "This process flows like silk" — "Small leaks sink great ships"</p>
+  </div>
+ 
+  <h3>Body Copy Openers</h3>
+  <div class="grid-2">
+    <div class="card blue-accent">
+      <div class="card-title">"Picture this…"</div>
+      <p>Paint a scene the prospect can step into. "Picture this: you come home from a late night out. Your heart sinks. Everything is gone…"</p>
+    </div>
+    <div class="card purple-accent">
+      <div class="card-title">Pay off the headline</div>
+      <p>Your first few paragraphs should immediately pay off or build upon your headline. Never let the reader wonder why they clicked.</p>
+    </div>
+  </div>
+ 
+  <h3>The 3 Greatest Copywriting Lessons</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Copywriting = salesmanship in print.</strong> Not clever wordsmithing. Not literary writing. It's one-to-one selling, multiplied.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Writer's block = not enough research.</strong> Gather 7x more information than you can use. When you know your product and prospect so deeply, the copy bursts forth like a dam breaking.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Writing is thinking on paper.</strong> Before you write, have a mental conversation about every persuasive element. Sleep on it. Write in the morning.</div></div>
+  </div>
+ 
+  <h3>Long Copy vs. Short Copy</h3>
+  <div class="card red-accent">
+    <div class="card-title">The Truth About Copy Length</div>
+    <p>Long copy almost always outpulls short. If you're trying to shorten your copy, you're probably writing for the unmotivated 95% (who won't care regardless of length). Write as much as necessary to give the motivated 5% everything they need to make a favorable decision. Your audience self-selects — write for the motivated.</p>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 6: RESEARCH -->
+<!-- =========================================== -->
+<div class="section" id="research">
+  <div class="section-num">Bullet #14, #19</div>
+  <h2>Research Protocol</h2>
+ 
+  <h3>10 Questions Before You Write a Single Word</h3>
+  <div class="steps" id="10-questions">
+    <div class="step"><div class="step-num"></div><div class="step-content">Why is this product made the way it is?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What consumer problems, desires, and needs is it designed for?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What's special about it — why does it fulfill needs better than competition?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">Who says so besides you? (Third-party validation)</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What are your strongest proof elements to make your case believable?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What are ALL the product's best features and how does each translate into a consumer benefit?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">If you had unlimited funds, how would you improve this product?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">Who are the heavy users — the 20% who generate 80% of sales?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What irresistible offers might trigger an explosion in sales?</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content">What premiums can be tossed in to press your prospects' hot buttons?</div></div>
+  </div>
+ 
+  <h3>The 5W1H Framework</h3>
+  <div class="card gold-accent">
+    <div class="card-title">6 Faithful Serving Men</div>
+    <p><strong>WHO</strong> are you advertising to? · <strong>WHAT</strong> does your product do for them? · <strong>WHY</strong> is it superior? · <strong>HOW</strong> can you prove your case? · <strong>WHERE</strong> should you advertise to reach prime prospects? · <strong>WHEN</strong> is the best time to reach them?</p>
+    <p style="margin-top:12px">Ask at least one good "WHY?" every day and gnaw on it until you're satisfied. Appoint "Mr. Why" as your lead detective. Instruct him to come back with 7x more information than you can use.</p>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 7: 10 MAXIMS -->
+<!-- =========================================== -->
+<div class="section" id="10-maxims">
+  <div class="section-num">Titans Event + Marketing Maxims</div>
+  <h2>The 10 Marketing Maxims</h2>
+  <p>Shared at Gary's retirement event and expanded in his Marketing Maxims newsletter. The distilled operating system of a 60-year career.</p>
+ 
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Make your advertising itself valuable.</strong> Leave your prospect better off for reading your promo, whether they buy or not. This also demonstrates what your product can do.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Aim your headlines at the heavy users.</strong> 20% of your buyers generate 80% of your sales. Know who they are. Show them how you help them get what they already want.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Break through by making advertising look unlike advertising.</strong> The less your promo looks like a sales pitch, the better it pulls. Make it look like valuable content, a magazine article, an exposé, a report.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>A gifted product is mightier than a gifted pen.</strong> The magic is in the product, not in the copy. Your product is the horse; you're just the jockey. Pick faster horses.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Advertising is multiplied salesmanship.</strong> One promo can close thousands of sales. Find clients who can scale your work to big audiences and pay you for those multiplied results.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Great ads are built on great research.</strong> Dig, drill, and dynamite until you have carloads of ore. Gather at least 7x more than you can use.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Write, rewrite, and then rewrite again.</strong> Your first draft is always your worst. Keep refining until it sings.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Love what you sell.</strong> Turn away products you can't passionately believe in. If you wouldn't recommend it to your family and friends, don't write for it.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Collect maxims and review them daily.</strong> At the moment of truth — blank screen, looming deadline — you can't remember textbooks. But you can remember the right maxim.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Compete with the immortals.</strong> Put your all into every piece. Study the greatest promos ever written. Handcopy them. Reverse-engineer them. Raise the bar.</div></div>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 8: SCAMPER -->
+<!-- =========================================== -->
+<div class="section" id="scamper">
+  <div class="section-num">Bullet #6</div>
+  <h2>SCAMPER — Creativity Multiplier</h2>
+  <p>7 ways to generate new ideas from existing proven winners. Use this when staring at a blank screen.</p>
+ 
+  <table class="score-table">
+    <thead>
+      <tr><th>Letter</th><th>Action</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong style="color:var(--gold)">S</strong></td><td>SUBSTITUTE a new, surprising element for a proven one</td><td>Doubleday Book Club → Military Book Club</td></tr>
+      <tr><td><strong style="color:var(--gold)">C</strong></td><td>COMBINE successful elements from two different sources</td><td>Merge your best headline with a competitor's best offer</td></tr>
+      <tr><td><strong style="color:var(--gold)">A</strong></td><td>ADAPT a winning formula from another product category</td><td>"Do You Make These Mistakes in [your niche]?"</td></tr>
+      <tr><td><strong style="color:var(--gold)">M</strong></td><td>MODIFY, MINIFY, or MAGNIFY any element</td><td>Shrink a 16-page sales letter into a postcard teaser</td></tr>
+      <tr><td><strong style="color:var(--gold)">P</strong></td><td>PUT to other uses — who else can use this?</td><td>A health product pitch repurposed for the pet market</td></tr>
+      <tr><td><strong style="color:var(--gold)">E</strong></td><td>ELIMINATE one or more standard elements</td><td>Gary found that REMOVING bullets from magalog covers boosted response</td></tr>
+      <tr><td><strong style="color:var(--gold)">R</strong></td><td>REARRANGE, REVERSE, or REDEFINE</td><td>Lead with the guarantee instead of burying it at the end</td></tr>
+    </tbody>
+  </table>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 9: ONLINE FORMULA -->
+<!-- =========================================== -->
+<div class="section" id="online">
+  <div class="section-num">Bullet #18</div>
+  <h2>7-Step Online Success Formula</h2>
+ 
+  <div class="steps">
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Carve out a niche.</strong> Don't sell "car accessories." Sell "fuzzy dice." Go vertical. Go deep. Go where people search with specific intent.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Give something valuable away for free.</strong> A free report, guide, tool, or sample. Make it genuinely useful — not a pitch in disguise.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Promote your free offer everywhere.</strong> Paid ads, guest posts, social, podcasts, print, radio, SEO, direct mail, list swaps. Try everything.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Capture email addresses.</strong> Build a list. This is your most valuable asset.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Pile on the value.</strong> Make your emails so valuable people eagerly open them. Share stories, be personal, become their trusted friend. Resist the urge to hard-sell every time.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Dance the two-step.</strong> Never hard-sell inside your newsletter. Instead: (1) Mention you have a great product related to the tip you just shared. (2) Link to a separate dedicated sales page where you sell as hard as you want.</div></div>
+    <div class="step"><div class="step-num"></div><div class="step-content"><strong>Capture physical addresses.</strong> Direct mail to online prospects pulls up to 400% higher sales than the same copy delivered online only (Gary Halbert's data).</div></div>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 10: AD GRADING -->
+<!-- =========================================== -->
+<div class="section" id="grading">
+  <div class="section-num">100 Seminar System</div>
+  <h2>Grade Any Ad in 5 Minutes</h2>
+ 
+  <p>Use this scoring system to evaluate any piece of copy before it goes live:</p>
+ 
+  <table class="score-table">
+    <thead>
+      <tr><th>Question</th><th>If YES</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Is it solving a <strong>real problem</strong> of the target market?</td><td>+15 pts</td></tr>
+      <tr><td>Is that problem or desire <strong>urgent</strong>?</td><td>+10 pts</td></tr>
+      <tr><td>Does it offer a <strong>unique promise/solution</strong>?</td><td>+25 pts</td></tr>
+      <tr><td>Is there <strong>unquestionable proof</strong>?</td><td>+25 pts</td></tr>
+      <tr><td>Is the offer <strong>irresistible</strong> (bonuses, guarantee, urgency)?</td><td>+25 pts</td></tr>
+    </tbody>
+  </table>
+ 
+  <div class="formula">
+    <div class="formula-eq">Score: ___/100</div>
+    <div class="formula-note">Below 60 = don't run it. 60-80 = fixable. 80+ = you have a potential control.</div>
+  </div>
+ 
+  <h3>Tricks That Boost Response</h3>
+  <div class="grid-2">
+    <div class="card gold-accent">
+      <div class="card-title">Look Less Like an Ad</div>
+      <p>The less your piece looks like advertising, the better it pulls. Make it look like an article, a report, an exposé, or a magazine. Gary found that removing sales copy from magalog covers actually increased response.</p>
+    </div>
+    <div class="card green-accent">
+      <div class="card-title">Explain the Mechanism</div>
+      <p>When you explain HOW your product works (the mechanism), it acts as proof. People believe more when they understand the process behind the result.</p>
+    </div>
+    <div class="card blue-accent">
+      <div class="card-title">Lumpy Mail</div>
+      <p>Physical objects in an envelope (the "Cracker Jack Principle") dramatically boost open rates. You get the lumpy envelope and you HAVE to see what's inside.</p>
+    </div>
+    <div class="card purple-accent">
+      <div class="card-title">The Exposé Frame</div>
+      <p>Frame your sales piece as an investigation or consumer report: "The Great Vitamin Hoax" — then recommend your product as the honest alternative. This works in almost any niche.</p>
+    </div>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 11: SWIPE FILE ADS -->
+<!-- =========================================== -->
+<div class="section" id="swipe">
+  <div class="section-num">Study These</div>
+  <h2>Bencivenga Swipe File & Resources</h2>
+ 
+  <h3>Must-Study Bencivenga Ads</h3>
+  <div class="checklist">
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>64 Toughest Interview Questions</strong> — classic fascination-driven long-form</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>Ad Agency Guarantee Ad</strong> — selling his own services with risk-reversal</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>Shoestring Business Ad</strong> — the Persuasion Equation in action</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>How to Launch Your Own Business Ad</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>"Do You Make These Mistakes in Job Interviews?"</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>Millionaire Apprenticeship Program Ad</strong></div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>Kurobuta Ham Letter</strong> — post-retirement, his own olive oil / food business</div></div>
+    <div class="check-item"><div class="check-box" onclick="this.classList.toggle('checked')"></div><div><strong>The Sampler (New Choices in Natural Healing)</strong> — $50M+ from one book promo, 174 fascinations</div></div>
+  </div>
+ 
+  <h3>Free Resources</h3>
+  <div class="grid-2">
+    <div class="card gold-accent">
+      <div class="card-title">Marketing Bullets (All 29)</div>
+      <p>Free at <strong>marketingbullets.com/archive</strong> — read, print, and handcopy every one.</p>
+    </div>
+    <div class="card green-accent">
+      <div class="card-title">Marketing Maxims Newsletter</div>
+      <p>Free at <strong>marketingmaxims.com</strong> — his latest principles in maxim form.</p>
+    </div>
+  </div>
+ 
+  <h3>Paid Resource</h3>
+  <div class="card red-accent">
+    <div class="card-title">The Bencivenga 100 Retirement Seminar</div>
+    <p>His farewell event for 100 attendees at $5,000/seat. Contains the Persuasion Equation, ad grading system, and dozens of control-beating techniques. Available as DVD/audio set — look for "Retirement Legacy" by Gary Bencivenga.</p>
+  </div>
+</div>
+ 
+<!-- =========================================== -->
+<!-- SECTION 12: QUICK-REF RULES -->
+<!-- =========================================== -->
+<div class="section">
+  <div class="section-num">Quick Reference</div>
+  <h2>Bencivenga's Laws in One Shot</h2>
+ 
+  <div class="card gold-accent" style="font-size:15px; line-height:2">
+    <p>➤ <strong>Proof must equal the claim.</strong> Never make your claim bigger than your proof.</p>
+    <p>➤ <strong>Think like a fish, not a fisherman.</strong> What does your market want? Not what do you want to sell.</p>
+    <p>➤ <strong>A gifted product > a gifted pen.</strong> The product is the horse. You're the jockey.</p>
+    <p>➤ <strong>The 80/20 rule governs everything.</strong> Master the vital few, ignore the trivial many.</p>
+    <p>➤ <strong>Find out what others want and help them get it.</strong> The ultimate selling secret.</p>
+    <p>➤ <strong>Predictability kills curiosity.</strong> If they can guess what you'll say, they won't read.</p>
+    <p>➤ <strong>Interest = Benefit + Curiosity.</strong> Both. Not one or the other.</p>
+    <p>➤ <strong>People will never care how much you know until they know how much you care.</strong></p>
+    <p>➤ <strong>The fear of loss > the desire for gain.</strong> Frame as what they're losing, not what they're gaining.</p>
+    <p>➤ <strong>You can't bore people into buying.</strong> Be interesting. Be original. Be personal.</p>
+    <p>➤ <strong>Persistence and determination alone are omnipotent.</strong></p>
+    <p>➤ <strong>As desire goes up, price resistance goes down.</strong></p>
+    <p>➤ <strong>Anything measured and watched improves.</strong></p>
+    <p>➤ <strong>"Because" is the most powerful compliance trigger.</strong> Always give a reason.</p>
+    <p>➤ <strong>Gather 7x more research than you can use.</strong> Writer's block = research deficit.</p>
+    <p>➤ <strong>Your not-to-do list is more important than your to-do list.</strong></p>
+    <p>➤ <strong>Start your day with an "hour of power"</strong> — your most important, result-generating activity first thing.</p>
+    <p>➤ <strong>Before bed, review your hardest problem.</strong> Let your subconscious solve it overnight.</p>
+  </div>
+</div>
+ 
+</div>
+ 
+<!-- FOOTER -->
+<div class="footer">
+  <p>Compiled from Gary Bencivenga's 29 Marketing Bullets, 10 Marketing Maxims, and the Bencivenga 100 Seminar notes.</p>
+  <p style="margin-top:8px">Original sources: <a href="https://marketingbullets.com/archive/" target="_blank">marketingbullets.com</a> · <a href="https://marketingmaxims.com" target="_blank">marketingmaxims.com</a></p>
+  <p style="margin-top:16px; color:var(--gold); font-family:'Source Serif 4',serif; font-style:italic; font-size:16px;">"In short, you will succeed by mastering the vital few, while others squander their time on the trivial many."</p>
+</div>
+ 
+</body>
+</html>

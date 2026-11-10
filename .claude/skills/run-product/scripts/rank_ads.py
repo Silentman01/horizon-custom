@@ -770,7 +770,8 @@ def main():
     print(f"== Groups: {len(got)} images -> {len(entries)} unique creatives "
           f"({len(near_log)} attached by perceptual match) ==")
     for aid, kind, dist, target in near_log:
-        print(f"  attached {aid} ({kind}, d={dist:.3f}) -> group of {groups[target][0]['id']}")
+        lead = groups[target][0]["id"] if target in groups else target
+        print(f"  attached {aid} ({kind}, d={dist:.3f}) -> group of {lead}")
     for x, y, dd in possible:
         print(f"  CHECK possible near-duplicate: {x} ~ {y} (d={dd:.3f}) - eyeball; --near-dup merges")
     print(f"== Ranking (top {min(a.top, len(entries))}) - sort={a.sort}, then days desc, copies+dup desc ==")
