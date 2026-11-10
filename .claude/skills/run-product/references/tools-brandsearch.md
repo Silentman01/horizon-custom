@@ -146,7 +146,7 @@ how Alpha uses it: [20 §4](20-step-alpha-runbook.md#alpha0-inputs). The calls, 
    ```
    Writes `PD/00_alpha/ad_inventory.json` (header: counts, pagination totals, gaps, pull date, platforms checked;
    one record per ad: id, short_id M1../S1.., platform, format, status, start, end, run_days, reach_rank,
-   duplicate_count, page, landing_url, caption, media URLs, video_file, image_file, transcript, gemini, angle, avatar,
+   duplicate_count, page, landing_url, caption, media URLs, video_file, image_file, transcript, angle, avatar,
    notes; full list in [20 §2](20-step-alpha-runbook.md#2-folder-and-files)). Videos land in
    `PD/05_ads/competitor/videos/<ad_id>.mp4`, static images in `PD/05_ads/competitor/images/<ad_id>.<ext>`,
    `transcript_url` texts in `PD/00_alpha/transcripts/<ad_id>.txt` — all free, run it the same session (URLs

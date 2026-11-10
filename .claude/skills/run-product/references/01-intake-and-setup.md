@@ -45,7 +45,7 @@ Run these quickly (one Bash call where possible). Record results in BRIEF.md "To
 | Browser | Edge `C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe` or Chrome | screenshots unavailable → use competitor PDF/screens if the operator provides them |
 | Kie key + credits | `KIE_API_KEY` env, project skill config, or operator; `curl -s -H "Authorization: Bearer $KEY" https://api.kie.ai/api/v1/chat/credit` | ask for the key; if balance < ~260, warn and plan priorities (18 §2) |
 | Brandsearch MCP + credits | `ToolSearch` query "brandsearch" → tools `mcp__claude_ai_Brandsearch__*`; `get_usage` / `get_ai_credits` | tell the operator to connect it (`claude mcp add` / MCP menu) or to provide the competitor's ads; Step Alpha needs the complete ad footprint, so it waits for one of the two (capture still runs). Too few credits for a transcript of every video ad (18 §2) → tell the operator before transcribing |
-| ArgoLink key (video analysis) | `ARGOLINK_API_KEY` env or `D:/Ecom/Products/.secrets/argolink.env` (read by `video_gemini.py`) | ask for the key; Step Alpha 1.2 needs it for the video beat maps |
+| ArgoLink key (video analysis) | `ARGOLINK_API_KEY` env or `D:/Ecom/Products/.secrets/argolink.env` (read by `video_gemini.py`) | ask for the key; needed for video remakes (14), not for Step Alpha |
 | Shopify Admin token (policies) | `SHOPIFY_ADMIN_TOKEN` env (custom app, `write_legal_policies`) | policies delivered as files + operator to-do |
 
 Windows notes: Bash is Git Bash; run Python with `-I`; set `sys.stdout.reconfigure(encoding="utf-8")` in scripts (cp1252 console crashes on ✓ and accents); paths with spaces in quotes.
@@ -56,7 +56,7 @@ Windows notes: Bash is Git Bash; run Python with `-I`; set `sys.stdout.reconfigu
 2. Create the tree:
 ```bash
 D="$PRODUCTS_ROOT/_plaims-headlight-glasses"
-mkdir -p "$D"/{00_alpha/analysis1,00_alpha/analysis2,00_alpha/chatgpt,00_alpha/transcripts,00_alpha/gemini,01_branding,02_competitor/page,02_competitor/home,02_competitor/media,03_product-images,04_page-images,05_ads/competitor/raw/footprint,05_ads/competitor/videos,05_ads/competitor/images,05_ads/generated,06_policies/source,scratch}
+mkdir -p "$D"/{00_alpha/analysis1,00_alpha/analysis2,00_alpha/chatgpt,00_alpha/transcripts,01_branding,02_competitor/page,02_competitor/home,02_competitor/media,03_product-images,04_page-images,05_ads/competitor/raw/footprint,05_ads/competitor/videos,05_ads/competitor/images,05_ads/generated,06_policies/source,scratch}
 ```
 3. Copy `templates/BRIEF.md` to `PRODUCT_DIR/BRIEF.md` and fill: inputs, market, mode, tooling results, credit balance, open questions.
 4. Keep BRIEF.md current: every decision (brand, palette, title, store, theme id, branch) is written there — sub-agents read it instead of you re-explaining.

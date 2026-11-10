@@ -42,7 +42,7 @@ Phase 0 ─┬─ Capture agent (product + home) ──┐
          ├─ Policies fetch ──────────────────┤
          └─ Brandsearch: complete footprint ─┴─► α0 inputs ─┬─ Lead A: α1.1 customer ─► α1.3 congruence ─┐
             + every video transcript                         │                     ▲ (per-ad tags from 1.2) │
-            + rank_ads top 30 (for remakes)                  └─ Lead B: α1.2 ads (α-analyst + Gemini) ─────┴─► α1.4 angle cards
+            + rank_ads top 30 (for remakes)                  └─ Lead B: α1.2 ads (α-analyst batches) ──────┴─► α1.4 angle cards
 
 α1.4 ─► α2 hidden angles ─► α3 ChatGPT prompt ─► GATE α (operator pastes ChatGPT result) ─► α4 synthesis ─► α5 dossier ─► α6 quality gate
 

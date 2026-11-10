@@ -10,7 +10,7 @@ Subcommands
       Checks the 16 QUALITY GATE boxes of the spec as far as a script can, prints PASS / FAIL per box
       with reasons, MANUAL notes for the coordinator's judgment, WARN lines, and exits 1 on any FAIL.
       Folder files it reads: ALPHA_DOSSIER.md, ad_inventory.json, transcripts/<id>.txt,
-      gemini/<id>.json, analysis1/*.md, analysis2/*.md, chatgpt/CHATGPT_PROMPT.md,
+      analysis1/*.md, analysis2/*.md, chatgpt/CHATGPT_PROMPT.md,
       chatgpt/CHATGPT_RAW.md.
 
   inventory --alpha-dir PD/00_alpha --dumps [platform:]FILE ... [--keyword KW ...]
@@ -25,16 +25,17 @@ Subcommands
       (DIR/<id>.<png|jpg|webp|gif>). --fetch-transcripts saves transcript_url text to
       transcripts/<id>.txt (free). Prints what still needs paid calls (transcribe_ad, download_ad).
 
-  beats GEMINI.json [--duration SECONDS]
-      Prints the 1.8 fields a script can compute from a video_gemini.py JSON: BEAT MAP (timestamp,
-      duration, % of total, function), HOOK DURATION, VO/TEXT SPLIT (% VO / % on-screen text only /
-      % music-only), PACING (WPS average + per beat). --duration = real length (ffprobe); Gemini's
-      duration_s can be ~1.5x off, so every time is rescaled by real/reported.
+  beats TRANSCRIPT.txt [--duration SECONDS]
+      Prints the 1.8 numbers a script can compute from a timed transcript (transcripts/<id>.txt,
+      '[start-end] text' lines): every line with timestamp, duration, % of total and WPS (the analyst
+      groups them into beats and names each function), HOOK DURATION, VO/TEXT SPLIT (% speech vs no
+      speech, plus the no-speech gaps) and PACING (WPS average). --duration = real length (ffprobe,
+      when the video file exists); default = end of the last spoken line. Gemini is not used in Alpha.
 
 Examples
   python -I alpha_gate.py check "D:/Ecom/Products/_plaims/00_alpha"
   python -I alpha_gate.py inventory --alpha-dir "PD/00_alpha" --dumps meta:dump1.txt tiktok:toolu_x.json --keyword insole
-  python -I alpha_gate.py beats "PD/00_alpha/gemini/123.json" --duration 31.4
+  python -I alpha_gate.py beats "PD/00_alpha/transcripts/123.txt" --duration 31.4
 """
 import argparse
 import glob
@@ -586,9 +587,6 @@ def gate(path):
         tpath = os.path.join(folder, tp)
         if not os.path.isfile(tpath) or os.path.getsize(tpath) == 0:
             f.append(f"video {sid}: transcript file missing/empty ({tp})")
-        gp = a.get("gemini") or f"gemini/{a.get('id')}.json"
-        if not os.path.isfile(os.path.join(folder, gp)):
-            f.append(f"video {sid}: video_gemini.py analysis missing ({gp})")
         b = next((vb_by[k] for k in ad_keys(a) if k in vb_by), None)
         if b is None:
             f.append(f"video {sid}: no video-analysis block in 1.8")
@@ -607,7 +605,7 @@ def gate(path):
         if not rows or all(any(is_placeholder(c) for c in r) for r in rows):
             f.append("1.8 'Video framework patterns' table is empty")
     rep.box(8, "Every video ad transcribed and framework-extracted", f,
-            ["beat maps match the video (spot-check 2 against the Gemini JSON and transcript)"] if videos else [],
+            ["beat maps match the transcript (spot-check 2 against transcripts/<id>.txt)"] if videos else [],
             vwarns)
 
     # 9 static ads
@@ -1029,7 +1027,6 @@ def fetch(url, dest, timeout=60):
 def inventory(a):
     folder = a.alpha_dir
     os.makedirs(os.path.join(folder, "transcripts"), exist_ok=True)
-    os.makedirs(os.path.join(folder, "gemini"), exist_ok=True)
     p = os.path.join(folder, "ad_inventory.json")
     old = {"header": {}, "ads": [], "excluded": [], "review": []}
     if os.path.isfile(p):
@@ -1140,7 +1137,6 @@ def inventory(a):
         }
         if fmt == "video":
             rec["transcript"] = f"transcripts/{m['id']}.txt"
-            rec["gemini"] = f"gemini/{m['id']}.json"
             rec["video_file"] = None
         if m["id"] in where:
             bucket, r = where[m["id"]]
@@ -1265,58 +1261,37 @@ def inventory(a):
 
 # ----------------------------------------------------------------------------- beats
 def beats(a):
-    g = json.load(open(a.gemini, encoding="utf-8"))
-    rep_d = float(g.get("duration_s") or 0) or None
-    real = a.duration or rep_d
-    if not real:
-        print("no duration: pass --duration")
+    """1.8 numbers from a timed transcript (transcripts/<id>.txt: '[start-end] text' lines)."""
+    segs = []
+    for line in open(a.transcript, encoding="utf-8"):
+        m = re.match(r"\s*\[(\d+(?:\.\d+)?)-(\d+(?:\.\d+)?)\]\s*(.*)", line)
+        if m:
+            segs.append((float(m.group(1)), float(m.group(2)), m.group(3).strip()))
+    if not segs:
+        print("no timed lines in the transcript ('[start-end] text')")
         return 1
-    k = (real / rep_d) if (a.duration and rep_d) else 1.0
-
-    def T(x):
-        return round(float(x) * k, 1)
-
-    print(f"duration: {real:.1f}s" + (f" (Gemini said {rep_d:.1f}s, times scaled x{k:.3f})" if abs(k - 1) > 0.01 else ""))
-    bm = g.get("beat_map") or []
-    vo = [(T(v.get("start_s", 0)), T(v.get("end_s", 0)), v.get("text", "")) for v in g.get("vo") or []]
-    ov = [(T(o.get("start_s", 0)), T(o.get("end_s", 0))) for o in g.get("overlays") or []]
-    hook = g.get("hook") or {}
-    print(f"HOOK DURATION:      {T(hook.get('ends_s', 0))}s")
+    real = a.duration or segs[-1][1]
+    print(f"duration: {real:.1f}s" + ("" if a.duration else " (end of the last spoken line; pass --duration for the real length)"))
+    print(f"HOOK DURATION:      {segs[0][1]:.1f}s (first spoken line: \"{segs[0][2]}\")")
     lines = []
-    for b in bm:
-        s, e = T(b.get("start_s", 0)), T(b.get("end_s", 0))
+    for s, e, t in segs:
         d = max(0.0, e - s)
-        words = 0.0
-        for vs, ve, txt in vo:
-            ol = max(0.0, min(e, ve) - max(s, vs))
-            if ve > vs and ol > 0:
-                words += len(txt.split()) * ol / (ve - vs)
-        wps = words / d if d else 0
-        lines.append(f"{s:.1f}–{e:.1f}s ({d:.1f}s, {100 * d / real:.0f}%) {b.get('beat', '?')} — {b.get('function', '')} [{wps:.1f} WPS]")
-    print("BEAT MAP:           " + ("\n                    ".join(lines) if lines else "(no beat_map in JSON)"))
-    step = 0.1
-    n = int(real / step)
-    v_t = o_t = only_o = none = 0
-    for i in range(n):
-        t = i * step + step / 2
-        inv = any(s <= t < e for s, e, _ in vo)
-        ino = any(s <= t < e for s, e in ov)
-        v_t += inv
-        o_t += ino
-        only_o += (ino and not inv)
-        none += (not inv and not ino)
-    pct = lambda x: 100 * x / n if n else 0  # noqa: E731
-    print(f"VO/TEXT SPLIT:      VO {pct(v_t):.0f}% · on-screen text only {pct(only_o):.0f}% · music-only {pct(none):.0f}% "
-          f"(text on screen {pct(o_t):.0f}% of the time, overlapping VO {pct(o_t - only_o):.0f}%)")
-    vo_words = sum(len(t.split()) for _, _, t in vo)
-    vo_secs = sum(max(0, e - s) for s, e, _ in vo)
-    print(f"PACING:             {vo_words / vo_secs if vo_secs else 0:.2f} WPS average over {vo_secs:.1f}s of VO "
-          f"({vo_words} words); per beat in BEAT MAP")
-    print(f"FORMAT (Gemini):    {g.get('format', '')}")
-    print(f"FRAMEWORK (Gemini): {g.get('framework', '')}")
-    print(f"MUSIC/SFX (Gemini): {g.get('music', '')}")
-    cta = g.get("cta") or {}
-    print(f"CTA (Gemini):       \"{cta.get('text', '')}\" at {T(cta.get('start_s', 0))}s; urgency: {cta.get('urgency', '')}")
+        w = len(t.split())
+        lines.append(f"{s:.1f}–{e:.1f}s ({d:.1f}s, {100 * d / real:.0f}%) [{(w / d) if d else 0:.1f} WPS] \"{t}\"")
+    print("TIMED LINES:        " + "\n                    ".join(lines))
+    print("                    (group these lines into beats and name each beat's function: hook, problem, ...)")
+    speech = sum(max(0.0, e - s) for s, e, _ in segs)
+    gaps = [(segs[i][1], segs[i + 1][0]) for i in range(len(segs) - 1) if segs[i + 1][0] - segs[i][1] >= 1.0]
+    if segs[0][0] >= 1.0:
+        gaps.insert(0, (0.0, segs[0][0]))
+    if real - segs[-1][1] >= 1.0:
+        gaps.append((segs[-1][1], real))
+    print(f"VO/TEXT SPLIT:      VO {100 * speech / real:.0f}% of the length · no speech {100 * (real - speech) / real:.0f}% "
+          f"(on-screen text or music only; read the caption/cover for which)")
+    if gaps:
+        print("NO-SPEECH GAPS:     " + ", ".join(f"{s:.1f}–{e:.1f}s" for s, e in gaps))
+    words = sum(len(t.split()) for _, _, t in segs)
+    print(f"PACING:             {words / speech if speech else 0:.2f} WPS average over {speech:.1f}s of VO ({words} words); per line above")
     return 0
 
 
@@ -1337,8 +1312,8 @@ def main():
     i.add_argument("--fetch-images", metavar="DIR", nargs="?", const="",
                    help="download image URLs of non-video ads to DIR/<id>.<ext> (free; default PD/05_ads/competitor/images)")
     i.add_argument("--fetch-transcripts", action="store_true", help="save transcript_url text (free)")
-    b = sp.add_parser("beats", help="1.8 beat map / VO-text split / WPS from a video_gemini.py JSON")
-    b.add_argument("gemini")
+    b = sp.add_parser("beats", help="1.8 timed lines / hook duration / VO split / WPS from a transcript")
+    b.add_argument("transcript")
     b.add_argument("--duration", type=float, help="real duration in seconds (ffprobe)")
     argv = sys.argv[1:]
     if argv and argv[0] not in ("check", "inventory", "beats", "-h", "--help"):

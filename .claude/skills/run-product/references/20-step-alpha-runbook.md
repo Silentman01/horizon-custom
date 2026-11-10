@@ -39,7 +39,7 @@ transform (spec lines 1–26 and 794). Phase 1 raw-data gathering (capture, medi
   with all their IDs listed.
 - **Sub-agents return documents as text** when file writes are refused; the coordinator saves them (16 §1).
 - **Credits:** check balances before paid calls, stay inside any credit freeze, report spend (18 §2).
-  Brandsearch `transcribe_ad` / `download_ad` 1 credit each; `video_gemini.py` ≈ $0.005 per 30 s ad.
+  Brandsearch `transcribe_ad` / `download_ad` 1 credit each. Gemini is not used in Step Alpha (operator 2026-11-10): video frameworks come from the transcript.
 
 ## 2. Folder and files
 ```
@@ -47,7 +47,6 @@ PD/00_alpha/
   ALPHA_DOSSIER.md            final dossier (α5), from templates/ALPHA_DOSSIER.md
   ad_inventory.json           every ad (α0): header + one record per ad
   transcripts/<ad_id>.txt     one per video ad (α0)
-  gemini/<ad_id>.json         video_gemini.py analysis per video ad (α1.2; 14 reuses it)
   analysis1/  1.1_customer.md · 1.2_ad_inventory.md · 1.2_video_ads.md · 1.2_static_ads.md ·
               1.2_patterns.md · 1.3_congruence.md · 1.4_angle_cards.md
   analysis2/  2.1_hidden_angles.md · 2.3_synthesis.md
@@ -61,8 +60,7 @@ PD/05_ads/competitor/videos/<ad_id>.mp4 · images/<ad_id>.<ext>   ad media (free
 - `ads[]`: `id` (Brandsearch), `short_id` (M1.. video, S1.. static/carousel), `platform`, `format` (video / static /
   carousel), `status`, `start`, `end`, `run_days`, `reach_rank`, `duplicate_count`, `page`, `landing_url`, `caption`
   {primary_text, headline, description, cta}, `video_url`, `image_url`, `transcript_url`, `dashboard_url`,
-  `video_file`, `image_file`, `transcript` (`transcripts/<id>.txt`, video only), `gemini` (`gemini/<id>.json`, video
-  only), `angle`, `avatar` (empty until α1.2), `notes`.
+  `video_file`, `image_file`, `transcript` (`transcripts/<id>.txt`, video only), `angle`, `avatar` (empty until α1.2), `notes`.
 - `excluded[]` (other products, each with `reason`) and `review[]` (must be empty before α6).
 
 ## 3. Who does what
@@ -70,10 +68,10 @@ PD/05_ads/competitor/videos/<ad_id>.mp4 · images/<ad_id>.<ext>   ad media (free
 |---|---|---|
 | Coordinator | session model | α0 (all Brandsearch calls, inventory, transcripts), relays tags between leads, GATE α, α5 merge, α6 gate, BRIEF.md |
 | Lead A (Store) | Opus, low | α1.1 customer intelligence; α1.3 funnel congruence (page side first, every ad path once the 1.2 tags arrive) |
-| Lead B (Growth) | Opus, low | α1.2 advertising intelligence (runs the Gemini worker and the analyst batches); α1.4 angle cards; α2 hidden angles; α3 prompt; α4 synthesis (via `SendMessage`, else a fresh Opus low agent) incl. Part 2 items |
+| Lead B (Growth) | Opus, low | α1.2 advertising intelligence (runs the analyst batches); α1.4 angle cards; α2 hidden angles; α3 prompt; α4 synthesis (via `SendMessage`, else a fresh Opus low agent) incl. Part 2 items |
 | α-analyst | Sonnet | 1.2 video + static blocks for every ad, ~15 ads per batch, batches in parallel |
 | α-angles | Sonnet | 2.1 angle explosion |
-| Haiku worker | Haiku | `video_gemini.py` runs, ffprobe durations, `alpha_gate.py beats` per video |
+| Haiku worker | Haiku | ffprobe durations and `alpha_gate.py beats` per video transcript |
 
 Briefs: [subagent-briefs §Step Alpha briefs](subagent-briefs.md#step-alpha-briefs).
 Order: [16 §1](16-orchestration.md#1-orchestration-model-coordinator--2-opus-leads--cheap-workers) ·
@@ -81,7 +79,7 @@ Order: [16 §1](16-orchestration.md#1-orchestration-model-coordinator--2-opus-le
 
 ```
 α0 coordinator ─► Lead A: 1.1 ─────────────┐                 ┌─► 1.3 every path ─┐
-                └► Lead B: Gemini + α-analyst ─► 1.2 + tags ─┘ (coordinator relays) ├─► Lead B 1.4 ─► α2 ─► α3
+                └► Lead B: α-analyst ─────────► 1.2 + tags ─┘ (coordinator relays) ├─► Lead B 1.4 ─► α2 ─► α3
                                                                                       │
 GATE α (operator, ChatGPT) ─► α4 Lead B ─► α5 coordinator ─► α6 gate ─► Phase 2 branding
 ```
@@ -139,21 +137,19 @@ Lead A returns 1.1 first; the coordinator saves it and sends the AV list to Lead
 
 ### 5.2 — 1.2 Advertising intelligence (Lead B → `analysis1/1.2_*.md`)
 Spec: 1.2 lines 195–291.
-1. **Gemini pass** (Haiku worker): `python -I <skill>/scripts/video_gemini.py "PD/05_ads/competitor/videos" --out-dir
-   "PD/00_alpha/gemini" --competitor "<Competitor>"` → `gemini/<ad_id>.json` for every video ad (framework, beat map,
-   hook, CTA, scenes, VO, overlays, music). Then per video: real length
-   `ffprobe -v error -show_entries format=duration -of csv=p=0 <ad_id>.mp4`, and
-   `python -I <skill>/scripts/alpha_gate.py beats "PD/00_alpha/gemini/<ad_id>.json" --duration <s>` prints BEAT MAP
-   (timestamp, duration, % of total, function), HOOK DURATION, VO/TEXT SPLIT and PACING (WPS average + per beat),
-   rescaled to the real length (Gemini lengths can be ~1.5x off, 14 §3).
+1. **Transcript pass** (Haiku worker): frameworks are read from the transcript; Gemini is not used in Step Alpha
+   (operator 2026-11-10). Per video: real length `ffprobe -v error -show_entries format=duration -of csv=p=0
+   <ad_id>.mp4` (when the file exists), then `python -I <skill>/scripts/alpha_gate.py beats
+   "PD/00_alpha/transcripts/<ad_id>.txt" --duration <s>`: every timed line with timestamp, duration, % of total and
+   WPS, HOOK DURATION, VO/TEXT SPLIT (speech vs no-speech gaps) and PACING. The analyst groups the lines into beats.
 2. **Analyst batches** (α-analyst, Sonnet, ~15 ads each, in parallel until every ad is covered). Inputs per ad: its
-   inventory record, the media file, the caption, and for video the transcript + Gemini JSON + `beats` output.
+   inventory record, the media file, the caption, and for video the transcript + its `beats` output.
    - **Video ad analysis** ([VIDEO AD ANALYSIS](19-step-alpha.md#video-ad-analysis), lines 214–245), one block per
      video, `AD ID` first, then all 13 spec fields: FRAMEWORK (named skeleton or a new one), BEAT MAP, FORMAT (from the
      spec's 19-item list), HOOK (exact words, type, open loop), HOOK DURATION, ANGLE, AVATAR, EMOTIONAL ARC (beat by
      beat), RETENTION MECHANICS (open loops, pattern interrupts, escalation, info drips, cliffhangers), VO/TEXT SPLIT,
-     PACING, MUSIC/SFX (genre, energy curve, key moments), CTA (exact text, timestamp, urgency). Words come from the
-     transcript (verbatim); visuals and timing from Gemini.
+     PACING, MUSIC/SFX (genre, energy curve, key moments), CTA (exact text, timestamp, urgency). Words, beats and timing come from the
+     transcript (verbatim); FORMAT and what is on screen from the cover/caption (and the video file when there is one).
    - **Static / text ad analysis** ([STATIC AD / TEXT AD ANALYSIS](19-step-alpha.md#static-ad--text-ad-analysis),
      lines 247–271), one block per non-video ad (static, carousel, text), `AD ID` first, then all 11 spec fields: PRIMARY TEXT,
      HEADLINE, DESCRIPTION (exact, from `caption`), HOOK (first line, type, open loop), ANGLE, AVATAR, EMOTIONAL TRIGGER,
@@ -302,7 +298,7 @@ Spec: QUALITY GATE lines 766–794.
 | 09 Ad copy | 3.1 cards, 3.3 hooks, 3.5 language, objection phrases; one copy set per angle |
 | 11 Home | 3.2 avatars, 3.1 angle cards |
 | 13 Copy chief | whole dossier; awareness + sophistication per avatar (1.1) set the copy approach |
-| 14 Video ads | 3.4 frameworks, 1.8 beat maps, 3.1 cards, 3.3 hooks; `gemini/` JSONs reused |
+| 14 Video ads | 3.4 frameworks, 1.8 beat maps, 3.1 cards, 3.3 hooks; transcripts |
 
 ## 13. Coverage table (spec → step → file → check)
 "gate N" = `alpha_gate.py` checkbox N. "MANUAL" = coordinator read-through (α6 step 2).
@@ -320,7 +316,7 @@ Spec: QUALITY GATE lines 766–794.
 | 1.1 UMS/UMP: 5 fields, Schwartz technique (171–193) | §5.1 | → 1.6 | gate 6 (5 fields, names a technique); MANUAL |
 | 1.2 Complete footprint, all platforms (200–202) | §4, tools-brandsearch | `raw/footprint/`, `ad_inventory.json` | gate 7 (no review rows, expected_total, gaps → MANUAL) |
 | 1.2 Ad inventory table, 7 columns (204–212) | §5.2 step 3 | `1.2_ad_inventory.md` → 1.7 | gate 7 (columns, rows = records, every ad, no empty cell) |
-| 1.2 Video ad analysis: transcript + 13 fields (214–245) | §4 step 4, §5.2 steps 1–2 | `transcripts/`, `gemini/`, `1.2_video_ads.md` → 1.8, 3.4 | gate 8 (transcript + Gemini file + block per video, all fields, beat map timestamps and %, WPS number; FORMAT off the spec list → WARN), gate 16 (3.4 covers every video) |
+| 1.2 Video ad analysis: transcript + 13 fields (214–245) | §4 step 4, §5.2 steps 1–2 | `transcripts/`, `1.2_video_ads.md` → 1.8, 3.4 | gate 8 (transcript + block per video, all fields, beat map timestamps and %, WPS number; FORMAT off the spec list → WARN), gate 16 (3.4 covers every video) |
 | 1.2 Static / text ad analysis: 11 fields (247–271) | §5.2 step 2 | `1.2_static_ads.md` → 1.9 | gate 9 (block per non-video ad, all fields; trigger / proof type / image format off the spec lists → WARN); MANUAL exact copy |
 | 1.2 Cross-ad pattern mining: 10 fields (273–291) | §5.2 step 4 | `1.2_patterns.md` → 1.9 | gate 10 (one block, 10 fields, numbers in velocity/volume) |
 | 1.3 Map every ad → page path: 8 fields (309–331) | §5.3 | `1.3_congruence.md` → 1.10 | gate 11 (block per ad, all fields, HIGH/MED/LOW) |
@@ -347,7 +343,7 @@ Spec: QUALITY GATE lines 766–794.
 | Gate □ 5 — 6 trigger types (777) | §5.1 | 1.5 | gate 5 |
 | Gate □ 6 — mechanism extracted + analyzed (778) | §5.1 | 1.6 | gate 6 + MANUAL |
 | Gate □ 7 — complete inventory (779) | §4, §5.2 | 1.7, `ad_inventory.json` | gate 7 + MANUAL |
-| Gate □ 8 — every video transcribed + framework (780) | §4, §5.2 | 1.8, `transcripts/`, `gemini/` | gate 8 + MANUAL |
+| Gate □ 8 — every video transcribed + framework (780) | §4, §5.2 | 1.8, `transcripts/` | gate 8 + MANUAL |
 | Gate □ 9 — every text ad decoded (781) | §5.2 | 1.9 | gate 9 + MANUAL |
 | Gate □ 10 — cross-ad synthesis (782) | §5.2 | 1.9 | gate 10 + MANUAL |
 | Gate □ 11 — congruence for every path (783) | §5.3 | 1.10 | gate 11 + MANUAL |

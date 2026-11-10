@@ -28,7 +28,7 @@ Parse the prompt; ask only for what blocks progress.
 | `SHOPIFY_ADMIN_TOKEN` | to push policies | custom app Admin API token with `write_legal_policies`; without it policies are delivered as files + to-do |
 | Brandsearch MCP | for Step Alpha + ads | tools `mcp__claude_ai_Brandsearch__*`: complete ad footprint + a transcript of every video ad (Phase 1.3); if missing, tell the operator to connect it or to provide the ads — Step Alpha waits for the footprint, capture continues |
 | ChatGPT market research | yes (GATE α) | the operator runs our tailored prompt (`00_alpha/chatgpt/CHATGPT_PROMPT.md`) in ChatGPT and pastes the full result back → `00_alpha/chatgpt/CHATGPT_RAW.md` |
-| `ARGOLINK_API_KEY` | for Step Alpha 1.2 | env or `D:/Ecom/Products/.secrets/argolink.env` (`video_gemini.py`, video beat maps) |
+| `ARGOLINK_API_KEY` | for video remakes (14) and ArgoLink images | env or `D:/Ecom/Products/.secrets/argolink.env` (`video_gemini.py`, `argolink_jobs.py`) |
 
 One prompt runs everything. Nothing is built until Step Alpha passes its quality gate (00 §17). Planned stops (gates), in run order:
 1. **GATE α — ChatGPT market research** (always, every run that builds anything). After α3, give the operator ONE ready-to-paste prompt block (the full `CHATGPT_PROMPT.md`, nothing to edit) with one line: "run this in ChatGPT and paste the full result back". Then stop: the run waits. When the result arrives, save it verbatim to `00_alpha/chatgpt/CHATGPT_RAW.md` and continue with α4–α6. No downstream step starts while waiting ("After ChatGPT data returns" is a hard dependency). Phase 1 raw-data gathering may still finish.
