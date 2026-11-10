@@ -24,12 +24,13 @@ Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 
 ## 1. When this runs, inputs, outputs
 
-**When:** after Phase 1 capture has landed (`02_competitor/page/capture.md`, `p.json`, screenshots). If capture hasn't run yet, run `scripts/capture_page.py` yourself first; it takes under a minute. Never brand from memory or from the URL alone, because the palette, price and positioning must come from the real page.
+**When:** after Phase 1 capture has landed (`02_competitor/page/capture.md`, `p.json`, screenshots) **and the Step Alpha gate has passed** (`00_alpha/ALPHA_DOSSIER.md`, gate PASS in BRIEF.md). Branding never starts before that. If capture hasn't run yet, run `scripts/capture_page.py` yourself first; it takes under a minute. Never brand from memory or from the URL alone, because the palette, price and positioning must come from the real page.
 
 **Inputs**
 - `COMPETITOR_URL` (one or more; the first is the page being cloned, "#1")
 - `MARKET` (country, language, currency), from BRIEF.md. Ask if it's missing. Names and titles depend on it.
 - `PRODUCT_DIR/02_competitor/page/`: `p.json`, `p.html`, `capture.json`, `capture.md`, desktop screenshot chunks
+- `PRODUCT_DIR/00_alpha/ALPHA_DOSSIER.md`: the sections below
 
 **Outputs**
 - `PRODUCT_DIR/01_branding/BRANDING.md` (built from `templates/BRANDING.md`)
@@ -44,7 +45,18 @@ Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 | "go all the way" with no brand given | Still stop at the gate. It's the one planned stop in the whole run. |
 | Operator proposes their own name | Accept it. Check silently for a clash with a big existing brand or a bad meaning in the market language, and flag only a real problem, in one line. |
 
-**What may run before the gate:** capture, media download, Brandsearch pulls and ranking, and the SECTION SPEC (it describes the competitor and doesn't need our brand). **What must wait:** anything that prints our brand: copy, images, ads, theme edits, the git branch.
+**What may run before the branding gate:** Phase 1 (capture, media download, Brandsearch pulls and ranking) and Step Alpha (it must have passed already). **What must wait for branding approval:** everything in Phase 3, the SECTION SPEC (A1) included, plus copy, images, ads, theme edits and the git branch (operator 2026-11-10).
+
+### Inputs from Step Alpha
+Read these dossier sections before Step 3. They change the **name and the tone**, nothing else:
+| Dossier section | What it changes |
+|---|---|
+| 3.2 Avatar Cards | who says the name: run the possessive test in the primary avatar's voice (age, register, how they talk). A name that avatar would not say naturally fails. |
+| 1.5 Emotional Landscape | the tone: the name's sound and the positioning line fit the dominant triggers (fear and frustration → calm, trustworthy; identity and aspiration → confident, a little bold). |
+| 1.6 Unique Mechanism | a possible name root (the way *nox* → Noxis echoes night), never a description of the mechanism. If the competitor brands its mechanism, note the name our copy will use. |
+| 3.5 Customer Language Bank | the community's own words: avoid names that clash with its slang or sound like a word it uses for the problem; roots may come from its positive words. |
+
+Palette, fonts and title stay 1:1 (Steps 4–6). Alpha does not change them. Record what you used in BRANDING.md § Alpha inputs used.
 
 ---
 
@@ -77,6 +89,7 @@ So the defaults are:
 2. Read `p.json` (title, vendor, handle, variants, `price`, `compare_at_price`, `price_currency`, images).
 3. Open the first two desktop screenshot chunks (header + buy box) and the chunks that hold the comparison table and footer. These are where the brand colors show.
 4. Read `MARKET` from BRIEF.md.
+5. Read the dossier sections listed in §1 (Inputs from Step Alpha).
 
 **Output:** nothing saved yet. You know what the page looks like and what it sells for.
 **Done when:** you can state the competitor's name, title, price, main CTA color and heading font without guessing.
@@ -101,7 +114,7 @@ So the defaults are:
 5. **Typography:** `--font-heading-family` / `--font-body-family` CSS vars, `@font-face`, Google Fonts links. Note the weight used for the title (usually 700).
 6. **Shape:** `--buttons-radius`, `--media-radius`, `--text-boxes-radius`, card radius. For example, `40px` buttons means pill shaped.
 7. **Visual tone:** 3–5 words ("clean white, amber accents, photo-led, no gradients").
-8. **Positioning angle:** one sentence answering these questions: *Who is the customer? What pain do they live with? What do they blame? What does the brand blame instead? Is the tone hype or anti-hype?* Read the title, subtitle, bullets, the long-form image-with-text sections and the FAQ, which together show the angle most clearly.
+8. **Positioning angle:** one sentence answering these questions: *Who is the customer? What pain do they live with? What do they blame? What does the brand blame instead? Is the tone hype or anti-hype?* Read the title, subtitle, bullets, the long-form image-with-text sections and the FAQ, which together show the angle most clearly. Check it against the dossier: the primary avatar (3.2) and the highest-confidence angle card (3.1, its ENEMY and PROMISE).
 
 **Output:** the snapshot table (PROMPT_1-1 format) plus a details block (tiers, verified palette with roles, fonts, radii, tone, positioning, apps seen).
 
@@ -137,6 +150,7 @@ Plaims     │ $24.95 / 34.95 / 44.95 │ #FFB800 #000000 #FFFFFF  │ Honest an
    - [ ] Not derivative of the competitor (no Plaimz, Glaims, Claims) and not an existing big brand in any category (Lumix, Optiq-style optical brands).
    - [ ] No bad meaning or slang in the market language. Not a negative symptom word for the category (for example "halo" is a glare symptom, so it's weak for glare glasses).
    - [ ] Credible in the category, so it could be printed on the box and the packshot.
+   - [ ] Fits the Alpha inputs: the primary avatar (3.2) would say it, its sound fits the dominant triggers (1.5), and it clashes with nothing in the language bank (3.5).
    - [ ] **Domain availability not checked and not mentioned.**
 4. **Rank and present 7–10.** Star the top 3. Give each name one line of rationale **that includes the possessive sentence**.
 5. Keep a **Rejected** list in BRANDING.md across rounds so no name comes back.
@@ -228,11 +242,12 @@ Brand names (★ = my picks)
 Palette (1:1 with <competitor>): #FFB800 CTA/bars · #000000 text · #FFFFFF bg · #0E1B4D deep accent · #E5E5E5 lines
 Fonts: Poppins 700 / Inter · pill buttons (40px)
 Title (1:1): Noxis Polarized Headlight Glasses
+Alpha fit: AV1 <avatar name> · triggers <top 2> → tone <3 words>
 
 Pick a name (or say "more names"). Palette and title are 1:1 for the test; say if you want variations.
 ```
 
-3. **STOP.** Don't create the branch, edit theme files, write copy or generate images. You may keep running the brand-independent streams (capture, media, Brandsearch, ranking, SECTION SPEC).
+3. **STOP.** Don't create the branch, edit theme files, write copy or generate images. You may keep running Phase 1 data work only; the SECTION SPEC waits for approval.
 
 **Done when:** BRANDING.md is saved, the message is sent, and you're waiting.
 
@@ -267,7 +282,8 @@ Pick a name (or say "more names"). Palette and title are 1:1 for the test; say i
 2. **BRANDING.md:** set the status to VALIDATED with the date, and fill the Decisions section.
 3. **Rename PRODUCT_DIR** `_<competitor-slug>` → `BRAND`. Actually move it (don't copy), then verify the old folder is gone.
 4. **Git branch** (details in `01-intake-and-setup.md` §git and `tools-shopify-cli-and-git.md`): working tree clean → `git checkout main` → `git pull` → `git checkout -b <BRAND_SLUG>`. The operator's instruction was: "make a new branch named after brand name and work on that new branch". Never branch from another brand's branch.
-5. Unblock the Phase 3 streams (copy, build, images, ads).
+5. **Logo set:** next to the logo and the white logo (`01_branding/logo/<slug>-logo(.svg/.png)`, `<slug>-logo-white(...)`, transparent PNG), make the square social logos and the favicon: `python -I scripts/brand_icons.py <logo.png> <logo-white.png> <brand_hex> 01_branding/logo <slug>` → `<slug>-social-square.png` (white logo on the brand color, 1080×1080), `<slug>-social-square-light.png` (dark on white), `<slug>-favicon.png` (512, first letter of the wordmark on a rounded brand-color square) + `.ico`. Check them on a contact sheet; use `--glyph N` if the first glyph is not a clean letter. The operator uploads the favicon in Theme settings > Logo and favicon and the square logo on the social accounts.
+6. Unblock the Phase 3 streams (copy, build, images, ads).
 
 **Done when:** BRIEF.md has every decision, the folder carries the brand name, and `git branch --show-current` prints `BRAND_SLUG`.
 
@@ -276,7 +292,7 @@ Pick a name (or say "more names"). Palette and title are 1:1 for the test; say i
 ## 12. Delegation (optional brainstorm agent)
 
 Usually the master does branding alone, because it's short and taste matters. Use a brainstorm agent only if a round fails twice:
-- Give it the snapshot, the checklist from Step 3, the Rejected list, `MARKET`, and the operator's exact words.
+- Give it the snapshot, the checklist from Step 3, the Rejected list, `MARKET`, the operator's exact words, and the dossier sections from §1 (3.2, 1.5, 1.6, 3.5).
 - Ask for 30 candidates, each marked pass or fail per checklist item, **returned as text** (sub-agents may be blocked from writing .md files).
 - The master picks the final 7–10 and the stars.
 
@@ -342,8 +358,10 @@ Details:
 - [ ] Snapshot built from `p.json` + capture. Prices come from JSON, not the screenshot.
 - [ ] Every palette hex was seen on a screenshot and has a role and a theme target. App and payment colors are excluded.
 - [ ] Fonts (with Shopify handles) and radii recorded.
+- [ ] Step Alpha gate passed before branding started; BRANDING.md § Alpha inputs used is filled (3.2, 1.5, 1.6, 3.5).
 - [ ] 7–10 names pass the checklist, the top 3 are starred, and each has a possessive sentence. Domains were not considered.
 - [ ] Title = the competitor's title with the brand swapped. The handle mirrors theirs.
 - [ ] Upgrade variations appear only if they were asked for.
 - [ ] BRANDING.md saved. Gate message sent. **Stopped** (unless the prompt fixed the brand).
 - [ ] After approval: BRIEF.md updated, PRODUCT_DIR renamed (moved), branch `BRAND_SLUG` created from clean `main`.
+- [ ] Logo set complete: logo, white logo, square social logos (brand color + light), favicon PNG + ICO.

@@ -3,7 +3,9 @@
 Goal: every non-gallery visual on the product page (testimonial photos, lifestyle/section images, animated GIFs, videos) exists for our brand, is light enough for the theme, and is wired into the section settings — so the page looks complete in the first preview.
 
 Read first: `00-operator-rules.md` §1, §5, §10; `tools-kie.md` (runner, PEOPLE-SWAP / CONCEPT-REMAKE / EDITORIAL patterns).
-Inputs come from the SECTION_SPEC **IMAGE MAP** (conversion-architect) and the raw media downloaded in Phase 1.
+Inputs come from the SECTION_SPEC **IMAGE MAP** (conversion-architect) and the raw media downloaded in Phase 1. Starts only after the Step Alpha gate and the branding gate.
+
+**Inputs from Step Alpha:** 3.2 Avatar Cards and 3.1 Angle Cards, through SECTION_SPEC's ANGLE ARCHITECTURE and each slot's Angle / avatar, decide **who is shown and what the image says**: every testimonial persona and every person in a section image is the avatar of the slot's angle (age, gender, setting, life situation); problem scenes show that avatar's pain or trigger event (1.2 Pain Points, 1.1 TRIGGER EVENT); testimonial text is modelled on testimony-ready phrases (3.5). A gap angle (2.4) given a testimonial or section slot gets its own avatar there.
 
 ## Contents
 1. Inputs, outputs, budget
@@ -29,6 +31,7 @@ Inputs come from the SECTION_SPEC **IMAGE MAP** (conversion-architect) and the r
 | Competitor media URLs | `02_competitor/page/capture.json` |
 | Raw media | `02_competitor/media/` (from the media agent) |
 | Testimonial copy (names, text) | copy deck from the copywriter |
+| Angle / avatar per slot | SECTION_SPEC § ANGLE ARCHITECTURE + IMAGE MAP; dossier 3.1, 3.2 (`00_alpha/ALPHA_DOSSIER.md`) |
 | Packshot | `03_product-images/<slug>-packshot.png` |
 
 | Output | Path |
@@ -47,10 +50,10 @@ Budget: 10 credits per remade photo at 2K (Noxis: 3 testimonials = 30). GIF/vide
 **Purpose:** one row per visual slot so nothing is forgotten and every slot gets the right treatment.
 **Do:** turn the IMAGE MAP into this table:
 
-| Slot | Section / block | Ratio | Competitor source | Kind | Treatment | Our file |
-|---|---|---|---|---|---|---|
-| T1 | testimonials / card 1 | 1:1 | `plaims-review-Dennis.png` | testimonial photo | PEOPLE-SWAP remake | `noxis-review-1.jpg` |
-| S1 | image-with-text 1 | 1:1 | `iphone-camera-no-text.gif` | GIF | raw → WebP | `noxis-night-road.webp` |
+| Slot | Section / block | Ratio | Competitor source | Kind | Angle / avatar | Treatment | Our file |
+|---|---|---|---|---|---|---|---|
+| T1 | testimonials / card 1 | 1:1 | `plaims-review-Dennis.png` | testimonial photo | V1 · AV1 | PEOPLE-SWAP remake | `noxis-review-1.jpg` |
+| S1 | image-with-text 1 | 1:1 | `iphone-camera-no-text.gif` | GIF | V1 · AV1 | raw → WebP | `noxis-night-road.webp` |
 
 Treatment rules:
 | Kind | Treatment | Why |
@@ -97,7 +100,7 @@ Check file sizes: a real animated GIF is usually several MB; a 50–200 KB `.gif
 ## 5. Step 4 — Testimonial photos: new people, copy must match
 **Purpose:** UGC-style proof photos with the same framing and emotion as the competitor's, of people who don't exist — and whose photo agrees with the words next to it.
 **Do:**
-1. For each testimonial slot, read the competitor photo **and** our testimonial text (copy deck). Decide the person/people from the copy (gender, age, relationship, count, setting); if the copy isn't written yet, describe from the competitor photo and hand the description to the copywriter.
+1. For each testimonial slot, read the competitor photo, the slot's avatar card (3.2) **and** our testimonial text (copy deck). Decide the person/people from the avatar and the copy (gender, age, relationship, count, setting); if the copy isn't written yet, describe from the avatar card and the competitor photo and hand the description to the copywriter.
 2. Fill PEOPLE-SWAP (§tools-kie 11): references `[competitor photo, packshot]`; describe shot type, each person (age, gender, hair, facial hair, clothing, expression), setting, light; "different people from the reference"; "Natural, unpolished, real customer photo look. No text, no logos." Ratio = slot ratio (usually 1:1), 2K, names `<slug>-review-N`.
 3. Run into `04_page-images/`, Read each result.
 4. **Copy-match check** for every photo vs its text: gender, age bracket, relationship words (mom/dad, husband/wife), number of people, setting (car/home/day/night), and **every pronoun in the full text** (he/she/him/her/his). Fix the copy if only words disagree (free); regenerate the photo if the photo contradicts the story.
@@ -112,6 +115,7 @@ Check file sizes: a real animated GIF is usually several MB; a 50–200 KB `.gif
 **Purpose:** fill image-with-text and banner slots with on-concept visuals of our product.
 **Do:**
 - Image with a competitor reference → CONCEPT-REMAKE (refs `[competitor image, packshot]`), "no text" unless the original has on-image text (then quote it verbatim, claims at full strength).
+- People and scene follow the slot's angle card and avatar (3.1, 3.2): a problem scene shows that avatar's pain or trigger event, a lifestyle scene shows that avatar's dream outcome (1.3).
 - Slot with no reference (or a stock photo) → EDITORIAL (t2i, or i2i with the packshot when the product is visible).
 - Ratio = the slot's ratio from the IMAGE MAP: 1:1 / 3:2 / 16:9 / 9:16 at 2K; 4:5 or 5:4 at 1K (2K doesn't support them).
 - Names by role: `<slug>-problem.png`, `<slug>-howto-1.png`, `<slug>-lifestyle-couple.png`.
@@ -154,7 +158,7 @@ Check file sizes: a real animated GIF is usually several MB; a 50–200 KB `.gif
 **Pitfalls:** editing the live template that receives ad traffic (operator rule 11 — build `product.<slug>-v2`); forgetting to commit the asset files with the template; GIF in `assets/` instead of the WebP.
 
 ## 10. Step 9 — Review
-**Do:** `python -I "<SKILL>/scripts/contact_sheet.py" "<PRODUCT_DIR>/04_page-images/*.png" --out "<PRODUCT_DIR>/04_page-images/_sheet.jpg"` and a competitor-vs-ours pair sheet; Read both. Checklist: same framing/emotion as the competitor; different faces; product matches the packshot (no print on it); no text or logos; copy-match passed; theme files within size targets. Fix with KEEP-EDIT (small element) or regenerate (wrong person/framing); move old versions to `04_page-images/superseded/<reason>/` first.
+**Do:** `python -I "<SKILL>/scripts/contact_sheet.py" "<PRODUCT_DIR>/04_page-images/*.png" --out "<PRODUCT_DIR>/04_page-images/_sheet.jpg"` and a competitor-vs-ours pair sheet; Read both. Checklist: same framing/emotion as the competitor; different faces; people match the slot's avatar card; product matches the packshot (no print on it); no text or logos; copy-match passed; theme files within size targets. Fix with KEEP-EDIT (small element) or regenerate (wrong person/framing); move old versions to `04_page-images/archive/v<N>_<reason>/` first.
 **Done when:** the checklist passes and the master has the slot → file mapping and credits spent.
 
 ## 11. Optional — Editorial photos for advertorial/listicle pages
@@ -179,4 +183,4 @@ driver's seat at night, a different man in his late 50s with a grey beard and a 
 and the black fit-over amber night driving glasses, slight smile, rainy windshield and street lights behind. Natural,
 unpolished, real customer photo look, square. No text, no logos.
 ```
-Job: `gpt-image-2-image-to-image`, 1:1, 2K, 10 credits each → 30 credits for the three.
+Job: `gpt-image-2-5-sunburst-image-to-image`, 1:1, 2K, 10 credits each → 30 credits for the three.

@@ -3,7 +3,9 @@
 Goal: a product gallery for our brand that sells exactly like the competitor's — same images in the same order, same main idea, layout logic and claims — showing our product, with **no logo**, perfect spelling, and a clean packshot that every later image and ad reuses.
 
 Read first: `00-operator-rules.md` §1 (claims) and §4 (product images), `tools-kie.md` (runner, pricing, prompt patterns).
-Runs after the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses the competitor media downloaded in Phase 1.
+Runs after the Step Alpha gate and the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses the competitor media downloaded in Phase 1.
+
+**Inputs from Step Alpha:** 3.2 Avatar Cards and 3.1 Angle Cards (through SECTION_SPEC's ANGLE ARCHITECTURE and the IMAGE MAP's Angle / avatar column) decide **what each gallery image says to whom and who is shown**: each kept image serves the angle card its slot is assigned; the people in it match that card's avatar (age, gender, setting, situation from DEMOGRAPHICS and TRIGGER EVENT); testimonial quotes are re-voiced from the testimony-ready phrases of 3.5. The first gallery image carries the above-the-fold angle. Claims and Mode A on-image text stay verbatim (Step 4): Alpha changes the people and the ours-to-write text, never a claim.
 
 ## Contents
 1. Inputs, outputs, budget
@@ -31,6 +33,7 @@ Runs after the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses 
 | Competitor gallery URLs (in order) | `02_competitor/page/capture.json` (gallery list) or `p.json` → `product.images[]` by `position` |
 | Brand, palette hex, market language, mode | `BRIEF.md`, `01_branding/BRANDING.md` |
 | Page copy deck (ratings, counts, offer wording) | returned by the copywriter / SECTION_SPEC copy inventory |
+| Angle / avatar per gallery slot | SECTION_SPEC § ANGLE ARCHITECTURE + IMAGE MAP; dossier 3.1 Angle Cards, 3.2 Avatar Cards, 3.5 Customer Language Bank (`00_alpha/ALPHA_DOSSIER.md`) |
 | Kie key + balance | env `KIE_API_KEY`; balance check in tools-kie §6 |
 
 | Output | Path |
@@ -38,7 +41,7 @@ Runs after the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses 
 | Raw competitor gallery | `02_competitor/media/<comp>-product-NN.<ext>` (untouched) |
 | Packshot | `03_product-images/<slug>-packshot.png` (1:1 2K) |
 | Remakes | `03_product-images/<slug>-product-NN.png` (1:1 2K, NN = our gallery position) |
-| Superseded versions | `03_product-images/superseded/<reason>/` |
+| Replaced versions | `03_product-images/archive/v<N>_<reason>/` |
 | Review sheets | `03_product-images/_sheet*.jpg`, `03_product-images/_compare.jpg` |
 | Builders, job JSONs, logs | `PRODUCT_DIR/scratch/` |
 
@@ -67,8 +70,8 @@ Budget: `10 × (1 packshot + N kept images) × 1.2`. Noxis: 1 + 5 = 60 credits (
 **Purpose:** decide per image what to make, and capture every on-image string verbatim (claims live there).
 **Do:** fill this table (keep it in your return and in `scratch/gallery_plan.md` or the job builder comments):
 
-| # | File | Type | Main idea (one line) | On-image text (verbatim, reading order) | People | Decision |
-|---|---|---|---|---|---|---|
+| # | File | Type | Main idea (one line) | On-image text (verbatim, reading order) | People | Angle / avatar | Decision |
+|---|---|---|---|---|---|---|---|
 
 Types and how to treat them:
 
@@ -77,8 +80,8 @@ Types and how to treat them:
 | Hero infographic | product large + callout arrows, often an inset (before/after) and an offer banner (free case) | remake |
 | Benefits | big claim headline + product + 3–5 callout boxes with checks | remake |
 | Comparison | ours vs theirs / us vs cheap alternative, checks vs crosses, "VS" badge | remake (rival = generic product, labels "OURS/THEIRS" or as competitor wrote them) |
-| Lifestyle | person using the product + headline + checklist/benefit panel | remake with a **different person** (same age, gender, setting) |
-| Testimonial | quote + stars + customer photo + rating strip | remake: different person, quote re-voiced to fit them, rating/count as on our page |
+| Lifestyle | person using the product + headline + checklist/benefit panel | remake with a **different person** who matches the slot's avatar card (3.2: age, gender, setting) |
+| Testimonial | quote + stars + customer photo + rating strip | remake: different person of the slot's avatar, quote re-voiced from testimony-ready phrases (3.5) to fit them, rating/count as on our page |
 | Plain packshot / what's in the box / specs | product on white, contents, dimensions | remake from our packshot (specs/dimensions verbatim) |
 | Brand-specific | only makes sense for the competitor: anti-replica notice ("buy only from plaims.com"), "as seen on" with their name, founder story with their name, close-up of their branded packaging | **skip** (or remake without brand only if the idea still works for us) |
 
@@ -107,7 +110,7 @@ Types and how to treat them:
 **Purpose:** a clean, text-free product image is the product reference for every remake and every ad. Making it first lets the ad stream start in parallel and keeps the product identical everywhere.
 **Do:**
 1. Pick the reference: the competitor image (or supplier photo) with the largest, sharpest, least-occluded view of the product — usually the hero infographic or a plain product slide.
-2. Fill the PACKSHOT template (§13.1); job: `gpt-image-2-image-to-image`, 1:1, 2K, name `<slug>-packshot`. For a transparent PNG, use `"resolution": "1K", "background": "transparent"` instead (6 credits).
+2. Fill the PACKSHOT template (§13.1); job: `gpt-image-2-5-sunburst-image-to-image`, 1:1, 2K, name `<slug>-packshot`. For a transparent PNG, use `"resolution": "1K", "background": "transparent"` instead (6 credits).
 3. Run (Step 7 command) into `03_product-images/`, then Read the result at full size.
 4. Check: exact shape and parts (compare side by side with the reference), colors, **no text, print or logo on the product**, pure white background, soft shadow, nothing else in frame.
 5. If a print or artefact appears, KEEP-EDIT it away ("Remove any text or print from the frame; keep everything else identical") rather than regenerating.
@@ -145,7 +148,8 @@ python -I "<SKILL>/scripts/kie_jobs.py" "<PRODUCT_DIR>/scratch/jobs_gallery.json
    - every claim present **verbatim**; text structure the same; spelling correct (market language);
    - **no logo/wordmark**, no competitor name, no print on the product;
    - product matches the packshot (shape, colors, parts);
-   - people are different from the competitor's and match age/gender/setting;
+   - people are different from the competitor's and match the avatar card of the image's angle (age, gender, setting);
+   - the image says what its angle card needs (Angle / avatar column), with the first image on the above-the-fold angle;
    - text readable at gallery-thumbnail size (mobile).
 3. Write a fix list: `image | problem | fix type (KEEP-EDIT / NO-LOGO / regenerate) | exact new text`.
 **Done when:** the fix list is empty, or every item has a planned fix.
@@ -157,18 +161,18 @@ python -I "<SKILL>/scripts/kie_jobs.py" "<PRODUCT_DIR>/scratch/jobs_gallery.json
    - **Text-only** (wrong word, softened claim, typo, wrong number) → KEEP-EDIT (§13.3) on the existing image, listing every change as `Change "<old>" to "<new>"` and the lines to keep.
    - **Remove an element** (logo, wordmark, stray badge) → NO-LOGO (§13.4) with reflow so no empty gap remains.
    - **Composition or product wrong** → regenerate the remake job with a corrected DESC.
-2. Before running, move each current version to `03_product-images/superseded/<reason>/` (e.g. `softened/`, `with-logo/`, `round1/`) and point the edit job's `upload.files` at that moved copy — the runner overwrites same-name files in the output folder.
+2. Before running, move each current version to `03_product-images/archive/v<N>_<reason>/` (e.g. `v1_softened/`, `v1_with-logo/`) and point the edit job's `upload.files` at that moved copy — the runner overwrites same-name files in the output folder.
 3. Batch all fixes of one round into one job file (`scratch/jobs_gallery_fix1.json`), run into `03_product-images/`, re-sheet, re-check.
-**Output:** corrected images; superseded versions kept (nothing approved is ever lost).
+**Output:** corrected images; replaced versions kept once in archive/ (nothing approved is ever lost).
 **Done when:** the checklist passes on every image.
 **Pitfalls:** regenerating from scratch for a text fix (new composition = new problems); forgetting to move the old file first (it gets overwritten and the history is lost); editing an edited image many times — after 2 failed edits of the same image, regenerate.
 
 ## 11. Step 10 — Final list in gallery order
 **Do:** produce the final mapping (return it to the master; it goes into DELIVERY.md):
 
-| Gallery position | File | Source competitor image | What it shows | Status |
-|---|---|---|---|---|
-| 1 | `<slug>-product-01.png` | `<comp>-product-01` | hero infographic | final |
+| Gallery position | File | Source competitor image | What it shows | Angle / avatar | Status |
+|---|---|---|---|---|---|
+| 1 | `<slug>-product-01.png` | `<comp>-product-01` | hero infographic | V1 · AV1 | final |
 
 - Order = competitor order minus skipped images. In Mode A, don't add extra slides; the packshot goes into the gallery only if the competitor has a plain product slide at that position (it is mainly the reference for ads and bundles).
 - Shopify accepts the 2K PNGs as-is (≤20 MB). Uploading media to the product is the operator's job unless a product-upload tool is available — list it in the to-dos.
@@ -236,8 +240,8 @@ natural contact shadows, bright even studio lighting. No other objects, no text,
 Builder (`scratch/mk_gallery_jobs.py`) — the pattern used in the Noxis run, with the rules above applied:
 ```python
 import json, sys
-M = "G:/Ecom/Products/Noxis/02_competitor/media/"
-PACK = "G:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"
+M = "D:/Ecom/Products/Noxis/02_competitor/media/"
+PACK = "D:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"
 PRODUCT_DESC = ("black wraparound fit-over night driving glasses with amber/orange polarized lenses "
                 "and amber side shields")
 BASE = ("Reference image 1 shows the concept only: recreate it as a NEW, original image with the same main idea, "
@@ -254,7 +258,7 @@ IMAGES = [  # (our name, competitor file, DESC)
      "eyes\", bottom-left \"Full peripheral protection\", bottom-right \"Fits over normal glasses\"."),
     # … one tuple per kept image
 ]
-jobs = [{"name": n, "model": "gpt-image-2-image-to-image",
+jobs = [{"name": n, "model": "gpt-image-2-5-sunburst-image-to-image",
          "upload": {"field": "input_urls", "files": [M + ref, PACK]},
          "input": {"prompt": BASE + desc, "aspect_ratio": "1:1", "resolution": "2K"}} for n, ref, desc in IMAGES]
 json.dump(jobs, open(sys.argv[1], "w", encoding="utf8"), ensure_ascii=False, indent=1)
@@ -264,17 +268,17 @@ Run: `python -I scratch/mk_gallery_jobs.py scratch/jobs_gallery.json` then the r
 
 Resulting job entry:
 ```json
-{"name": "noxis-product-02", "model": "gpt-image-2-image-to-image",
- "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
-                                            "G:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
+{"name": "noxis-product-02", "model": "gpt-image-2-5-sunburst-image-to-image",
+ "upload": {"field": "input_urls", "files": ["D:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
+                                            "D:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
  "input": {"prompt": "Reference image 1 shows the concept only: … Square benefits infographic … \"Reduces Nighttime Glare By 85%\" …",
            "aspect_ratio": "1:1", "resolution": "2K"}}
 ```
 
 Fix-round job (KEEP-EDIT, uploading the moved copy):
 ```json
-{"name": "noxis-product-04", "model": "gpt-image-2-image-to-image",
- "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/03_product-images/superseded/softened/noxis-product-04.png"]},
+{"name": "noxis-product-04", "model": "gpt-image-2-5-sunburst-image-to-image",
+ "upload": {"field": "input_urls", "files": ["D:/Ecom/Products/Noxis/03_product-images/archive/v1_softened/noxis-product-04.png"]},
  "input": {"prompt": "Edit this exact image. Keep everything identical (layout, product, colors, photography, typography style) and change ONLY the text described below. All text crisp and correctly spelled. Change the headline to \"Drive Confidently At Night With Glare-Free Vision\", with \"Glare-Free\" highlighted in amber. Change the three check items in the bottom amber panel to \"Cataracts\", \"Astigmatism\", \"Fit Over Prescription Glasses\".",
            "aspect_ratio": "1:1", "resolution": "2K"}}
 ```
@@ -283,8 +287,8 @@ Fix-round job (KEEP-EDIT, uploading the moved copy):
 
 **What happened (130 credits for 5 images instead of 50):**
 1. Round 1 builder had a `BRAND` block ("write \"noxis\" in a bold, rounded lowercase sans-serif wordmark") and paraphrased the text: "Cuts Headlight Glare at Night" instead of "Reduces Nighttime Glare By 85%"; "Rainy nights / Sensitive eyes" instead of "Cataracts / Astigmatism"; "CHEAP TINTS" instead of "THEIRS".
-2. Operator: *"Never told you to do this, revert any claims adjustments you made. every claims we have are validated and running."* → KEEP-EDIT on 02/03/04 restoring the exact text (old files → `superseded/softened/`).
-3. Operator: *"remake product images, plaims don't have their logo on them and ours lose space because of logo you added"* → NO-LOGO edit with reflow on all 5 (old files → `superseded/with-logo/`).
+2. Operator: *"Never told you to do this, revert any claims adjustments you made. every claims we have are validated and running."* → KEEP-EDIT on 02/03/04 restoring the exact text (old files → `archive/v1_softened/`).
+3. Operator: *"remake product images, plaims don't have their logo on them and ours lose space because of logo you added"* → NO-LOGO edit with reflow on all 5 (old files → `archive/v1_with-logo/`).
 4. Final accepted set: logo-free, claims verbatim, product consistent; the competitor's anti-replica slide skipped.
 
 **Corrected first-time DESCs (use as the quality bar):**
