@@ -226,7 +226,7 @@ python -I ~/.claude/skills/run-product/scripts/rank_ads.py \
   days, same rules as Step 4): `id`, `short_id` (M1.. video, S1.. static/carousel), `platform`, `format`
   (video / static / carousel), `status`, `start`, `end`, `run_days`, `reach_rank`, `duplicate_count`, `page`,
   `landing_url`, `caption` {primary_text, headline, description, cta}, the media URLs (`video_url`, `image_url`,
-  `transcript_url`, `dashboard_url`), `video_file`, `image_file`, `transcript` and `gemini` (paths, video only),
+  `transcript_url`, `dashboard_url`), `video_file`, `image_file`, `transcript` (path, video only),
   plus `angle`, `avatar` and `notes` left empty. Step Alpha 1.2 fills `angle` and `avatar`.
 - Header (`header`): counts per platform, status and format, the `pagination.total` values, `gaps`,
   `pull_date`, `platforms_checked`, `expected_total`. Rows whose copy lacks the keyword land in `review`:
@@ -261,7 +261,7 @@ it reuses these files and the Alpha analysis instead of pulling again.
   urllib right away, because it expires.
 - `transcribe_ad(id)` returns the hook line, timed speech and language (1 credit; existing transcripts are
   instant).
-- `analyze_ad` is not used: Step Alpha 1.2 analyses every video ad (`video_gemini.py` + the transcript).
+- `analyze_ad` is not used: Step Alpha 1.2 analyses every video ad from its transcript.
 
 ## Costs (check `get_usage` / `get_ai_credits` before spending)
 | Action | Cost |

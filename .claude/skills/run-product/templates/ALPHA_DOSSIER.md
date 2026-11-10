@@ -143,7 +143,7 @@ SCHWARTZ TECHNIQUE:  [Mechanization / Concentration /
 
 ### 1.8 Video Frameworks (beat maps, formats, patterns)
 
-<!-- One block per video ad in the inventory. Inputs: transcripts/<ad_id>.txt + gemini/<ad_id>.json. BEAT MAP / VO/TEXT SPLIT / PACING / HOOK DURATION: `alpha_gate.py beats gemini/<ad_id>.json --duration <ffprobe s>` prints them. -->
+<!-- One block per video ad in the inventory. Inputs: transcripts/<ad_id>.txt (frameworks come from the transcript; no Gemini). Timed lines / VO/TEXT SPLIT / PACING / HOOK DURATION: `alpha_gate.py beats transcripts/<ad_id>.txt [--duration <ffprobe s>]` prints them. -->
 
 ```
 AD ID:              [M1]

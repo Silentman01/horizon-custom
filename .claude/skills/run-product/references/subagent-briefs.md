@@ -110,10 +110,9 @@ Inputs: <PRODUCT_DIR>\00_alpha\ad_inventory.json (EVERY ad of the competitor; ID
 00_alpha\transcripts\ (every video ad), 05_ads\competitor\raw\footprint\ (dumps: captions, headlines, descriptions,
 dates), images 05_ads\competitor\images\, videos 05_ads\competitor\videos\, page capture 02_competitor\page\.
 1. α1.2 ADVERTISING INTELLIGENCE
-   a. Haiku worker: python -I <skill>\scripts\video_gemini.py "<PRODUCT_DIR>\05_ads\competitor\videos" --out-dir
-      "<PRODUCT_DIR>\00_alpha\gemini" --competitor "<Competitor>" for every video ad (ArgoLink, ≈ $0.005 per 30 s ad),
-      then per video ffprobe the real length and run python -I <skill>\scripts\alpha_gate.py beats
-      "<PRODUCT_DIR>\00_alpha\gemini\<ad_id>.json" --duration <s> (BEAT MAP, HOOK DURATION, VO/TEXT SPLIT, PACING).
+   a. Haiku worker, per video ad: ffprobe the real length (when the file exists) and run python -I
+      <skill>\scripts\alpha_gate.py beats "<PRODUCT_DIR>\00_alpha\transcripts\<ad_id>.txt" --duration <s> (timed
+      lines, HOOK DURATION, VO/TEXT SPLIT, PACING). No Gemini in Step Alpha: frameworks come from the transcript.
    b. Sonnet workers (brief α-analyst) in parallel, batches of ~15 ads, until EVERY video and non-video ad is covered.
    c. You: AD INVENTORY table (every ad: AD ID, FORMAT, PLATFORM, STATUS, RUN TIME, ANGLE, AVATAR; AV IDs from 1.1 when the
       coordinator sends them, provisional labels until then), the video framework patterns table (framework → ads,
@@ -138,9 +137,8 @@ Then STOP and return. The operator runs the prompt (GATE α); α4 comes after (b
 <COMMON HEADER>
 Task: Step Alpha 1.2 analysis of competitor ads <ad IDs, batch n of m>. Spec: <skill>\references\19-step-alpha.md §1.2.
 Inputs per ad: its record in <PRODUCT_DIR>\00_alpha\ad_inventory.json; media file <path>; caption, headline and
-description in its `caption` (raw dumps: <PRODUCT_DIR>\05_ads\competitor\raw\footprint\); for a video: 00_alpha\transcripts\<ad_id>.txt and the Gemini JSON
-00_alpha\gemini\<ad_id>.json (framework, beat map, music, pacing, overlays) + its `alpha_gate.py beats` output (times
-already rescaled to the real duration; Gemini times can run long, never use them unscaled).
+description in its `caption` (raw dumps: <PRODUCT_DIR>\05_ads\competitor\raw\footprint\); for a video: 00_alpha\transcripts\<ad_id>.txt + its `alpha_gate.py beats` output (timed lines, hook duration,
+speech/no-speech split, WPS). Frameworks and beat maps are read from the transcript (no Gemini in Step Alpha).
 EVERY VIDEO ad, every field: FRAMEWORK, BEAT MAP (each beat: timestamp, duration, % of total, function), FORMAT (spec
 list), HOOK (exact words, type, open loop mechanism), HOOK DURATION, ANGLE, AVATAR, EMOTIONAL ARC, RETENTION MECHANICS,
 VO/TEXT SPLIT, PACING (WPS average + per-beat variation, from the transcript words and times), MUSIC/SFX, CTA (exact
