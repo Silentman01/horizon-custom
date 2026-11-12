@@ -66,7 +66,7 @@ files; model "sonnet" for writing Kie prompts/job JSON (packshot, own conversion
 Use worker briefs 2, 7, 8, 10, 11 and add `model` to each.
 Read <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md first (3.1 angle cards, 3.2 avatars, 1.7 inventory, 1.9 ad copy
 patterns, 3.3 hook library, 3.4 framework library, 3.5 language bank).
-Stream: packshot FIRST (real packaging) → own conversion gallery (GALLERY_PLAN.md, 05 §16) → page images/GIF WebP → AD_VARIANTS.md (angle card ID per variant; STOP for operator approval) → 25 ads → ad copy.
+Stream: write every plan/job file first (free) → SAMPLE GATE (00 §18): packshot (real packaging) + gallery hero + one graphic slide + one person/lifestyle + one page image on ONE sheet, then STOP and return for the operator's OK → after OK: own conversion gallery (GALLERY_PLAN.md, 05 §16) → page images/GIF WebP. AD_VARIANTS.md (angle card ID per variant; STOP for operator approval) → first ~5 ads → SAMPLE GATE → remaining ads → ad copy.
 Kie budget: <credits>; check `kie_jobs.py --credits` before each batch; stay within budget, prioritise packshot →
 gallery → top-5 ads → remaining ads → page images, and report what was skipped.
 Open every contact sheet yourself before accepting a batch (claims at full strength, no logo, no competitor name,
@@ -336,7 +336,8 @@ Task: produce <BRAND>'s product gallery. Messaging and people shown follow ALPHA
    in <PRODUCT_DIR>\scratch\jobs_gallery.json. Use one design system across the slides, 6 % safe margins, mobile-legible
    headlines, the real packaging from the packshot, no overlaid logo, correct spelling, 1:1 2K. CONCEPT-REMAKE of each
    competitor image (1:1 remakes) only when the brief asks for a v1 A/B set.
-3. python -I <skill>\scripts\kie_jobs.py <jobs> "<PRODUCT_DIR>\03_product-images"
+3. SAMPLE GATE (00 §18): run only the packshot + 3–4 representative slides first, contact sheet → STOP and return for the operator's OK.
+   After OK: python -I <skill>\scripts\kie_jobs.py <jobs> "<PRODUCT_DIR>\03_product-images" (the rest)
 4. Contact sheet → Read → fix with KEEP-EDIT jobs (text-only fixes) → move replaced versions once to <area>\archive\v<N>_<reason>\.
 Return: final file list in gallery order (one line each: what it shows), credits spent, any flaw left.
 ```

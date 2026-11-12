@@ -68,6 +68,8 @@ For all 25 ads (top 5 included) write `05_ads/AD_VARIANTS.md`, one row per ad:
 - Top 5 use FIDELITY-VARIANT (tools-kie) with the variant text instead of word-for-word text.
 Stop and present the table to the operator. After approval, run Steps 1–9 with the approved text and do not stop again until delivery (except credit shortage).
 
+**Sample gate (00 §18, operator 2026-11-12):** after AD_VARIANTS approval, generate the first ~5 ads only (top-ranked variants, including one native lo-fi format when the competitor runs them) → one contact sheet → STOP for the operator's OK → then the remaining ads without stopping again.
+
 ## 2. Step 1 — Load the inputs and the claims bank
 **Purpose:** everything the prompts need in one place, so specs are precise and claims consistent.
 **Do:**
