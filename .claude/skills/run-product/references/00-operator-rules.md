@@ -19,6 +19,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 12. Working style and reporting
 17. Step Alpha before anything is built
 18. Sample gate: about 5 images confirmed before any batch
+19. Native-language copy gate
 
 ---
 
@@ -164,7 +165,8 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 >
 > Both analyses must complete before ANY downstream step fires.
 
-## 18. Sample gate: about 5 images confirmed before any batch (operator 2026-11-12)
+## 18. Sample gate: about 5 images confirmed before any batch
+19. Native-language copy gate (operator 2026-11-12)
 **Rule:** never generate a full image batch before the operator has confirmed a small sample. Each generation stream first makes **about 5 representative images**, shows them on ONE contact sheet and **stops**. Only after the operator's OK does it generate the rest, then continue without stopping again.
 - **Product / page images (streams B + C), one shared sample:** the packshot (real packaging, 00 §4), the gallery hero (slide 1), one graphic slide (mechanism or comparison, to check text, spelling, margins and the design system), one lifestyle or testimonial image with a person (to check the people, the product in hand and the fit spec), and one page or advertorial image.
 - **Ads (D2 + G), with the sample matched to the competitor's format mix** (operator 2026-11-12): "for videos it remakes one, and images it remakes 5, and waits for approval to finish rest. obviously adapt according to what competitors have. if they only have videos then only 1 video no image".
@@ -179,12 +181,26 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 
 Also: "before building anything, we must run step alpha". The old Phase 3 ad analysis is removed fully: "you can remove the ad analysis phase 3 since we do every analysis in step alpha now" and "it doesn't move, remove it fully, step alpha is a way better and improved way and contains everything that needs to be analyzed". Step Alpha is the only ad and customer analysis in this skill.
 
+## 19. Native-language copy gate (operator 2026-11-12)
+**Rule:** in any market whose language is not English, every customer-facing string must read as if a native copywriter of that market wrote it from scratch. Never translated English. This covers page, home, advertorials, ad copy, on-image text, video scripts, emails and policies.
+- **Write in the market language from the start.** Copy agents write directly in the market language using the dossier's native language bank (2.6 / 3.5). They never draft in English and translate.
+- **Native editor pass before anything is rendered or built.** It runs BEFORE strings go into images, ads, VO or the theme. A separate Opus 4.6 agent briefed as a native senior copywriter of the market (persona, register, culture) checks every string. It hunts:
+  - calques and English rhythm (punchline fragments, "…does." constructions);
+  - anglicisms;
+  - wrong register (FR: vouvoiement, except inside persona letters, which use natural spoken French);
+  - foreign cultural references (Thanksgiving, hot dogs, $, US towns, US names). Replace them with the market's life: déjeuner du dimanche, réveillon, baguette, pharmacie, mutuelle;
+  - typography (FR: espaces insécables, « », decimal comma).
+  - The editor writes `scratch/<LANG>_EDIT_CHANGELOG.md` (old → new → why) plus the list of image texts to re-render.
+- **Image prompts quote only edited strings.** Image and ad prompts use strings that already passed the edit. A generated image with an un-edited string is re-rendered by an edit.
+- **VO scripts get the same pass line by line before voicing.**
+**Why:** on Oralys (FR) the operator flagged: "some copy doesn't sound native french at all. please careful about that … not only these, many others". Gallery examples: « La crème ne le traverse pas » (calque of "paste can't cross"), « Poser un trait », « Tout ce que vous aviez arrêté », « Tient au café chaud », « Un gel qui épouse la gencive, si. ». Copy written from English sources and US competitor letters had carried the English over.
 ## Operator rules (summary — full text in the sections above)
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
 - **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
 - **Adapted framework, not 1:1 clones (§2).** MAP the competitor's winning formula (conversion flow, funnel psychology, offer/trust/proof architecture), then BUILD OUR OWN version: same conversion principles, different execution. Title pattern stays with our brand; palette adapted from the competitor's role logic; page structure, copy, and design are distinctly ours. No string word-for-word identical to the competitor's.
 - **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
+- **Native-language copy gate (§19):** non-English markets: copy is written in the market language from the start (never translated), then a separate Opus 4.6 native-copywriter edit pass checks every string (calques, register, culture, typography) BEFORE it goes into images, ads, VO or the theme.
 - **Sample gate (§18):** every image stream first makes ~5 representative images on one sheet → operator OK → then the full batch. Plans and job files are written in full before the gate (free).
 - **No logo overlaid on product images, but the packaging is the real supplier product rebranded with our name (§4)**; own conversion gallery, not 1:1 remakes; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
