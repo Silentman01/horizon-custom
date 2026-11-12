@@ -147,6 +147,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "משלוח",
+    "cart_extras_free": "חינם",
+    "cart_extras_shipping_later": "מחושב בקופה",
     "cancel": "ביטול",
     "discount": "הנחה",
     "account_title": "חשבון",

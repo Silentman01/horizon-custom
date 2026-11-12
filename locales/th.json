@@ -121,6 +121,9 @@
     "back_to_main_menu": "กลับไปที่เมนูหลัก"
   },
   "content": {
+    "cart_extras_shipping": "การจัดส่ง",
+    "cart_extras_free": "ฟรี",
+    "cart_extras_shipping_later": "คำนวณเมื่อชำระเงิน",
     "reviews": "รีวิว",
     "language": "ภาษา",
     "localization_region_and_language": "ภูมิภาคและภาษา",

@@ -3,7 +3,7 @@
 > **Model (operator, 2026-10-24): GPT Image 2.5 Sunburst** — `gpt-image-2-5-sunburst-image-to-image` (edits/remakes) and `gpt-image-2-5-sunburst-text-to-image` (no reference). Same price as GPT Image 2 (1K 6, 2K 10, 4K 16 credits) and same input fields (`prompt`, `input_urls`, `aspect_ratio`, `resolution`, `background`). The Flare variant was rejected: in a side-by-side packshot test it printed the competitor's name on our label, Sunburst rendered our label correctly (Krino run).
 > **Aspect ratios on 2.5:** `auto, 1:1, 3:2, 2:3, 4:3, 3:4, 16:9, 9:16, 21:9, 27:16, 16:27, 9:8, 8:9` — there is **no 4:5 / 5:4 / 2:1 / 3:1**: where this skill says 4:5 use 3:4 (or 8:9), where it says 5:4 use 4:3 (or 9:8). Older GPT Image 2 notes below (e.g. "4:5 only at 1K") apply only if you fall back to `gpt-image-2-*`.
 
-Every generated image in this skill (packshot, gallery remakes, testimonials, section images, ads) goes through Kie.ai's GPT Image 2.5 via the bundled batch runner `scripts/kie_jobs.py`. This file is the single reference for how to call it, what it costs, and the canonical prompt blocks that 05, 06 and 08 fill in.
+Every generated image in this skill (packshot, gallery images, testimonials, section images, ads) goes through Kie.ai's GPT Image 2.5 via the bundled batch runner `scripts/kie_jobs.py`. This file is the single reference for how to call it, what it costs, and the canonical prompt blocks that 05, 06 and 08 fill in.
 
 `SKILL` below = `~/.claude/skills/run-product` (the skill lives in the theme repo: `<THEME_DIR>\.claude\skills\run-product`).
 

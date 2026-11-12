@@ -1,0 +1,214 @@
+{%- liquid
+  assign s = section.settings
+-%}
+{%- style -%}
+  .oralys-adv-bd-{{ section.id }} {
+    {% if s.color_bg != blank %}background: {{ s.color_bg }};{% endif %}
+    {% if s.color_text != blank %}color: {{ s.color_text }};{% endif %}
+    {% if s.color_link != blank %}--oralys-adv-bd-link: {{ s.color_link }};{% endif %}
+    padding-top: {{ s.pad_top_mobile }}px;
+    padding-bottom: {{ s.pad_bottom_mobile }}px;
+  }
+  @media (min-width: 750px) {
+    .oralys-adv-bd-{{ section.id }} { padding-top: {{ s.pad_top }}px; padding-bottom: {{ s.pad_bottom }}px; }
+  }
+{%- endstyle -%}
+
+<div class="oralys-adv-bd oralys-adv-bd-{{ section.id }}">
+  <div class="oralys-adv-bd__in">
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      {%- case block.type -%}
+        {%- when 'heading' -%}
+          {%- if b.text != blank -%}
+            <h2
+              class="oralys-adv-bd__h oralys-adv-bd__h--{{ b.size }}"
+              {% if b.color != blank %}style="color: {{ b.color }}"{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              {%- if b.kicker != blank -%}<span class="oralys-adv-bd__kick">{{ b.kicker }}</span>{%- endif -%}
+              {{- b.text -}}
+            </h2>
+          {%- endif -%}
+        {%- when 'text' -%}
+          <div class="oralys-adv-bd__txt{% if b.drop_cap %} oralys-adv-bd__txt--drop{% endif %}{% if b.lead %} oralys-adv-bd__txt--lead{% endif %}" {{ block.shopify_attributes }}>
+            {{- b.text -}}
+          </div>
+        {%- when 'callout' -%}
+          <aside
+            class="oralys-adv-bd__call oralys-adv-bd__call--{{ b.style }}"
+            style="{% if b.color_bg != blank %}--oralys-adv-call-bg: {{ b.color_bg }};{% endif %}{% if b.color_border != blank %}--oralys-adv-call-bd: {{ b.color_border }};{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if b.title != blank -%}<p class="oralys-adv-bd__call-t">{{ b.title }}</p>{%- endif -%}
+            <div class="oralys-adv-bd__call-x">{{ b.text }}</div>
+          </aside>
+        {%- when 'checklist' -%}
+          {%- assign items = b.items | newline_to_br | split: '<br />' -%}
+          <div class="oralys-adv-bd__list" {{ block.shopify_attributes }}>
+            {%- if b.title != blank -%}<p class="oralys-adv-bd__list-t">{{ b.title }}</p>{%- endif -%}
+            <ul class="oralys-adv-bd__ul oralys-adv-bd__ul--{{ b.icon }}">
+              {%- for it in items -%}
+                {%- assign t = it | strip -%}
+                {%- if t != blank -%}
+                  <li class="oralys-adv-bd__li">
+                    <span class="oralys-adv-bd__ic" aria-hidden="true">
+                      {%- case b.icon -%}
+                        {%- when 'cross' -%}
+                          <svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M6.5 6.5l7 7M13.5 6.5l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+                        {%- when 'number' -%}
+                          {{ forloop.index }}
+                        {%- else -%}
+                          <svg viewBox="0 0 20 20" width="20" height="20"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.5 10.3l3 3 6-6.3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                      {%- endcase -%}
+                    </span>
+                    <span>{{ t }}</span>
+                  </li>
+                {%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- when 'divider' -%}
+          <hr class="oralys-adv-bd__hr oralys-adv-bd__hr--{{ b.style }}" {{ block.shopify_attributes }}>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .oralys-adv-bd { color: var(--oralys-adv-text); font-family: var(--oralys-adv-font-body); }
+  .oralys-adv-bd__in { max-width: var(--oralys-adv-measure, 700px); margin: 0 auto; padding: 0 16px; }
+  .oralys-adv-bd__txt { font-size: var(--oralys-adv-body-size, 18px); line-height: 1.62; }
+  .oralys-adv-bd__txt p, .oralys-adv-bd__txt ul, .oralys-adv-bd__txt ol { margin: 0 0 1em; }
+  .oralys-adv-bd__txt ul, .oralys-adv-bd__txt ol { padding-left: 1.2em; }
+  .oralys-adv-bd__txt li { margin-bottom: 0.35em; }
+  .oralys-adv-bd__txt a { color: var(--oralys-adv-bd-link, var(--oralys-adv-cta)); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+  .oralys-adv-bd__txt strong { font-weight: 700; }
+  .oralys-adv-bd__txt--lead { font-size: calc(var(--oralys-adv-body-size, 18px) * 1.08); }
+  .oralys-adv-bd__txt--drop > p:first-child::first-letter {
+    float: left;
+    font-family: var(--oralys-adv-font-head);
+    font-weight: var(--oralys-adv-font-head-weight, 700);
+    font-size: 3.3em;
+    line-height: 0.85;
+    padding: 0.08em 0.1em 0 0;
+    color: var(--oralys-adv-accent);
+  }
+  .oralys-adv-bd__h {
+    font-family: var(--oralys-adv-font-head);
+    font-weight: var(--oralys-adv-font-head-weight, 700);
+    line-height: 1.22;
+    margin: 1.5em 0 0.6em;
+    color: var(--oralys-adv-text);
+    text-wrap: balance;
+  }
+  .oralys-adv-bd__in > .oralys-adv-bd__h:first-child { margin-top: 0.3em; }
+  .oralys-adv-bd__h--large { font-size: 25px; }
+  .oralys-adv-bd__h--medium { font-size: 21px; }
+  .oralys-adv-bd__h--small { font-size: 18px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .oralys-adv-bd__kick {
+    display: block;
+    font-family: var(--oralys-adv-font-body);
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--oralys-adv-accent);
+    margin-bottom: 6px;
+  }
+  .oralys-adv-bd__call {
+    margin: 1.4em 0;
+    padding: 18px 18px 6px;
+    border-radius: 12px;
+    background: var(--oralys-adv-call-bg, var(--oralys-adv-tint));
+    border: 1px solid var(--oralys-adv-call-bd, transparent);
+    font-size: calc(var(--oralys-adv-body-size, 18px) * 0.95);
+  }
+  .oralys-adv-bd__call--border { background: var(--oralys-adv-call-bg, transparent); border: 0; border-left: 4px solid var(--oralys-adv-call-bd, var(--oralys-adv-accent)); border-radius: 0; padding: 4px 0 2px 16px; }
+  .oralys-adv-bd__call--warning { background: var(--oralys-adv-call-bg, #fff6e5); border: 1px solid var(--oralys-adv-call-bd, #f0c66b); }
+  .oralys-adv-bd__call-t { margin: 0 0 8px; font-weight: 700; font-size: 15px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--oralys-adv-accent); }
+  .oralys-adv-bd__call-x p { margin: 0 0 0.8em; }
+  .oralys-adv-bd__list { margin: 1.2em 0 1.4em; }
+  .oralys-adv-bd__list-t { font-weight: 700; margin: 0 0 10px; }
+  .oralys-adv-bd__ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .oralys-adv-bd__li { display: flex; gap: 12px; align-items: flex-start; line-height: 1.5; }
+  .oralys-adv-bd__ic { flex: 0 0 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; color: var(--oralys-adv-accent); margin-top: 2px; }
+  .oralys-adv-bd__ul--cross .oralys-adv-bd__ic { color: var(--oralys-adv-cta); }
+  .oralys-adv-bd__ul--number .oralys-adv-bd__ic { border-radius: 50%; background: var(--oralys-adv-accent); color: #fff; font-weight: 700; font-size: 14px; }
+  .oralys-adv-bd__hr { border: 0; margin: 2em auto; }
+  .oralys-adv-bd__hr--line { border-top: 1px solid var(--oralys-adv-line); }
+  .oralys-adv-bd__hr--dots { text-align: center; }
+  .oralys-adv-bd__hr--dots::before { content: '• • •'; letter-spacing: 0.6em; color: var(--oralys-adv-muted); }
+  @media (min-width: 750px) {
+    .oralys-adv-bd__h--large { font-size: 30px; }
+    .oralys-adv-bd__h--medium { font-size: 24px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Adv · Article body",
+  "tag": "section",
+  "class": "oralys-adv-bd-section",
+  "max_blocks": 50,
+  "settings": [
+    { "type": "header", "content": "Colors (empty = page colors from the article header)" },
+    { "type": "color", "id": "color_bg", "label": "Background" },
+    { "type": "color", "id": "color_text", "label": "Text" },
+    { "type": "color", "id": "color_link", "label": "Links" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Top desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 16 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 16 },
+    { "type": "range", "id": "pad_top_mobile", "label": "Top mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 12 },
+    { "type": "range", "id": "pad_bottom_mobile", "label": "Bottom mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 12 }
+  ],
+  "blocks": [
+    {
+      "type": "heading",
+      "name": "Subheading",
+      "settings": [
+        { "type": "text", "id": "kicker", "label": "Kicker above" },
+        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "Intertitre" },
+        { "type": "select", "id": "size", "label": "Size", "default": "large", "options": [ { "value": "large", "label": "Large" }, { "value": "medium", "label": "Medium" }, { "value": "small", "label": "Small caps" } ] },
+        { "type": "color", "id": "color", "label": "Color" }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Paragraphs",
+      "settings": [
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Votre texte.</p>" },
+        { "type": "checkbox", "id": "drop_cap", "label": "Drop cap", "default": false },
+        { "type": "checkbox", "id": "lead", "label": "Larger lead text", "default": false }
+      ]
+    },
+    {
+      "type": "callout",
+      "name": "Callout box",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Encadré.</p>" },
+        { "type": "select", "id": "style", "label": "Style", "default": "tint", "options": [ { "value": "tint", "label": "Tinted card" }, { "value": "border", "label": "Left rule" }, { "value": "warning", "label": "Warning" } ] },
+        { "type": "color", "id": "color_bg", "label": "Background" },
+        { "type": "color", "id": "color_border", "label": "Border" }
+      ]
+    },
+    {
+      "type": "checklist",
+      "name": "Icon list",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "items", "label": "Items (one per line)", "default": "Premier point\nDeuxième point" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "check", "options": [ { "value": "check", "label": "Check" }, { "value": "cross", "label": "Cross" }, { "value": "number", "label": "Numbers" } ] }
+      ]
+    },
+    {
+      "type": "divider",
+      "name": "Divider",
+      "settings": [
+        { "type": "select", "id": "style", "label": "Style", "default": "dots", "options": [ { "value": "dots", "label": "Dots" }, { "value": "line", "label": "Line" } ] }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Adv · Article body", "blocks": [ { "type": "text" } ] } ]
+}
+{% endschema %}

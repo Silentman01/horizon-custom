@@ -123,6 +123,9 @@
     "zoom_media": "Fă zoom pe elementul media {{ index }}"
   },
   "content": {
+    "cart_extras_shipping": "Livrare",
+    "cart_extras_free": "Gratuită",
+    "cart_extras_shipping_later": "Calculată la finalizarea comenzii",
     "reviews": "recenzii",
     "language": "Limba",
     "localization_region_and_language": "Regiunea și limba",

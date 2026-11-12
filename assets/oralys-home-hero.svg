@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="Tube de gel Oralys">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#EEF6F1"/><stop offset="1" stop-color="#D6EADF"/></linearGradient>
+<linearGradient id="tb" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E9EEEB"/><stop offset=".35" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DDE5E1"/></linearGradient>
+</defs>
+<rect width="600" height="600" fill="url(#bg)"/>
+<circle cx="440" cy="150" r="120" fill="#FFFFFF" opacity=".55"/>
+<circle cx="140" cy="470" r="90" fill="#FFFFFF" opacity=".45"/>
+<ellipse cx="310" cy="520" rx="190" ry="22" fill="#0E3D30" opacity=".12"/>
+<g transform="rotate(-24 300 300)">
+<path d="M205 120 h190 l-12 300 q-2 22 -24 22 h-118 q-22 0 -24 -22 z" fill="url(#tb)" stroke="#C9D6CF" stroke-width="3"/>
+<rect x="200" y="96" width="200" height="30" rx="6" fill="#F4F7F5" stroke="#C9D6CF" stroke-width="3"/>
+<path d="M205 104 h190" stroke="#C9D6CF" stroke-width="2"/>
+<rect x="213" y="160" width="174" height="16" fill="#0E6B50"/>
+<rect x="246" y="440" width="108" height="34" rx="4" fill="#E3EAE6" stroke="#C9D6CF" stroke-width="3"/>
+<rect x="232" y="472" width="136" height="74" rx="14" fill="#D2382C"/>
+<path d="M244 486 v46 M262 486 v46 M280 486 v46 M298 486 v46 M316 486 v46 M334 486 v46 M352 486 v46" stroke="#B02D23" stroke-width="4" stroke-linecap="round"/>
+</g>
+<path d="M455 395 q30 -6 52 14 q-10 30 -46 24 q-18 -4 -6 -38z" fill="#9FD3BC" opacity=".9"/>
+<circle cx="500" cy="372" r="9" fill="#9FD3BC"/>
+</svg>

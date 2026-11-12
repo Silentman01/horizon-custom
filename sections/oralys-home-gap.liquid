@@ -1,0 +1,327 @@
+<section class="oralys-home-gap" id="oralys-home-gap" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-gap__inner">
+    <div class="oralys-home-gap__head{% if section.settings.align == 'center' %} oralys-home-gap__head--center{% endif %}">{% if section.settings.eyebrow != blank %}<p class="oralys-home-gap__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}{% if section.settings.heading != blank %}<h2 class="oralys-home-gap__h">{{ section.settings.heading }}</h2>{% endif %}{% if section.settings.subheading != blank %}<div class="oralys-home-gap__sub">{{ section.settings.subheading }}</div>{% endif %}</div>
+    <div class="oralys-home-gap__grid">
+      <figure class="oralys-home-gap__fig">
+        {% render 'oralys-home-media', image: section.settings.image, asset: section.settings.asset, alt: section.settings.image_alt, class: 'oralys-home-gap__img', width: 800, height: 520, sizes: '(min-width: 990px) 50vw, 100vw' %}
+        <figcaption class="oralys-home-gap__caps">
+          <span class="oralys-home-gap__cap oralys-home-gap__cap--bad">{{ section.settings.cap_left }}</span>
+          <span class="oralys-home-gap__cap oralys-home-gap__cap--good">{{ section.settings.cap_right }}</span>
+        </figcaption>
+      </figure>
+      <div class="oralys-home-gap__side">
+        <ol class="oralys-home-gap__steps">
+          {% for block in section.blocks %}
+            <li class="oralys-home-gap__step" {{ block.shopify_attributes }}>
+              <span class="oralys-home-gap__num">{{ forloop.index }}</span>
+              <div><h3 class="oralys-home-gap__st">{{ block.settings.title }}</h3><div class="oralys-home-gap__sx">{{ block.settings.text }}</div></div>
+            </li>
+          {% endfor %}
+        </ol>
+        {% if section.settings.note_text != blank %}
+          <aside class="oralys-home-gap__note">
+            {% if section.settings.note_title != blank %}<p class="oralys-home-gap__note-t">{{ section.settings.note_title }}</p>{% endif %}
+            <div>{{ section.settings.note_text }}</div>
+          </aside>
+        {% endif %}
+        {% if section.settings.cta_label != blank %}<a class="oralys-home-gap__btn oralys-home-gap__btn--full" href="{{ section.settings.cta_link | default: '/products/oralys-gel' }}">{{ section.settings.cta_label }}</a>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-gap{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-gap *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-gap{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-gap__inner{max-width:1200px;margin:0 auto}
+.oralys-home-gap__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-gap__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-gap__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-gap__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-gap__h{font-size:var(--oh-h-d)}}
+.oralys-home-gap__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-gap__head[style*=center] .oralys-home-gap__sub,.oralys-home-gap__head--center .oralys-home-gap__sub{margin-inline:auto}
+.oralys-home-gap__sub p{margin:0 0 8px}
+.oralys-home-gap__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-gap__btn:hover{transform:translateY(-1px)}
+.oralys-home-gap__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-gap__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-gap__grid{display:grid;gap:28px}
+.oralys-home-gap__fig{margin:0;background:var(--oh-card);border-radius:14px;padding:10px;border:1px solid var(--oh-line)}
+.oralys-home-gap__img{width:100%;height:auto;display:block;border-radius:10px}
+.oralys-home-gap__caps{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;font-size:14px;line-height:1.35;font-weight:600}
+.oralys-home-gap__cap{padding:8px 10px;border-radius:8px;background:var(--oh-bg)}
+.oralys-home-gap__cap--bad{border-left:3px solid var(--oh-cta)}.oralys-home-gap__cap--good{border-left:3px solid var(--oh-accent)}
+.oralys-home-gap__steps{list-style:none;margin:0;padding:0;position:relative}
+.oralys-home-gap__step{display:flex;gap:14px;padding:0 0 20px;position:relative}
+.oralys-home-gap__step:not(:last-child)::before{content:"";position:absolute;left:17px;top:38px;bottom:0;width:2px;background:var(--oh-accent);opacity:.3}
+.oralys-home-gap__num{flex:0 0 36px;height:36px;border-radius:50%;background:var(--oh-accent);color:#fff;font-weight:700;display:flex;align-items:center;justify-content:center}
+.oralys-home-gap__st{margin:4px 0 4px;font-size:19px;line-height:1.3;font-family:var(--font-heading--family)}
+.oralys-home-gap__sx p{margin:0;color:var(--oh-muted)}
+.oralys-home-gap__note{background:var(--oh-card);border:1px dashed var(--oh-accent);border-radius:12px;padding:14px 16px;margin:6px 0 22px;font-size:16px}
+.oralys-home-gap__note-t{margin:0 0 4px;font-weight:700;color:var(--oh-accent)}.oralys-home-gap__note p{margin:0}
+@media (min-width:990px){.oralys-home-gap__grid{grid-template-columns:1.05fr 1fr;gap:56px;align-items:start}.oralys-home-gap__fig{position:sticky;top:96px}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : le vide",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "Ce n'est pas votre faute"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre (italique = mot en couleur accent)",
+      "default": "La crème colle. <em>Le vide, lui, reste.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "<p>Vous pensez l'avoir mal posé, ou pas mis assez de crème ? Non. Après des années sans dents, l'os de la mâchoire se rétracte. Votre dentier, lui, garde la même forme. Entre les deux, un vide se creuse.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Schéma"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Schéma"
+    },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Schéma : fichier du thème (secours)",
+      "default": "oralys-home-gap.svg",
+      "info": "Prévu : oralys-home-gap.jpg (coupe avant/après, 4:3 ou 800×520)."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texte alternatif",
+      "default": "Coupe d'une gencive : à gauche le vide sous le dentier, à droite le vide comblé par le gel"
+    },
+    {
+      "type": "text",
+      "id": "cap_left",
+      "label": "Légende gauche",
+      "default": "Avec la crème : l'appareil repose sur un vide"
+    },
+    {
+      "type": "text",
+      "id": "cap_right",
+      "label": "Légende droite",
+      "default": "Avec Oralys : le vide est comblé, l'appareil ne bouge plus"
+    },
+    {
+      "type": "header",
+      "content": "Encadré notice"
+    },
+    {
+      "type": "text",
+      "id": "note_title",
+      "label": "Titre de l'encadré",
+      "default": "Relisez la notice de votre crème"
+    },
+    {
+      "type": "richtext",
+      "id": "note_text",
+      "label": "Texte de l'encadré",
+      "default": "<p>Elle déconseille d'en remettre quand le dentier est mal ajusté. Autrement dit, la crème n'a jamais été conçue pour combler un vide. Le gel, lui, est fait pour ça.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Bouton",
+      "default": "Combler le vide avec Oralys"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Lien du bouton",
+      "info": "Vide = /products/oralys-gel"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#EEF6F1"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Étape de l'explication",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Titre"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Texte</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Oralys accueil : le vide"
+    }
+  ]
+}
+{% endschema %}

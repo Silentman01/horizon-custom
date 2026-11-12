@@ -125,6 +125,9 @@
     "back_to_main_menu": "Zpět do hlavní nabídky"
   },
   "content": {
+    "cart_extras_shipping": "Doprava",
+    "cart_extras_free": "Zdarma",
+    "cart_extras_shipping_later": "Vypočítá se v pokladně",
     "reviews": "recen.",
     "language": "Jazyk",
     "localization_region_and_language": "Oblast a jazyk",

@@ -121,6 +121,9 @@
     "back_to_main_menu": "メインメニューに戻る"
   },
   "content": {
+    "cart_extras_shipping": "送料",
+    "cart_extras_free": "無料",
+    "cart_extras_shipping_later": "チェックアウト時に計算",
     "reviews": "レビュー",
     "language": "言語",
     "localization_region_and_language": "地域と言語",

@@ -123,6 +123,9 @@
     "back_to_main_menu": "Volver al menú principal"
   },
   "content": {
+    "cart_extras_shipping": "Envío",
+    "cart_extras_free": "Gratis",
+    "cart_extras_shipping_later": "Se calcula al pagar",
     "reviews": "reseñas",
     "language": "Idioma",
     "localization_region_and_language": "Región e idioma",

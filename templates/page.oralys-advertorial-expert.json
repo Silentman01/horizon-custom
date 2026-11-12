@@ -1,0 +1,697 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Contenu sponsorisé",
+        "publication_name": "Le Courrier du Bien-Vieillir",
+        "publication_tagline": "Santé, conseils et vie pratique après 60 ans",
+        "masthead_nav": "Santé | Dents & sourire | Vos droits | Cuisine | Témoignages",
+        "category": "Entretien · Santé bucco-dentaire",
+        "headline": "Dentier qui bouge : <strong>ce que votre pharmacien ne vous dit pas</strong> quand il vous tend un tube de crème",
+        "dek": "<p>Claire Delmas a vendu de la crème adhésive pendant 27 ans, dont 11 dans une officine de Lausanne. Là-bas, explique-t-elle, on ne la propose presque plus à quelqu’un dont le dentier bouge. Elle nous a dit ce qu’on conseille à la place, et pourquoi on n’en parle pas au comptoir en France.</p>",
+        "author_name": "Propos recueillis par Anne-Sophie Garnier",
+        "author_role": "Rubrique Santé · avec Claire Delmas, docteure en pharmacie",
+        "author_image_asset": "oralys-adv-a1-pharmacist-portrait.webp",
+        "date_text": "Mis à jour le 12 novembre 2026",
+        "meta_text": "7 min de lecture",
+        "hero_image_asset": "oralys-adv-a2-pharmacy-shelf-adhesives.webp",
+        "hero_caption": "Au rayon dentier, presque tout ce qu’on vous propose est de la crème. « C’est le réflexe français », dit Claire Delmas.",
+        "hero_ratio": "landscape",
+        "heading_font": "lora_n7",
+        "body_font": "figtree_n4",
+        "h1_size_mobile": 29,
+        "h1_size_desktop": 42,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 700,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E",
+        "color_muted": "#5C6863",
+        "color_accent": "#0E6B50",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#FBE3A6",
+        "masthead_bg": "#FFFFFF",
+        "masthead_text": "#0E3D30",
+        "pad_top": 0,
+        "pad_bottom": 20,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 12
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Chaque semaine, la même phrase revient au comptoir de Claire Delmas : « Ma crème ne tient plus, vous n’avez pas plus fort ? » Pendant des années, elle a fait ce que font toutes les pharmacies de France. Elle a tendu la version « extra-forte ».</p><p>Puis elle est partie travailler en Suisse. Onze ans plus tard, elle est rentrée en Haute-Savoie avec une autre réponse. Nous l’avons rencontrée dans son officine d’Annecy.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 1",
+            "text": "« Plus fort », ça ne change rien ?",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Claire Delmas :</strong> Non, et les gens le sentent bien. Ils me racontent tous la même journée. Le matin, ça tient. Vers 11 heures, le dentier du bas commence à se soulever quand ils parlent. À midi, ils mangent de la mie de pain et laissent la croûte. Certains s’excusent pour aller en remettre aux toilettes du restaurant.</p><p>Alors ils doublent la dose. La pâte déborde, elle a un goût, elle donne des haut-le-cœur. Et le soir, il faut gratter la gencive au-dessus du lavabo. Une dame m’a dit un jour : « J’ai essayé quatre colles censées tenir 12 heures. Aucune ne tient un repas. » Elle pensait qu’elle s’y prenait mal. Le problème, ce n’était pas elle.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-a3-denture-gap-closeup.webp",
+        "alt": "Dentier du bas posé sur une serviette, l’intérieur de l’appareil visible",
+        "caption": "L’appareil a été fait pour la gencive du jour de la pose. La gencive, elle, a continué de changer.",
+        "ratio": "landscape",
+        "width": "content",
+        "radius": 14,
+        "pad_top": 16,
+        "pad_bottom": 16,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 2",
+            "text": "Alors pourquoi ça bouge ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> Parce que sous l’appareil, il y a un vide. Quand on perd ses dents, l’os qui les portait n’a plus de travail. Il se résorbe, lentement, toute la vie. Les dentistes le savent depuis une étude suivie sur 25 ans, publiée en 1972. Et c’est en bas que ça va le plus vite.</p><p>Résultat : votre dentier a été moulé sur une gencive qui n’existe plus. Entre les deux, un espace s’est creusé. Vous ne le voyez pas, mais vous le sentez à chaque bouchée.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "Ce que fait vraiment une crème adhésive",
+            "text": "<p>Une crème colle deux surfaces <strong>qui se touchent</strong>. Devant un vide, elle n’a plus rien à retenir. Ajoutez la salive, qui la dissout en 3 heures environ, et vous comprenez pourquoi elle lâche avant le déjeuner, quelle que soit la marque.</p>",
+            "style": "tint"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "callout_3"
+      ]
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma : l’os se résorbe sous le dentier et un vide se creuse entre la gencive et l’appareil",
+        "caption": "Le vide que la crème ne peut pas combler : l’os fond, l’appareil garde sa forme.",
+        "ratio": "natural",
+        "width": "content",
+        "radius": 14,
+        "pad_top": 4,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Une crème ne peut pas remplir un creux. Tant qu’on soigne un vide avec de la pâte, on repasse au rayon tous les dix jours.",
+        "name": "Claire Delmas",
+        "detail": "Docteure en pharmacie, Annecy",
+        "image_asset": "oralys-adv-a1-pharmacist-portrait.webp",
+        "style": "marks",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26
+      }
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 3",
+            "text": "Qu’est-ce qu’on fait en Suisse, que l’on ne fait pas ici ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> Le premier jour à Lausanne, une patiente me demande une crème. Ma titulaire m’arrête et lui pose une seule question : « Est-ce que votre appareil repose encore sur votre gencive ? » La dame ne savait pas quoi répondre. Elle est repartie avec un gel thermoplastique, pas avec un tube de colle.</p><p>Là-bas, et dans beaucoup de cabinets en Italie ou en Allemagne, quand un dentier bouge, on cherche à <strong>remplir</strong> l’espace, pas à enduire par-dessus. Le gel thermoplastique de qualité dentaire est solide à la température de la bouche. On le tiédit, il devient souple, on le pose dans l’appareil, et il prend la forme exacte de votre gencive avant de se raffermir.</p><p>Il ne colle rien : il épouse votre gencive, comme une empreinte. La salive n’a aucune prise dessus, alors il tient toute la journée, et souvent 2 à 3 jours d’affilée.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-a4-expert-explaining.webp",
+        "alt": "Un praticien montre à une patiente l’intérieur de son dentier",
+        "caption": "À Lausanne, la question posée au comptoir n’est pas « quelle crème ? » mais « est-ce que votre appareil repose encore sur votre gencive ? ».",
+        "ratio": "landscape",
+        "width": "wide",
+        "radius": 14,
+        "pad_top": 16,
+        "pad_bottom": 16,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 4",
+            "text": "Pourquoi on ne vous le dit pas en France ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> Personne ne vous cache rien par méchanceté. C’est une habitude. La crème est au rayon depuis cinquante ans, les patients la demandent, on la donne. Et un tube qui ne passe pas la matinée, on le revend dix jours plus tard. Personne n’a de raison de changer le réflexe.</p><p>À côté, il y a le rebasage au cabinet : plusieurs semaines d’attente, entre 150 et 300 € selon les cas, et dans un an le vide sera revenu. Quand on n’a pas les moyens, on finit par se dire, comme une patiente me l’a lâché un jour : « Pas de sous, pas de dents. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "Lisez la notice de votre crème",
+            "text": "<p>Elle est écrite par le fabricant lui-même, sur la notice d’une crème vendue en pharmacie : « NE PAS utiliser de produit en excès si votre prothèse est mal ajustée. »</p><p>Autrement dit, si votre dentier bouge, la crème n’a jamais été la bonne réponse. Même ceux qui la fabriquent le disent.</p>",
+            "style": "warning"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "callout_3"
+      ]
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 5",
+            "text": "Et concrètement, ça se pose comment ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> C’est ce qui surprend le plus : ça se fait à la maison, en dix minutes, sans rendez-vous.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Chauffer : le tube quelques minutes dans un bol d’eau chaude (60 °C maximum). Dentier propre et bien sec.\nPoser : une noisette de gel étalée avec les pouces dans l’appareil. Pour le bas, on la roule d’abord en boudin.\nMordre : bouche humide, on met le dentier, on serre quelques secondes. On rince à l’eau froide, c’est prêt.",
+            "icon": "number"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour le retirer, cinq minutes dans l’eau tiède et l’ancien gel se soulève d’un seul morceau. Pas de pâte à gratter, pas de goût, rien qui se détache pendant le repas.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "checklist_3",
+        "text_4"
+      ]
+    },
+    "compare_1": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Crème, rebasage ou gel : le comparatif de Claire Delmas",
+        "intro": "<p>Les trois solutions qu’on lui demande le plus au comptoir, sur les critères qui comptent à table.</p>",
+        "columns": "3",
+        "corner_label": "",
+        "col_1": "Crème adhésive",
+        "col_2": "Rebasage au cabinet",
+        "col_3": "Gel Oralys",
+        "highlight": "3",
+        "footnote": ""
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Comble le vide sous l’appareil",
+            "v1": "✗",
+            "v2": "✓",
+            "v3": "✓"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Tient un repas entier",
+            "v1": "✗ Lâche avant midi",
+            "v2": "✓",
+            "v3": "✓ Toute la journée"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Le dentier du bas aussi",
+            "v1": "✗",
+            "v2": "✓",
+            "v3": "✓"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Sans pâte ni goût",
+            "v1": "✗",
+            "v2": "✓",
+            "v3": "✓"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Fait à la maison, ce soir",
+            "v1": "✓",
+            "v2": "✗ Rendez-vous",
+            "v3": "✓ 10 minutes"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Coût",
+            "v1": "≈ 250 € par an",
+            "v2": "150 à 300 € à chaque fois",
+            "v3": "Dès 39,95 € le tube (≈ 5 semaines)"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 6",
+            "text": "Lequel conseillez-vous aujourd’hui ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> Depuis mon retour, j’oriente mes patients vers <strong>Oralys</strong>. C’est un gel thermoplastique de qualité dentaire, mis au point avec des experts dentaires, sans zinc et sans colle. Il fonctionne pour le haut, le bas, un complet ou un partiel, et même pour un provisoire en attendant le définitif.</p><p>Le Dr Hélène Verdier, chirurgienne-dentiste à Lyon spécialisée en prothèse amovible, le conseille aussi. Elle me disait la semaine dernière que la plupart de ses patients n’achètent plus de crème au bout de deux semaines. C’est aussi ce que je vois : ceux qui l’essaient ne reviennent pas au rayon crème.</p><p>Plus de 30 000 porteurs de dentier l’utilisent déjà, avec une note de 4,8/5. Un tube dure environ cinq semaines, parce qu’une fine couche suffit.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "La seule précaution",
+            "text": "<p>Il se vend uniquement sur son site officiel. Je dis toujours à mes patients de commander là, et pas une imitation trouvée ailleurs : c’est le seul moyen d’avoir le vrai gel et la garantie de 90 jours.</p>",
+            "style": "border"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "callout_3"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-a5-tube-on-counter.webp",
+        "alt": "Tube de gel Oralys posé sur un comptoir de pharmacie",
+        "caption": "Oralys : le gel thermoplastique que Claire Delmas conseille désormais à la place de la crème.",
+        "ratio": "landscape",
+        "width": "content",
+        "radius": 14,
+        "pad_top": 4,
+        "pad_bottom": 4,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Le gel conseillé par Claire Delmas",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "quote_2": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Ma pharmacienne m’a dit d’arrêter la crème. Je l’ai crue folle. Le dimanche suivant, j’ai mangé la croûte de la baguette devant mes petits-enfants.",
+        "name": "Odile P., 73 ans",
+        "detail": "Annecy · dentier du haut et du bas",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 20,
+        "pad_bottom": 8,
+        "pad_top_mobile": 16,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "quote_3": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Mon dentier 100 % Santé bougeait depuis un an. Un tube a fait ce que je n’avais pas les moyens de faire refaire.",
+        "name": "René L., 77 ans",
+        "detail": "Chambéry · dentier du bas",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 20,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 16
+      }
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Question 7",
+            "text": "Un dernier conseil pour nos lecteurs ?",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>C. D. :</strong> Arrêtez de vous en vouloir. Votre dentier ne bouge pas parce que vous le mettez mal ou que vous avez acheté la mauvaise crème. Il bouge parce que votre gencive a changé. Remplissez ce vide une fois, et vous sentirez le changement dès le premier repas.</p><p>Et si ça ne vous convient pas, vous avez 90 jours pour vous faire rembourser. Vous ne risquez rien à essayer. <a href=\"/products/oralys-gel\">Voir si Oralys est encore disponible au prix de lancement</a>.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (214)",
+        "sort_label": "Les plus récents",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#1F4E8C",
+        "color_reply_bg": "#F3F6F4"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Jacqueline M.",
+            "badge": "",
+            "text": "Exactement ce qu’on m’a dit en Suisse quand j’habitais à Genève. En rentrant en France, on m’a redonné de la crème. J’ai commandé hier.",
+            "time": "il y a 38 min",
+            "likes": "24",
+            "is_reply": false,
+            "avatar_color": "#7A4E9C"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Paul-André R.",
+            "badge": "",
+            "text": "Ma femme ne riait plus devant nos amis à cause du bas. Elle l’a posé lundi, samedi elle a fini le gigot sans quitter la table une seule fois.",
+            "time": "il y a 1 h",
+            "likes": "61",
+            "is_reply": false,
+            "avatar_color": "#0E6B50"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Michèle D.",
+            "badge": "",
+            "text": "Ça marche avec un partiel à crochets ?",
+            "time": "il y a 2 h",
+            "likes": "9",
+            "is_reply": false,
+            "avatar_color": "#B5651D"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Paul-André R.",
+            "badge": "",
+            "text": "Ma belle-sœur a un partiel, elle l’utilise depuis septembre. Elle dit qu’il ne bouge plus quand elle mâche.",
+            "time": "il y a 2 h",
+            "likes": "14",
+            "is_reply": true,
+            "avatar_color": "#0E6B50"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Yvonne B.",
+            "badge": "",
+            "text": "J’étais très sceptique, j’ai jeté assez d’argent en crèmes. J’ai pris les 2 tubes à cause des 90 jours. Trois semaines plus tard, je n’ai plus touché à ma crème. Elle est dans le tiroir.",
+            "time": "il y a 4 h",
+            "likes": "47",
+            "is_reply": false,
+            "avatar_color": "#1F4E8C"
+          }
+        },
+        "comment_6": {
+          "type": "comment",
+          "settings": {
+            "name": "Bernadette L.",
+            "badge": "",
+            "text": "Le plus beau pour moi c’est le soir : plus rien à gratter. Je l’avais oublié, ce que c’est d’avoir la bouche propre.",
+            "time": "il y a 6 h",
+            "likes": "33",
+            "is_reply": false,
+            "avatar_color": "#9C3D54"
+          }
+        },
+        "comment_7": {
+          "type": "comment",
+          "settings": {
+            "name": "Gilbert F.",
+            "badge": "",
+            "text": "Commandé pour mon père de 84 ans qui ne mangeait plus que de la soupe. Il a redemandé du pain au dîner. Je ne l’avais pas vu depuis deux ans.",
+            "time": "il y a 9 h",
+            "likes": "88",
+            "is_reply": false,
+            "avatar_color": "#3D6E9C"
+          }
+        },
+        "comment_8": {
+          "type": "comment",
+          "settings": {
+            "name": "Françoise T.",
+            "badge": "",
+            "text": "Petite astuce : la première fois j’ai mis trop de gel, le deuxième jour c’était parfait. Il faut juste une petite noisette.",
+            "time": "il y a 12 h",
+            "likes": "21",
+            "is_reply": false,
+            "avatar_color": "#0E6B50"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5",
+        "comment_6",
+        "comment_7",
+        "comment_8"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "Le Courrier du Bien-Vieillir",
+        "text": "<p>Cet article est une publicité pour Oralys. Les propos et témoignages rapportés sont ceux de personnes ayant utilisé le produit ; les prénoms sont indiqués avec leur accord. Oralys n’est pas un médicament et ne remplace pas l’avis de votre chirurgien-dentiste.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 Le Courrier du Bien-Vieillir",
+        "color_bg": "#F3F6F4",
+        "color_text": "#5C6863"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "figure_1",
+    "body_2",
+    "figure_2",
+    "quote_1",
+    "body_3",
+    "figure_3",
+    "body_4",
+    "body_5",
+    "compare_1",
+    "body_6",
+    "figure_4",
+    "cta_1",
+    "quote_2",
+    "quote_3",
+    "body_7",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}

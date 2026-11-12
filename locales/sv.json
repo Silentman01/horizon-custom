@@ -121,6 +121,9 @@
     "zoom_media": "Zooma media {{ index }}"
   },
   "content": {
+    "cart_extras_shipping": "Frakt",
+    "cart_extras_free": "Gratis",
+    "cart_extras_shipping_later": "Beräknas i kassan",
     "reviews": "recensioner",
     "language": "Språk",
     "localization_region_and_language": "Region och språk",

@@ -4,6 +4,8 @@ Goal: take the competitor's best-performing Meta video ads and remake each one f
 
 Distilled from the Krino (Mexico, 5 HAIRO remakes, English → Mexican Spanish) and Aurea (US, Manifestly remakes, English → English) runs, October 2026. Read `00-operator-rules.md` §16 first. Scripts: `scripts/video_*.py` (run with `python -I`, all have `--help`).
 
+> **Sample gate (00 §18, operator 2026-11-12):** the first remake is ONE video, the best `reach_rank` story / mechanism ad (not a BOFU sale clip, see the video-pick rule). It runs right after the AD_VARIANTS approval, together with the 5-image ad sample when the competitor also runs statics, and with no image ads when it runs only videos. Stop with the final + a 6-frame strip + the script and timings; the remaining videos follow only after the operator's OK.
+
 ## Contents
 1. When this runs, inputs, outputs, folders
 2. Step 1 — Candidate selection (operator gate)
@@ -120,7 +122,7 @@ Rewrite each remade line with the **same meaning, length and claim strength**, i
    ```
    These are the operator's default settings (reference implementation: `D:/Ecom/Products/Krino/05_ads/voice-samples/elevenlabs/eleven_vo.py` + `ELEVENLABS_SPEC.json`). Same spec, same voice_id for every line of a video, so the voice is identical across the splice.
 4. **Rights:** ElevenLabs' terms require the right to clone a voice. If the original sounds like a real person rather than a stock AI/TTS voice, flag it in the PLAN ("original voice sounds like a real person: operator to decide") so the operator decides before the video ships.
-5. **Delete clones no longer needed** (`video_vo.py delete-voice <id>`) once the video is final; there are only 10 slots.
+5. **Voice slots (operator 2026-11-12):** before designing or cloning, list the account's voices (free) and reuse a saved voice that fits. When all slots are full and a new voice must be saved, delete exactly ONE voice: the OLDEST custom voice by creation date, never premade/library voices. Log its name, id and creation date in VOICE_SPEC.md first. Otherwise never delete voices. Re-voice meticulously: check the remaining characters first, cap at the remaining quota, one take per line, retakes only for lines failing the sync/beat/pronunciation check (00 §20).
 
 **New market (translation):** clone the original voice and voice the translated lines with `language_code` set. If the accent does not land, audition alternatives (`video_vo.py audition --text "<same 2–4 lines>" --spec a.json b.json`), the operator listens and picks, and the pick is saved as the brand's VOICE_SPEC.json (exact spec + the reusable function) so every later video uses the same voice. Krino MX Voz (`drn8JPuDNuSugjUdIuYG`, an ElevenLabs clone of the operator-picked Gemini take) is the Krino brand voice.
 

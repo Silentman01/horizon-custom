@@ -1642,6 +1642,23 @@
         "label": "t:settings.border_color",
         "default": "{{ settings.color_palette.foreground }}",
         "alpha": true
+      },
+      {
+        "type": "select",
+        "id": "drawer_desktop_mode",
+        "label": "Drawers on desktop",
+        "options": [
+          {
+            "value": "overlay",
+            "label": "Over the page"
+          },
+          {
+            "value": "push",
+            "label": "Push the page aside"
+          }
+        ],
+        "default": "overlay",
+        "info": "Over the page = like on mobile, with a dark backdrop."
       }
     ]
   },
@@ -2114,25 +2131,6 @@
           }
         ],
         "default": "equal-width-buttons"
-      }
-    ]
-  },
-  {
-    "name": "Old Tom's header",
-    "settings": [
-      {
-        "type": "text",
-        "id": "ot_track_label",
-        "label": "Track Order button text",
-        "default": "Track Order",
-        "info": "Lime pill in the header. Empty = hidden."
-      },
-      {
-        "type": "text",
-        "id": "ot_track_url",
-        "label": "Track Order button link",
-        "default": "/apps/17TRACK",
-        "info": "17TRACK tracking page."
       }
     ]
   }

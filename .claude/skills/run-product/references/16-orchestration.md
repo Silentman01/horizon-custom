@@ -16,7 +16,7 @@ Cost rule: expensive reasoning only where judgment matters; everything mechanica
 |---|---|---|---|
 | Coordinator | the main session (you) | operator's session model | inputs, gates (GATE α, branding, variants), Brandsearch MCP pulls (complete footprint + every video transcript, dump to files), Alpha dossier (α5) + quality gate (α6), git + Shopify pushes, final acceptance, BRIEF.md |
 | **Lead A — Store lead** | `Agent`, `model: "opus"`, `effort: "low"` | Opus, low | Alpha: α1.1 customer intelligence + α1.3 funnel congruence · then (capture exists from Phase 1) ADAPTATION BLUEPRINT → original copy → adapted build (product + home) → policies → page QA |
-| **Lead B — Growth lead** | `Agent`, `model: "opus"`, `effort: "low"` | Opus, low | Alpha: α1.2 advertising intelligence + α1.4 angle cards + α2 hidden angles + α3 ChatGPT prompt (+ α4 synthesis after GATE α) · then packshot → gallery remakes → page images/GIFs → ad variants → 25 ads → ad copy |
+| **Lead B — Growth lead** | `Agent`, `model: "opus"`, `effort: "low"` | Opus, low | Alpha: α1.2 advertising intelligence + α1.4 angle cards + α2 hidden angles + α3 ChatGPT prompt (+ α4 synthesis after GATE α) · then packshot → own conversion gallery (05 §16) → page images/GIFs → ad variants → 25 ads → ad copy |
 | **Opus 4.6 page/copy agents** | spawned by Lead A | `model: "opus"` | conversion architect (A1: framework mapping + ADAPTATION BLUEPRINT), copywriter (A2: fully original copy), copy chief (all persuasive copy), builder (A3: adapted section design), home-page builder (A4: adapted home), advertorial builder (A5: adapted advertorial/pre-sell pages, when detected) |
 | Workers (writing, code, vision) | spawned by a lead | `model: "sonnet"` | Alpha α-analyst batches (1.2, video + static ads), α-angles (2.1 explosion), image-prompt writers, ad copy, visual QA |
 | Workers (mechanical) | spawned by a lead | `model: "haiku"` | capture/screenshot/fetch scripts, downloads, `video_gemini.py` runs, GIF→WebP, contact sheets, policies fetch/transform, rank_ads runs, theme check runs |
@@ -53,7 +53,7 @@ Phase 0 ─┬─ Capture agent (product + home) ──┐
 α6 pass ─► Branding ─► GATE ─┬─ A1 spec + adaptation blueprint ─► A2 original copy ─► A3 adapted build ──┤
                              ├─ A4 home adaptation ──► home build ──────┤ (after A3 + B)
                              ├─ A5 advertorial pages (after A1 + 1.5, when detected) ──┤
-                             ├─ B packshot ─► gallery remakes ──────────┤
+                             ├─ B packshot ─► own gallery (05 §16) ──────┤
                              ├─ C page images/GIF webp ─────────────────┤
                              ├─ D2a variants ─► op gate ─► D2 25 ads ───┤ (D2 also needs the packshot)
                              ├─ E ad copy ──────────────────────────────┤

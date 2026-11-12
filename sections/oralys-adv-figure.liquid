@@ -1,0 +1,87 @@
+{%- liquid
+  assign s = section.settings
+-%}
+{%- if s.image != blank or s.image_asset != blank -%}
+  {%- style -%}
+    .oralys-adv-fg-{{ section.id }} {
+      {% if s.color_bg != blank %}background: {{ s.color_bg }};{% endif %}
+      padding-top: {{ s.pad_top_mobile }}px;
+      padding-bottom: {{ s.pad_bottom_mobile }}px;
+    }
+    .oralys-adv-fg-{{ section.id }} .oralys-adv-fg__img { border-radius: {{ s.radius }}px; }
+    @media (min-width: 750px) {
+      .oralys-adv-fg-{{ section.id }} { padding-top: {{ s.pad_top }}px; padding-bottom: {{ s.pad_bottom }}px; }
+    }
+  {%- endstyle -%}
+  <div class="oralys-adv-fg oralys-adv-fg-{{ section.id }} oralys-adv-fg--{{ s.width }}" data-oralys-adv-media>
+    <figure class="oralys-adv-fg__fig">
+      <div class="oralys-adv-fg__wrap oralys-adv-fg__wrap--{{ s.ratio }}">
+        {%- render 'oralys-adv-media', image: s.image, asset: s.image_asset, alt: s.alt, class: 'oralys-adv-fg__img', eager: true -%}
+        {%- if s.badge != blank -%}<span class="oralys-adv-fg__badge">{{ s.badge }}</span>{%- endif -%}
+      </div>
+      {%- if s.caption != blank or s.credit != blank -%}
+        <figcaption class="oralys-adv-fg__cap">
+          {{- s.caption -}}
+          {%- if s.credit != blank %} <span class="oralys-adv-fg__cred">{{ s.credit }}</span>{% endif -%}
+        </figcaption>
+      {%- endif -%}
+    </figure>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .oralys-adv-fg__fig { margin: 0 auto; padding: 0; }
+  .oralys-adv-fg--content .oralys-adv-fg__fig { max-width: var(--oralys-adv-measure, 700px); padding: 0 16px; }
+  .oralys-adv-fg--wide .oralys-adv-fg__fig { max-width: calc(var(--oralys-adv-measure, 700px) + 160px); }
+  .oralys-adv-fg--full .oralys-adv-fg__fig { max-width: none; }
+  .oralys-adv-fg__wrap { position: relative; }
+  .oralys-adv-fg__img { display: block; width: 100%; height: auto; object-fit: cover; }
+  .oralys-adv-fg__wrap--landscape .oralys-adv-fg__img { aspect-ratio: 3 / 2; }
+  .oralys-adv-fg__wrap--portrait .oralys-adv-fg__img { aspect-ratio: 4 / 5; }
+  .oralys-adv-fg__wrap--square .oralys-adv-fg__img { aspect-ratio: 1; }
+  .oralys-adv-fg--wide .oralys-adv-fg__img, .oralys-adv-fg--full .oralys-adv-fg__img { border-radius: 0; }
+  .oralys-adv-fg__badge {
+    position: absolute;
+    left: 12px;
+    top: 12px;
+    background: var(--oralys-adv-accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 999px;
+  }
+  .oralys-adv-fg__cap { font-size: 14px; line-height: 1.45; color: var(--oralys-adv-muted); font-style: italic; padding-top: 8px; }
+  .oralys-adv-fg--wide .oralys-adv-fg__cap, .oralys-adv-fg--full .oralys-adv-fg__cap { padding-inline: 16px; }
+  .oralys-adv-fg__cred { font-style: normal; opacity: 0.8; font-size: 12px; }
+  @media (min-width: 750px) {
+    .oralys-adv-fg--wide .oralys-adv-fg__img { border-radius: 14px; }
+    .oralys-adv-fg--wide .oralys-adv-fg__cap { padding-inline: 0; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Adv · Image figure",
+  "tag": "section",
+  "class": "oralys-adv-fg-section",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Fallback (theme asset filename)", "info": "Used when no image is picked. The section hides itself if neither exists." },
+    { "type": "text", "id": "alt", "label": "Alt text" },
+    { "type": "text", "id": "caption", "label": "Caption" },
+    { "type": "text", "id": "credit", "label": "Credit" },
+    { "type": "text", "id": "badge", "label": "Badge on image" },
+    { "type": "select", "id": "ratio", "label": "Ratio", "default": "landscape", "options": [ { "value": "landscape", "label": "3:2" }, { "value": "portrait", "label": "4:5" }, { "value": "square", "label": "1:1" }, { "value": "natural", "label": "Natural" } ] },
+    { "type": "select", "id": "width", "label": "Width", "default": "content", "options": [ { "value": "content", "label": "Text column" }, { "value": "wide", "label": "Wide" }, { "value": "full", "label": "Full width" } ] },
+    { "type": "range", "id": "radius", "label": "Corner radius", "min": 0, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "color", "id": "color_bg", "label": "Background" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Top desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "pad_top_mobile", "label": "Top mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 12 },
+    { "type": "range", "id": "pad_bottom_mobile", "label": "Bottom mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 12 }
+  ],
+  "presets": [ { "name": "Adv · Image figure" } ]
+}
+{% endschema %}

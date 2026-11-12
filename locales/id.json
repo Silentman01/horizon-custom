@@ -121,6 +121,9 @@
     "zoom_media": "Perbesar media {{ index }}"
   },
   "content": {
+    "cart_extras_shipping": "Pengiriman",
+    "cart_extras_free": "Gratis",
+    "cart_extras_shipping_later": "Dihitung saat checkout",
     "reviews": "ulasan",
     "language": "Bahasa",
     "localization_region_and_language": "Wilayah dan bahasa",

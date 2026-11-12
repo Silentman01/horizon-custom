@@ -121,6 +121,9 @@
     "zoom_media": "Medyayı yakınlaştır: {{ index }}"
   },
   "content": {
+    "cart_extras_shipping": "Kargo",
+    "cart_extras_free": "Ücretsiz",
+    "cart_extras_shipping_later": "Ödeme sırasında hesaplanır",
     "reviews": "değerlendirme",
     "language": "Dil",
     "localization_region_and_language": "Bölge ve dil",

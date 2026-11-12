@@ -1,0 +1,243 @@
+<section class="oralys-home-faq" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-faq__inner">
+    <div class="oralys-home-faq__head{% if section.settings.align == 'center' %} oralys-home-faq__head--center{% endif %}">{% if section.settings.eyebrow != blank %}<p class="oralys-home-faq__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}{% if section.settings.heading != blank %}<h2 class="oralys-home-faq__h">{{ section.settings.heading }}</h2>{% endif %}</div>
+    <div class="oralys-home-faq__list">
+      {% for block in section.blocks %}
+        <details class="oralys-home-faq__item" {% if forloop.first and section.settings.open_first %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="oralys-home-faq__q">{{ block.settings.question }}<span class="oralys-home-faq__ic" aria-hidden="true"></span></summary>
+          <div class="oralys-home-faq__a">{{ block.settings.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-faq{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-faq *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-faq{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-faq__inner{max-width:1200px;margin:0 auto}
+.oralys-home-faq__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-faq__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-faq__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-faq__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-faq__h{font-size:var(--oh-h-d)}}
+.oralys-home-faq__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-faq__head[style*=center] .oralys-home-faq__sub,.oralys-home-faq__head--center .oralys-home-faq__sub{margin-inline:auto}
+.oralys-home-faq__sub p{margin:0 0 8px}
+.oralys-home-faq__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-faq__btn:hover{transform:translateY(-1px)}
+.oralys-home-faq__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-faq__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-faq__inner{max-width:820px}
+.oralys-home-faq__list{display:grid;gap:10px}
+.oralys-home-faq__item{background:var(--oh-card);border:1px solid var(--oh-line);border-radius:12px}
+.oralys-home-faq__item[open]{border-color:var(--oh-accent)}
+.oralys-home-faq__q{list-style:none;cursor:pointer;padding:16px 52px 16px 18px;font-weight:700;font-size:17px;position:relative;line-height:1.35}
+.oralys-home-faq__q::-webkit-details-marker{display:none}
+.oralys-home-faq__ic{position:absolute;right:16px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;background:var(--oh-accent)}
+.oralys-home-faq__ic::before,.oralys-home-faq__ic::after{content:"";position:absolute;left:6px;right:6px;top:11px;height:2px;background:#fff}
+.oralys-home-faq__ic::after{transform:rotate(90deg);transition:transform .2s}
+.oralys-home-faq__item[open] .oralys-home-faq__ic::after{transform:rotate(0)}
+.oralys-home-faq__a{padding:0 18px 16px;color:var(--oh-muted)}.oralys-home-faq__a p{margin:0 0 8px}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : FAQ",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "Questions fréquentes"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre (italique = mot en couleur accent)",
+      "default": "Ce qu'on nous demande <em>le plus souvent</em>"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Ouvrir la première question",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#EEF6F1"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Question ?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p>Réponse.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 16,
+  "presets": [
+    {
+      "name": "Oralys accueil : FAQ"
+    }
+  ]
+}
+{% endschema %}

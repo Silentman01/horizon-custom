@@ -153,6 +153,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "الشحن",
+    "cart_extras_free": "مجاني",
+    "cart_extras_shipping_later": "يُحسب عند الدفع",
     "cancel": "إلغاء",
     "discount": "الخصم",
     "account_title": "الحساب",

@@ -141,6 +141,9 @@
     }
   },
   "content": {
+    "cart_extras_shipping": "شپنگ",
+    "cart_extras_free": "مفت",
+    "cart_extras_shipping_later": "چیک آؤٹ پر حساب کی جاتی ہے",
     "cancel": "منسوخ کریں",
     "discount": "ڈسکاؤنٹ",
     "account_title": "اکاؤنٹ",

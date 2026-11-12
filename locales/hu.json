@@ -121,6 +121,9 @@
     "back_to_main_menu": "Vissza a főmenübe"
   },
   "content": {
+    "cart_extras_shipping": "Szállítás",
+    "cart_extras_free": "Ingyenes",
+    "cart_extras_shipping_later": "A pénztárnál számítjuk ki",
     "reviews": "összegzés",
     "no_results_found": "Nincs találat",
     "language": "Nyelv",

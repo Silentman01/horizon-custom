@@ -1,0 +1,563 @@
+{%- liquid
+  assign s = section.settings
+  assign h = s.heading
+  if s.accent != blank
+    assign acc = '<em>' | append: s.accent | append: '</em>'
+    assign h = h | replace: s.accent, acc
+  endif
+-%}
+<div class="oralys-pdp-rev" style="--op-bg:{{ s.c_bg }};--op-text:{{ s.c_text }};--op-accent:{{ s.c_accent }};--op-muted:{{ s.c_muted }};--op-card:{{ s.c_card }};--op-line:{{ s.c_line }};--op-cta:{{ s.c_cta }};--op-cta-text:{{ s.c_cta_text }};--op-h-m:{{ s.h_m }}px;--op-h-d:{{ s.h_d }}px;--op-body:{{ s.body_size }}px;--op-align:{{ s.align }};--op-pt-m:{{ s.pt_m }}px;--op-pb-m:{{ s.pb_m }}px;--op-pt-d:{{ s.pt_d }}px;--op-pb-d:{{ s.pb_d }}px" data-oralys-pdp-tabs>
+  <div class="oralys-pdp-rev__inner">
+    <div class="oralys-pdp-rev__head">{% if s.eyebrow != blank %}<p class="oralys-pdp-rev__eyebrow">{{ s.eyebrow }}</p>{% endif %}{% if h != blank %}<h2 class="oralys-pdp-rev__h">{{ h }}</h2>{% endif %}</div>
+    {%- if s.score != blank %}<p class="oralys-pdp-rev__score"><span class="oralys-pdp-rev__stars" style="color:{{ s.c_star }}" aria-hidden="true">★★★★★</span>{{ s.score }}</p>{% endif -%}
+    {%- if s.show_featured and s.f_text != blank -%}
+    <figure class="oralys-pdp-rev__feat">
+      {%- if s.image != blank or s.asset != blank -%}<span class="oralys-pdp-rev__fav">{% render 'oralys-pdp-media', image: s.image, asset: s.asset, alt: s.alt, class: 'oralys-pdp-rev__favimg', loading: 'lazy', width: 112, height: 112 %}</span>{%- endif -%}
+      <div><span class="oralys-pdp-rev__stars" style="color:{{ s.c_star }}" aria-hidden="true">★★★★★</span><blockquote class="oralys-pdp-rev__fq">{{ s.f_text }}</blockquote><figcaption class="oralys-pdp-rev__fn"><b>{{ s.f_name }}</b>{% if s.f_meta != blank %}<span>{{ s.f_meta }}</span>{% endif %}</figcaption></div>
+    </figure>
+    {%- endif -%}
+    {%- assign tabn = 0 -%}
+    {%- capture tabs -%}{%- for block in section.blocks -%}{%- if block.type == 'tab' -%}{%- assign tabn = tabn | plus: 1 -%}<button type="button" role="tab" class="oralys-pdp-rev__tab" id="oralys-pdp-rev-{{ section.id }}-t{{ tabn }}" aria-controls="oralys-pdp-rev-{{ section.id }}-p{{ tabn }}" aria-selected="{% if tabn == 1 %}true{% else %}false{% endif %}" data-tab="{{ tabn }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>{%- endif -%}{%- endfor -%}{%- endcapture -%}
+    {%- if tabn > 1 -%}<div class="oralys-pdp-rev__tabs" role="tablist">{{ tabs }}</div>{%- endif -%}
+    {%- if tabn < 1 -%}{%- assign tabn = 1 -%}{%- endif -%}
+    {%- for t in (1..tabn) -%}
+    <div class="oralys-pdp-rev__panel" role="tabpanel" id="oralys-pdp-rev-{{ section.id }}-p{{ t }}" data-panel="{{ t }}"{% if t > 1 %} hidden{% endif %}>
+      <div class="oralys-pdp-rev__rail" data-oralys-pdp-drag>
+      {%- assign cur = 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'tab' -%}
+          {%- assign cur = cur | plus: 1 -%}
+        {%- elsif cur == t or cur == 0 and t == 1 -%}
+        <article class="oralys-pdp-rev__card" {{ block.shopify_attributes }}>
+          <div class="oralys-pdp-rev__ph">{%- if block.settings.image != blank or block.settings.asset != blank -%}{% render 'oralys-pdp-media', image: block.settings.image, asset: block.settings.asset, alt: block.settings.name, class: 'oralys-pdp-rev__phimg', width: 800, height: 1000 %}{%- endif -%}{% if block.settings.chip != blank %}<span class="oralys-pdp-rev__chip">{{ block.settings.chip }}</span>{% endif %}</div>
+          <div class="oralys-pdp-rev__body">
+            <span class="oralys-pdp-rev__stars" style="color:{{ s.c_star }}" role="img" aria-label="{{ block.settings.stars }}/5">{% for i in (1..block.settings.stars) %}★{% endfor %}</span>
+            <h3 class="oralys-pdp-rev__hl">{{ block.settings.headline }}</h3>
+            <p class="oralys-pdp-rev__txt">{{ block.settings.text }}</p>
+            <p class="oralys-pdp-rev__name">{{ block.settings.name }}</p>
+            {%- if s.verified != blank %}<p class="oralys-pdp-rev__ver">{% render 'oralys-pdp-icon', name: 'check', size: 14 %}{{ s.verified }}</p>{% endif -%}
+          </div>
+        </article>
+        {%- endif -%}
+      {%- endfor -%}
+      </div>
+    </div>
+    {%- endfor -%}
+    {%- if s.hint != blank %}<p class="oralys-pdp-rev__hint">{{ s.hint }}</p>{% endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.oralys-pdp-rev{background:var(--op-bg);color:var(--op-text);padding:var(--op-pt-m) 16px var(--op-pb-m);font-family:var(--font-body--family);font-size:var(--op-body);line-height:1.55}
+.oralys-pdp-rev *{box-sizing:border-box}
+@media (min-width:750px){.oralys-pdp-rev{padding:var(--op-pt-d) 32px var(--op-pb-d)}}
+.oralys-pdp-rev__inner{max-width:1200px;margin:0 auto}
+.oralys-pdp-rev__head{text-align:var(--op-align);margin:0 0 24px}
+.oralys-pdp-rev__eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--op-accent);margin:0 0 10px}
+.oralys-pdp-rev__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--op-h-m);line-height:1.22;margin:0;color:var(--op-text);text-wrap:balance}
+.oralys-pdp-rev__h em{font-style:normal;color:var(--op-accent)}
+@media (min-width:750px){.oralys-pdp-rev__h{font-size:var(--op-h-d)}}
+.oralys-pdp-rev__btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--op-cta);color:var(--op-cta-text);font-weight:700;font-size:18px;text-decoration:none;border:0;width:100%;transition:transform .15s}
+.oralys-pdp-rev__btn:hover{transform:translateY(-1px)}
+@media (min-width:750px){.oralys-pdp-rev__btn{display:inline-flex;width:auto;min-width:320px}}
+
+.oralys-pdp-rev__head{margin-bottom:10px}
+.oralys-pdp-rev__score{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 20px;font-weight:700;justify-content:var(--op-align)}
+.oralys-pdp-rev__stars{letter-spacing:1px;font-size:17px;line-height:1}
+.oralys-pdp-rev__feat{display:flex;gap:14px;align-items:flex-start;margin:0 0 24px;padding:18px;border-radius:12px;background:#EEF6F1}
+.oralys-pdp-rev__fav{flex:0 0 56px;width:56px;height:56px;border-radius:50%;overflow:hidden;background:#fff}
+.oralys-pdp-rev__favimg{width:100%;height:100%;object-fit:cover;display:block}
+.oralys-pdp-rev__fq{margin:6px 0 8px;font-size:17px;line-height:1.5;font-weight:500}
+.oralys-pdp-rev__fn{display:flex;flex-direction:column;font-size:14px;color:var(--op-muted)}
+.oralys-pdp-rev__fn b{color:var(--op-text)}
+.oralys-pdp-rev__tabs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 16px;padding:0 16px}
+.oralys-pdp-rev__tabs::-webkit-scrollbar{display:none}
+.oralys-pdp-rev__tab{flex:0 0 auto;min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--op-line);background:#fff;color:var(--op-text);font:inherit;font-size:15px;font-weight:700;cursor:pointer}
+.oralys-pdp-rev__tab[aria-selected=true]{background:var(--op-accent);border-color:var(--op-accent);color:#fff}
+.oralys-pdp-rev__rail{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:989px){
+  .oralys-pdp-rev__rail{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;scrollbar-width:none;cursor:grab;overscroll-behavior-x:contain;margin:0 -16px;padding:0 16px 4px}
+  .oralys-pdp-rev__rail::-webkit-scrollbar{display:none}
+  .oralys-pdp-rev__rail.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+  .oralys-pdp-rev__card{flex:0 0 clamp(240px,78vw,330px);scroll-snap-align:start}
+}
+.oralys-pdp-rev__card{display:flex;flex-direction:column;border:1px solid var(--op-line);border-radius:12px;overflow:hidden;background:var(--op-card)}
+.oralys-pdp-rev__ph{position:relative;aspect-ratio:4/5;background:#EEF6F1}
+.oralys-pdp-rev__phimg{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+.oralys-pdp-rev__chip{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:999px;background:#fff;color:var(--op-accent);font-size:13px;font-weight:800}
+.oralys-pdp-rev__body{padding:14px 16px 16px;display:flex;flex-direction:column;gap:6px}
+.oralys-pdp-rev__hl{margin:0;font-family:var(--font-heading--family);font-size:18px;line-height:1.25;font-weight:700}
+.oralys-pdp-rev__txt{margin:0;font-size:15.5px;line-height:1.5}
+.oralys-pdp-rev__name{margin:4px 0 0;font-weight:700;font-size:14px}
+.oralys-pdp-rev__ver{display:flex;align-items:center;gap:4px;margin:0;font-size:13px;color:var(--op-accent);font-weight:700}
+.oralys-pdp-rev__hint{margin:12px 0 0;font-size:14px;color:var(--op-muted);text-align:center}
+@media (min-width:990px){.oralys-pdp-rev__hint{display:none}}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  if (window.__oralysPdpDrag) return; window.__oralysPdpDrag = true;
+  const init = () => document.querySelectorAll('[data-oralys-pdp-drag]:not([data-oralys-pdp-drag-ready])').forEach((rail) => {
+    rail.setAttribute('data-oralys-pdp-drag-ready', '');
+    let x0 = 0, s0 = 0, id = -1, moved = false;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0 || rail.scrollWidth <= rail.clientWidth) return;
+      id = e.pointerId; x0 = e.clientX; s0 = rail.scrollLeft; moved = false;
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) { moved = true; rail.classList.add('is-dragging'); rail.setPointerCapture(id); }
+      rail.scrollLeft = s0 - dx;
+    });
+    const end = () => {
+      if (id === -1) return; id = -1; if (!moved) return;
+      const left = rail.scrollLeft; rail.classList.remove('is-dragging'); rail.scrollLeft = left;
+      const card = rail.firstElementChild, step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(rail).columnGap || 0) : 0;
+      if (step) rail.scrollTo({ left: Math.round(left / step) * step, behavior: 'smooth' });
+    };
+    rail.addEventListener('pointerup', end); rail.addEventListener('pointercancel', end);
+    rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+    rail.addEventListener('dragstart', (e) => e.preventDefault());
+  });
+  init(); document.addEventListener('shopify:section:load', init); document.addEventListener('DOMContentLoaded', init);
+})();
+
+(() => {
+  if (window.__oralysPdpTabs) return; window.__oralysPdpTabs = true;
+  document.addEventListener('click', (e) => {
+    const b = e.target.closest && e.target.closest('.oralys-pdp-rev__tab');
+    if (!b) return;
+    const root = b.closest('[data-oralys-pdp-tabs]'); if (!root) return;
+    root.querySelectorAll('.oralys-pdp-rev__tab').forEach((t) => t.setAttribute('aria-selected', t === b ? 'true' : 'false'));
+    root.querySelectorAll('.oralys-pdp-rev__panel').forEach((p) => { p.hidden = p.dataset.panel !== b.dataset.tab; });
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Oralys : avis",
+  "tag": "section",
+  "class": "oralys-pdp-rev-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "ILS EN PARLENT MIEUX QUE NOUS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "La parole à ceux qui portent un dentier"
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Mot du titre en couleur accent",
+      "default": "dentier",
+      "info": "Doit apparaître tel quel dans le titre. Vide = aucun mot en couleur."
+    },
+    {
+      "type": "text",
+      "id": "score",
+      "label": "Ligne de note",
+      "default": "4,8/5 · plus de 30 000 porteurs de dentier"
+    },
+    {
+      "type": "header",
+      "content": "Avis mis en avant"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_featured",
+      "label": "Afficher l'avis mis en avant",
+      "default": true
+    },
+    {
+      "type": "textarea",
+      "id": "f_text",
+      "label": "Texte",
+      "default": "« Douze ans de crème, et mon appareil du bas se soulevait dès que je parlais. J'avais renoncé. Avec Oralys, il est resté en place tout le repas. J'ai mangé une tranche de baguette bien croustillante, devant tout le monde. Pour moi, c'est ça qui compte. »"
+    },
+    {
+      "type": "text",
+      "id": "f_name",
+      "label": "Nom",
+      "default": "Josiane L., 70 ans, Tours"
+    },
+    {
+      "type": "text",
+      "id": "f_meta",
+      "label": "Détails",
+      "default": "Haut et bas · Achat vérifié · 3 mois d'utilisation"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo"
+    },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Photo : fichier du thème",
+      "default": "oralys-pdp-rev-t05.webp"
+    },
+    {
+      "type": "text",
+      "id": "hint",
+      "label": "Indication sous les avis",
+      "default": "Faites glisser pour lire la suite →"
+    },
+    {
+      "type": "text",
+      "id": "verified",
+      "label": "Mention achat vérifié",
+      "default": "Achat vérifié"
+    },
+    {
+      "type": "color",
+      "id": "c_star",
+      "label": "Étoiles",
+      "default": "#F0A830"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot du titre, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Onglet",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé",
+          "default": "Onglet"
+        }
+      ]
+    },
+    {
+      "type": "review",
+      "name": "Avis",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Un avis appartient à l'onglet placé au-dessus de lui."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Photo : fichier du thème"
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "label": "Étoiles",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "headline",
+          "label": "Titre"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Texte"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nom, âge, ville"
+        },
+        {
+          "type": "text",
+          "id": "chip",
+          "label": "Type d'appareil",
+          "default": "Bas"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : avis",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Le dentier du bas"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t07.webp",
+            "stars": 5,
+            "headline": "Le bas ne remonte plus",
+            "text": "« Mon dentier du bas se baladait dans la bouche depuis des années. Je l'ai posé lundi matin, il n'a pas bougé de la journée. Le soir, je n'y croyais toujours pas. »",
+            "name": "Gérard M., 71 ans, Clermont-Ferrand",
+            "chip": "Bas"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t09.webp",
+            "stars": 5,
+            "headline": "Plus de tube dans la poche",
+            "text": "« Je trimballais ma crème partout, même au marché. Ça fait cinq semaines que le tube n'est pas sorti du tiroir. »",
+            "name": "Bernard T., 69 ans, Nancy",
+            "chip": "Bas"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t11.webp",
+            "stars": 5,
+            "headline": "Je ne vérifie plus avec la langue",
+            "text": "« Je passais ma langue dessus toute la journée pour voir s'il tenait. Un jour au téléphone, je me suis rendu compte que je n'y pensais plus du tout. »",
+            "name": "Chantal D., 66 ans, Limoges",
+            "chip": "Bas"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "Les repas de famille"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t04.webp",
+            "stars": 5,
+            "headline": "Je reçois de nouveau ma famille",
+            "text": "« Je refusais les invitations avec repas. Dimanche, j'ai reçu mes enfants et je suis restée assise du début à la fin, sans filer à la salle de bain. »",
+            "name": "Annie P., 73 ans, Rennes",
+            "chip": "Haut et bas"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t16.webp",
+            "stars": 5,
+            "headline": "Maman remange avec nous",
+            "text": "« Ma mère ne mangeait plus que de la soupe à table. Je lui ai posé Oralys avant le repas de Noël : elle a mangé la dinde et la bûche comme tout le monde. »",
+            "name": "Sylvie G., 55 ans, Dijon (pour sa mère, 85 ans)",
+            "chip": "Haut"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t10.webp",
+            "stars": 5,
+            "headline": "Une côte de bœuf, sans y penser",
+            "text": "« Au mariage de mon petit-fils, j'ai mangé la viande sans m'excuser pour aller remettre de la colle. Première fois en dix ans. »",
+            "name": "Robert F., 72 ans, Perpignan",
+            "chip": "Haut et bas"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "label": "J'étais sceptique"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t03.webp",
+            "stars": 5,
+            "headline": "Après quatre colles, je n'y croyais plus",
+            "text": "« J'avais essayé quatre crèmes « tenue 12 h ». Aucune ne tenait un repas. J'ai commandé Oralys en me disant que j'avais 90 jours pour le renvoyer. Je ne l'ai pas renvoyé. »",
+            "name": "Martine B., 68 ans, Caen",
+            "chip": "Haut"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t08.webp",
+            "stars": 5,
+            "headline": "Rien à voir avec les gels de pharmacie",
+            "text": "« J'avais testé un gel ventouse en pharmacie, il a tenu cinq minutes. Oralys se pose différemment : on le tiédit, on le moule, et là ça tient. »",
+            "name": "Jean-Pierre H., 74 ans, Metz",
+            "chip": "Bas"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "asset": "oralys-pdp-rev-t13.webp",
+            "stars": 5,
+            "headline": "À 38 ans, je ris de nouveau",
+            "text": "« Partiel du haut depuis un accident. J'avais honte de sourire au travail. Je pensais que c'était un produit pour mes grands-parents, j'avais tort. »",
+            "name": "Élodie R., 38 ans, Toulouse",
+            "chip": "Partiel"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

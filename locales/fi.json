@@ -121,6 +121,9 @@
     "back_to_main_menu": "Takaisin päävalikkoon"
   },
   "content": {
+    "cart_extras_shipping": "Toimitus",
+    "cart_extras_free": "Ilmainen",
+    "cart_extras_shipping_later": "Lasketaan kassalla",
     "reviews": "arvostelua",
     "language": "Kieli",
     "localization_region_and_language": "Alue ja kieli",

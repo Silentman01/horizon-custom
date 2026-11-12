@@ -1,0 +1,255 @@
+<section class="oralys-home-close" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-close__inner">
+    <div class="oralys-home-close__seal" aria-hidden="true"><strong>{{ section.settings.seal_big }}</strong><span>{{ section.settings.seal_small }}</span></div>
+    <h2 class="oralys-home-close__h">{{ section.settings.heading }}</h2>
+    {% if section.settings.text != blank %}<div class="oralys-home-close__x">{{ section.settings.text }}</div>{% endif %}
+    <ul class="oralys-home-close__ticks">
+      {% for i in (1..3) %}{% assign k = 'tick_' | append: i %}{% if section.settings[k] != blank %}<li>{{ section.settings[k] }}</li>{% endif %}{% endfor %}
+    </ul>
+    {% if section.settings.cta_label != blank %}<a class="oralys-home-close__btn oralys-home-close__btn--full" href="{{ section.settings.cta_link | default: '/products/oralys-gel' }}">{{ section.settings.cta_label }}</a>{% endif %}
+    {% if section.settings.price_line != blank %}<p class="oralys-home-close__price">{{ section.settings.price_line }}</p>{% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-close{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-close *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-close{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-close__inner{max-width:1200px;margin:0 auto}
+.oralys-home-close__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-close__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-close__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-close__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-close__h{font-size:var(--oh-h-d)}}
+.oralys-home-close__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-close__head[style*=center] .oralys-home-close__sub,.oralys-home-close__head--center .oralys-home-close__sub{margin-inline:auto}
+.oralys-home-close__sub p{margin:0 0 8px}
+.oralys-home-close__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-close__btn:hover{transform:translateY(-1px)}
+.oralys-home-close__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-close__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-close__inner{max-width:760px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.oralys-home-close__seal{width:104px;height:104px;border-radius:50%;border:3px solid var(--oh-accent);outline:2px dashed var(--oh-accent);outline-offset:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:22px;color:var(--oh-accent);line-height:1}
+.oralys-home-close__seal strong{font-size:34px;font-family:var(--font-heading--family)}.oralys-home-close__seal span{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-top:4px}
+.oralys-home-close__x p{margin:0 0 14px;color:var(--oh-muted)}
+.oralys-home-close__ticks{list-style:none;padding:0;margin:4px 0 22px;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;font-weight:600}
+.oralys-home-close__ticks li::before{content:"✓ ";color:var(--oh-accent)}
+.oralys-home-close__price{margin:12px 0 0;font-size:14px;color:var(--oh-muted)}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : garantie",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "seal_big",
+      "label": "Sceau : chiffre",
+      "default": "90"
+    },
+    {
+      "type": "text",
+      "id": "seal_small",
+      "label": "Sceau : texte",
+      "default": "jours"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre (italique = couleur accent)",
+      "default": "Essayez-le 90 jours. <em>Gardez-le s'il tient.</em>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Posez-le, mangez, riez, et oubliez-le. Si votre dentier bouge encore, écrivez-nous : vous êtes remboursé intégralement, sans avoir à vous justifier.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tick_1",
+      "label": "Coche 1",
+      "default": "Sans abonnement"
+    },
+    {
+      "type": "text",
+      "id": "tick_2",
+      "label": "Coche 2",
+      "default": "Colis neutre"
+    },
+    {
+      "type": "text",
+      "id": "tick_3",
+      "label": "Coche 3",
+      "default": "Paiement sécurisé"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Bouton",
+      "default": "Je choisis mon pack"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Lien du bouton",
+      "info": "Vide = /products/oralys-gel"
+    },
+    {
+      "type": "text",
+      "id": "price_line",
+      "label": "Ligne prix",
+      "default": "À partir de 39,95 € · livraison en France"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#0E3D30"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#9FD3BC"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#CFE3D9"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#0E3D30"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#2F5E50"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys accueil : garantie"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,372 @@
+{%- assign bs = block.settings -%}
+<div class="oralys-pdp-chips" style="--opc-accent:{{ bs.c_accent }};--opc-tint:{{ bs.c_tint }};--opc-text:{{ bs.c_text }}" {{ block.shopify_attributes }}>
+  <ul class="oralys-pdp-chips__row" role="list">
+    {%- for i in (1..3) -%}
+      {%- assign ck = 'chip_' | append: i -%}{%- assign ik = 'icon_' | append: i -%}
+      {%- if bs[ck] != blank -%}
+      <li class="oralys-pdp-chips__chip">{% if bs[ik] != 'none' %}<span class="oralys-pdp-chips__ic">{% render 'oralys-pdp-icon', name: bs[ik], size: 22 %}</span>{% endif %}<span>{{ bs[ck] }}</span></li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+  {%- if bs.show_pills and bs.pills != blank -%}
+  <div class="oralys-pdp-chips__sit">
+    {%- if bs.pills_label != blank %}<span class="oralys-pdp-chips__label">{{ bs.pills_label }}</span>{% endif -%}
+    <div class="oralys-pdp-chips__pills">{%- assign ps = bs.pills | split: '·' -%}{% for p in ps %}<span class="oralys-pdp-chips__pill"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ p | strip }}</span>{% endfor %}</div>
+  </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.oralys-pdp-chips{display:grid;gap:12px;color:var(--opc-text)}
+.oralys-pdp-chips__row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.oralys-pdp-chips__chip{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px;border:1.5px solid var(--opc-accent);border-radius:12px;background:#fff;font-size:14px;font-weight:600;line-height:1.25}
+.oralys-pdp-chips__ic{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:var(--opc-tint);color:var(--opc-accent)}
+.oralys-pdp-chips__sit{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.oralys-pdp-chips__label{font-size:14px;font-weight:700}
+.oralys-pdp-chips__pills{display:flex;flex-wrap:wrap;gap:6px}
+.oralys-pdp-chips__pill{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:999px;background:var(--opc-tint);color:var(--opc-accent);font-size:14px;font-weight:700}
+@media (min-width:750px){.oralys-pdp-chips__chip{flex-direction:row;text-align:left;padding:10px 12px;font-size:14px}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys : puces avantages",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Puces avantages"
+    },
+    {
+      "type": "text",
+      "id": "chip_1",
+      "label": "Puce 1",
+      "default": "Comble le vide, sans colle"
+    },
+    {
+      "type": "select",
+      "id": "icon_1",
+      "label": "Icône 1",
+      "default": "gap",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "chip_2",
+      "label": "Puce 2",
+      "default": "Même le dentier du bas"
+    },
+    {
+      "type": "select",
+      "id": "icon_2",
+      "label": "Icône 2",
+      "default": "tooth",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "chip_3",
+      "label": "Puce 3",
+      "default": "Croquez dans la baguette"
+    },
+    {
+      "type": "select",
+      "id": "icon_3",
+      "label": "Icône 3",
+      "default": "bread",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Type d'appareil"
+    },
+    {
+      "type": "text",
+      "id": "pills_label",
+      "label": "Libellé",
+      "default": "Pour quel appareil ?"
+    },
+    {
+      "type": "text",
+      "id": "pills",
+      "label": "Choix (séparés par ·)",
+      "default": "Haut · Bas · Complet ou partiel"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_pills",
+      "label": "Afficher le type d'appareil",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_tint",
+      "label": "Fond des puces",
+      "default": "#EEF6F1"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : puces avantages"
+    }
+  ]
+}
+{% endschema %}

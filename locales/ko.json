@@ -121,6 +121,9 @@
     "zoom_media": "{{ index }} 미디어 확대/축소"
   },
   "content": {
+    "cart_extras_shipping": "배송",
+    "cart_extras_free": "무료",
+    "cart_extras_shipping_later": "결제 시 계산",
     "reviews": "리뷰",
     "language": "언어",
     "localization_region_and_language": "지역 및 언어",

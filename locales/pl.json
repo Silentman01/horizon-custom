@@ -125,6 +125,9 @@
     "back_to_main_menu": "Wróć do menu głównego"
   },
   "content": {
+    "cart_extras_shipping": "Wysyłka",
+    "cart_extras_free": "Za darmo",
+    "cart_extras_shipping_later": "Obliczana przy kasie",
     "reviews": "recenzje",
     "language": "Język",
     "localization_region_and_language": "Region i język",

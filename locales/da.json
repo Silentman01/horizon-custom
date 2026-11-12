@@ -121,6 +121,9 @@
     "back_to_main_menu": "Tilbage til hovedmenu"
   },
   "content": {
+    "cart_extras_shipping": "Fragt",
+    "cart_extras_free": "Gratis",
+    "cart_extras_shipping_later": "Beregnes ved betaling",
     "reviews": "anmeldelser",
     "language": "Sprog",
     "localization_region_and_language": "Område og sprog",

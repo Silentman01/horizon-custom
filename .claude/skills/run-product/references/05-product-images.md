@@ -1,6 +1,8 @@
-# Phase 3B — Product images (packshot + gallery remakes)
+# Phase 3B — Product images (packshot + our own conversion gallery)
 
-Goal: a product gallery for our brand that sells exactly like the competitor's — same images in the same order, same main idea, layout logic and claims — showing our product, with **no logo**, perfect spelling, and a clean packshot that every later image and ad reuses.
+Goal: a product gallery that is **ours**: improved over the competitor's, built for conversion (mobile horizontal swipe, direct-response sequence), with the real packaging, perfect spelling and claims at full strength, plus a packshot that every later image and ad reuses.
+
+**Default since 2026-11-12 (operator): own gallery, not 1:1 remakes.** Same principle as copy and pages (00 §2). We MAP the competitor's gallery (what job each slide does, which claims it carries), then BUILD OUR OWN gallery with §16 GALLERY FRAMEWORK: new layouts, our design system, slides chosen and ordered for CVR, every slide tied to a dossier angle card and objection. Steps 1–4 below still run (download, contact sheet, classify, claims list) because they are the framework map. Steps 6–10 (CONCEPT-REMAKE per competitor image) are the **v1 remake set**: make it only when the operator asks for an A/B against the competitor's look, and then name it `v1_remake/`.
 
 Read first: `00-operator-rules.md` §1 (claims) and §4 (product images), `tools-kie.md` (runner, pricing, prompt patterns).
 Runs after the Step Alpha gate and the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses the competitor media downloaded in Phase 1.
@@ -23,6 +25,7 @@ Runs after the Step Alpha gate and the branding gate (needs BRAND, palette, MARK
 13. Prompt templates (ready to fill)
 14. Job JSON and builder example
 15. Noxis run — what went wrong and the corrected first-time prompts
+16. GALLERY FRAMEWORK — our own conversion gallery (default)
 
 ---
 
@@ -116,7 +119,7 @@ Types and how to treat them:
 5. If a print or artefact appears, KEEP-EDIT it away ("Remove any text or print from the frame; keep everything else identical") rather than regenerating.
 **Output:** `03_product-images/<slug>-packshot.png`. Tell the master it exists (the ad stream waits for it).
 **Done when:** a stranger could not tell it apart from the real product, and there is no text on it.
-**Pitfalls:** asking for "small <brand> print on the temple" — GPT Image renders small prints garbled; packaging with the competitor's brand (for boxed products: either a plain unbranded box, or our own packaging only if BRANDING.md defines one).
+**Pitfalls:** asking for "small <brand> print on the temple" — GPT Image renders small prints garbled; packaging with the competitor's brand. For packaged products (tube, box, bottle), when the competitor's packaging shows its brand, ours shows OUR logo (00 §4, Oralys 2026-11-12). Define it in BRANDING.md "Packaging" and make the packshot via the edit endpoint with the padded logo PNG as a reference: wordmark large, positioned like the competitor's, almost no other print. A blank unbranded pack is wrong.
 
 > **Noxis run:** the packshot was made *last*, from our remake 01, with "small 'noxis' print on the temple" → the print came out as "noɓıs". The ad prompts then had to say "no text or logo on the frame". Make it first, text-free.
 
@@ -296,3 +299,74 @@ Fix-round job (KEEP-EDIT, uploading the moved copy):
 - **03 comparison:** "Square comparison graphic split diagonally: left half amber with three green-check white pills at the top \"Designed for LED headlights\", \"Perfect for sensitive eyes\", \"Fits over prescription glasses\", our glasses below and the bold label \"OURS\"; right half light grey labeled \"THEIRS\" showing generic flimsy yellow-lens sport glasses, with three red-cross pills \"Terrible for LED headlights\", \"Too bright for sensitive eyes\", \"Poor fit over prescriptions\". A \"VS\" circle on the diagonal. Small footer bottom-left \"30-Days Money Back Guarantee\"."
 - **04 lifestyle:** "Square lifestyle ad: top 65% a candid photo of a smiling woman in her late 50s with shoulder-length brown hair and a beige sweater driving at dusk, wearing the glasses, city lights outside. White headline on the right \"Drive Confidently At Night With Glare-Free Vision\" with \"Glare-Free\" on an amber box. Bottom 35% amber panel with three black outlined check icons and bold text \"Cataracts\", \"Astigmatism\", \"Fit Over Prescription Glasses\", the glasses at the right of the panel and a small outlined pill \"Polarized\"."
 - **05 testimonial:** "Square testimonial ad: left half the bold black quote \"I finally drive home after dark again\" with five gold stars and the glasses below. Right half a rounded-corner photo of a friendly man in his early 60s with short grey hair and stubble, navy fleece, in the driver's seat, adjusting the glasses. Bottom amber strip with bold text \"Rated 4.8/5 by 1,300+ drivers\"." (rating line = exactly the figure in our page copy, which mirrors Plaims' "Rated 4.8/5 by 1,356+ happy drivers", so page and image agree)
+
+---
+
+## 16. GALLERY FRAMEWORK — our own conversion gallery (default)
+
+**Why:** on mobile the gallery IS the first screen. Most shoppers see slide 1, swipe 2–4 slides, then scroll or leave. A 1:1 remake inherits the competitor's weak slides and its look (operator 2026-11-12: "not 1:1 from competitors but instead are improved and our fully own while helping CVR, horizontal scroll, framework, direct response").
+
+### 16.0 Inspiration bank (scaling brands' galleries, reusable across products)
+Before GALLERY_PLAN.md, the coordinator (only the coordinator calls Brandsearch) finds 15–20 scaling products in 3–4 buckets: the direct category, adjacent categories, the same audience (age / market), and the same format (tube, balm, device…).
+- **Search:** `search_products`, sort `winning`, `ads_30d_min`, `audience_top_age`, quoted title words; skip noise.
+- **Sources:** write the list to `PRODUCTS_ROOT/_image-bank/SOURCES.json`.
+- **Worker** (sonnet):
+  - pulls each gallery from the store's public `/products/<handle>.json` (paced, plain User-Agent, skip on 403/429, never work around blocks);
+  - makes a contact sheet per product;
+  - classifies every slide by job (§16.3 taxonomy + packshot, before-after, authority, ingredients, founder story), layout, text density, visual type, price shown y/n, and why it converts;
+  - writes `_image-bank/INDEX.md` (per product, cross-bank by job, gallery sequences, steal-worthy patterns for this product) plus `_by-job/<job>.jpg` sheets.
+- **Reuse:** the bank lives outside the product folder (`PRODUCTS_ROOT/_image-bank/`) and is extended run after run. New products are appended to SOURCES.json, and the scripts in `_image-bank/_scripts/` are incremental: they skip folders that already exist.
+- **Fill the bank on EVERY launch (operator 2026-11-12: "get even more from any niches so we have enough data for any futur launches … make sure workflow skill fills the bank as it wants for any futur launches"):**
+  1. **This launch's category:** add 5–8 scaling products in the direct category, plus adjacent categories, the same audience (age / market) and the same format, unless the bank already holds them. Search with `search_products`, sort `winning`, `ads_30d_min`, `audience_top_age`, quoted title words.
+  2. **Coverage top-up:** read the Coverage table in INDEX.md. Add up to 10 top products from niches with fewer than 2 brands: `search_products` sort `winning`, `est_revenue_min_usd` 100000, `ads_30d_min` 50, `niche_exclude` = the niches already covered. Take one product per niche, favouring the market's language (FR/DE/IT stores for EU launches).
+  3. **Pull and index:** the worker runs the incremental pull + classification and updates INDEX.md (coverage, per product, cross-bank by job, sequences, patterns for this launch, universal patterns).
+  - **Timing:** right after the branding gate, in parallel with A1. It costs ~20–35 Brandsearch credits per run and no generation credits. GALLERY_PLAN.md waits for INDEX.md.
+- **Use:** GALLERY_PLAN.md cites, per slide, the bank examples it mixes (`bucket/brand/NN`). We take patterns, never pixels. The distinctiveness gate (§16.5) still applies against every source.
+
+### 16.1 Inputs
+- **Framework map** = the Step 3 classification table: each competitor slide's job, claims and text structure.
+- **Dossier** (`00_alpha/ALPHA_DOSSIER.md`): 3.1 angle cards, 3.2 avatars, 1.2 ranked pains, 1.3 desires, 1.4 objections (+ GAP), 1.6 mechanism, 3.5/2.6 language bank (testimony-ready).
+- **SECTION_SPEC** ADAPTATION BLUEPRINT: the hero angle, plus the page sections the gallery must not duplicate word for word.
+- **BRANDING.md:** palette, fonts, the real packaging (Packaging section) and the packshot.
+
+### 16.2 GALLERY_PLAN.md (write it before any prompt) → `03_product-images/GALLERY_PLAN.md`
+One row per slide:
+
+| # | JOB (conversion role) | ANGLE (V/O id) | OBJECTION / PAIN killed (1.4 / 1.2 id) | HEADLINE (market language, ≤ 7 words) | SUPPORT TEXT (≤ 3 short lines) | PROOF ELEMENT | VISUAL (layout, people, product) | WHY IT BEATS THE COMPETITOR SLIDE |
+
+Headlines and support text come from the **copy chief (Opus 4.6, books-playbooks)**. The voice is the customer's, taken from the language bank. Claims stay at full strength (rule 1); the wording is ours (no string identical to the competitor's).
+
+### 16.3 Default sequence (direct-response swipe story; adapt the count to 7–10)
+
+| # | Job | What it must do |
+|---|---|---|
+| 1 | **Hero / thumb-stop** | Real packaging large + the core outcome promise (lead angle) + rating strip (same figures as the page) + 3 icon benefits + a small offer cue. Passes the 3-second test: what is it, what does it do for me, why believe it. |
+| 2 | **Problem / agitation** | The #1 felt pain (1.2 rank 1) as a scene the avatar recognises, the "before" state, in their words. |
+| 3 | **Mechanism** | The unique mechanism (1.6) as one clear visual: why the old way fails and how ours works. A diagram or cross-section beats text. |
+| 4 | **Demo / how-to** | 3 numbered steps with hands and the product. Kills the effort/complexity objection. |
+| 5 | **Outcome / identity** | The dream outcome (1.3) lived by the primary avatar (3.2): the moment they get back. |
+| 6 | **Comparison + cost anchor** | Ours vs the enemy alternatives from the angle cards (cream / relines / implants…), checks vs crosses, a price or per-week anchor. |
+| 7 | **Social proof** | UGC-style review card with a real-looking customer photo of the avatar, stars, a testimony-ready quote and a "verified" mark. |
+| 8 | **Objection buster** | The strongest remaining objection (1.4 with the biggest GAP): compatibility (upper / lower / partial), safety (ingredients), "is it real" (authenticity). |
+| 9 | **Risk reversal + what's in the box** | Guarantee, contents, delivery time, all matching the page and the policies. |
+| 10 | *(optional)* **Offer / bundle value** | The bundle ladder as an image, matching the buy box exactly. |
+
+### 16.4 Design system (one template across all slides, so the swipe reads as one brand)
+- **Shared shell:** the same top band or header style, font (BRANDING), palette roles, icon set (one stroke weight), corner radius and badge style.
+- **Rhythm:** alternate photo-led and graphic-led slides, never 3 text-heavy slides in a row.
+- **Mobile legibility:** headline cap height ≥ 6–7 % of the image height, at most ~25 words per slide, high contrast. Check the thumbnail strip at 120 px.
+- **No prices** on any slide (00 §4): no € / $ figure, per-week cost or struck price; the offer in words only.
+- **Safe margins:** 6 % on every side. Nothing touches an edge (clipped headlines were the main defect on Oralys v1).
+- **Packaging:** always the real packaging from the packshot reference; no overlaid corner logo (00 §4).
+- **Format:** 1:1 2K unless the theme gallery is 4:5. Same ratio for every slide.
+- **People:** they match the slide's avatar card. Two slides never show the same person unless the plan says so.
+
+### 16.5 Distinctiveness gate
+No slide may reuse a competitor slide's layout + headline combination. Put both contact sheets side by side (ours vs `_competitor.jpg`). Pass test: an AI comparing them sees two different galleries doing similar jobs. The same claims are allowed; the same picture is not.
+
+### 16.6 Run and QA
+- **Sample gate first (00 §18):** packshot + slide 1 (hero) + one graphic slide + one people slide → `_samples.jpg` → STOP for the operator's OK, then the rest.
+- **Run:** build the jobs from GALLERY_PLAN.md with the edit endpoint, references `[packshot (+ box), optional layout sketch]`. Name the files `<slug>-product-NN.png` in plan order.
+- **Contact sheet + thumbnail strip check:** spelling at full size, claims verbatim, nothing clipped, product = packshot, the design system held.
+- **Fixes:** KEEP-EDIT (§13.3).
+- **Wiring:** the builder (A3) uses this set as the gallery. A v1 remake set, when one exists, stays in `v1_remake/` for A/B.

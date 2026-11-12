@@ -18,6 +18,9 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 11b. Mobile first
 12. Working style and reporting
 17. Step Alpha before anything is built
+18. Sample gate: about 5 images confirmed before any batch
+19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation
 
 ---
 
@@ -44,8 +47,12 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 **Market:** names and copy follow the target market — ask if not given ("we want to run in US").
 
 ## 4. Product images
-- Remake every competitor gallery image: same main idea, layout logic, text structure and claims, with our product.
-- **No brand logo or wordmark** on product images. "plaims don't have their logo on them and ours lose space because of logo you added."
+- **Own conversion gallery, not 1:1 remakes (operator 2026-11-12):** "a second version on product images that are not 1:1 from competitors but instead are improved and our fully own while helping CVR, horizontal scroll, framework, direct response". Map the competitor gallery (the job of each slide, its claims), then build our own swipe story from the dossier (05 §16 GALLERY FRAMEWORK): hero thumb-stop → problem → mechanism → demo → outcome → comparison + cost → social proof → objection buster → risk reversal. Use one design system, keep claims at full strength in our wording, and use the real packaging. A 1:1 remake set (the old default) is made only for an A/B, in `v1_remake/`.
+- **Never show a price on product images** (operator 2026-11-12): no € / $ figure, "Dès …", per-week cost or crossed-out price on any gallery or page image. Offer words without numbers ("90 jours satisfait ou remboursé", "Le plus choisi") are fine. Prices live in the buy box only.
+- **Inspiration bank before the gallery plan** (operator 2026-11-12): "get inspiration from any brands that are scaling on brandsearch and have proven frameworks … making a bank of product images, by category/niches … and we make our own mix". See 05 §16.0.
+- **No brand logo or wordmark overlaid on the image layout** (corner logos, wordmark headers on infographics). "plaims don't have their logo on them and ours lose space because of logo you added."
+- **But the product's own packaging carries OUR brand** (operator 2026-11-12, Oralys): when the product is a tube, box, bottle or sachet and the competitor prints its brand on it, ours shows our logo the same way. "product doesn't have our logo on them, is that normal? if not, fix". I had specced a blank tube, and ~25 images were redone. Define the branded packaging in BRANDING.md, build the packshot with the padded logo file as an edit reference, keep the printed text LARGE and minimal, and every later image uses that packshot.
+- **The packaging is the real supplier product, rebranded, never an invented design** (same day): "we want to remake this exact same one … So customers receive that product and not different from our product images … see it as a kind of mockup or template". The operator sent the white-label supplier tube+box ("Bond Base 7"), which the competitor sells rebranded as "Oragel 7". Use that photo as the template, swap only the brand word, the tagline (into the market language) and the units, and keep the shape, colours, fonts, layout and number marks. Store it as `01_branding/packaging/<supplier>-original.png`. At the branding gate, ask for the supplier photo when the competitor's packaging looks white-label, meaning the same pack shows up under other brand names.
 - Skip images that only make sense for the competitor (e.g. "IMPORTANT NOTICE — buy only from plaims.com").
 - When only text must change, **edit the existing image** with a keep-everything prompt instead of regenerating (cheaper, keeps the approved look).
 - Keep replaced versions once in `<area>/archive/v<N>_<reason>/` (`v1_with-logo/`, `v1_softened/` …) so nothing approved is lost; never a `superseded/` or duplicate folder.
@@ -135,7 +142,7 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 - **Pipeline order (2026-11-04):** insert the (c) clips FIRST, then de-subtitle, then burn the new captions and audio. Burning captions before the inserts leaves the generated clips with no captions.
 - **No lip sync.** Voice-over: transcribe locally (faster-whisper), rewrite (native translation for a new market, or brand swap for the same market), re-voice. Music or sound effects only: keep the audio. Keep character dialogue that never names the competitor.
 - **Audio provider:** all audio and voice work uses the ElevenLabs API directly, not Kie (key `D:/Ecom/Products/.secrets/elevenlabs.env`, `ELEVENLABS_API_KEY`; Starter, instant cloning, 40k characters/month). Defaults: `eleven_multilingual_v2`, `language_code` of the market, stability 0.55 / similarity 0.9 / style 0.15 / speaker boost.
-- **Clone the original voice:** isolate 30–90 s of the original VO with demucs, clone it (`POST /v1/voices/add`), re-voice only the lines that need remaking and splice them into the original voice track. Record the voice_id in the PLAN; flag when the original sounds like a real person (ElevenLabs' terms require the right to clone) so the operator decides; delete clones no longer needed (10 slots).
+- **Clone the original voice:** isolate 30–90 s of the original VO with demucs, clone it (`POST /v1/voices/add`), re-voice only the lines that need remaking and splice them into the original voice track. Record the voice_id in the PLAN; flag when the original sounds like a real person (ElevenLabs' terms require the right to clone) so the operator decides; voice slots: reuse a saved voice first; when full, delete only the OLDEST custom voice (logged in VOICE_SPEC.md), never anything else (operator 2026-11-12).
 - **Always remake three parts of every video**, even when nothing else needs it, so the script and audio curve differ from the original: the hook (the opening sentence/thought, length from the transcript, not fixed seconds), the very end (closing line/CTA) and one random body line. Same meaning, length and claim strength, cloned voice, same beat, captions updated.
 - **Sync:** each line on its original beat, original pauses kept, no voice-over across cuts, speed-up at most 1.08x (otherwise rephrase), music 8–10 dB under the voice, about −14 LUFS, captions re-timed word by word. Overlays: old ones covered, new ones in the same style, position and timing; brand names respelled phonetically for TTS only ("Awe-ree-uh").
 - **Independent check** before final: frames every 0.5 s, whisper read-back, sync within 0.15 s, the three remakes present, no competitor trace; strip metadata (§14).
@@ -159,15 +166,60 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 >
 > Both analyses must complete before ANY downstream step fires.
 
+## 18. Sample gate: about 5 images confirmed before any batch
+19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation (operator 2026-11-12)
+**Rule:** never generate a full image batch before the operator has confirmed a small sample. Each generation stream first makes **about 5 representative images**, shows them on ONE contact sheet and **stops**. Only after the operator's OK does it generate the rest, then continue without stopping again.
+- **Product / page images (streams B + C), one shared sample:** the packshot (real packaging, 00 §4), the gallery hero (slide 1), one graphic slide (mechanism or comparison, to check text, spelling, margins and the design system), one lifestyle or testimonial image with a person (to check the people, the product in hand and the fit spec), and one page or advertorial image.
+- **Ads (D2 + G), with the sample matched to the competitor's format mix** (operator 2026-11-12): "for videos it remakes one, and images it remakes 5, and waits for approval to finish rest. obviously adapt according to what competitors have. if they only have videos then only 1 video no image".
+  - **Competitor runs both formats:** after the AD_VARIANTS gate, generate **5 image ads** (the top-ranked variants, including one native lo-fi) **and remake 1 video** (the best `reach_rank` story or mechanism video, not a BOFU sale clip). Then STOP for one OK.
+  - **Only videos:** remake 1 video, no image ads.
+  - **Only statics or carousels:** generate 5 image ads, no video.
+  - **After the OK:** generate the rest without stopping again. The 1-video sample replaces the ~20-candidate round unless the operator asks to choose.
+- **Video (G):** the clip gates in 14 still apply inside each remake.
+- **Free before the gate:** prompts, job files, GALLERY_PLAN.md and AD_VARIANTS.md cost nothing, so write them in full before the gate. The operator's feedback is then applied to every job before the batch runs.
+- **Sample sheet:** `<area>/_samples.jpg` (temporary, deleted after the gate). Report the cost of the sample and the estimated cost of the full batch.
+**Why:** on Oralys, about 90 images were generated before the operator first looked. The packaging was wrong (a blank tube instead of the real supplier tube rebranded) and the gallery was a 1:1 remake instead of our own, so most of the batch had to be redone. The operator: "never generates all these images before we confirm few … generate around 5 images and once confirmed it can go through everything else. so we don't waste credits like we did and give feedbacks again".
+
 Also: "before building anything, we must run step alpha". The old Phase 3 ad analysis is removed fully: "you can remove the ad analysis phase 3 since we do every analysis in step alpha now" and "it doesn't move, remove it fully, step alpha is a way better and improved way and contains everything that needs to be analyzed". Step Alpha is the only ad and customer analysis in this skill.
 
+## 19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation (operator 2026-11-12)
+**Rule:** in any market whose language is not English, every customer-facing string must read as if a native copywriter of that market wrote it from scratch. Never translated English. This covers page, home, advertorials, ad copy, on-image text, video scripts, emails and policies.
+- **Write in the market language from the start.** Copy agents write directly in the market language using the dossier's native language bank (2.6 / 3.5). They never draft in English and translate.
+- **Native editor pass before anything is rendered or built.** It runs BEFORE strings go into images, ads, VO or the theme. A separate Opus 4.6 agent briefed as a native senior copywriter of the market (persona, register, culture) checks every string. It hunts:
+  - calques and English rhythm (punchline fragments, "…does." constructions);
+  - anglicisms;
+  - wrong register (FR: vouvoiement, except inside persona letters, which use natural spoken French);
+  - foreign cultural references (Thanksgiving, hot dogs, $, US towns, US names). Replace them with the market's life: déjeuner du dimanche, réveillon, baguette, pharmacie, mutuelle;
+  - typography (FR: espaces insécables, « », decimal comma).
+  - The editor writes `scratch/<LANG>_EDIT_CHANGELOG.md` (old → new → why) plus the list of image texts to re-render.
+- **Image prompts quote only edited strings.** Image and ad prompts use strings that already passed the edit. A generated image with an un-edited string is re-rendered by an edit.
+- **VO scripts get the same pass line by line before voicing.**
+**Why:** on Oralys (FR) the operator flagged: "some copy doesn't sound native french at all. please careful about that … not only these, many others". Gallery examples: « La crème ne le traverse pas » (calque of "paste can't cross"), « Poser un trait », « Tout ce que vous aviez arrêté », « Tient au café chaud », « Un gel qui épouse la gencive, si. ». Copy written from English sources and US competitor letters had carried the English over.
+## 20. HARD RULE: cost estimate + manual confirmation before ANY paid generation (operator 2026-11-12)
+**Rule:** no image, image edit, video clip, voice-design or TTS call is ever made until the operator has confirmed a written cost estimate for that round. It covers samples, full batches, fix rounds and retries. There is no exception and no "it's only a few cents".
+1. **Write the estimate:** `PD/scratch/GEN_ESTIMATE_<round>.md`.
+   - **What:** item by item: the file it produces, its job, type (new image / edit / video clip / voice), model, size or duration.
+   - **Cost per item:** the unit cost from the rate tables (tools-kie, `video_argolink.py` RATES, the ElevenLabs plan), and the expected retries.
+   - **Totals:** the round total with a +20 % buffer, the **run spend to date** (the ledger below) and the projected run total.
+   - **Next step:** what comes after this round, and its estimated cost.
+2. **Ask for confirmation:** show the operator the list as a short table plus the total, and STOP. Only an explicit OK, or an OK with a changed scope or budget, releases the round.
+3. **Cap:** the approved total is a hard cap for that round. Every runner logs cost (`cost.json`). An agent that would exceed the cap stops and returns a new estimate. It never overruns silently.
+4. **Ledger:** keep the run spend in BRIEF.md "Spend ledger": date, round, items, approved, actual. Report it in every gate message.
+5. **Sub-agents:** they get the approved budget in their brief and are told: no paid call beyond it; when out of budget, stop and estimate. Free local work (ffmpeg, desub, Whisper, scripts, prompts, plans) continues.
+6. **Combined with the sample gate (§18):** the sample's estimate AND the full batch's estimate are shown together. After the sample is approved, the full batch still needs its own OK (it can be given in the same answer).
+**Why:** on Oralys, more than $15 was spent across ~260 images and several video clips before the operator saw a single number. Rounds were re-done because of spec changes (blank packaging, 1:1 gallery, prices on images, non-native French). The operator: "we have spent >$15 so far and that's a lot. update skill so next time before generating any video clips or images it should make a cost estimation, what it wants to generate and needs manual confirmation before generating many medias. hard rule".
 ## Operator rules (summary — full text in the sections above)
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
 - **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
 - **Adapted framework, not 1:1 clones (§2).** MAP the competitor's winning formula (conversion flow, funnel psychology, offer/trust/proof architecture), then BUILD OUR OWN version: same conversion principles, different execution. Title pattern stays with our brand; palette adapted from the competitor's role logic; page structure, copy, and design are distinctly ours. No string word-for-word identical to the competitor's.
 - **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
-- **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
+- **HARD RULE: cost estimate + manual OK before ANY paid generation (§20):** images, edits, video clips and voices. Write GEN_ESTIMATE (items, model, unit cost, +20 %, run spend to date), STOP for the operator's OK; the approved total is a hard cap; keep a spend ledger in BRIEF.
+- **Native-language copy gate (§19):** non-English markets: copy is written in the market language from the start (never translated), then a separate Opus 4.6 native-copywriter edit pass checks every string (calques, register, culture, typography) BEFORE it goes into images, ads, VO or the theme.
+- **Sample gate (§18):** every image stream first makes ~5 representative images on one sheet → operator OK → then the full batch. Plans and job files are written in full before the gate (free).
+- **No logo overlaid on product images, but the packaging is the real supplier product rebranded with our name (§4)**; own conversion gallery, not 1:1 remakes; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
 - **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
 - **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).

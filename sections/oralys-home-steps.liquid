@@ -1,0 +1,278 @@
+<section class="oralys-home-steps" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-steps__inner">
+    <div class="oralys-home-steps__head{% if section.settings.align == 'center' %} oralys-home-steps__head--center{% endif %}">{% if section.settings.eyebrow != blank %}<p class="oralys-home-steps__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}{% if section.settings.heading != blank %}<h2 class="oralys-home-steps__h">{{ section.settings.heading }}</h2>{% endif %}{% if section.settings.subheading != blank %}<div class="oralys-home-steps__sub">{{ section.settings.subheading }}</div>{% endif %}</div>
+    <ol class="oralys-home-steps__list">
+      {% for block in section.blocks %}
+        <li class="oralys-home-steps__item" {{ block.shopify_attributes }}>
+          <div class="oralys-home-steps__mark"><span>{{ forloop.index }}</span></div>
+          <div class="oralys-home-steps__card">
+            {% if block.settings.image != blank %}{{ block.settings.image | image_url: width: 700 | image_tag: class: 'oralys-home-steps__img', loading: 'lazy', alt: block.settings.title }}
+            {% elsif block.settings.asset != blank %}<img class="oralys-home-steps__img" src="{{ block.settings.asset | asset_url }}" alt="{{ block.settings.title | escape }}" width="800" height="600" loading="lazy">{% endif %}
+            <div class="oralys-home-steps__row"><h3 class="oralys-home-steps__t">{{ block.settings.title }}</h3>{% if block.settings.time != blank %}<span class="oralys-home-steps__time">{{ block.settings.time }}</span>{% endif %}</div>
+            <div class="oralys-home-steps__x">{{ block.settings.text }}</div>
+          </div>
+        </li>
+      {% endfor %}
+    </ol>
+    {% if section.settings.tip != blank %}<p class="oralys-home-steps__tip">{{ section.settings.tip }}</p>{% endif %}
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-steps{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-steps *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-steps{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-steps__inner{max-width:1200px;margin:0 auto}
+.oralys-home-steps__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-steps__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-steps__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-steps__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-steps__h{font-size:var(--oh-h-d)}}
+.oralys-home-steps__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-steps__head[style*=center] .oralys-home-steps__sub,.oralys-home-steps__head--center .oralys-home-steps__sub{margin-inline:auto}
+.oralys-home-steps__sub p{margin:0 0 8px}
+.oralys-home-steps__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-steps__btn:hover{transform:translateY(-1px)}
+.oralys-home-steps__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-steps__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-steps__list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.oralys-home-steps__item{display:grid;grid-template-columns:48px 1fr;gap:14px;position:relative;padding-bottom:18px}
+.oralys-home-steps__item:not(:last-child)::before{content:"";position:absolute;left:23px;top:48px;bottom:0;border-left:2px dashed var(--oh-accent);opacity:.5}
+.oralys-home-steps__mark span{width:48px;height:48px;border-radius:50%;background:var(--oh-accent);color:#fff;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center}
+.oralys-home-steps__card{background:var(--oh-card);border:1px solid var(--oh-line);border-radius:12px;padding:14px 16px}
+.oralys-home-steps__img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin-bottom:10px;display:block}
+.oralys-home-steps__row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.oralys-home-steps__t{margin:0;font-family:var(--font-heading--family);font-size:20px}
+.oralys-home-steps__time{font-size:13px;font-weight:700;color:var(--oh-accent);border:1px solid var(--oh-accent);border-radius:40px;padding:2px 10px;white-space:nowrap}
+.oralys-home-steps__x p{margin:6px 0 0;color:var(--oh-muted)}
+.oralys-home-steps__tip{margin:18px 0 0;padding:12px 16px;border-radius:12px;background:var(--oh-card);font-weight:600;text-align:center}
+@media (min-width:990px){
+ .oralys-home-steps__list{grid-template-columns:repeat(var(--oh-cols,4),1fr);gap:20px}
+ .oralys-home-steps__item{grid-template-columns:1fr;padding:0}
+ .oralys-home-steps__item:not(:last-child)::before{left:56px;right:-20px;top:23px;bottom:auto;border-left:0;border-top:2px dashed var(--oh-accent)}
+ .oralys-home-steps__mark{position:relative;z-index:1}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : étapes",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "Mode d'emploi"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre (italique = mot en couleur accent)",
+      "default": "<em>Quatre gestes</em> simples, ce soir"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Sous-titre",
+      "default": "<p>Moins de cinq minutes devant votre lavabo, sans rendez-vous et sans outil.</p>"
+    },
+    {
+      "type": "text",
+      "id": "tip",
+      "label": "Astuce sous les étapes",
+      "default": "Première fois ? Posez-le un soir, au calme. Dès la deuxième fois, le geste devient naturel."
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#F6FAF8"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 88
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Étape",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titre",
+          "default": "Étape"
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Durée",
+          "default": "1 min"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Texte",
+          "default": "<p>Texte de l'étape.</p>"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image (4:3)"
+        },
+        {
+          "type": "text",
+          "id": "asset",
+          "label": "Image : fichier du thème (secours)",
+          "info": "Vide = pas d'image. Prévu : oralys-step-1-chauffer.jpg, oralys-step-2-poser.jpg, oralys-step-3-mordre.jpg, oralys-step-4-retirer.jpg."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Oralys accueil : étapes"
+    }
+  ]
+}
+{% endschema %}

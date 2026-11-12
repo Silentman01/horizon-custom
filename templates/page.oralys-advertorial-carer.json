@@ -1,0 +1,727 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Contenu sponsorisé",
+        "publication_name": "Entre Proches",
+        "publication_tagline": "Le magazine des aidants familiaux",
+        "masthead_nav": "Vos parents | Santé | Droits & aides | Au quotidien | Témoignages",
+        "category": "Vos parents · Témoignage",
+        "headline": "Maman ne finissait plus son assiette. <strong>Ce n’était ni l’âge ni l’appétit : c’était son dentier.</strong>",
+        "dek": "<p>À 88 ans, Odette avait perdu 4 kilos en un hiver. Sa fille Catherine a fini par trouver la vraie raison, et un geste de dix minutes, le soir, qui lui a rendu le plaisir de manger. Sans colle à remettre à chaque repas.</p>",
+        "author_name": "Par Catherine Morel, 58 ans, Tours",
+        "author_role": "Aidante de sa mère depuis 2021",
+        "author_image_asset": "oralys-adv-c2-daughter-worried.webp",
+        "date_text": "Publié le 10 novembre 2026",
+        "meta_text": "7 min de lecture",
+        "hero_image_asset": "oralys-adv-c1-mother-plate-untouched.webp",
+        "hero_caption": "Le déjeuner du dimanche. Odette coupait sa viande en tout petits morceaux, puis la laissait sur le bord de l’assiette.",
+        "hero_ratio": "landscape",
+        "heading_font": "lora_n7",
+        "body_font": "figtree_n4",
+        "h1_size_mobile": 29,
+        "h1_size_desktop": 42,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 700,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E",
+        "color_muted": "#5C6863",
+        "color_accent": "#0E6B50",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#FBE3A6",
+        "masthead_bg": "#FFFFFF",
+        "masthead_text": "#0E3D30",
+        "pad_top": 0,
+        "pad_bottom": 20,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 12
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le dimanche, Maman vient déjeuner à la maison. C’est notre rituel depuis la mort de Papa.</p><p>Pendant des mois, je n’ai rien vu. Ou plutôt, j’ai vu sans comprendre. Elle coupait sa viande en tout petits morceaux, les poussait sur le bord de l’assiette, et finissait par dire : « Je n’ai plus très faim, ma chérie. »</p><p>Je mettais ça sur le compte de l’âge. On nous répète tellement que les personnes âgées mangent moins.</p><p>Et puis, en janvier, l’infirmière qui passe chez elle l’a pesée. <strong>4 kilos de moins depuis septembre.</strong> Pour une femme de 52 kilos.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        }
+      },
+      "block_order": [
+        "text_1"
+      ]
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Elle ne refusait pas de manger. Elle avait peur que son dentier tombe devant nous.",
+        "name": "Catherine Morel",
+        "detail": "Aidante, Tours",
+        "style": "marks",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ce qu’elle n’osait pas me dire",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le soir même, je lui ai posé la question franchement. Elle a mis longtemps à répondre. Puis elle a avoué : son dentier du bas bougeait dès qu’elle mâchait. Le pain, la viande, la pomme du dessert : tout était devenu un risque. Alors elle prenait la purée, le yaourt, et elle laissait le reste.</p><p>Elle avait honte. Elle ne voulait pas « nous embêter avec ça ».</p><p>C’est là que j’ai compris que je passais à côté de quelque chose d’important. Quand une personne âgée ne mâche plus, elle avale mal, elle est ballonnée, elle maigrit, et elle se fatigue. Ce n’était pas un problème de confort. <strong>C’était sa santé.</strong></p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Tout ce qu’on a essayé, et pourquoi rien ne tenait",
+            "size": "large"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Je suis organisée. J’ai fait comme pour tout le reste : une liste, et on a essayé.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_5": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "La crème adhésive de la pharmacie : au bout de dix minutes, au moment du café, l’appareil partait tout seul. Le soir, il fallait gratter les restes sur sa gencive.\nPlus de crème : un goût dans la bouche toute la journée, et ça ne tenait pas mieux.\nLes coussinets : trop épais, elle les sentait, elle les enlevait en cachette.\nLe prothésiste : un rendez-vous dans trois mois. Trois mois à manger de la purée.\nLe contrôle à l’accueil de jour : une note sur son carnet, « Appareils inadaptés. À revoir. » Merci, on le savait.",
+            "icon": "cross"
+          }
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Je me sentais coupable. C’est ma mère. Elle m’a nourrie pendant vingt ans, et moi je n’arrivais pas à la faire manger.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "heading_3",
+        "text_4",
+        "checklist_5",
+        "text_6"
+      ]
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ce que la pharmacienne m’a expliqué en deux minutes",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>C’est finalement à la pharmacie de son quartier que tout a changé. J’achetais un énième tube de crème, et la pharmacienne m’a demandé, gentiment : « C’est pour votre maman ? Elle porte son dentier depuis longtemps ? »</p><p>Vingt-cinq ans. Elle a hoché la tête, et elle m’a dessiné ça sur un bout d’ordonnance.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Quand on perd ses dents, l’os de la mâchoire continue de fondre, année après année. La gencive descend, surtout en bas.\nLe dentier, lui, ne change pas de forme. Un vide se crée entre la gencive et l’appareil.\nLa crème est une colle de surface : elle colle deux choses qui se touchent. Elle ne peut pas remplir un vide, et la salive la dissout en quelques heures.\nCe qu’il faut, ce n’est pas plus de colle. C’est combler le vide.",
+            "icon": "number"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "« Votre maman n’y est pour rien. Et vous non plus. »",
+            "text": "<p>« On ne colle pas un vide : on le remplit », m’a dit la pharmacienne. Je crois que c’est la première fois en un an que je me suis sentie soulagée.</p>",
+            "style": "tint"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "checklist_3",
+        "callout_4"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma : l’os fond sous le dentier et un vide se creuse entre la gencive et l’appareil",
+        "caption": "Le vide sous l’appareil : la crème ne peut pas le remplir, le gel prend sa forme exacte.",
+        "ratio": "natural",
+        "width": "content",
+        "radius": 14,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Un gel qui prend la forme de sa gencive",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Elle m’a parlé d’un gel de rebasage qu’on applique à la maison : <strong>Oralys</strong>. On le réchauffe dans un bol d’eau chaude, il devient souple, on le dépose dans l’appareil, on remet l’appareil en bouche, et il prend la forme exacte de la gencive. En refroidissant, il devient ferme. La salive ne le dissout pas.</p><p>Une seule application tient des jours, pas des heures. Et quand il faut le changer, il se retire d’un seul morceau. Sans zinc, sans colle à gratter.</p><p>Pour moi, ce dernier point a tout changé. Je ne vis pas chez Maman. Je ne pouvais pas être là à chaque repas pour remettre de la crème. Un geste le soir, et c’est réglé pour plusieurs jours.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "link",
+        "heading": "",
+        "text": "",
+        "button_label": "Voir le gel Oralys",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé"
+      }
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-c5-daughter-tube-in-hand.webp",
+        "alt": "Une femme tient un tube de gel Oralys dans sa cuisine",
+        "caption": "Le dimanche soir, après le dîner : dix minutes la première fois, cinq maintenant.",
+        "ratio": "portrait",
+        "width": "content",
+        "radius": 14,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Comment je le fais pour elle, le soir",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Maman a les mains qui tremblent un peu. Alors c’est moi qui m’en occupe, le dimanche soir après le dîner.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Je réchauffe le tube quelques minutes dans un bol d’eau chaude (pas bouillante, 60 °C maximum), le temps que le gel devienne souple.\nJe dépose un cordon de gel dans le creux de l’appareil bien sec, comme un trait de dentifrice.\nMaman remet son dentier et serre doucement une minute. Le gel prend la forme de sa gencive. Une fois froid, je coupe le surplus.\nPour le changer, je trempe l’appareil dans l’eau chaude : le gel sort d’un seul morceau. On recommence.",
+            "icon": "number"
+          }
+        },
+        "heading_4": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ce qui s’est passé ensuite",
+            "size": "large"
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "title": "Le premier soir",
+            "text": "<p>Elle a serré les dents, ouvert la bouche, refermé. Elle m’a regardée : « Il ne bouge plus. » Je n’y croyais pas.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_6": {
+          "type": "callout",
+          "settings": {
+            "title": "Jour 3",
+            "text": "<p>Au téléphone : « J’ai mangé une tranche de jambon avec du pain. Le pain, Catherine ! » Aucune crème remise depuis dimanche.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_7": {
+          "type": "callout",
+          "settings": {
+            "title": "Jour 10",
+            "text": "<p>L’infirmière note qu’elle a repris 600 grammes. Maman est retournée au club le jeudi, pour le goûter.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_8": {
+          "type": "callout",
+          "settings": {
+            "title": "Le repas de Noël",
+            "text": "<p>Elle a mangé de tout, de l’entrée à la bûche. Mon fils l’a fait rire : elle a ri la bouche ouverte, sans mettre la main devant. La première fois depuis des années.</p>",
+            "style": "tint"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "checklist_3",
+        "heading_4",
+        "callout_5",
+        "callout_6",
+        "callout_7",
+        "callout_8"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-c4-mother-eating-again.webp",
+        "alt": "Une femme âgée mange avec appétit à une table de famille",
+        "caption": "Odette, à table, quelques semaines plus tard. Elle finit son assiette.",
+        "ratio": "landscape",
+        "width": "wide",
+        "radius": 14,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "quote_2": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Je ne lui ai pas acheté un produit. Je lui ai rendu le déjeuner du dimanche.",
+        "name": "Catherine Morel",
+        "detail": "Aidante de sa mère, 88 ans",
+        "style": "marks",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26
+      }
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Les questions que je me suis posées, en tant qu’aidante",
+            "size": "large"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "title": "Est-ce compliqué ?",
+            "text": "<p>Non. Si vous savez mettre du dentifrice sur une brosse, vous savez le faire. La première fois, prenez dix minutes au calme.</p>",
+            "style": "border"
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "Faut-il recommencer tous les jours ?",
+            "text": "<p>Non. Une application tient plusieurs jours. Plus de crème matin, midi et soir.</p>",
+            "style": "border"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "Et si mon parent est en EHPAD ?",
+            "text": "<p>Une amie le fait pour son père en résidence, pendant sa visite du week-end. Le personnel n’a rien à gérer entre deux.</p>",
+            "style": "border"
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "title": "Et le dentier du bas ?",
+            "text": "<p>C’est justement là que Maman avait le plus de mal. Le gel comble le vide en haut comme en bas, sur un complet comme sur un partiel.</p>",
+            "style": "border"
+          }
+        },
+        "callout_6": {
+          "type": "callout",
+          "settings": {
+            "title": "Est-ce que ça abîme le dentier ? Est-ce sûr ?",
+            "text": "<p>Non : le gel se retire d’un seul morceau à l’eau chaude. Sans zinc, rien qui fond dans la bouche, rien qu’elle avale.</p>",
+            "style": "border"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "callout_2",
+        "callout_3",
+        "callout_4",
+        "callout_5",
+        "callout_6"
+      ]
+    },
+    "cta_2": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Le gel qui a rendu ses repas à Odette",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ce que je dirais à une autre fille, à un autre fils",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Si votre père ou votre mère laisse son assiette, ne vous contentez pas de « c’est l’âge ». Demandez-lui, doucement, si son dentier bouge. Il y a de grandes chances que la réponse soit oui, et qu’il ou elle n’ose pas le dire.</p><p>Ce n’est pas sa faute. Ce n’est pas la vôtre. C’est un vide sous l’appareil. Et un vide, ça se comble.</p><p>Vous avez 90 jours pour essayer. Nous, il nous a fallu un soir. <a href=\"/products/oralys-gel\">Voir l’offre Oralys</a>.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-c3-mother-daughter-embrace.webp",
+        "alt": "Une mère et sa fille s’embrassent en souriant",
+        "caption": "« Merci, ma chérie. » Elle me le dit encore chaque dimanche.",
+        "ratio": "landscape",
+        "width": "wide",
+        "radius": 14,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "quote_3": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Mon père a 84 ans, il est en EHPAD à Angers. Je le fais le samedi pendant ma visite. Il a redemandé du pain au dîner.",
+        "name": "Évelyne R., 61 ans",
+        "detail": "Angers · pour son père",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "quote_4": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "J’étais sceptique, j’avais tout essayé pour ma belle-mère. Le dentier du bas tient enfin. Plus de crème à racheter toutes les semaines.",
+        "name": "Nadia B., 52 ans",
+        "detail": "Lyon · pour sa belle-mère",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "quote_5": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Auxiliaire de vie depuis 12 ans : c’est la première chose qui tient sans que je doive repasser à midi. Je l’ai conseillé à trois familles.",
+        "name": "Isabelle T., 47 ans",
+        "detail": "Nantes · auxiliaire de vie",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (38)",
+        "sort_label": "Les plus récents",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#1F4E8C",
+        "color_reply_bg": "#F3F6F4"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Ginette L.",
+            "badge": "",
+            "text": "Ma mère a 90 ans et elle mange de la purée depuis l’été. Je viens de commander. Merci pour ce témoignage.",
+            "time": "il y a 2 h",
+            "likes": "19",
+            "is_reply": false,
+            "avatar_color": "#7A4E9C"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Catherine Morel",
+            "badge": "Auteure",
+            "text": "Faites-le un soir au calme, et racontez-moi ! Bon courage à vous deux.",
+            "time": "il y a 1 h",
+            "likes": "8",
+            "is_reply": true,
+            "avatar_color": "#0E6B50"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Alain D.",
+            "badge": "",
+            "text": "Commandé pour mon père en octobre. Il a recommencé à aller au restaurant. Le bas tient.",
+            "time": "il y a 5 h",
+            "likes": "27",
+            "is_reply": false,
+            "avatar_color": "#3D6E9C"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Brigitte F.",
+            "badge": "",
+            "text": "Je croyais que c’était l’âge, comme vous. Ça fait du bien de lire ça.",
+            "time": "hier",
+            "likes": "41",
+            "is_reply": false,
+            "avatar_color": "#9C3D54"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Christophe M.",
+            "badge": "",
+            "text": "Le pack de 2 tubes nous fait plus de deux mois.",
+            "time": "hier",
+            "likes": "12",
+            "is_reply": false,
+            "avatar_color": "#B5651D"
+          }
+        },
+        "comment_6": {
+          "type": "comment",
+          "settings": {
+            "name": "Colette G.",
+            "badge": "",
+            "text": "Est-ce que ça marche pour un partiel ?",
+            "time": "il y a 2 j",
+            "likes": "6",
+            "is_reply": false,
+            "avatar_color": "#1F4E8C"
+          }
+        },
+        "comment_7": {
+          "type": "comment",
+          "settings": {
+            "name": "Catherine Morel",
+            "badge": "Auteure",
+            "text": "Oui, le gel comble le vide sous la partie en résine. Une voisine l’utilise sur son partiel du haut.",
+            "time": "il y a 2 j",
+            "likes": "9",
+            "is_reply": true,
+            "avatar_color": "#0E6B50"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5",
+        "comment_6",
+        "comment_7"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "Entre Proches",
+        "text": "<p>Cet article est une publicité pour Oralys. Entre Proches est une publication éditée par Oralys.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 Entre Proches",
+        "color_bg": "#F3F6F4",
+        "color_text": "#5C6863"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "quote_1",
+    "body_2",
+    "body_3",
+    "figure_1",
+    "body_4",
+    "cta_1",
+    "figure_2",
+    "body_5",
+    "figure_3",
+    "quote_2",
+    "body_6",
+    "cta_2",
+    "body_7",
+    "figure_4",
+    "quote_3",
+    "quote_4",
+    "quote_5",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}

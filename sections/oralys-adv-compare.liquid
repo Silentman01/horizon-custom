@@ -1,0 +1,151 @@
+{%- liquid
+  assign s = section.settings
+  assign cols = s.columns | plus: 0
+  assign hl = s.highlight | plus: 0
+-%}
+{%- style -%}
+  .oralys-adv-cp-{{ section.id }} {
+    {% if s.color_bg != blank %}background: {{ s.color_bg }};{% endif %}
+    --oralys-adv-cp-hl: {{ s.color_highlight_bg }};
+    --oralys-adv-cp-hl-bd: {{ s.color_highlight_border }};
+    --oralys-adv-cp-yes: {{ s.color_yes }};
+    --oralys-adv-cp-no: {{ s.color_no }};
+    --oralys-adv-cp-head: {{ s.color_head_bg }};
+    padding-top: {{ s.pad_top_mobile }}px;
+    padding-bottom: {{ s.pad_bottom_mobile }}px;
+  }
+  @media (min-width: 750px) {
+    .oralys-adv-cp-{{ section.id }} { padding-top: {{ s.pad_top }}px; padding-bottom: {{ s.pad_bottom }}px; }
+  }
+{%- endstyle -%}
+
+<div class="oralys-adv-cp oralys-adv-cp-{{ section.id }}">
+  <div class="oralys-adv-cp__in">
+    {%- if s.heading != blank -%}<h2 class="oralys-adv-cp__h">{{ s.heading }}</h2>{%- endif -%}
+    {%- if s.intro != blank -%}<div class="oralys-adv-cp__intro">{{ s.intro }}</div>{%- endif -%}
+    <div class="oralys-adv-cp__scroll">
+      <table class="oralys-adv-cp__t oralys-adv-cp__t--{{ cols }}">
+        <thead>
+          <tr>
+            <th scope="col" class="oralys-adv-cp__corner">{{ s.corner_label }}</th>
+            {%- for i in (1..cols) -%}
+              {%- capture key %}col_{{ i }}{% endcapture -%}
+              <th scope="col" class="oralys-adv-cp__th{% if i == hl %} is-hl{% endif %}">{{ s[key] }}</th>
+            {%- endfor -%}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <th scope="row" class="oralys-adv-cp__row">{{ block.settings.label }}</th>
+              {%- for i in (1..cols) -%}
+                {%- capture key %}v{{ i }}{% endcapture -%}
+                {%- assign v = block.settings[key] | strip -%}
+                {%- assign first = v | slice: 0 -%}
+                <td class="oralys-adv-cp__td{% if i == hl %} is-hl{% endif %}">
+                  {%- if first == '✓' -%}
+                    <span class="oralys-adv-cp__yes" aria-label="oui"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M5.5 10.3l3 3 6-6.3" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                    {{- v | remove_first: '✓' -}}
+                  {%- elsif first == '✗' -%}
+                    <span class="oralys-adv-cp__no" aria-label="non"><svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="10" fill="currentColor"/><path d="M6.5 6.5l7 7M13.5 6.5l-7 7" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg></span>
+                    {{- v | remove_first: '✗' -}}
+                  {%- else -%}
+                    {{- v -}}
+                  {%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+    {%- if s.footnote != blank -%}<p class="oralys-adv-cp__note">{{ s.footnote }}</p>{%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .oralys-adv-cp__in { max-width: var(--oralys-adv-measure, 700px); margin: 0 auto; padding: 0 16px; }
+  .oralys-adv-cp__h {
+    font-family: var(--oralys-adv-font-head);
+    font-weight: var(--oralys-adv-font-head-weight, 700);
+    font-size: 23px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .oralys-adv-cp__intro { color: var(--oralys-adv-muted); margin-bottom: 14px; }
+  .oralys-adv-cp__intro p { margin: 0 0 0.6em; }
+  .oralys-adv-cp__scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .oralys-adv-cp__t { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; line-height: 1.35; }
+  .oralys-adv-cp__t th, .oralys-adv-cp__t td { padding: 11px 8px; border-bottom: 1px solid var(--oralys-adv-line, #dce5e0); vertical-align: middle; text-align: center; }
+  .oralys-adv-cp__t thead th { background: var(--oralys-adv-cp-head); font-size: 14px; font-weight: 700; }
+  .oralys-adv-cp__corner { text-align: left !important; }
+  .oralys-adv-cp__row { text-align: left !important; font-weight: 600; }
+  @media (max-width: 749px) {
+    .oralys-adv-cp__in { padding: 0 12px; }
+    .oralys-adv-cp__t { table-layout: fixed; font-size: 13px; line-height: 1.3; hyphens: auto; overflow-wrap: anywhere; }
+    .oralys-adv-cp__t th, .oralys-adv-cp__t td { padding: 9px 4px; }
+    .oralys-adv-cp__t thead th { font-size: 12.5px; }
+    .oralys-adv-cp__corner, .oralys-adv-cp__row { width: 28%; }
+    .oralys-adv-cp__t--1 .oralys-adv-cp__corner, .oralys-adv-cp__t--1 .oralys-adv-cp__row { width: 40%; }
+    .oralys-adv-cp__yes svg, .oralys-adv-cp__no svg { width: 16px; height: 16px; }
+    .oralys-adv-cp__yes, .oralys-adv-cp__no { display: flex; justify-content: center; margin: 0 auto 2px; }
+  }
+  .oralys-adv-cp__t .is-hl { background: var(--oralys-adv-cp-hl); border-left: 2px solid var(--oralys-adv-cp-hl-bd); border-right: 2px solid var(--oralys-adv-cp-hl-bd); font-weight: 700; }
+  .oralys-adv-cp__t thead .is-hl { border-top: 2px solid var(--oralys-adv-cp-hl-bd); border-radius: 10px 10px 0 0; color: var(--oralys-adv-accent); }
+  .oralys-adv-cp__t tbody tr:last-child .is-hl { border-bottom: 2px solid var(--oralys-adv-cp-hl-bd); border-radius: 0 0 10px 10px; }
+  .oralys-adv-cp__yes, .oralys-adv-cp__no { display: inline-flex; vertical-align: middle; margin-right: 4px; }
+  .oralys-adv-cp__yes { color: var(--oralys-adv-cp-yes); }
+  .oralys-adv-cp__no { color: var(--oralys-adv-cp-no); }
+  .oralys-adv-cp__note { font-size: 13px; color: var(--oralys-adv-muted); margin: 10px 0 0; }
+  @media (min-width: 750px) {
+    .oralys-adv-cp__h { font-size: 28px; }
+    .oralys-adv-cp__t { font-size: 16px; }
+    .oralys-adv-cp__t th, .oralys-adv-cp__t td { padding: 13px 12px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Adv · Comparison box",
+  "tag": "section",
+  "class": "oralys-adv-cp-section",
+  "max_blocks": 14,
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Comparatif" },
+    { "type": "richtext", "id": "intro", "label": "Intro" },
+    { "type": "select", "id": "columns", "label": "Columns", "default": "3", "options": [ { "value": "2", "label": "2" }, { "value": "3", "label": "3" } ] },
+    { "type": "text", "id": "corner_label", "label": "First column header" },
+    { "type": "text", "id": "col_1", "label": "Column 1", "default": "Option A" },
+    { "type": "text", "id": "col_2", "label": "Column 2", "default": "Option B" },
+    { "type": "text", "id": "col_3", "label": "Column 3", "default": "Option C" },
+    { "type": "select", "id": "highlight", "label": "Highlighted column", "default": "3", "options": [ { "value": "0", "label": "None" }, { "value": "1", "label": "1" }, { "value": "2", "label": "2" }, { "value": "3", "label": "3" } ] },
+    { "type": "text", "id": "footnote", "label": "Footnote" },
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "color_bg", "label": "Background" },
+    { "type": "color", "id": "color_head_bg", "label": "Header row", "default": "#F5F8F6" },
+    { "type": "color", "id": "color_highlight_bg", "label": "Highlighted column", "default": "#EEF6F1" },
+    { "type": "color", "id": "color_highlight_border", "label": "Highlight border", "default": "#0E6B50" },
+    { "type": "color", "id": "color_yes", "label": "Check icon", "default": "#0E6B50" },
+    { "type": "color", "id": "color_no", "label": "Cross icon", "default": "#B9C2BE" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Top desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 32 },
+    { "type": "range", "id": "pad_top_mobile", "label": "Top mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "pad_bottom_mobile", "label": "Bottom mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Row label", "default": "Critère" },
+        { "type": "text", "id": "v1", "label": "Column 1 value", "default": "✗", "info": "Start with ✓ or ✗ to show an icon; text after it stays." },
+        { "type": "text", "id": "v2", "label": "Column 2 value", "default": "✗" },
+        { "type": "text", "id": "v3", "label": "Column 3 value", "default": "✓" }
+      ]
+    }
+  ],
+  "presets": [ { "name": "Adv · Comparison box", "blocks": [ { "type": "row" }, { "type": "row" } ] } ]
+}
+{% endschema %}

@@ -123,6 +123,9 @@
     "back_to_main_menu": "Natrag na glavni izbornik"
   },
   "content": {
+    "cart_extras_shipping": "Dostava",
+    "cart_extras_free": "Besplatna",
+    "cart_extras_shipping_later": "Izračunava se pri plaćanju",
     "reviews": "recenzije",
     "no_results_found": "Nema pronađenih rezultata",
     "language": "Jezik",

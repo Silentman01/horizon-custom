@@ -121,6 +121,9 @@
     "back_to_main_menu": "返回主菜单"
   },
   "content": {
+    "cart_extras_shipping": "运费",
+    "cart_extras_free": "免费",
+    "cart_extras_shipping_later": "结账时计算",
     "reviews": "评价",
     "no_results_found": "未找到结果",
     "language": "语言",
