@@ -69,7 +69,7 @@
               "type": "oralys-pdp-gallery",
               "settings": {
                 "mode": "fallback",
-                "items": "oralys-pdp-v2-01.webp | Tient 2 à 3 jours, pas une matinée.\noralys-pdp-v2-02.webp | Avant, elle cachait son sourire.\noralys-pdp-v2-03.webp | On ne colle pas un vide. On le comble.\noralys-pdp-v2-04.webp | Il prend la forme de vos gencives.\noralys-pdp-v2-05.webp | « Il faudra vous y faire. » Non.\noralys-pdp-v2-06.webp | Tout ce à quoi vous aviez renoncé.\noralys-pdp-v2-07.webp | Le résultat d'un rebasage, le prix d'un tube.\noralys-pdp-v2-08.webp | « Ce n'est pas la colle, c'est le vide. »\noralys-pdp-v2-09.webp | « J'ai remangé du pain. »\noralys-pdp-v2-10.webp | 90 jours pour l'essayer.",
+                "items": "oralys-pdp-v2-01.webp | Tient 2 à 3 jours, pas une matinée.\noralys-pdp-v2-02.webp | Avant, elle cachait son sourire.\noralys-pdp-v2-03.webp | On ne colle pas un vide. On le comble.\noralys-pdp-v2-04.webp | Il prend la forme de vos gencives.\noralys-pdp-v2-05.webp | « Il faudra vous y faire. » Non.\noralys-pdp-v2-06.webp | Tout ce à quoi vous aviez renoncé.\noralys-pdp-v2-07.webp | Le résultat d'un rebasage, le prix d'un tube.\noralys-pdp-v2-08.webp | « Ce n'est pas la colle, c'est le vide. »\noralys-pdp-v2-09.webp | « J'ai remangé du pain. »\noralys-pdp-v2-10.webp | 90 jours pour l'essayer.",
                 "radius": 14,
                 "c_dot": "#0E6B50",
                 "c_dot_off": "#DCE5E0"
@@ -116,7 +116,7 @@
               "type": "text",
               "name": "Promesse",
               "settings": {
-                "text": "<p>Votre dentier bouge parce qu'un vide s'est creusé sous l'appareil. Oralys le remplit, et votre dentier tient du petit-déjeuner au dîner. Sans la moindre trace de colle.</p>",
+                "text": "<p>Votre dentier bouge parce qu'un vide s'est creusé entre l'appareil et la gencive. La crème ne peut pas le combler. Le gel Oralys, lui, le remplit — et votre dentier tient du petit-déjeuner au dîner.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -146,33 +146,19 @@
                 "icon_2": "tooth",
                 "chip_3": "Croquez dans la baguette",
                 "icon_3": "bread",
-                "pills_label": "Pour quel appareil ?",
-                "pills": "Haut · Bas · Complet ou partiel",
-                "show_pills": true,
+                "pills_label": "",
+                "pills": "",
+                "show_pills": false,
                 "c_accent": "#0E6B50",
                 "c_tint": "#EEF6F1",
                 "c_text": "#17221E"
               },
               "blocks": {}
             },
-            "oralys_quote": {
-              "type": "oralys-pdp-quote",
-              "settings": {
-                "text": "« Pendant neuf ans, j'ai ri la main devant la bouche. Le premier soir avec Oralys, j'ai ri à table sans y penser. »",
-                "author": "Monique R., 69 ans, Angers",
-                "asset": "oralys-pdp-rev-t01.webp",
-                "show_stars": true,
-                "c_rule": "#0E6B50",
-                "c_text": "#17221E",
-                "c_muted": "#5C6863",
-                "c_star": "#F0A830"
-              },
-              "blocks": {}
-            },
             "oralys_urgency": {
               "type": "oralys-pdp-urgency",
               "settings": {
-                "text": "Offre de lancement : se termine ce soir à minuit",
+                "text": "Offre de lancement : se termine ce soir à minuit",
                 "icon": true,
                 "c_text": "#D2382C",
                 "c_bg": "#FDF0EE"
@@ -198,61 +184,61 @@
                 "tier_1": {
                   "type": "_oralys-pdp-tier",
                   "settings": {
-                    "option_value": "1 tube",
+                    "option_value": "1 tube",
                     "variant_position": 1,
                     "qty": 1,
                     "preselect": false,
-                    "title": "1 tube",
-                    "subtitle": "Environ 5 semaines de tenue",
+                    "title": "1 tube",
+                    "subtitle": "Environ 5 semaines de tenue",
                     "badge": "",
                     "badge_style": "green",
                     "asset": "oralys-pdp-b1.webp",
                     "save_label": "Économisez {amount}",
                     "gifts_title": "",
                     "gifts": "Livraison standard offerte",
-                    "price_fallback": "39,95 €",
-                    "compare_fallback": "65,00 €",
-                    "save_fallback": "25,05 €"
+                    "price_fallback": "39,95 €",
+                    "compare_fallback": "65,00 €",
+                    "save_fallback": "25,05 €"
                   }
                 },
                 "tier_2": {
                   "type": "_oralys-pdp-tier",
                   "settings": {
-                    "option_value": "2 tubes",
+                    "option_value": "2 tubes",
                     "variant_position": 2,
                     "qty": 2,
                     "preselect": true,
-                    "title": "2 tubes · le 2e à -70 %",
-                    "subtitle": "Environ 10 semaines de tenue",
+                    "title": "2 tubes · le 2e à -70 %",
+                    "subtitle": "Environ 10 semaines de tenue",
                     "badge": "LE PLUS CHOISI",
                     "badge_style": "green",
                     "asset": "oralys-pdp-b2.webp",
                     "save_label": "Économisez {amount}",
                     "gifts_title": "",
-                    "gifts": "Livraison express offerte\nComprimés nettoyants offerts (valeur 14,99 €)",
-                    "price_fallback": "55,93 €",
-                    "compare_fallback": "130,00 €",
-                    "save_fallback": "74,07 €"
+                    "gifts": "Livraison express offerte\nComprimés nettoyants offerts (valeur 14,99 €)",
+                    "price_fallback": "55,93 €",
+                    "compare_fallback": "130,00 €",
+                    "save_fallback": "74,07 €"
                   }
                 },
                 "tier_3": {
                   "type": "_oralys-pdp-tier",
                   "settings": {
-                    "option_value": "4 tubes",
+                    "option_value": "4 tubes",
                     "variant_position": 3,
                     "qty": 4,
                     "preselect": false,
-                    "title": "4 tubes · 2 achetés = 2 offerts",
-                    "subtitle": "Environ 20 semaines de tenue",
+                    "title": "4 tubes · 2 achetés = 2 offerts",
+                    "subtitle": "Environ 20 semaines de tenue",
                     "badge": "MEILLEURE OFFRE",
                     "badge_style": "red",
                     "asset": "oralys-pdp-b4.webp",
                     "save_label": "Économisez {amount}",
                     "gifts_title": "4 cadeaux inclus",
-                    "gifts": "Livraison express\nComprimés nettoyants\nÉtui à dentier\nGuide « Bien poser son gel »",
-                    "price_fallback": "79,90 €",
-                    "compare_fallback": "260,00 €",
-                    "save_fallback": "180,10 €"
+                    "gifts": "Livraison express\nComprimés nettoyants\nÉtui à dentier\nGuide « Bien poser son gel »",
+                    "price_fallback": "79,90 €",
+                    "compare_fallback": "260,00 €",
+                    "save_fallback": "180,10 €"
                   }
                 }
               },
@@ -314,32 +300,19 @@
             "oralys_trust": {
               "type": "oralys-pdp-trust",
               "settings": {
-                "delivery": "Expédié sous 24 h ouvrées · colis neutre, rien d'écrit dessus",
+                "delivery": "Expédié sous 24 h · colis neutre",
                 "delivery_icon": "box",
-                "item_1": "90 jours satisfait ou remboursé",
+                "item_1": "90 jours satisfait ou remboursé",
                 "icon_1": "shield",
                 "item_2": "Paiement sécurisé",
                 "icon_2": "lock",
                 "item_3": "Sans abonnement",
                 "icon_3": "repeat",
-                "item_4": "Vendu uniquement sur notre site",
+                "item_4": "",
                 "icon_4": "home",
                 "c_accent": "#0E6B50",
                 "c_text": "#17221E",
                 "c_tint": "#EEF6F1"
-              },
-              "blocks": {}
-            },
-            "oralys_stock": {
-              "type": "oralys-pdp-stock",
-              "settings": {
-                "label": "Stock de lancement : 93 % déjà réservé",
-                "percent": 93,
-                "sub": "Commandez aujourd'hui, votre colis part demain.",
-                "c_fill": "#D2382C",
-                "c_track": "#F3DEDB",
-                "c_text": "#17221E",
-                "c_muted": "#5C6863"
               },
               "blocks": {}
             },
@@ -348,8 +321,8 @@
               "settings": {
                 "seal_top": "90",
                 "seal_bottom": "JOURS",
-                "title": "90 jours pour juger à table",
-                "body": "Mangez, parlez, riez avec Oralys pendant 90 jours. Si votre dentier ne tient pas comme promis, on vous rembourse intégralement. Un e-mail suffit.",
+                "title": "90 jours pour juger à table",
+                "body": "Mangez, parlez, riez avec Oralys pendant 90 jours. Si votre dentier ne tient pas, on vous rembourse intégralement.",
                 "c_bg": "#0E6B50",
                 "c_text": "#FFFFFF",
                 "c_seal": "#FFFFFF"
@@ -363,13 +336,11 @@
             "title",
             "subline",
             "oralys_chips",
-            "oralys_quote",
             "oralys_urgency",
             "oralys_bundle",
             "variant_picker",
             "buy_buttons",
             "oralys_trust",
-            "oralys_stock",
             "oralys_guarantee"
           ]
         },
@@ -396,22 +367,79 @@
         "enable_sticky_add_to_cart": true
       }
     },
+    "op_proof": {
+      "type": "oralys-home-proof",
+      "settings": {
+        "c_bg": "#0E3D30",
+        "c_text": "#FFFFFF",
+        "c_accent": "#FFFFFF",
+        "c_muted": "#CFE3D9",
+        "c_card": "#0E3D30",
+        "c_line": "#2F5E50",
+        "c_cta": "#D2382C",
+        "c_cta_text": "#FFFFFF",
+        "h_m": 26,
+        "h_d": 34,
+        "body_size": 17,
+        "align": "left",
+        "pt_m": 20,
+        "pb_m": 20,
+        "pt_d": 28,
+        "pb_d": 28
+      },
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "value": "4,8/5",
+            "label": "note moyenne"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "value": "90 jours",
+            "label": "satisfait ou remboursé"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "value": "≈ 5 sem.",
+            "label": "par tube"
+          }
+        },
+        "stat_4": {
+          "type": "stat",
+          "settings": {
+            "value": "Zéro zinc",
+            "label": "et pas de colle"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3",
+        "stat_4"
+      ]
+    },
     "op_gap": {
       "type": "oralys-pdp-gap",
       "settings": {
         "eyebrow": "POURQUOI ÇA BOUGE",
-        "heading": "Ce n'est pas votre faute. Ce n'est même pas celle de votre dentier.",
-        "accent": "faute",
-        "story": "<p>Le jour où votre appareil a été fait, il épousait parfaitement votre gencive. Puis, mois après mois, l'os qui la soutient s'est rétracté, sans bruit. Votre dentier, lui, n'a pas changé de forme. Résultat : un vide s'est creusé dessous. Et c'est dans ce vide que tout se joue.</p>",
-        "asset": "oralys-pdp-gap-illustration.webp",
-        "alt": "Avant : un vide sous le dentier. Après : le gel Oralys remplit l'espace",
-        "small_asset": "oralys-pdp-denture-model.webp",
-        "small_alt": "Dentier du bas posé sur un moulage en plâtre",
-        "show_small": true,
-        "show_loop": true,
-        "loop_asset": "oralys-pdp-in-action.webp",
-        "loop_poster": "oralys-pdp-in-action-poster.jpg",
-        "loop_alt": "Oralys remplit l'espace",
+        "heading": "Ce n'est pas la colle qui lâche. C'est le vide qui s'est creusé.",
+        "accent": "vide",
+        "story": "",
+        "asset": "",
+        "alt": "",
+        "small_asset": "",
+        "small_alt": "",
+        "show_small": false,
+        "show_loop": false,
+        "loop_asset": "",
+        "loop_poster": "",
+        "loop_alt": "",
         "image_side": "left",
         "col_a": "La crème",
         "col_a_rows": "Se pose par-dessus le vide\nS'en va avec la salive vers midi\nLaisse une pâte à gratter le soir",
@@ -430,31 +458,31 @@
         "h_d": 40,
         "body_size": 17,
         "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
+        "pt_m": 48,
+        "pb_m": 48,
+        "pt_d": 72,
+        "pb_d": 72
       },
       "blocks": {
         "fact_1": {
           "type": "fact",
           "settings": {
-            "title": "L'os se rétracte",
-            "body": "Après les extractions, la crête osseuse fond chaque année, et celle du bas plusieurs fois plus vite que celle du haut. C'est pour ça que le bas bouge le premier."
+            "title": "L'os fond, surtout en bas",
+            "body": "Après les extractions, la crête osseuse se rétracte chaque mois. Celle du bas fond plus vite. Un vide grandit entre le dentier et la gencive — et rien ne l'arrête."
           }
         },
         "fact_2": {
           "type": "fact",
           "settings": {
-            "title": "La crème ne peut pas combler le vide",
-            "body": "Une crème adhésive colle deux surfaces qui se touchent. Face à un vide, elle n'a plus prise. Et la salive la dissout en 3 heures environ : « loin des 24 h promises »."
+            "title": "Votre crème colle. Elle ne comble pas.",
+            "body": "La crème adhésive a été conçue pour coller deux surfaces qui se touchent. Face à un vide, elle n'a plus prise. La salive la dissout en quelques heures : « loin des 24 h promises »."
           }
         },
         "fact_3": {
           "type": "fact",
           "settings": {
-            "title": "Oralys remplit l'espace",
-            "body": "Tiédi dans l'eau, le gel épouse la forme exacte de votre gencive, puis se raffermit à la chaleur de la bouche. La salive n'a aucun effet dessus. Une seule pose tient toute la journée, et même 2 à 3 jours."
+            "title": "Le gel remplit le vide. Le dentier ne bouge plus.",
+            "body": "Tiédi dans l'eau chaude, le gel Oralys prend l'empreinte exacte de votre gencive puis se raffermit. Une seule pose tient 2 à 3 jours — même en bas."
           }
         }
       },
@@ -464,214 +492,19 @@
         "fact_3"
       ]
     },
-    "op_insider": {
-      "type": "oralys-pdp-ins",
-      "settings": {
-        "eyebrow": "L'AVIS D'UNE PROFESSIONNELLE",
-        "heading": "« Un vide, ça ne se colle pas. Ça se comble. »",
-        "accent": "règle",
-        "asset": "oralys-pdp-expert-verdier.webp",
-        "alt": "Portrait du Dr Hélène Verdier",
-        "initials": "HV",
-        "name": "Dr Hélène Verdier",
-        "meta": "Chirurgienne-dentiste, prothèse amovible · 26 ans d'exercice · Lyon",
-        "letter": "<p>Chaque semaine, je vois des patients qui ont « tout essayé » : crème forte, double dose, bandelettes. Ils pensent avoir un problème de colle. Ce n'est pas le cas. Leur gencive a changé de forme depuis la pose, et l'appareil ne repose plus sur rien.</p><p>La crème adhésive a été conçue pour renforcer un contact qui existe déjà. Elle n'a jamais été pensée pour combler un espace. Lui demander de tenir un dentier qui flotte, c'est soigner le symptôme et racheter un tube toutes les deux semaines.</p><p>Un matériau thermoplastique de qualité dentaire, qui occupe physiquement ce vide, traite la cause : l'ajustement. C'est ce que je conseille aujourd'hui à mes patients qui portent un appareil complet ou partiel. La plupart n'achètent plus de crème au bout de deux semaines.</p>",
-        "signature": "Dr Hélène Verdier, Lyon",
-        "chips": "Rétraction osseuse documentée depuis 1972\nUn vide n'est pas un défaut de colle\nRemplir plutôt qu'enduire",
-        "n_eyebrow": "LU SUR LA NOTICE DE VOTRE CRÈME",
-        "n_title": "Le fabricant l'écrit lui-même",
-        "n_body": "<p>Sur la notice d'une crème adhésive vendue en pharmacie : « NE PAS utiliser de produit en excès si votre prothèse est mal ajustée. » Autrement dit : si votre dentier bouge, la crème n'est pas la solution. Oralys, si.</p>",
-        "n_asset": "",
-        "n_alt": "Notice de crème adhésive, la mention sur les prothèses mal ajustées surlignée",
-        "n_quote": "NE PAS utiliser de produit en excès si votre prothèse est mal ajustée.",
-        "ticks": "Remplit le vide que la crème laisse\nSe retire propre, sans pâte à gratter\nMangez, parlez, riez sans y penser",
-        "cta": "Je choisis mon pack",
-        "cta_sub": "90 jours satisfait ou remboursé · Paiement sécurisé · 4,8/5",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
-      }
-    },
-    "op_cost": {
-      "type": "oralys-pdp-cost",
-      "settings": {
-        "eyebrow": "LE VRAI PRIX D'UN DENTIER QUI TIENT",
-        "heading": "Un dentier qui tient coûte souvent moins cher que la colle",
-        "accent": "moins",
-        "intro": "<p>Vous l'avez peut-être déjà calculé : un tube de crème tous les 10 jours, ça finit par chiffrer. Comparez sur une année.</p>",
-        "c_title": "Remboursé par le 100 % Santé… mais il bouge ?",
-        "c_body": "<p>Votre appareil est pris en charge, tant mieux. Mais la Sécurité sociale ne rembourse ni la colle ni le temps passé à la remettre. Oralys redonne de la tenue au dentier que vous avez déjà, sans rendez-vous et sans reste à charge surprise.</p>",
-        "week": "Avec le pack 4 tubes, Oralys revient à moins de 4 € par semaine.",
-        "asset": "oralys-pdp-packshot.webp",
-        "alt": "Tube Oralys Gel",
-        "c_bar": "#C9D3CE",
-        "c_bar_hi": "#0E6B50",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
-      },
-      "blocks": {
-        "bar_1": {
-          "type": "bar",
-          "settings": {
-            "label": "Crème adhésive, un tube tous les 10 jours",
-            "value": "environ 250 € par an",
-            "width": 46,
-            "highlight": false
-          }
-        },
-        "bar_2": {
-          "type": "bar",
-          "settings": {
-            "label": "Rebasage chez le dentiste",
-            "value": "souvent 150 à 300 € par séance",
-            "width": 58,
-            "highlight": false
-          }
-        },
-        "bar_3": {
-          "type": "bar",
-          "settings": {
-            "label": "Nouveau dentier hors 100 % Santé",
-            "value": "plus de 1 000 €",
-            "width": 80,
-            "highlight": false
-          }
-        },
-        "bar_4": {
-          "type": "bar",
-          "settings": {
-            "label": "Implants",
-            "value": "plusieurs milliers d'euros",
-            "width": 100,
-            "highlight": false
-          }
-        },
-        "bar_5": {
-          "type": "bar",
-          "settings": {
-            "label": "Oralys, 1 tube toutes les 5 semaines",
-            "value": "environ 200 € par an avec le pack 4 tubes",
-            "width": 38,
-            "highlight": true
-          }
-        }
-      },
-      "block_order": [
-        "bar_1",
-        "bar_2",
-        "bar_3",
-        "bar_4",
-        "bar_5"
-      ]
-    },
-    "op_sanscolle": {
-      "type": "oralys-pdp-sc",
-      "settings": {
-        "eyebrow": "PLUS JAMAIS DE COLLE",
-        "heading": "Rien de collant. Rien qui fond. Une bouche propre le soir.",
-        "accent": "propre",
-        "asset": "oralys-pdp-peel-out.webp",
-        "alt": "Mains retirant le gel Oralys du dentier en un seul morceau",
-        "ratio": "1 / 1",
-        "caption": "Sans danger au quotidien, jour après jour.",
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
-      },
-      "blocks": {
-        "tile_1": {
-          "type": "tile",
-          "settings": {
-            "icon": "nocolle",
-            "title": "Sans colle",
-            "body": "Pas de pâte qui déborde sur la gencive ni de goût qui reste au fond de la gorge."
-          }
-        },
-        "tile_2": {
-          "type": "tile",
-          "settings": {
-            "icon": "nozinc",
-            "title": "Zéro zinc",
-            "body": "Beaucoup de crèmes en contiennent. Quand on en remet trois fois par jour, ça s'accumule. Oralys n'en contient pas."
-          }
-        },
-        "tile_3": {
-          "type": "tile",
-          "settings": {
-            "icon": "drop",
-            "title": "Rien qui fond dans la bouche",
-            "body": "La salive ne le dissout pas : rien ne se détache pendant le repas, rien qu'on avale."
-          }
-        },
-        "tile_4": {
-          "type": "tile",
-          "settings": {
-            "icon": "peel",
-            "title": "Sort d'un seul morceau",
-            "body": "Trempez, soulevez : le gel se retire en entier. Fini les dix minutes à gratter au-dessus du lavabo."
-          }
-        }
-      },
-      "block_order": [
-        "tile_1",
-        "tile_2",
-        "tile_3",
-        "tile_4"
-      ]
-    },
     "op_reviews": {
       "type": "oralys-pdp-rev",
       "settings": {
-        "eyebrow": "ILS EN PARLENT MIEUX QUE NOUS",
-        "heading": "La parole à ceux qui portent un dentier",
-        "accent": "dentier",
+        "eyebrow": "",
+        "heading": "La parole à ceux qui le portent",
+        "accent": "",
         "score": "4,8/5 · plus de 30 000 porteurs de dentier",
         "show_featured": true,
-        "f_text": "« Douze ans de crème, et mon appareil du bas se soulevait dès que je parlais. J'avais renoncé. Avec Oralys, il est resté en place tout le repas. J'ai mangé une tranche de baguette bien croustillante, devant tout le monde. Pour moi, c'est ça qui compte. »",
-        "f_name": "Josiane L., 70 ans, Tours",
-        "f_meta": "Haut et bas · Achat vérifié · 3 mois d'utilisation",
+        "f_text": "« Douze ans de crème. Mon appareil du bas se soulevait dès que je parlais. J'avais renoncé au pain, au restaurant, aux repas de famille. Le premier dimanche avec Oralys, j'ai mangé une tranche de baguette bien croustillante devant tout le monde. Pour moi, c'est ça qui compte. »",
+        "f_name": "Josiane L., 70 ans, Tours",
+        "f_meta": "Haut et bas · Achat vérifié · 3 mois d'utilisation",
         "asset": "oralys-pdp-rev-t05.webp",
-        "hint": "Faites glisser pour lire la suite →",
+        "hint": "Faites glisser →",
         "verified": "Achat vérifié",
         "c_star": "#F0A830",
         "c_bg": "#FFFFFF",
@@ -692,150 +525,122 @@
         "pb_d": 72
       },
       "blocks": {
-        "tab_1": {
-          "type": "tab",
+        "review_1": {
+          "type": "review",
           "settings": {
-            "label": "Le dentier du bas"
+            "asset": "oralys-pdp-rev-t07.webp",
+            "stars": 5,
+            "headline": "Le bas ne se balade plus",
+            "text": "« Mon dentier du bas se baladait dans la bouche depuis des années. J'ai posé Oralys un lundi matin. Le soir, il n'avait pas bougé. Le mardi, pareil. Je n'y croyais toujours pas au bout d'une semaine. »",
+            "name": "Gérard M., 71 ans, Clermont-Ferrand",
+            "chip": "Bas"
           }
         },
         "review_2": {
           "type": "review",
           "settings": {
-            "asset": "oralys-pdp-rev-t07.webp",
+            "asset": "oralys-pdp-rev-t04.webp",
             "stars": 5,
-            "headline": "Le bas ne remonte plus",
-            "text": "« Mon dentier du bas se baladait dans la bouche depuis des années. Je l'ai posé lundi matin, il n'a pas bougé de la journée. Le soir, je n'y croyais toujours pas. »",
-            "name": "Gérard M., 71 ans, Clermont-Ferrand",
-            "chip": "Bas"
+            "headline": "Je reçois de nouveau ma famille à table",
+            "text": "« Je refusais les invitations avec repas. Le dimanche, je restais dans la cuisine. Depuis que j'ai Oralys, j'ai reçu mes enfants et je suis restée assise du début à la fin, sans filer à la salle de bain. »",
+            "name": "Annie P., 73 ans, Rennes",
+            "chip": "Haut et bas"
           }
         },
         "review_3": {
           "type": "review",
           "settings": {
-            "asset": "oralys-pdp-rev-t09.webp",
+            "asset": "oralys-pdp-rev-t03.webp",
             "stars": 5,
-            "headline": "Plus de tube dans la poche",
-            "text": "« Je trimballais ma crème partout, même au marché. Ça fait cinq semaines que le tube n'est pas sorti du tiroir. »",
-            "name": "Bernard T., 69 ans, Nancy",
-            "chip": "Bas"
+            "headline": "Quatre colles essayées. Aucune ne tenait un repas.",
+            "text": "« Fixodent, Corega, la poudre de ma sœur, un gel ventouse en pharmacie. Aucune ne tenait la durée d'un repas. J'ai commandé Oralys en me disant que j'avais 90 jours pour le renvoyer. Je ne l'ai pas renvoyé. »",
+            "name": "Martine B., 68 ans, Caen",
+            "chip": "Haut"
           }
         },
         "review_4": {
           "type": "review",
           "settings": {
-            "asset": "oralys-pdp-rev-t11.webp",
-            "stars": 5,
-            "headline": "Je ne vérifie plus avec la langue",
-            "text": "« Je passais ma langue dessus toute la journée pour voir s'il tenait. Un jour au téléphone, je me suis rendu compte que je n'y pensais plus du tout. »",
-            "name": "Chantal D., 66 ans, Limoges",
-            "chip": "Bas"
-          }
-        },
-        "tab_5": {
-          "type": "tab",
-          "settings": {
-            "label": "Les repas de famille"
-          }
-        },
-        "review_6": {
-          "type": "review",
-          "settings": {
-            "asset": "oralys-pdp-rev-t04.webp",
-            "stars": 5,
-            "headline": "Je reçois de nouveau ma famille",
-            "text": "« Je refusais les invitations avec repas. Dimanche, j'ai reçu mes enfants et je suis restée assise du début à la fin, sans filer à la salle de bain. »",
-            "name": "Annie P., 73 ans, Rennes",
-            "chip": "Haut et bas"
-          }
-        },
-        "review_7": {
-          "type": "review",
-          "settings": {
             "asset": "oralys-pdp-rev-t16.webp",
             "stars": 5,
             "headline": "Maman remange avec nous",
-            "text": "« Ma mère ne mangeait plus que de la soupe à table. Je lui ai posé Oralys avant le repas de Noël : elle a mangé la dinde et la bûche comme tout le monde. »",
-            "name": "Sylvie G., 55 ans, Dijon (pour sa mère, 85 ans)",
+            "text": "« Ma mère ne mangeait plus que de la soupe à table. Je lui ai posé Oralys avant le repas de Noël. Elle a mangé la dinde et la bûche comme tout le monde. C'est la première fois en trois ans. »",
+            "name": "Sylvie G., 55 ans, Dijon (pour sa mère, 85 ans)",
             "chip": "Haut"
           }
         },
-        "review_8": {
-          "type": "review",
-          "settings": {
-            "asset": "oralys-pdp-rev-t10.webp",
-            "stars": 5,
-            "headline": "Une côte de bœuf, sans y penser",
-            "text": "« Au mariage de mon petit-fils, j'ai mangé la viande sans m'excuser pour aller remettre de la colle. Première fois en dix ans. »",
-            "name": "Robert F., 72 ans, Perpignan",
-            "chip": "Haut et bas"
-          }
-        },
-        "tab_9": {
-          "type": "tab",
-          "settings": {
-            "label": "J'étais sceptique"
-          }
-        },
-        "review_10": {
-          "type": "review",
-          "settings": {
-            "asset": "oralys-pdp-rev-t03.webp",
-            "stars": 5,
-            "headline": "Après quatre colles, je n'y croyais plus",
-            "text": "« J'avais essayé quatre crèmes « tenue 12 h ». Aucune ne tenait un repas. J'ai commandé Oralys en me disant que j'avais 90 jours pour le renvoyer. Je ne l'ai pas renvoyé. »",
-            "name": "Martine B., 68 ans, Caen",
-            "chip": "Haut"
-          }
-        },
-        "review_11": {
+        "review_5": {
           "type": "review",
           "settings": {
             "asset": "oralys-pdp-rev-t08.webp",
             "stars": 5,
             "headline": "Rien à voir avec les gels de pharmacie",
-            "text": "« J'avais testé un gel ventouse en pharmacie, il a tenu cinq minutes. Oralys se pose différemment : on le tiédit, on le moule, et là ça tient. »",
-            "name": "Jean-Pierre H., 74 ans, Metz",
+            "text": "« J'avais testé un gel ventouse en pharmacie. Tenu cinq minutes. Oralys se pose autrement : on le tiédit, on le moule, et là ça tient. Ça fait trois semaines que la crème est restée dans le tiroir. »",
+            "name": "Jean-Pierre H., 74 ans, Metz",
             "chip": "Bas"
           }
         },
-        "review_12": {
+        "review_6": {
           "type": "review",
           "settings": {
             "asset": "oralys-pdp-rev-t13.webp",
             "stars": 5,
-            "headline": "À 38 ans, je ris de nouveau",
-            "text": "« Partiel du haut depuis un accident. J'avais honte de sourire au travail. Je pensais que c'était un produit pour mes grands-parents, j'avais tort. »",
-            "name": "Élodie R., 38 ans, Toulouse",
+            "headline": "À 38 ans, je ris de nouveau",
+            "text": "« Partiel du haut depuis un accident. J'avais honte de sourire au travail. Je pensais que c'était un produit pour les grands-parents, j'avais tort. Aujourd'hui, j'oublie que je le porte. »",
+            "name": "Élodie R., 38 ans, Toulouse",
             "chip": "Partiel"
           }
         }
       },
       "block_order": [
-        "tab_1",
+        "review_1",
         "review_2",
         "review_3",
         "review_4",
-        "tab_5",
-        "review_6",
-        "review_7",
-        "review_8",
-        "tab_9",
-        "review_10",
-        "review_11",
-        "review_12"
+        "review_5",
+        "review_6"
       ]
+    },
+    "op_final": {
+      "type": "oralys-pdp-final",
+      "settings": {
+        "heading": "Mangez, parlez, riez — sans y penser.",
+        "accent": "",
+        "ticks": "Même le dentier du bas\nZéro colle, zéro zinc\n90 jours satisfait ou remboursé",
+        "tiers": "Dès 39,95 € · 2 tubes, le 2e à -70 % · 4 tubes, 2 achetés = 2 offerts",
+        "cta": "Je choisis mon pack",
+        "seal": "Garantie 90 jours",
+        "asset": "oralys-pdp-packshot.webp",
+        "alt": "Tube Oralys Gel",
+        "c_bg": "#0E3D30",
+        "c_text": "#FFFFFF",
+        "c_accent": "#7FD1AE",
+        "c_muted": "#CFE3DA",
+        "c_card": "#EEF6F1",
+        "c_line": "#2C5A4C",
+        "c_cta": "#D2382C",
+        "c_cta_text": "#FFFFFF",
+        "h_m": 28,
+        "h_d": 40,
+        "body_size": 17,
+        "align": "center",
+        "pt_m": 56,
+        "pb_m": 56,
+        "pt_d": 80,
+        "pb_d": 80
+      }
     },
     "op_howto": {
       "type": "oralys-pdp-how",
       "settings": {
         "eyebrow": "MODE D'EMPLOI",
-        "heading": "Posé en 3 gestes, il tient 2 à 3 jours",
+        "heading": "Posé en 3 gestes, il tient 2 à 3 jours",
         "accent": "3 gestes",
         "r_title": "Pour le retirer",
-        "r_body": "5 minutes dans l'eau tiède (jamais bouillante), puis soulevez l'ancien gel : il vient d'un seul morceau. Au besoin, aidez-vous d'une petite cuillère.",
+        "r_body": "5 minutes dans l'eau tiède, puis soulevez : le gel vient d'un seul morceau.",
         "r_asset": "oralys-pdp-peel-out.webp",
-        "r_alt": "Ancien gel retiré d'un seul morceau après trempage",
-        "note": "La plupart des gens trouvent le bon dosage dès le 2e jour.",
+        "r_alt": "Ancien gel retiré d'un seul morceau",
+        "note": "",
         "c_bg": "#FFFFFF",
         "c_text": "#17221E",
         "c_accent": "#0E6B50",
@@ -848,10 +653,10 @@
         "h_d": 40,
         "body_size": 17,
         "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
+        "pt_m": 48,
+        "pb_m": 48,
+        "pt_d": 72,
+        "pb_d": 72
       },
       "blocks": {
         "step_1": {
@@ -860,7 +665,7 @@
             "asset": "oralys-pdp-step-1.webp",
             "alt": "Tube Oralys dans un bol d'eau chaude",
             "title": "Chauffer",
-            "body": "Plongez le tube quelques minutes dans un bol d'eau chaude (60 °C maximum). Pendant ce temps, lavez votre dentier et séchez-le bien : il doit être parfaitement sec."
+            "body": "Plongez le tube dans de l'eau chaude (60 °C max). Lavez et séchez bien votre dentier."
           }
         },
         "step_2": {
@@ -869,7 +674,7 @@
             "asset": "oralys-pdp-step-2.webp",
             "alt": "Pouces étalant le gel dans le dentier",
             "title": "Poser",
-            "body": "Déposez une noisette de gel, grosse comme une cerise, et étalez-la avec les pouces sur tout l'intérieur de l'appareil, en appuyant sur les bords. Pour le bas, roulez d'abord le gel en boudin."
+            "body": "Déposez une noisette de gel et étalez-la avec les pouces dans le creux de l'appareil."
           }
         },
         "step_3": {
@@ -878,7 +683,7 @@
             "asset": "oralys-pdp-step-3.webp",
             "alt": "Homme mordant doucement, dentier en place",
             "title": "Mordre",
-            "body": "Humidifiez votre bouche, mettez le dentier en place et serrez les dents quelques secondes. Rincez à l'eau froide, coupez le surplus aux ciseaux : c'est prêt."
+            "body": "Remettez le dentier, serrez les dents quelques secondes, rincez à l'eau froide. C'est prêt."
           }
         }
       },
@@ -892,8 +697,8 @@
       "type": "oralys-pdp-faq",
       "settings": {
         "eyebrow": "",
-        "heading": "Vos questions, nos réponses franches",
-        "accent": "questions",
+        "heading": "Vos questions",
+        "accent": "",
         "open_first": true,
         "c_bg": "#EEF6F1",
         "c_text": "#17221E",
@@ -913,183 +718,82 @@
         "pb_d": 72
       },
       "blocks": {
-        "group_1": {
-          "type": "group",
+        "qa_1": {
+          "type": "qa",
           "settings": {
-            "label": "Commande"
+            "question": "Quelle différence avec Fixodent ou Corega ?",
+            "answer": "<p>Les crèmes collent en surface, sur un vide qu'elles ne peuvent pas combler. Oralys remplit l'espace : le dentier tient toute la journée.</p>"
           }
         },
         "qa_2": {
           "type": "qa",
           "settings": {
-            "question": "C'est un abonnement ?",
-            "answer": "<p>Non. Chaque commande est un achat unique. Aucun prélèvement ne suivra, jamais.</p>"
+            "question": "Ça marche avec un appareil partiel ?",
+            "answer": "<p>Oui. Haut, bas, complet ou partiel : le gel épouse la forme de votre gencive, quelle qu'elle soit.</p>"
           }
         },
         "qa_3": {
           "type": "qa",
           "settings": {
-            "question": "Le colis est-il discret ?",
-            "answer": "<p>Oui. Carton neutre, aucun nom de produit à l'extérieur. Personne ne sait ce qu'il contient.</p>"
+            "question": "Combien de temps dure un tube ?",
+            "answer": "<p>Environ 5 semaines. Une application tient 2 à 3 jours : vous n'en remettez pas à chaque repas.</p>"
           }
         },
         "qa_4": {
           "type": "qa",
           "settings": {
-            "question": "Quand vais-je le recevoir ?",
-            "answer": "<p>Votre commande part sous 24 h ouvrées. Comptez 3 à 5 jours ouvrés en France métropolitaine. La livraison est offerte.</p>"
+            "question": "C'est un abonnement ?",
+            "answer": "<p>Non. Chaque commande est un achat unique. Aucun prélèvement ne suivra.</p>"
           }
         },
         "qa_5": {
           "type": "qa",
           "settings": {
-            "question": "Et si ça ne marche pas pour moi ?",
-            "answer": "<p>Vous avez 90 jours satisfait ou remboursé. Si votre dentier ne tient pas comme promis, écrivez-nous : on vous rembourse intégralement, sans discuter.</p>"
+            "question": "Et si ça ne marche pas pour moi ?",
+            "answer": "<p>Vous avez 90 jours satisfait ou remboursé. Un e-mail suffit, sans avoir à vous justifier.</p>"
           }
         },
-        "group_6": {
-          "type": "group",
+        "qa_6": {
+          "type": "qa",
           "settings": {
-            "label": "Utilisation"
+            "question": "Le colis est-il discret ?",
+            "answer": "<p>Oui. Carton neutre, aucun nom de produit à l'extérieur.</p>"
           }
         },
         "qa_7": {
           "type": "qa",
           "settings": {
-            "question": "Ça marche avec un appareil partiel, ou un dentier provisoire ?",
-            "answer": "<p>Oui. Haut, bas, complet ou partiel, et même un provisoire en attendant le définitif : le gel épouse la forme de votre gencive, quelle qu'elle soit.</p>"
+            "question": "C'est sans danger tous les jours ?",
+            "answer": "<p>Oui. Sans zinc ni ingrédient nocif, rien ne fond dans la bouche, rien qu'on avale.</p>"
           }
         },
         "qa_8": {
           "type": "qa",
           "settings": {
-            "question": "Je peux enlever mon dentier pour le nettoyer ?",
-            "answer": "<p>Bien sûr. Retirez-le, nettoyez-le comme d'habitude et remettez-le : il garde son ajustement. Une application tient 2 à 3 jours : on renouvelle le gel tous les 2 à 3 jours, et un tube dure environ 5 semaines.</p>"
-          }
-        },
-        "qa_9": {
-          "type": "qa",
-          "settings": {
-            "question": "S'il tient si bien, comment je l'enlève ?",
-            "answer": "<p>Soulevez-le par le bord, comme toujours : l'air rompt l'effet ventouse. En mâchant, c'est l'inverse : vous appuyez l'appareil contre la gencive et il tient encore mieux. Même une pomme ne le décroche pas.</p>"
-          }
-        },
-        "qa_10": {
-          "type": "qa",
-          "settings": {
-            "question": "Ça a un goût ? Ça gêne en bouche ?",
-            "answer": "<p>Aucun goût, aucune sensation pâteuse, rien qui donne des haut-le-cœur. Une fois posé, on l'oublie.</p>"
-          }
-        },
-        "qa_11": {
-          "type": "qa",
-          "settings": {
-            "question": "Combien de temps dure un tube ?",
-            "answer": "<p>Environ 5 semaines en usage quotidien, car une fine couche suffit. Une crème, elle, se vide en une dizaine de jours.</p>"
-          }
-        },
-        "group_12": {
-          "type": "group",
-          "settings": {
-            "label": "Efficacité"
-          }
-        },
-        "qa_13": {
-          "type": "qa",
-          "settings": {
-            "question": "Quelle différence avec Fixodent ou Corega ?",
-            "answer": "<p>Les crèmes collent en surface, sur un vide qu'elles ne peuvent pas combler : voilà pourquoi elles lâchent avant midi. Oralys remplit l'espace entre la gencive et l'appareil et le dentier tient toute la journée.</p>"
-          }
-        },
-        "qa_14": {
-          "type": "qa",
-          "settings": {
-            "question": "J'ai déjà essayé un gel de rebasage en pharmacie, sans résultat.",
-            "answer": "<p>Ces gels « ventouse » se posent à froid, comme une crème. Oralys est un thermoplastique : on le tiédit, il se moule exactement à votre gencive, puis il se raffermit. C'est cette forme qui tient, pas un effet collant.</p>"
-          }
-        },
-        "qa_15": {
-          "type": "qa",
-          "settings": {
-            "question": "Pourquoi mon dentiste ne m'en a jamais parlé ?",
-            "answer": "<p>Parce qu'au cabinet, le réflexe reste la crème ou le rebasage payant. De plus en plus de praticiens en Europe conseillent pourtant un gel qui remplit le vide, comme le Dr Verdier plus haut.</p>"
-          }
-        },
-        "qa_16": {
-          "type": "qa",
-          "settings": {
-            "question": "C'est sans danger tous les jours ?",
-            "answer": "<p>Oui, 100 % sûr. Oralys a été mis au point avec des experts dentaires, sans zinc ni ingrédient nocif, et testé en usage quotidien sans irritation.</p>"
-          }
-        },
-        "qa_17": {
-          "type": "qa",
-          "settings": {
-            "question": "Au bout de combien de temps verrai-je un résultat ?",
-            "answer": "<p>Dès la première pose. Le jour même où vous recevez Oralys, vous mangez, parlez et riez sans y penser.</p>"
+            "question": "Pourquoi mon dentiste ne m'en a jamais parlé ?",
+            "answer": "<p>Au cabinet, le réflexe reste la crème ou le rebasage payant. De plus en plus de praticiens en Europe conseillent un gel qui remplit le vide.</p>"
           }
         }
       },
       "block_order": [
-        "group_1",
+        "qa_1",
         "qa_2",
         "qa_3",
         "qa_4",
         "qa_5",
-        "group_6",
+        "qa_6",
         "qa_7",
-        "qa_8",
-        "qa_9",
-        "qa_10",
-        "qa_11",
-        "group_12",
-        "qa_13",
-        "qa_14",
-        "qa_15",
-        "qa_16",
-        "qa_17"
+        "qa_8"
       ]
-    },
-    "op_final": {
-      "type": "oralys-pdp-final",
-      "settings": {
-        "heading": "Demain matin, posez-le. Le soir, il sera toujours là.",
-        "accent": "",
-        "ticks": "Même le dentier du bas\nZéro colle, zéro zinc\n90 jours satisfait ou remboursé",
-        "tiers": "Dès 39,95 € · 2 tubes, le 2e à -70 % · 4 tubes, 2 achetés = 2 offerts",
-        "cta": "Je choisis mon pack",
-        "seal": "Garantie 90 jours",
-        "asset": "oralys-pdp-packshot.webp",
-        "alt": "Tube Oralys Gel sur fond vert menthe",
-        "c_bg": "#0E3D30",
-        "c_text": "#FFFFFF",
-        "c_accent": "#7FD1AE",
-        "c_muted": "#CFE3DA",
-        "c_card": "#EEF6F1",
-        "c_line": "#2C5A4C",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "center",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
-      }
     }
   },
   "order": [
     "main",
+    "op_proof",
     "op_gap",
-    "op_insider",
-    "op_cost",
-    "op_sanscolle",
     "op_reviews",
+    "op_final",
     "op_howto",
-    "op_faq",
-    "op_final"
+    "op_faq"
   ]
 }
-

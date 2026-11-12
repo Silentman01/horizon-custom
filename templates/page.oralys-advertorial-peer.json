@@ -14,7 +14,7 @@
       "type": "oralys-adv-header",
       "settings": {
         "show_masthead": true,
-        "ad_label": "Publicité · Article sponsorisé",
+        "ad_label": "",
         "publication_name": "Les Carnets de Monique",
         "publication_tagline": "Le blog d’une retraitée qui teste tout avant vous",
         "masthead_nav": "Mes tests | Santé | Cuisine | Petits-enfants | Voyages",

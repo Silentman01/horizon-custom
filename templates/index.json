@@ -114,7 +114,7 @@
       "settings": {
         "eyebrow": "Ce n'est pas votre faute",
         "heading": "La crème colle. <em>Le vide, lui, reste.</em>",
-        "subheading": "<p>Vous pensez l'avoir mal posé, ou pas mis assez de crème ? Non. Après des années sans dents, l'os de la mâchoire se rétracte. Votre dentier, lui, garde la même forme. Entre les deux, un vide se creuse.</p>",
+        "subheading": "<p>Vous pensez ne pas avoir mis assez de crème, ou l’avoir mal posée. Non. Après les extractions, l’os fond un peu chaque mois. Un vide se creuse sous le dentier. La crème n’a jamais été faite pour le combler.</p>",
         "asset": "oralys-home-gap.svg",
         "image_alt": "Coupe d'une gencive : à gauche le vide sous le dentier, à droite le vide comblé par le gel",
         "cap_left": "Avec la crème : l'appareil repose sur un vide",
@@ -144,21 +144,21 @@
           "type": "fact",
           "settings": {
             "title": "La gencive se creuse, surtout en bas",
-            "text": "<p>La crête du bas fond plus vite que celle du haut. C'est pour ça que le dentier du bas « se balade » le premier.</p>"
+            "text": "<p>La crête du bas fond plus vite que celle du haut. C’est pour ça que le dentier du bas « se balade » le premier.</p>"
           }
         },
         "fact_2": {
           "type": "fact",
           "settings": {
             "title": "La crème ne peut pas combler un vide",
-            "text": "<p>Elle ne colle que deux surfaces qui se touchent. Face à un vide, elle reste en pont, la salive la dissout et l'appareil lâche avant midi.</p>"
+            "text": "<p>Elle ne colle que deux surfaces qui se touchent. Face à un vide, elle reste en pont, la salive la dissout et l’appareil lâche « loin des 24 h promises ».</p>"
           }
         },
         "fact_3": {
           "type": "fact",
           "settings": {
             "title": "Le gel comble le vide",
-            "text": "<p>Assoupli à l'eau chaude, il prend l'empreinte exacte de votre gencive puis se raffermit. Le dentier ne bouge plus, plusieurs jours d'affilée.</p>"
+            "text": "<p>Assoupli à l’eau chaude, il prend l’empreinte exacte de votre gencive puis se raffermit. Le dentier ne bouge plus, plusieurs jours d’affilée.</p>"
           }
         }
       },
@@ -625,7 +625,6 @@
     "oralys_gap",
     "oralys_offer",
     "oralys_voices",
-    "oralys_cost",
     "oralys_steps",
     "oralys_faq",
     "oralys_close"
