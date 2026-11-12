@@ -58,7 +58,7 @@
     <span class="oralys-pdp-tier__txt">
       <span class="oralys-pdp-tier__title">{{ bs.title }}</span>
       {%- if bs.subtitle != blank %}<span class="oralys-pdp-tier__sub">{{ bs.subtitle }}</span>{% endif -%}
-      {%- if save_txt != blank and bs.save_label != blank %}<span class="oralys-pdp-tier__save">{{ bs.save_label | replace: '{amount}', save_txt }}</span>{% endif -%}
+      {%- if save_txt != blank and bs.save_label != blank -%}{%- assign amount_token = '{' | append: 'amount' | append: '}' -%}{%- assign save_line = bs.save_label | replace: amount_token, save_txt -%}<span class="oralys-pdp-tier__save">{{ save_line }}</span>{%- endif -%}
     </span>
     <span class="oralys-pdp-tier__prices"><span class="oralys-pdp-tier__price">{{ price_txt }}</span>{% if compare_txt != blank %}<s class="oralys-pdp-tier__was">{{ compare_txt }}</s>{% endif %}</span>
   </span>
