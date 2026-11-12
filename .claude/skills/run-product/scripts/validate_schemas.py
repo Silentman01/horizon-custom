@@ -27,6 +27,8 @@ def check_settings(path, settings, where):
         if t in ("header", "paragraph"):
             if not s.get("content"):
                 err(path, f"{where}: {t} without content")
+            elif t == "header" and isinstance(s["content"], str) and not s["content"].startswith("t:") and len(s["content"]) > 50:
+                err(path, f"{where}: header content longer than 50 chars ({len(s['content'])}) - Shopify rejects the file")
             continue
         if not sid:
             continue
@@ -79,6 +81,8 @@ def check_values(path, where, values, sch_settings, selects=True):
         if s.get("type") == "range" and isinstance(v, (int, float)):
             if not (s["min"] <= v <= s["max"]):
                 err(path, f"{where}.{k}: value {v} outside {s['min']}..{s['max']}")
+            elif round((v - s["min"]) / s.get("step", 1), 6) % 1:
+                err(path, f"{where}.{k}: value {v} not on step {s.get('step', 1)} - Shopify rejects the template")
         if selects and s.get("type") in ("select", "radio") and v not in [o.get("value") for o in s.get("options", [])]:
             err(path, f"{where}.{k}: value '{v}' not in options")
 
@@ -91,6 +95,10 @@ for _p in glob.glob(os.path.join(root, "sections", "*.liquid")) + glob.glob(os.p
             err(_p, f"duplicate {{% {_tag} %}} tag (Shopify allows one per file)")
     if re.search(r"^(<<<<<<<|>>>>>>>) ", _s, re.M):
         err(_p, "git merge-conflict markers")
+    for _m in re.finditer(r"\{\{(.*?)\}\}", _s, re.S):  # each output tag on its own (ends at the first '}}')
+        if re.search(r"'[^']*\}[^']*'|\"[^\"]*\}[^\"]*\"", _m.group(1)):
+            _ln = _s.count("\n", 0, _m.start()) + 1
+            err(_p, f"line {_ln}: '}}' inside a quoted string in an output tag - Shopify rejects the file (assign the string first)")
 
 
 schemas = {}

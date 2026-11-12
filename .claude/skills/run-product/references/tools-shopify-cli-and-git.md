@@ -142,3 +142,16 @@ check      shopify theme check --path . --output json   # no new offenses vs mai
 push       shopify theme push --store S --theme ID --nodelete --only <files>   # draft id; never --publish
 github     git push -u origin <slug>
 ```
+
+## GitHub-synced theme: a page 404s or a template is missing (Oralys, 2026-11-12)
+Shopify's GitHub sync silently **skips every file it rejects**, and any template that depends on a skipped file goes with it. On Oralys:
+- `_oralys-pdp-tier.liquid` had `'{amount}'` inside a `{{ }}` tag, so the block was skipped. `product.json` used that block, so it was skipped too, and every product page returned 404 even though the product was active and published.
+- A schema header label longer than 50 characters cost `oralys-adv-body`, and with it all 4 advertorial templates.
+- Mobile padding values that weren't on their slider's step got templates rejected.
+
+How to debug without touching the live theme:
+1. Pull `templates/*` from the live theme and list what is MISSING compared with the repo.
+2. Push the branch to a hidden development theme with `shopify theme push --development --json`. The JSON lists Shopify's exact error per file. Core colour-default errors there are an upload-order artefact of the development theme, so ignore them if the live sync accepted those files.
+3. Fix, re-push the fixed files to the development theme until there are NO ERRORS, preview `?preview_theme_id=<dev id>`, then commit and push the branch (the sync applies it).
+
+`validate_schemas.py` now catches all three causes: `}` inside a quoted string in an output tag, header content over 50 characters, and template range values off the slider step.
