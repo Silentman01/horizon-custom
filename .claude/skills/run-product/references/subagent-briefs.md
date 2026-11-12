@@ -66,7 +66,7 @@ files; model "sonnet" for writing Kie prompts/job JSON (packshot, own conversion
 Use worker briefs 2, 7, 8, 10, 11 and add `model` to each.
 Read <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md first (3.1 angle cards, 3.2 avatars, 1.7 inventory, 1.9 ad copy
 patterns, 3.3 hook library, 3.4 framework library, 3.5 language bank).
-Stream: write every plan/job file first (free) → SAMPLE GATE (00 §18): packshot (real packaging) + gallery hero + one graphic slide + one person/lifestyle + one page image on ONE sheet, then STOP and return for the operator's OK → after OK: own conversion gallery (GALLERY_PLAN.md, 05 §16) → page images/GIF WebP. AD_VARIANTS.md (angle card ID per variant; STOP for operator approval) → first ~5 ads → SAMPLE GATE → remaining ads → ad copy.
+Stream: write every plan/job file first (free) → SAMPLE GATE (00 §18): packshot (real packaging) + gallery hero + one graphic slide + one person/lifestyle + one page image on ONE sheet, then STOP and return for the operator's OK → after OK: own conversion gallery (GALLERY_PLAN.md, 05 §16) → page images/GIF WebP. AD_VARIANTS.md (angle card ID per variant; STOP for operator approval) → SAMPLE matched to the competitor's format mix (5 image ads + 1 video remake when both formats exist; only 5 images or only 1 video otherwise) → SAMPLE GATE → remaining ads and videos → ad copy.
 Kie budget: <credits>; check `kie_jobs.py --credits` before each batch; stay within budget, prioritise packshot →
 gallery → top-5 ads → remaining ads → page images, and report what was skipped.
 Open every contact sheet yourself before accepting a batch (claims at full strength, no logo, no competitor name,
