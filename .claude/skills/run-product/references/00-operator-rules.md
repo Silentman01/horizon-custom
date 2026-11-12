@@ -21,6 +21,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 18. Sample gate: about 5 images confirmed before any batch
 19. Native-language copy gate
 20. HARD RULE: cost estimate + manual confirmation before any paid generation
+21. Clean section structure — don't overcomplicate the page
 
 ---
 
@@ -210,6 +211,16 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 5. **Sub-agents:** they get the approved budget in their brief and are told: no paid call beyond it; when out of budget, stop and estimate. Free local work (ffmpeg, desub, Whisper, scripts, prompts, plans) continues.
 6. **Combined with the sample gate (§18):** the sample's estimate AND the full batch's estimate are shown together. After the sample is approved, the full batch still needs its own OK (it can be given in the same answer).
 **Why:** on Oralys, more than $15 was spent across ~260 images and several video clips before the operator saw a single number. Rounds were re-done because of spec changes (blank packaging, 1:1 gallery, prices on images, non-native French). The operator: "we have spent >$15 so far and that's a lot. update skill so next time before generating any video clips or images it should make a cost estimation, what it wants to generate and needs manual confirmation before generating many medias. hard rule".
+
+## 21. Clean section structure — don't overcomplicate the page (operator 2026-11-12)
+**Rule:** every below-fold section does ONE job. A heading + one element type: a stat bar, a comparison table, a review carousel, a FAQ accordion, a how-to stepper, a CTA band. Never pack multiple element types (image + story + loop + comparison table + fact cards + CTA) into a single section.
+1. **Mirror the competitor's clean structure first.** The competitor's proven layout is the starting point (oragel.co: hero → stats → why-cards → reviews → CTA → how-to → reasons → compare → guarantee). Match the flow, keep each section focused.
+2. **Section count is not the problem; clutter per section is.** Having 8–10 clean, focused sections is better than 5 overloaded ones. Each section on mobile should fit on ~1.5 screens, not scroll endlessly.
+3. **Cut before you add.** The expert letter, the cost breakdown, the notice callout — these can live in an advertorial or an accordion. They don't need their own heavy section on the PDP.
+4. **Visual check before delivery.** Before delivering any page, compare its mobile render (390 px) side by side with the competitor's. If our page looks busier, cut sections or hide sub-elements until it doesn't.
+5. **Copy: alpha + playbook + competitor = the triad.** Every line of persuasive copy draws from (a) the competitor's proven framework and promise level, (b) Step Alpha customer language and verbatims, and (c) the copy playbooks for technique. Never write copy from just one of the three.
+**Why:** on Oralys, the initial build packed too many elements into each section: the gap section alone had story text + illustration + animated loop + small image + comparison table + 3 fact cards + CTA. The operator: "could you fix/remake/improve our product page sections, they look kind of messed up and not as good as we usually do and clearly not as good as oragel. you overcomplicated things here."
+
 ## Operator rules (summary — full text in the sections above)
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
@@ -222,6 +233,7 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 - **No logo overlaid on product images, but the packaging is the real supplier product rebranded with our name (§4)**; own conversion gallery, not 1:1 remakes; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
 - **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
+- **Clean section structure (§21):** every below-fold section does ONE job (stat bar, comparison table, review carousel, FAQ accordion, how-to stepper, CTA band). Never overload a section with multiple element types. Mirror the competitor's clean flow, visual-check at 390 px before delivery. Copy draws from the triad: competitor framework + Step Alpha language + copy playbooks.
 - **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).
 - **Every ad prompt attaches our packshot**; no competitor brand names. **Before generating any ad**, write `05_ads/AD_VARIANTS.md` (each source headline → our almost-similar variant; each design → our close-but-different variant) and stop for operator validation; after approval generate and keep going (08 §1b).
 - **Video ads** (on request, `references/14-video-ads.md`): ~20 candidates by `reach_rank` → operator confirms; per video, audit every clip (a clean / b overlay fixed locally / c regenerate); no lip sync; re-voice with an ElevenLabs clone of the original voice (never Kie for audio); always remake the hook, the end and one random body line; (c) clips only after operator confirmation; `generated/videos/` holds finals only.
