@@ -45,7 +45,8 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 ## 4. Product images
 - Remake every competitor gallery image: same main idea, layout logic, text structure and claims, with our product.
-- **No brand logo or wordmark** on product images. "plaims don't have their logo on them and ours lose space because of logo you added."
+- **No brand logo or wordmark overlaid on the image layout** (corner logos, wordmark headers on infographics). "plaims don't have their logo on them and ours lose space because of logo you added."
+- **But the product's own packaging carries OUR brand** (operator 2026-11-12, Oralys): when the product is a tube, box, bottle or sachet and the competitor prints its brand on it, ours shows our logo the same way. "product doesn't have our logo on them, is that normal? if not, fix". I had specced a blank tube, and ~25 images were redone. Define the branded packaging in BRANDING.md, build the packshot with the padded logo file as an edit reference, keep the printed text LARGE and minimal, and every later image uses that packshot.
 - Skip images that only make sense for the competitor (e.g. "IMPORTANT NOTICE — buy only from plaims.com").
 - When only text must change, **edit the existing image** with a keep-everything prompt instead of regenerating (cheaper, keeps the approved look).
 - Keep replaced versions once in `<area>/archive/v<N>_<reason>/` (`v1_with-logo/`, `v1_softened/` …) so nothing approved is lost; never a `superseded/` or duplicate folder.
