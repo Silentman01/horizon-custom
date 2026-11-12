@@ -116,7 +116,7 @@ Types and how to treat them:
 5. If a print or artefact appears, KEEP-EDIT it away ("Remove any text or print from the frame; keep everything else identical") rather than regenerating.
 **Output:** `03_product-images/<slug>-packshot.png`. Tell the master it exists (the ad stream waits for it).
 **Done when:** a stranger could not tell it apart from the real product, and there is no text on it.
-**Pitfalls:** asking for "small <brand> print on the temple" — GPT Image renders small prints garbled; packaging with the competitor's brand (for boxed products: either a plain unbranded box, or our own packaging only if BRANDING.md defines one).
+**Pitfalls:** asking for "small <brand> print on the temple" — GPT Image renders small prints garbled; packaging with the competitor's brand. For packaged products (tube, box, bottle), when the competitor's packaging shows its brand, ours shows OUR logo (00 §4, Oralys 2026-11-12). Define it in BRANDING.md "Packaging" and make the packshot via the edit endpoint with the padded logo PNG as a reference: wordmark large, positioned like the competitor's, almost no other print. A blank unbranded pack is wrong.
 
 > **Noxis run:** the packshot was made *last*, from our remake 01, with "small 'noxis' print on the temple" → the print came out as "noɓıs". The ad prompts then had to say "no text or logo on the frame". Make it first, text-free.
 
