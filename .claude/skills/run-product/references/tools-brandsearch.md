@@ -111,6 +111,62 @@ not for a specific competitor. **1 credit per ad.**
 - Rate limit: `429 too_many_requests` with `Retry-After`. Wait, then retry.
 - If the account is inactive, every call fails. Tell the operator.
 
+## Complete ad footprint for Step Alpha (Phase 1.3)
+Step Alpha 1.2 needs **every** ad of the competitor for this product, not the top 30 (spec
+[19](19-step-alpha.md) lines 200–202 and the QUALITY GATE "Complete ad inventory" and "Every video ad
+transcribed"). The procedure is [07 Steps 7–9](07-ads-research-brandsearch.md#step-7--pull-the-complete-footprint-for-step-alpha);
+how Alpha uses it: [20 §4](20-step-alpha-runbook.md#alpha0-inputs). The calls, in order:
+
+1. **Brand and pages.** `get_brand_by_url(url)` (else `lookup_brand`) → `brand_id`.
+   `get_brand_advertisers(brand_id, limit=100)` → every Meta page advertising for the brand; save it with the
+   dumps (SATURATION in Alpha 1.2). Optional, 1 credit: `get_brand_ads_aggregates(brand_id)` for totals and media mix.
+2. **Meta, both statuses, every format, paged until exhausted.** For `status` in `active`, `inactive`:
+   ```
+   query_meta_ads(body={"brand_ids": ["<domain>"], "q": "<kw>", "status": "<status>", "page": N, "page_size": 100,
+                        "fields": "id,status,start_date,end_date,total_active_time,duplicate_count,is_duplicate,reach_rank,eu_total_spend,eu_total_reach,creative,cards_count,is_image,is_video,platforms,language,duration,funnel_type,has_transcript,transcript_url,page_info,image_original_url,image_url"})
+   ```
+   No `is_image`/`is_video` filter. Repeat with `page` 1, 2, 3 … up to `pagination.total_pages`, one dump per page.
+   Then the same without `q` and with `"is_video": true` (video captions are often short): keep the rows that
+   are this product (title, transcript or landing page), drop the brand's other products.
+3. **`get_brand_ads` slices** for true `total_active_time` and media URLs (20 rows each, no paging): `platform="meta"`,
+   each `status`, plus `is_video="true"`, with `sort_by` = `rank`, `date`, `recent`, `active` and both `sort_order`.
+4. **Other platforms.** `get_brand_ads(brand_id, platform="tiktok")` and `platform="instagram"`, both statuses, sliced
+   the same way. Stop slicing a platform when two slices in a row bring no new id. Platform empty in Brandsearch → ask
+   the operator once for those ads (the spec allows "provided by operator") and record the gap.
+5. **Exhausted check.** Unique ids per platform and status ≥ the `pagination.total` Brandsearch reports. Short →
+   record it in `ad_inventory.json` `header.gaps` and BRIEF.md.
+6. **Save** every result unedited to `PD/05_ads/competitor/raw/footprint/<platform>-<status>-p<N>.json` (harness
+   files: copy them; inline results: save verbatim).
+7. **Inventory + free media** (one command; re-run it after every new dump, it keeps what you filled):
+   ```
+   python -I <skill>/scripts/alpha_gate.py inventory --alpha-dir "PD/00_alpha" \
+     --dumps meta:PD/05_ads/competitor/raw/footprint/meta-*.json tiktok:PD/05_ads/competitor/raw/footprint/tiktok-*.json \
+     --keyword <kw> --expected-total <sum of pagination totals per platform/status> \
+     --fetch-videos --fetch-images --fetch-transcripts
+   ```
+   Writes `PD/00_alpha/ad_inventory.json` (header: counts, pagination totals, gaps, pull date, platforms checked;
+   one record per ad: id, short_id M1../S1.., platform, format, status, start, end, run_days, reach_rank,
+   duplicate_count, page, landing_url, caption, media URLs, video_file, image_file, transcript, angle, avatar,
+   notes; full list in [20 §2](20-step-alpha-runbook.md#2-folder-and-files)). Videos land in
+   `PD/05_ads/competitor/videos/<ad_id>.mp4`, static images in `PD/05_ads/competitor/images/<ad_id>.<ext>`,
+   `transcript_url` texts in `PD/00_alpha/transcripts/<ad_id>.txt` — all free, run it the same session (URLs
+   expire after 3 days). Rows whose copy lacks the keyword go to `review`: move each to `ads` or `excluded`
+   (with a `reason`) by hand. The gate fails while `review` is not empty.
+8. **Transcript of EVERY video ad.** The command prints how many are still missing and their credit cost.
+   Check `get_usage` / `get_ai_credits` and any credit freeze first ([18 §2](18-folders-scripts-credits.md#2-credits-and-costs)).
+   Then per missing Meta video: `transcribe_ad(id)` (**1 credit**, can take over a minute) → save the result
+   verbatim to `PD/00_alpha/transcripts/<ad_id>.txt` (first line `source: brandsearch` + language, then the timed
+   speech). Identical videos share one transcript (no second credit). `422 ad_not_video`, TikTok/Instagram or a
+   failure → `python -I video_transcribe.py PD/05_ads/competitor/videos/<ad_id>.mp4 --out <scratch>.json` (free,
+   local) and save its timed lines with `source: whisper`. A video with no speech still gets a file:
+   `source: none — music only`.
+9. **Video file missing** (no URL in any dump): `download_ad(platform, id, media="video")` (**1 credit**), fetch the
+   returned URL at once, save as `<ad_id>.mp4`.
+
+Done when: `alpha_gate.py inventory` reports 0 to review, 0 transcripts missing, 0 video files missing, and the
+header totals match Brandsearch (or the gap is recorded). Cost of a footprint: quota only for the pulls, plus
+1 credit per video ad without a free transcript, plus 1 credit per video/image with no URL.
+
 ## Costs at a glance
 - **Free, quota only:** `get_brand_ads`, `query_meta_ads`, `search_meta_ads`, brand lookups, direct URL downloads.
 - **1 credit:** each `download_ad`, `get_meta_ad`, `transcribe_ad`; each aggregates call; each

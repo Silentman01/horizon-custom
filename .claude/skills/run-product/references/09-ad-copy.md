@@ -1,22 +1,33 @@
-# Phase 3E — Ad copy (framework extraction + brand copy)
+# Phase 3E — Ad copy (framework extraction + one copy set per angle card)
 
-Goal: Meta ad copy for our brand that mirrors the competitor's proven caption structure beat for beat, with claims at the same strength, in the market's language: primary text Version A (1:1 structure), Version B (short), 5 headlines with top picks, link description, CTA rotation. Output: `05_ads/AD_COPY.md` from `templates/AD_COPY.md`.
+Goal: Meta ad copy for our brand that mirrors the competitor's proven caption structure beat for beat, with claims at the same strength, in the market's language, written **once per Step Alpha angle card**: per card, primary text Version A (1:1 structure), Version B (short), 5 headlines with top picks, link description; one CTA rotation for all. Output: `05_ads/AD_COPY.md` from `templates/AD_COPY.md`.
 
-**One shared file:** `05_ads/AD_COPY.md` sits at the root of `05_ads/` and is the only copy set for the brand: every ad uses it, image and video alike, until the operator says otherwise. Never put copy files inside `generated/`, batch or video folders, and new batches (images or videos) reuse it instead of writing new primary texts or headlines.
+**One shared file:** `05_ads/AD_COPY.md` sits at the root of `05_ads/` and is the only copy file for the brand. It holds one copy set per angle card; every ad, image and video alike, uses the copy set of its angle card (AD_VARIANTS.md column, 08 §1b), until the operator says otherwise. Never put copy files inside `generated/`, batch or video folders, and new batches (images or videos) reuse it instead of writing new primary texts or headlines.
 
 Read first: `00-operator-rules.md` §1 (claims — no softening, no caveat notes), §11 (copy style).
-Starts when `05_ads/competitor/ranking.json` (captions) and `COMPETITOR_ADS.md` exist. Sub-agents return the document as text; the master saves it.
+When the competitor uses advertorial funnels, some angle cards send traffic to an advertorial page instead of the product page — see [22](references/22-native-ads-and-advertorials.md).
+Starts after Alpha: the Step Alpha gate has passed (`00_alpha/ALPHA_DOSSIER.md`) and `05_ads/competitor/ranking.json` (captions) exists. Sub-agents return the document as text; the master saves it. All persuasive copy goes through the copy chief (13).
+
+**Inputs from Step Alpha:**
+| Dossier section | Use |
+|---|---|
+| 3.1 Angle Cards (validated `V#` + opportunity `O#`) | one copy set per card: its avatar, pain/desire, trigger, enemy, mechanism, promise, proof |
+| 1.9 Ad Copy Patterns · 1.7 Ad Inventory | the caption groups, persuasion sequences and CTAs, and which caption runs on which angle |
+| 3.3 Hook Library | the hook line of each copy set and the headlines |
+| 3.5 Customer Language Bank (+ 2.6) | hook-ready and headline-ready phrases for hooks and headlines; objection-ready phrases for the feature stack and risk reversal |
+| 1.4 Objections | the objections each set's feature stack answers |
+| 1.1 Avatars (awareness, sophistication) | how fast each set names the product and what kind of claim leads (13) |
 
 ---
 
 ## Step 1 — Collect the captions
 **Purpose:** find the copy the competitor actually pays to run.
 **Do:**
-1. Pull from `ranking.json` / the raw Brandsearch dumps (`05_ads/competitor/raw/`) for every ad of the product: primary text (body/caption), headline (title), link description, CTA type, days running. Field names: see `tools-brandsearch.md`.
+1. Pull from `ranking.json`, the raw Brandsearch dumps (`05_ads/competitor/raw/`) and the dossier (1.9 Ad Copy Patterns, 1.7 Ad Inventory) for every ad of the product: primary text (body/caption), headline (title), link description, CTA type, days running, angle card. Field names: see `tools-brandsearch.md`.
 2. Normalise whitespace and group identical captions. Count ads and total days running per caption group.
 3. Pick the **primary caption** = the group used by the best-ranked creatives (best `reach_rank`; ties by total days running, then ad count). Competitors often lock one caption on every ad and test only creatives — then there is exactly one group.
 4. Note headline variants and the CTA types used and how often.
-**Output:** caption groups table (`caption # | ads | total days | first line`).
+**Output:** caption groups table (`caption # | ads | total days | first line | angle cards it runs on`).
 **Done when:** the primary caption, headlines and CTAs are identified.
 **Pitfalls:** captions from the brand's other products (filter by the product keyword as in 07); truncated captions in one endpoint — take the longest version.
 
@@ -44,23 +55,32 @@ Also record: line length, emoji use (✔️, 👉), paragraph rhythm, reading le
 **Do:** list every claim in the caption and headline (numbers, conditions, authority, technology names, guarantees, counts) and write our line next to it. Our line keeps the **same strength and specificity**: "clinical testing and doctor recommendations" stays "clinically tested and doctor-recommended", "over 10,000 people trust us" stays "over 10,000 people trust <BRAND>", "risk-free for 30 days" stays 30 days. Mechanism names get our brand's version of the same structure ("<Name> Technology") or the competitor's generic term if it isn't trademarked to them.
 **Never:** soften, drop, hedge ("may help"), or add notes like "keep only if true" / "check compliance" / alternative safer lines. The operator validates claims.
 
-## Step 4 — Write Version A (1:1 structure)
-**Do:** one paragraph/line group per beat, same order, same approximate length and rhythm, same emoji pattern, original wording (paraphrase), simple vocabulary, market language and spelling, our brand name where the competitor uses theirs. Read it aloud: it should feel like the same ad written by a different person.
+## Step 4 — Write Version A per angle card (1:1 structure)
+**Do:** one copy set per card in 3.1 (validated and opportunity; killed angles get none). Keep the competitor's beat structure, and aim every beat at the card:
+- Hook: from the card's HOOK TEMPLATES or the Hook Library (3.3), in customer words from the hook-ready phrases (3.5).
+- Enemy: the card's ENEMY. Mechanism: the card's MECHANISM (1.6). Feature stack: answers the top objections of the card's avatar (1.4), in objection-ready phrases. Authority + transformation: the card's PROOF and PROMISE. Risk reversal + crowd: as the competitor.
+- The card the competitor's primary caption runs on stays closest to 1:1.
 
-## Step 5 — Write Version B (short)
-**Do:** 3–5 lines for testing: hook (one line, often the blame-shift or the strongest claim) → mechanism/benefits in one sentence → risk reversal + crowd → CTA line with an emoji arrow if the competitor uses emojis. Same claims, same strength.
+Then, per set: one paragraph/line group per beat, same order, same approximate length and rhythm, same emoji pattern, original wording (paraphrase), simple vocabulary, market language and spelling, our brand name where the competitor uses theirs. Read it aloud: it should feel like the same ad written by a different person, for that card's avatar.
+
+## Step 5 — Write Version B (short) per angle card
+**Do:** 3–5 lines for testing: hook (one line from 3.3 / 3.5, often the blame-shift or the strongest claim) → mechanism/benefits in one sentence → risk reversal + crowd → CTA line with an emoji arrow if the competitor uses emojis. Same claims, same strength.
 
 ## Step 6 — Headlines, description, CTAs
-- **5 headlines** (≤40 characters where possible): #1 mirrors the competitor's headline structure; the rest come from the best hooks of the top ads (situation, enemy, fit, blame-shift, outcome). Star the top 2–3 to test first.
+- **5 headlines per angle card** (≤40 characters where possible): #1 mirrors the competitor's headline structure; the rest come from the Hook Library (3.3) and the headline-ready phrases (3.5) of that card (situation, enemy, fit, blame-shift, outcome). Star the top 2–3 to test first.
 - **Link description:** the competitor's pattern if they use one; otherwise three proof points from the page separated by " · " (fit / guarantee / shipping offer).
-- **CTA:** the competitor's CTA buttons and rotation, using Meta's button names as they appear in the data (main + 2 alternates).
+- **CTA:** the competitor's CTA buttons and rotation, using Meta's button names as they appear in the data (main + 2 alternates). One rotation for every set.
+
+**Advertorial-funnel angles:** for angle cards whose ads link to an advertorial page (22), the primary text and headlines drive traffic to the advertorial (not the product page). The CTA and promise match the advertorial's opening — "Read the article", "See the research", "Check the review" — not the product page's offer. The landing field in the copy set header says the advertorial template name. For angle cards that go direct to the product page, everything stays as above.
 
 ## Step 7 — Final check and save
-Checklist: every beat present in order · every competitor claim present at the same strength · no competitor name · market language/spelling/currency · length close to the competitor's · no caveat or "note" lines anywhere · headlines starred. Return the full AD_COPY.md as text (sub-agent) or save it to `05_ads/AD_COPY.md` (master).
+Checklist: one copy set per angle card in 3.1, each headed with its card ID, avatar and hook source · every beat present in order · every competitor claim present at the same strength · no competitor name · market language/spelling/currency · length close to the competitor's · no caveat or "note" lines anywhere · headlines starred. Return the full AD_COPY.md as text (sub-agent) or save it to `05_ads/AD_COPY.md` (master).
 
 ---
 
 ## Noxis run — worked example (corrected)
+> The Noxis run had one copy set (before Step Alpha). Today this would be the copy set of the card the competitor's primary caption runs on.
+
 
 Beats (Plaims, paraphrased): 1 "Wondering why some night driving glasses don't work? Here's what to look for…" · 2 others = "basic orange-tinted sunglasses with no medical backing" · 3 "Specialized GlareCut Technology engineered for aging eyes" · 4 perfect brightness, peripheral protection, fits over prescription glasses · 5 "clinical testing and doctor recommendations" + "transformed blinding LED headlights into soft, manageable light" · 6 "risk-free for 30 days" + "over 10,000 people trust us".
 

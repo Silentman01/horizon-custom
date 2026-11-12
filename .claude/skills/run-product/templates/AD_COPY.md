@@ -1,6 +1,9 @@
 # <BRAND> — Meta ad copy
 
-Market: <country · language · currency> · Source: <competitor> captions on <n> ads (<n> caption groups) · Date: <YYYY-MM-DD>
+Market: <country · language · currency> · Source: <competitor> captions on <n> ads (<n> caption groups) · Step Alpha dossier: `00_alpha/ALPHA_DOSSIER.md` · Date: <YYYY-MM-DD>
+
+<!-- How: references/09-ad-copy.md. One copy set per angle card in dossier 3.1 (validated V# + opportunity O#).
+     Every ad (image and video) uses the copy set of its angle card (AD_VARIANTS.md "angle card" column). -->
 
 ## 1. Competitor framework
 <One line: e.g. "One caption locked on all <n> ads; they test creatives, not copy.">
@@ -25,23 +28,28 @@ CTA rotation: <e.g. Shop now / See details / Learn more>
 
 ---
 
-## 3. Primary text — Version A (mirrors the framework 1:1)
+<!-- Repeat sections 3–6 for EVERY angle card in 3.1. -->
 
-<beat 1>
+## Copy set <V1 | O1 …> — <angle name>
+Angle card: <ID> · Avatar: <AV#, name> · Awareness / sophistication: <from 1.1> · Hook source: <3.3 # or card HOOK TEMPLATE> · Landing: <product page or product.<slug>-<angle-id>>
 
-<beat 2>
+### 3. Primary text — Version A (mirrors the framework 1:1, aimed at this card)
 
-<beat 3>
+<beat 1: hook from 3.3, in customer words from 3.5>
 
-<✔️ benefit 1>
+<beat 2: the card's ENEMY>
+
+<beat 3: the card's MECHANISM>
+
+<✔️ benefit 1: answers the avatar's top objection (1.4)>
 <✔️ benefit 2>
 <✔️ benefit 3>
 
-<beat 5>
+<beat 5: the card's PROOF + PROMISE>
 
 <beat 6>
 
-## 4. Primary text — Version B (short, for testing)
+### 4. Primary text — Version B (short, for testing)
 
 <hook line>
 
@@ -49,15 +57,17 @@ CTA rotation: <e.g. Shop now / See details / Learn more>
 
 <crowd line + CTA line>
 
-## 5. Headlines (test the starred ones first)
+### 5. Headlines (test the starred ones first)
 1. **<headline mirroring the competitor's structure>** ★
 2. <headline> ★
 3. <headline>
 4. <headline>
 5. <headline>
 
-## 6. Link description
+### 6. Link description
 <proof point · proof point · proof point>
 
-## 7. CTA
+---
+
+## 7. CTA (all copy sets)
 <main> (main) · <alternate> · <alternate>

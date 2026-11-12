@@ -16,13 +16,34 @@ config.json:
   "accent": "#3D5AFE",                       # bold words of the trust points
   "text": "#111111",
   "avatars": [{"src": "face.png", "cx": 0.5, "cy": 0.3, "size": 0.25}],  # crop center + side, fractions of the image
-  "points": [["30 DÍAS", " DE GARANTÍA"], ["ENVÍO EN ", "24 HRS"], ["PAGO ", "SEGURO"]]
+  "points": [["30 DÍAS", " DE GARANTÍA"], ["ENVÍO EN ", "24 HRS"], ["PAGO ", "SEGURO"]],
+  "icons": ["guarantee", "truck", "lock"]    # optional, one per point: built-in name, inline "<svg…>" or null
 }
 In each point, items at even indexes are accent bold, odd ones plain: ["30 DAYS", " GUARANTEE"],
-["", "SHIPS IN ", "24 HOURS"] (empty first item when the point starts plain). The bar text shrinks to fit.
+["", "SHIPS IN ", "24 HOURS"] (empty first item when the point starts plain). The bar text shrinks to fit;
+the points shrink too if they collide.
+Icons sit before the point text at text height, in "icon_color" (default accent). Built-ins: guarantee, truck,
+lock, check. Inline SVGs should use stroke/fill="currentColor"; their width/height are overridden.
+Save config.json as UTF-8 (a "£" read as "Â£" means it was saved in another encoding).
 """
-import base64, io, json, os, sys
+import base64, io, json, os, re, sys
 from PIL import Image
+
+_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">%s</svg>'
+ICONS = {
+    'guarantee': _SVG % '<path d="M12 2.5 4 5.5v6c0 5 3.4 8.8 8 10 4.6-1.2 8-5 8-10v-6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+    'truck': _SVG % '<path d="M1.5 5h12v11h-12z"/><path d="M13.5 9h4.5l3.5 3.5V16h-8z"/><circle cx="6" cy="17.5" r="2" fill="#fff"/><circle cx="17.5" cy="17.5" r="2" fill="#fff"/>',
+    'lock': _SVG % '<rect x="4.5" y="10.5" width="15" height="11" rx="2"/><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"/><path d="M12 15v2.5"/>',
+    'check': _SVG % '<circle cx="12" cy="12" r="9.5"/><path d="m7.5 12 3 3 6-6"/>',
+}
+
+
+def icon_svg(v):
+    if not v:
+        return ''
+    svg = v if v.lstrip().startswith('<svg') else ICONS[v]
+    svg = re.sub(r'<svg[^>]*>', lambda m: re.sub(r'\s(width|height)="[^"]*"', '', m.group(0)), svg, count=1)
+    return '<i class="ic">' + svg + '</i>'
 
 
 def crop_avatar(a, px=200):
@@ -53,8 +74,9 @@ def main():
     logo = Image.open(cfg['logo'])
     font = cfg.get('font', 'Inter')
     pts = ''
-    for p in cfg['points']:
-        pts += '<span>' + ''.join(
+    icons = cfg.get('icons') or []
+    for n, p in enumerate(cfg['points']):
+        pts += '<span>' + icon_svg(icons[n] if n < len(icons) else None) + ''.join(
             ('<b>%s</b>' if i % 2 == 0 else '%s') % s for i, s in enumerate(p)) + '</span>'
     avs = ''.join('<img class="av" src="%s">' % b64(f, 'JPEG') for f in faces)
     html = f"""<!doctype html><html><head><meta charset="utf-8">
@@ -72,6 +94,9 @@ background:linear-gradient(90deg,{cfg['bar_from']},{cfg['bar_to']})}}
 .bt{{color:#fff;font-weight:600;font-size:{cfg.get('bar_size', 40)}px;letter-spacing:.01em;white-space:nowrap;text-transform:uppercase}}
 .pts{{position:absolute;left:18px;right:18px;top:258px;display:flex;justify-content:space-between;font-size:{cfg.get('points_size', 21)}px;text-transform:uppercase;white-space:nowrap}}
 .pts b{{color:{cfg['accent']};font-weight:800}}
+.pts span{{display:inline-flex;align-items:center;white-space:pre}}
+.ic{{display:inline-flex;color:{cfg.get('icon_color', cfg['accent'])};margin-right:.35em}}
+.ic svg{{width:1.1em;height:1.1em;display:block}}
 </style></head><body>
 <div class="logo"><img src="{b64(logo)}"></div>
 <div class="bar"><div class="avs">{avs}</div><div class="bt">{cfg['bar_text']}</div></div>
@@ -87,7 +112,12 @@ background:linear-gradient(90deg,{cfg['bar_from']},{cfg['bar_to']})}}
             # shrink the bar text until it fits next to the faces
             pg.evaluate('''() => { const bar = document.querySelector('.bar'), t = document.querySelector('.bt');
               let s = parseFloat(getComputedStyle(t).fontSize);
-              while (t.getBoundingClientRect().right > bar.getBoundingClientRect().right - 40 && s > 18) { s -= 1; t.style.fontSize = s + 'px'; } }''')
+              while (t.getBoundingClientRect().right > bar.getBoundingClientRect().right - 40 && s > 18) { s -= 1; t.style.fontSize = s + 'px'; }
+              // shrink the points until they keep at least 24px between them
+              const p = document.querySelector('.pts'), sp = [...p.children];
+              let f = parseFloat(getComputedStyle(p).fontSize);
+              const room = () => p.clientWidth - sp.reduce((a, e) => a + e.getBoundingClientRect().width, 0);
+              while (room() < 24 * (sp.length - 1) && f > 12) { f -= 0.5; p.style.fontSize = f + 'px'; } }''')
             pg.screenshot(path=path)
         b.close()
     print('wrote', out)

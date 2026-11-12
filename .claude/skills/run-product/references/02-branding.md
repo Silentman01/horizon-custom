@@ -1,6 +1,6 @@
 # 02 — Branding (Phase 2, ends at the GATE)
 
-This step turns the captured competitor page into the decisions the whole launch depends on: brand name, palette, fonts and shape, and product title. In a product test almost all of it is copied 1:1 from what already sells. The one real creative bet is the **brand name**, and the operator makes that choice.
+This step turns the captured competitor page into the decisions the whole launch depends on: brand name, palette, fonts and shape, and product title. Brand identity (palette, fonts, title, shape) is copied 1:1 from what already sells — the page structure, copy and design are adapted separately (see 03 §7b ADAPTATION BLUEPRINT, 04, 13). The one real creative bet is the **brand name**, and the operator makes that choice.
 
 Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 
@@ -24,12 +24,13 @@ Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 
 ## 1. When this runs, inputs, outputs
 
-**When:** after Phase 1 capture has landed (`02_competitor/page/capture.md`, `p.json`, screenshots). If capture hasn't run yet, run `scripts/capture_page.py` yourself first; it takes under a minute. Never brand from memory or from the URL alone, because the palette, price and positioning must come from the real page.
+**When:** after Phase 1 capture has landed (`02_competitor/page/capture.md`, `p.json`, screenshots) **and the Step Alpha gate has passed** (`00_alpha/ALPHA_DOSSIER.md`, gate PASS in BRIEF.md). Branding never starts before that. If capture hasn't run yet, run `scripts/capture_page.py` yourself first; it takes under a minute. Never brand from memory or from the URL alone, because the palette, price and positioning must come from the real page.
 
 **Inputs**
 - `COMPETITOR_URL` (one or more; the first is the page being cloned, "#1")
 - `MARKET` (country, language, currency), from BRIEF.md. Ask if it's missing. Names and titles depend on it.
 - `PRODUCT_DIR/02_competitor/page/`: `p.json`, `p.html`, `capture.json`, `capture.md`, desktop screenshot chunks
+- `PRODUCT_DIR/00_alpha/ALPHA_DOSSIER.md`: the sections below
 
 **Outputs**
 - `PRODUCT_DIR/01_branding/BRANDING.md` (built from `templates/BRANDING.md`)
@@ -44,7 +45,18 @@ Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 | "go all the way" with no brand given | Still stop at the gate. It's the one planned stop in the whole run. |
 | Operator proposes their own name | Accept it. Check silently for a clash with a big existing brand or a bad meaning in the market language, and flag only a real problem, in one line. |
 
-**What may run before the gate:** capture, media download, Brandsearch pulls and ranking, and the SECTION SPEC (it describes the competitor and doesn't need our brand). **What must wait:** anything that prints our brand: copy, images, ads, theme edits, the git branch.
+**What may run before the branding gate:** Phase 1 (capture, media download, Brandsearch pulls and ranking) and Step Alpha (it must have passed already). **What must wait for branding approval:** everything in Phase 3, the SECTION SPEC (A1) included, plus copy, images, ads, theme edits and the git branch (operator 2026-11-10).
+
+### Inputs from Step Alpha
+Read these dossier sections before Step 3. They change the **name and the tone**, nothing else:
+| Dossier section | What it changes |
+|---|---|
+| 3.2 Avatar Cards | who says the name: run the possessive test in the primary avatar's voice (age, register, how they talk). A name that avatar would not say naturally fails. |
+| 1.5 Emotional Landscape | the tone: the name's sound and the positioning line fit the dominant triggers (fear and frustration → calm, trustworthy; identity and aspiration → confident, a little bold). |
+| 1.6 Unique Mechanism | a possible name root (the way *nox* → Noxis echoes night), never a description of the mechanism. If the competitor brands its mechanism, note the name our copy will use. |
+| 3.5 Customer Language Bank | the community's own words: avoid names that clash with its slang or sound like a word it uses for the problem; roots may come from its positive words. |
+
+Palette, fonts and title stay 1:1 (Steps 4–6). Alpha does not change them. Record what you used in BRANDING.md § Alpha inputs used.
 
 ---
 
@@ -60,7 +72,7 @@ PROMPT_1-1 Step 1 asks for 4 palette variations (MIRROR/SHIFT/CONTRAST/WILDCARD)
 
 So the defaults are:
 
-1. **Test 1:1, upgrade later.** Palette = the competitor's exact hex codes and roles. Fonts and radii are the same. Title = the competitor's title pattern with our brand. **Why:** a test answers one question ("does this product sell with our page and ads?"). Changing the palette or the title adds variables and costs time for no learning. Upgrades come after the product is proven.
+1. **Brand identity 1:1, upgrade later.** Palette = the competitor's exact hex codes and roles. Fonts and radii are the same. Title = the competitor's title pattern with our brand. **Why:** a test answers one question ("does this product sell with our page and ads?"). Changing the palette or the title adds variables and costs time for no learning. The page structure, copy and sections are adapted (00 §2, 03 §7b), but the brand identity stays 1:1. Upgrades come after the product is proven.
 2. **The PROMPT_1-1 variations become optional.** The 4 palette variations and 5 title candidates go in an "Upgrade options" section, and only when the operator asks for them or the prompt explicitly requests the full Step 1 variations. Never put them in the default gate message.
 3. **Domains are never a filter.** Read "works as a domain" as "could carry a my-/try-/get- prefix", which is always true. Don't check availability, don't mention it, and don't drop a name because of it.
 4. **Market language, not French + English.** Names must be pronounceable one way by a native speaker of `MARKET`'s language. If the operator works in another language, also check that they can say it, but the customer is who matters.
@@ -77,6 +89,7 @@ So the defaults are:
 2. Read `p.json` (title, vendor, handle, variants, `price`, `compare_at_price`, `price_currency`, images).
 3. Open the first two desktop screenshot chunks (header + buy box) and the chunks that hold the comparison table and footer. These are where the brand colors show.
 4. Read `MARKET` from BRIEF.md.
+5. Read the dossier sections listed in §1 (Inputs from Step Alpha).
 
 **Output:** nothing saved yet. You know what the page looks like and what it sells for.
 **Done when:** you can state the competitor's name, title, price, main CTA color and heading font without guessing.
@@ -101,7 +114,7 @@ So the defaults are:
 5. **Typography:** `--font-heading-family` / `--font-body-family` CSS vars, `@font-face`, Google Fonts links. Note the weight used for the title (usually 700).
 6. **Shape:** `--buttons-radius`, `--media-radius`, `--text-boxes-radius`, card radius. For example, `40px` buttons means pill shaped.
 7. **Visual tone:** 3–5 words ("clean white, amber accents, photo-led, no gradients").
-8. **Positioning angle:** one sentence answering these questions: *Who is the customer? What pain do they live with? What do they blame? What does the brand blame instead? Is the tone hype or anti-hype?* Read the title, subtitle, bullets, the long-form image-with-text sections and the FAQ, which together show the angle most clearly.
+8. **Positioning angle:** one sentence answering these questions: *Who is the customer? What pain do they live with? What do they blame? What does the brand blame instead? Is the tone hype or anti-hype?* Read the title, subtitle, bullets, the long-form image-with-text sections and the FAQ, which together show the angle most clearly. Check it against the dossier: the primary avatar (3.2) and the highest-confidence angle card (3.1, its ENEMY and PROMISE).
 
 **Output:** the snapshot table (PROMPT_1-1 format) plus a details block (tiers, verified palette with roles, fonts, radii, tone, positioning, apps seen).
 
@@ -137,6 +150,7 @@ Plaims     │ $24.95 / 34.95 / 44.95 │ #FFB800 #000000 #FFFFFF  │ Honest an
    - [ ] Not derivative of the competitor (no Plaimz, Glaims, Claims) and not an existing big brand in any category (Lumix, Optiq-style optical brands).
    - [ ] No bad meaning or slang in the market language. Not a negative symptom word for the category (for example "halo" is a glare symptom, so it's weak for glare glasses).
    - [ ] Credible in the category, so it could be printed on the box and the packshot.
+   - [ ] Fits the Alpha inputs: the primary avatar (3.2) would say it, its sound fits the dominant triggers (1.5), and it clashes with nothing in the language bank (3.5).
    - [ ] **Domain availability not checked and not mentioned.**
 4. **Rank and present 7–10.** Star the top 3. Give each name one line of rationale **that includes the possessive sentence**.
 5. Keep a **Rejected** list in BRANDING.md across rounds so no name comes back.
@@ -228,11 +242,12 @@ Brand names (★ = my picks)
 Palette (1:1 with <competitor>): #FFB800 CTA/bars · #000000 text · #FFFFFF bg · #0E1B4D deep accent · #E5E5E5 lines
 Fonts: Poppins 700 / Inter · pill buttons (40px)
 Title (1:1): Noxis Polarized Headlight Glasses
+Alpha fit: AV1 <avatar name> · triggers <top 2> → tone <3 words>
 
 Pick a name (or say "more names"). Palette and title are 1:1 for the test; say if you want variations.
 ```
 
-3. **STOP.** Don't create the branch, edit theme files, write copy or generate images. You may keep running the brand-independent streams (capture, media, Brandsearch, ranking, SECTION SPEC).
+3. **STOP.** Don't create the branch, edit theme files, write copy or generate images. You may keep running Phase 1 data work only; the SECTION SPEC waits for approval.
 
 **Done when:** BRANDING.md is saved, the message is sent, and you're waiting.
 
@@ -277,7 +292,7 @@ Pick a name (or say "more names"). Palette and title are 1:1 for the test; say i
 ## 12. Delegation (optional brainstorm agent)
 
 Usually the master does branding alone, because it's short and taste matters. Use a brainstorm agent only if a round fails twice:
-- Give it the snapshot, the checklist from Step 3, the Rejected list, `MARKET`, and the operator's exact words.
+- Give it the snapshot, the checklist from Step 3, the Rejected list, `MARKET`, the operator's exact words, and the dossier sections from §1 (3.2, 1.5, 1.6, 3.5).
 - Ask for 30 candidates, each marked pass or fail per checklist item, **returned as text** (sub-agents may be blocked from writing .md files).
 - The master picks the final 7–10 and the stars.
 
@@ -343,6 +358,7 @@ Details:
 - [ ] Snapshot built from `p.json` + capture. Prices come from JSON, not the screenshot.
 - [ ] Every palette hex was seen on a screenshot and has a role and a theme target. App and payment colors are excluded.
 - [ ] Fonts (with Shopify handles) and radii recorded.
+- [ ] Step Alpha gate passed before branding started; BRANDING.md § Alpha inputs used is filled (3.2, 1.5, 1.6, 3.5).
 - [ ] 7–10 names pass the checklist, the top 3 are starred, and each has a possessive sentence. Domains were not considered.
 - [ ] Title = the competitor's title with the brand swapped. The handle mirrors theirs.
 - [ ] Upgrade variations appear only if they were asked for.

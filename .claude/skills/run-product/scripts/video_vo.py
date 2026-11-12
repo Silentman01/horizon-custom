@@ -38,7 +38,7 @@ VOICE_SPEC.json (exact spec saved per video; defaults = the operator's ElevenLab
   {"provider": "edge", "voice": "es-MX-JorgeNeural", "rate": "+10%"}   free; timing drafts only
   {"provider": "gemini", "request": {<Kie createTask body>}}         legacy; only if the operator asks
 --one-take: synthesise the whole script in ONE call and split it at the silences. Needs faster-whisper.
-Keys: ELEVENLABS_API_KEY (env, or --secrets file, default G:/Ecom/Products/.secrets/elevenlabs.env);
+Keys: ELEVENLABS_API_KEY (env, or --secrets file, default D:/Ecom/Products/.secrets/elevenlabs.env);
   KIE_API_KEY (env, legacy). Raw TTS takes are cached in --cache (default next to --out) by text hash,
   so re-runs cost nothing.
 """
@@ -46,7 +46,7 @@ import argparse, copy, hashlib, json, os, re, shutil, subprocess, sys, tempfile,
 import numpy as np
 
 SR = 48000
-SECRETS = "G:/Ecom/Products/.secrets/elevenlabs.env"
+SECRETS = "D:/Ecom/Products/.secrets/elevenlabs.env"
 EL_DEFAULT = {"model_id": "eleven_multilingual_v2",
               "voice_settings": {"stability": 0.55, "similarity_boost": 0.9, "style": 0.15, "use_speaker_boost": True}}
 
@@ -124,7 +124,7 @@ def tts(text, out, spec, secrets=SECRETS, prev=None, nxt=None):
     elif prov == "elevenlabs":
         body = {"text": text, "model_id": spec.get("model_id", EL_DEFAULT["model_id"]),
                 "voice_settings": spec.get("voice_settings", EL_DEFAULT["voice_settings"])}
-        for k in ("seed", "language_code"):
+        for k in ("seed", "language_code", "speed"):
             if k in spec:
                 body[k] = spec[k]
         if prev:
@@ -169,11 +169,19 @@ def cached_tts(text, spec, cache, secrets, prev=None, nxt=None):
 TH = -42.0
 
 
-def trim(x, pad=0.02):
+def trim(x, pad=0.02, blip=0.08, gap=0.15):
     d, h = env_db(x)
     act = np.where(d > TH)[0]
     if not len(act):
         return x
+    # drop isolated clicks/breaths at either end (a 40 ms tick 0.6 s after the last word kept whole tails)
+    fr = SR / h
+    runs = np.split(act, np.where(np.diff(act) > 1)[0] + 1)
+    while len(runs) > 1 and len(runs[-1]) < blip * fr and runs[-1][0] - runs[-2][-1] > gap * fr:
+        runs.pop()
+    while len(runs) > 1 and len(runs[0]) < blip * fr and runs[1][0] - runs[0][-1] > gap * fr:
+        runs.pop(0)
+    act = np.concatenate(runs)
     return x[max(0, act[0] * h - int(pad * SR)):min(len(x), (act[-1] + 1) * h + int(pad * SR))]
 
 
@@ -201,7 +209,7 @@ def shrink_pauses(x, need, keep=0.13):
 
 
 def tempo(x, f):
-    if f <= 1.0005:
+    if abs(f - 1.0) <= 0.0005:
         return x
     fd, a = tempfile.mkstemp(suffix=".wav")
     os.close(fd)
@@ -259,7 +267,8 @@ def cmd_build(a):
     if a.one_take:
         segs = split_take(load(cached_tts(" ".join(say), spec, cache, a.secrets)), lines, a.lang)
     else:
-        segs = [load(cached_tts(t, spec, cache, a.secrets, say[i - 1] if i else None,
+        segs = [load(cached_tts(t, dict(spec, speed=lines[i]["tts_speed"]) if lines[i].get("tts_speed") else spec,
+                                cache, a.secrets, say[i - 1] if i else None,
                                 say[i + 1] if i + 1 < len(say) else None)) for i, t in enumerate(say)]
     total = sc.get("total") or lines[-1]["end"] + 0.5
     track, info, bad = np.zeros(int(total * SR) + SR), [], 0
@@ -268,7 +277,9 @@ def cmd_build(a):
         if len(x) / SR > slot:
             x = trim(shrink_pauses(x, len(x) / SR - slot))
         f = max(1.0, len(x) / SR / slot)
-        ok = f <= a.max_speed
+        if a.fill and len(x) / SR < slot - 0.04:
+            f = max(a.fill, len(x) / SR / slot)  # slow a short take so it ends with the speaker's mouth
+        ok = f <= a.max_speed and (not a.fill or len(x) / SR / f >= slot - 0.3)
         x = tempo(x, min(f, a.max_speed))
         s = int(l["start"] * SR)
         track[s:s + len(x)] += x[:len(track) - s]
@@ -459,6 +470,9 @@ def main():
     p.add_argument("--spec"); p.add_argument("--voice", default="en-US-ChristopherNeural", help="edge voice if no --spec")
     p.add_argument("--one-take", action="store_true"); p.add_argument("--lang"); p.add_argument("--match")
     p.add_argument("--max-speed", type=float, default=1.08); p.add_argument("--cache")
+    p.add_argument("--fill", type=float, default=0.0,
+                   help="talking heads: slow takes shorter than their slot down to this speed (e.g. 0.92) so they fill it; "
+                        "lines still >0.3 s short are flagged REPHRASE (write them longer)")
     p.add_argument("--secrets", default=SECRETS); p.set_defaults(f=cmd_build)
     p = sub.add_parser("mix"); p.add_argument("--vo", required=True); p.add_argument("--out", required=True)
     p.add_argument("--music"); p.add_argument("--duck", type=float, default=9.0); p.add_argument("--lufs", type=float, default=-14.0)

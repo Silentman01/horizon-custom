@@ -1,21 +1,29 @@
-# 07 — Competitor ad research (Brandsearch MCP)
+# 07 — Competitor ad pull (Brandsearch MCP): complete footprint + top-30 ranking
 
-Goal: get the competitor's **top 30 unique image creatives for THIS product**, ranked the way that
-holds up for the MARKET, analyzed to the level where we can recreate the top 5 at ~97% fidelity
-(see 08-ad-creatives.md), plus the caption framework (see 09-ad-copy.md).
+This is Phase 1.3, the data pull that feeds Step Alpha. It has two jobs:
+1. **Complete ad footprint** for Step Alpha 1.2: every ad the competitor runs or ran for this product,
+   active and inactive, image and video, on every platform Brandsearch has, paged until nothing new comes
+   back, plus a transcript of **every** video ad (Steps 7–9).
+2. **Top 30 unique image creatives**, ranked the way that holds up for the MARKET (Steps 1–6). D2 remakes
+   the top 5 and builds the pattern ads from them (08); the video picks use the same ranking (14).
 
-Outputs (all under `PRODUCT_DIR/05_ads/`):
-- `competitor/raw/` holds the raw Brandsearch dumps, copied unedited
-- `competitor/NN_<leadid>.<ext>` holds the top 30 originals with ranked file names. The extension
+This step only pulls, downloads, transcribes and ranks. Step Alpha 1.2 reads every ad (inventory table,
+video beat maps, static decoding, cross-ad patterns): `19-step-alpha.md` (spec) and `20-step-alpha-runbook.md` (how).
+
+Outputs:
+- `05_ads/competitor/raw/` holds the raw Brandsearch dumps of the ranking pull, copied unedited
+- `05_ads/competitor/raw/footprint/` holds the raw footprint dumps (every platform, status and page)
+- `05_ads/competitor/NN_<leadid>.<ext>` holds the top 30 originals with ranked file names. The extension
   follows the real file format, and Brandsearch originals are often PNG, so glob `NN_*.*` and not `*.jpg`.
-- `competitor/ranking.json`, `missing_images.json`, `merged_ads.json`, `copy_summary.md`
-- `competitor/sheet_top10.jpg`, `sheet_01.jpg`, `sheet_02.jpg`
-- `COMPETITOR_ADS.md`, built from `templates/COMPETITOR_ADS.md`
+- `05_ads/competitor/ranking.json`, `missing_images.json`, `merged_ads.json`, `copy_summary.md`
+- `05_ads/competitor/sheet_top10.jpg`, `sheet_01.jpg`, `sheet_02.jpg`
+- `05_ads/competitor/videos/<ad_id>.mp4`: every video ad file (Step Alpha's visual beat analysis reads them)
+- `00_alpha/transcripts/<ad_id>.txt`: one transcript per video ad
+- `00_alpha/ad_inventory.json`: one record per ad of the footprint
 
 Tool reference: `tools-brandsearch.md`. Script: `scripts/rank_ads.py`.
 Who does what: the **master** makes every Brandsearch MCP call and runs the script, because MCP results
-land in the master's context and harness files. **Sub-agents** only read the image files and return text.
-Sub-agents are often blocked from writing .md files, so the master writes COMPETITOR_ADS.md.
+land in the master's context and harness files. **Sub-agents** only read the files.
 
 ---
 
@@ -30,7 +38,7 @@ Rules (operator rule 7):
 - **Spend/reach sorting only when targeting EU markets.** US ads carry no `eu_total_spend` / `eu_total_reach`; the first Noxis attempt ranked US ads by spend and the operator rejected it.
 - **Don't rank by days running alone.** An ad can run for weeks on a tiny budget ("an ad might be longest running but very low spent"). In the Plaims run, "Rainy Night Driving Glasses" (10 days, `reach_rank` 11) out-ranks several 17-day ads (`reach_rank` 13–24), and the tabletop comparison, mirror-glare and sore-eyes posters entered the top 10 only by impressions rank.
 - `reach_rank` is populated for US ads (e.g. 3, 7, 8, 11 … for Plaims). It ranks among ALL the brand's ads (other products included), so values have gaps after the keyword filter — use them as an order, not a count.
-- Days running and duplicates stay useful as tie-breakers and as context in the analysis (a creative duplicated into more ad sets = being scaled).
+- Days running and duplicates stay useful as tie-breakers and as signals for Step Alpha (a creative duplicated into more ad sets = being scaled).
 
 **Always request `reach_rank` (and `eu_total_spend,eu_total_reach` when EU) in the `fields` of every pull** — rank_ads.py can only sort by what the dumps contain; dumps without it fall back to days running with a warning.
 
@@ -42,13 +50,13 @@ Rules (operator rule 7):
 - **Purpose:** every ad call needs `brand_id` = the cleaned domain (`plaims.com`). The brand is often
   not named the way the URL suggests.
 - **Call:** `get_brand_by_url(url=COMPETITOR_URL)`. If that returns 404, call `lookup_brand(q="<name or domain>")`.
-  Optional: `get_brand_advertisers(brand_id=...)` lists the Meta pages advertising for the brand.
-  It is useful when the brand also runs ads from a second page or domain.
-- **Check:** the record shows Meta ads active. If it shows 0 ads, stop and report this to the operator.
-  Don't search other brands without asking.
+  `get_brand_advertisers(brand_id=...)` lists the Meta pages advertising for the brand (needed in
+  Step 7). It also shows when the brand runs ads from a second page or domain.
+- **Check:** the record shows ads (active or inactive). If it shows 0 ads, stop and report this to the
+  operator. Don't search other brands without asking.
 - **Optional context (1 credit):** `get_brand_ads_aggregates(brand_id=...)` gives the media mix
-  (image vs video share), CTA breakdown and demography. Use it to decide whether video matters (step 10).
-- **Done when:** you have `brand_id` and know whether the brand has Meta image ads.
+  (image vs video share), CTA breakdown and demography. Step Alpha can use the demography for its avatars.
+- **Done when:** you have `brand_id` and know which platforms and formats the brand advertises on.
 
 ## Step 2 — Find the product keyword(s)
 - **Purpose:** brands advertise several products. Plaims also runs a persimmon soap, so the unfiltered
@@ -160,92 +168,100 @@ python -I ~/.claude/skills/run-product/scripts/rank_ads.py \
   - **wrong product:** remove it, re-run with a better keyword, and don't hand-edit ranks
   - **CHECK near-duplicates** (same image, re-encoded): re-run with `--near-dup` if they really are the same
   - **`low_res` entries** in the top 10 (thumbnail only): use download_ad as in step 5
-- Fewer than 30 unique creatives is fine. Analyze what exists and say so.
+- Fewer than 30 unique creatives is fine. Rank what exists and say so.
 - **Done when:** the master has a final ordered list of up to 30 files.
 
-## Step 7 — Analyze with 2 sub-agents (15 ads each, in parallel)
-- **Why 2 × 15:** one agent reading 30 full-size images runs out of context and gets shallow. 15 each
-  keeps the descriptions detailed enough for 97% recreation.
-- Give each agent its file list (ranks 1–15 and 16–30), the matching `ranking.json` entries (days,
-  copies, first_seen, size), and this brief:
+## Step 7 — Pull the complete footprint (for Step Alpha)
+- **Why:** Step Alpha needs every ad, not the top 30. The quality gate checks "Complete ad inventory from
+  BrandSearch" and "Every video ad transcribed" (`19-step-alpha.md`, QUALITY GATE).
+- **Scope:** this product only. Use the Step 2 keyword(s). Video captions are often short: also pull
+  `is_video` without `q` and keep the rows that are this product (title, transcript or landing page).
+  Ads of the brand's other products stay out.
+- **Meta, every status and format:** `query_meta_ads` once with `"status": "active"` and once with
+  `"status": "inactive"`, no `is_image`/`is_video` filter, `page_size: 100`, and page `1, 2, 3 …` until
+  `page = total_pages`. One dump per page. Add `get_brand_ads` slices for both statuses and for
+  `is_video="true"` (true `total_active_time`, more media URLs).
+- **Other platforms:** `get_brand_ads(platform="tiktok")` and `platform="instagram"`, both statuses. These
+  return 20 rows per call with no page parameter, so slice with `sort_by` (`rank`, `date`, `recent`,
+  `active`) and `sort_order` (`asc`, `desc`) until two slices in a row bring no new id.
+- **Fields:** the Step 3 fields plus `is_image,is_video,platforms,language,duration,funnel_type,has_transcript,transcript_url,page_info`.
+  Video URLs (`video_sd_url`, `video_hd_url`) are attached automatically.
+- **Exhausted =** unique ids per platform and status ≥ the `pagination.total` Brandsearch reports. If a
+  platform stays short, record the gap in `ad_inventory.json` (`"gaps"`) and in BRIEF.md, and ask the
+  operator once for an export of the missing ads (the spec allows ads "provided by operator").
+- **Advertisers:** `get_brand_advertisers(brand_id)` lists the pages running the product (Alpha's
+  SATURATION line). Save it with the dumps.
+- **Saving:** copy each harness result file (Step 3 formats), or save an inline result verbatim, to
+  `05_ads/competitor/raw/footprint/<platform>-<status>-p<N>.json`. Never edit a dump.
+- **Media files:** run Step 9's command right after the pull, in the same session (URLs expire after 3 days):
+  `--fetch-videos` saves every video ad (`video_hd_url`, else `video_sd_url`, browser UA, free) to
+  `05_ads/competitor/videos/<ad_id>.mp4`, `--fetch-images` every non-video ad to `05_ads/competitor/images/<ad_id>.<ext>`.
+  Use `download_ad(platform, id, media="video")` (1 credit) only for rows without a URL.
+- **Done when:** every platform and status is exhausted (or the gap is recorded) and every video ad has a file.
 
-```
-You are an ad-creative analyst. Read each image file below (use the Read tool on every file, full size).
-Do NOT write files; return everything as text in your final reply.
-For EACH ad, in rank order, return:
-1. Rank, file name, lead id, days running, copies, first seen (given).
-2. Size in px and aspect ratio (1:1, 4:5, 9:16 ...).
-3. Format type (e.g. Ours vs Theirs table, POV through product, product + callout arrows, big-type
-   poster with bullets, before/after split, UGC selfie, handwritten note/planner, fake advertorial,
-   listicle grid, stat poster, diagram, testimonial card, lifestyle + checklist).
-4. ALL on-image text VERBATIM, top to bottom, keeping case, line breaks, emphasis, typos (mark "[sic]").
-5. Visual description precise enough to recreate it at ~97% fidelity:
-   - layout with approximate % positions/sizes of every element (e.g. "headline band top 0-18%, black on white")
-   - colors as hex estimates (background, text, accents, panels)
-   - fonts (family guess, weight, case, size relative to the canvas), icons, checks/Xs, arrows, badges
-   - product: angle, size (% of width), position, lens color, cutout vs in-scene
-   - people: age, gender, ethnicity, expression, clothing, pose, framing, what they are doing
-   - background/scene, lighting, color grade, photo vs render vs illustration, "simulated view"-type disclaimers
-6. Hook (the first thing read) and the Schwartz awareness level it targets (unaware / problem-aware /
-   solution-aware / product-aware / most-aware), with one line of reasoning.
-7. Claims made on the image, verbatim (do not judge or soften them).
-8. Angle in 3-6 words (e.g. "cataract-specific vs generic yellow").
-After all ads, return PATTERNS across your batch: winning formats, hook families, category enemy,
-color system, type system, claim types, product presentation, people/casting, any quirks
-(typos, wrong-market prices), and how the older long-running ads differ from the newer tests.
-```
-- **Done when:** both agents have returned text for all their ads and patterns.
+## Step 8 — Transcribe every video ad
+- **Credits first:** count the video ads with no transcript yet (`has_transcript` false). Each
+  `transcribe_ad` costs 1 credit. Check `get_usage` / `get_ai_credits`, write the count and cost in the
+  BRIEF credits line, and stay inside any credit freeze or budget set for the run (18 §2).
+- **Per video ad:**
+  1. `transcript_url` present → download it (free, it doesn't expire).
+  2. Otherwise `transcribe_ad(id)` (Meta video only, 1 credit, can take more than a minute).
+  3. Not Meta, or `422`/failure → transcribe the downloaded file locally with
+     `scripts/video_transcribe.py` (faster-whisper, free).
+- Identical videos (`is_duplicate`, same file hash) share one transcript: transcribe once and write the
+  same text into each id's file. No second credit.
+- **Save** `00_alpha/transcripts/<ad_id>.txt`: first line `source: brandsearch | brandsearch-url | whisper`
+  and the language, then the timed speech verbatim (`--fetch-transcripts` writes the `brandsearch-url` files with
+  that line). A video with no speech still gets a file: `source: none — music only`. Never edit or translate it.
+- **Done when:** every video ad id in the footprint has a transcript file.
 
-## Step 8 — Master compiles COMPETITOR_ADS.md
-- Copy `templates/COMPETITOR_ADS.md` to `PRODUCT_DIR/05_ads/COMPETITOR_ADS.md` and fill it:
-  - method line, with counts and the ranking rule actually used
-  - **generations**: cluster the ranks by launch date and style. Plaims had Gen 1, launched Sep 25 and
-    still running at 17 days, all 1:1, Poppins Bold, amber #FFB800, hard condition claims. Gen 2
-    launched Sep 28 – Oct 11, mostly 1856×2304 4:5, AI scenes, plainer copy, then lo-fi native tests.
-    Long-running generations are proven. New ones are only what the brand is testing now.
-  - top-30 table (rank, days, copies, format, hook)
-  - patterns, merged from both agents
-  - pointer to the per-ad detail
-- Save each agent's full per-ad text as an appendix (`COMPETITOR_ADS.md` § Per-ad detail) or as
-  `05_ads/competitor/analysis_1-15.md` and `analysis_16-30.md`. 08-ad-creatives.md needs the
-  verbatim text and layout for the top 5 remakes.
-- Keep claims exactly as they appear (operator rule 1). Don't add notes about claim validity.
-
-## Step 9 — Capture the copy/caption framework
-- Read `competitor/copy_summary.md`. Brands often **lock one caption and test creatives**: all 67
-  Plaims ads ran "Headlight Glasses That Actually Work" with the same 108-word body, and only the CTA
-  button varied (Shop now ×29, See details ×10, Learn more ×5).
-- Record per caption: title, full description (verbatim), CTA button(s), number of ads and creatives,
-  and which ranks use it. Paste this into COMPETITOR_ADS.md § Ad copy, and hand it to 09-ad-copy.md.
-- If captions differ per creative, note which caption goes with which top-10 creative. `ranking.json`
-  has `titles`, `descriptions` and `ctas` per group.
+## Step 9 — Write `00_alpha/ad_inventory.json`
+- One command, run right after Step 7 and again after Step 8 (it keeps what you already filled):
+  ```
+  python -I <skill>/scripts/alpha_gate.py inventory --alpha-dir "PD/00_alpha" \
+    --dumps meta:PD/05_ads/competitor/raw/footprint/meta-*.json tiktok:PD/05_ads/competitor/raw/footprint/tiktok-*.json \
+    --keyword <kw> --expected-total <sum of pagination totals> --fetch-videos --fetch-images --fetch-transcripts
+  ```
+- One record per ad of the footprint, merged by id across all dumps (earliest start, latest end, max
+  days, same rules as Step 4): `id`, `short_id` (M1.. video, S1.. static/carousel), `platform`, `format`
+  (video / static / carousel), `status`, `start`, `end`, `run_days`, `reach_rank`, `duplicate_count`, `page`,
+  `landing_url`, `caption` {primary_text, headline, description, cta}, the media URLs (`video_url`, `image_url`,
+  `transcript_url`, `dashboard_url`), `video_file`, `image_file`, `transcript` (path, video only),
+  plus `angle`, `avatar` and `notes` left empty. Step Alpha 1.2 fills `angle` and `avatar`.
+- Header (`header`): counts per platform, status and format, the `pagination.total` values, `gaps`,
+  `pull_date`, `platforms_checked`, `expected_total`. Rows whose copy lacks the keyword land in `review`:
+  move each to `ads` or `excluded` (with a `reason`) by hand. Field details: [20 §2](20-step-alpha-runbook.md#2-folder-and-files).
+- **Done when:** the command reports 0 to review, 0 transcripts missing and 0 video files missing, and the record
+  count equals the unique ids pulled (or the gap is recorded).
 
 ## Step 10 — Report to the operator
 - Show `sheet_top10.jpg` (open or attach the image), plus this table:
 
-| Rank | Lead id | Angle | Days | Copies |
+| Rank | Lead id | Days | Copies | Format |
 |---|---|---|---|---|
-| 1 | 1635066311558242 | Ours vs Theirs, cataract-specific vs generic yellow | 17 | 3 |
+| 1 | 1635066311558242 | 17 | 3 | Ours vs Theirs table |
 
-- Add three lines: the ranking rule used (Top rank by impressions; spend only for EU markets), the unique-creative count,
+- Add four lines: the ranking rule used (Top rank by impressions; spend only for EU markets), the
+  unique-creative count, the footprint counts (ads per platform / status / format, video transcripts),
   and the credits spent.
-- **Done when:** the operator has seen the top 10. Ad generation (08) starts from this ranking.
+- **Done when:** the operator has seen the top 10. Step Alpha starts from the footprint; ad generation (08)
+  starts after Alpha from this ranking.
 
 ---
 
-## Video ads (out of scope unless asked)
-Full video remake workflow (candidate gate, clip audit, voice clone, captions, (c) regenerations, folders): `14-video-ads.md`. The steps below are only the Brandsearch part of it.
-- The default pull uses `is_image="true"`, and the script skips `is_video` rows.
-- If the operator asks, or aggregates show the brand is mostly video:
-  1. Pull with `is_video="true"`, using the same two endpoints and the same ranking rule.
-  2. `download_ad(platform="meta", id, media="video")` returns a download URL (1 credit). Fetch it with
-     urllib right away, because it expires.
-  3. `transcribe_ad(id)` returns the hook line, timed speech and language (1 credit; existing
-     transcripts are instant).
-  4. `analyze_ad(platform="meta", id)` gives an AI breakdown (19 AI credits for video, 14 for image;
-     cached results are free). It is optional; our own sub-agent analysis is usually better and free.
-- `rank_ads.py --include-video` ranks video ads by their cover frame, which only works if
-  `image_url` or `thumbnail_url` exists.
+## Video ads
+Every video ad is pulled, downloaded and transcribed in Steps 7–8, for Step Alpha. The video remake
+workflow (candidate gate, clip audit, voice clone, captions, (c) regenerations, folders) is `14-video-ads.md`;
+it reuses these files and the Alpha analysis instead of pulling again.
+- The ranking pull (Steps 3–4) uses `is_image="true"`, and the script skips `is_video` rows.
+- Video ranking for the remake candidates: the same rule (`reach_rank` ascending, then days, then copies).
+  `rank_ads.py --include-video` ranks video ads by their cover frame, which only works if `image_url` or
+  `thumbnail_url` exists; otherwise sort the video records of `ad_inventory.json` by `reach_rank`.
+- `download_ad(platform="meta", id, media="video")` returns a download URL (1 credit). Fetch it with
+  urllib right away, because it expires.
+- `transcribe_ad(id)` returns the hook line, timed speech and language (1 credit; existing transcripts are
+  instant).
+- `analyze_ad` is not used: Step Alpha 1.2 analyses every video ad from its transcript.
 
 ## Costs (check `get_usage` / `get_ai_credits` before spending)
 | Action | Cost |
@@ -260,13 +276,15 @@ Full video remake workflow (candidate gate, clip audit, voice clone, captions, (
 | `analyze_ad` | 14 AI credits (image) / 19 (video) |
 
 ## Pitfalls (each one happened or nearly happened)
-- Ranking by spend for US ads produces wrong winners. Use days, then copies.
+- Ranking by spend for US ads produces wrong winners. Use `reach_rank`, then days, then copies.
 - No `q` filter pulls the brand's other products. Plaims' soap ads topped the first unfiltered pull.
 - Using only `query_meta_ads` gives truncated dates (5 d vs 17 d for the same ad) and 23 rows without
   images. Using only `get_brand_ads` gives 20 rows. Use both.
 - Paying `download_ad` for every missing row cost 15 credits for 0 new creatives. Follow the priorities.
-- URLs expire after 3 days. Run the script immediately after pulling, and keep `_cache/`.
+- URLs expire after 3 days. Run the script and the video downloads immediately after pulling, and keep `_cache/`.
 - Sub-agents calling the MCP themselves leads to duplicated calls and spend, and results trapped in
   their context. The master pulls; agents read files.
 - Sub-agents can't write .md files. Make them return text, and the master writes the file.
 - Sorting the ranking by id or by file name loses the order. `ranking.json` order is the truth.
+- The top 30 or an active-only pull is not the footprint. Step Alpha needs every ad, active and inactive,
+  every format and platform, and every video transcribed (Steps 7–8).

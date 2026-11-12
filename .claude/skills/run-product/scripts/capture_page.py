@@ -13,7 +13,7 @@ Outputs written to --out:
   capture.md    the same, human-readable
 
 Usage:
-  python -I capture_page.py https://plaims.com/products/plaims-headlight-glasses --out "G:/Ecom/Products/Noxis/02_competitor/page"
+  python -I capture_page.py https://plaims.com/products/plaims-headlight-glasses --out "D:/Ecom/Products/Noxis/02_competitor/page"
   python -I capture_page.py URL --out DIR --html-file saved.html   # analyse HTML saved from a real browser (bot-protected shop)
   python -I capture_page.py URL --out DIR --no-json                # skip the .json request
 """

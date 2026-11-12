@@ -4,19 +4,25 @@
     {
       "id": 1,
       "prompt": "Do this product for the US market: https://plaims.com/products/plaims-headlight-glasses — start with branding and wait for my validation.",
-      "expected_output": "Phase 0 preflight + PRODUCT_DIR + BRIEF.md; capture + media + Brandsearch pulls started; BRANDING.md with competitor snapshot table, 7-10 invented possessive-friendly names (top 3 starred, no domain filtering), palette = competitor hex 1:1, title = competitor pattern 1:1; stops at the gate without creating the branch.",
+      "expected_output": "Phase 0 preflight + PRODUCT_DIR (incl. 00_alpha/) + BRIEF.md; capture + media + Brandsearch pulls of the complete ad footprint with a transcript of every video ad; Step Alpha runs BEFORE branding: analyses 1.1-1.4 and 2.1, then the tailored ChatGPT prompt is given as one copy block and the run waits for the operator's pasted result; after it: synthesis, 00_alpha/ALPHA_DOSSIER.md in the spec structure, alpha_gate.py pass recorded in BRIEF.md; only then BRANDING.md with competitor snapshot table, 7-10 invented possessive-friendly names (top 3 starred, no domain filtering), palette = competitor hex 1:1, title = competitor pattern 1:1; stops at the branding gate without creating the branch.",
       "files": []
     },
     {
       "id": 2,
       "prompt": "Brand name is Noxis, US market. Run everything for https://plaims.com/products/plaims-headlight-glasses: product page on a new branch, product images, the page gifs, and 25 ads from their top Meta image ads with ad copy.",
-      "expected_output": "No branding gate (brand given); branch noxis from main; section spec; Mode A page build with bundle cards driving the variant picker; home page index.json cloned 1:1 from plaims.com home reusing noxis sections; packshot + gallery remakes without logo and with claims at full strength; raw GIFs + WebP; Brandsearch ads ranked by reach_rank (Top rank by impressions), not spend (US), ties by days running, filtered to headlight; 5 top ads at ~97% + 20 pattern ads, packshot attached to every prompt; AD_COPY.md; policies fetched from plaims.com/policies/* and rewritten 1:1 with Noxis/domain/email, Wyoming address removed, pushed or delivered as files; DELIVERY.md.",
+      "expected_output": "Step Alpha first (complete ad footprint + every video transcript, dossier, ChatGPT prompt gate, alpha_gate.py pass) before any build; no separate ad analysis and no COMPETITOR_ADS.md; no branding gate (brand given); branch noxis from main; section spec built from the dossier angle cards and congruence; Mode A page build with bundle cards driving the variant picker; home page index.json cloned 1:1 from plaims.com home reusing noxis sections; packshot + gallery remakes without logo and with claims at full strength; raw GIFs + WebP; Brandsearch top 30 ranked by reach_rank (Top rank by impressions), not spend (US), ties by days running, filtered to headlight; AD_VARIANTS.md (angle card ID per variant) approved before generation; 5 top-ad recreations + 20 pattern ads, packshot attached to every prompt; AD_COPY.md; policies fetched from plaims.com/policies/* and rewritten 1:1 with Noxis/domain/email, Wyoming address removed, pushed or delivered as files; DELIVERY.md listing the dossier.",
       "files": []
     },
     {
       "id": 3,
       "prompt": "get the top image ads of https://klarea-france.com/products/klarea-pro%C2%AE-nettoyeur-doreille-adhesif with brandsearch and make 10 ads for our brand Ceriva (France) + the ad copy in french",
-      "expected_output": "Partial run entering Phase 3 D: reuses/creates BRIEF; generates packshot if missing; Brandsearch pulls with keyword filter; EU market so eu spend/reach may be the primary sort, then reach_rank; analysis; ads in French; AD_COPY in French with claims unchanged.",
+      "expected_output": "Partial run: reuses/creates BRIEF; if no passed Step Alpha is recorded, runs it first (Brandsearch complete footprint with keyword filter + video transcripts, dossier, ChatGPT prompt gate, alpha_gate.py pass) before any ad work; generates packshot if missing; EU market so eu spend/reach may be the primary sort for the top 30, then reach_rank; no separate ad analysis (Step Alpha 1.2 is it); AD_VARIANTS.md with an angle card per ad approved before generation; ads in French; AD_COPY in French with claims unchanged.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Run this product for the UK market: https://example-competitor.com/products/posture-corrector — go all the way.",
+      "expected_output": "Phase 0 + Phase 1 raw-data gathering only (capture, media, policies fetch, Brandsearch complete ad footprint active + inactive, transcript of EVERY video ad, ad_inventory.json); then Step Alpha (Phase alpha) before branding or any asset: 1.1 customer intelligence, 1.2 advertising intelligence for every ad (video frameworks and beat maps from the transcripts), 1.3 congruence for every ad-to-page path, 1.4 angle cards, 2.1 hidden angles (8+ beyond the competitor), then ONE ready-to-paste ChatGPT market-research prompt tailored to this product and the run STOPS waiting for the operator's ChatGPT result (GATE alpha). No brand names, BRANDING.md, section spec, copy, theme files, images, ads, ad copy, CSV or checkout header exist before 00_alpha/ALPHA_DOSSIER.md (Part 1 1.1-1.11, Part 2 2.1-2.8, Part 3 3.1-3.6) passes alpha_gate.py and the read-through, recorded in BRIEF.md. No Phase 3 ad analysis stream and no COMPETITOR_ADS.md.",
       "files": []
     }
   ]

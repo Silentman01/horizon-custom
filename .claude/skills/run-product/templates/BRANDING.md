@@ -35,6 +35,17 @@ COMPETITOR │ PRICE                     │ PALETTE                    │ POSI
 | Positioning angle | {{who · what they blame · what the brand blames instead · hype vs anti-hype}} |
 | Apps seen | {{bundle app, reviews app, cart app…}} |
 
+### Alpha inputs used (`00_alpha/ALPHA_DOSSIER.md`)
+
+<!-- Alpha shapes the name and the tone only. Palette, fonts and title stay 1:1. -->
+
+| Dossier section | What we took | Effect on names / tone |
+|---|---|---|
+| 3.2 Avatar Cards | {{AV1 name, age, register · AV2 …}} | {{possessive test said in AV1's voice}} |
+| 1.5 Emotional Landscape | {{dominant trigger types}} | {{tone words, sound of the name}} |
+| 1.6 Unique Mechanism | {{mechanism · competitor's mechanism name}} | {{name root or "none"}} · {{our mechanism name for copy}} |
+| 3.5 Customer Language Bank | {{slang / problem words checked}} | {{names dropped because of a clash, or "none"}} |
+
 ---
 
 ## 2. Brand names (★ = top 3)

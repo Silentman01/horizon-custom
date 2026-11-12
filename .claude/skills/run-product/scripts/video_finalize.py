@@ -109,6 +109,8 @@ def cmd_clean(a):
         p = os.path.join(root, f)
         m = re.match(r"(v\d+)-", f)
         if os.path.isdir(p):
+            if f == "archive":  # archive/v<N>_<reason>/ keeps replaced versions (00 §4); never touched
+                continue
             if re.fullmatch(r"v\d+-work", f):
                 for g in sorted(os.listdir(p)):
                     if not (g.startswith(f[:-5]) and g.endswith(KEEP)):

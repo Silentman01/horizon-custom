@@ -19,8 +19,9 @@ Outputs in --out (prefix = "<name>-" when --name is given):
 
 Usage:
   python -I screenshot.py https://plaims.com/products/plaims-headlight-glasses --out DIR
-  python -I screenshot.py G:/tmp/page.html --out DIR --name ours --mobile 0      # desktop only
+  python -I screenshot.py D:/tmp/page.html --out DIR --name ours --mobile 0      # desktop only
   python -I screenshot.py URL --out DIR --desktop 0 --engine cli                 # iframe mobile only
+  python -I screenshot.py https://x.myshopify.com/products/h --out DIR --storefront-password PASS  # pre-launch store
   python -I screenshot.py URL --out DIR --browser "C:/Program Files/Google/Chrome/Application/chrome.exe"
 """
 import argparse
@@ -222,6 +223,9 @@ class CDP:
         return True
 
 
+STOREFRONT_PASSWORD = None
+
+
 def cdp_capture(browser, url, width, mobile, max_h, wait_ms, out_png, out_dir):
     prof = new_profile(out_dir)
     proc = subprocess.Popen([browser, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-first-run",
@@ -247,6 +251,14 @@ def cdp_capture(browser, url, width, mobile, max_h, wait_ms, out_png, out_dir):
         if mobile:
             cdp.call("Emulation.setTouchEmulationEnabled", enabled=True, maxTouchPoints=5)
         cdp.call("Page.enable")
+        if STOREFRONT_PASSWORD:  # password-protected Shopify store: log in once, the session cookie carries over
+            origin = "/".join(url.split("/")[:3])
+            cdp.call("Page.navigate", url=origin + "/password")
+            cdp.wait_event("Page.loadEventFired", 60)
+            cdp.call("Runtime.evaluate", awaitPromise=True, returnByValue=True, expression=(
+                "fetch('/password',{method:'POST',credentials:'include',headers:{'Content-Type':"
+                "'application/x-www-form-urlencoded'},body:new URLSearchParams({form_type:'storefront_password',"
+                "utf8:'✓',password:%s})}).then(r=>r.status)" % json.dumps(STOREFRONT_PASSWORD)))
         cdp.call("Page.navigate", url=url)
         if not cdp.wait_event("Page.loadEventFired", 60):
             print("  note: load event not fired within 60s, capturing anyway")
@@ -434,7 +446,12 @@ def main():
     ap.add_argument("--engine", choices=("auto", "cdp", "cli"), default="auto", help="capture engine (default auto)")
     ap.add_argument("--chunk", type=int, default=2400, help="desktop chunk height in px (default 2400)")
     ap.add_argument("--chunk-width", type=int, default=720, help="desktop chunk width after downscale (default 720)")
+    ap.add_argument("--storefront-password", help="Shopify storefront password (store still 'Opening soon'); cdp engine only")
     args = ap.parse_args()
+    global STOREFRONT_PASSWORD
+    STOREFRONT_PASSWORD = args.storefront_password
+    if STOREFRONT_PASSWORD:
+        args.engine = "cdp"
 
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)

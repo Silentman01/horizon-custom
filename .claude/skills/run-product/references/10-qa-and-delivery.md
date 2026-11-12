@@ -14,11 +14,13 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 ---
 
 ## 1. What "done" means
-- **Mode A:** zero visible structural discrepancies vs the competitor at desktop and mobile (brand identity, copy and images differ by design).
+- **Step Alpha passed before anything was built:** `00_alpha/ALPHA_DOSSIER.md` exists in the spec structure, the operator's ChatGPT result is saved verbatim in `00_alpha/chatgpt/CHATGPT_RAW.md`, `python -I <SKILL>/scripts/alpha_gate.py <PD>/00_alpha/ALPHA_DOSSIER.md` passes, the coordinator's read-through of the judgment items passed, and BRIEF.md records the gate result with a date earlier than any branding or build work. No gate pass = not done, whatever else exists.
+- **Mode A:** page follows the ADAPTATION BLUEPRINT at desktop and mobile — every conversion role is present, section structure matches the blueprint (not the competitor), copy is fully original, and the page looks distinctly ours (brand identity, copy, images and layout differ by design).
 - **Mode B:** zero *unintended* discrepancies; every intentional improvement is logged with a reason.
 - Every image/ad batch reviewed on a contact sheet; no misspellings, no competitor brand names, no logo on product images, claims at full strength.
 - `shopify theme check` shows no new offenses compared with the baseline on `main`.
-- **Every Phase 3 stream has its output on disk** before delivery: check the SKILL.md stream table row by row (spec, copy deck, theme, home, product images, page images, `05_ads/COMPETITOR_ADS.md`, `05_ads/AD_COPY.md`, ads, policies, checkout header, logo set). A stop instruction like "stop at remaking ads" skips only that stream; the others still run. A missing file = not done (Krino shipped without AD_COPY.md, 2026-10-25).
+- **Folder hygiene:** no `superseded/` or duplicate media folders; each replaced version sits once in `<area>/archive/v<N>_<reason>/`, one home per final file; `*_sheet*` contact/preview sheets deleted once generation is done; a SHA-256 pass over PRODUCT_DIR finds no duplicates (delete the copy outside the final folder).
+- **Every Phase 3 stream has its output on disk** before delivery: check the Phase 3 stream table in 17-phases-and-streams.md row by row (spec, copy deck, theme, home, product images, page images, `05_ads/AD_VARIANTS.md`, `05_ads/AD_COPY.md`, ads, policies, checkout header, logo set, `08_shopify/<slug>-products.csv` product import file). A stop instruction like "stop at remaking ads" skips only that stream; the others still run. A missing file = not done (Krino shipped without AD_COPY.md, 2026-10-25).
 
 ## 2. Page QA
 **Inputs:** competitor screenshots (`02_competitor/page/desk*.png`, mobile sheets if available), SECTION_SPEC.md, the built theme files.
@@ -31,17 +33,19 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 
 **Step 2.2 — Compare section by section** (visual QA agent, brief in subagent-briefs.md): layout and alignment, spacing, typography (family/size/weight/color), colors (hex), component behaviour (selected states, accordions, carousels, sticky elements), image positions and ratios, mobile stacking (horizontal scroll rails, table compaction).
 
-**Step 2.3 — Behaviour checks** (read the code if you can't click): bundle cards select the right variant and update price/form; preselected tier on load; `?variant=` respected; ATC adds the selected variant; accordions exclusive; nothing depends on `window.scrollTo` if the theme scrolls a wrapper (`scrollIntoView` instead).
+**Step 2.3 — Behaviour checks** (read the code if you can't click): bundle cards select the right variant and update price/form; preselected tier on load; `?variant=` respected; ATC adds the selected variant; accordions exclusive; nothing depends on `window.scrollTo` if the theme scrolls a wrapper (`scrollIntoView` instead). Quantity-mode bundles: a bundle add puts exactly N units in the cart (mixed variants as separate lines, nothing doubled); the drawer opens with every line; its extras show on product and home pages; drawer total = card price once discounts exist; `cart_drawer.settings` is not empty.
 
-**Step 2.4 — Static checks:** `shopify theme check` (only baseline offenses allowed); JSON templates valid; rich text settings wrapped in `<p>`; no hard-coded competitor names, prices in the wrong currency, or leftover placeholder copy.
+**Step 2.3b — Dossier checks:** the above-the-fold and section order follow the page architecture chosen from the dossier (3.1 angle cards, 1.10/2.4 congruence); the FAQ/objection blocks cover the dossier objections (1.4); the mechanism section matches 1.6.
+
+**Step 2.4 — Static checks:** `python -I <SKILL>/scripts/validate_schemas.py <theme_root>` = 0 errors (Mojo: theme check was clean but Shopify rejected 25 schema errors, so the product and home templates never reached the store); `shopify theme check` (only baseline offenses allowed); JSON templates valid; rich text settings wrapped in `<p>`; no hard-coded competitor names, prices in the wrong currency, or leftover placeholder copy.
 
 **Known harness artefacts (don't "fix" the theme for these):** fonts fall back to serif when offline; lazy images blank inside headless iframes; colors empty if snippet globals aren't passed; text-glyph icons rendering in colour on some systems (use SVG icons in the theme anyway).
 
 ## 3. Image and ad QA
 For every batch (gallery remakes, page images, top-5 ads, 20 ads):
 1. `python -I scripts/contact_sheet.py "<dir>/*.png" --out <dir>/_sheet.jpg` and Read it.
-2. Checklist per image: product matches the packshot (frame shape, amber lenses, side shields); text spelled correctly and identical to the spec; claims exactly as specified; no competitor brand; no logo/wordmark on product images; no text on the product frame; people look natural; layout matches the reference (top-5: side-by-side with the original).
-3. Fix by editing (keep-everything prompt) when only text/small elements are wrong; regenerate only when composition is wrong. Keep superseded files in a subfolder.
+2. Checklist per image: product matches the packshot (frame shape, amber lenses, side shields); text spelled correctly and identical to the spec; each ad carries the angle card ID from AD_VARIANTS.md and its message matches that card (dossier 3.1); claims exactly as specified; no competitor brand; no logo/wordmark on product images; no text on the product frame; people look natural; layout matches the reference (top-5: side-by-side with the original).
+3. Fix by editing (keep-everything prompt) when only text/small elements are wrong; regenerate only when composition is wrong. Move the replaced file once to `<area>/archive/v<N>_<reason>/` (never a `superseded/` folder).
 4. Note leftover minor flaws honestly in the delivery (e.g. "ad-25 body text is decorative filler").
 
 ## 4. Discrepancy log and loop
@@ -62,7 +66,7 @@ Apply fixes → re-render → re-compare → repeat until the table has only `fi
 5. If a push reports errors (e.g. invalid rich text), read the full message, fix, re-push, then re-pull to confirm the remote matches.
 
 ## 6. Delivery report
-Write `PRODUCT_DIR/DELIVERY.md` from `templates/DELIVERY.md`: links/paths, sections built, image placeholder map (position → file or still needed), product media list (gallery order), ads list, ad copy pointer, operator to-dos, credits spent, known minor flaws, QA log summary.
+Write `PRODUCT_DIR/DELIVERY.md` from `templates/DELIVERY.md`: Step Alpha dossier path and gate result, links/paths, sections built, image placeholder map (position → file or still needed), product media list (gallery order), ads list, ad copy pointer, operator to-dos, credits spent, known minor flaws, QA log summary.
 
 ## 7. Final message to the operator
 Short. Lead with the result and the preview link (or "pushed to GitHub branch X; send me the store to create the draft theme"). Then: contact sheet paths, the to-do list (variants, uploads, gift/bundle app, reviews app, store connection), credits spent. No claim caveats.

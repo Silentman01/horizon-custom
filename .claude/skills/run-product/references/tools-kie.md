@@ -5,7 +5,7 @@
 
 Every generated image in this skill (packshot, gallery remakes, testimonials, section images, ads) goes through Kie.ai's GPT Image 2.5 via the bundled batch runner `scripts/kie_jobs.py`. This file is the single reference for how to call it, what it costs, and the canonical prompt blocks that 05, 06 and 08 fill in.
 
-`SKILL` below = `~/.claude/skills/run-product` (Windows: `C:\Users\Moi\.claude\skills\run-product`).
+`SKILL` below = `~/.claude/skills/run-product` (the skill lives in the theme repo: `<THEME_DIR>\.claude\skills\run-product`).
 
 ## Contents
 1. Models and discovery
@@ -121,7 +121,7 @@ python -I "<SKILL>/scripts/kie_jobs.py" <jobs.json> <out_dir>
 ```
 - Reads `KIE_API_KEY`; creates all tasks (0.6 s apart — inside the 20/10 s limit), polls every 5 s, downloads each result to `<out_dir>/<name>.<ext>` (ext from the result URL, normally `.png`), prints `name: saved … (N credits)`.
 - Stops waiting after **900 s** for the whole batch and prints `name: timed out, task <taskId>` for anything still running (recover with §13).
-- **Overwrites** an existing file with the same name in `out_dir`. Before an edit round, move the current version to a `superseded/<reason>/` folder and upload it from there (see 05 §9).
+- **Overwrites** an existing file with the same name in `out_dir`. Before an edit round, move the current version to `<area>/archive/v<N>_<reason>/` and upload it from there (see 05 §9).
 - Create failures print `name: create failed {…}` and the batch continues; task failures print `name: FAILED <failCode> <failMsg>`.
 
 Job file format (a JSON array):
@@ -130,8 +130,8 @@ Job file format (a JSON array):
   {
     "name": "noxis-product-02",
     "model": "gpt-image-2-5-sunburst-image-to-image",
-    "upload": {"field": "input_urls", "files": ["G:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
-                                               "G:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
+    "upload": {"field": "input_urls", "files": ["D:/Ecom/Products/Noxis/02_competitor/media/plaims-product-02.png",
+                                               "D:/Ecom/Products/Noxis/03_product-images/noxis-packshot.png"]},
     "input": {"prompt": "…", "aspect_ratio": "1:1", "resolution": "2K"}
   }
 ]
