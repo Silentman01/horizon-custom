@@ -27,6 +27,7 @@ Writing files: you may write code, JSON job files, images and data files at the 
 Documents (analyses, specs, copy) must be RETURNED AS TEXT in your final reply — the harness may refuse report
 files from sub-agents and the master will save them. Do not call Brandsearch MCP tools; use the dump files given.
 Do not modify the theme repo unless this brief says so. Do not publish or push anything.
+PAID GENERATION (00 §20, hard rule): no image, edit, video-clip or voice call unless this brief gives an APPROVED budget for the round. Stay under it (log cost.json); if you would exceed it, stop and return a new GEN_ESTIMATE (items, model, unit cost, +20 %). Free local work may continue.
 After Step Alpha: read the sections of <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md that this brief names before working.
 ```
 
