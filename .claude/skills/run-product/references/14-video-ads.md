@@ -4,6 +4,8 @@ Goal: take the competitor's best-performing Meta video ads and remake each one f
 
 Distilled from the Krino (Mexico, 5 HAIRO remakes, English → Mexican Spanish) and Aurea (US, Manifestly remakes, English → English) runs, October 2026. Read `00-operator-rules.md` §16 first. Scripts: `scripts/video_*.py` (run with `python -I`, all have `--help`).
 
+> **Sample gate (00 §18, operator 2026-11-12):** the first remake is ONE video, the best `reach_rank` story / mechanism ad (not a BOFU sale clip, see the video-pick rule). It runs right after the AD_VARIANTS approval, together with the 5-image ad sample when the competitor also runs statics, and with no image ads when it runs only videos. Stop with the final + a 6-frame strip + the script and timings; the remaining videos follow only after the operator's OK.
+
 ## Contents
 1. When this runs, inputs, outputs, folders
 2. Step 1 — Candidate selection (operator gate)
