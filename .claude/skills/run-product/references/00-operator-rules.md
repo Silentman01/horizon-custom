@@ -91,7 +91,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Market language and currency; native typography for the language (e.g. French non-breaking spaces).
 
 ## 10b. Policies
-**Rule:** Clone the competitor's policies (footer links or `<site>/policies/<handle>`) **1:1, word for word**; replace only their brand name, domain and email addresses with ours; **remove — and never add — postal addresses, phone numbers, registration numbers or any private information**; push them to the store with the rest of the run.
+**Rule:** Clone the competitor's policies (footer links or `<site>/policies/<handle>`) **1:1, word for word**; replace only their brand name, domain and email addresses with ours; **remove — and never add — postal addresses, phone numbers, registration numbers or any private information**; push them to the store with the rest of the run. **In the market's language:** when the competitor writes in another language, the 1:1 text is translated faithfully into the market language — never ask (operator 2026-11-12: "use common sense pls, we run FR so it's FR").
 **Why:** operator instruction when finalising the launch automation ("get them 1:1 exactly same… remove (do not put any) specified addresses or private informations… push these pages as well when running a product").
 
 ## 11b. Mobile first

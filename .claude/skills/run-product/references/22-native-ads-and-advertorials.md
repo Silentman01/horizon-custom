@@ -48,6 +48,9 @@ Native ads are image (or video) ads designed to look like organic content on the
 - Whiteboard or planning board — brainstorm or pros/cons
 - Letter or note format — personal recommendation
 
+**Observed in real runs** (add one line per run):
+- *Oragel / denture reliner gel, 2026-11-12 (Vossi, oragel.co):* the "native" part is the **advertiser identity + the copy**, not only the image. Ads run from a **persona Facebook page** (page name = a person, category "Personal blog": "Brenda Sue", "Sophie Keller"), never the brand page. Primary text = a **1,500–2,500-word first-person letter** from an invented insider ("dental hygienist, 24 years", "Italian prosthodontist") opening with a reverse hook ("Please don't buy Vossi Oragel…", "For 23 years I handed out sample tubes of Fixodent like they were mints"), a day-by-day diary (Day 1, Day 2… Day 30), the mechanism explained as a discovery, an anti-marketplace "only sold here" paragraph, price + guarantee, and P.S./P.P.S. Headline is a fixed native line ("Read this if you wear dentures 👆"), description = brand name, CTA "Learn more" / "See details". Image = **lo-fi phone photo**, square or 4:5: a denture half-lined with gel on a towel, a denture next to a super-glue bottle, a lower plate beside a plastic-wrap box, a patient in a dentist chair, a waiting room of seniors in branded t-shirts under a "Relines $650" sign. No designed text overlays. 79% of ads link to an advertorial, not the product page. Videos (oragel.co only, 8 of 54): talking-head "this is fake / only the real one" anti-copy pieces and short BOGO-ending urgency clips.
+
 **What makes them work:** they look real. The platform user sees what looks like organic content, engages with it, and only realizes it's an ad after they're already hooked by the message.
 
 **How we remake them:** same adaptation principle as everything else — understand the format mechanism (what makes it look native, what hooks the reader, what drives the click), then build our own version with different content, different visual style, and our angle/avatar/language from Step Alpha. Never 1:1.
@@ -65,6 +68,9 @@ Advertorial pages (also called pre-sell pages, advertorial landing pages, or edi
 - Quiz or assessment pages — interactive, ends with product recommendation
 - "[Year] buyer's guide to [category]" — comparison article recommending the product
 - "Breaking: new [technology/ingredient/method]" — news-style article about the product's mechanism
+
+**Observed in real runs** (add one line per run):
+- *Oragel / denture reliner gel, 2026-11-12:* five advertorials from two brands, all on the brand's own Shopify domain under `/pages/<slug>`. (1) **Expert exposé** "Top Italian Prosthodontist Exposes the $2.3 Billion Secret…" — 6,000 words, invented masthead ("DENTURE FIT JOURNAL"), date + view counter, comments section, "This is an advertisement" footer, Path 1 vs Path 2 close, 127 ads. (2) **"In Italy they stopped using adhesive — 10 reasons why"** numbered listicle, 2,600 words, 76 ads. (3) **"Here is why American dentists won't tell you"** expert + patient case study with Day 1/14/21/28 timeline, "Advertorial" tag, sticky product card with countdown, 28 ads. (4) **Branded safety listicle** "5 reasons [product] is safer than adhesive cream" (zinc angle, stat tiles, cream-vs-gel box, verified reviews), not editorial, 24 ads. (5) **Personal-review listicle** "I tried 7 different solutions… only one worked" by a wearer persona, 870 words, countdown banner, 50 ads. Every CTA is a soft "check availability" link to the product page; the funnel's authority comes from a geography contrast ("in Italy they don't use adhesive") + an industry-villain story.
 
 **Common advertorial structure** (the beats — similar to ad copy framework extraction):
 
