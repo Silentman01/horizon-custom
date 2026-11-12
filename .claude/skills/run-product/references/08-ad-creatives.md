@@ -3,6 +3,7 @@
 Goal: 25 launch-ready Meta image ads for our brand: the competitor's 5 best-ranked creatives remade with our product, plus 20 new ads built on the formats the competitor's top 30 prove work. Every ad maps to one Step Alpha angle card, validated (`V#`) or opportunity (`O#`), so the mix tests the angles the competitor proved with money and the ones it misses. Every ad shows our exact product (packshot attached), carries the claims at full strength, and never shows the competitor's name.
 
 Read first: `00-operator-rules.md` §1 (claims) and §7 (ads); `tools-kie.md` (runner, FIDELITY-97 / PATTERN-AD / KEEP-EDIT patterns, 4:5 = 1K).
+Native ad formats (Reddit-style, editorial, lo-fi) get specific treatment when the competitor runs them: [22 §8](references/22-native-ads-and-advertorials.md#8-phase-3--native-ads-in-the-creative-mix-extends-d2).
 Video ads are a separate workflow: `14-video-ads.md`.
 Starts after Alpha: the Step Alpha gate has passed (`00_alpha/ALPHA_DOSSIER.md`) and `03_product-images/<slug>-packshot.png` exists (05 Step 5).
 
@@ -109,6 +110,8 @@ Read the comparison (and full-size images for small text).
 1. From the cross-ad patterns (1.9, `1.2_patterns.md`: dominant formats and hook types) and the top-30 sheets, list **formats** (rows) and **hook families** from the Hook Library 3.3 (columns). Typical formats: comparison table, POV through the lens, big-type "[SITUATION] <PRODUCT>" poster with "+" bullets, lifestyle + benefit panel, native lo-fi (notes/planner, whiteboard, letter, newspaper advertorial), numbered list/listicle, stat poster, timeline, split before/after, diagram/anatomy, still life, UGC selfie. Typical hooks: condition/audience, situation (rain, mirror glare, tired eyes), blame-shift ("it isn't your eyes"), category enemy (cheap alternative), identity/age, couple/gift (2-pack), social proof.
 2. Default selection = **one ad per competitor creative from rank 6 downward**, adapted (new headline wording on the same hook mechanism, new scene, same format mechanics), skipping near-duplicates and formats already covered by the top 5, until 20 ads.
 3. Check coverage with the matrix: every format the competitor runs ≥2 times appears at least once (its winning format 2–3 times with different hooks); every hook family appears at least once; mix of visual styles (photo, typographic, native lo-fi, diagram). Then check the angle mix of §1b (every `V#` and `O#` card covered, at least 6 `O#` ads). Swap picks until both hold.
+
+**Native ad formats:** when the competitor's top 30 includes native-style ads (Reddit posts, article thumbnails, handwritten notes, chat screenshots, editorial layouts — see [22 §2](references/22-native-ads-and-advertorials.md#2-what-native-ads-are)), these are a first-class format row in the matrix. If the competitor runs ≥ 2 native ads in the top 30, at least one native format appears in the top-5 remakes (if it's in the top 5) and at least 2 in the pattern ads. Native ads that the competitor sends to an advertorial page also send ours to our advertorial (A5); those that go direct to the product page stay direct.
 4. Order the 20 by the competitor rank they derive from (priority if credits run short); keep at least one ad per `O#` card inside the first 15.
 **Output:** a table `ad-NN | angle card | source rank | format | hook | headline` (part of your return).
 **Done when:** 20 rows, matrix and angle mix covered, no two ads with the same format + hook + angle.
@@ -126,6 +129,9 @@ Read the comparison (and full-size images for small text).
 - **Brand name only where the format needs it** (letter title/signature, CTA button "TRY <BRAND>"); never on the product, never the competitor's name. Fake publication names in advertorials are invented (not our brand, not a real outlet).
 - Labels like "Simulated view" only if the competitor's version of that format carries one.
 - Settings: 4:5, 1K, packshot attached (`upload.files: [PACK]`).
+
+**Native ad specs:** for a native-format ad, also specify: the platform it imitates (Reddit, Twitter, article, note, etc.); the UI chrome (fake upvotes, timestamps, usernames — never real platform trademarks); the "organic content" (post title, comment text, article headline); where the product appears and how subtle it is; and the hook from the angle card / hook library. Native ads should look lo-fi and organic — over-designing defeats the purpose. See [22 §8](references/22-native-ads-and-advertorials.md#8-phase-3--native-ads-in-the-creative-mix-extends-d2).
+
 **Output:** `scratch/mk_ads_20.py` → `scratch/jobs_ads_20.json`.
 **Done when:** every ad has a full spec and every quoted claim exists in the claims bank at the same strength.
 
@@ -155,7 +161,7 @@ Checklist per ad:
 **Done when:** the checklist passes for all 25, or remaining minor flaws are listed honestly in the return (e.g. "ad-25 body text is decorative filler").
 
 ## 10. Step 9 — Deliver
-Return to the master: the ad map table (`ad-NN | angle card | source rank | format | hook | on-image headline | landing page | file`), contact sheet paths, credits spent, flaws left. Landing page = the template SECTION_SPEC's landing decision gives the ad's angle card (the main product page unless an angle landing page exists). Each ad's copy is the copy set of its angle card in AD_COPY.md (09). The master shows the operator the sheets.
+Return to the master: the ad map table (`ad-NN | angle card | source rank | format | hook | on-image headline | landing page | file`), contact sheet paths, credits spent, flaws left. Landing page = advertorial URL for ads in the advertorial funnel, product page for direct ads (see AD_VARIANTS.md and [22 §9](references/22-native-ads-and-advertorials.md#9-ad-copy-for-the-advertorial-funnel-extends-e)); when no advertorial funnel exists, the SECTION_SPEC's landing decision gives the ad's angle card (the main product page unless an angle landing page exists). Each ad's copy is the copy set of its angle card in AD_COPY.md (09). The master shows the operator the sheets.
 
 ## 11. Spec checklist and anti-patterns
 Always: packshot attached · PRODUCT_DESC verbatim · "NO text or logo on the frame" · quoted text · market-language spelling · zones in % · ratio/resolution valid (4:5 → 1K) · one angle card per ad.

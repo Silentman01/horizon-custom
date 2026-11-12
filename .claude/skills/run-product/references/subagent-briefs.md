@@ -1,6 +1,6 @@
 # Sub-agent briefs (copy, fill the <…>, launch)
 
-Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see 16-orchestration.md §1. **Exception: conversion architect (4), copywriter (5), builder (6), home-page builder (13) and copy chief (15) ALWAYS run on Opus 4.6 (`model: "opus"`) no matter what** — these roles require the strongest judgment for adaptation and original copy. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
+Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see 16-orchestration.md §1. **Exception: conversion architect (4), copywriter (5), builder (6), home-page builder (13), copy chief (15) and advertorial builder (16) ALWAYS run on Opus 4.6 (`model: "opus"`) no matter what** — these roles require the strongest judgment for adaptation and original copy. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
 
 ## Contents
 - Common header
@@ -11,6 +11,7 @@ Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_backgrou
 - 7 Product-image agent · 8 Page-image agent
 - 10 Ad-creative agent · 11 Ad-copy agent · 14 Policies agent (optional)
 - 12 Visual QA agent (distinctiveness + blueprint fidelity) · 15 Copy chief (Opus 4.6, playbooks, originality gate)
+- 16 Advertorial builder (Opus 4.6, when advertorial funnel detected)
 - Handling returns
 
 ---
@@ -38,15 +39,15 @@ These are the Phase 3 parts, sent only after the Alpha quality gate and the bran
 You are LEAD A (Store) of a run-product launch, running on Opus at low effort. Your job is to PLAN, DELEGATE and
 VERIFY — not to do mechanical work yourself. Spawn workers with the Agent tool (general-purpose, background,
 parallel when independent) using: model "haiku" for scripts/downloads/screenshots/theme check/policies fetch+transform;
-model "opus" (Opus 4.6) for conversion architect (4), copywriter (5), builder (6), home-page builder (13) — these
-roles require the strongest model for framework adaptation and original copy, never Sonnet;
+model "opus" (Opus 4.6) for conversion architect (4), copywriter (5), builder (6), home-page builder (13),
+advertorial builder (16) — these roles require the strongest model for framework adaptation and original copy, never Sonnet;
 model "sonnet" for visual QA (12) only.
-Use the worker briefs below (1, 4, 5, 6, 12, 13, 14) and add `model` to each.
+Use the worker briefs below (1, 4, 5, 6, 12, 13, 14, 16) and add `model` to each.
 Read <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md first (3.1 angle cards, 3.2 avatars, 1.4 objections, 1.6 mechanism,
 1.10 + 2.4 funnel congruence, 3.5 language bank) and pass the named sections to each worker.
 Stream (capture exists from Phase 1): SECTION_SPEC + ADAPTATION BLUEPRINT → fully original copy (from dossier +
 playbooks, not paraphrasing competitor) → build adapted page (settings, header, footer, sections, template) →
-adapted home page → policies transform → local render + QA loop.
+adapted home page → advertorial pages (A5, when the competitor uses advertorial funnels — 22) → policies transform → local render + QA loop.
 You MAY write theme files on branch <BRAND_SLUG> (no git commands, no push, no publish) and files in <PRODUCT_DIR>.
 Verify each worker output yourself (read files, run `shopify theme check`, look at screenshots). QA now checks
 DISTINCTIVENESS from the competitor (an AI comparing both pages should see two completely different things) as well
@@ -454,11 +455,40 @@ Do NOT push (the master pushes with the store token).
 Return: table policy | words | replacements | removals | leftovers, plus any manual edits you made.
 ```
 
+## 16 Advertorial builder (Phase 3, A5 — only when advertorial funnel detected)
+**Launch:** after A1 (needs adaptation blueprint + dossier); skip if no advertorial funnel in BRIEF.md. **Model: `"opus"` (Opus 4.6) — always.** **Reference:** 22.
+```
+<COMMON HEADER>
+Task: build adapted advertorial/pre-sell landing pages for <BRAND>. The competitor uses advertorial funnels
+(ads → advertorial → product page); we build our own version — same conversion psychology, completely
+different execution.
+Inputs: <PRODUCT_DIR>\02_competitor\advertorials\ (captured competitor advertorials + ADVERTORIAL_INVENTORY.md),
+<page dir>\SECTION_SPEC.md + ADAPTATION_BLUEPRINT.md (visual identity rules for store consistency),
+<PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md (3.1 angle cards, 3.5 language bank, 1.1 avatars awareness/sophistication,
+1.4 objections, 1.5 emotional landscape, 1.6 mechanism, 3.3 hook library, 1.3 congruence incl. advertorial paths).
+BEFORE WRITING: read the relevant sections of <skill>\books-playbooks\*.html (Halbert "personal letter" for
+editorial voice, Hopkins "editorial advertising" for advertorial tone, Schwartz awareness for entry point).
+Per angle card that the competitor serves with an advertorial:
+1. ADVERTORIAL FRAMEWORK MAP: extract the competitor's advertorial beats, editorial conventions, tone, word count, claims.
+2. ADVERTORIAL ADAPTATION BLUEPRINT: our version — different editorial style, story structure, visual identity,
+   publication name; same conversion psychology (problem → mechanism → proof → CTA). The test: an AI comparing
+   both advertorial pages sees two completely different articles.
+3. WRITE: fully original editorial copy from Step Alpha data (language bank, pains, avatar language, emotional
+   landscape) + playbooks. Claims at full strength. No word-for-word matches with competitor.
+4. BUILD: as Shopify page template `templates/page.<slug>-advertorial-<angle-id>.json` or custom Liquid page.
+   Must render complete with zero admin setup. Responsive (mobile-first). Add noindex meta.
+   Visual identity consistent with the product page's adaptation blueprint.
+5. ORIGINALITY CHECK: compare against competitor's advertorial text — flag and rewrite any matches.
+Return: per advertorial: framework map, adaptation blueprint, copy, files written, angle card served,
+congruency assessment (read the ad → advertorial → product page path), originality report.
+```
+
 ---
 
 ## Handling returns
 - Save returned documents immediately to their target paths (Step Alpha files in `00_alpha/` per 18 §1, SECTION_SPEC.md, ADAPTATION_BLUEPRINT.md, AD_VARIANTS.md, AD_COPY.md, copy deck).
 - Verify claims of success: open generated images/contact sheets yourself before reporting them as done.
-- **Originality gate:** verify that no returned copy (page deck, home deck, ad copy, image claims) contains word-for-word matches with the competitor's copy inventory. If matches are found, send the piece back to the copy chief for rewriting before saving.
+- **Originality gate:** verify that no returned copy (page deck, home deck, ad copy, advertorial copy, image claims) contains word-for-word matches with the competitor's copy inventory. If matches are found, send the piece back to the copy chief for rewriting before saving.
+- **Advertorial congruency:** for each A5 return, read the full ad → advertorial → product page path and confirm the story flows without jarring hops. Send back for revision if the advertorial's CTA promise doesn't match the product page's above-the-fold content.
 - If an agent stalls or fails, resume it with `SendMessage` (keeps its context) rather than starting a new one.
 - Update BRIEF.md progress after each return.
