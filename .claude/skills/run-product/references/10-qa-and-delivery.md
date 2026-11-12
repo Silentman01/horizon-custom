@@ -15,7 +15,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 
 ## 1. What "done" means
 - **Step Alpha passed before anything was built:** `00_alpha/ALPHA_DOSSIER.md` exists in the spec structure, the operator's ChatGPT result is saved verbatim in `00_alpha/chatgpt/CHATGPT_RAW.md`, `python -I <SKILL>/scripts/alpha_gate.py <PD>/00_alpha/ALPHA_DOSSIER.md` passes, the coordinator's read-through of the judgment items passed, and BRIEF.md records the gate result with a date earlier than any branding or build work. No gate pass = not done, whatever else exists.
-- **Mode A:** zero visible structural discrepancies vs the competitor at desktop and mobile (brand identity, copy and images differ by design).
+- **Mode A:** page follows the ADAPTATION BLUEPRINT at desktop and mobile — every conversion role is present, section structure matches the blueprint (not the competitor), copy is fully original, and the page looks distinctly ours (brand identity, copy, images and layout differ by design).
 - **Mode B:** zero *unintended* discrepancies; every intentional improvement is logged with a reason.
 - Every image/ad batch reviewed on a contact sheet; no misspellings, no competitor brand names, no logo on product images, claims at full strength.
 - `shopify theme check` shows no new offenses compared with the baseline on `main`.

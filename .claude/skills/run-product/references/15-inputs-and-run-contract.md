@@ -20,7 +20,7 @@ Parse the prompt; ask only for what blocks progress.
 | `MARKET` (country, language, currency) | yes | ask if not stated — names, copy and currency depend on it (Noxis run: US, English, USD) |
 | `BRAND` | no | produced in Phase 2; if the prompt names it, skip the branding gate |
 | Brand guideline file | no | if given (palette, fonts, UI, product name) it overrides the 1:1 palette/fonts/title; copy it to `01_branding/` |
-| `MODE` | no | **A — faithful clone** (default for product tests); B only if asked |
+| `MODE` | no | **A — adapted framework** (default for product tests); B only if asked |
 | `PRODUCTS_ROOT` | first run | ask once, then record in BRIEF (operator default `D:\Ecom\Products`) |
 | `STORE` / draft `THEME_ID` | no | needed only to push a draft theme; otherwise push to GitHub and ask at delivery |
 | `KIE_API_KEY` | for images/ads | env var, project skill config, or ask |

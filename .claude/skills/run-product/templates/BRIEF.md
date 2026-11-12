@@ -7,7 +7,7 @@ _Single source of truth for this product. Sub-agents read this file. Update it a
 |---|---|
 | Competitor URL(s) | |
 | Market (country / language / currency) | |
-| Mode | A — faithful clone (default) / B — intelligent clone |
+| Mode | A — adapted framework (default) / B — intelligent clone |
 | Scope | full run / branding only / page only / images only / ads only |
 | Operator files | (e.g. PROMPT_1-1.MD, competitor PDFs) |
 

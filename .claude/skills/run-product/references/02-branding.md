@@ -1,6 +1,6 @@
 # 02 — Branding (Phase 2, ends at the GATE)
 
-This step turns the captured competitor page into the decisions the whole launch depends on: brand name, palette, fonts and shape, and product title. In a product test almost all of it is copied 1:1 from what already sells. The one real creative bet is the **brand name**, and the operator makes that choice.
+This step turns the captured competitor page into the decisions the whole launch depends on: brand name, palette, fonts and shape, and product title. Brand identity (palette, fonts, title, shape) is copied 1:1 from what already sells — the page structure, copy and design are adapted separately (see 03 §7b ADAPTATION BLUEPRINT, 04, 13). The one real creative bet is the **brand name**, and the operator makes that choice.
 
 Read `00-operator-rules.md` §1–3 first. This file covers how to do the step.
 
@@ -72,7 +72,7 @@ PROMPT_1-1 Step 1 asks for 4 palette variations (MIRROR/SHIFT/CONTRAST/WILDCARD)
 
 So the defaults are:
 
-1. **Test 1:1, upgrade later.** Palette = the competitor's exact hex codes and roles. Fonts and radii are the same. Title = the competitor's title pattern with our brand. **Why:** a test answers one question ("does this product sell with our page and ads?"). Changing the palette or the title adds variables and costs time for no learning. Upgrades come after the product is proven.
+1. **Brand identity 1:1, upgrade later.** Palette = the competitor's exact hex codes and roles. Fonts and radii are the same. Title = the competitor's title pattern with our brand. **Why:** a test answers one question ("does this product sell with our page and ads?"). Changing the palette or the title adds variables and costs time for no learning. The page structure, copy and sections are adapted (00 §2, 03 §7b), but the brand identity stays 1:1. Upgrades come after the product is proven.
 2. **The PROMPT_1-1 variations become optional.** The 4 palette variations and 5 title candidates go in an "Upgrade options" section, and only when the operator asks for them or the prompt explicitly requests the full Step 1 variations. Never put them in the default gate message.
 3. **Domains are never a filter.** Read "works as a domain" as "could carry a my-/try-/get- prefix", which is always true. Don't check availability, don't mention it, and don't drop a name because of it.
 4. **Market language, not French + English.** Names must be pronounceable one way by a native speaker of `MARKET`'s language. If the operator works in another language, also check that they can say it, but the customer is who matters.

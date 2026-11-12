@@ -2,7 +2,7 @@
 
 <!-- How to fill this: references/03-competitor-page-analysis.md, Steps 4–10. Worked example: §15 there (Plaims).
      Written by the conversion-architect agent and RETURNED AS TEXT; the master saves it to
-     PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md. Describe the competitor AS IS (Mode A).
+     PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md. Describe the competitor AS IS (Part 1), then build the ADAPTATION BLUEPRINT (Part 2).
      '~' = measured on screenshot chunks × scale · exact values from CSS/app config · 'unknown — check live' if unsure.
      Never write "same as above": repeat the values. ANGLE ROLE and §3b are about OUR page and come from the
      Step Alpha dossier (00_alpha/ALPHA_DOSSIER.md; A1 starts only after the Alpha gate passed).
@@ -13,7 +13,7 @@
 | URL | {{COMPETITOR_URL}} |
 | Captured | {{YYYY-MM-DD}} · desktop {{1440}} px · chunk scale {{2}} |
 | Mobile capture | {{captured / blocked (X-Frame-Options) → fallback a/b/c/d}} |
-| MODE | {{A — faithful clone}} |
+| MODE | {{A — adapted framework}} |
 | Theme family (competitor) | {{Dawn-family / custom / …}} · page width {{px}} |
 | Fonts | heading {{…}} · body {{…}} |
 | Currency | JSON {{USD}} · screenshot {{€ (geo)}} → use JSON |
@@ -108,7 +108,7 @@ X3 {{Popup / exit intent / timer / floating badge}}: {{… or "none found"}}
 | {{Buy 2}} | 2 | {{…}} | {{…}} | {{…}} | {{…}} | {{…}} |
 | {{Buy 3}} | 3 | {{…}} | {{…}} | {{…}} | {{…}} | {{…}} |
 
-**Urgency mechanics:** {{timers, stock counters, "selling fast", limited-time, or "none on page", and don't add any in Mode A}}
+**Urgency mechanics:** {{timers, stock counters, "selling fast", limited-time, or "none on page" — don't add any the competitor doesn't use}}
 **Trust architecture:** {{guarantee terms + where repeated, badges, payment icons, review score, endorsements, honesty devices}}
 **Social proof architecture:** {{rating line (score, count, placement), testimonial format + personas, UGC, reviews app count/avg}}
 **Upsell architecture:** {{quantity breaks, gifts scaling, MOST POPULAR / preselected, BEST VALUE, free-shipping threshold vs tier prices, cart bar}}
@@ -117,7 +117,7 @@ X3 {{Popup / exit intent / timer / floating badge}}: {{… or "none found"}}
 ## 3b. ANGLE ARCHITECTURE (Step Alpha)
 
 <!-- How: references/03-competitor-page-analysis.md Step 6 § ANGLE ARCHITECTURE. Inputs: dossier 3.1, 1.10, 2.4, 3.2, 1.4,
-     1.6, 2.6/3.5. Mode A: same sections and word budget; this decides which angle each existing slot speaks to. -->
+     1.6, 2.6/3.5. The ADAPTATION BLUEPRINT defines sections and word budget; this decides which angle each slot speaks to. -->
 
 | Card | Angle | Confidence / potential | Avatar | Competitor congruence (1.10) | Gap angle (2.4) | Home on our page (S#.## / image ID) |
 |---|---|---|---|---|---|---|
