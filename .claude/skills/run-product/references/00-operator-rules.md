@@ -105,7 +105,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Use a master + parallel sub-agents; be efficient; don't stall waiting when other streams can run.
 - Check Kie credits before batches; report spend.
 - Show the operator images (contact sheets), keep messages short, no internal narration.
-- Don't add unrequested features or "improvements" in Mode A; mention ideas in one line at the end instead.
+- Don't add unrequested features or "improvements"; mention ideas in one line at the end instead.
 
 ## 11. No placeholder or example labels (operator, 2026-10-18)
 Never ship visible labels such as "Example review", "Avis exemple", "placeholder", "à remplacer", demo badges or "show placeholder badges" settings in any section, block, image or copy. Reviews, testimonials and stats are written as final content (operator validates them). Track anything that needs operator replacement in DELIVERY.md, never on the page.

@@ -17,7 +17,7 @@ Goal: in a few minutes, know exactly what to build, for which market, with which
 **Do:**
 1. Collect competitor URL(s). Normalise to the product URL without query strings (keep `?variant=` only if the operator points at a specific variant). Derive `COMPETITOR_HOME` = the root of the first competitor's domain (home page is cloned too, stream A4).
 2. Detect the market: explicit ("we want to run in US"), currency symbols, language of the prompt is *not* proof of market (the operator writes in English for French stores and vice versa).
-3. Detect a brand name if given ("brand name: Noxis"), a mode ("faithful"/"1:1" → A, "improve"/"optimize" → B), scope words ("start with branding", "only ads", "everything").
+3. Detect a brand name if given ("brand name: Noxis"), a mode ("adapted"/"framework" → A, "improve"/"optimize" → B), scope words ("start with branding", "only ads", "everything").
 4. Note attached files (e.g. a methodology prompt like `PROMPT_1-1.MD`, competitor HTML/PDF) — read them; if they sit in the theme repo, git-ignore them in Step 5.
 5. Check for an existing `PRODUCT_DIR/BRIEF.md` (resume case) — if present, load its decisions and skip what's done; if Step Alpha has not passed, resume at its first unmet step (15 §3).
 **Output:** a filled input table (in your head, then in BRIEF.md).
@@ -29,7 +29,7 @@ Ask in one message, only if unknown:
 - Market (country/language/currency) — blocks names, copy, prices.
 - `PRODUCTS_ROOT` — first run only (operator default `D:\Ecom\Products`); then remember it in BRIEF and memory.
 - Our domain + support email for the policies — can wait until the branding gate (ask together with the name choice).
-Do **not** ask about: domains (rule 3), palette/title (1:1 by default), mode (A by default), store (only needed at delivery), images (we remake them).
+Do **not** ask about: domains (rule 3), palette/title (branding 1:1 by default), mode (A by default), store (only needed at delivery), images (we remake them).
 If the operator already said "go", start Phase 1 while waiting for the answer — capture and ad pulls don't depend on it. Step Alpha needs the market (the ChatGPT prompt and customer language follow it), so get the answer before α3.
 
 ## Step 3 — Preflight checks

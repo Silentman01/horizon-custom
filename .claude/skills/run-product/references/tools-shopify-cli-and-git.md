@@ -57,7 +57,7 @@ git switch -c "$BRAND_SLUG" origin/main      # e.g. noxis
 ```bash
 git add blocks/noxis-*.liquid blocks/_noxis-*.liquid sections/noxis-*.liquid snippets/noxis-*.liquid \
         assets/noxis-* templates/product.json config/settings_data.json sections/header-group.json .gitignore
-git commit -m "Build Noxis product page (Plaims clone, mode A)" -m "<attribution line from the session>"
+git commit -m "Build Noxis product page (adapted from Plaims)" -m "<attribution line from the session>"
 ```
 - One commit per milestone (build, visuals, copy fixes). Messages say what changed for the merchant.
 - Note the commit hash (`git rev-parse HEAD`) — you need it in §6.

@@ -318,7 +318,7 @@ Fill this for every section from announcement bar to footer. The builder reads t
 
 **Write these five blocks** (from PROMPT_1-1), then the arc:
 1. **Offer architecture:** pricing display, bundles, anchoring, crossed-out prices, per-unit math. **Include a price-math table**: tier, quantity, price, per unit, compare-at, SAVE value, extras, and how the app computes compare-at (Kaching `includeInCompareAt: true` adds the free gift's value to compare-at, which inflates the anchor).
-2. **Urgency mechanics:** timers, stock counters, "selling fast", limited-time labels. **Record absence too** ("none on page"). In Mode A, don't add urgency the competitor doesn't use.
+2. **Urgency mechanics:** timers, stock counters, "selling fast", limited-time labels. **Record absence too** ("none on page"). Don't add urgency the competitor doesn't use.
 3. **Trust architecture:** guarantee terms (length, refund type, keep-the-product), certifications, badges, payment icons, review scores, endorsements, "Track your order" links, and honesty or anti-hype used as a trust device.
 4. **Social proof architecture:** rating line (score + count + placement), testimonial format (photo / video / text, persona per testimonial), UGC, reviews app (count, average), and "thousands of customers" claims.
 5. **Upsell architecture:** quantity breaks, gifts scaling with quantity, "MOST POPULAR" and the preselected tier, the "BEST VALUE" anchor, the free-shipping threshold relative to tier prices, cart progress bars, post-purchase offers.
@@ -399,7 +399,7 @@ Fill this for every section from announcement bar to footer. The builder reads t
 - **Cart drawer extras** (progress bar, upsells): note the threshold and texts. Use a native shipping rate at the same threshold. The theme has a built-in cart drawer mockup: the "Cart drawer" section in the header group (`sections/cart-drawer-extras.liquid` + `snippets/cart-extras.liquid`), editable in the theme editor; selecting it opens the drawer: announcement bar, timer bar, free-shipping bar, price details (subtotal / discounts / shipping, labels auto-translated), badges and payment icons under the checkout button, tax note hidden. Everything is off by default: turn on and fill in the copy in the `cart_drawer` entry of `sections/header-group.json` to match the competitor's drawer, in the store language. Never fork it into a brand snippet.
 - **Sticky ATC:** native if the theme has one or the builder adds a light block. Record its label and target.
 - **Reviews app** (Judge.me, Loox…): an operator to-do (install + import). Build a placeholder in the same position. Static rating lines and testimonial cards are theme content. Rebuild them.
-- **Popups / email capture:** note them. Don't rebuild them in Mode A unless the operator asks.
+- **Popups / email capture:** note them. Don't rebuild them unless the operator asks.
 
 **Done when:** every app-rendered element on the page has a plan, and every operator to-do is listed for DELIVERY.md.
 
@@ -726,7 +726,7 @@ Not present: popups, exit intent, countdown timers, stock counters.
 | Buy 2 · MOST POPULAR · preselected | 2 | $34.95 | $17.48 | $79.80 | $44.85 | + 2 free cases · Free Shipping |
 | Buy 3 · BEST VALUE | 3 | $44.95 | $14.98 | $119.70 | $74.75 | + 3 free cases · Free Shipping |
 
-**Urgency.** None on the page (no timers, no stock counters). The urgency is emotional ("something about tonight"). In Mode A, add none.
+**Urgency.** None on the page (no timers, no stock counters). The urgency is emotional ("something about tonight"). Don't add any.
 **Trust.** 30-day guarantee, stated three times (accordion, comparison row, FAQ): full refund, "not store credit", "we do not ask for them back", "the case is yours either way". "Rated #1". Honesty as proof (S7). Payment icons, policies, "Track your order".
 **Social proof.** Rating line above the title (4.8/5, 1,356+). "Thousands of customers already wear…". 3 persona photo testimonials. Judge.me list (4.7, 68 reviews, recent dates).
 **Upsell.** Free-shipping threshold of $30 sits between the 1-unit and 2-unit prices. The 2-unit tier is preselected and badged MOST POPULAR. BEST VALUE anchors the 3-unit tier. Gifts scale with quantity. The cart progress bar repeats the threshold.
