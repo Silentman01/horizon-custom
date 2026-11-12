@@ -1,0 +1,418 @@
+<section class="oralys-home-hero" id="oralys-home-top" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-hero__inner oralys-home-hero__inner--{{ section.settings.image_side }}">
+    <div class="oralys-home-hero__intro">
+      {% if section.settings.show_rating %}
+        <p class="oralys-home-hero__rating"><span class="oralys-home-hero__stars" style="color:{{ section.settings.c_stars }}" aria-hidden="true">★★★★★</span> {{ section.settings.rating_text }}</p>
+      {% endif %}
+      {% if section.settings.eyebrow != blank %}<p class="oralys-home-hero__eyebrow">{{ section.settings.eyebrow }}</p>{% endif %}
+      <h1 class="oralys-home-hero__h oralys-home-hero__title">{{ section.settings.heading }}</h1>
+    </div>
+    <div class="oralys-home-hero__media">
+      {%- liquid
+        if section.settings.mobile_image != blank
+          assign hero_m = section.settings.mobile_image | image_url: width: 1000
+        elsif section.settings.mobile_asset != blank
+          assign hero_m = section.settings.mobile_asset | asset_url
+        endif
+      -%}
+      <picture>
+        {% if hero_m != blank %}<source media="(max-width: 749px)" srcset="{{ hero_m }}" width="1024" height="1280">{% endif %}
+        {% render 'oralys-home-media', image: section.settings.image, asset: section.settings.asset, alt: section.settings.image_alt, class: 'oralys-home-hero__img', loading: 'eager', width: 1792, height: 1008, sizes: '(min-width: 990px) 50vw, 100vw' %}
+      </picture>
+      {% if section.settings.badge != blank %}<span class="oralys-home-hero__badge">{{ section.settings.badge }}</span>{% endif %}
+    </div>
+    <div class="oralys-home-hero__body">
+      {% if section.settings.text != blank %}<div class="oralys-home-hero__text">{{ section.settings.text }}</div>{% endif %}
+      {% if section.settings.chips_label != blank or section.settings.chip_1 != blank %}
+        <div class="oralys-home-hero__chips">
+          {% if section.settings.chips_label != blank %}<span class="oralys-home-hero__chips-label">{{ section.settings.chips_label }}</span>{% endif %}
+          {% for i in (1..3) %}{% assign k = 'chip_' | append: i %}{% if section.settings[k] != blank %}<span class="oralys-home-hero__chip">{{ section.settings[k] }}</span>{% endif %}{% endfor %}
+        </div>
+      {% endif %}
+      <ul class="oralys-home-hero__list">
+        {% for i in (1..3) %}{% assign k = 'bullet_' | append: i %}{% if section.settings[k] != blank %}
+          <li><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="11" fill="currentColor"/><path d="M6.5 11.5l3 3 6-6.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ section.settings[k] }}</span></li>
+        {% endif %}{% endfor %}
+      </ul>
+      <div class="oralys-home-hero__ctas">
+        {% if section.settings.cta_label != blank %}<a class="oralys-home-hero__btn oralys-home-hero__btn--full" href="{{ section.settings.cta_link | default: '/products/oralys-gel' }}">{{ section.settings.cta_label }} <span aria-hidden="true">→</span></a>{% endif %}
+        {% if section.settings.link_label != blank %}<a class="oralys-home-hero__link" href="{{ section.settings.link_url | default: '#oralys-home-gap' }}">{{ section.settings.link_label }}</a>{% endif %}
+      </div>
+      {% if section.settings.reassurance != blank %}<p class="oralys-home-hero__reassure">{{ section.settings.reassurance }}</p>{% endif %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-hero{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-hero *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-hero{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-hero__inner{max-width:1200px;margin:0 auto}
+.oralys-home-hero__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-hero__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-hero__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-hero__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-hero__h{font-size:var(--oh-h-d)}}
+.oralys-home-hero__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-hero__head[style*=center] .oralys-home-hero__sub,.oralys-home-hero__head--center .oralys-home-hero__sub{margin-inline:auto}
+.oralys-home-hero__sub p{margin:0 0 8px}
+.oralys-home-hero__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-hero__btn:hover{transform:translateY(-1px)}
+.oralys-home-hero__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-hero__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-hero__inner{display:grid;gap:18px;grid-template-areas:"intro" "media" "body"}
+.oralys-home-hero__intro{grid-area:intro}.oralys-home-hero__media{grid-area:media;position:relative}.oralys-home-hero__body{grid-area:body}
+.oralys-home-hero__rating{margin:0 0 8px;font-size:15px;color:var(--oh-muted)}
+.oralys-home-hero__stars{letter-spacing:2px;font-size:16px}
+.oralys-home-hero__title{margin:0;font-size:calc(var(--oh-h-m) + 4px)}
+.oralys-home-hero__img{width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;object-position:50% 50%;border-radius:14px;display:block;background:var(--oh-card)}
+.oralys-home-hero__badge{position:absolute;right:14px;bottom:14px;background:var(--oh-text);color:#fff;font-weight:700;font-size:14px;padding:8px 14px;border-radius:40px}
+.oralys-home-hero__text p{margin:0 0 12px}
+.oralys-home-hero__chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:4px 0 16px}
+.oralys-home-hero__chips-label{font-size:14px;font-weight:700;color:var(--oh-muted);width:100%}
+.oralys-home-hero__chip{border:1.5px solid var(--oh-accent);color:var(--oh-accent);border-radius:40px;padding:6px 14px;font-size:15px;font-weight:700;background:var(--oh-card)}
+.oralys-home-hero__list{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px;color:var(--oh-accent)}
+.oralys-home-hero__list li{display:flex;gap:10px;align-items:flex-start}.oralys-home-hero__list svg{flex:0 0 22px;margin-top:2px}
+.oralys-home-hero__list span{color:var(--oh-text);font-weight:600}
+.oralys-home-hero__ctas{display:flex;flex-direction:column;gap:12px;align-items:center}
+.oralys-home-hero__link{color:var(--oh-text);font-weight:700;text-underline-offset:4px}
+.oralys-home-hero__reassure{margin:14px 0 0;text-align:center;font-size:14px;color:var(--oh-muted)}
+@media (min-width:750px){.oralys-home-hero__img{aspect-ratio:16/9}}
+@media (min-width:990px){
+ .oralys-home-hero__inner{grid-template-columns:1fr 1fr;column-gap:56px;row-gap:0;align-items:center;grid-template-areas:"media intro" "media body"}
+ .oralys-home-hero__inner--right{grid-template-areas:"intro media" "body media"}
+ .oralys-home-hero__intro{align-self:end;margin-bottom:16px}.oralys-home-hero__body{align-self:start}
+ .oralys-home-hero__title{font-size:var(--oh-h-d)}
+ .oralys-home-hero__ctas{flex-direction:row;gap:24px}.oralys-home-hero__reassure{text-align:left}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : hero",
+  "tag": "div",
+  "class": "oralys-home-hero-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Note"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_rating",
+      "label": "Afficher la note",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Texte de la note",
+      "default": "4,8/5 · Plus de 30 000 porteurs de dentier l'utilisent déjà"
+    },
+    {
+      "type": "color",
+      "id": "c_stars",
+      "label": "Étoiles",
+      "default": "#F0A830"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "Pas une colle : l'empreinte de vos gencives"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Titre H1 (italique = couleur accent)",
+      "default": "Votre dentier tient du café du matin <em>jusqu'au dîner.</em>"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image (ordinateur)"
+    },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Image (ordinateur) : fichier du thème (secours)",
+      "default": "oralys-home-hero-wide.webp",
+      "info": "Fichier du dossier assets utilisé tant qu'aucune image n'est choisie (16:9, 1792 px)."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Image (mobile, 749 px et moins)"
+    },
+    {
+      "type": "text",
+      "id": "mobile_asset",
+      "label": "Image (mobile, 749 px et moins) : fichier du thème (secours)",
+      "default": "oralys-home-hero-mobile.webp",
+      "info": "Fichier du dossier assets utilisé sur mobile tant qu'aucune image n'est choisie (4:5, 1024 px). Vide = image ordinateur."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Texte alternatif",
+      "default": "Une grand-mère croque dans une baguette à table, en famille"
+    },
+    {
+      "type": "select",
+      "id": "image_side",
+      "label": "Image (ordinateur)",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "À gauche"
+        },
+        {
+          "value": "right",
+          "label": "À droite"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Pastille sur l'image",
+      "default": "1 tube ≈ 5 semaines"
+    },
+    {
+      "type": "header",
+      "content": "Contenu"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Texte",
+      "default": "<p>Avec les années, la gencive se creuse et un vide se forme sous l'appareil. La crème ne peut pas le combler : elle colle en surface, puis elle fond. Le gel Oralys, lui, <strong>comble ce vide</strong> et épouse votre gencive telle qu'elle est aujourd'hui.</p>"
+    },
+    {
+      "type": "text",
+      "id": "chips_label",
+      "label": "Libellé des pastilles",
+      "default": "Convient pour :"
+    },
+    {
+      "type": "text",
+      "id": "chip_1",
+      "label": "Pastille 1",
+      "default": "Dentier du haut"
+    },
+    {
+      "type": "text",
+      "id": "chip_2",
+      "label": "Pastille 2",
+      "default": "Dentier du bas"
+    },
+    {
+      "type": "text",
+      "id": "chip_3",
+      "label": "Pastille 3",
+      "default": "Complet ou partiel"
+    },
+    {
+      "type": "text",
+      "id": "bullet_1",
+      "label": "Puce 1",
+      "default": "Croquez dans une baguette sans y penser"
+    },
+    {
+      "type": "text",
+      "id": "bullet_2",
+      "label": "Puce 2",
+      "default": "Riez sans mettre la main devant la bouche"
+    },
+    {
+      "type": "text",
+      "id": "bullet_3",
+      "label": "Puce 3",
+      "default": "Se retire d'un seul morceau, rien à gratter le soir"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Bouton",
+      "default": "Je choisis mon pack"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Lien du bouton",
+      "info": "Vide = /products/oralys-gel"
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Lien secondaire",
+      "default": "Pourquoi la crème lâche ↓"
+    },
+    {
+      "type": "text",
+      "id": "link_url",
+      "label": "Ancre du lien secondaire",
+      "default": "#oralys-home-gap"
+    },
+    {
+      "type": "text",
+      "id": "reassurance",
+      "label": "Ligne de réassurance",
+      "default": "90 jours satisfait ou remboursé · sans abonnement · colis neutre"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys accueil : hero"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,212 @@
+<section class="oralys-home-proof" style="--oh-bg:{{ section.settings.c_bg }};--oh-text:{{ section.settings.c_text }};--oh-accent:{{ section.settings.c_accent }};--oh-muted:{{ section.settings.c_muted }};--oh-card:{{ section.settings.c_card }};--oh-line:{{ section.settings.c_line }};--oh-cta:{{ section.settings.c_cta }};--oh-cta-text:{{ section.settings.c_cta_text }};--oh-h-m:{{ section.settings.h_m }}px;--oh-h-d:{{ section.settings.h_d }}px;--oh-body:{{ section.settings.body_size }}px;--oh-align:{{ section.settings.align }};--oh-pt-m:{{ section.settings.pt_m }}px;--oh-pb-m:{{ section.settings.pb_m }}px;--oh-pt-d:{{ section.settings.pt_d }}px;--oh-pb-d:{{ section.settings.pb_d }}px">
+  <div class="oralys-home-proof__inner">
+    {% for block in section.blocks %}
+      <div class="oralys-home-proof__item" {{ block.shopify_attributes }}>
+        <span class="oralys-home-proof__value">{{ block.settings.value }}</span>
+        <span class="oralys-home-proof__label">{{ block.settings.label }}</span>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+{% stylesheet %}
+.oralys-home-proof{background:var(--oh-bg);color:var(--oh-text);padding:var(--oh-pt-m) 16px var(--oh-pb-m);font-family:var(--font-body--family);font-size:var(--oh-body);line-height:1.55}
+.oralys-home-proof *{box-sizing:border-box}
+@media (min-width:750px){.oralys-home-proof{padding:var(--oh-pt-d) 32px var(--oh-pb-d)}}
+.oralys-home-proof__inner{max-width:1200px;margin:0 auto}
+.oralys-home-proof__head{text-align:var(--oh-align);margin:0 0 28px}
+.oralys-home-proof__eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--oh-accent);margin:0 0 10px}
+.oralys-home-proof__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--oh-h-m);line-height:1.2;margin:0 0 12px;color:var(--oh-text);text-wrap:balance}
+.oralys-home-proof__h em{font-style:normal;color:var(--oh-accent)}
+@media (min-width:750px){.oralys-home-proof__h{font-size:var(--oh-h-d)}}
+.oralys-home-proof__sub{color:var(--oh-muted);margin:0;max-width:680px}
+.oralys-home-proof__head[style*=center] .oralys-home-proof__sub,.oralys-home-proof__head--center .oralys-home-proof__sub{margin-inline:auto}
+.oralys-home-proof__sub p{margin:0 0 8px}
+.oralys-home-proof__btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--oh-cta);color:var(--oh-cta-text);font-weight:700;font-size:17px;text-decoration:none;border:0;transition:transform .15s}
+.oralys-home-proof__btn:hover{transform:translateY(-1px)}
+.oralys-home-proof__btn--full{width:100%}
+@media (min-width:750px){.oralys-home-proof__btn--full{width:auto;min-width:300px}}
+
+.oralys-home-proof__inner{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:color-mix(in srgb,var(--oh-text) 18%,transparent);border-radius:12px;overflow:hidden}
+.oralys-home-proof__item{background:var(--oh-bg);padding:16px 12px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.oralys-home-proof__value{font-family:var(--font-heading--family);font-weight:700;font-size:calc(var(--oh-h-m));line-height:1.1;color:var(--oh-accent)}
+.oralys-home-proof__label{font-size:14px;color:var(--oh-muted);line-height:1.35}
+@media (min-width:750px){.oralys-home-proof__inner{grid-template-columns:repeat(4,1fr)}.oralys-home-proof__value{font-size:var(--oh-h-d)}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys accueil : chiffres",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#0E3D30"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot vert, icônes)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#CFE3D9"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#0E3D30"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#2F5E50"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Chiffre",
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Chiffre",
+          "default": "90 jours"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Légende",
+          "default": "pour essayer"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Oralys accueil : chiffres"
+    }
+  ]
+}
+{% endschema %}

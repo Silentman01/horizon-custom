@@ -55,7 +55,7 @@
               "type": "text",
               "name": "t:names.heading",
               "settings": {
-                "text": "<h2>Join our email list</h2>",
+                "text": "<h2>Oralys</h2>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -80,7 +80,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<p>Get exclusive deals and early access to new products.</p>",
+                "text": "<p>Le gel qui comble le vide sous votre dentier. Recevez nos conseils de pose et nos offres :</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -113,15 +113,15 @@
                 "input_style": "custom",
                 "border_width": 1,
                 "border_radius": 100,
-                "input_background_color": "{{ settings.color_palette.color1 }}",
+                "input_background_color": "#FFFFFF",
                 "input_border_color": "",
                 "input_type_preset": "paragraph",
                 "style_class": "button-secondary",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.background }}",
+                "custom_button_background": "{{ settings.color_palette.color1 }}",
+                "custom_button_text": "#FFFFFF",
+                "custom_button_border": "{{ settings.color_palette.color1 }}",
                 "display_type": "text",
-                "label": "Sign up",
+                "label": "Je m'inscris",
                 "integrated_button": false,
                 "button_type_preset": "paragraph",
                 "padding-block-start": 0,
@@ -182,7 +182,7 @@
       "settings": {
         "section_width": "page-width",
         "gap": 40,
-        "background_color": "{{ settings.color_palette.color1 }}",
+        "background_color": "#0E3D30",
         "padding-block-start": 36,
         "padding-block-end": 36
       }
@@ -225,7 +225,7 @@
       "settings": {
         "section_width": "page-width",
         "gap": 24,
-        "background_color": "{{ settings.color_palette.color1 }}",
+        "background_color": "#0E3D30",
         "divider_thickness": 1,
         "padding-block-start": 12,
         "padding-block-end": 16

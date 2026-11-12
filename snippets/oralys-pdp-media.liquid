@@ -1,0 +1,14 @@
+{%- comment -%}
+  Oralys product page media: image_picker first, then a theme asset file, else nothing (caller styles a fallback).
+  Params: image, asset, alt, class, loading, width, height, sizes
+{%- endcomment -%}
+{%- liquid
+  assign m_loading = loading | default: 'lazy'
+  assign m_w = width | default: 1200
+  assign m_h = height | default: 1200
+-%}
+{%- if image != blank -%}
+  {{ image | image_url: width: 1600 | image_tag: class: class, alt: alt, loading: m_loading, sizes: sizes, widths: '360, 540, 720, 900, 1200, 1600' }}
+{%- elsif asset != blank -%}
+  <img src="{{ asset | asset_url }}" class="{{ class }}" alt="{{ alt | escape }}" loading="{{ m_loading }}" decoding="async" width="{{ m_w }}" height="{{ m_h }}">
+{%- endif -%}

@@ -14,14 +14,27 @@
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
-        "announcement_BxgCk9": {
+        "announcement_oralys_1": {
           "type": "_announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "Jusqu'à -70 % sur Oralys + livraison offerte",
             "link": "",
-            "font": "var(--font-subheading--family)",
-            "font_size": "0.75rem",
-            "weight": "",
+            "font": "var(--font-heading--family)",
+            "font_size": "0.875rem",
+            "weight": "700",
+            "letter_spacing": "normal",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "announcement_oralys_2": {
+          "type": "_announcement",
+          "settings": {
+            "text": "Commandez aujourd'hui, livré avant le 24 décembre",
+            "link": "",
+            "font": "var(--font-heading--family)",
+            "font_size": "0.875rem",
+            "weight": "700",
             "letter_spacing": "normal",
             "case": "none"
           },
@@ -29,16 +42,18 @@
         }
       },
       "block_order": [
-        "announcement_BxgCk9"
+        "announcement_oralys_1",
+        "announcement_oralys_2"
       ],
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
         "section_width": "page-width",
-        "divider_width": 1,
-        "padding-block-start": 15,
-        "padding-block-end": 15,
-        "divider_color": "{{ settings.color_palette.color3 }}"
+        "divider_width": 0,
+        "padding-block-start": 10,
+        "padding-block-end": 10,
+        "divider_color": "{{ settings.color_palette.color3 }}",
+        "background_color": "{{ settings.color_palette.color1 }}"
       }
     },
     "header_section": {
@@ -50,7 +65,8 @@
           "settings": {
             "hide_logo_on_home_page": false,
             "padding-block-start": 0,
-            "padding-block-end": 0
+            "padding-block-end": 0,
+            "logo_asset": "oralys-logo.png"
           },
           "blocks": {}
         },
@@ -102,7 +118,32 @@
     },
     "cart_drawer": {
       "type": "cart-drawer-extras",
-      "settings": {}
+      "settings": {
+        "cart_extras_ship_enable": true,
+        "cart_extras_ship_threshold": 0,
+        "cart_extras_ship_text_unlocked": "Bravo, la livraison est offerte !",
+        "cart_extras_ship_text_locked": "Plus que {amount} pour la livraison offerte",
+        "cart_extras_ship_bg": "#EEF6F1",
+        "cart_extras_ship_color": "#17221E",
+        "cart_extras_ship_fill": "#0E6B50",
+        "cart_extras_ship_track": "#DCE5E0",
+        "cart_extras_ship_progress": false,
+        "cart_extras_top_divider_color": "#DCE5E0",
+        "cart_extras_compact": true,
+        "cart_extras_hide_tax_note": true,
+        "cart_extras_hide_discount_code": true,
+        "cart_extras_badges_enable": true,
+        "cart_extras_badge_1_text": "Paiement sécurisé",
+        "cart_extras_badge_1_icon": "lock",
+        "cart_extras_badge_2_text": "Colis neutre",
+        "cart_extras_badge_2_icon": "shield",
+        "cart_extras_badge_3_text": "Sans abonnement",
+        "cart_extras_badge_3_icon": "check",
+        "cart_extras_badges_color": "#17221E",
+        "cart_extras_badges_icon_color": "#0E6B50",
+        "cart_extras_pay_enable": true,
+        "oralys_gifts_enable": true
+      }
     }
   },
   "order": [

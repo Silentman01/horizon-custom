@@ -1,0 +1,99 @@
+{%- liquid
+  assign s = section.settings
+-%}
+{%- style -%}
+  .oralys-adv-qt-{{ section.id }} {
+    {% if s.color_bg != blank %}background: {{ s.color_bg }};{% endif %}
+    {% if s.color_text != blank %}--oralys-adv-qt-text: {{ s.color_text }};{% endif %}
+    {% if s.color_accent != blank %}--oralys-adv-qt-accent: {{ s.color_accent }};{% endif %}
+    --oralys-adv-qt-size: {{ s.size_mobile }}px;
+    padding-top: {{ s.pad_top_mobile }}px;
+    padding-bottom: {{ s.pad_bottom_mobile }}px;
+  }
+  @media (min-width: 750px) {
+    .oralys-adv-qt-{{ section.id }} { --oralys-adv-qt-size: {{ s.size_desktop }}px; padding-top: {{ s.pad_top }}px; padding-bottom: {{ s.pad_bottom }}px; }
+  }
+{%- endstyle -%}
+{%- if s.quote != blank -%}
+  <div class="oralys-adv-qt oralys-adv-qt-{{ section.id }}">
+    <figure class="oralys-adv-qt__fig oralys-adv-qt__fig--{{ s.style }} oralys-adv-qt__fig--{{ s.align }}">
+      <blockquote class="oralys-adv-qt__q">{{ s.quote }}</blockquote>
+      {%- if s.name != blank -%}
+        <figcaption class="oralys-adv-qt__by">
+          {%- if s.image != blank or s.image_asset != blank -%}
+            <span class="oralys-adv-qt__av" data-oralys-adv-media>
+              {%- render 'oralys-adv-media', image: s.image, asset: s.image_asset, alt: s.name, class: 'oralys-adv-qt__av-img', sizes: '48px' -%}
+            </span>
+          {%- endif -%}
+          <span>
+            <span class="oralys-adv-qt__name">{{ s.name }}</span>
+            {%- if s.detail != blank -%}<span class="oralys-adv-qt__det">{{ s.detail }}</span>{%- endif -%}
+          </span>
+        </figcaption>
+      {%- endif -%}
+    </figure>
+  </div>
+{%- endif -%}
+
+{% stylesheet %}
+  .oralys-adv-qt__fig { max-width: var(--oralys-adv-measure, 700px); margin: 0 auto; padding: 0 16px; }
+  .oralys-adv-qt__q {
+    margin: 0;
+    font-family: var(--oralys-adv-font-head);
+    font-weight: var(--oralys-adv-font-head-weight, 700);
+    font-size: var(--oralys-adv-qt-size, 22px);
+    line-height: 1.35;
+    color: var(--oralys-adv-qt-text, var(--oralys-adv-text));
+  }
+  .oralys-adv-qt__fig--rule .oralys-adv-qt__q { border-left: 4px solid var(--oralys-adv-qt-accent, var(--oralys-adv-accent)); padding-left: 18px; }
+  .oralys-adv-qt__fig--marks .oralys-adv-qt__q::before {
+    content: '« ';
+    display: inline;
+    font-size: 1em;
+    line-height: inherit;
+    color: var(--oralys-adv-qt-accent, var(--oralys-adv-accent));
+  }
+  .oralys-adv-qt__fig--card .oralys-adv-qt__q {
+    background: var(--oralys-adv-tint, #eef6f1);
+    border-radius: 12px;
+    padding: 20px;
+    border-top: 4px solid var(--oralys-adv-qt-accent, var(--oralys-adv-accent));
+  }
+  .oralys-adv-qt__fig--center { text-align: center; }
+  .oralys-adv-qt__fig--center .oralys-adv-qt__by { justify-content: center; }
+  .oralys-adv-qt__by { display: flex; align-items: center; gap: 10px; margin-top: 14px; font-size: 15px; text-align: left; }
+  .oralys-adv-qt__fig--rule .oralys-adv-qt__by { padding-left: 22px; }
+  .oralys-adv-qt__av { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; overflow: hidden; }
+  .oralys-adv-qt__av-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .oralys-adv-qt__name { display: block; font-weight: 700; }
+  .oralys-adv-qt__det { display: block; color: var(--oralys-adv-muted); font-size: 14px; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Adv · Pull quote",
+  "tag": "section",
+  "class": "oralys-adv-qt-section",
+  "settings": [
+    { "type": "textarea", "id": "quote", "label": "Quote", "default": "Citation." },
+    { "type": "text", "id": "name", "label": "Name" },
+    { "type": "text", "id": "detail", "label": "Detail (age, town, role)" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "image_asset", "label": "Photo fallback (theme asset filename)" },
+    { "type": "select", "id": "style", "label": "Style", "default": "rule", "options": [ { "value": "rule", "label": "Left rule" }, { "value": "marks", "label": "Big quote marks" }, { "value": "card", "label": "Card" } ] },
+    { "type": "select", "id": "align", "label": "Alignment", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "center", "label": "Center" } ] },
+    { "type": "range", "id": "size_mobile", "label": "Text size mobile", "min": 16, "max": 34, "step": 1, "unit": "px", "default": 21 },
+    { "type": "range", "id": "size_desktop", "label": "Text size desktop", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 25 },
+    { "type": "header", "content": "Colors (empty = page colors)" },
+    { "type": "color", "id": "color_bg", "label": "Background" },
+    { "type": "color", "id": "color_text", "label": "Text" },
+    { "type": "color", "id": "color_accent", "label": "Accent" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "pad_top", "label": "Top desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pad_bottom", "label": "Bottom desktop", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 28 },
+    { "type": "range", "id": "pad_top_mobile", "label": "Top mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "pad_bottom_mobile", "label": "Bottom mobile", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 20 }
+  ],
+  "presets": [ { "name": "Adv · Pull quote" } ]
+}
+{% endschema %}

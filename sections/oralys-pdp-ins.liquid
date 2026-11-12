@@ -1,0 +1,391 @@
+{%- liquid
+  assign s = section.settings
+  assign h = s.heading
+  if s.accent != blank
+    assign acc = '<em>' | append: s.accent | append: '</em>'
+    assign h = h | replace: s.accent, acc
+  endif
+-%}
+{%- assign chips = s.chips | newline_to_br | split: '<br />' -%}
+{%- assign ticks = s.ticks | newline_to_br | split: '<br />' -%}
+<div class="oralys-pdp-ins" style="--op-bg:{{ s.c_bg }};--op-text:{{ s.c_text }};--op-accent:{{ s.c_accent }};--op-muted:{{ s.c_muted }};--op-card:{{ s.c_card }};--op-line:{{ s.c_line }};--op-cta:{{ s.c_cta }};--op-cta-text:{{ s.c_cta_text }};--op-h-m:{{ s.h_m }}px;--op-h-d:{{ s.h_d }}px;--op-body:{{ s.body_size }}px;--op-align:{{ s.align }};--op-pt-m:{{ s.pt_m }}px;--op-pb-m:{{ s.pb_m }}px;--op-pt-d:{{ s.pt_d }}px;--op-pb-d:{{ s.pb_d }}px">
+  <div class="oralys-pdp-ins__inner">
+    <div class="oralys-pdp-ins__head">{% if s.eyebrow != blank %}<p class="oralys-pdp-ins__eyebrow">{{ s.eyebrow }}</p>{% endif %}{% if h != blank %}<h2 class="oralys-pdp-ins__h">{{ h }}</h2>{% endif %}</div>
+    <div class="oralys-pdp-ins__grid">
+      <article class="oralys-pdp-ins__card">
+        <header class="oralys-pdp-ins__who">
+          <span class="oralys-pdp-ins__pt">{%- if s.image != blank or s.asset != blank -%}{% render 'oralys-pdp-media', image: s.image, asset: s.asset, alt: s.alt, class: 'oralys-pdp-ins__ptimg', loading: 'lazy', width: 176, height: 176 %}{%- else -%}<span class="oralys-pdp-ins__mono" aria-hidden="true">{{ s.initials }}</span>{%- endif -%}</span>
+          <div><p class="oralys-pdp-ins__name">{{ s.name }}</p><p class="oralys-pdp-ins__meta">{{ s.meta }}</p></div>
+        </header>
+        <div class="oralys-pdp-ins__letter">{{ s.letter }}</div>
+        {%- if s.signature != blank %}<p class="oralys-pdp-ins__sig">{{ s.signature }}</p>{% endif -%}
+        <ul class="oralys-pdp-ins__chips" role="list">{% for c in chips %}{% assign cs = c | strip %}{% if cs != blank %}<li>{{ cs }}</li>{% endif %}{% endfor %}</ul>
+      </article>
+      <aside class="oralys-pdp-ins__notice">
+        {%- if s.n_eyebrow != blank %}<p class="oralys-pdp-ins__neb">{{ s.n_eyebrow }}</p>{% endif -%}
+        <h3 class="oralys-pdp-ins__nt">{{ s.n_title }}</h3>
+        <div class="oralys-pdp-ins__nmedia">
+          {%- if s.n_image != blank or s.n_asset != blank -%}{% render 'oralys-pdp-media', image: s.n_image, asset: s.n_asset, alt: s.n_alt, class: 'oralys-pdp-ins__nimg', loading: 'lazy', width: 1200, height: 900 %}
+          {%- else -%}<div class="oralys-pdp-ins__paper" role="img" aria-label="{{ s.n_alt | escape }}"><span class="oralys-pdp-ins__pl oralys-pdp-ins__pl--t"></span><span class="oralys-pdp-ins__pl"></span><span class="oralys-pdp-ins__pl oralys-pdp-ins__pl--s"></span><mark class="oralys-pdp-ins__hl">{{ s.n_quote }}</mark><span class="oralys-pdp-ins__pl"></span><span class="oralys-pdp-ins__pl oralys-pdp-ins__pl--s"></span><span class="oralys-pdp-ins__pl"></span></div>{%- endif -%}
+        </div>
+        <div class="oralys-pdp-ins__nb">{{ s.n_body }}</div>
+      </aside>
+    </div>
+    <div class="oralys-pdp-ins__close">
+      <ul class="oralys-pdp-ins__ticks" role="list">{% for t in ticks %}{% assign ts = t | strip %}{% if ts != blank %}<li><span class="oralys-pdp-ins__tk" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>{{ ts }}</li>{% endif %}{% endfor %}</ul>
+      {%- if s.cta != blank %}<a class="oralys-pdp-ins__btn" href="#oralys-pdp-offer">{{ s.cta }}</a>{% endif -%}
+      {%- if s.cta_sub != blank %}<p class="oralys-pdp-ins__csub">{{ s.cta_sub }}</p>{% endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.oralys-pdp-ins{background:var(--op-bg);color:var(--op-text);padding:var(--op-pt-m) 16px var(--op-pb-m);font-family:var(--font-body--family);font-size:var(--op-body);line-height:1.55}
+.oralys-pdp-ins *{box-sizing:border-box}
+@media (min-width:750px){.oralys-pdp-ins{padding:var(--op-pt-d) 32px var(--op-pb-d)}}
+.oralys-pdp-ins__inner{max-width:1200px;margin:0 auto}
+.oralys-pdp-ins__head{text-align:var(--op-align);margin:0 0 24px}
+.oralys-pdp-ins__eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--op-accent);margin:0 0 10px}
+.oralys-pdp-ins__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--op-h-m);line-height:1.22;margin:0;color:var(--op-text);text-wrap:balance}
+.oralys-pdp-ins__h em{font-style:normal;color:var(--op-accent)}
+@media (min-width:750px){.oralys-pdp-ins__h{font-size:var(--op-h-d)}}
+.oralys-pdp-ins__btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--op-cta);color:var(--op-cta-text);font-weight:700;font-size:18px;text-decoration:none;border:0;width:100%;transition:transform .15s}
+.oralys-pdp-ins__btn:hover{transform:translateY(-1px)}
+@media (min-width:750px){.oralys-pdp-ins__btn{display:inline-flex;width:auto;min-width:320px}}
+
+.oralys-pdp-ins__grid{display:grid;gap:20px}
+@media (min-width:990px){.oralys-pdp-ins__grid{grid-template-columns:3fr 2fr;gap:32px;align-items:start}}
+.oralys-pdp-ins__card{border:1px solid var(--op-line);border-radius:12px;padding:20px;background:var(--op-card)}
+.oralys-pdp-ins__who{display:flex;gap:14px;align-items:center;margin-bottom:16px}
+.oralys-pdp-ins__pt{flex:0 0 88px;width:88px;height:88px;border-radius:50%;overflow:hidden;background:var(--op-accent);display:flex;align-items:center;justify-content:center}
+.oralys-pdp-ins__ptimg{width:100%;height:100%;object-fit:cover;display:block}
+.oralys-pdp-ins__mono{color:#fff;font-family:var(--font-heading--family);font-weight:700;font-size:30px;letter-spacing:.02em}
+.oralys-pdp-ins__name{margin:0;font-weight:800;font-size:19px}
+.oralys-pdp-ins__meta{margin:2px 0 0;font-size:14.5px;color:var(--op-muted);line-height:1.35}
+.oralys-pdp-ins__letter p{margin:0 0 14px}
+.oralys-pdp-ins__sig{margin:0 0 16px;font-style:italic;font-weight:600;color:var(--op-accent)}
+.oralys-pdp-ins__chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.oralys-pdp-ins__chips li{padding:6px 12px;border-radius:999px;background:#EEF6F1;color:var(--op-accent);font-size:13.5px;font-weight:700}
+.oralys-pdp-ins__notice{border-radius:12px;padding:20px;background:#F7F5EF;border:1px solid var(--op-line)}
+.oralys-pdp-ins__neb{margin:0 0 6px;font-size:12.5px;font-weight:800;letter-spacing:.08em;color:var(--op-accent)}
+.oralys-pdp-ins__nt{margin:0 0 14px;font-family:var(--font-heading--family);font-size:20px;font-weight:700;line-height:1.25}
+.oralys-pdp-ins__nmedia{margin-bottom:14px}
+.oralys-pdp-ins__nimg{display:block;width:100%;height:auto;border-radius:14px}
+.oralys-pdp-ins__paper{display:grid;gap:9px;padding:20px 18px;background:#fff;border-radius:14px;box-shadow:0 1px 0 var(--op-line),0 8px 24px rgba(23,34,30,.06);transform:rotate(-1.2deg)}
+.oralys-pdp-ins__pl{display:block;height:7px;border-radius:4px;background:#E6E9E7;width:100%}
+.oralys-pdp-ins__pl--t{height:10px;width:55%;background:#CFD6D2}
+.oralys-pdp-ins__pl--s{width:70%}
+.oralys-pdp-ins__hl{background:linear-gradient(transparent 12%,#FFE36E 12%,#FFE36E 88%,transparent 88%);color:var(--op-text);font-weight:800;font-size:15px;line-height:1.5;padding:0 3px;font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:-.01em}
+.oralys-pdp-ins__nb p{margin:0}
+.oralys-pdp-ins__close{margin-top:28px;display:grid;gap:14px;justify-items:center;text-align:center}
+.oralys-pdp-ins__ticks{list-style:none;margin:0;padding:0;display:grid;gap:8px;text-align:left}
+@media (min-width:750px){.oralys-pdp-ins__ticks{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 24px}}
+.oralys-pdp-ins__ticks li{display:flex;align-items:center;gap:8px;font-weight:600}
+.oralys-pdp-ins__tk{flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:var(--op-accent);display:inline-flex;align-items:center;justify-content:center}
+.oralys-pdp-ins__csub{margin:0;font-size:14px;color:var(--op-muted)}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys : avis d'experte",
+  "tag": "section",
+  "class": "oralys-pdp-ins-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre",
+      "default": "L'AVIS D'UNE PROFESSIONNELLE"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "« Un vide, ça ne se colle pas. Ça se comble. »"
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Mot du titre en couleur accent",
+      "default": "règle",
+      "info": "Doit apparaître tel quel dans le titre. Vide = aucun mot en couleur."
+    },
+    {
+      "type": "header",
+      "content": "Experte"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Portrait"
+    },
+    {
+      "type": "text",
+      "id": "asset",
+      "label": "Portrait : fichier du thème",
+      "default": "oralys-pdp-expert-verdier.webp",
+      "info": "Utilisé si aucune image n'est choisie (fichier dans assets/). Vide = monogramme avec les initiales."
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Portrait : texte alternatif",
+      "default": "Portrait du Dr Hélène Verdier"
+    },
+    {
+      "type": "text",
+      "id": "initials",
+      "label": "Initiales (sans portrait)",
+      "default": "HV"
+    },
+    {
+      "type": "text",
+      "id": "name",
+      "label": "Nom",
+      "default": "Dr Hélène Verdier"
+    },
+    {
+      "type": "text",
+      "id": "meta",
+      "label": "Métier, années, ville",
+      "default": "Chirurgienne-dentiste, prothèse amovible · 26 ans d'exercice · Lyon"
+    },
+    {
+      "type": "richtext",
+      "id": "letter",
+      "label": "Lettre",
+      "default": "<p>Chaque semaine, je vois des patients qui ont « tout essayé » : crème forte, double dose, bandelettes. Ils pensent avoir un problème de colle. Ce n'est pas le cas. Leur gencive a changé de forme depuis la pose, et l'appareil ne repose plus sur rien.</p><p>La crème adhésive a été conçue pour renforcer un contact qui existe déjà. Elle n'a jamais été pensée pour combler un espace. Lui demander de tenir un dentier qui flotte, c'est soigner le symptôme et racheter un tube toutes les deux semaines.</p><p>Un matériau thermoplastique de qualité dentaire, qui occupe physiquement ce vide, traite la cause : l'ajustement. C'est ce que je conseille aujourd'hui à mes patients qui portent un appareil complet ou partiel. La plupart n'achètent plus de crème au bout de deux semaines.</p>"
+    },
+    {
+      "type": "text",
+      "id": "signature",
+      "label": "Signature",
+      "default": "Dr Hélène Verdier, Lyon"
+    },
+    {
+      "type": "textarea",
+      "id": "chips",
+      "label": "Preuves (une par ligne)",
+      "default": "Rétraction osseuse documentée depuis 1972\nUn vide n'est pas un défaut de colle\nRemplir plutôt qu'enduire"
+    },
+    {
+      "type": "header",
+      "content": "Encadré notice"
+    },
+    {
+      "type": "text",
+      "id": "n_eyebrow",
+      "label": "Sur-titre",
+      "default": "LU SUR LA NOTICE DE VOTRE CRÈME"
+    },
+    {
+      "type": "text",
+      "id": "n_title",
+      "label": "Titre",
+      "default": "Le fabricant l'écrit lui-même"
+    },
+    {
+      "type": "richtext",
+      "id": "n_body",
+      "label": "Texte",
+      "default": "<p>Sur la notice d'une crème adhésive vendue en pharmacie : « NE PAS utiliser de produit en excès si votre prothèse est mal ajustée. » Autrement dit : si votre dentier bouge, la crème n'est pas la solution. Oralys, si.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "n_image",
+      "label": "Photo de la notice"
+    },
+    {
+      "type": "text",
+      "id": "n_asset",
+      "label": "Photo : fichier du thème",
+      "info": "Vide = notice dessinée avec la phrase ci-dessous surlignée."
+    },
+    {
+      "type": "text",
+      "id": "n_alt",
+      "label": "Photo : texte alternatif",
+      "default": "Notice de crème adhésive, la mention sur les prothèses mal ajustées surlignée"
+    },
+    {
+      "type": "text",
+      "id": "n_quote",
+      "label": "Phrase surlignée (notice dessinée)",
+      "default": "NE PAS utiliser de produit en excès si votre prothèse est mal ajustée."
+    },
+    {
+      "type": "header",
+      "content": "Appel à l'action"
+    },
+    {
+      "type": "textarea",
+      "id": "ticks",
+      "label": "Points forts (un par ligne)",
+      "default": "Remplit le vide que la crème laisse\nSe retire propre, sans pâte à gratter\nMangez, parlez, riez sans y penser"
+    },
+    {
+      "type": "text",
+      "id": "cta",
+      "label": "Bouton",
+      "default": "Je choisis mon pack"
+    },
+    {
+      "type": "text",
+      "id": "cta_sub",
+      "label": "Sous le bouton",
+      "default": "90 jours satisfait ou remboursé · Paiement sécurisé · 4,8/5"
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot du titre, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 96
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : avis d'experte"
+    }
+  ]
+}
+{% endschema %}

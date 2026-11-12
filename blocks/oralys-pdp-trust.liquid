@@ -1,0 +1,519 @@
+{%- assign bs = block.settings -%}
+<div class="oralys-pdp-trust" style="--opt-accent:{{ bs.c_accent }};--opt-text:{{ bs.c_text }};--opt-tint:{{ bs.c_tint }}" {{ block.shopify_attributes }}>
+  {%- if bs.delivery != blank %}<p class="oralys-pdp-trust__del">{% if bs.delivery_icon != 'none' %}{% render 'oralys-pdp-icon', name: bs.delivery_icon, size: 20 %}{% endif %}<span>{{ bs.delivery }}</span></p>{% endif -%}
+  <ul class="oralys-pdp-trust__row" role="list">
+    {%- for i in (1..4) -%}{%- assign k = 'item_' | append: i -%}{%- assign ik = 'icon_' | append: i -%}
+      {%- if bs[k] != blank -%}<li class="oralys-pdp-trust__item">{% if bs[ik] != 'none' %}<span class="oralys-pdp-trust__ic">{% render 'oralys-pdp-icon', name: bs[ik], size: 20 %}</span>{% endif %}<span>{{ bs[k] }}</span></li>{%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+.oralys-pdp-trust{display:grid;gap:12px;color:var(--opt-text)}
+.oralys-pdp-trust__del{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;font-size:14px;font-weight:600;text-align:center;color:var(--opt-text)}
+.oralys-pdp-trust__del svg{color:var(--opt-accent);flex:0 0 auto}
+.oralys-pdp-trust__row{list-style:none;margin:0;padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;border-radius:12px;background:var(--opt-tint)}
+.oralys-pdp-trust__item{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;line-height:1.25}
+.oralys-pdp-trust__ic{flex:0 0 auto;color:var(--opt-accent);display:inline-flex}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys : garanties",
+  "settings": [
+    {
+      "type": "text",
+      "id": "delivery",
+      "label": "Ligne de livraison",
+      "default": "Expédié sous 24 h ouvrées · colis neutre, rien d'écrit dessus"
+    },
+    {
+      "type": "select",
+      "id": "delivery_icon",
+      "label": "Icône de livraison",
+      "default": "box",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "item_1",
+      "label": "Garantie 1",
+      "default": "90 jours satisfait ou remboursé"
+    },
+    {
+      "type": "select",
+      "id": "icon_1",
+      "label": "Icône 1",
+      "default": "shield",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "item_2",
+      "label": "Garantie 2",
+      "default": "Paiement sécurisé"
+    },
+    {
+      "type": "select",
+      "id": "icon_2",
+      "label": "Icône 2",
+      "default": "lock",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "item_3",
+      "label": "Garantie 3",
+      "default": "Sans abonnement"
+    },
+    {
+      "type": "select",
+      "id": "icon_3",
+      "label": "Icône 3",
+      "default": "repeat",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "item_4",
+      "label": "Garantie 4",
+      "default": "Vendu uniquement sur notre site"
+    },
+    {
+      "type": "select",
+      "id": "icon_4",
+      "label": "Icône 4",
+      "default": "home",
+      "options": [
+        {
+          "value": "none",
+          "label": "Aucune"
+        },
+        {
+          "value": "check",
+          "label": "Coche"
+        },
+        {
+          "value": "gap",
+          "label": "Vide comblé"
+        },
+        {
+          "value": "tooth",
+          "label": "Dent"
+        },
+        {
+          "value": "bread",
+          "label": "Pain"
+        },
+        {
+          "value": "clock",
+          "label": "Horloge"
+        },
+        {
+          "value": "shield",
+          "label": "Bouclier"
+        },
+        {
+          "value": "lock",
+          "label": "Cadenas"
+        },
+        {
+          "value": "repeat",
+          "label": "Sans abonnement"
+        },
+        {
+          "value": "home",
+          "label": "Maison"
+        },
+        {
+          "value": "box",
+          "label": "Colis"
+        },
+        {
+          "value": "truck",
+          "label": "Camion"
+        },
+        {
+          "value": "gift",
+          "label": "Cadeau"
+        },
+        {
+          "value": "nozinc",
+          "label": "Zéro zinc"
+        },
+        {
+          "value": "drop",
+          "label": "Ne fond pas"
+        },
+        {
+          "value": "peel",
+          "label": "Se retire"
+        },
+        {
+          "value": "nocolle",
+          "label": "Sans colle"
+        },
+        {
+          "value": "star",
+          "label": "Étoile"
+        },
+        {
+          "value": "heart",
+          "label": "Cœur"
+        },
+        {
+          "value": "smile",
+          "label": "Sourire"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Icônes",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_tint",
+      "label": "Fond",
+      "default": "#EEF6F1"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : garanties"
+    }
+  ]
+}
+{% endschema %}

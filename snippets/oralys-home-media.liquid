@@ -1,0 +1,14 @@
+{%- comment -%}
+  Oralys home media: image_picker first, then a theme asset file name, else nothing.
+  Params: image, asset, alt, class, loading, width, height, sizes
+{%- endcomment -%}
+{%- liquid
+  assign media_loading = loading | default: 'lazy'
+  assign media_w = width | default: 1200
+  assign media_h = height | default: 1200
+-%}
+{%- if image != blank -%}
+  {{ image | image_url: width: 1600 | image_tag: class: class, alt: alt, loading: media_loading, sizes: sizes, widths: '400, 600, 800, 1000, 1400, 1600' }}
+{%- elsif asset != blank -%}
+  <img src="{{ asset | asset_url }}" class="{{ class }}" alt="{{ alt | escape }}" loading="{{ media_loading }}" width="{{ media_w }}" height="{{ media_h }}">
+{%- endif -%}

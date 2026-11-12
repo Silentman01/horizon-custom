@@ -1,0 +1,183 @@
+{%- liquid
+  assign product_resource = closest.product
+  if request.visual_preview_mode and product_resource == blank
+    assign product_resource = collections.all.products.first
+  endif
+  assign bs = block.settings
+-%}
+{%- unless product_resource == blank -%}
+<oralys-pdp-bundle id="oralys-pdp-offer" class="oralys-pdp-bundle"
+  style="--opb-accent:{{ bs.c_accent }};--opb-red:{{ bs.c_red }};--opb-tint:{{ bs.c_tint }};--opb-sel:{{ bs.c_selected_bg }};--opb-line:{{ bs.c_line }};--opb-text:{{ bs.c_text }};--opb-muted:{{ bs.c_muted }};--opb-r:{{ bs.radius }}px"
+  {% if bs.hide_native_picker %}data-hide-native{% endif %} {% if bs.hide_quantity %}data-hide-qty{% endif %} {{ block.shopify_attributes }}>
+  {%- if bs.heading != blank %}<p class="oralys-pdp-bundle__heading"><span>{{ bs.heading }}</span></p>{% endif -%}
+  <div class="oralys-pdp-bundle__tiers" role="radiogroup" aria-label="{{ bs.heading | escape }}">
+    {% content_for 'blocks', closest.product: product_resource %}
+  </div>
+</oralys-pdp-bundle>
+{%- endunless -%}
+
+{% stylesheet %}
+.oralys-pdp-bundle{display:block;color:var(--opb-text);scroll-margin-top:24px}
+.oralys-pdp-bundle__heading{display:flex;align-items:center;gap:12px;margin:0 0 14px;font-family:var(--font-heading--family);font-weight:700;font-size:18px;text-align:center}
+.oralys-pdp-bundle__heading::before,.oralys-pdp-bundle__heading::after{content:"";flex:1;height:1px;background:var(--opb-line)}
+.oralys-pdp-bundle__tiers{display:grid;gap:14px}
+.oralys-pdp-bundle.is-flash .oralys-pdp-bundle__tiers{animation:oralys-pdp-flash 1s ease}
+@keyframes oralys-pdp-flash{0%,100%{transform:none}30%{transform:scale(1.015)}}
+.product-details:has(.oralys-pdp-bundle[data-hide-native]) variant-picker{display:none}
+.product-details:has(.oralys-pdp-bundle[data-hide-qty]) .quantity-selector-wrapper{display:none}
+.product-details:has(.oralys-pdp-bundle) .accelerated-checkout-block,.product-details:has(.oralys-pdp-bundle) shopify-accelerated-checkout{display:none!important}
+.product-details:has(.oralys-pdp-bundle) .add-to-cart-button{min-height:58px;font-size:18px;font-weight:700}
+{% endstylesheet %}
+
+{% javascript %}
+if (!customElements.get('oralys-pdp-bundle')) {
+  customElements.define('oralys-pdp-bundle', class extends HTMLElement {
+    connectedCallback() {
+      this.addEventListener('change', this.onChange);
+      const go = () => this.syncInitialState();
+      if (customElements.get('variant-picker')) go(); else customElements.whenDefined('variant-picker').then(go);
+      setTimeout(() => { if (!this._synced) this.syncInitialState(); }, 1200);
+    }
+    disconnectedCallback() { this.removeEventListener('change', this.onChange); }
+    scope() { return this.closest('.shopify-section') || document; }
+    picker() { return this.scope().querySelector('variant-picker'); }
+    syncInitialState() {
+      this._synced = true;
+      const inputs = [...this.querySelectorAll('.oralys-pdp-tier__input')], checked = inputs.find((i) => i.checked) || inputs[0];
+      if (!checked) return;
+      checked.checked = true;
+      this.mark(checked);
+      if (checked.dataset.variantId) {
+        if (checked.dataset.preselect !== undefined && !new URL(location.href).searchParams.has('variant')) this.select(checked.dataset.variantId);
+      } else this.setQty(checked.dataset.qty);
+    }
+    mark(i) { this.querySelectorAll('.oralys-pdp-tier').forEach((t) => t.classList.toggle('is-selected', t.contains(i))); }
+    onChange = (e) => {
+      const i = e.target; if (!(i instanceof HTMLInputElement) || !i.classList.contains('oralys-pdp-tier__input')) return;
+      this.mark(i);
+      if (i.dataset.variantId) { this.setQty(1); this.select(i.dataset.variantId); } else this.setQty(i.dataset.qty);
+      document.dispatchEvent(new CustomEvent('oralys:tier', { detail: { label: i.dataset.label, price: i.dataset.price } }));
+    };
+    setQty(q) {
+      const n = parseInt(q, 10) || 1;
+      this.scope().querySelectorAll('form input[name="quantity"]').forEach((el) => { el.value = n; el.dispatchEvent(new Event('change', { bubbles: true })); });
+    }
+    select(id) {
+      const p = this.picker(); if (!p) return;
+      const r = p.querySelector(`input[type="radio"][data-variant-id="${id}"]`);
+      if (r) { if (!r.checked) r.click(); return; }
+      const o = p.querySelector(`option[data-variant-id="${id}"]`), s = o?.closest('select');
+      if (o && s && s.value !== o.value) { s.value = o.value; s.dispatchEvent(new Event('change', { bubbles: true })); }
+    }
+  });
+}
+(() => {
+  if (window.__oralysPdpOffer) return; window.__oralysPdpOffer = true;
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('a[href="#oralys-pdp-offer"]');
+    if (!a) return;
+    const t = document.querySelector('.oralys-pdp-bundle') || document.querySelector('.buy-buttons-block') || document.querySelector('[id^="ProductInformation-"]');
+    if (!t) return;
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    t.classList.add('is-flash'); setTimeout(() => t.classList.remove('is-flash'), 1200);
+  });
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Oralys : packs",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Chaque carte correspond à une variante du produit (option « Pack » : 1 tube / 2 tubes / 4 tubes). Les prix viennent des variantes ; sans variantes, les prix de secours de chaque carte s'affichent et la quantité ajoutée suit la carte. Gardez le bloc Sélecteur de variante : il est masqué et piloté par ces cartes."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Choisissez votre pack"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_native_picker",
+      "label": "Masquer le sélecteur de variante natif",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_quantity",
+      "label": "Masquer le sélecteur de quantité",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (bordure sélectionnée, badge vert)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_red",
+      "label": "Badge rouge, économies",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_tint",
+      "label": "Fond des cartes",
+      "default": "#EEF6F1"
+    },
+    {
+      "type": "color",
+      "id": "c_selected_bg",
+      "label": "Fond de la carte choisie",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordure",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "label": "Arrondi des cartes",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : packs"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "_oralys-pdp-tier"
+    }
+  ]
+}
+{% endschema %}
