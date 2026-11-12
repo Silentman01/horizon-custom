@@ -12,6 +12,24 @@
     "main": {
       "type": "product-information",
       "blocks": {
+        "disclosures": {
+          "type": "disclosures",
+          "settings": {
+            "heading": "Divulgations",
+            "heading_preset": "h4",
+            "open_by_default": false,
+            "icon": "caret",
+            "disclosure_heading_preset": "h5",
+            "text_color": "",
+            "dividers": true,
+            "divider_color": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
         "media-gallery": {
           "type": "_product-media-gallery",
           "static": true,
@@ -25,6 +43,7 @@
             "slideshow_mobile_controls_style": "dots",
             "thumbnail_position": "right",
             "thumbnail_width": 44,
+            "thumbnail_radius": 0,
             "aspect_ratio": "1",
             "constrain_to_viewport": true,
             "media_fit": "cover",
@@ -53,11 +72,13 @@
             "gap": 16,
             "sticky_details_desktop": true,
             "background_media": "none",
+            "background_color": "",
             "video_position": "cover",
             "background_image_position": "cover",
             "border": "none",
             "border_width": 1,
             "border_opacity": 100,
+            "border_color": "",
             "border_radius": 0,
             "padding-block-start": 16,
             "padding-block-end": 32,
@@ -71,8 +92,8 @@
                 "mode": "fallback",
                 "items": "oralys-pdp-v2-01.webp | Tient 2 à 3 jours, pas une matinée.\noralys-pdp-v2-02.webp | Avant, elle cachait son sourire.\noralys-pdp-v2-03.webp | On ne colle pas un vide. On le comble.\noralys-pdp-v2-04.webp | Il prend la forme de vos gencives.\noralys-pdp-v2-05.webp | « Il faudra vous y faire. » Non.\noralys-pdp-v2-06.webp | Tout ce à quoi vous aviez renoncé.\noralys-pdp-v2-07.webp | Le résultat d'un rebasage, le prix d'un tube.\noralys-pdp-v2-08.webp | « Ce n'est pas la colle, c'est le vide. »\noralys-pdp-v2-09.webp | « J'ai remangé du pain. »\noralys-pdp-v2-10.webp | 90 jours pour l'essayer.",
                 "radius": 14,
-                "c_dot": "#0E6B50",
-                "c_dot_off": "#DCE5E0"
+                "c_dot": "#0e6b50",
+                "c_dot_off": "#dce5e0"
               },
               "blocks": {}
             },
@@ -81,8 +102,8 @@
               "settings": {
                 "text": "4,8/5 · Plus de 30 000 porteurs de dentier l'ont adopté",
                 "stars": 5,
-                "c_star": "#F0A830",
-                "c_text": "#17221E",
+                "c_star": "#f0a830",
+                "c_text": "#17221e",
                 "size": 15
               },
               "blocks": {}
@@ -102,6 +123,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -127,6 +149,7 @@
                 "letter_spacing": "normal",
                 "case": "none",
                 "wrap": "pretty",
+                "text_color": "",
                 "background": false,
                 "background_color": "#00000026",
                 "corner_radius": 0,
@@ -149,9 +172,9 @@
                 "pills_label": "",
                 "pills": "",
                 "show_pills": false,
-                "c_accent": "#0E6B50",
-                "c_tint": "#EEF6F1",
-                "c_text": "#17221E"
+                "c_accent": "#0e6b50",
+                "c_tint": "#eef6f1",
+                "c_text": "#17221e"
               },
               "blocks": {}
             },
@@ -160,8 +183,8 @@
               "settings": {
                 "text": "Offre de lancement : se termine ce soir à minuit",
                 "icon": true,
-                "c_text": "#D2382C",
-                "c_bg": "#FDF0EE"
+                "c_text": "#d2382c",
+                "c_bg": "#fdf0ee"
               },
               "blocks": {}
             },
@@ -171,13 +194,13 @@
                 "heading": "Choisissez votre pack",
                 "hide_native_picker": true,
                 "hide_quantity": true,
-                "c_accent": "#0E6B50",
-                "c_red": "#D2382C",
-                "c_tint": "#EEF6F1",
-                "c_selected_bg": "#FFFFFF",
-                "c_line": "#DCE5E0",
-                "c_text": "#17221E",
-                "c_muted": "#5C6863",
+                "c_accent": "#0e6b50",
+                "c_red": "#d2382c",
+                "c_tint": "#eef6f1",
+                "c_selected_bg": "#ffffff",
+                "c_line": "#dce5e0",
+                "c_text": "#17221e",
+                "c_muted": "#5c6863",
                 "radius": 12
               },
               "blocks": {
@@ -199,7 +222,8 @@
                     "price_fallback": "39,95 €",
                     "compare_fallback": "65,00 €",
                     "save_fallback": "25,05 €"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_2": {
                   "type": "_oralys-pdp-tier",
@@ -219,7 +243,8 @@
                     "price_fallback": "55,93 €",
                     "compare_fallback": "130,00 €",
                     "save_fallback": "74,07 €"
-                  }
+                  },
+                  "blocks": {}
                 },
                 "tier_3": {
                   "type": "_oralys-pdp-tier",
@@ -239,7 +264,8 @@
                     "price_fallback": "79,90 €",
                     "compare_fallback": "260,00 €",
                     "save_fallback": "180,10 €"
-                  }
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
@@ -253,6 +279,15 @@
               "settings": {
                 "variant_style": "buttons",
                 "show_swatches": false,
+                "option_label_text_color": "",
+                "variant_style_class": "default",
+                "custom_variant_background": "{{ settings.color_palette.background }}",
+                "custom_variant_text": "{{ settings.color_palette.foreground }}",
+                "custom_variant_border": "{{ settings.color_palette.foreground }}",
+                "selected_variant_style_class": "default",
+                "custom_selected_variant_background": "{{ settings.color_palette.foreground }}",
+                "custom_selected_variant_text": "{{ settings.color_palette.background }}",
+                "custom_selected_variant_border": "{{ settings.color_palette.foreground }}",
                 "alignment": "left",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -265,8 +300,23 @@
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
+                "text_color": "",
                 "show_pickup_availability": false,
                 "gift_card_form": true,
+                "recipient_button_style": "default",
+                "recipient_button_background": "{{ settings.color_palette.background }}",
+                "recipient_button_text": "{{ settings.color_palette.foreground }}",
+                "recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_style": "default",
+                "selected_recipient_button_background": "{{ settings.color_palette.foreground }}",
+                "selected_recipient_button_text": "{{ settings.color_palette.background }}",
+                "selected_recipient_button_border": "{{ settings.color_palette.foreground }}",
+                "input_style": "default",
+                "input_background_color": "{{ settings.color_palette.background }}",
+                "input_text_color": "{{ settings.color_palette.foreground }}",
+                "input_border_color": "{{ settings.color_palette.foreground }}",
+                "border_width": 1,
+                "border_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -276,21 +326,31 @@
                 "quantity": {
                   "type": "quantity",
                   "static": true,
-                  "settings": {},
+                  "settings": {
+                    "input_style": "default",
+                    "input_background_color": "{{ settings.color_palette.background }}",
+                    "input_text_color": "{{ settings.color_palette.foreground }}",
+                    "input_border_color": "{{ settings.color_palette.foreground }}",
+                    "border_width": 1,
+                    "border_radius": 0
+                  },
                   "blocks": {}
                 },
                 "add-to-cart": {
                   "type": "add-to-cart",
                   "static": true,
                   "settings": {
-                    "style_class": "button"
+                    "style_class": "button",
+                    "custom_button_background": "{{ settings.color_palette.foreground }}",
+                    "custom_button_text": "{{ settings.color_palette.background }}",
+                    "custom_button_border": "{{ settings.color_palette.background }}"
                   },
                   "blocks": {}
                 },
                 "accelerated-checkout": {
                   "type": "accelerated-checkout",
-                  "static": true,
                   "disabled": true,
+                  "static": true,
                   "settings": {},
                   "blocks": {}
                 }
@@ -310,9 +370,9 @@
                 "icon_3": "repeat",
                 "item_4": "",
                 "icon_4": "home",
-                "c_accent": "#0E6B50",
-                "c_text": "#17221E",
-                "c_tint": "#EEF6F1"
+                "c_accent": "#0e6b50",
+                "c_text": "#17221e",
+                "c_tint": "#eef6f1"
               },
               "blocks": {}
             },
@@ -323,9 +383,9 @@
                 "seal_bottom": "JOURS",
                 "title": "90 jours pour juger à table",
                 "body": "Mangez, parlez, riez avec Oralys pendant 90 jours. Si votre dentier ne tient pas, on vous rembourse intégralement.",
-                "c_bg": "#0E6B50",
-                "c_text": "#FFFFFF",
-                "c_seal": "#FFFFFF"
+                "c_bg": "#0e6b50",
+                "c_text": "#ffffff",
+                "c_seal": "#ffffff"
               },
               "blocks": {}
             }
@@ -343,14 +403,6 @@
             "oralys_trust",
             "oralys_guarantee"
           ]
-        },
-        "disclosures": {
-          "type": "disclosures",
-          "settings": {
-            "padding-block-start": 0,
-            "padding-block-end": 0
-          },
-          "blocks": {}
         }
       },
       "block_order": [
@@ -359,34 +411,17 @@
       "settings": {
         "content_width": "content-center-aligned",
         "desktop_media_position": "left",
-        "equal_columns": false,
+        "equal_columns": true,
         "limit_details_width": false,
         "gap": 48,
+        "enable_sticky_add_to_cart": false,
+        "background_color": "",
         "padding-block-start": 8,
-        "padding-block-end": 24,
-        "enable_sticky_add_to_cart": false
+        "padding-block-end": 24
       }
     },
     "op_proof": {
       "type": "oralys-home-proof",
-      "settings": {
-        "c_bg": "#0E3D30",
-        "c_text": "#FFFFFF",
-        "c_accent": "#FFFFFF",
-        "c_muted": "#CFE3D9",
-        "c_card": "#0E3D30",
-        "c_line": "#2F5E50",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 26,
-        "h_d": 34,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 20,
-        "pb_m": 20,
-        "pt_d": 28,
-        "pb_d": 28
-      },
       "blocks": {
         "stat_1": {
           "type": "stat",
@@ -422,47 +457,28 @@
         "stat_2",
         "stat_3",
         "stat_4"
-      ]
+      ],
+      "settings": {
+        "c_bg": "#0e3d30",
+        "c_text": "#ffffff",
+        "c_accent": "#ffffff",
+        "c_muted": "#cfe3d9",
+        "c_card": "#0e3d30",
+        "c_line": "#2f5e50",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
+        "h_m": 26,
+        "h_d": 34,
+        "body_size": 17,
+        "align": "left",
+        "pt_m": 20,
+        "pb_m": 20,
+        "pt_d": 28,
+        "pb_d": 28
+      }
     },
     "op_gap": {
       "type": "oralys-pdp-gap",
-      "settings": {
-        "eyebrow": "POURQUOI ÇA BOUGE",
-        "heading": "Ce n'est pas la colle qui lâche. C'est le vide qui s'est creusé.",
-        "accent": "vide",
-        "story": "",
-        "asset": "",
-        "alt": "",
-        "small_asset": "",
-        "small_alt": "",
-        "show_small": false,
-        "show_loop": false,
-        "loop_asset": "",
-        "loop_poster": "",
-        "loop_alt": "",
-        "image_side": "left",
-        "col_a": "La crème",
-        "col_a_rows": "Se pose par-dessus le vide\nS'en va avec la salive vers midi\nLaisse une pâte à gratter le soir",
-        "col_b": "Oralys",
-        "col_b_rows": "Remplit le vide sous l'appareil\nTient du matin au soir\nSe retire d'un seul morceau",
-        "cta": "Voir les packs →",
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 48,
-        "pb_m": 48,
-        "pt_d": 72,
-        "pb_d": 72
-      },
       "blocks": {
         "fact_1": {
           "type": "fact",
@@ -490,31 +506,35 @@
         "fact_1",
         "fact_2",
         "fact_3"
-      ]
-    },
-    "op_reviews": {
-      "type": "oralys-pdp-rev",
+      ],
       "settings": {
-        "eyebrow": "",
-        "heading": "La parole à ceux qui le portent",
-        "accent": "",
-        "score": "4,8/5 · plus de 30 000 porteurs de dentier",
-        "show_featured": true,
-        "f_text": "« Douze ans de crème. Mon appareil du bas se soulevait dès que je parlais. J'avais renoncé au pain, au restaurant, aux repas de famille. Le premier dimanche avec Oralys, j'ai mangé une tranche de baguette bien croustillante devant tout le monde. Pour moi, c'est ça qui compte. »",
-        "f_name": "Josiane L., 70 ans, Tours",
-        "f_meta": "Haut et bas · Achat vérifié · 3 mois d'utilisation",
-        "asset": "oralys-pdp-rev-t05.webp",
-        "hint": "Faites glisser →",
-        "verified": "Achat vérifié",
-        "c_star": "#F0A830",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
+        "eyebrow": "POURQUOI ÇA BOUGE",
+        "heading": "Ce n'est pas la colle qui lâche. C'est le vide qui s'est creusé.",
+        "accent": "vide",
+        "story": "",
+        "asset": "",
+        "alt": "",
+        "small_asset": "",
+        "small_alt": "",
+        "show_small": false,
+        "show_loop": false,
+        "loop_asset": "",
+        "loop_poster": "",
+        "loop_alt": "",
+        "image_side": "left",
+        "col_a": "La crème",
+        "col_a_rows": "Se pose par-dessus le vide\nS'en va avec la salive vers midi\nLaisse une pâte à gratter le soir",
+        "col_b": "Oralys",
+        "col_b_rows": "Remplit le vide sous l'appareil\nTient du matin au soir\nSe retire d'un seul morceau",
+        "cta": "Voir les packs →",
+        "c_bg": "#eef6f1",
+        "c_text": "#17221e",
+        "c_accent": "#0e6b50",
+        "c_muted": "#5c6863",
+        "c_card": "#ffffff",
+        "c_line": "#dce5e0",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
         "h_m": 28,
         "h_d": 40,
         "body_size": 17,
@@ -523,7 +543,10 @@
         "pb_m": 48,
         "pt_d": 72,
         "pb_d": 72
-      },
+      }
+    },
+    "op_reviews": {
+      "type": "oralys-pdp-rev",
       "blocks": {
         "review_1": {
           "type": "review",
@@ -599,7 +622,37 @@
         "review_4",
         "review_5",
         "review_6"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "La parole à ceux qui le portent",
+        "accent": "",
+        "score": "4,8/5 · plus de 30 000 porteurs de dentier",
+        "show_featured": true,
+        "f_text": "« Douze ans de crème. Mon appareil du bas se soulevait dès que je parlais. J'avais renoncé au pain, au restaurant, aux repas de famille. Le premier dimanche avec Oralys, j'ai mangé une tranche de baguette bien croustillante devant tout le monde. Pour moi, c'est ça qui compte. »",
+        "f_name": "Josiane L., 70 ans, Tours",
+        "f_meta": "Haut et bas · Achat vérifié · 3 mois d'utilisation",
+        "asset": "oralys-pdp-rev-t05.webp",
+        "hint": "Faites glisser →",
+        "verified": "Achat vérifié",
+        "c_star": "#f0a830",
+        "c_bg": "#ffffff",
+        "c_text": "#17221e",
+        "c_accent": "#0e6b50",
+        "c_muted": "#5c6863",
+        "c_card": "#ffffff",
+        "c_line": "#dce5e0",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
+        "h_m": 28,
+        "h_d": 40,
+        "body_size": 17,
+        "align": "left",
+        "pt_m": 48,
+        "pb_m": 48,
+        "pt_d": 72,
+        "pb_d": 72
+      }
     },
     "op_final": {
       "type": "oralys-pdp-final",
@@ -612,14 +665,14 @@
         "seal": "Garantie 90 jours",
         "asset": "oralys-pdp-packshot.webp",
         "alt": "Tube Oralys Gel",
-        "c_bg": "#0E3D30",
-        "c_text": "#FFFFFF",
-        "c_accent": "#7FD1AE",
-        "c_muted": "#CFE3DA",
-        "c_card": "#EEF6F1",
-        "c_line": "#2C5A4C",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
+        "c_bg": "#0e3d30",
+        "c_text": "#ffffff",
+        "c_accent": "#7fd1ae",
+        "c_muted": "#cfe3da",
+        "c_card": "#eef6f1",
+        "c_line": "#2c5a4c",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
         "h_m": 28,
         "h_d": 40,
         "body_size": 17,
@@ -632,32 +685,6 @@
     },
     "op_howto": {
       "type": "oralys-pdp-how",
-      "settings": {
-        "eyebrow": "MODE D'EMPLOI",
-        "heading": "Posé en 3 gestes, il tient 2 à 3 jours",
-        "accent": "3 gestes",
-        "r_title": "Pour le retirer",
-        "r_body": "5 minutes dans l'eau tiède, puis soulevez : le gel vient d'un seul morceau.",
-        "r_asset": "oralys-pdp-peel-out.webp",
-        "r_alt": "Ancien gel retiré d'un seul morceau",
-        "note": "",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 48,
-        "pb_m": 48,
-        "pt_d": 72,
-        "pb_d": 72
-      },
       "blocks": {
         "step_1": {
           "type": "step",
@@ -691,23 +718,24 @@
         "step_1",
         "step_2",
         "step_3"
-      ]
-    },
-    "op_faq": {
-      "type": "oralys-pdp-faq",
+      ],
       "settings": {
-        "eyebrow": "",
-        "heading": "Vos questions",
-        "accent": "",
-        "open_first": true,
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
+        "eyebrow": "MODE D'EMPLOI",
+        "heading": "Posé en 3 gestes, il tient 2 à 3 jours",
+        "accent": "3 gestes",
+        "r_title": "Pour le retirer",
+        "r_body": "5 minutes dans l'eau tiède, puis soulevez : le gel vient d'un seul morceau.",
+        "r_asset": "oralys-pdp-peel-out.webp",
+        "r_alt": "Ancien gel retiré d'un seul morceau",
+        "note": "",
+        "c_bg": "#ffffff",
+        "c_text": "#17221e",
+        "c_accent": "#0e6b50",
+        "c_muted": "#5c6863",
+        "c_card": "#ffffff",
+        "c_line": "#dce5e0",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
         "h_m": 28,
         "h_d": 40,
         "body_size": 17,
@@ -716,7 +744,10 @@
         "pb_m": 48,
         "pt_d": 72,
         "pb_d": 72
-      },
+      }
+    },
+    "op_faq": {
+      "type": "oralys-pdp-faq",
       "blocks": {
         "qa_1": {
           "type": "qa",
@@ -784,7 +815,29 @@
         "qa_6",
         "qa_7",
         "qa_8"
-      ]
+      ],
+      "settings": {
+        "eyebrow": "",
+        "heading": "Vos questions",
+        "accent": "",
+        "open_first": true,
+        "c_bg": "#eef6f1",
+        "c_text": "#17221e",
+        "c_accent": "#0e6b50",
+        "c_muted": "#5c6863",
+        "c_card": "#ffffff",
+        "c_line": "#dce5e0",
+        "c_cta": "#d2382c",
+        "c_cta_text": "#ffffff",
+        "h_m": 28,
+        "h_d": 40,
+        "body_size": 17,
+        "align": "left",
+        "pt_m": 48,
+        "pb_m": 48,
+        "pt_d": 72,
+        "pb_d": 72
+      }
     },
     "op_sticky": {
       "type": "oralys-pdp-sticky",
@@ -792,12 +845,12 @@
         "btn_label": "Je choisis mon pack",
         "show_after": 600,
         "hide_near": 200,
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
+        "c_bg": "#ffffff",
+        "c_text": "#17221e",
         "c_muted": "#888888",
-        "c_save": "#D2382C",
-        "c_btn": "#D2382C",
-        "c_btn_text": "#FFFFFF"
+        "c_save": "#d2382c",
+        "c_btn": "#d2382c",
+        "c_btn_text": "#ffffff"
       }
     }
   },
