@@ -46,9 +46,9 @@
         "masthead_bg": "#1F2E4D",
         "masthead_text": "#FFFFFF",
         "pad_top": 0,
-        "pad_bottom": 18,
+        "pad_bottom": 20,
         "pad_top_mobile": 0,
-        "pad_bottom_mobile": 10
+        "pad_bottom_mobile": 12
       }
     },
     "body_1": {
@@ -109,10 +109,10 @@
         "ratio": "square",
         "width": "content",
         "radius": 10,
-        "pad_top": 10,
-        "pad_bottom": 10,
-        "pad_top_mobile": 6,
-        "pad_bottom_mobile": 6
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
       }
     },
     "body_2": {
@@ -164,10 +164,10 @@
         "ratio": "square",
         "width": "content",
         "radius": 10,
-        "pad_top": 10,
-        "pad_bottom": 10,
-        "pad_top_mobile": 6,
-        "pad_bottom_mobile": 6
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
       }
     },
     "body_3": {
@@ -282,10 +282,10 @@
         "ratio": "square",
         "width": "content",
         "radius": 10,
-        "pad_top": 10,
-        "pad_bottom": 10,
-        "pad_top_mobile": 6,
-        "pad_bottom_mobile": 6
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
       }
     },
     "body_4": {
@@ -346,10 +346,10 @@
         "ratio": "natural",
         "width": "content",
         "radius": 10,
-        "pad_top": 10,
-        "pad_bottom": 10,
-        "pad_top_mobile": 6,
-        "pad_bottom_mobile": 6
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
       }
     },
     "quote_1": {
@@ -422,10 +422,10 @@
         "ratio": "square",
         "width": "content",
         "radius": 10,
-        "pad_top": 10,
-        "pad_bottom": 10,
-        "pad_top_mobile": 6,
-        "pad_bottom_mobile": 6
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
       }
     },
     "cta_1": {
