@@ -193,7 +193,7 @@ def is_placeholder(v):
 
 
 def has_quote(v):
-    return bool(re.search(r'"[^"]{3,}"|“[^”]{3,}”', v or ""))
+    return bool(re.search(r'"[^"]{3,}"|“[^”]{3,}”|«[^»]{3,}»', v or ""))
 
 
 IDS_RE = re.compile(r"\b(?:AV|[VOHESM])\d+\b|\b\d{8,}\b")
