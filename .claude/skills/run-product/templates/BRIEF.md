@@ -43,10 +43,6 @@ _Single source of truth for this product. Sub-agents read this file. Update it a
 | Brandsearch MCP / credits at start | |
 | ArgoLink key (video_gemini.py) | |
 
-## Spend ledger (00 §20, every paid generation round)
-| Date | Round | Items | Approved | Actual |
-|---|---|---|---|---|
-
 ## Progress
 - [ ] Phase 1 capture (page, media, complete ad footprint + every video transcript, top 30 ranked)
 - [ ] α0 inputs (`00_alpha/ad_inventory.json`, `transcripts/`)

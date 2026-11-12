@@ -1,0 +1,177 @@
+{%- liquid
+  assign s = section.settings
+  assign sets = '1,2,3' | split: ','
+-%}
+<div class="ot-press" style="{% render 'oldtoms-vars' %}--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;">
+  {%- if s.caption != blank -%}<p class="ot-press__caption">{{ s.caption }}</p>{%- endif -%}
+  <div class="ot-press__rail" data-ot-drag data-ot-marquee data-ot-mobile-only data-ot-speed="0.6">
+    {%- for n in sets -%}
+      <ul class="ot-press__set{% unless forloop.first %} ot-press__set--dup{% endunless %}" data-ot-set{% unless forloop.first %} aria-hidden="true"{% endunless %}>
+        {%- for block in section.blocks -%}
+          <li class="ot-press__logo ot-press__logo--{{ block.settings.look }}" {% if forloop.parentloop.first %}{{ block.shopify_attributes }}{% endif %}>
+            {%- if block.settings.logo != blank -%}
+              {{ block.settings.logo | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200, 400', alt: block.settings.name, class: 'ot-press__img' }}
+            {%- else -%}
+              <span>{{ block.settings.name }}</span>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+.ot-press { background: #23372b; color: #fff; padding: var(--ot-pt, 24px) 0 var(--ot-pb, 24px); overflow: hidden; font-family: var(--ot-font); }
+.ot-press__caption { margin: 0 0 14px; padding-inline: 16px; text-align: center; font-size: 14px; line-height: 1.3; color: #8fa59c; }
+.ot-press__rail { display: flex; overflow-x: auto; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain; -webkit-overflow-scrolling: touch; }
+.ot-press__rail::-webkit-scrollbar { display: none; }
+.ot-press__rail.is-dragging { cursor: grabbing; user-select: none; }
+.ot-press__set { display: flex; flex: none; align-items: center; gap: 44px; margin: 0; padding: 0 44px 0 0; list-style: none; }
+.ot-press__logo { flex: none; display: flex; align-items: center; height: 28px; color: #fff; white-space: nowrap; user-select: none; }
+.ot-press__img { height: 100%; width: auto; max-width: 140px; object-fit: contain; filter: brightness(0) invert(1); -webkit-user-drag: none; }
+.ot-press__logo span { font-size: 22px; line-height: 1; }
+.ot-press__logo--bold span { font-family: Helvetica, Arial, sans-serif; font-weight: 800; letter-spacing: 0.02em; }
+.ot-press__logo--serif span { font-family: Georgia, 'Times New Roman', serif; font-weight: 700; letter-spacing: 0.01em; }
+.ot-press__logo--caps span { font-family: Helvetica, Arial, sans-serif; font-weight: 700; font-size: 19px; letter-spacing: 0.14em; text-transform: uppercase; }
+.ot-press__logo--heavy span { font-family: Helvetica, Arial, sans-serif; font-weight: 900; font-size: 20px; letter-spacing: 0.06em; text-transform: uppercase; font-style: italic; }
+@media screen and (min-width: 750px) {
+  .ot-press { padding-block: 28px; }
+  .ot-press__caption { font-size: 14px; margin-bottom: 18px; }
+  .ot-press__rail { justify-content: center; overflow: visible; cursor: default; }
+  .ot-press__set { gap: 90px; padding: 0; }
+  .ot-press__set--dup { display: none; }
+  .ot-press__logo { height: 40px; }
+  .ot-press__logo span { font-size: 30px; }
+  .ot-press__logo--caps span { font-size: 26px; }
+  .ot-press__logo--heavy span { font-size: 28px; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  /* mouse/pen drag for horizontal rails; touch keeps native swipe */
+  const init = () => document.querySelectorAll('[data-ot-drag]:not([data-ot-drag-ready])').forEach((rail) => {
+    rail.setAttribute('data-ot-drag-ready', '');
+    let x0 = 0, s0 = 0, id = -1, moved = false;
+    rail.addEventListener('dragstart', (e) => e.preventDefault());
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType === 'touch' || e.button !== 0 || rail.scrollWidth <= rail.clientWidth) return;
+      id = e.pointerId; x0 = e.clientX; s0 = rail.scrollLeft; moved = false;
+    });
+    rail.addEventListener('pointermove', (e) => {
+      if (e.pointerId !== id) return;
+      const dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) < 4) return;
+      if (!moved) { moved = true; rail.classList.add('is-dragging'); try { rail.setPointerCapture(id); } catch (err) { /* ignore */ } }
+      rail.scrollLeft = s0 - dx;
+    });
+    const end = () => {
+      if (id === -1) return;
+      id = -1;
+      if (!moved) return;
+      const left = rail.scrollLeft;
+      rail.classList.remove('is-dragging');
+      rail.scrollLeft = left;
+      if (rail.hasAttribute('data-ot-snap')) {
+        const card = rail.firstElementChild;
+        const step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(rail).columnGap || 0) : 0;
+        if (step) rail.scrollTo({ left: Math.round(left / step) * step, behavior: 'smooth' });
+      }
+    };
+    rail.addEventListener('pointerup', end);
+    rail.addEventListener('pointercancel', end);
+    rail.addEventListener('click', (e) => { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  });
+  init();
+  document.addEventListener('shopify:section:load', init);
+})();
+(() => {
+  /* auto-scrolling rails: pause on hover, touch, drag and wheel; draggable and swipeable; loops over repeated sets */
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const wide = window.matchMedia('(min-width: 750px)');
+  const start = (rail) => {
+    const dir = rail.dataset.otDir === 'rev' ? -1 : 1;
+    const speed = parseFloat(rail.dataset.otSpeed || '0.5');
+    const mobileOnly = rail.hasAttribute('data-ot-mobile-only');
+    let hover = false, last = 0, running = false, pos = 0, primed = false;
+    const span = () => {
+      const sets = rail.querySelectorAll('[data-ot-set]');
+      return sets.length > 1 ? sets[1].offsetLeft - sets[0].offsetLeft : 0;
+    };
+    const touch = () => { last = performance.now(); };
+    rail.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') hover = true; });
+    rail.addEventListener('pointerleave', () => { hover = false; });
+    ['pointerdown', 'touchstart', 'touchmove', 'wheel', 'keydown', 'focusin'].forEach((ev) => rail.addEventListener(ev, touch, { passive: true }));
+    const tick = () => {
+      requestAnimationFrame(tick);
+      if (reduce.matches || (mobileOnly && wide.matches)) { running = false; return; }
+      const s = span();
+      if (!s || rail.scrollWidth <= rail.clientWidth) return;
+      if (!primed) { primed = true; if (dir < 0) rail.scrollLeft = s; }
+      const idle = !hover && !rail.classList.contains('is-dragging') && performance.now() - last > 2200;
+      if (!idle) { running = false; return; }
+      if (!running) { running = true; pos = rail.scrollLeft; }
+      pos += dir * speed;
+      if (pos >= s) pos -= s;
+      if (pos <= 0 && dir < 0) pos += s;
+      rail.scrollLeft = pos;
+    };
+    requestAnimationFrame(tick);
+  };
+  const init = () => document.querySelectorAll('[data-ot-marquee]:not([data-ot-marquee-ready])').forEach((rail) => {
+    rail.setAttribute('data-ot-marquee-ready', '');
+    start(rail);
+  });
+  init();
+  document.addEventListener('shopify:section:load', init);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Old Tom's press strip",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "caption", "label": "Caption", "default": "Making all the BUZZ lately in.." },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Press name",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name (shown as a wordmark)", "default": "NBC" },
+        { "type": "image_picker", "id": "logo", "label": "Logo image (optional, replaces the wordmark; shown in white)" },
+        {
+          "type": "select",
+          "id": "look",
+          "label": "Wordmark style",
+          "options": [
+            { "value": "bold", "label": "Bold sans" },
+            { "value": "serif", "label": "Serif" },
+            { "value": "caps", "label": "Spaced capitals" },
+            { "value": "heavy", "label": "Heavy italic capitals" }
+          ],
+          "default": "bold"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Old Tom's press strip",
+      "blocks": [
+        { "type": "logo", "settings": { "name": "NBC", "look": "bold" } },
+        { "type": "logo", "settings": { "name": "BuzzFeed", "look": "bold" } },
+        { "type": "logo", "settings": { "name": "HUFFPOST", "look": "caps" } },
+        { "type": "logo", "settings": { "name": "USA TODAY", "look": "heavy" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -420,7 +420,7 @@ def main():
     p.add_argument("--speed", type=float); p.add_argument("--max-speed", type=float, default=1.08)
     p.add_argument("--total", type=float); p.add_argument("--only"); p.add_argument("--force", action="store_true")
 
-    p = sub.add_parser("delete-voice", help="operator rule 2026-11-12: only when all slots are full, delete the OLDEST custom voice (log it in VOICE_SPEC.md first)")
+    p = sub.add_parser("delete-voice", help="operator rule: do NOT delete voices; kept for manual use only")
     p.add_argument("voice_id")
 
     args = ap.parse_args()

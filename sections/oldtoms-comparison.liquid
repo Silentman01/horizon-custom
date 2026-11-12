@@ -1,0 +1,116 @@
+{%- assign s = section.settings -%}
+<div class="ot-compare" style="{% render 'oldtoms-vars' %}--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;">
+  {%- if s.heading != blank -%}<h2 class="ot-compare__heading">{{ s.heading }}</h2>{%- endif -%}
+  <div class="ot-compare__wrap">
+    <table class="ot-compare__table">
+      <thead>
+        <tr>
+          <th scope="col" class="ot-compare__feat"><span class="ot-compare__sr">{{ s.feature_head }}</span></th>
+          <th scope="col" class="ot-compare__us ot-compare__us--head"><span class="ot-compare__brand">{{ s.brand }}</span></th>
+          <th scope="col" class="ot-compare__them ot-compare__them--head">{{ s.others_head }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- assign b = block.settings -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row" class="ot-compare__feat">{{ b.label }}</th>
+            <td class="ot-compare__us{% if forloop.last %} ot-compare__us--last{% endif %}">
+              {%- if b.us_text != blank -%}<span class="ot-compare__text">{{ b.us_text }}</span>
+              {%- elsif b.us -%}<svg class="ot-compare__icon" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Yes"><circle cx="16" cy="16" r="16" fill="#a9d86e"/><path d="M9.5 16.5l4.3 4.3L22.5 11.7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- else -%}<svg class="ot-compare__icon" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="No"><circle cx="16" cy="16" r="16" fill="#d9d9d9"/><path d="M11 11l10 10M21 11L11 21" stroke="#808080" stroke-width="3" stroke-linecap="round"/></svg>{%- endif -%}
+            </td>
+            <td class="ot-compare__them">
+              {%- if b.them_text != blank -%}<span class="ot-compare__text">{{ b.them_text }}</span>
+              {%- elsif b.them -%}<svg class="ot-compare__icon" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Yes"><circle cx="16" cy="16" r="16" fill="#a9d86e"/><path d="M9.5 16.5l4.3 4.3L22.5 11.7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {%- else -%}<svg class="ot-compare__icon" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="No"><circle cx="16" cy="16" r="16" fill="#d9d9d9"/><path d="M11 11l10 10M21 11L11 21" stroke="#808080" stroke-width="3" stroke-linecap="round"/></svg>{%- endif -%}
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+  {%- if s.show_cta -%}
+    <div class="ot-compare__cta">{% render 'oldtoms-cta', label: s.cta_label, guarantee: s.cta_guarantee %}</div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.ot-compare { background: #fff; color: #000; font-family: var(--ot-font); padding: var(--ot-pt, 48px) 12px var(--ot-pb, 48px); }
+.ot-compare__heading { margin: 0 0 24px; text-align: center; font-family: var(--ot-font-heading); font-weight: 400; font-size: 36px; line-height: 1.1; color: #23372b; }
+.ot-compare__wrap { max-width: 960px; margin: 0 auto; }
+.ot-compare__table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+.ot-compare__table th, .ot-compare__table td { padding: 0; text-align: center; vertical-align: middle; font-weight: 400; }
+.ot-compare__feat { width: 46%; padding: 13px 6px 13px 0 !important; text-align: left !important; font-size: 13px; line-height: 1.3; border-bottom: 1px solid #5b7265; }
+.ot-compare__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+.ot-compare__us { width: 27%; height: 52px; background: #f9f9f4; border-bottom: 1px solid #5b7265; border-inline: 1px solid #c9d1c3; }
+.ot-compare__us--head { height: auto; padding: 14px 4px !important; border-top: 1px solid #c9d1c3; border-radius: 20px 20px 0 0; border-bottom: 0; }
+.ot-compare__us--last { border-bottom: 1px solid #c9d1c3; border-radius: 0 0 20px 20px; }
+.ot-compare__brand { display: block; white-space: nowrap; font-family: var(--ot-font-heading); font-size: 14px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #23372b; }
+.ot-compare__them { width: 27%; border-bottom: 1px solid #5b7265; }
+.ot-compare__them--head { font-size: 11px !important; font-weight: 500 !important; line-height: 1.25; text-transform: uppercase; border-bottom: 0; }
+thead .ot-compare__feat { border-bottom: 0; }
+.ot-compare__icon { display: block; margin-inline: auto; width: 26px; height: 26px; }
+.ot-compare__text { font-size: 12px; font-style: italic; line-height: 1.3; display: block; padding: 0 4px; }
+.ot-compare__cta { max-width: 700px; margin: 28px auto 0; }
+@media screen and (min-width: 750px) {
+  .ot-compare__heading { font-size: 46px; margin-bottom: 36px; }
+  .ot-compare__feat { width: 50%; font-size: 14px; padding: 18px 10px 18px 0 !important; }
+  .ot-compare__us, .ot-compare__them { width: 25%; }
+  .ot-compare__us { height: 59px; }
+  .ot-compare__brand { font-size: 22px; }
+  .ot-compare__them--head { font-size: 12px !important; }
+  .ot-compare__icon { width: 32px; height: 32px; }
+  .ot-compare__text { font-size: 13px; }
+  .ot-compare__cta { margin-top: 44px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Old Tom's comparison",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "How We Stack Up" },
+    { "type": "text", "id": "feature_head", "label": "Feature column (screen reader label)", "default": "Feature" },
+    { "type": "text", "id": "brand", "label": "Brand column", "default": "OLD TOM'S" },
+    { "type": "text", "id": "others_head", "label": "Others column", "default": "Other Solutions" },
+    { "type": "header", "content": "Button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show add to cart button", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Add to cart" },
+    { "type": "text", "id": "cta_guarantee", "label": "Guarantee line", "default": "30-Day Money Back Guarantee" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Feature", "default": "Natural & ZERO Chemicals or Toxins" },
+        { "type": "checkbox", "id": "us", "label": "Old Tom's: tick (off = cross)", "default": true },
+        { "type": "text", "id": "us_text", "label": "Old Tom's: text instead of icon" },
+        { "type": "checkbox", "id": "them", "label": "Others: tick (off = cross)", "default": false },
+        { "type": "text", "id": "them_text", "label": "Others: text instead of icon" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Old Tom's comparison",
+      "blocks": [
+        { "type": "row", "settings": { "label": "Natural & ZERO Chemicals or Toxins" } },
+        { "type": "row", "settings": { "label": "Works Within 72 Hours" } },
+        { "type": "row", "settings": { "label": "Safe for Kids, Pets & Livestock" } },
+        { "type": "row", "settings": { "label": "No Clean-Up / No Bodies" } },
+        { "type": "row", "settings": { "label": "90-Day Cover Per Pouch" } },
+        { "type": "row", "settings": { "label": "Cost Per Day of Protection", "us_text": "£0.26", "them_text": "£0.40 to £1.75/day" } },
+        { "type": "row", "settings": { "label": "Zero Tolerance Build-Up" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

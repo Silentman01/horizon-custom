@@ -4,8 +4,7 @@ import { isClickedOutside, lockScroll, onAnimationEnd, unlockScroll } from '@the
 import { getScrollTop, scrollTo } from '@theme/scroll-container';
 
 /** Viewport width below which the drawer opens as a modal overlay (no squeeze). */
-// Overlay mode (theme setting "Drawers on desktop") keeps the modal behaviour at every width.
-const MODAL_BREAKPOINT = document.documentElement.hasAttribute('data-drawer-overlay') ? 100000 : 990;
+const MODAL_BREAKPOINT = 990;
 
 /**
  * A drawer that opens from the right side.

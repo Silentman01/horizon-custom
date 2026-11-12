@@ -1,0 +1,174 @@
+{%- liquid
+  assign s = section.settings
+  assign default_link = s.button_link | default: '/products/mouse-repellent-pouches'
+-%}
+<section class="ot-home-hero" style="{% render 'oldtoms-vars' %}--ot-hero-bg:{{ s.panel_color }};--ot-hero-h:{{ s.desktop_height }}px;--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;" data-ot-hero data-autoplay="{{ s.autoplay_seconds }}">
+  <div class="ot-home-hero__track" data-ot-drag data-ot-hero-track>
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      <div class="ot-home-hero__slide" {{ block.shopify_attributes }}>
+        <div class="ot-home-hero__media">
+          <div class="ot-home-hero__frame">
+            {% render 'oldtoms-media', image: b.image, asset: b.asset, ratio: '350 / 410', alt: b.image_alt, eager: forloop.first %}
+          </div>
+        </div>
+        <div class="ot-home-hero__panel">
+          <div class="ot-home-hero__card">
+            {%- if s.rating_label != blank -%}
+              <a class="ot-home-hero__rating" href="{{ s.rating_link | default: default_link }}" draggable="false">
+                <span class="ot-home-hero__rating-label">{{ s.rating_label }}</span>
+                <span class="ot-home-hero__stars" aria-hidden="true">★★★★★</span>
+                <span class="ot-home-hero__rating-link">{{ s.rating_text }}</span>
+              </a>
+            {%- endif -%}
+            {%- if forloop.first -%}<h1 class="ot-home-hero__heading">{{ b.heading }}</h1>{%- else -%}<h2 class="ot-home-hero__heading">{{ b.heading }}</h2>{%- endif -%}
+            {%- if b.body != blank -%}<p class="ot-home-hero__body">{{ b.body }}</p>{%- endif -%}
+            {%- if s.button_label != blank -%}<a class="ot-home-hero__button" href="{{ b.link | default: default_link }}" draggable="false">{{ s.button_label }}</a>{%- endif -%}
+            {%- if b.tags != blank -%}<p class="ot-home-hero__tags">{{ b.tags }}</p>{%- endif -%}
+          </div>
+          {%- if b.quote != blank -%}
+            <div class="ot-home-hero__quote">
+              <div class="ot-home-hero__avatar">{% render 'oldtoms-media', image: b.avatar, asset: b.avatar_asset, ratio: '1 / 1', alt: b.name %}</div>
+              <div class="ot-home-hero__quote-body">
+                <p class="ot-home-hero__quote-text">&ldquo;{{ b.quote }}&rdquo;</p>
+                <p class="ot-home-hero__who"><strong>{{ b.name }}{% if b.location != blank %}, {{ b.location }}{% endif %}</strong> <span class="ot-home-hero__verified">&#10003; {{ s.verified_label }}</span></p>
+              </div>
+              {%- if b.sticker_asset != blank -%}<img class="ot-home-hero__sticker" src="{{ b.sticker_asset | asset_url }}" alt="" width="44" height="44" loading="lazy" onerror="this.remove()">{%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="ot-home-hero__dots" role="tablist" aria-label="Slides">
+      {%- for block in section.blocks -%}<button type="button" class="ot-home-hero__dot" role="tab" aria-label="Slide {{ forloop.index }}" data-ot-hero-dot="{{ forloop.index0 }}"></button>{%- endfor -%}
+    </div>
+  {%- endif -%}
+</section>
+{% render 'oldtoms-home-drag' %}
+
+{% stylesheet %}
+.ot-home-hero { position: relative; background: var(--ot-hero-bg); padding: var(--ot-pt) 0 var(--ot-pb); font-family: var(--ot-font); color: #121212; overflow: hidden; }
+.ot-home-hero__track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; overscroll-behavior-x: contain; cursor: grab; }
+.ot-home-hero__track::-webkit-scrollbar { display: none; }
+.ot-home-hero__track.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+.ot-home-hero__slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; display: flex; flex-direction: column; gap: 14px; padding: 16px 16px 8px; }
+.ot-home-hero__frame { border: 2px solid var(--ot-green); border-radius: 20px; overflow: hidden; background: var(--ot-cream); }
+.ot-home-hero__panel { display: flex; flex-direction: column; gap: 14px; }
+.ot-home-hero__card { background: #F2F1EF; border: 2px solid var(--ot-green); border-radius: 20px; padding: 20px 16px 18px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.ot-home-hero__rating { display: inline-flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; font-size: 12px; color: #121212; text-decoration: none; }
+.ot-home-hero__stars { color: #F5A623; font-size: 16px; letter-spacing: 1px; }
+.ot-home-hero__rating-link { text-decoration: underline; }
+.ot-home-hero__heading { margin: 0; font-family: var(--ot-font-heading); font-weight: 400; font-size: 30px; line-height: 1.15; color: var(--ot-green); }
+.ot-home-hero__body { margin: 0; font-size: 15px; line-height: 1.45; }
+.ot-home-hero__button { display: inline-flex; justify-content: center; align-items: center; width: 100%; max-width: 310px; height: 48px; border: 2px solid var(--ot-green); border-radius: 999px; background: var(--ot-lime); color: var(--ot-green); box-shadow: 0 4px 0 var(--ot-green); font-weight: 700; font-size: 14px; text-transform: uppercase; text-decoration: none; letter-spacing: 0.02em; }
+.ot-home-hero__tags { margin: 0; font-size: 13px; line-height: 1.4; }
+.ot-home-hero__quote { position: relative; display: flex; gap: 12px; align-items: flex-start; background: #F9F9F6; border: 2px solid var(--ot-green); border-radius: 16px; padding: 14px 56px 14px 14px; }
+.ot-home-hero__avatar { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; overflow: hidden; }
+.ot-home-hero__quote-text { margin: 0 0 6px; font-size: 13px; line-height: 1.4; }
+.ot-home-hero__who { margin: 0; font-size: 13px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.ot-home-hero__verified { border: 1px solid #3A9B5C; color: #3A9B5C; background: #fff; border-radius: 999px; padding: 1px 8px; font-size: 11px; }
+.ot-home-hero__sticker { position: absolute; top: 8px; right: 10px; width: 40px; height: 40px; object-fit: contain; }
+.ot-home-hero__dots { display: flex; justify-content: center; gap: 10px; padding: 8px 0 16px; }
+.ot-home-hero__dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #E2E2E2; cursor: pointer; }
+.ot-home-hero__dot[aria-selected='true'] { background: #121212; }
+@media screen and (min-width: 750px) {
+  .ot-home-hero__slide { display: grid; grid-template-columns: 1.02fr 1fr; grid-template-areas: 'panel media'; gap: 0; padding: 0; min-height: var(--ot-hero-h); }
+  .ot-home-hero__media { grid-area: media; position: relative; }
+  .ot-home-hero__frame { position: absolute; inset: 0; border: 0; border-radius: 0; }
+  .ot-home-hero__frame .ot-media { position: absolute; inset: 0; height: 100%; aspect-ratio: auto !important; }
+  .ot-home-hero__panel { grid-area: panel; justify-content: center; padding: 50px; gap: 28px; }
+  .ot-home-hero__card { padding: 34px 40px 36px; gap: 16px; }
+  .ot-home-hero__heading { font-size: 38px; }
+  .ot-home-hero__body { font-size: 16px; max-width: 440px; }
+  .ot-home-hero__button { width: 180px; }
+  .ot-home-hero__dots { position: absolute; left: 0; bottom: 12px; width: 51%; padding: 0; }
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  const setup = (root) => {
+    if (root.dataset.otHeroReady) return;
+    root.dataset.otHeroReady = '1';
+    const track = root.querySelector('[data-ot-hero-track]');
+    const dots = root.querySelectorAll('[data-ot-hero-dot]');
+    if (!track) return;
+    const slides = track.children;
+    const index = () => Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
+    const mark = () => { const i = index(); dots.forEach((d, n) => d.setAttribute('aria-selected', n === i ? 'true' : 'false')); };
+    const go = (i) => track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+    track.addEventListener('scroll', mark, { passive: true });
+    dots.forEach((d) => d.addEventListener('click', () => go(Number(d.dataset.otHeroDot))));
+    mark();
+    const secs = Number(root.dataset.autoplay) || 0;
+    let paused = false;
+    ['pointerenter', 'focusin', 'pointerdown'].forEach((ev) => root.addEventListener(ev, () => { paused = true; }));
+    ['pointerleave', 'focusout'].forEach((ev) => root.addEventListener(ev, () => { paused = false; }));
+    if (secs > 0 && slides.length > 1 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setInterval(() => { if (!paused && !document.hidden && !(window.Shopify && window.Shopify.designMode)) go((index() + 1) % slides.length); }, secs * 1000);
+    }
+  };
+  const init = () => document.querySelectorAll('[data-ot-hero]').forEach(setup);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  document.addEventListener('shopify:section:load', init);
+})();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Old Tom's home hero",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "header", "content": "Rating" },
+    { "type": "text", "id": "rating_label", "label": "Rating word", "default": "Excellent" },
+    { "type": "text", "id": "rating_text", "label": "Reviews link text", "default": "2,753 verified reviews" },
+    { "type": "url", "id": "rating_link", "label": "Reviews link", "info": "Blank = the button link." },
+    { "type": "header", "content": "Button and quote" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "button_link", "label": "Default button link" },
+    { "type": "text", "id": "verified_label", "label": "Verified chip", "default": "Verified Buyer" },
+    { "type": "header", "content": "Slider" },
+    { "type": "range", "id": "autoplay_seconds", "label": "Auto-rotate (0 = off)", "default": 6, "min": 0, "max": 12, "step": 1, "unit": "s" },
+    { "type": "range", "id": "desktop_height", "label": "Desktop height", "default": 860, "min": 560, "max": 1000, "step": 20, "unit": "px" },
+    { "type": "color", "id": "panel_color", "label": "Panel colour", "default": "#5D824E" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "default": 0, "min": 0, "max": 80, "step": 4, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "default": 0, "min": 0, "max": 80, "step": 4, "unit": "px" }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Slide image" },
+        { "type": "text", "id": "asset", "label": "Slide image: theme file", "info": "Used when no image is uploaded." },
+        { "type": "text", "id": "image_alt", "label": "Image alt text" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "Keep Rodents Out, Naturally." },
+        { "type": "textarea", "id": "body", "label": "Text", "default": "Protect your home with our plant-based, essential oil pouches. Safe for your family, tough on mice and rats." },
+        { "type": "url", "id": "link", "label": "Button link", "info": "Blank = section default." },
+        { "type": "text", "id": "tags", "label": "Tag line", "default": "Plant-Based · Long-Lasting · Indoor Protection" },
+        { "type": "header", "content": "Review card" },
+        { "type": "textarea", "id": "quote", "label": "Quote" },
+        { "type": "text", "id": "name", "label": "Name" },
+        { "type": "text", "id": "location", "label": "Location" },
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "text", "id": "avatar_asset", "label": "Avatar: theme file" },
+        { "type": "text", "id": "sticker_asset", "label": "Sticker: theme file (transparent PNG)" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Old Tom's home hero",
+      "blocks": [
+        { "type": "slide", "settings": { "asset": "oldtoms-hero-01.jpg", "heading": "Keep Rodents Out, Naturally.", "tags": "Plant-Based · Long-Lasting · Indoor Protection", "quote": "At last, a natural fix that actually works! I put these in my garage and haven't seen a mouse since.", "name": "Eliza H.", "location": "Cheltenham", "avatar_asset": "oldtoms-hero-avatar-01.jpg", "sticker_asset": "oldtoms-sticker-mouse.png" } },
+        { "type": "slide", "settings": { "asset": "oldtoms-hero-02.jpg", "heading": "Say Goodbye to Spiders, Naturally.", "body": "Keep your corners clear. Our plant-based formula sees off spiders without harsh chemicals.", "tags": "Repels Spiders Naturally · Pet Safe · Plant-Based Formula", "quote": "I hate spiders, but I hate toxic sprays even more. These pouches are a lifesaver.", "name": "Sarah M.", "location": "Bristol", "avatar_asset": "oldtoms-hero-avatar-02.jpg", "sticker_asset": "oldtoms-sticker-spider.png" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

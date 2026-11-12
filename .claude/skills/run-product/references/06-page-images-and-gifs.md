@@ -7,8 +7,6 @@ Inputs come from the SECTION_SPEC **IMAGE MAP** (conversion-architect) and the r
 
 **Inputs from Step Alpha:** 3.2 Avatar Cards and 3.1 Angle Cards, through SECTION_SPEC's ANGLE ARCHITECTURE and each slot's Angle / avatar, decide **who is shown and what the image says**: every testimonial persona and every person in a section image is the avatar of the slot's angle (age, gender, setting, life situation); problem scenes show that avatar's pain or trigger event (1.2 Pain Points, 1.1 TRIGGER EVENT); testimonial text is modelled on testimony-ready phrases (3.5). A gap angle (2.4) given a testimonial or section slot gets its own avatar there.
 
-**Sample gate (00 §18):** page images share the stream-B sample (one page/advertorial image with a person goes on the same `_samples.jpg`). Generate the rest only after the operator's OK.
-
 ## Contents
 1. Inputs, outputs, budget
 2. Step 1 — Build the media plan from the IMAGE MAP

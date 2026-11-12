@@ -166,9 +166,9 @@
       "id": "cart_extras_ship_threshold",
       "label": "Free shipping from",
       "min": 0,
-      "max": 2000,
-      "step": 20,
-      "unit": "$",
+      "max": 500,
+      "step": 5,
+      "unit": "£",
       "default": 0,
       "info": "In store currency. 0 = free shipping on every order. Also drives the shipping line of the price details."
     },
@@ -690,65 +690,6 @@
       "unit": "px",
       "default": 6,
       "visible_if": "{{ section.settings.cart_extras_pay_enable }}"
-    },
-    {
-      "type": "header",
-      "content": "Cadeaux selon le nombre de tubes"
-    },
-    {
-      "type": "checkbox",
-      "id": "oralys_gifts_enable",
-      "label": "Afficher les cadeaux",
-      "default": false,
-      "info": "Compte les tubes du panier (variante « 2 tubes » = 2). Palier 2 : 2 tubes et plus. Palier 3 : 4 tubes et plus."
-    },
-    {
-      "type": "text",
-      "id": "oralys_gifts_msg_1",
-      "label": "Message : 1 tube",
-      "default": "Ajoutez un 2e tube à -70 % pour recevoir vos comprimés nettoyants offerts"
-    },
-    {
-      "type": "text",
-      "id": "oralys_gifts_msg_2",
-      "label": "Message : 2 tubes",
-      "default": "Passez à 4 tubes : 2 offerts, plus l'étui à dentier et le guide en cadeau"
-    },
-    {
-      "type": "text",
-      "id": "oralys_gifts_msg_3",
-      "label": "Message : 4 tubes",
-      "default": "Vos 4 cadeaux sont inclus"
-    },
-    {
-      "type": "textarea",
-      "id": "oralys_gifts_rows_2",
-      "label": "Cadeaux : 2 tubes (une ligne : nom | mention)",
-      "default": "Livraison express | OFFERTE\nComprimés nettoyants (14,99 €) | OFFERT"
-    },
-    {
-      "type": "textarea",
-      "id": "oralys_gifts_rows_3",
-      "label": "Cadeaux : 4 tubes (une ligne : nom | mention)",
-      "default": "Livraison express | OFFERTE\nComprimés nettoyants (14,99 €) | OFFERT\nÉtui à dentier | OFFERT\nGuide « Bien poser son gel » | OFFERT"
-    },
-    {
-      "type": "text",
-      "id": "oralys_gifts_guarantee",
-      "label": "Ligne garantie",
-      "default": "90 jours satisfait ou remboursé"
-    },
-    {
-      "type": "color",
-      "id": "oralys_gifts_accent",
-      "label": "Accent",
-      "default": "#0E6B50"
-    },
-    {
-      "type": "color",
-      "id": "oralys_gifts_bg",
-      "label": "Fond",
-      "default": "#EEF6F1"
     }
   ],
   "presets": [

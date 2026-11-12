@@ -4,13 +4,10 @@
   @param {boolean} [render_wrapper] - When true, wraps the drawer in the section wrapper that the Section Rendering API adds automatically.
   @param {string} [section_id] - The section that renders the drawer (the "Cart drawer" header-group section). Defaults to 'cart-drawer-section'.
   @param {object} [cx] - Settings of the "Cart drawer" section, for the cart drawer extras (snippets/cart-extras).
-  @param {string} [section_id] - The section that renders the drawer (the "Cart drawer" header-group section). Defaults to 'cart-drawer-section'.
-  @param {object} [cx] - Settings of the "Cart drawer" section, for the cart drawer extras (snippets/cart-extras).
 {% enddoc %}
 
 {%- liquid
   assign render_wrapper = render_wrapper | default: true, allow_false: true
-  assign cx_section_id = section_id | default: 'cart-drawer-section'
   assign cx_section_id = section_id | default: 'cart-drawer-section'
 -%}
 

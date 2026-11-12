@@ -55,25 +55,14 @@
     {% endif %}
     data-testid="header-logo"
   >
-    {%- if settings.logo == blank and block_settings.logo_asset != blank -%}
-      <img
-        src="{{ block_settings.logo_asset | asset_url }}"
-        class="header-logo__image header-logo__image--asset"
-        alt="{{ alt_text_fallback | escape }}"
-        width="{{ settings.logo_height | times: 3 }}"
-        height="{{ settings.logo_height }}"
-        style="--header-logo-image-height: {{ settings.logo_height }}px; --header-logo-image-height-mobile: {{ settings.logo_height_mobile }}px;"
-      >
-    {%- else -%}
-      {% render 'image',
-        image: settings.logo,
-        class: 'header-logo__image',
-        height: settings.logo_height,
-        alt_text_fallback: alt_text_fallback,
-        text_fallback: shop.name,
-        style: logo_style
-      %}
-    {%- endif -%}
+    {% render 'image',
+      image: settings.logo,
+      class: 'header-logo__image',
+      height: settings.logo_height,
+      alt_text_fallback: alt_text_fallback,
+      text_fallback: shop.name,
+      style: logo_style
+    %}
   </span>
 
   {% if use_inverse_logo %}
@@ -142,11 +131,6 @@
     }
   }
 
-  .header-logo__image--asset {
-    width: auto;
-    max-width: 200px;
-  }
-
   .header-logo__solid-header-image-container {
     display: var(--header-logo-display, block);
   }
@@ -162,12 +146,6 @@
   "tag": null,
   "class": "header-logo",
   "settings": [
-    {
-      "type": "text",
-      "id": "logo_asset",
-      "label": "Logo : fichier du thème",
-      "info": "Utilisé quand aucun logo n'est choisi dans Paramètres du thème > Logo (fichier dans assets/)."
-    },
     {
       "type": "paragraph",
       "content": "t:content.edit_logo_in_theme_settings"

@@ -258,21 +258,6 @@ Spec: ALPHA OUTPUT lines 721–764. Copy [templates/ALPHA_DOSSIER.md](../templat
 headings and order exactly (Part 1 1.1–1.11, Part 2 2.1–2.8, Part 3 3.1–3.6) and its block markers; repeat blocks per
 item; delete every template example row.
 
-**Assembler (Oragel run, 2026-11-12):** `python -I <skill>/scripts/assemble_dossier.py <PD> --title "<Product>" --context "<context line>"`
-builds the whole dossier from the working files:
-- **Part 1** comes from `1.1_customer.md` (`## 1.x` sections), `1.2_*`, `1.3_congruence.md` + `1.3_paths.md`, and `1.4_angle_cards.md`.
-- **2.1** merges the RESEARCH VERDICT / EVIDENCE lines from `2.3_synthesis.md` into the H blocks, validated first.
-- **2.2–2.8** are cut from the `## 2.x` sections of `2.3_synthesis.md`.
-- **Part 3** tables are generated: 3.1 from the V+O cards, 3.2 from the avatars, 3.3 from every ad block's HOOK, 3.4 from every video block, 3.5 from the 2.6 groups.
-- **2.5 and 3.6** are pasted verbatim.
-
-Sub-headings in the inputs are demoted to `####`. The full letter bodies (`1.2_caption_families.md`) go in 1.9 as an appendix, so PRIMARY TEXT stays exact without being duplicated.
-
-Pitfalls:
-- **Markers:** mark the parts of `CHATGPT_RAW.md` with plain lines (`=== PART 1 of 2 … ===`), never HTML comments. The gate strips comments from the dossier but not from the raw file, so the 2.5 verbatim check fails.
-- **French quotes:** French data uses « » quotes. The gate accepts them now; older gate copies did not.
-- **Synthesis file:** keep the web supplement out of `2.3_synthesis.md`, in `chatgpt/WEB_SUPPLEMENT.md`. Otherwise it is swallowed into 2.8.
-
 | Dossier section | Filled from |
 |---|---|
 | H1 `# <Product> — Step Alpha Intelligence Dossier` + context line | BRIEF inputs, inventory counts |

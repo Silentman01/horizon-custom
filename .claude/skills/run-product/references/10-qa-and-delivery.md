@@ -42,7 +42,7 @@ Goal: prove the page, images and ads are right before the operator sees them, th
 **Known harness artefacts (don't "fix" the theme for these):** fonts fall back to serif when offline; lazy images blank inside headless iframes; colors empty if snippet globals aren't passed; text-glyph icons rendering in colour on some systems (use SVG icons in the theme anyway).
 
 ## 3. Image and ad QA
-For every batch (own gallery, page images, top-5 ads, 20 ads):
+For every batch (gallery remakes, page images, top-5 ads, 20 ads):
 1. `python -I scripts/contact_sheet.py "<dir>/*.png" --out <dir>/_sheet.jpg` and Read it.
 2. Checklist per image: product matches the packshot (frame shape, amber lenses, side shields); text spelled correctly and identical to the spec; each ad carries the angle card ID from AD_VARIANTS.md and its message matches that card (dossier 3.1); claims exactly as specified; no competitor brand; no logo/wordmark on product images; no text on the product frame; people look natural; layout matches the reference (top-5: side-by-side with the original).
 3. Fix by editing (keep-everything prompt) when only text/small elements are wrong; regenerate only when composition is wrong. Move the replaced file once to `<area>/archive/v<N>_<reason>/` (never a `superseded/` folder).

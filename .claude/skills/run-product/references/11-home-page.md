@@ -65,7 +65,7 @@ Extending a reusable section for the home: only add optional settings with defau
 Fully original copy, same rules as the product page (03 §14): every string written from the Step Alpha data (dossier 3.5 Customer Language Bank is the primary source, plus 3.1 angle cards, 1.1 avatars, 1.4 objections, 1.5 emotional landscape) and the copy playbooks (13). No word-for-word matches with the competitor — not a single title, headline or body line duplicated. Claims at the SAME strength. Simple direct-response language, our brand, market language and currency, each string written for its section's angle card and tagged with its ID. The home copy is consistent with the product page copy (same offer, guarantee, numbers) but adapted to the home's different section structure from the blueprint.
 
 ## 6. Images
-- Prefer what already exists: the own gallery (stream B), page images and GIF WebPs (stream C), the packshot. Pick the one whose angle / avatar matches the home section's ANGLE ROLE.
+- Prefer what already exists: gallery remakes (stream B), page images and GIF WebPs (stream C), the packshot. Pick the one whose angle / avatar matches the home section's ANGLE ROLE.
 - People in any new image are the avatar of the section's angle (3.2).
 - Copy theme-ready versions into `assets/<slug>-home-*.jpg` (~1200 px, JPG q82 progressive).
 - Generate with Kie only for an essential visual with no equivalent (hero lifestyle, banner): attach the packshot, no logo/text on the frame, 2K; keep it to a few images and report credits.

@@ -9,625 +9,546 @@
  */
 {
   "sections": {
-    "oralys_hero": {
-      "type": "oralys-home-hero",
+    "ot_home_hero": {
+      "type": "oldtoms-home-hero",
+      "blocks": {
+        "b1": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-01.jpg",
+            "image_alt": "Woman in a tidy garage holding the black Old Tom's bag",
+            "heading": "Keep Rodents Out, Naturally.",
+            "body": "Protect your home with our plant-based, essential oil pouches. Safe for your family, tough on mice and rats.",
+            "link": "",
+            "tags": "Plant-Based · Long-Lasting · Indoor Protection",
+            "quote": "At last, a natural fix that actually works! I put these in my garage and haven't seen a mouse since. Smells lovely too, unlike those chemical traps. Customer for life!",
+            "name": "Eliza H.",
+            "location": "Cheltenham",
+            "avatar_asset": "oldtoms-hero-avatar-01.jpg",
+            "sticker_asset": "oldtoms-sticker-mouse.png"
+          }
+        },
+        "b2": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-02.jpg",
+            "image_alt": "Woman on a sofa in a bright lounge, spider pouch bag on the side table",
+            "heading": "Say Goodbye to Spiders, Naturally.",
+            "body": "Keep your corners clear. Our plant-based formula sees off spiders without harsh chemicals, keeping your home safe and calm.",
+            "link": "",
+            "tags": "Repels Spiders Naturally · Pet Safe · Plant-Based Formula",
+            "quote": "I hate spiders, but I hate toxic sprays even more. These pouches are a lifesaver. Popped a few in the cellar and the house is completely spider-free now!",
+            "name": "Sarah M.",
+            "location": "Bristol",
+            "avatar_asset": "oldtoms-hero-avatar-02.jpg",
+            "sticker_asset": "oldtoms-sticker-spider.png"
+          }
+        },
+        "b3": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-03.jpg",
+            "image_alt": "Man spraying along a kitchen skirting board",
+            "heading": "Instant Protection From Bugs",
+            "body": "Our powerful essential oil spray kills bugs on contact. The ultimate plant-based defence for a pest-free home.",
+            "link": "",
+            "tags": "Kills on Contact · Free From Harsh Chemicals · Multi-Bug Defence",
+            "quote": "This spray is brilliant! Used it on an ant trail in the kitchen and it worked instantly. Love that it's natural so I don't worry about my pets.",
+            "name": "Michael T.",
+            "location": "Norwich",
+            "avatar_asset": "oldtoms-hero-avatar-03.jpg",
+            "sticker_asset": "oldtoms-sticker-ant.png"
+          }
+        },
+        "b4": {
+          "type": "slide",
+          "settings": {
+            "asset": "oldtoms-hero-04.jpg",
+            "image_alt": "Mum and two children at a campsite by a loch",
+            "heading": "Enjoy the Outdoors, Bite-Free!",
+            "body": "Just peel, stick and play. Our citronella-powered patches keep the whole family safe, naturally.",
+            "link": "",
+            "tags": "Safe Around Kids · Outdoor Friendly · Citronella Powered",
+            "quote": "A total game changer for our family camping trips. Stuck one on the kids' tops and they didn't get a single bite all evening. Highly recommend!",
+            "name": "Emily R.",
+            "location": "Fort William",
+            "avatar_asset": "oldtoms-hero-avatar-04.jpg",
+            "sticker_asset": "oldtoms-sticker-mosquito.png"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
       "settings": {
-        "show_rating": true,
-        "rating_text": "4,8/5 · Plus de 30 000 porteurs de dentier l'utilisent déjà",
-        "c_stars": "#F0A830",
-        "eyebrow": "Pas une colle : l'empreinte de vos gencives",
-        "heading": "Votre dentier tient du café du matin <em>jusqu'au dîner.</em>",
-        "asset": "oralys-home-hero-wide.webp",
-        "mobile_asset": "oralys-home-hero-mobile.webp",
-        "image_alt": "Une grand-mère croque dans une baguette à table, en famille",
-        "image_side": "left",
-        "badge": "1 tube ≈ 5 semaines",
-        "text": "<p>Avec les années, la gencive se creuse et un vide se forme sous l'appareil. La crème ne peut pas le combler : elle colle en surface, puis elle fond. Le gel Oralys, lui, <strong>comble ce vide</strong> et épouse votre gencive telle qu'elle est aujourd'hui.</p>",
-        "chips_label": "Convient pour :",
-        "chip_1": "Dentier du haut",
-        "chip_2": "Dentier du bas",
-        "chip_3": "Complet ou partiel",
-        "bullet_1": "Croquez dans une baguette sans y penser",
-        "bullet_2": "Riez sans mettre la main devant la bouche",
-        "bullet_3": "Se retire d'un seul morceau, rien à gratter le soir",
-        "cta_label": "Je choisis mon pack",
-        "link_label": "Pourquoi la crème lâche ↓",
-        "link_url": "#oralys-home-gap",
-        "reassurance": "90 jours satisfait ou remboursé · sans abonnement · colis neutre",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 30,
-        "h_d": 52,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 24,
-        "pb_m": 48,
-        "pt_d": 56,
-        "pb_d": 80
+        "rating_label": "Excellent",
+        "rating_text": "2,753 verified reviews",
+        "rating_link": "",
+        "button_label": "SHOP NOW",
+        "button_link": "/products/mouse-repellent-pouches",
+        "verified_label": "Verified Buyer",
+        "autoplay_seconds": 6,
+        "desktop_height": 860,
+        "panel_color": "#5d824e",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
-    "oralys_proof": {
-      "type": "oralys-home-proof",
-      "settings": {
-        "c_bg": "#0E3D30",
-        "c_text": "#FFFFFF",
-        "c_accent": "#FFFFFF",
-        "c_muted": "#CFE3D9",
-        "c_card": "#0E3D30",
-        "c_line": "#2F5E50",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 26,
-        "h_d": 34,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 20,
-        "pb_m": 20,
-        "pt_d": 28,
-        "pb_d": 28
-      },
+    "ot_home_benefits": {
+      "type": "oldtoms-home-benefits",
       "blocks": {
-        "stat_1": {
+        "b1": {
+          "type": "item",
+          "settings": {
+            "glyph": "◎",
+            "text": "100% Plant-Based Formula"
+          }
+        },
+        "b2": {
+          "type": "item",
+          "settings": {
+            "glyph": "☞",
+            "text": "Long-Lasting Protection"
+          }
+        },
+        "b3": {
+          "type": "item",
+          "settings": {
+            "glyph": "♡",
+            "text": "Safe For Kids & Pets"
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "glyph": "♕",
+            "text": "30 Day Money Back Guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "bg_color": "#7fa93f",
+        "text_color": "#ffffff",
+        "speed": 24,
+        "padding_top": 12,
+        "padding_bottom": 12
+      }
+    },
+    "ot_home_proof": {
+      "type": "oldtoms-home-proof",
+      "blocks": {
+        "b1": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-01.jpg",
+            "alt": "Pouch behind a fridge"
+          }
+        },
+        "b2": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-02.jpg",
+            "alt": "Pouch in a caravan locker"
+          }
+        },
+        "b3": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-03.jpg",
+            "alt": "Pouch on a shed shelf"
+          }
+        },
+        "b4": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-04.jpg",
+            "alt": "Pouch in a stable corner"
+          }
+        },
+        "b5": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-05.jpg",
+            "alt": "Pouch under the sink"
+          }
+        },
+        "b6": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-06.jpg",
+            "alt": "Pouch in the loft"
+          }
+        },
+        "b7": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-07.jpg",
+            "alt": "Pouches by the garage door"
+          }
+        },
+        "b8": {
+          "type": "tile",
+          "settings": {
+            "asset": "oldtoms-proof-08.jpg",
+            "alt": "Pouch in a wardrobe"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7",
+        "b8"
+      ],
+      "settings": {
+        "number": "37,129+",
+        "label": "Properties Protected",
+        "bg_color": "#f4f4f0",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "ot_home_collage": {
+      "type": "oldtoms-home-collage",
+      "blocks": {
+        "b1": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-01.jpg",
+            "alt": "Man on a patio with the spray bottle",
+            "title": "Works instantly!",
+            "text": "I used the Critter Control Spray round the patio and kitchen. It works so fast and there's no harsh chemical smell left behind. Highly recommend!",
+            "name": "Ryan S.",
+            "location": "Swindon"
+          }
+        },
+        "b2": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-02.jpg",
+            "alt": "Pouches lined along a garage skirting board next to a bike",
+            "title": "Finally, peace of mind!",
+            "text": "We had a bit of a mouse problem in the garage. Dropped a few pouches by the skirting and the problem vanished completely. So glad it's natural and safe.",
+            "name": "James D.",
+            "location": "Chester"
+          }
+        },
+        "b3": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-03.jpg",
+            "alt": "Spider pouch tucked in the corner of a utility room",
+            "title": "No more spiders!",
+            "text": "We always had spiders in the utility room. Since putting pouches in the corners I haven't seen a single spider or web. The essential oil smell is a nice bonus!",
+            "name": "Rhys B.",
+            "location": "Cardiff"
+          }
+        },
+        "b4": {
+          "type": "review",
+          "settings": {
+            "asset": "oldtoms-testimonial-photo-04.jpg",
+            "alt": "Child's jacket sleeve with a patch on a countryside path",
+            "title": "Perfect for our kids!",
+            "text": "These patches are a lifesaver on evening walks. I stick them on the kids' clothes and we don't worry about bites. So much better than sticky sprays!",
+            "name": "Ken K.",
+            "location": "Inverness"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4"
+      ],
+      "settings": {
+        "heading": "What Our Customers Say",
+        "verified_label": "Verified Buyer",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "ot_home_reasons": {
+      "type": "oldtoms-home-reasons",
+      "blocks": {
+        "b1": {
+          "type": "reason",
+          "settings": {
+            "title": "Proven to Work",
+            "text": "92% of users see a visible drop in pest activity within the first 48 hours."
+          }
+        },
+        "b2": {
+          "type": "reason",
+          "settings": {
+            "title": "Plant-Based Power",
+            "text": "Made with 100% botanical actives like Peppermint and Lemongrass oil."
+          }
+        },
+        "b3": {
+          "type": "reason",
+          "settings": {
+            "title": "Long-Lasting Shield",
+            "text": "Our extended-release formula gives non-stop protection for your home for up to 60 days."
+          }
+        },
+        "b4": {
+          "type": "reason",
+          "settings": {
+            "title": "Family & Pet Safe",
+            "text": "Non-toxic and DEET-free, so it's safe to use around your children and pets when used as directed."
+          }
+        },
+        "b5": {
+          "type": "reason",
+          "settings": {
+            "title": "Less than 1% Return Rate",
+            "text": "Our customers love the results — fewer than 1% of orders are ever returned."
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5"
+      ],
+      "settings": {
+        "heading": "5 Reasons Why Homeowners Trust",
+        "brand_tag": "OLD TOM'S",
+        "bg_color": "#f5fae8",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "ot_home_compare": {
+      "type": "oldtoms-home-compare",
+      "blocks": {
+        "b1": {
+          "type": "row",
+          "settings": {
+            "feature": "Natural & ZERO Chemicals or Toxins",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b2": {
+          "type": "row",
+          "settings": {
+            "feature": "Works Within 72 Hours",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b3": {
+          "type": "row",
+          "settings": {
+            "feature": "Safe for Kids, Pets & Livestock",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b4": {
+          "type": "row",
+          "settings": {
+            "feature": "No Clean-Up / No Bodies",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b5": {
+          "type": "row",
+          "settings": {
+            "feature": "90-Day Cover Per Pouch",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        },
+        "b6": {
+          "type": "row",
+          "settings": {
+            "feature": "Cost Per Day of Protection",
+            "ours": "£0.22",
+            "theirs": "£0.48 to £1.95/day"
+          }
+        },
+        "b7": {
+          "type": "row",
+          "settings": {
+            "feature": "Zero Tolerance Build-Up",
+            "ours": "yes",
+            "theirs": "no"
+          }
+        }
+      },
+      "block_order": [
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ],
+      "settings": {
+        "heading": "How We Stack Up",
+        "brand_name": "OLD TOM'S",
+        "others_name": "OTHER SOLUTIONS",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "ot_home_stats": {
+      "type": "oldtoms-home-stats",
+      "blocks": {
+        "b1": {
           "type": "stat",
           "settings": {
-            "value": "4,8/5",
-            "label": "note moyenne de nos clients"
+            "icon": "star",
+            "value": "4.8/5",
+            "label": "Rated Excellent"
           }
         },
-        "stat_2": {
+        "b2": {
           "type": "stat",
           "settings": {
-            "value": "90 jours",
-            "label": "pour l'essayer, satisfait ou remboursé"
+            "icon": "cart",
+            "value": "1M+",
+            "label": "Repellents Sold"
           }
         },
-        "stat_3": {
+        "b3": {
           "type": "stat",
           "settings": {
-            "value": "≈ 5 semaines",
-            "label": "avec un seul tube"
-          }
-        },
-        "stat_4": {
-          "type": "stat",
-          "settings": {
-            "value": "Zéro zinc",
-            "label": "et pas une goutte de colle"
+            "icon": "people",
+            "value": "500K+",
+            "label": "Customers"
           }
         }
       },
       "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3",
-        "stat_4"
-      ]
-    },
-    "oralys_gap": {
-      "type": "oralys-home-gap",
+        "b1",
+        "b2",
+        "b3"
+      ],
       "settings": {
-        "eyebrow": "Ce n'est pas votre faute",
-        "heading": "La crème colle. <em>Le vide, lui, reste.</em>",
-        "subheading": "<p>Vous pensez l'avoir mal posé, ou pas mis assez de crème ? Non. Après des années sans dents, l'os de la mâchoire se rétracte. Votre dentier, lui, garde la même forme. Entre les deux, un vide se creuse.</p>",
-        "asset": "oralys-home-gap.svg",
-        "image_alt": "Coupe d'une gencive : à gauche le vide sous le dentier, à droite le vide comblé par le gel",
-        "cap_left": "Avec la crème : l'appareil repose sur un vide",
-        "cap_right": "Avec Oralys : le vide est comblé, l'appareil ne bouge plus",
-        "note_title": "Relisez la notice de votre crème",
-        "note_text": "<p>Elle déconseille d'en remettre quand le dentier est mal ajusté. Autrement dit, la crème n'a jamais été conçue pour combler un vide. Le gel, lui, est fait pour ça.</p>",
-        "cta_label": "Combler le vide avec Oralys",
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 42,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 56,
-        "pb_m": 56,
-        "pt_d": 88,
-        "pb_d": 88
-      },
+        "pattern_asset": "oldtoms-stats-pattern.jpg",
+        "bg_color": "#4f9a4c",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "ot_home_faq": {
+      "type": "oldtoms-home-faq",
       "blocks": {
-        "fact_1": {
-          "type": "fact",
+        "b1": {
+          "type": "item",
           "settings": {
-            "title": "La gencive se creuse, surtout en bas",
-            "text": "<p>La crête du bas fond plus vite que celle du haut. C'est pour ça que le dentier du bas « se balade » le premier.</p>"
+            "question": "Are Old Tom's products really safe around kids and pets?",
+            "answer": "Yes, absolutely! All our products are made with 100% plant-based essential oils (like peppermint, lemongrass and citronella) and are completely free from harsh, toxic chemicals. They're built to be a safe, natural alternative for your home, family and furry friends."
           }
         },
-        "fact_2": {
-          "type": "fact",
+        "b2": {
+          "type": "item",
           "settings": {
-            "title": "La crème ne peut pas combler un vide",
-            "text": "<p>Elle ne colle que deux surfaces qui se touchent. Face à un vide, elle reste en pont, la salive la dissout et l'appareil lâche avant midi.</p>"
+            "question": "How long do the repellent pouches last?",
+            "answer": "Our pouches give long-lasting, non-stop protection. Generally they work for 30 to 60 days depending on airflow and room size. We recommend replacing them once the natural scent starts to fade."
           }
         },
-        "fact_3": {
-          "type": "fact",
+        "b3": {
+          "type": "item",
           "settings": {
-            "title": "Le gel comble le vide",
-            "text": "<p>Assoupli à l'eau chaude, il prend l'empreinte exacte de votre gencive puis se raffermit. Le dentier ne bouge plus, plusieurs jours d'affilée.</p>"
+            "question": "Do I need to leave the house after using the Critter Control Spray?",
+            "answer": "Not at all! Our spray has no toxic fumes or harsh chemicals, so you don't need to clear the room. It kills bugs on contact and leaves a fresh mint and cinnamon scent behind."
+          }
+        },
+        "b4": {
+          "type": "item",
+          "settings": {
+            "question": "Where's the best place for the Spider and Rodent Repellent Pouches?",
+            "answer": "For best results, put pouches in enclosed spaces or wherever you spot pest activity. Great spots include corners, cellars, lofts, wardrobes, under sinks, garages, sheds and near doors and windows."
+          }
+        },
+        "b5": {
+          "type": "item",
+          "settings": {
+            "question": "How do the Midge & Mosquito Patches work?",
+            "answer": "Our patches are infused with natural citronella oil. Just peel and stick onto clothing, a rucksack or a pushchair. It makes a natural, invisible barrier that keeps biters away — perfect for days out."
+          }
+        },
+        "b6": {
+          "type": "item",
+          "settings": {
+            "question": "Will the Rodent Repellent Pouches leave a bad smell in my house?",
+            "answer": "No, quite the opposite! Mice and rats hate the smell, but people love it. Our rodent pouches use a blend of peppermint, cinnamon and cedarwood oils that works as a natural air freshener and even helps soak up bad odours."
+          }
+        },
+        "b7": {
+          "type": "item",
+          "settings": {
+            "question": "What if the product doesn't work for me?",
+            "answer": "We're confident in our natural formulas, which is why every order is backed by our 30-Day Money Back Guarantee. If you're not completely happy with your results, just contact our support team within 30 days for a full refund."
           }
         }
       },
       "block_order": [
-        "fact_1",
-        "fact_2",
-        "fact_3"
-      ]
-    },
-    "oralys_offer": {
-      "type": "oralys-home-offer",
+        "b1",
+        "b2",
+        "b3",
+        "b4",
+        "b5",
+        "b6",
+        "b7"
+      ],
       "settings": {
-        "eyebrow": "Livraison en France",
-        "heading": "Choisissez <em>votre pack</em>",
-        "subheading": "<p>Une seule pose tient plusieurs jours. Et plus vous prenez de tubes, moins la semaine vous revient cher.</p>",
-        "footnote": "Paiement sécurisé · sans abonnement · 90 jours satisfait ou remboursé",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 56,
-        "pb_m": 56,
-        "pt_d": 88,
-        "pb_d": 88
-      },
-      "blocks": {
-        "pack_1": {
-          "type": "pack",
-          "settings": {
-            "asset": "oralys-pdp-b1.webp",
-            "title": "1 tube",
-            "subtitle": "≈ 5 semaines de tenue",
-            "price": "39,95 €",
-            "compare": "65,00 €",
-            "saving": "Économisez 25,05 €",
-            "perks": "<ul><li>Idéal pour essayer</li><li>90 jours satisfait ou remboursé</li></ul>",
-            "badge_style": "green",
-            "featured": false,
-            "button": "Choisir 1 tube"
-          }
-        },
-        "pack_2": {
-          "type": "pack",
-          "settings": {
-            "asset": "oralys-pdp-b2.webp",
-            "title": "2 tubes",
-            "subtitle": "≈ 10 semaines · 2e tube à -70 %",
-            "price": "55,93 €",
-            "compare": "130,00 €",
-            "saving": "Économisez 74,07 €",
-            "perks": "<ul><li>Livraison offerte</li><li>Comprimés nettoyants offerts</li><li>90 jours satisfait ou remboursé</li></ul>",
-            "badge_style": "green",
-            "featured": true,
-            "button": "Choisir 2 tubes",
-            "badge": "LE PLUS CHOISI"
-          }
-        },
-        "pack_3": {
-          "type": "pack",
-          "settings": {
-            "asset": "oralys-pdp-b4.webp",
-            "title": "4 tubes",
-            "subtitle": "≈ 20 semaines · 2 achetés = 2 offerts",
-            "price": "79,90 €",
-            "compare": "260,00 €",
-            "saving": "Économisez 180,10 €",
-            "perks": "<ul><li>Livraison offerte</li><li>4 cadeaux inclus</li><li>90 jours satisfait ou remboursé</li></ul>",
-            "badge_style": "red",
-            "featured": false,
-            "button": "Choisir 4 tubes",
-            "badge": "MEILLEURE OFFRE"
-          }
-        }
-      },
-      "block_order": [
-        "pack_1",
-        "pack_2",
-        "pack_3"
-      ]
+        "heading": "FAQ",
+        "bg_color": "#ffffff",
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
     },
-    "oralys_voices": {
-      "type": "oralys-home-voices",
+    "ot_home_support": {
+      "type": "oldtoms-home-support",
       "settings": {
-        "eyebrow": "Ils l'ont posé un soir",
-        "heading": "Ils ont retrouvé <em>leur place à table</em>",
-        "score": "4,8/5 · plus de 30 000 porteurs de dentier",
-        "verified": "✓ Achat vérifié",
-        "rail_label": "Avis clients",
-        "c_stars": "#F0A830",
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 48,
-        "pb_m": 48,
-        "pt_d": 72,
-        "pb_d": 72
-      },
-      "blocks": {
-        "review_1": {
-          "type": "review",
-          "settings": {
-            "situation": "Le dentier du bas",
-            "title": "Le bas ne remonte plus",
-            "text": "<p>« Mon dentier du bas se baladait dans la bouche depuis des années. Je l'ai posé lundi matin, il n'a pas bougé de la journée. Le soir, je n'y croyais toujours pas. »</p>",
-            "name": "Gérard M.",
-            "detail": "71 ans, Clermont-Ferrand",
-            "asset": "oralys-pdp-rev-t07.webp"
-          }
-        },
-        "review_2": {
-          "type": "review",
-          "settings": {
-            "situation": "Repas de famille",
-            "title": "Je reçois de nouveau ma famille",
-            "text": "<p>« Je refusais les invitations avec repas. Dimanche, j'ai reçu mes enfants et je suis restée assise du début à la fin, sans filer à la salle de bain. »</p>",
-            "name": "Annie P.",
-            "detail": "73 ans, Rennes",
-            "asset": "oralys-pdp-rev-t04.webp"
-          }
-        },
-        "review_3": {
-          "type": "review",
-          "settings": {
-            "situation": "J'étais sceptique",
-            "title": "Après quatre colles, je n'y croyais plus",
-            "text": "<p>« J'avais essayé quatre crèmes « tenue 12 h ». Aucune ne tenait un repas. J'ai commandé Oralys en me disant que j'avais 90 jours pour le renvoyer. Je ne l'ai pas renvoyé. »</p>",
-            "name": "Martine B.",
-            "detail": "68 ans, Caen",
-            "asset": "oralys-pdp-rev-t03.webp"
-          }
-        },
-        "review_4": {
-          "type": "review",
-          "settings": {
-            "situation": "Repas de famille",
-            "title": "Maman remange avec nous",
-            "text": "<p>« Ma mère ne mangeait plus que de la soupe à table. Je lui ai posé Oralys avant le repas de Noël : elle a mangé la dinde et la bûche comme tout le monde. »</p>",
-            "name": "Sylvie G.",
-            "detail": "55 ans, Dijon (pour sa mère, 85 ans)",
-            "asset": "oralys-pdp-rev-t16.webp"
-          }
-        },
-        "review_5": {
-          "type": "review",
-          "settings": {
-            "situation": "Repas de famille",
-            "title": "Une côte de bœuf, sans y penser",
-            "text": "<p>« Au mariage de mon petit-fils, j'ai mangé la viande sans m'excuser pour aller remettre de la colle. Première fois en dix ans. »</p>",
-            "name": "Robert F.",
-            "detail": "72 ans, Perpignan",
-            "asset": "oralys-pdp-rev-t10.webp"
-          }
-        },
-        "review_6": {
-          "type": "review",
-          "settings": {
-            "situation": "J'étais sceptique",
-            "title": "À 38 ans, je ris de nouveau",
-            "text": "<p>« Partiel du haut depuis un accident. J'avais honte de sourire au travail. Je pensais que c'était un produit pour mes grands-parents, j'avais tort. »</p>",
-            "name": "Élodie R.",
-            "detail": "38 ans, Toulouse",
-            "asset": "oralys-pdp-rev-t13.webp"
-          }
-        }
-      },
-      "block_order": [
-        "review_1",
-        "review_2",
-        "review_3",
-        "review_4",
-        "review_5",
-        "review_6"
-      ]
-    },
-    "oralys_cost": {
-      "type": "oralys-home-cost",
-      "settings": {
-        "eyebrow": "Pas de sous, pas de dents ?",
-        "heading": "Le prix d'un tube, <em>pas d'un rendez-vous</em>",
-        "subheading": "<p>Ce que vous coûte un dentier qui bouge, selon la solution choisie.</p>",
-        "call_title": "Dentier 100 % Santé qui bouge ?",
-        "call_text": "<p>Remboursé par la Sécu et votre mutuelle, il n'est pas forcément bien ajusté pour autant. Le gel le cale sur votre gencive telle qu'elle est aujourd'hui, pour le prix d'un tube, sans attendre un nouveau rendez-vous.</p>",
-        "cta_label": "Voir les packs",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#EEF6F1",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 56,
-        "pb_m": 56,
-        "pt_d": 88,
-        "pb_d": 88
-      },
-      "blocks": {
-        "bar_1": {
-          "type": "bar",
-          "settings": {
-            "label": "Implants",
-            "amount": "plusieurs milliers d'euros",
-            "width": 100,
-            "highlight": false
-          }
-        },
-        "bar_2": {
-          "type": "bar",
-          "settings": {
-            "label": "Nouveau dentier hors 100 % Santé",
-            "amount": "plus de 1 000 €",
-            "width": 80,
-            "highlight": false
-          }
-        },
-        "bar_3": {
-          "type": "bar",
-          "settings": {
-            "label": "Rebasage chez le dentiste",
-            "amount": "souvent 150 à 300 € par séance",
-            "width": 58,
-            "highlight": false
-          }
-        },
-        "bar_4": {
-          "type": "bar",
-          "settings": {
-            "label": "Crème adhésive, un tube tous les 10 jours",
-            "amount": "environ 250 € par an",
-            "width": 46,
-            "highlight": false
-          }
-        },
-        "bar_5": {
-          "type": "bar",
-          "settings": {
-            "label": "Oralys, un tube toutes les 5 semaines",
-            "amount": "environ 200 € par an avec le pack 4 tubes",
-            "width": 38,
-            "highlight": true
-          }
-        }
-      },
-      "block_order": [
-        "bar_1",
-        "bar_2",
-        "bar_3",
-        "bar_4",
-        "bar_5"
-      ]
-    },
-    "oralys_steps": {
-      "type": "oralys-home-steps",
-      "settings": {
-        "eyebrow": "Mode d'emploi",
-        "heading": "<em>Quatre gestes</em> simples, ce soir",
-        "subheading": "<p>Moins de cinq minutes devant votre lavabo, sans rendez-vous et sans outil.</p>",
-        "tip": "Première fois ? Posez-le un soir, au calme. Dès la deuxième fois, le geste devient naturel.",
-        "c_bg": "#FFFFFF",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#F6FAF8",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 56,
-        "pb_m": 56,
-        "pt_d": 88,
-        "pb_d": 88
-      },
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "title": "Chauffer",
-            "time": "2 min",
-            "text": "<p>Plongez le tube dans une tasse d'eau bien chaude, pas bouillante. Le gel devient souple.</p>"
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "title": "Déposer",
-            "time": "30 s",
-            "text": "<p>Sur votre dentier propre et sec, déposez un fin cordon de gel dans le creux.</p>"
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "title": "Poser et mordre",
-            "time": "1 min",
-            "text": "<p>Remettez l'appareil et mordez doucement. Le gel prend l'empreinte de votre gencive puis se raffermit.</p>"
-          }
-        },
-        "step_4": {
-          "type": "step",
-          "settings": {
-            "title": "Retirer",
-            "time": "quand vous voulez",
-            "text": "<p>Après un bain d'eau tiède, le gel se retire d'un seul morceau. Rien à gratter.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3",
-        "step_4"
-      ]
-    },
-    "oralys_faq": {
-      "type": "oralys-home-faq",
-      "settings": {
-        "eyebrow": "Questions fréquentes",
-        "heading": "Ce qu'on nous demande <em>le plus souvent</em>",
-        "open_first": true,
-        "c_bg": "#EEF6F1",
-        "c_text": "#17221E",
-        "c_accent": "#0E6B50",
-        "c_muted": "#5C6863",
-        "c_card": "#FFFFFF",
-        "c_line": "#DCE5E0",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 40,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 48,
-        "pb_m": 48,
-        "pt_d": 72,
-        "pb_d": 72
-      },
-      "blocks": {
-        "qa_1": {
-          "type": "qa",
-          "settings": {
-            "question": "Est-ce un abonnement ?",
-            "answer": "<p>Non. Chaque commande est un achat unique. Aucun prélèvement ne suivra, jamais.</p>"
-          }
-        },
-        "qa_2": {
-          "type": "qa",
-          "settings": {
-            "question": "Ça marche aussi sur le dentier du bas ?",
-            "answer": "<p>Oui. C'est même en bas que le vide est souvent le plus grand, et c'est justement ce vide que le gel vient combler.</p>"
-          }
-        },
-        "qa_3": {
-          "type": "qa",
-          "settings": {
-            "question": "Et sur un appareil partiel ?",
-            "answer": "<p>Oui, sur les partiels en résine comme sur les stellites : le gel se pose sur la partie qui repose sur la gencive.</p>"
-          }
-        },
-        "qa_4": {
-          "type": "qa",
-          "settings": {
-            "question": "Combien de temps dure un tube ?",
-            "answer": "<p>Environ 5 semaines. Une application tient plusieurs jours : vous n'en remettez pas à chaque repas.</p>"
-          }
-        },
-        "qa_5": {
-          "type": "qa",
-          "settings": {
-            "question": "Y a-t-il du zinc ou de la colle ?",
-            "answer": "<p>Ni l'un ni l'autre. Rien ne fond dans la bouche, vous n'avalez rien au fil de la journée, et le gel n'a aucun goût.</p>"
-          }
-        },
-        "qa_6": {
-          "type": "qa",
-          "settings": {
-            "question": "Mon dentiste ne m'en a jamais parlé. Pourquoi ?",
-            "answer": "<p>Au cabinet, on vous propose un rebasage, un nouvel appareil ou des implants. Le gel, lui, se pose chez vous : il comble le même vide, pour le prix d'un tube.</p>"
-          }
-        },
-        "qa_7": {
-          "type": "qa",
-          "settings": {
-            "question": "Le colis est-il discret ?",
-            "answer": "<p>Oui. Carton neutre, aucun nom de produit à l'extérieur. Personne ne sait ce qu'il contient.</p>"
-          }
-        },
-        "qa_8": {
-          "type": "qa",
-          "settings": {
-            "question": "Et si ça ne tient pas chez moi ?",
-            "answer": "<p>Vous avez 90 jours. Écrivez-nous et nous vous remboursons intégralement, sans discuter.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "qa_1",
-        "qa_2",
-        "qa_3",
-        "qa_4",
-        "qa_5",
-        "qa_6",
-        "qa_7",
-        "qa_8"
-      ]
-    },
-    "oralys_close": {
-      "type": "oralys-home-close",
-      "settings": {
-        "seal_big": "90",
-        "seal_small": "jours",
-        "heading": "Essayez-le 90 jours. <em>Gardez-le s'il tient.</em>",
-        "text": "<p>Posez-le, mangez, riez, et oubliez-le. Si votre dentier bouge encore, écrivez-nous : vous êtes remboursé intégralement, sans avoir à vous justifier.</p>",
-        "tick_1": "Sans abonnement",
-        "tick_2": "Colis neutre",
-        "tick_3": "Paiement sécurisé",
-        "cta_label": "Je choisis mon pack",
-        "price_line": "À partir de 39,95 € · livraison en France",
-        "c_bg": "#0E3D30",
-        "c_text": "#FFFFFF",
-        "c_accent": "#9FD3BC",
-        "c_muted": "#CFE3D9",
-        "c_card": "#0E3D30",
-        "c_line": "#2F5E50",
-        "c_cta": "#D2382C",
-        "c_cta_text": "#FFFFFF",
-        "h_m": 28,
-        "h_d": 42,
-        "body_size": 17,
-        "align": "left",
-        "pt_m": 64,
-        "pb_m": 64,
-        "pt_d": 96,
-        "pb_d": 96
+        "heading": "Still Need Help? Contact Us",
+        "body": "Our experts are here to help — from placement tips to picking the right pack size.",
+        "button_label": "Contact Us",
+        "button_link": "/pages/contact",
+        "hours": "Our customer support is open Monday to Friday, 8am–8pm.",
+        "avatar_asset": "oldtoms-support-agent.jpg",
+        "bg_color": "#ffffff",
+        "card_color": "#f0f0e6",
+        "padding_top": 24,
+        "padding_bottom": 56
       }
     }
   },
   "order": [
-    "oralys_hero",
-    "oralys_proof",
-    "oralys_gap",
-    "oralys_offer",
-    "oralys_voices",
-    "oralys_cost",
-    "oralys_steps",
-    "oralys_faq",
-    "oralys_close"
+    "ot_home_hero",
+    "ot_home_benefits",
+    "ot_home_proof",
+    "ot_home_collage",
+    "ot_home_reasons",
+    "ot_home_compare",
+    "ot_home_stats",
+    "ot_home_faq",
+    "ot_home_support"
   ]
 }

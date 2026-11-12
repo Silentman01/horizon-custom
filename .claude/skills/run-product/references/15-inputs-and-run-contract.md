@@ -41,7 +41,7 @@ Everything else runs to completion, in parallel, and ends with one delivery repo
 
 ## 2. Reporting to the operator
 - Short progress lines at milestones; never narrate internal deliberation.
-- Show images, don't describe them: contact sheets for the gallery, top-10 competitor ads, generated ads.
+- Show images, don't describe them: contact sheets for gallery remakes, top-10 competitor ads, generated ads.
 - Gate message (branding) = tables + picks, nothing else.
 - GATE α message = one line of instruction + the prompt in one copy block, nothing else.
 - Delivery = what was built, where files are, what the operator must do, credits spent. No claim caveats (rule 1).

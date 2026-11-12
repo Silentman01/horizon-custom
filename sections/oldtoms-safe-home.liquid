@@ -1,0 +1,148 @@
+{%- liquid
+  assign s = section.settings
+  assign frees = section.blocks | where: 'type', 'free'
+  assign proud = section.blocks | where: 'type', 'proud'
+-%}
+<div class="ot-safe" style="{% render 'oldtoms-vars' %}--ot-pt:{{ s.padding_top }}px;--ot-pb:{{ s.padding_bottom }}px;">
+  <div class="ot-safe__grid">
+    <div class="ot-safe__image">{% render 'oldtoms-media', image: s.image, asset: s.asset, ratio: '1 / 1', alt: s.image_alt, sizes: '(min-width: 750px) 48vw, 92vw' %}</div>
+    <div class="ot-safe__text">
+      {%- if s.heading != blank -%}<h2 class="ot-safe__heading">{{ s.heading }}</h2>{%- endif -%}
+      <p class="ot-safe__lead">{%- if s.subheading != blank -%}<strong>{{ s.subheading }}</strong> {% endif -%}{{ s.body }}</p>
+      <div class="ot-safe__cards">
+        <div class="ot-safe__card">
+          <h3 class="ot-safe__card-title">{{ s.free_title }}</h3>
+          <ul class="ot-safe__list">
+            {%- for block in frees -%}
+              <li class="ot-safe__row" {{ block.shopify_attributes }}>
+                <span class="ot-safe__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    {%- case forloop.index -%}
+                      {%- when 1 -%}<circle cx="12" cy="10" r="5"/><path d="M9 20v-3h6v3M10 9.5h.01M14 9.5h.01"/>
+                      {%- when 2 -%}<path d="M9 3h6M10 3v6l-5 9a2 2 0 002 3h10a2 2 0 002-3l-5-9V3M8 15h8"/>
+                      {%- when 3 -%}<circle cx="12" cy="12" r="3"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3M6.3 6.3l2 2M15.7 15.7l2 2M6.3 17.7l2-2M15.7 8.3l2-2"/>
+                      {%- when 4 -%}<path d="M4 18c2-6 6-9 12-9l4-3-1 5 1 4c-4 0-6 2-8 5z"/><path d="M8 18l-2 3"/>
+                      {%- when 5 -%}<rect x="6" y="5" width="12" height="14" rx="2"/><path d="M9 9h6M9 13h6"/>
+                      {%- when 6 -%}<path d="M10 3v5L6 17a2 2 0 002 3h8a2 2 0 002-3l-4-9V3M9 3h6"/>
+                      {%- else -%}<path d="M5 19l9-9 3 3-9 9zM14 10l4-5 2 2-4 4"/>
+                    {%- endcase -%}
+                  </svg>
+                </span>
+                <svg class="ot-safe__mark" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#ccf46f"/><path d="M8.2 8.2l7.6 7.6M15.8 8.2l-7.6 7.6" stroke="#24433d" stroke-width="2" stroke-linecap="round"/></svg>
+                <span class="ot-safe__label ot-safe__label--free">{{ block.settings.label }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+        <div class="ot-safe__card ot-safe__card--dark">
+          <h3 class="ot-safe__card-title">{{ s.proud_title }}</h3>
+          <ul class="ot-safe__list">
+            {%- for block in proud -%}
+              <li class="ot-safe__row" {{ block.shopify_attributes }}>
+                <span class="ot-safe__icon ot-safe__icon--light" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+                    {%- case forloop.index -%}
+                      {%- when 1 -%}<path d="M5 19c0-9 5-14 15-14 0 9-5 14-15 14zM5 19l8-8"/>
+                      {%- when 2 -%}<circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-4 3-6 7-6s7 2 7 6"/>
+                      {%- when 3 -%}<path d="M5 14c0-4 2-7 5-7l4 2 4-1-1 5-2 5H7zM9 12h.01"/>
+                      {%- when 4 -%}<path d="M5 8l3 2h8l3-2M8 10v8M16 10v8M8 14h8M7 6l1 2M17 6l-1 2"/>
+                      {%- else -%}<path d="M8 6l-3 5h5M16 18l3-5h-5M12 4l3 3M12 20l-3-3"/>
+                    {%- endcase -%}
+                  </svg>
+                </span>
+                <svg class="ot-safe__mark" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#ccf46f"/><path d="M7.5 12.3l3 3 6-6.3" fill="none" stroke="#24433d" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="ot-safe__label">{{ block.settings.label }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%- if s.show_cta -%}
+    <div class="ot-safe__cta">{% render 'oldtoms-cta', label: s.cta_label, guarantee: s.cta_guarantee %}</div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+.ot-safe { background: #f4f4f0; color: #23372b; font-family: var(--ot-font); padding: var(--ot-pt, 48px) 16px var(--ot-pb, 48px); }
+.ot-safe__grid { display: grid; gap: 20px; max-width: 1360px; margin: 0 auto; }
+.ot-safe__image { order: 2; border-radius: 16px; overflow: hidden; }
+.ot-safe__text { display: contents; }
+.ot-safe__heading { order: 1; margin: 0; text-align: center; font-family: var(--ot-font-heading); font-weight: 400; font-size: 36px; line-height: 1.1; }
+.ot-safe__lead { order: 3; margin: 0; font-size: 14px; line-height: 1.5; }
+.ot-safe__lead strong { font-weight: 400; }
+.ot-safe__cards { order: 4; display: grid; gap: 12px; }
+.ot-safe__card { padding: 18px 16px; border-radius: 14px; background: #fff; }
+.ot-safe__card--dark { background: #23372b; color: #fff; }
+.ot-safe__card-title { margin: 0 0 12px; font-family: var(--ot-font-heading); font-weight: 400; font-size: 18px; color: inherit; }
+.ot-safe__card--dark .ot-safe__card-title { color: #ccf46f; text-transform: uppercase; }
+.ot-safe__list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.ot-safe__row { display: flex; align-items: center; gap: 12px; }
+.ot-safe__icon { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid #23372b; border-radius: 50%; background: #fff; color: #23372b; }
+.ot-safe__icon--light { border-color: #fff; }
+.ot-safe__mark { flex: none; }
+.ot-safe__label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.ot-safe__label--free { text-decoration: line-through; }
+.ot-safe__cta { max-width: 700px; margin: 28px auto 0; }
+@media screen and (min-width: 750px) {
+  .ot-safe { padding-inline: 0; padding-bottom: var(--ot-pb, 48px); }
+  .ot-safe__grid { grid-template-columns: 1fr 1fr; gap: 44px; align-items: stretch; }
+  .ot-safe__text { display: block; order: 1; padding: 0 0 0 40px; }
+  .ot-safe__image { order: 2; border-radius: 0; }
+  .ot-safe__image .ot-media { height: 100%; aspect-ratio: auto !important; min-height: 640px; }
+  .ot-safe__heading { text-align: left; font-size: 48px; margin-bottom: 20px; }
+  .ot-safe__lead { margin-bottom: 24px; }
+  .ot-safe__cards { grid-template-columns: 1fr 1fr; gap: 14px; align-items: start; }
+  .ot-safe__cta { padding-inline: 16px; }
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Old Tom's safe home",
+  "tag": "section",
+  "class": "ot-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Safe Home. Clear Conscience." },
+    { "type": "text", "id": "subheading", "label": "Lead-in (bold start of the paragraph)", "default": "Safe For Your Home" },
+    { "type": "textarea", "id": "body", "label": "Paragraph", "default": "Strong enough to send mice running for good. Gentle enough to put anywhere your family lives." },
+    { "type": "text", "id": "free_title", "label": "Free-from list title", "default": "We're Proudly Free From:" },
+    { "type": "text", "id": "proud_title", "label": "Proud-of list title", "default": "And Proudly:" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "Theme asset filename (used when no image is picked)", "default": "oldtoms-safe-home.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Image description", "default": "A hand dropping Old Tom's sachets over three pouch bags with cinnamon sticks and mint" },
+    { "type": "header", "content": "Button" },
+    { "type": "checkbox", "id": "show_cta", "label": "Show add to cart button", "default": true },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Add to cart" },
+    { "type": "text", "id": "cta_guarantee", "label": "Guarantee line", "default": "30-Day Money Back Guarantee" },
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    { "type": "free", "name": "Free from item", "settings": [ { "type": "text", "id": "label", "label": "Label", "default": "Poison" } ] },
+    { "type": "proud", "name": "Proud of item", "settings": [ { "type": "text", "id": "label", "label": "Label", "default": "100% Plant-Derived" } ] }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Old Tom's safe home",
+      "blocks": [
+        { "type": "free", "settings": { "label": "Poison" } },
+        { "type": "free", "settings": { "label": "Harmful Chemicals" } },
+        { "type": "free", "settings": { "label": "Neurotoxins" } },
+        { "type": "free", "settings": { "label": "Animal Cruelty" } },
+        { "type": "free", "settings": { "label": "Traps or Snares" } },
+        { "type": "free", "settings": { "label": "Synthetic Compounds" } },
+        { "type": "free", "settings": { "label": "Rodenticides" } },
+        { "type": "proud", "settings": { "label": "100% Plant-Derived" } },
+        { "type": "proud", "settings": { "label": "Safe Around Kids" } },
+        { "type": "proud", "settings": { "label": "Safe Around Pets" } },
+        { "type": "proud", "settings": { "label": "Safe Around Livestock" } },
+        { "type": "proud", "settings": { "label": "Biodegradable Formula" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

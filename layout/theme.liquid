@@ -5,9 +5,6 @@
   {% endif %}
   lang="{{ request.locale.iso_code }}"
   dir="{{ request.locale.direction | default: 'ltr' }}"
-  {% if settings.drawer_desktop_mode != 'push' %}
-    data-drawer-overlay
-  {% endif %}
 >
   <head>
     {%- if settings.favicon != blank -%}
