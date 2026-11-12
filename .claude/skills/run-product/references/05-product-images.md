@@ -306,6 +306,18 @@ Fix-round job (KEEP-EDIT, uploading the moved copy):
 
 **Why:** on mobile the gallery IS the first screen. Most shoppers see slide 1, swipe 2–4 slides, then scroll or leave. A 1:1 remake inherits the competitor's weak slides and its look (operator 2026-11-12: "not 1:1 from competitors but instead are improved and our fully own while helping CVR, horizontal scroll, framework, direct response").
 
+### 16.0 Inspiration bank (scaling brands' galleries, reusable across products)
+Before GALLERY_PLAN.md, the coordinator (only the coordinator calls Brandsearch) finds 15–20 scaling products in 3–4 buckets: the direct category, adjacent categories, the same audience (age / market), and the same format (tube, balm, device…).
+- **Search:** `search_products`, sort `winning`, `ads_30d_min`, `audience_top_age`, quoted title words; skip noise.
+- **Sources:** write the list to `PRODUCTS_ROOT/_image-bank/SOURCES.json`.
+- **Worker** (sonnet):
+  - pulls each gallery from the store's public `/products/<handle>.json` (paced, plain User-Agent, skip on 403/429, never work around blocks);
+  - makes a contact sheet per product;
+  - classifies every slide by job (§16.3 taxonomy + packshot, before-after, authority, ingredients, founder story), layout, text density, visual type, price shown y/n, and why it converts;
+  - writes `_image-bank/INDEX.md` (per product, cross-bank by job, gallery sequences, steal-worthy patterns for this product) plus `_by-job/<job>.jpg` sheets.
+- **Reuse:** the bank lives outside the product folder and is extended run after run (new buckets append to SOURCES.json).
+- **Use:** GALLERY_PLAN.md cites, per slide, the bank examples it mixes (`bucket/brand/NN`). We take patterns, never pixels. The distinctiveness gate (§16.5) still applies against every source.
+
 ### 16.1 Inputs
 - **Framework map** = the Step 3 classification table: each competitor slide's job, claims and text structure.
 - **Dossier** (`00_alpha/ALPHA_DOSSIER.md`): 3.1 angle cards, 3.2 avatars, 1.2 ranked pains, 1.3 desires, 1.4 objections (+ GAP), 1.6 mechanism, 3.5/2.6 language bank (testimony-ready).
@@ -338,6 +350,7 @@ Headlines and support text come from the **copy chief (Opus 4.6, books-playbooks
 - **Shared shell:** the same top band or header style, font (BRANDING), palette roles, icon set (one stroke weight), corner radius and badge style.
 - **Rhythm:** alternate photo-led and graphic-led slides, never 3 text-heavy slides in a row.
 - **Mobile legibility:** headline cap height ≥ 6–7 % of the image height, at most ~25 words per slide, high contrast. Check the thumbnail strip at 120 px.
+- **No prices** on any slide (00 §4): no € / $ figure, per-week cost or struck price; the offer in words only.
 - **Safe margins:** 6 % on every side. Nothing touches an edge (clipped headlines were the main defect on Oralys v1).
 - **Packaging:** always the real packaging from the packshot reference; no overlaid corner logo (00 §4).
 - **Format:** 1:1 2K unless the theme gallery is 4:5. Same ratio for every slide.
