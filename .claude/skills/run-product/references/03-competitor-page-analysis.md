@@ -130,6 +130,8 @@ python -I capture_page.py "<COMPETITOR_URL>" --out "<PD>/02_competitor/page" --h
 ```
 It takes 2–4 minutes under RAM pressure. Then let the media agent pull the gallery from `p.html` (no `p.json` → `capture.json` may list only one gallery image).
 
+**Shut the headless browsers down when the capture is done.** Headless Edge/Chrome (here and in `screenshot.py`) can stay alive and keep `.browser-profiles` / `edgeprof` locked. On the Oragel run, 44 leftover headless processes blocked the PRODUCT_DIR rename after the branding gate, and the move half-failed. Stop only your own processes, matched by profile path (never the operator's browser): `Get-CimInstance Win32_Process -Filter "Name='msedge.exe'" | ? { $_.CommandLine -like '*<PD folder name>*' } | % { Stop-Process -Id $_.ProcessId -Force }`. Then delete the temporary browser profiles, because they are not deliverables.
+
 **Output:** the capture files above.
 **Done when:** `p.json` has the title and prices, `capture.md` lists colors, fonts, apps, section ids and media URLs, and every GIF on the page has a URL.
 
