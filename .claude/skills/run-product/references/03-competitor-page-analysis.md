@@ -123,6 +123,13 @@ grep -o -i -E 'judge\.?me|loox|okendo|yotpo|stamped|klaviyo' p.html | sort | uni
 ```
 If `<url>.json` returns 404 (non-Shopify site, or blocked), try `/products/<handle>.js`, the `application/ld+json` Product schema, or `ShopifyAnalytics.meta` in the HTML.
 
+**HTTP 429 on the product page (Oragel run, 2026-11-12):** the shop rate-limits script fetches of `/products/…` (its `/pages/…` advertorials still captured fine). Don't retry in a loop and don't spoof clients. Save the page from a real browser instead — Edge headless with its OWN profile (the operator's Edge is usually open, and without `--user-data-dir` the dump is empty), old `--headless` mode (`--headless=new` returned nothing on this PC), then capture from the file:
+```powershell
+Start-Process "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" -ArgumentList '--headless','--disable-gpu','--no-first-run','--user-data-dir=<PD>\scratch\edgeprof','--virtual-time-budget=15000','--dump-dom','<COMPETITOR_URL>' -RedirectStandardOutput <PD>\scratch\page-browser.html -NoNewWindow -Wait
+python -I capture_page.py "<COMPETITOR_URL>" --out "<PD>/02_competitor/page" --html-file "<PD>/scratch/page-browser.html" --no-json
+```
+It takes 2–4 minutes under RAM pressure. Then let the media agent pull the gallery from `p.html` (no `p.json` → `capture.json` may list only one gallery image).
+
 **Output:** the capture files above.
 **Done when:** `p.json` has the title and prices, `capture.md` lists colors, fonts, apps, section ids and media URLs, and every GIF on the page has a URL.
 
