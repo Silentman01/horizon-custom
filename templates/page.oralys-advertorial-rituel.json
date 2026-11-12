@@ -14,7 +14,7 @@
       "type": "oralys-adv-header",
       "settings": {
         "show_masthead": true,
-        "ad_label": "Publicité · Contenu sponsorisé",
+        "ad_label": "",
         "publication_name": "Les Petits Comptes",
         "publication_tagline": "Le magazine qui fait les comptes du quotidien",
         "masthead_nav": "Maison | Budget | Santé au quotidien | Cuisine",

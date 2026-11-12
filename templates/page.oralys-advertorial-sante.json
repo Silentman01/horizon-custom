@@ -21,7 +21,7 @@
         "category": "Votre budget santé · Dossier pratique",
         "headline": "Dentier 100 % Santé qui bouge ? <strong>Ce n’est pas sa qualité qui est en cause.</strong> Et la solution coûte le prix d’un tube.",
         "dek": "<p>Il ne vous a rien coûté, et pourtant il ne tient plus en bouche. Avant de payer un rebasage ou d’attendre un nouveau dentier, voici ce qui se passe vraiment sous votre appareil, et ce qu’il en coûte de le régler à la maison.</p>",
-        "author_name": "Par Michel Aubert",
+        "author_name": "Par Gilles Aubert",
         "author_role": "Chroniqueur budget et droits des retraités",
         "author_image_asset": "",
         "date_text": "Mis à jour le 9 novembre 2026",
@@ -110,7 +110,7 @@
       "type": "oralys-adv-quote",
       "settings": {
         "quote": "Il était gratuit. Il bouge. Ce n’est pas votre faute, et ce n’est pas celle du 100 % Santé.",
-        "name": "Michel Aubert",
+        "name": "Gilles Aubert",
         "detail": "Le Fil Retraite",
         "style": "rule",
         "align": "left",
@@ -191,7 +191,7 @@
           "type": "row",
           "settings": {
             "label": "Crème adhésive",
-            "v1": "≈ 250 € par an",
+            "v1": "≈ 7 € la semaine, plus de 350 € par an",
             "v2": "✗ La salive la dissout en quelques heures",
             "v3": "✓"
           }
@@ -353,9 +353,9 @@
     "quote_2": {
       "type": "oralys-adv-quote",
       "settings": {
-        "quote": "Mon dentier du bas bougeait en fin de journée. Avec la retraite que j’ai, pas question de payer un rebasage tous les ans. Le tube me fait plus d’un mois, et le bas tient.",
-        "name": "Odette P., 74 ans",
-        "detail": "Var · dentier complet 100 % Santé",
+        "quote": "Mon dentier 100 % Santé ne m’a rien coûté. Au bout de huit mois, il ne tenait plus sans colle, et au bout d’un an, même avec. Aujourd’hui, une application d’Oralys me tient 2 à 3 jours, et avec le pack de 4, ça me revient à 4 € la semaine. La colle me coûtait presque le double.",
+        "name": "Josiane B., 74 ans",
+        "detail": "Draguignan (Var) · dentier complet 100 % Santé depuis 14 mois",
         "style": "card",
         "align": "left",
         "size_mobile": 19,
@@ -369,9 +369,9 @@
     "quote_3": {
       "type": "oralys-adv-quote",
       "settings": {
-        "quote": "J’achetais deux tubes de crème par mois. J’ai fait le calcul : Oralys me revient moins cher, et je n’en remets pas à midi.",
-        "name": "Marcel L., 77 ans",
-        "detail": "Loiret · dentier du bas",
+        "quote": "Chez nous, on disait : pas de sous, pas de dents. Le dentiste m’a donné le prix du rebasage, puis celui des implants, et j’ai ri. La colle me coûtait 7 € la semaine ; le pack de 4 Oralys me revient à 4 €. Le lendemain de la pose, j’ai mangé un jambon-beurre au café avec les copains, et le bas n’a pas bougé.",
+        "name": "Michel P., 73 ans",
+        "detail": "Orléans (Loiret) · dentier haut et bas depuis 16 ans",
         "style": "card",
         "align": "left",
         "size_mobile": 19,
@@ -645,7 +645,7 @@
         "comment_4": {
           "type": "comment",
           "settings": {
-            "name": "Michel Aubert",
+            "name": "Gilles Aubert",
             "badge": "Auteur",
             "text": "Bonne idée, Yvette : à deux, le pack de 4 revient encore moins cher à la semaine.",
             "time": "hier",
@@ -669,9 +669,9 @@
         "comment_6": {
           "type": "comment",
           "settings": {
-            "name": "Odette P.",
+            "name": "Josiane B.",
             "badge": "",
-            "text": "Le mien aussi, c’était le bas. Il tient.",
+            "text": "Le mien aussi, Henri, c’est le bas qui a lâché en premier. Il tient.",
             "time": "il y a 2 j",
             "likes": "16",
             "is_reply": true,
@@ -739,4 +739,3 @@
     "footer_1"
   ]
 }
-

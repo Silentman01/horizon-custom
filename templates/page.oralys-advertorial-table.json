@@ -14,7 +14,7 @@
       "type": "oralys-adv-header",
       "settings": {
         "show_masthead": true,
-        "ad_label": "Publicité · Article sponsorisé",
+        "ad_label": "",
         "publication_name": "La Grande Tablée",
         "publication_tagline": "Cuisine de famille, recettes et art de vivre",
         "masthead_nav": "Recettes | Le dimanche | Grands-parents | Art de vivre | Vos histoires",

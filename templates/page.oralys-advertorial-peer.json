@@ -475,11 +475,11 @@
         "comment_1": {
           "type": "comment",
           "settings": {
-            "name": "Danielle V.",
+            "name": "Danielle S.",
             "badge": "",
-            "text": "Le gel ventouse de pharmacie, pareil chez moi : cinq minutes. Je croyais être la seule. Merci Monique pour votre franchise.",
+            "text": "Ancienne prof de sciences, 68 ans, à Perpignan, dentier complet depuis 8 ans. J’ai fait comme vous, Monique, mais avec un protocole : 9 produits en 6 mois, tous notés sur 10 dans un carnet. Crèmes 3/10, poudre 2/10, coussinets 4/10, kits de rebasage de pharmacie 3/10. Oralys : 9,5/10, le seul qui a tenu 3 jours d’affilée avec la même application.",
             "time": "il y a 25 min",
-            "likes": "42",
+            "likes": "64",
             "is_reply": false,
             "avatar_color": "#9C3D54"
           }
@@ -489,14 +489,38 @@
           "settings": {
             "name": "Monique Lemaire",
             "badge": "Autrice",
-            "text": "Vous n’êtes pas la seule, Danielle ! Il se pose à froid comme une crème, il ne peut pas remplir le vide. Le thermoplastique, c’est autre chose.",
-            "time": "il y a 20 min",
-            "likes": "18",
+            "text": "Un vrai banc d’essai, Danielle ! Et je parie que le demi-point manquant, c’est le premier jour avec trop de gel : pareil chez moi.",
+            "time": "il y a 22 min",
+            "likes": "21",
             "is_reply": true,
             "avatar_color": "#0E6B50"
           }
         },
         "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Annie G.",
+            "badge": "",
+            "text": "69 ans, Besançon, dentier complet depuis 13 ans. Trois kits de rebasage maison ratés : la poudre et le liquide qui ont durci de travers, le gel « effet ventouse » de pharmacie qui a tenu cinq minutes, et celui d’internet qui a fondu au premier café. Une amie de ma chorale a retiré son dentier devant moi : le gel Oralys est sorti d’un seul morceau, posé trois jours plus tôt. Cinq minutes contre deux à trois jours.",
+            "time": "il y a 40 min",
+            "likes": "42",
+            "is_reply": false,
+            "avatar_color": "#7A6E2C"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Monique Lemaire",
+            "badge": "Autrice",
+            "text": "Cinq minutes, comme moi, Annie ! Ce gel-là se pose à froid comme une crème, il ne peut pas remplir le vide. Le thermoplastique, c’est autre chose.",
+            "time": "il y a 35 min",
+            "likes": "18",
+            "is_reply": true,
+            "avatar_color": "#0E6B50"
+          }
+        },
+        "comment_5": {
           "type": "comment",
           "settings": {
             "name": "Claude H.",
@@ -508,7 +532,7 @@
             "avatar_color": "#1F4E8C"
           }
         },
-        "comment_4": {
+        "comment_6": {
           "type": "comment",
           "settings": {
             "name": "Josiane S.",
@@ -520,7 +544,7 @@
             "avatar_color": "#7A4E9C"
           }
         },
-        "comment_5": {
+        "comment_7": {
           "type": "comment",
           "settings": {
             "name": "Henri G.",
@@ -532,7 +556,7 @@
             "avatar_color": "#B5651D"
           }
         },
-        "comment_6": {
+        "comment_8": {
           "type": "comment",
           "settings": {
             "name": "Monique Lemaire",
@@ -544,7 +568,7 @@
             "avatar_color": "#0E6B50"
           }
         },
-        "comment_7": {
+        "comment_9": {
           "type": "comment",
           "settings": {
             "name": "Nathalie R.",
@@ -556,7 +580,7 @@
             "avatar_color": "#3D6E9C"
           }
         },
-        "comment_8": {
+        "comment_10": {
           "type": "comment",
           "settings": {
             "name": "Lucette B.",
@@ -577,7 +601,9 @@
         "comment_5",
         "comment_6",
         "comment_7",
-        "comment_8"
+        "comment_8",
+        "comment_9",
+        "comment_10"
       ]
     },
     "sticky_1": {
@@ -624,4 +650,3 @@
     "footer_1"
   ]
 }
-

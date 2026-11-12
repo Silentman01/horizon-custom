@@ -14,7 +14,7 @@
       "type": "oralys-adv-header",
       "settings": {
         "show_masthead": true,
-        "ad_label": "Publicité · Article sponsorisé",
+        "ad_label": "",
         "publication_name": "Les Grands Jours",
         "publication_tagline": "Le magazine des familles, des fêtes et des souvenirs",
         "masthead_nav": "Mariages | Baptêmes | Anniversaires | Tables de fête | Vos histoires",
