@@ -18,6 +18,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 11b. Mobile first
 12. Working style and reporting
 17. Step Alpha before anything is built
+18. Sample gate: about 5 images confirmed before any batch
 
 ---
 
@@ -161,6 +162,15 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 >
 > Both analyses must complete before ANY downstream step fires.
 
+## 18. Sample gate: about 5 images confirmed before any batch (operator 2026-11-12)
+**Rule:** never generate a full image batch before the operator has confirmed a small sample. Each generation stream first makes **about 5 representative images**, shows them on ONE contact sheet and **stops**. Only after the operator's OK does it generate the rest, then continue without stopping again.
+- **Product / page images (streams B + C), one shared sample:** the packshot (real packaging, 00 §4), the gallery hero (slide 1), one graphic slide (mechanism or comparison, to check text, spelling, margins and the design system), one lifestyle or testimonial image with a person (to check the people, the product in hand and the fit spec), and one page or advertorial image.
+- **Ads (D2):** after the AD_VARIANTS gate, generate the first ~5 ads (the top-ranked variants, including one native lo-fi format when the competitor runs them) → sample gate → the remaining ads.
+- **Video (G):** the existing candidate and clip gates already apply.
+- **Free before the gate:** prompts, job files, GALLERY_PLAN.md and AD_VARIANTS.md cost nothing, so write them in full before the gate. The operator's feedback is then applied to every job before the batch runs.
+- **Sample sheet:** `<area>/_samples.jpg` (temporary, deleted after the gate). Report the cost of the sample and the estimated cost of the full batch.
+**Why:** on Oralys, about 90 images were generated before the operator first looked. The packaging was wrong (a blank tube instead of the real supplier tube rebranded) and the gallery was a 1:1 remake instead of our own, so most of the batch had to be redone. The operator: "never generates all these images before we confirm few … generate around 5 images and once confirmed it can go through everything else. so we don't waste credits like we did and give feedbacks again".
+
 Also: "before building anything, we must run step alpha". The old Phase 3 ad analysis is removed fully: "you can remove the ad analysis phase 3 since we do every analysis in step alpha now" and "it doesn't move, remove it fully, step alpha is a way better and improved way and contains everything that needs to be analyzed". Step Alpha is the only ad and customer analysis in this skill.
 
 ## Operator rules (summary — full text in the sections above)
@@ -169,7 +179,8 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 - **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
 - **Adapted framework, not 1:1 clones (§2).** MAP the competitor's winning formula (conversion flow, funnel psychology, offer/trust/proof architecture), then BUILD OUR OWN version: same conversion principles, different execution. Title pattern stays with our brand; palette adapted from the competitor's role logic; page structure, copy, and design are distinctly ours. No string word-for-word identical to the competitor's.
 - **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
-- **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
+- **Sample gate (§18):** every image stream first makes ~5 representative images on one sheet → operator OK → then the full batch. Plans and job files are written in full before the gate (free).
+- **No logo overlaid on product images, but the packaging is the real supplier product rebranded with our name (§4)**; own conversion gallery, not 1:1 remakes; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
 - **Ads ranking: Brandsearch "Top rank (by impressions)" (`reach_rank`) first; spend/reach only when targeting EU markets; days running + duplicates as tie-breakers.** Filter to the product keyword. Dedupe by image hash.
 - **Copy chief + playbooks:** all persuasive copy (ad headline variants, ad copy, page/home copy, image claims, offers) is written or punched up by an Opus copy-chief agent using `books-playbooks/` — no softness, calibrated to the competitor's proven framework and promise level, sharpened with the playbooks (`references/13-copy-playbooks.md`).

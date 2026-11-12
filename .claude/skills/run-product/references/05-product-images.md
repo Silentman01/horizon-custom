@@ -347,6 +347,7 @@ Headlines and support text come from the **copy chief (Opus 4.6, books-playbooks
 No slide may reuse a competitor slide's layout + headline combination. Put both contact sheets side by side (ours vs `_competitor.jpg`). Pass test: an AI comparing them sees two different galleries doing similar jobs. The same claims are allowed; the same picture is not.
 
 ### 16.6 Run and QA
+- **Sample gate first (00 §18):** packshot + slide 1 (hero) + one graphic slide + one people slide → `_samples.jpg` → STOP for the operator's OK, then the rest.
 - **Run:** build the jobs from GALLERY_PLAN.md with the edit endpoint, references `[packshot (+ box), optional layout sketch]`. Name the files `<slug>-product-NN.png` in plan order.
 - **Contact sheet + thumbnail strip check:** spelling at full size, claims verbatim, nothing clipped, product = packshot, the design system held.
 - **Fixes:** KEEP-EDIT (§13.3).
