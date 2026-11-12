@@ -20,6 +20,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 17. Step Alpha before anything is built
 18. Sample gate: about 5 images confirmed before any batch
 19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation
 
 ---
 
@@ -166,7 +167,8 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 > Both analyses must complete before ANY downstream step fires.
 
 ## 18. Sample gate: about 5 images confirmed before any batch
-19. Native-language copy gate (operator 2026-11-12)
+19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation (operator 2026-11-12)
 **Rule:** never generate a full image batch before the operator has confirmed a small sample. Each generation stream first makes **about 5 representative images**, shows them on ONE contact sheet and **stops**. Only after the operator's OK does it generate the rest, then continue without stopping again.
 - **Product / page images (streams B + C), one shared sample:** the packshot (real packaging, 00 §4), the gallery hero (slide 1), one graphic slide (mechanism or comparison, to check text, spelling, margins and the design system), one lifestyle or testimonial image with a person (to check the people, the product in hand and the fit spec), and one page or advertorial image.
 - **Ads (D2 + G), with the sample matched to the competitor's format mix** (operator 2026-11-12): "for videos it remakes one, and images it remakes 5, and waits for approval to finish rest. obviously adapt according to what competitors have. if they only have videos then only 1 video no image".
@@ -181,7 +183,8 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 
 Also: "before building anything, we must run step alpha". The old Phase 3 ad analysis is removed fully: "you can remove the ad analysis phase 3 since we do every analysis in step alpha now" and "it doesn't move, remove it fully, step alpha is a way better and improved way and contains everything that needs to be analyzed". Step Alpha is the only ad and customer analysis in this skill.
 
-## 19. Native-language copy gate (operator 2026-11-12)
+## 19. Native-language copy gate
+20. HARD RULE: cost estimate + manual confirmation before any paid generation (operator 2026-11-12)
 **Rule:** in any market whose language is not English, every customer-facing string must read as if a native copywriter of that market wrote it from scratch. Never translated English. This covers page, home, advertorials, ad copy, on-image text, video scripts, emails and policies.
 - **Write in the market language from the start.** Copy agents write directly in the market language using the dossier's native language bank (2.6 / 3.5). They never draft in English and translate.
 - **Native editor pass before anything is rendered or built.** It runs BEFORE strings go into images, ads, VO or the theme. A separate Opus 4.6 agent briefed as a native senior copywriter of the market (persona, register, culture) checks every string. It hunts:
@@ -194,12 +197,26 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 - **Image prompts quote only edited strings.** Image and ad prompts use strings that already passed the edit. A generated image with an un-edited string is re-rendered by an edit.
 - **VO scripts get the same pass line by line before voicing.**
 **Why:** on Oralys (FR) the operator flagged: "some copy doesn't sound native french at all. please careful about that … not only these, many others". Gallery examples: « La crème ne le traverse pas » (calque of "paste can't cross"), « Poser un trait », « Tout ce que vous aviez arrêté », « Tient au café chaud », « Un gel qui épouse la gencive, si. ». Copy written from English sources and US competitor letters had carried the English over.
+## 20. HARD RULE: cost estimate + manual confirmation before ANY paid generation (operator 2026-11-12)
+**Rule:** no image, image edit, video clip, voice-design or TTS call is ever made until the operator has confirmed a written cost estimate for that round. It covers samples, full batches, fix rounds and retries. There is no exception and no "it's only a few cents".
+1. **Write the estimate:** `PD/scratch/GEN_ESTIMATE_<round>.md`.
+   - **What:** item by item: the file it produces, its job, type (new image / edit / video clip / voice), model, size or duration.
+   - **Cost per item:** the unit cost from the rate tables (tools-kie, `video_argolink.py` RATES, the ElevenLabs plan), and the expected retries.
+   - **Totals:** the round total with a +20 % buffer, the **run spend to date** (the ledger below) and the projected run total.
+   - **Next step:** what comes after this round, and its estimated cost.
+2. **Ask for confirmation:** show the operator the list as a short table plus the total, and STOP. Only an explicit OK, or an OK with a changed scope or budget, releases the round.
+3. **Cap:** the approved total is a hard cap for that round. Every runner logs cost (`cost.json`). An agent that would exceed the cap stops and returns a new estimate. It never overruns silently.
+4. **Ledger:** keep the run spend in BRIEF.md "Spend ledger": date, round, items, approved, actual. Report it in every gate message.
+5. **Sub-agents:** they get the approved budget in their brief and are told: no paid call beyond it; when out of budget, stop and estimate. Free local work (ffmpeg, desub, Whisper, scripts, prompts, plans) continues.
+6. **Combined with the sample gate (§18):** the sample's estimate AND the full batch's estimate are shown together. After the sample is approved, the full batch still needs its own OK (it can be given in the same answer).
+**Why:** on Oralys, more than $15 was spent across ~260 images and several video clips before the operator saw a single number. Rounds were re-done because of spec changes (blank packaging, 1:1 gallery, prices on images, non-native French). The operator: "we have spent >$15 so far and that's a lot. update skill so next time before generating any video clips or images it should make a cost estimation, what it wants to generate and needs manual confirmation before generating many medias. hard rule".
 ## Operator rules (summary — full text in the sections above)
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
 - **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
 - **Adapted framework, not 1:1 clones (§2).** MAP the competitor's winning formula (conversion flow, funnel psychology, offer/trust/proof architecture), then BUILD OUR OWN version: same conversion principles, different execution. Title pattern stays with our brand; palette adapted from the competitor's role logic; page structure, copy, and design are distinctly ours. No string word-for-word identical to the competitor's.
 - **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
+- **HARD RULE: cost estimate + manual OK before ANY paid generation (§20):** images, edits, video clips and voices. Write GEN_ESTIMATE (items, model, unit cost, +20 %, run spend to date), STOP for the operator's OK; the approved total is a hard cap; keep a spend ledger in BRIEF.
 - **Native-language copy gate (§19):** non-English markets: copy is written in the market language from the start (never translated), then a separate Opus 4.6 native-copywriter edit pass checks every string (calques, register, culture, typography) BEFORE it goes into images, ads, VO or the theme.
 - **Sample gate (§18):** every image stream first makes ~5 representative images on one sheet → operator OK → then the full batch. Plans and job files are written in full before the gate (free).
 - **No logo overlaid on product images, but the packaging is the real supplier product rebranded with our name (§4)**; own conversion gallery, not 1:1 remakes; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
