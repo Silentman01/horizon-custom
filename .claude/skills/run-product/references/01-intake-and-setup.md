@@ -17,7 +17,7 @@ Goal: in a few minutes, know exactly what to build, for which market, with which
 **Do:**
 1. Collect competitor URL(s). Normalise to the product URL without query strings (keep `?variant=` only if the operator points at a specific variant). Derive `COMPETITOR_HOME` = the root of the first competitor's domain (home page is cloned too, stream A4).
 2. Detect the market: explicit ("we want to run in US"), currency symbols, language of the prompt is *not* proof of market (the operator writes in English for French stores and vice versa).
-3. Detect a brand name if given ("brand name: Noxis"), a mode ("adapted"/"framework" → A, "improve"/"optimize" → B), scope words ("start with branding", "only ads", "everything").
+3. Detect a brand name if given ("brand name: Noxis"), a mode ("adapted"/"framework" → A, "improve"/"optimize" → B), scope words ("start with branding", "only ads", "everything"). Also note if the operator mentions advertorials, pre-sell pages, native ads, or landing pages — these signal an advertorial funnel ([22](references/22-native-ads-and-advertorials.md)).
 4. Note attached files (e.g. a methodology prompt like `PROMPT_1-1.MD`, competitor HTML/PDF) — read them; if they sit in the theme repo, git-ignore them in Step 5.
 5. Check for an existing `PRODUCT_DIR/BRIEF.md` (resume case) — if present, load its decisions and skip what's done; if Step Alpha has not passed, resume at its first unmet step (15 §3).
 **Output:** a filled input table (in your head, then in BRIEF.md).
@@ -56,7 +56,7 @@ Windows notes: Bash is Git Bash; run Python with `-I`; set `sys.stdout.reconfigu
 2. Create the tree:
 ```bash
 D="$PRODUCTS_ROOT/_plaims-headlight-glasses"
-mkdir -p "$D"/{00_alpha/analysis1,00_alpha/analysis2,00_alpha/chatgpt,00_alpha/transcripts,01_branding,02_competitor/page,02_competitor/home,02_competitor/media,03_product-images,04_page-images,05_ads/competitor/raw/footprint,05_ads/competitor/videos,05_ads/competitor/images,05_ads/generated,06_policies/source,scratch}
+mkdir -p "$D"/{00_alpha/analysis1,00_alpha/analysis2,00_alpha/chatgpt,00_alpha/transcripts,01_branding,02_competitor/page,02_competitor/home,02_competitor/media,02_competitor/advertorials,03_product-images,04_page-images,05_ads/competitor/raw/footprint,05_ads/competitor/videos,05_ads/competitor/images,05_ads/generated,06_policies/source,09_advertorials,scratch}
 ```
 3. Copy `templates/BRIEF.md` to `PRODUCT_DIR/BRIEF.md` and fill: inputs, market, mode, tooling results, credit balance, open questions.
 4. Keep BRIEF.md current: every decision (brand, palette, title, store, theme id, branch) is written there — sub-agents read it instead of you re-explaining.
@@ -78,4 +78,4 @@ git checkout -b <brand_slug> origin/main      # e.g. noxis
 **Why from main:** another brand's branch carries its templates, settings and assets; mixing brands contaminates both stores.
 
 ## Step 6 — Hand-off to Phase 1
-Launch, in one message, the capture agent and the media agent (briefs in `subagent-briefs.md`), start the policies fetch, and run the Brandsearch pulls yourself: the complete ad footprint and a transcript of every video ad (07, `tools-brandsearch.md`). When the Phase 1 data lands, go to **Phase α — Step Alpha** (`20-step-alpha-runbook.md`, spec `19-step-alpha.md`), not to branding: launch both leads' Alpha parts in one message (`subagent-briefs.md` §Step Alpha briefs). Branding (02) starts only after GATE α and the Alpha quality gate (α6) pass.
+Launch, in one message, the capture agent and the media agent (briefs in `subagent-briefs.md`), start the policies fetch, and run the Brandsearch pulls yourself: the complete ad footprint and a transcript of every video ad (07, `tools-brandsearch.md`). After the ad footprint is pulled (1.3), check `ad_inventory.json` for `landing_url`s that differ from `COMPETITOR_URL`. If found, launch the advertorial capture (1.5, [22](references/22-native-ads-and-advertorials.md)) alongside the other Phase 1 agents: capture each unique advertorial URL into `02_competitor/advertorials/<slug>/`. Record in BRIEF.md: `Advertorial funnel: yes/no | <n> unique advertorial URLs | <n> ads pointing to advertorials`. When the Phase 1 data lands, go to **Phase α — Step Alpha** (`20-step-alpha-runbook.md`, spec `19-step-alpha.md`), not to branding: launch both leads' Alpha parts in one message (`subagent-briefs.md` §Step Alpha briefs). Branding (02) starts only after GATE α and the Alpha quality gate (α6) pass.

@@ -5,6 +5,7 @@ Goal: Meta ad copy for our brand that mirrors the competitor's proven caption st
 **One shared file:** `05_ads/AD_COPY.md` sits at the root of `05_ads/` and is the only copy file for the brand. It holds one copy set per angle card; every ad, image and video alike, uses the copy set of its angle card (AD_VARIANTS.md column, 08 §1b), until the operator says otherwise. Never put copy files inside `generated/`, batch or video folders, and new batches (images or videos) reuse it instead of writing new primary texts or headlines.
 
 Read first: `00-operator-rules.md` §1 (claims — no softening, no caveat notes), §11 (copy style).
+When the competitor uses advertorial funnels, some angle cards send traffic to an advertorial page instead of the product page — see [22](references/22-native-ads-and-advertorials.md).
 Starts after Alpha: the Step Alpha gate has passed (`00_alpha/ALPHA_DOSSIER.md`) and `05_ads/competitor/ranking.json` (captions) exists. Sub-agents return the document as text; the master saves it. All persuasive copy goes through the copy chief (13).
 
 **Inputs from Step Alpha:**
@@ -69,6 +70,8 @@ Then, per set: one paragraph/line group per beat, same order, same approximate l
 - **5 headlines per angle card** (≤40 characters where possible): #1 mirrors the competitor's headline structure; the rest come from the Hook Library (3.3) and the headline-ready phrases (3.5) of that card (situation, enemy, fit, blame-shift, outcome). Star the top 2–3 to test first.
 - **Link description:** the competitor's pattern if they use one; otherwise three proof points from the page separated by " · " (fit / guarantee / shipping offer).
 - **CTA:** the competitor's CTA buttons and rotation, using Meta's button names as they appear in the data (main + 2 alternates). One rotation for every set.
+
+**Advertorial-funnel angles:** for angle cards whose ads link to an advertorial page (22), the primary text and headlines drive traffic to the advertorial (not the product page). The CTA and promise match the advertorial's opening — "Read the article", "See the research", "Check the review" — not the product page's offer. The landing field in the copy set header says the advertorial template name. For angle cards that go direct to the product page, everything stays as above.
 
 ## Step 7 — Final check and save
 Checklist: one copy set per angle card in 3.1, each headed with its card ID, avatar and hook source · every beat present in order · every competitor claim present at the same strength · no competitor name · market language/spelling/currency · length close to the competitor's · no caveat or "note" lines anywhere · headlines starred. Return the full AD_COPY.md as text (sub-agent) or save it to `05_ads/AD_COPY.md` (master).

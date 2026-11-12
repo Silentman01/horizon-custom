@@ -42,6 +42,7 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, adaptation, copy style
 | IMAGE MAP | every image position with ratio, content, source and plan | image agents (05, 06) |
 | COPY INVENTORY | every text string per section, verbatim, tagged [CLAIM]/[OFFER]/[NUM], with word counts | copywriter (as reference — our copy is written fresh, not paraphrased from this) |
 | APPS | each app, what it renders, its config facts, and the rebuild plan | builder, operator to-dos |
+| Advertorial framework (when detected) | structure, beats, editorial conventions of competitor advertorial pages | advertorial builder (A5, [22](references/22-native-ads-and-advertorials.md)) |
 | Inconsistencies | contradictions on the competitor page, with a default resolution | master |
 
 **Roles**
@@ -344,7 +345,9 @@ Fill this for every section from announcement bar to footer. The builder reads t
 8. Fill the ANGLE ROLE field of every section block from this table.
 
 **Output:** the ANGLE ARCHITECTURE block in SECTION_SPEC.md (template §3b) + ANGLE ROLE in every section block.
-**Done when:** every card in 3.1 with HIGH confidence and every gap angle from 2.4 has a home or a landing page, every 1.4 objection has a slot or a stated reason why not, and the landing decision is written.
+**Advertorial landing decision:** when the competitor sends certain angles through advertorial/pre-sell pages (detected in 1.5, analyzed in α1.3), record which angle cards use the advertorial funnel and which go direct. Our adapted version follows the same funnel structure: angles that the competitor funnels through advertorials get our own adapted advertorial (A5, [22](references/22-native-ads-and-advertorials.md)); angles sent direct stay direct. The advertorial's angle card governs its content (avatar, pain, mechanism, hook). List each advertorial with its angle card ID in the landing decision table.
+
+**Done when:** every card in 3.1 with HIGH confidence and every gap angle from 2.4 has a home or a landing page (or an advertorial when the competitor uses one for that angle), every 1.4 objection has a slot or a stated reason why not, and the landing decision is written.
 
 ---
 

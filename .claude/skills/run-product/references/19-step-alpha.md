@@ -320,6 +320,11 @@ AT CLICK:           [what the customer FEELS when they
                      skeptical? excited?]
                      ↓
 LANDING:            [product page]
+ADVERTORIAL:        [if LANDING is not the product page:
+                     the advertorial URL, its headline, its
+                     angle, where it sends traffic next.
+                     Score congruence at BOTH hops:
+                     ad→advertorial and advertorial→page]
                      ↓
 FIRST SECTION
 THEY SEE:           [what does the product page show
@@ -365,6 +370,12 @@ relevance. Many bounce.
     (this informs our product page strategy — do we build
     one page with multi-angle architecture, or multiple
     angle-specific landing pages?)
+  — Does the competitor use advertorial/pre-sell pages
+    between the ad and the product page? If so: which
+    angles use advertorials, what does the advertorial
+    do that the product page doesn't (the "warm-up"
+    job), and what would our adapted advertorial look
+    like for each angle?
 
 —————————————————————————————————
 1.4 — MARKETING ANGLE MAP
