@@ -167,8 +167,12 @@ Every section/block/snippet uses its own class prefix (e.g. `rf-quiz__*`, `rf-hp
 ## 18. Sample gate: about 5 images confirmed before any batch (operator 2026-11-12)
 **Rule:** never generate a full image batch before the operator has confirmed a small sample. Each generation stream first makes **about 5 representative images**, shows them on ONE contact sheet and **stops**. Only after the operator's OK does it generate the rest, then continue without stopping again.
 - **Product / page images (streams B + C), one shared sample:** the packshot (real packaging, 00 §4), the gallery hero (slide 1), one graphic slide (mechanism or comparison, to check text, spelling, margins and the design system), one lifestyle or testimonial image with a person (to check the people, the product in hand and the fit spec), and one page or advertorial image.
-- **Ads (D2):** after the AD_VARIANTS gate, generate the first ~5 ads (the top-ranked variants, including one native lo-fi format when the competitor runs them) → sample gate → the remaining ads.
-- **Video (G):** the existing candidate and clip gates already apply.
+- **Ads (D2 + G), with the sample matched to the competitor's format mix** (operator 2026-11-12): "for videos it remakes one, and images it remakes 5, and waits for approval to finish rest. obviously adapt according to what competitors have. if they only have videos then only 1 video no image".
+  - **Competitor runs both formats:** after the AD_VARIANTS gate, generate **5 image ads** (the top-ranked variants, including one native lo-fi) **and remake 1 video** (the best `reach_rank` story or mechanism video, not a BOFU sale clip). Then STOP for one OK.
+  - **Only videos:** remake 1 video, no image ads.
+  - **Only statics or carousels:** generate 5 image ads, no video.
+  - **After the OK:** generate the rest without stopping again. The 1-video sample replaces the ~20-candidate round unless the operator asks to choose.
+- **Video (G):** the clip gates in 14 still apply inside each remake.
 - **Free before the gate:** prompts, job files, GALLERY_PLAN.md and AD_VARIANTS.md cost nothing, so write them in full before the gate. The operator's feedback is then applied to every job before the batch runs.
 - **Sample sheet:** `<area>/_samples.jpg` (temporary, deleted after the gate). Report the cost of the sample and the estimated cost of the full batch.
 **Why:** on Oralys, about 90 images were generated before the operator first looked. The packaging was wrong (a blank tube instead of the real supplier tube rebranded) and the gallery was a 1:1 remake instead of our own, so most of the batch had to be redone. The operator: "never generates all these images before we confirm few … generate around 5 images and once confirmed it can go through everything else. so we don't waste credits like we did and give feedbacks again".
