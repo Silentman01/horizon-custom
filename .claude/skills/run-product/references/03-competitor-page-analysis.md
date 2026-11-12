@@ -1,8 +1,10 @@
 # 03 — Competitor page capture and analysis (Phase 1 capture → Phase 3 stream A1)
 
-Capture the competitor's product page completely: data, copy, colors, apps, media and screenshots. Then turn the capture into the **SECTION SPEC**, the blueprint that the copywriter, the builder, the image agents and visual QA all work from. If the spec is vague, the build drifts, the copy is the wrong length and images end up in the wrong ratios. If the spec is precise, the rest of the run is mostly mechanical.
+Capture the competitor's product page completely: data, copy, colors, apps, media and screenshots. Then turn the capture into the **SECTION SPEC** (what the competitor does) and the **ADAPTATION BLUEPRINT** (how our page will differ). The spec documents the competitor's proven conversion framework; the blueprint transforms it into a page that is distinctly ours — different layouts, different visual patterns, different structure — while keeping the same conversion mechanics that make the competitor's page work.
 
-Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
+The goal: if you sent our finished shop and the competitor's to an AI asked to find similarities, it would see two completely different pages that happen to sell a similar product.
+
+Read `00-operator-rules.md` §1, §2, §11 first (claims, adaptation, copy style).
 
 ## Contents
 1. What this step produces, and who does what
@@ -12,6 +14,7 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
 5. Step 3: Verify the capture
 6. Step 4: Build the section inventory
 7. Step 5: Write the SECTION SPEC, section by section
+7b. Step 5b: ADAPTATION BLUEPRINT (our page)
 8. Step 6: FUNNEL PSYCHOLOGY summary + ANGLE ARCHITECTURE (Step Alpha)
 9. Step 7: IMAGE MAP
 10. Step 8: COPY INVENTORY
@@ -30,18 +33,20 @@ Read `00-operator-rules.md` §1, §2, §11 first (claims, 1:1, copy style).
 | Part | Content | Consumed by |
 |---|---|---|
 | Section inventory | every section top to bottom, mapped to its HTML section id and screenshot position | everyone |
-| SECTION SPEC | for each section: LAYOUT / COMPONENTS / TYPOGRAPHY / VISUAL DETAILS / IMAGE POSITIONS / CONVERSION ROLE / MOBILE BEHAVIOR | builder (04), visual QA (10) |
+| SECTION SPEC | for each section: LAYOUT / COMPONENTS / TYPOGRAPHY / VISUAL DETAILS / IMAGE POSITIONS / CONVERSION ROLE / MOBILE BEHAVIOR | conversion architect (input to the blueprint) |
+| FRAMEWORK MAP | the competitor's page architecture as a conversion framework: what each section does for the funnel, why it's in that order, which psychological principles it uses | conversion architect, copywriter, builder |
+| ADAPTATION BLUEPRINT | how our page will differ: different section layouts, visual patterns and structure, while keeping the same conversion mechanics. The builder and copywriter work from this, not from the competitor spec | builder (04), copywriter, image agents, visual QA (10) |
 | Non-obvious elements | sticky ATC, cart drawer, popups, timers, progress bars | builder |
 | FUNNEL PSYCHOLOGY | offer, urgency, trust, social proof, upsell architecture, plus the price math | copywriter, builder, ad agents |
-| ANGLE ARCHITECTURE | which Step Alpha angle card(s), avatar and objection each section serves; what sits above the fold; one page vs angle landing pages | copywriter, builder, image agents, ad agents |
+| ANGLE ARCHITECTURE | which Step Alpha angle card(s), avatar and objection each section of OUR adapted page serves; what sits above the fold; one page vs angle landing pages | copywriter, builder, image agents, ad agents |
 | IMAGE MAP | every image position with ratio, content, source and plan | image agents (05, 06) |
-| COPY INVENTORY | every text string per section, verbatim, tagged [CLAIM]/[OFFER]/[NUM], with word counts | copywriter |
+| COPY INVENTORY | every text string per section, verbatim, tagged [CLAIM]/[OFFER]/[NUM], with word counts | copywriter (as reference — our copy is written fresh, not paraphrased from this) |
 | APPS | each app, what it renders, its config facts, and the rebuild plan | builder, operator to-dos |
 | Inconsistencies | contradictions on the competitor page, with a default resolution | master |
 
 **Roles**
 - **Capture agent (Phase 1):** runs Steps 1–3 and writes the capture files (data files; no report needed).
-- **Conversion-architect agent (Phase 3, A1):** runs Steps 4–10 from the capture files and the Step Alpha dossier, and **returns the spec as text**. Sub-agents may be blocked from writing .md files ("Subagents should return findings as text"), so the **master saves** the text to `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md`.
+- **Conversion-architect agent (Phase 3, A1):** runs Steps 4–10 from the capture files and the Step Alpha dossier. Produces BOTH the competitor SECTION SPEC (what they do) AND the ADAPTATION BLUEPRINT (how our page will differ). **Returns both as text**. Sub-agents may be blocked from writing .md files ("Subagents should return findings as text"), so the **master saves** the text to `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md`. **Must run on Opus 4.6** — the adaptation requires high judgment about conversion mechanics.
 - A1 starts only after the **Step Alpha gate has passed** (it reads the dossier) **and the branding gate is approved** (operator 2026-11-10), like every Phase 3 stream.
 
 ---
@@ -242,12 +247,68 @@ The first seven fields are PROMPT_1-1's. ANGLE ROLE is the one field about our p
 
 **Rules**
 - Cover **every** section, including the announcement bar, header and footer. No "same as above". Repeat the values.
-- Describe the competitor **as is** (ANGLE ROLE excepted). In Mode A the spec is the target. Improvements belong only in a Mode B spec, marked `MODE B CHANGE:` with a reason.
+- Describe the competitor **as is** — the spec documents what they built. Our adaptations belong in Step 5b (ADAPTATION BLUEPRINT).
 - Don't write our copy here. Quote theirs in the COPY INVENTORY.
 - Keep CONVERSION ROLE concrete: name the trigger, the objection and the proof in this page's words.
 
 **Output:** one block per inventory row, plus a "Non-obvious elements" block.
 **Done when:** a builder could reproduce every section from the text alone, and each value is either measured (`~`), taken from CSS or config, or marked unknown.
+
+---
+
+## 7b. Step 5b: ADAPTATION BLUEPRINT (our page)
+
+**Purpose:** define how our page will differ from the competitor's while keeping the conversion mechanics that make their page work. The builder and copywriter work from this blueprint, not from the competitor spec. The test: if an AI compared our finished page against the competitor's, it would see two completely different pages that happen to sell a similar product.
+
+**Inputs:** the SECTION SPEC (Step 5), the FUNNEL PSYCHOLOGY and ANGLE ARCHITECTURE (Step 6), and the Step Alpha dossier (3.1 angle cards, 3.2 avatars, 3.5 language bank, 1.4 objections, 1.5 emotional landscape, 1.6 mechanism).
+
+**Write the blueprint in five parts:**
+
+### 5b.1 Section reordering
+Map the competitor's section order to ours. The conversion flow (Attention → Interest → Desire → Action from the FUNNEL PSYCHOLOGY) stays intact, but the sections that deliver each stage can change: sections may be reordered, merged, split or replaced. For each change, state: what moves, why (which conversion mechanic it preserves), and where it lands in our flow.
+
+Example: competitor has S4 testimonials → S5 story → S6 comparison → S7 honesty → S8 FAQ. Our blueprint might merge S5 story and S7 honesty into one section, move comparison above testimonials, and split FAQ into two: mechanism questions above the fold, objection questions below.
+
+### 5b.2 Layout adaptation
+For **every section** in our adapted page, define how the visual layout differs from the competitor's equivalent:
+- Different column structures (competitor's 2-col image-left text-right → our full-width hero stack)
+- Different component patterns (competitor's 3-card grid testimonials → our 2-col large quote + portrait)
+- Different visual treatments (competitor's flat white bg → our accent-band alternation; competitor's contained width → our full-bleed media sections)
+- Different spacing rhythm (competitor's uniform padding → our progressive density)
+
+The builder follows these layouts, not the competitor's.
+
+### 5b.3 Component swaps
+Replace component patterns while preserving their conversion job:
+- Competitor's comparison **table** → our feature **grid** (icons + short labels, no "us vs them" columns)
+- Competitor's accordion **FAQ** → our tabbed FAQ or expandable cards
+- Competitor's trust **badge row** → our trust **strip** or **marquee** with different iconography
+- Competitor's **bundle cards** → our **stepped selector** or **slider** or **visual tier cards** with a different layout
+
+Each swap states: COMPETITOR COMPONENT → OUR COMPONENT | CONVERSION ROLE PRESERVED | VISUAL DIFFERENCE.
+
+### 5b.4 Visual identity
+Define the visual language that makes our page feel distinct:
+- **Border treatments:** rounded vs sharp corners, visible vs invisible borders, accent-colored vs neutral
+- **Background patterns:** solid vs gradient vs texture vs alternating bands
+- **Image treatments:** rounded corners vs sharp crop, overlay text vs clean image + separate text, full-bleed vs contained
+- **Spacing rhythm:** tight vs airy, progressive density (loose at top → dense at the offer) vs uniform
+- **Typography hierarchy:** our heading scale, weight progression, and color usage (does our accent appear in headings? subheadings? badges only?)
+- **Section transitions:** hard cuts vs flowing shapes vs overlapping cards
+
+These choices apply globally. The builder uses them everywhere.
+
+### 5b.5 The blueprint table
+One row per section in OUR page order (not the competitor's):
+
+```
+| OUR SECTION | CONVERSION ROLE | LAYOUT (our version) | COMPETITOR EQUIVALENT | KEY DIFFERENCES | WHAT WE KEEP (the mechanic) |
+|---|---|---|---|---|---|
+```
+
+Fill this for every section from announcement bar to footer. The builder reads this table to know what to build; the copywriter reads it to know how many strings each section needs and what conversion job each one serves.
+
+**Done when:** every conversion mechanism from the FUNNEL PSYCHOLOGY has a home in the blueprint, every HIGH angle and gap angle from the ANGLE ARCHITECTURE has a home in the adapted layout, and the blueprint table covers announcement bar → footer with no gaps. A builder could describe our page without ever seeing the competitor's.
 
 ---
 
@@ -268,7 +329,7 @@ The first seven fields are PROMPT_1-1's. ANGLE ROLE is the one field about our p
 ### ANGLE ARCHITECTURE (Step Alpha)
 **Purpose:** the competitor sends many angles to one page, and the page drops some of them (spec 1.3). Every angle we advertise must land on a page that confirms it. This block decides which section carries which angle card, so the copy, the images and the ads line up. Read 3.1, 1.10 and 2.4 first, and the congruence insights in [19 CONGRUENCE INSIGHTS](19-step-alpha.md#congruence-insights) (spec lines 353–367).
 
-**Mode A stays 1:1.** Same sections, order, components and word budget. The architecture decides which angle each existing slot speaks to: a subtitle, a bullet, an accordion row, a testimonial persona, an FAQ question, an image-with-text block, a comparison row, a gallery image.
+**The ADAPTATION BLUEPRINT defines which sections carry which angles.** The architecture decides how each angle is served in OUR adapted layout, not the competitor's. The blueprint may have different section names, different component types and a different order — the angle architecture maps each card to a slot in OUR structure. Where the competitor drops an angle (LOW congruence in 1.10), our adapted layout can give it a better home.
 
 **Do**
 1. **Angle table.** One row per card in 3.1: ID, name, confidence, avatar, competitor congruence (1.10 HIGH/MED/LOW), gap angle (2.4) yes/no, and its home on our page (S#.## string or image ID).
@@ -277,7 +338,7 @@ The first seven fields are PROMPT_1-1's. ANGLE ROLE is the one field about our p
 4. **One page or angle landing pages.** Decide from the congruence insights and write the decision with one line of reason:
    - **One page with multi-angle architecture** (default): every angle above fits a slot, and the above-the-fold angles cover most of the ad traffic.
    - **Angle landing pages** when an angle's promise can't be confirmed above the fold without pushing out the main angle, and that angle gets its own ads (a HIGH validated card, or a gap angle with HIGH potential). Each landing page is a copy of the product template (`product.<slug>-<angle-id>.json`, 04 §6) with the same sections; only its above-the-fold strings, section images and section order aim at that angle. The product gallery is shared by every template (Shopify product media), so it stays the same. List each landing page with its angle card ID; the ads of that card link to it (08, 09).
-5. **Objections → FAQ and objection handling.** Map each objection in 1.4 (type, competitor handling, STRENGTH) to its slot: FAQ question, accordion row, comparison row or testimonial. Objections the competitor handles weakly (STRENGTH 1–3) or not at all come first. Questions are written in the skeptic's own words from the objection-ready phrases (2.6 / 3.5). Same FAQ count as the competitor: a top objection with no home takes the slot of a question that maps to no objection in 1.4.
+5. **Objections → FAQ and objection handling.** Map each objection in 1.4 (type, competitor handling, STRENGTH) to its slot in OUR adapted layout: FAQ question, expandable card, feature grid row, testimonial or any component the blueprint assigns to objection handling. Objections the competitor handles weakly (STRENGTH 1–3) or not at all come first. Questions are written in the skeptic's own words from the objection-ready phrases (2.6 / 3.5). The blueprint decides the count and format; it doesn't have to match the competitor's FAQ count.
 6. **Mechanism → the mechanism section.** The section that explains why the product works (an accordion row "How do they work?", an image-with-text block, a comparison row) carries the mechanism from 1.6: name, story and proof, at the competitor's claim strength.
 7. **Customer language → copy.** For each section, list the language bank lines (3.5: hook-ready, headline-ready, objection-ready, testimony-ready) the copywriter should use.
 8. Fill the ANGLE ROLE field of every section block from this table.
@@ -367,12 +428,16 @@ The first seven fields are PROMPT_1-1's. ANGLE ROLE is the one field about our p
 
 ## 13. Delegation: the conversion-architect brief
 
-Launch one `general-purpose` agent in the background as soon as the capture files exist. Template:
+Launch one agent (`model: "claude-opus-4-6"`) in the background as soon as the capture files exist. The conversion architect must run on **Opus 4.6** — the adaptation requires high judgment about conversion mechanics, layout design and differentiation.
+
+Template:
 
 ```
-You are the CONVERSION ARCHITECT for a Shopify product-page clone (MODE <A|B>).
+You are the CONVERSION ARCHITECT for a Shopify product page.
+Your job has two parts: (1) map the competitor's page framework, (2) design OUR adaptation that uses
+the same conversion mechanics but looks and feels completely different.
 Read first:
-  - <SKILL_DIR>/references/03-competitor-page-analysis.md  (Steps 4–10, §15 worked example)
+  - <SKILL_DIR>/references/03-competitor-page-analysis.md  (Steps 4–10 AND Step 5b: ADAPTATION BLUEPRINT)
   - <SKILL_DIR>/templates/SECTION_SPEC.md                   (output format, follow it exactly)
   - <SKILL_DIR>/references/00-operator-rules.md §1 (claims)
   - <SKILL_DIR>/references/19-step-alpha.md CONGRUENCE INSIGHTS (spec lines 353–367)
@@ -381,17 +446,30 @@ Inputs (all in <PRODUCT_DIR>/02_competitor/page/):
 Step Alpha dossier (gate passed): <PRODUCT_DIR>/00_alpha/ALPHA_DOSSIER.md: 3.1 Angle Cards, 1.10 Funnel Congruence,
   2.4 Funnel Congruence Gaps, 3.2 Avatar Cards, 1.4 Objections, 1.6 Unique Mechanism, 2.6/3.5 Language Bank, 1.1 Avatars
 Market: <MARKET>. Competitor: <COMPETITOR_URL>.
-Task: produce the complete SECTION SPEC of the competitor page: section inventory, one PROMPT_1-1 block per
-section (header to footer, nothing skipped, px and #hex values; '~' = measured on chunks at scale <S>), non-obvious
-elements (check app configs for sticky ATC, cart drawer bars, popups, timers), FUNNEL PSYCHOLOGY with a price-math
-table, ANGLE ARCHITECTURE (Step 6: angle table, above the fold, a home for every HIGH and gap angle, one page vs
-angle landing pages, objection map, mechanism section, language bank lines per section) and an ANGLE ROLE field in
-every section block, IMAGE MAP (every image, ratio, content, source URL, plan), COPY INVENTORY (every string verbatim,
-tagged [CLAIM]/[OFFER]/[NUM]/[BOLD], word counts per section), APPS with rebuild plan, inconsistencies with defaults.
-Describe the competitor as it is; don't improve it (Mode A). ANGLE ROLE and ANGLE ARCHITECTURE are about our page.
-Don't write our copy. Keep claims verbatim.
-Mark mobile lines (observed) or (inferred). Write 'unknown — check live' rather than guessing.
-Return the whole document as TEXT in your final message (don't write .md files; the master saves it).
+
+PART 1 — COMPETITOR SECTION SPEC: section inventory, one PROMPT_1-1 block per section (header to footer, nothing
+skipped, px and #hex values; '~' = measured on chunks at scale <S>), non-obvious elements (check app configs for
+sticky ATC, cart drawer bars, popups, timers), FUNNEL PSYCHOLOGY with a price-math table, IMAGE MAP (every image,
+ratio, content, source URL, plan), COPY INVENTORY (every string verbatim, tagged [CLAIM]/[OFFER]/[NUM]/[BOLD], word
+counts per section), APPS with rebuild plan, inconsistencies with defaults. Describe the competitor AS IT IS.
+
+PART 2 — ADAPTATION BLUEPRINT (§5b): design our page that keeps every conversion mechanism but differs visually:
+  - Section reordering: which sections move, merge, split or get replaced (conversion flow stays)
+  - Layout adaptation: for every section, how our layout differs (different column structures, component patterns,
+    visual treatments). The builder works from these layouts, not the competitor's.
+  - Component swaps: replace component patterns (table → grid, accordion → tabs, etc.) while preserving
+    their conversion job
+  - Visual identity: our border treatments, bg patterns, image treatments, spacing rhythm, typography hierarchy
+  - Blueprint table: one row per section in OUR order (OUR SECTION | CONVERSION ROLE | LAYOUT | COMPETITOR
+    EQUIVALENT | KEY DIFFERENCES | WHAT WE KEEP)
+  - ANGLE ARCHITECTURE: angle table, above the fold, a home for every HIGH and gap angle in OUR adapted
+    layout, one page vs angle landing pages, objection map, mechanism section, language bank lines per section.
+    ANGLE ROLE in every section block refers to OUR sections.
+  THE TEST: if an AI compared our finished page to the competitor's, it would see two completely different pages.
+
+Don't write our copy. Keep claims verbatim. Mark mobile lines (observed) or (inferred). Write 'unknown — check
+live' rather than guessing.
+Return the whole document (PART 1 + PART 2) as TEXT in your final message (don't write .md files; the master saves it).
 ```
 
 The master reviews the result against §17 before saving, and sends it back with the gaps listed if sections are missing or summarized.
@@ -400,23 +478,26 @@ The master reviews the result against §17 before saving, and sends it back with
 
 ## 14. Copy rules for the copywriter (downstream)
 
-These rules travel with the spec to the copywriter agent (Phase 3, A2). PROMPT_1-1 Phase 2 describes the method (extract the persuasion job per section, write original copy that does the same job). The operator rules constrain it:
+These rules travel with the spec to the copywriter agent (Phase 3, A2). The copywriter works from the ADAPTATION BLUEPRINT (our page structure) and the Step Alpha dossier (customer intelligence), not from the competitor's copy. The copy chief reads the relevant playbook sections (`books-playbooks/*.html`) before writing every piece. **The copywriter agent must run on Opus 4.6.**
 
-1. **Original wording, same persuasion job.** Rewrite every string. Paraphrase the key lines closely enough to keep their rhythm and punch. Keep the section's trigger, objection and proof.
+1. **Fully original wording, same persuasion job.** No title, headline, subtitle or body text may be word-for-word identical to the competitor's. Every string is written fresh using the playbooks (`books-playbooks/*.html`: Schwartz, Bencivenga, Halbert, Kennedy, Hopkins) and the Step Alpha language bank. The persuasion JOB of each section stays — the WORDS are entirely ours. Customers must recognize themselves, feel listened to and understood.
 2. **Claims at full strength (rule 1).** Every `[CLAIM]` string keeps its strength, numbers and trademarks: "Rated #1 Headlight Glasses", "GlareCut Technology™", "Reduces Nighttime Glare By 85%", "4.8/5". Never soften, caveat or drop them, and never add "results may vary".
    > **Real incident (example):** the first Noxis copy turned "GlareCut Technology™" into "Polarized layer", "Rated #1 Headlight Glasses" into "Built for the drive home", and the comparison row "Glare Cut Technology" into "Polarized Amber Lens". The operator had them reverted (commit "Restore original claims in Noxis page copy").
 3. **Don't invent new claims either.** Carry the competitor's. New wording you write states benefits in plain terms.
 4. **Simple vocabulary, direct response.** Short sentences, contractions, everyday words ("eye doctor" over "optometrist"), the customer as subject, features as evidence, specific over general. Run the 11 pm scroll test: would a tired reader on a phone keep reading this line?
-5. **Length ≈ competitor.** Stay within ±10% of each section's word count from the COPY INVENTORY. No extra paragraphs, bullets or sections. The operator once found a page "big and heavy to read compared to" the competitors (about 1,500 words). Keep it light.
-6. **Same shape.** Same number of bullets, accordion items, FAQ questions, table rows and testimonials. Bold the same kinds of phrases in the same places. Keep headline length similar.
+5. **Similar weight, adapted structure.** Keep total copy weight similar to the competitor's (the operator once found a 1,500-word page "big and heavy to read"). But our section structure comes from the ADAPTATION BLUEPRINT, not the competitor's — sections may have different counts, different lengths, different formats.
+6. **Match the blueprint, not the competitor's shape.** The ADAPTATION BLUEPRINT defines our structure: how many bullets, how many FAQ items, how many testimonials, what format each section uses. Match that structure. The competitor's literal counts are reference only.
 7. **Market language.** Spelling, idioms, places and units for `MARKET` (UK "dual carriageway" → US "Interstate"; "ring road" → "beltway"). Use the market's currency and the native typography of its language (e.g. French non-breaking spaces before `: ; ! ?`).
 8. **Offer terms consistent.** One guarantee length, one shipping threshold, matching the offer, everywhere.
 9. **Testimonials match their photos** (mother vs father, age, setting). Keep the persona and the objection each testimonial answers.
-10. **Mode A:** improve wording inside the same strings only (a sharper headline, a "so that…" bridge in an existing bullet). Restructuring is Mode B only.
+10. **Follow the ADAPTATION BLUEPRINT for structure and the ANGLE ARCHITECTURE for content mapping.** The blueprint says what each section is and what conversion job it does; the angle architecture says which angle card and avatar it serves. Sharpen every piece with the playbooks (Schwartz awareness/sophistication for the avatar, Bencivenga proof arsenal, Halbert word pictures, Kennedy urgency triggers, Hopkins specifics).
 11. **Customer language from the Language Bank** (dossier 3.5 / 2.6). Headlines and subtitles use hook-ready and headline-ready phrases, FAQ questions and objection answers use objection-ready phrases (the skeptic's exact words), testimonials are modelled on testimony-ready phrases. Use the phrase as the customer said it, fitted to the string's length budget. Claims still come from the competitor (rules 2–3).
 12. **Write each string for its section's angle.** Follow the section's ANGLE ROLE (angle card, avatar, objection). Tag every string in the copy deck with its angle card ID(s) (`S3.03 [V1]`), so QA and the ads can check congruence.
+13. **PLAYBOOK MANDATORY.** The copy chief reads the relevant sections of `books-playbooks/*.html` before writing every piece. Per piece, state one line naming the angle card, the avatar, its awareness/sophistication and the playbook principle used (e.g. "V2 · AV2 problem aware, stage 4 → Schwartz: improved-mechanism headline").
+14. **Step Alpha data in every string.** Every string must be informed by Step Alpha: verbatims from the language bank (3.5), pain points (1.2), dream outcomes (1.3), emotional triggers (1.5). The customer reads the page and thinks: "they get me." Strong promises backed by specific pains, specific desires, specific language the customer actually uses.
 
-**Paraphrase examples (Plaims → Noxis, real run)**
+**Paraphrase examples (Plaims → Noxis, pre-adaptation era)**
+> These examples predate the adaptation approach and show the MINIMUM text-level distance from the competitor. With the adaptation blueprint, our section structure and visual execution differ substantially more. The copy examples below show only the text-level difference; in the current workflow, every string is written fresh from the playbooks and language bank, not paraphrased from the competitor's wording.
 | Plaims | Noxis | Note |
 |---|---|---|
 | Every winter, night driving gets harder. More glare, more rain, more blinding headlights. | Every winter the drive home gets harder. Brighter headlights, more rain, more of that blinding glare. | same three-beat rhythm |
@@ -431,6 +512,9 @@ These rules travel with the spec to the copywriter agent (Phase 3, A2). PROMPT_1
 ---
 
 ## 15. Worked example: the Plaims SECTION SPEC
+
+> **Note:** This worked example predates the adaptation approach. It shows a SECTION SPEC only (Part 1).
+> New runs must also produce an ADAPTATION BLUEPRINT (Part 2 — see §7b) alongside the spec.
 
 > Real run, example only. Source: `plaims.com/products/plaims-headlight-glasses`, captured at 1440 px. Chunks are 720 px wide (scale 2). `~` = measured. Mobile capture blocked by X-Frame-Options, so mobile lines are inferred unless the operator's notes say otherwise. Theme: Dawn family (RGB-triplet CSS vars, `--page-width` about 1200 px, `--buttons-radius: 40px`, `--media-radius: 20px`). Fonts: Poppins (headings), Inter (body). About 1,050 words of brand-written copy from the rating line to the FAQ, plus about 1,000 words of Judge.me reviews (about 2,000 in total).
 
@@ -742,13 +826,25 @@ TOTAL brand copy ≈ 1,050 words (reviews excluded)
 ---
 
 ## 17. Done-when checklist
+
+### Part 1 — SECTION SPEC (competitor framework)
 - [ ] Capture files present: p.json, p.html, capture.json/.md, copy.txt, desktop chunks; mobile captured or fallback recorded.
 - [ ] Inventory covers announcement bar → footer, plus invisible app elements.
 - [ ] Every section has all seven PROMPT_1-1 fields with px and #hex values (`~` measured, CSS/config exact, or "unknown — check live").
 - [ ] FUNNEL PSYCHOLOGY has all five blocks, the arc, and a price-math table that reproduces the displayed SAVE and compare-at values.
-- [ ] ANGLE ARCHITECTURE done from the dossier (Alpha gate passed): above the fold validates the highest-confidence angle(s), every HIGH and gap angle has a home or a landing page, landing decision written, objection map, mechanism section; every section block has ANGLE ROLE.
 - [ ] IMAGE MAP has every image, GIF, video, icon set and logo, with ratio, content, source and plan; competitor-only images are marked skip.
 - [ ] COPY INVENTORY lists every string verbatim with tags and per-section word counts, with noise stripped.
 - [ ] APPS table has a plan per app and the operator to-dos listed.
 - [ ] Inconsistencies listed with defaults.
-- [ ] Master saved `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md` and briefed the copywriter (with §14), the builder, the image agents and QA.
+
+### Part 2 — ADAPTATION BLUEPRINT (our page)
+- [ ] Section reordering defined: every competitor section accounted for (kept, moved, merged, split or replaced), conversion flow preserved.
+- [ ] Layout adaptation written for every section: our layout differs from the competitor's (different column structures, component patterns, visual treatments).
+- [ ] Component swaps specified: replaced patterns (table → grid, accordion → tabs, etc.) with conversion role preserved.
+- [ ] Visual identity defined: our border treatments, bg patterns, image treatments, spacing rhythm, typography hierarchy — visually distinct from competitor.
+- [ ] Blueprint table complete: one row per section in OUR order with all six columns (OUR SECTION | CONVERSION ROLE | LAYOUT | COMPETITOR EQUIVALENT | KEY DIFFERENCES | WHAT WE KEEP).
+- [ ] ANGLE ARCHITECTURE done from the dossier (Alpha gate passed): above the fold validates the highest-confidence angle(s), every HIGH and gap angle has a home in OUR adapted layout, landing decision written, objection map, mechanism section; every section block has ANGLE ROLE referencing OUR sections.
+- [ ] **AI test**: if you sent our blueprint and the competitor's page to an AI, it would see two completely different pages while serving the same conversion mechanics.
+
+### Delivery
+- [ ] Master saved `PRODUCT_DIR/02_competitor/page/SECTION_SPEC.md` (both parts) and briefed the copywriter (with §14), the builder (with the blueprint), the image agents and QA.
