@@ -13,7 +13,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 | 1.4 Objections · 1.6 Unique Mechanism | FAQ order and the mechanism section, as the spec maps them (§5.9, §5.7) |
 
 ## Contents
-0. Principles (mobile first, editability, native first, 1:1)
+0. Principles (mobile first, editability, native first, adapted framework)
 1. Preflight: detect the theme
 2. Global settings: palette, fonts, buttons
 3. Header, announcement bar, footer
@@ -38,7 +38,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
    - QA (§8) includes a real **pointer drag** on every rail at 390 px.
 2. **The merchant edits everything.** Every text, image, color choice, toggle and repeatable item is a schema setting or block, with presets. Never hard-code copy in Liquid. Labeled placeholders show where each image goes.
 3. **Native first.** If a theme block or section already matches the competitor component (title, price, variant picker, buy buttons, accordion, rich text), configure it. Build `<slug>-*` custom files only for components the theme lacks (bundle cards, comparison table, rating line, testimonial cards, …).
-4. **1:1 in Mode A.** Same sections, order, proportions, colors and claims as the competitor (00-operator-rules §1–2). No "improvements". List ideas in one line at delivery.
+4. **Adapted, not copied.** Same conversion mechanics (funnel psychology, offer architecture, trust architecture, social proof, urgency — all from the FUNNEL PSYCHOLOGY block in SECTION_SPEC), but different visual execution. The ADAPTATION BLUEPRINT (SECTION_SPEC §ADAPTATION) defines our section structure, layouts and component choices — we don't replicate the competitor's pixel layout, we build sections that do the same conversion job with our own design language. Claims stay at full strength (00 §1); the palette and fonts come from BRANDING.md. The test: an AI comparing both pages should see two completely different products/brands, not a clone.
 5. **Variants are the source of truth.** Bundle cards read price and compare-at from the product variants (Buy 1 / Buy 2 / Buy 3). The cards never compute prices the checkout doesn't know about. In quantity mode: the variant price plus one native automatic discount per tier.
 6. **Performance and accessibility by default.** Use WebP for GIFs, lazy images below the fold, explicit width/height, no third-party fonts or scripts, real radio inputs, visible `:focus-visible`, and aria labels on icon-only content.
 
@@ -72,7 +72,7 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 **Pitfalls:** on a store that sells other products, global settings change every page. Ask the operator before pushing `settings_data.json` there, or scope colors to your sections. Keep hex values exact (no "close enough").
 
 ## 3. Header, announcement bar, footer
-**Purpose:** the first visual band and the offer line ("FREE Shipping on orders over $30+") are part of the clone.
+**Purpose:** the first visual band and the offer line ("FREE Shipping on orders over $30+") are part of the adapted storefront.
 **Do:**
 - Horizon: `sections/header-group.json` → `_announcement` block `text`, `font_size`, `weight`. Announcement section `background_color: "{{ settings.color_palette.color1 }}"`, `divider_width: 0`, padding. Header `logo_position` (Noxis: `center`), `show_language: false` if one market. `sections/footer-group.json`: only adjust if the competitor footer differs structurally (Noxis kept the default).
 - Dawn: `sections/header-group.json` → `announcement-bar` blocks + `color_scheme`. Header `logo_position`, `menu`.
@@ -81,28 +81,30 @@ Distilled from the Noxis build (Horizon 4.2, branch `noxis`) and the Ceriva buil
 **Pitfalls:** group JSON files are shared by all templates. Change only the keys you need.
 
 ## 4. Component inventory: native vs custom
-**Purpose:** decide, per SECTION_SPEC component, the cheapest faithful implementation before writing code.
-**Do:** fill this table in your working notes (one row per component, top to bottom):
+**Purpose:** decide, per ADAPTATION BLUEPRINT component, the best implementation in the theme. The inventory follows the blueprint's section list (our page), not the competitor's.
+**Do:** fill this table in your working notes (one row per blueprint component, top to bottom):
 ```
-COMPONENT (spec §)      │ NATIVE OPTION (theme)             │ MATCH? │ DECISION
-────────────────────────┼───────────────────────────────────┼────────┼───────────────────────────────
-Gallery                 │ _product-media-gallery / main-product media │ yes │ native; images = Shopify product media
-Rating line             │ none (reviews app shows stars)    │ no     │ custom block <slug>-rating
-Title                   │ text block {{ closest.product.title }} │ yes │ native, type_preset h3
-Subtitle                │ text block                        │ yes    │ native (rich text → <p>)
-Benefit checklist       │ none                              │ no     │ custom block <slug>-checklist
-Bundle & save cards     │ variant-picker buttons            │ no     │ custom <slug>-bundle + _<slug>-bundle-tier, drives hidden native picker
-Add to cart             │ buy-buttons                       │ yes    │ native (theme primary button = palette color1)
-Info accordion          │ accordion / collapsible_tab       │ yes    │ native rows
-Testimonials            │ none matching (cards w/ photo)    │ no     │ custom section <slug>-testimonials
-Image + text story      │ media-with-content / image-with-text │ partial │ custom <slug>-image-text if layout/ratio differs
-Comparison table        │ none                              │ no     │ custom section <slug>-comparison
-FAQ                     │ accordion section                 │ partial │ custom <slug>-faq if icons/exclusive behaviour needed
+BLUEPRINT COMPONENT     │ CONVERSION ROLE                   │ NATIVE OPTION (theme)             │ DECISION
+────────────────────────┼───────────────────────────────────┼───────────────────────────────────┼───────────────────────────────
+Gallery                 │ product showcase                  │ _product-media-gallery            │ native; images = Shopify product media
+Rating line             │ social proof above fold           │ none                              │ custom block <slug>-rating
+Title                   │ product identity                  │ text block {{ closest.product.title }} │ native, type_preset h3
+Subtitle                │ pain/promise hook                 │ text block                        │ native (rich text → <p>)
+Benefit strip / bullets │ top objection kills               │ none                              │ custom block <slug>-checklist (or icons strip, per blueprint)
+Bundle & save cards     │ offer + anchoring                 │ variant-picker buttons            │ custom <slug>-bundle + _<slug>-bundle-tier, drives hidden native picker
+Add to cart             │ action gate                       │ buy-buttons                       │ native (theme primary button = palette color1)
+Trust / mechanism       │ proof + mechanism                 │ media-with-content / accordion    │ per blueprint: could be accordion, image-text, icon strip, stats bar
+Testimonials            │ social proof by persona           │ none matching                     │ custom section <slug>-testimonials (layout per blueprint: grid, rail, cards, quote blocks)
+Comparison              │ differentiation                   │ none                              │ custom section <slug>-comparison (table, checklist, or side-by-side per blueprint)
+FAQ                     │ last-mile objection removal       │ accordion section                 │ custom <slug>-faq if blueprint layout differs from native
 ```
-**Done when:** every spec component has a decision, and every custom component has a file name.
+The blueprint may combine, split or reorder sections vs the competitor. Follow it — not the competitor's layout.
+**Done when:** every blueprint component has a decision, and every custom component has a file name.
 **Pitfalls:** "partial" native matches usually cost more time in tweaks than a small custom section. Custom files are also easier to keep identical across brands.
 
 ## 5. Build the custom blocks and sections
+
+> Each section implements the ADAPTATION BLUEPRINT's design for that conversion role, not a pixel copy of the competitor. The patterns below show **how** to build common components in the theme; **what** to build comes from the blueprint. For example, if the blueprint says "our trust section is a horizontal strip with icons + stats instead of the competitor's 3-card testimonial grid," build the strip, not the grid. The competitor's page is a reference for conversion mechanics (what works), never for visual execution (how it looks).
 
 ### 5.1 Naming and file layout
 - Prefix everything with the brand slug: `sections/<slug>-comparison.liquid`, `blocks/<slug>-bundle.liquid`, private child blocks `blocks/_<slug>-bundle-tier.liquid` (leading `_` = only usable inside its parent), `snippets/<slug>-vars.liquid`, `assets/<slug>-night-road.webp`. Section keys in templates: `<short>_<role>` (`nx_testimonials`).
@@ -260,7 +262,7 @@ Styling to copy from the competitor: radius (Noxis 18 px), border in the accent 
 **Why drive the native picker instead of writing `input[name=id]` yourself:** the theme then updates price, sticky add-to-cart, media, URL and availability exactly as with its own buttons. Writing the form id directly leaves the rest of the page stale.
 **Limits:** this works for single-option products (one "Bundle" option). With two options (color × bundle), a card must set both option inputs. Build that only if the spec needs it.
 
-**Quantity mode (colour × size products, or no pack variants) — like Kaching quantity breaks.** No pack variants. Copy the competitor's tiers 1:1 (titles, pack prices, struck "was" prices, badges, preselected tier, countdown/sale line above the cards). Reference: branch `mojo`, `blocks/mojo-bundle-tiers.liquid` + `_mojo-bundle-tier.liquid` (single-option version: `krino`, `_krino-bundle-card.liquid` + `snippets/krino-sync.liquid`). Each card = N units with an option picker per unit; prices in Liquid = variant price × N and a "Bundle price" setting, save/%/per-unit from tokens. Add flow: listen for `submit` on **window** in capture phase (Horizon's `on:submit` is document-capture), add the extra lines with `/cart/add.js`, then in a new task (`setTimeout`) set the form `id`/`quantity` and `requestSubmit()` so Horizon re-renders and opens the drawer. Mark lines with hidden property `_Bundle`. Checkout price comes from native automatic discounts: one per card, Amount off products, fixed amount = full − bundle price, once per order, minimum quantity N, no combinations; put the amount in the setting's `info` text (editor sidebar) and BUNDLE_OFFERS.md, never on the page, not even in design mode. Set `auto_open_cart_drawer: true`. Offer table + discount setup → `PD/08_shopify/BUNDLE_OFFERS.md`.
+**Quantity mode (colour × size products, or no pack variants) — like Kaching quantity breaks.** No pack variants. Adapt the competitor's tiers (titles, pack prices, struck "was" prices, badges, preselected tier, countdown/sale line above the cards) — same offer architecture, our own wording. Reference: branch `mojo`, `blocks/mojo-bundle-tiers.liquid` + `_mojo-bundle-tier.liquid` (single-option version: `krino`, `_krino-bundle-card.liquid` + `snippets/krino-sync.liquid`). Each card = N units with an option picker per unit; prices in Liquid = variant price × N and a "Bundle price" setting, save/%/per-unit from tokens. Add flow: listen for `submit` on **window** in capture phase (Horizon's `on:submit` is document-capture), add the extra lines with `/cart/add.js`, then in a new task (`setTimeout`) set the form `id`/`quantity` and `requestSubmit()` so Horizon re-renders and opens the drawer. Mark lines with hidden property `_Bundle`. Checkout price comes from native automatic discounts: one per card, Amount off products, fixed amount = full − bundle price, once per order, minimum quantity N, no combinations; put the amount in the setting's `info` text (editor sidebar) and BUNDLE_OFFERS.md, never on the page, not even in design mode. Set `auto_open_cart_drawer: true`. Offer table + discount setup → `PD/08_shopify/BUNDLE_OFFERS.md`.
 
 ### 5.5 Small buy-box blocks
 - `<slug>-rating`: 5 SVG stars filled with the accent + one text setting ("Rated 4.8/5 by 1,300+ drivers", carried 1:1 from the competitor pattern).
@@ -338,7 +340,7 @@ Always configure the theme's Cart drawer section (`cart_drawer` in `sections/hea
 **Purpose:** reproducible templates, valid settings (Shopify rejects some values only at push time), and fast copy swaps (v2 pages, translations).
 **Do:** write `PRODUCT_DIR/scratch/build_<slug>_template.py`:
 ```python
-"""Build templates/product.json for <Brand> (Mode A clone of <competitor>)."""
+"""Build templates/product.json for <Brand> (adapted from <competitor>'s conversion framework)."""
 import copy, json, re, sys
 SRC, OUT = sys.argv[1], sys.argv[2]           # SRC = a template that already works in this theme (e.g. main's product.json)
 raw = open(SRC, encoding="utf8").read()
@@ -377,9 +379,9 @@ sections = {"main": main, "nx_testimonials": {...}, "nx_compare": {...}, "nx_faq
 tpl = {"sections": sections, "order": ["main", "nx_testimonials", "nx_story", "nx_compare", "nx_honest", "nx_faq"]}
 open(OUT, "w", encoding="utf8", newline="\n").write(header + json.dumps(tpl, ensure_ascii=False, indent=2) + "\n")
 ```
-- **Angle tags:** keep `ANGLE_MAP = {"<section key or block id>": ["V1", "O2"], …}` at the top of the builder, copied from each section's ANGLE ROLE, and print it with the word count. It goes into DELIVERY.md (angle → section map). Never render it on the page or in the editor.
+- **Angle tags:** keep `ANGLE_MAP = {"<section key or block id>": ["V1", "O2"], …}` at the top of the builder, copied from each section's ANGLE ROLE in the ADAPTATION BLUEPRINT, and print it with the word count. The map follows the blueprint's section assignments (our page structure), not the competitor's. It goes into DELIVERY.md (angle → section map + adaptation rationale). Never render it on the page or in the editor.
 - **Angle landing pages** (only when SECTION_SPEC's landing decision says so): build `templates/product.<slug>-<angle-id>.json` from the main template with the same sections; change only the above-the-fold strings, section images and section order listed for that angle (the copy deck has a block per landing page). The gallery is product media, shared by all templates. List each landing page with its angle card in DELIVERY.md so that card's ads link to it.
-- **Copy:** paste the copywriter's deck verbatim, with claims at full strength (00 §1). The deck is written from the Step Alpha language bank and tagged with angle IDs per string; don't rewrite it in the builder. Rich-text settings (`richtext`, Horizon `text` block `text`, accordion row text, FAQ answers) must start with `<p>`, `<ul>`, `<ol>` or `<h1>`–`<h6>`. Otherwise the push fails with « Tous les nœuds de niveau supérieur doivent être des balises <p>… ».
+- **Copy:** paste the copywriter's deck verbatim, with claims at full strength (00 §1). The copy deck is fully original — no string may be word-for-word identical to the competitor's (the copywriter ensures this; the builder never rewrites it). The deck is written from the Step Alpha language bank and tagged with angle IDs per string. Rich-text settings (`richtext`, Horizon `text` block `text`, accordion row text, FAQ answers) must start with `<p>`, `<ul>`, `<ol>` or `<h1>`–`<h6>`. Otherwise the push fails with « Tous les nœuds de niveau supérieur doivent être des balises <p>… ».
 - **French or other markets:** add a typography helper (FR: narrow no-break space before `? ! : ;` and inside `« »`: `re.sub(r" ([?!:;»])", " \\1", t)`) and apply it in `setv`.
 - **Variant pages (v2):** load the live template instead of building from scratch, `setv` only the copy, drop or reorder sections, print a word count of the visible copy (the operator compares length with the competitor), and write `product.<slug>-v2.json` (tools §9).
 - Placeholders: set `placeholder_label` + competitor ratio for every image you don't have yet, and `image_asset`/`asset` for files you ship.
@@ -406,9 +408,13 @@ node "<skill>/scripts/render_sections.js" --theme "$THEME_DIR" --template templa
    - `--buybox`: renders the main section's **custom** blocks (prefix auto-detected or `--prefix`) for real against a mock product (`--product` = competitor `p.json`, or a default Buy 1/2/3), and native blocks as stand-ins (title, text, hidden `variant-picker` radios, ATC in the theme button colors, accordions). The bundle JS runs, so clicking a card selects the native radio and updates the mock price.
    - `--shot`: headless Edge/Chrome with its own `--user-data-dir` writes `page-desktop.png` (1280 wide) and `page-mobile.png` (390 px iframe inside a 500 px window, so crop x ≤ 390). Heights are measured automatically.
    - Exit code 1 = a Liquid error (shown in the page as a red box).
-3. Read the screenshots next to the competitor's (`10-qa` §2): desktop and mobile, section by section.
+3. Read the screenshots and verify against the ADAPTATION BLUEPRINT (not the competitor's screenshots):
+   - Every conversion role from the FUNNEL PSYCHOLOGY block is served by a section on our page.
+   - Every angle from the ANGLE ARCHITECTURE has a home (section or landing page).
+   - The visual execution matches the blueprint's layout, component choices and design language.
+   - The page does **not** look like a copy of the competitor — compare side by side to confirm visual distinctness. Two different brands, not a clone.
 4. **Pointer-drag test (mobile first):** open the page in a 390 px viewport (Edge device mode or the editor's mobile preview) and drag each rail with the mouse. It must move and snap. A rail that only scrolls with touch or a trackpad fails.
-5. If the theme's main section uses native blocks you replaced visually (e.g. a price block styled by the theme), compare with a cropped competitor buy box, or finish with the real draft preview once a store exists.
+5. If the theme's main section uses native blocks you replaced visually (e.g. a price block styled by the theme), finish with the real draft preview once a store exists.
 **Known harness artefacts:** theme base CSS isn't loaded (pass `--css base.css` for Dawn), lazy images are forced eager, Google Fonts are loaded for QA only (`--fonts none` offline), and the theme's own gallery and header aren't rendered.
 
 ## 9. Commit → pull/merge → push draft
@@ -427,6 +433,7 @@ Paste into DELIVERY.md, filled in:
 - [ ] Global settings changed (palette, fonts, buttons, announcement): confirm on a shared store.
 - [ ] Preview links: product preview with `preview_theme_id`, editor link.
 - [ ] Angle map: section → angle card IDs (from `ANGLE_MAP`), and the landing page for each angle card when angle landing pages were built (the ads of that card link there).
+- [ ] Adaptation summary: how our page structure differs from the competitor's, which conversion roles were kept/combined/reordered, and why (from the ADAPTATION BLUEPRINT). This goes into DELIVERY.md so the operator sees two distinct pages, not a clone.
 
 ## 11. Pitfalls index
 | Pitfall | Where |
@@ -446,3 +453,4 @@ Paste into DELIVERY.md, filled in:
 | Main section hand-written → invalid settings in editor | §6 |
 | Lazy images blank in headless screenshots | §8 |
 | An advertised angle with no section that confirms it | SECTION_SPEC § ANGLE ARCHITECTURE, §6 `ANGLE_MAP` |
+| Page looks like a clone of the competitor | §0 principle 4, §8 QA step 4 — the ADAPTATION BLUEPRINT exists to prevent this |

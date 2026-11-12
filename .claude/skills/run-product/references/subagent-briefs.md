@@ -1,16 +1,16 @@
 # Sub-agent briefs (copy, fill the <…>, launch)
 
-Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see 16-orchestration.md §1. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
+Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_background: true`) and an explicit `model`: leads `opus` + `effort: "low"`; workers `sonnet` (writing/code/vision) or `haiku` (mechanical) — see 16-orchestration.md §1. **Exception: conversion architect (4), copywriter (5), builder (6), home-page builder (13) and copy chief (15) ALWAYS run on Opus 4.6 (`model: "opus"`) no matter what** — these roles require the strongest judgment for adaptation and original copy. Launch independent agents **in the same message**. Every brief starts with the COMMON HEADER so the agent can work cold.
 
 ## Contents
 - Common header
 - Lead briefs (Phase 3 parts)
 - Step Alpha briefs: Lead A α · Lead B α · α-analyst (batches) · α-angles · α-synthesis
 - 1 Capture agent · 2 Media agent · 3 Name brainstorm (optional)
-- 4 Conversion architect · 5 Copywriter · 6 Builder (optional) · 13 Home-page builder
+- 4 Conversion architect (Opus 4.6) · 5 Copywriter (Opus 4.6) · 6 Builder (Opus 4.6) · 13 Home-page builder (Opus 4.6)
 - 7 Product-image agent · 8 Page-image agent
 - 10 Ad-creative agent · 11 Ad-copy agent · 14 Policies agent (optional)
-- 12 Visual QA agent · 15 Copy chief (Opus, all persuasive copy)
+- 12 Visual QA agent (distinctiveness + blueprint fidelity) · 15 Copy chief (Opus 4.6, playbooks, originality gate)
 - Handling returns
 
 ---
@@ -20,7 +20,7 @@ Launch with the `Agent` tool (`subagent_type: general-purpose`, `run_in_backgrou
 You are a sub-agent in a product launch run (skill `run-product`, root <THEME_DIR>\.claude\skills\run-product, THEME_DIR from BRIEF.md).
 Read first: <PRODUCT_DIR>\BRIEF.md (inputs and decisions) and
 <THEME_DIR>\.claude\skills\run-product\references\00-operator-rules.md (non-negotiable rules — claims stay at full
-strength, no logo on product images, 1:1 testing, etc.).
+strength, no logo on product images, adapted framework — study the competitor's winning formula then build our own distinct version, etc.).
 Environment: Windows, Git Bash; run Python as `python -I`; scripts are in the skill's scripts\ folder.
 Writing files: you may write code, JSON job files, images and data files at the paths given below.
 Documents (analyses, specs, copy) must be RETURNED AS TEXT in your final reply — the harness may refuse report
@@ -38,16 +38,22 @@ These are the Phase 3 parts, sent only after the Alpha quality gate and the bran
 You are LEAD A (Store) of a run-product launch, running on Opus at low effort. Your job is to PLAN, DELEGATE and
 VERIFY — not to do mechanical work yourself. Spawn workers with the Agent tool (general-purpose, background,
 parallel when independent) using: model "haiku" for scripts/downloads/screenshots/theme check/policies fetch+transform;
-model "sonnet" for SECTION_SPEC (conversion architect), copywriting, Liquid section building, visual QA.
+model "opus" (Opus 4.6) for conversion architect (4), copywriter (5), builder (6), home-page builder (13) — these
+roles require the strongest model for framework adaptation and original copy, never Sonnet;
+model "sonnet" for visual QA (12) only.
 Use the worker briefs below (1, 4, 5, 6, 12, 13, 14) and add `model` to each.
 Read <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md first (3.1 angle cards, 3.2 avatars, 1.4 objections, 1.6 mechanism,
 1.10 + 2.4 funnel congruence, 3.5 language bank) and pass the named sections to each worker.
-Stream (capture exists from Phase 1): SECTION_SPEC → copy → build product page (settings, header, footer, sections,
-template) → home page → policies transform → local render + QA loop.
+Stream (capture exists from Phase 1): SECTION_SPEC + ADAPTATION BLUEPRINT → fully original copy (from dossier +
+playbooks, not paraphrasing competitor) → build adapted page (settings, header, footer, sections, template) →
+adapted home page → policies transform → local render + QA loop.
 You MAY write theme files on branch <BRAND_SLUG> (no git commands, no push, no publish) and files in <PRODUCT_DIR>.
-Verify each worker output yourself (read files, run `shopify theme check`, look at screenshots). Escalate a task to
-yourself only if a worker failed twice or it needs judgment (claims strength, 1:1 fidelity, broken build).
-Return (text): files changed, what was built per section, QA table, operator to-dos, "ready to push" list.
+Verify each worker output yourself (read files, run `shopify theme check`, look at screenshots). QA now checks
+DISTINCTIVENESS from the competitor (an AI comparing both pages should see two completely different things) as well
+as conversion mechanics preserved. Escalate a task to yourself only if a worker failed twice or it needs judgment
+(claims strength, adaptation fidelity, broken build).
+Return (text): files changed, what was built per section, distinctiveness assessment, QA table, operator to-dos,
+"ready to push" list.
 ```
 
 ### Lead B — Growth lead
@@ -236,46 +242,82 @@ Return: table name | possessive sentence | why it fits | risk (if any). Mark you
 ```
 
 ## 4 Conversion architect (Phase 3, A1)
-**Launch:** right after the gate (needs capture files). **Reference:** 03 (SECTION SPEC format), templates/SECTION_SPEC.md.
+**Launch:** right after the gate (needs capture files). **Model: `"opus"` (Opus 4.6) — always.** **Reference:** 03 (SECTION SPEC format + ADAPTATION BLUEPRINT), templates/SECTION_SPEC.md.
 ```
 <COMMON HEADER>
-Task: produce the SECTION SPEC of the competitor page for a Mode <A/B> rebuild.
+Task: TWO deliverables — (1) the SECTION SPEC of the competitor page, then (2) an ADAPTATION BLUEPRINT for our page.
 Inputs: <page dir>\capture.md, capture.json, copy.txt, p.html, screenshots (desk chunks, mobile sheets),
 <media dir>\_sheet.jpg, and <PRODUCT_DIR>\00_alpha\ALPHA_DOSSIER.md: 3.1 angle cards + 1.10/2.4 funnel congruence
-(page architecture), 1.4 objections + 3.5 objection-ready language (FAQ/objection handling), 1.6 mechanism.
+(page architecture), 1.4 objections + 3.5 objection-ready language (FAQ/objection handling), 1.6 mechanism,
+3.2 avatar cards, 1.5 emotional landscape, 3.5 language bank.
+Also read: <skill>\books-playbooks\*.html headings (grep for relevant conversion principles).
+
+PART 1 — COMPETITOR SECTION SPEC (mapping their framework):
 Follow <skill>\references\03-competitor-page-analysis.md and the template
 <skill>\templates\SECTION_SPEC.md exactly: every section top→bottom (incl. announcement, header, sticky ATC,
 popups, footer) with LAYOUT / COMPONENTS / TYPOGRAPHY / VISUAL DETAILS / IMAGE POSITIONS / CONVERSION ROLE / MOBILE,
-then FUNNEL PSYCHOLOGY, IMAGE MAP (position, ratio, content, source file), COPY INVENTORY (every string per
-section), APPS (what must be rebuilt natively).
-Return the full SECTION_SPEC.md content as text.
+then FUNNEL PSYCHOLOGY (price math, urgency, trust, social proof, upsell, narrative arc), ANGLE ARCHITECTURE
+(angle table, above-the-fold, gap angles, landing decision, objection map, mechanism section), IMAGE MAP,
+COPY INVENTORY (every string verbatim, tagged), APPS.
+
+PART 2 — ADAPTATION BLUEPRINT (how our page will be DISTINCT):
+Study the competitor's framework (section roles, conversion mechanics, funnel psychology) and design our ADAPTED
+version. The test: an AI comparing our shop and the competitor's should see two completely different things.
+For each section, specify:
+  - OUR SECTION: renamed role, different layout/grid, different visual pattern, different component choices
+  - CONVERSION MECHANICS PRESERVED: the trigger, objection, proof and action the section carries (same job, different execution)
+  - WHAT CHANGES: section order shifts, layout flips, typography choices, color application, component swaps,
+    spacing rhythm, visual hierarchy reordering — everything that makes it visually and structurally distinct
+  - WHAT STAYS: the conversion principle, the dossier angle/avatar it serves, the emotional arc position
+  - ANGLE ROLE: same mapping as in the spec (V#/O# · AV# · objection · congruence role)
+Include: our SECTION ORDER (different from theirs), our VISUAL IDENTITY RULES (layout patterns, spacing rhythm,
+component vocabulary — all different from the competitor), our FUNNEL FLOW (same psychology, different execution).
+Use the dossier data (avatars, pains, desires, language bank) to make the page speak to our customers more directly
+than the competitor does — customers should feel listened to and understood.
+Return BOTH documents as text (the master saves them to SECTION_SPEC.md and ADAPTATION_BLUEPRINT.md).
 ```
 
 ## 5 Copywriter (Phase 3, A2)
-**Launch:** when SECTION_SPEC.md is saved. **Reference:** 03 §copy rules, 09 for tone parity.
+**Launch:** when SECTION_SPEC.md + ADAPTATION_BLUEPRINT.md are saved. **Model: `"opus"` (Opus 4.6) — always.** **Reference:** 03 §copy rules, 13 (playbooks), 09 for tone parity.
 ```
 <COMMON HEADER>
-Task: write every word of the <BRAND> product page in <language/market>.
-Inputs: <page dir>\SECTION_SPEC.md (COPY INVENTORY = the slots to fill), copy.txt (competitor wording), BRIEF.md
-(brand, title, offer, guarantee), ALPHA_DOSSIER.md (3.1 angle cards, 1.1 awareness + sophistication per avatar,
-3.5 language bank incl. objection-ready phrases).
-Rules: same persuasion job per slot; original wording that paraphrases the competitor's key lines; claims at the SAME
-strength (never soften, never add caveats); simple vocabulary, direct response; total length close to the
-competitor's; brand name replaces theirs; testimonials rewritten as new people whose details can match the photos
-listed in the image map; prices/currency for <MARKET>.
-Return: a copy deck in section order, each slot labelled exactly as in the COPY INVENTORY (so the builder can map it),
-plus word count vs competitor.
+Task: write every word of the <BRAND> product page in <language/market>. FULLY ORIGINAL — no title, headline,
+subtitle or body text may be word-for-word identical to the competitor's.
+Inputs: <page dir>\SECTION_SPEC.md (COPY INVENTORY = reference for slot structure and word budget),
+<page dir>\ADAPTATION_BLUEPRINT.md (our adapted section structure — write for THIS structure, not the competitor's),
+copy.txt (competitor wording — for reference only, never copy), BRIEF.md (brand, title, offer, guarantee),
+ALPHA_DOSSIER.md (3.1 angle cards, 1.1 awareness + sophistication per avatar, 1.2 pains, 1.3 desires,
+1.5 emotional landscape, 3.5 language bank incl. objection-ready phrases, 3.3 hook library).
+BEFORE WRITING: read the relevant sections of <skill>\books-playbooks\*.html (Schwartz awareness/sophistication
+approach, Bencivenga proof arsenal, Halbert word pictures, Kennedy emotional triggers, Hopkins specifics).
+Rules:
+- Write from the Step Alpha dossier data (language bank, pains, desires, emotional landscape) and the playbooks,
+  NOT from paraphrasing competitor strings. The customer's own words are your primary source.
+- Same persuasion JOB per section (trigger, objection, proof, action) but fully original EXECUTION.
+- Claims at the SAME strength (never soften, never add caveats) — carry competitor claims as-is (rule 1).
+- Simple vocabulary, direct response, short lines; total length within ±10% of competitor per section.
+- Customers should feel listened to, understood and recognized — use their actual language from 3.5.
+- Strong promises backed by the dossier's mechanism (1.6) and proof points.
+- Testimonials as new people whose details match the image map; different stories, same objection-handling job.
+- Prices/currency for <MARKET>; brand name replaces theirs.
+- State the playbook principle used per piece (e.g. "V2 · AV2 problem aware, stage 4 → Schwartz: mechanism headline").
+ORIGINALITY CHECK: before returning, compare every title, headline, subtitle and body line against the competitor's
+COPY INVENTORY. Flag and rewrite any word-for-word or near-identical matches.
+Return: a copy deck following the ADAPTATION BLUEPRINT's section order, each slot labelled with its adapted section
+ID (so the builder can map it), angle card tag per string, plus word count vs competitor and originality report.
 ```
 
 ## 6 Builder (optional, Phase 3, A3)
-The master usually builds (it owns the repo). Delegate only big custom sections, with explicit file paths.
+The master usually builds (it owns the repo). Delegate only big custom sections, with explicit file paths. **Model: `"opus"` (Opus 4.6) — always** (section design/adaptation requires the strongest judgment).
 ```
 <COMMON HEADER>
 You MAY write these theme files only: <list of new files, e.g. sections/<slug>-comparison.liquid>.
-Task: implement <component> per SECTION_SPEC section "<name>" and <skill>\references\04-product-page-build.md
-patterns (vars snippet, media snippet, scoped CSS, schema settings + presets, mobile behaviour).
+Task: implement <component> per the ADAPTATION BLUEPRINT (not a pixel clone of the competitor) and
+<skill>\references\04-product-page-build.md patterns (vars snippet, media snippet, scoped CSS, schema settings +
+presets, mobile behaviour). Build the ADAPTED layout, visual patterns and component choices specified in the
+blueprint. The section must serve the same conversion role as the competitor's equivalent but look and feel distinct.
 Then run `shopify theme check` and report only offenses in your files. Do not touch templates or settings.
-Return: files written, settings/blocks available, check result.
+Return: files written, settings/blocks available, check result, distinctiveness notes (what differs from competitor).
 ```
 
 ## 7 Product-image agent (Phase 3, B)
@@ -309,16 +351,20 @@ Task: produce page images for <BRAND>. Messaging and people shown follow ALPHA_D
 Return: mapping image-map position → file, credits spent.
 ```
 
-## 15 Copy chief (Opus, playbooks)
-**Launch:** whenever persuasive copy is written (AD_VARIANTS, AD_COPY, page/home copy deck, image claims). **Reference:** 13, 00 §1.
+## 15 Copy chief (Opus 4.6, playbooks)
+**Launch:** whenever persuasive copy is written (AD_VARIANTS, AD_COPY, page/home copy deck, image claims). **Model: `"opus"` (Opus 4.6, `claude-opus-4-6`) — always.** **Reference:** 13, 00 §1.
 ```
 <COMMON HEADER>
 You are the COPY CHIEF. Read <PRODUCT_DIR>/00_alpha/ALPHA_DOSSIER.md first (mandatory: awareness state + sophistication
-per avatar from 1.1 decide the copy approach; 3.1 angle cards, 3.3 hooks, 3.5 language bank), then the relevant
-sections of <SKILL>/books-playbooks/*.html (grep headings). Write specific
+per avatar from 1.1 decide the copy approach; 3.1 angle cards, 3.3 hooks, 3.5 language bank, 1.5 emotional landscape),
+then the relevant sections of <SKILL>/books-playbooks/*.html (grep headings). Write specific
 direct-response copy with NO softness, calibrated to the competitor's proven framework and promise level (they scale);
-sharpen with the playbooks, push promises further only where the angle needs it; no hedges or caveats; claims at full strength. Keep the given structure/format; return the copy + one line per piece naming the
-playbook principle used.
+sharpen with the playbooks, push promises further only where the angle needs it; no hedges or caveats; claims at full
+strength. The playbooks and the Step Alpha language bank are the PRIMARY sources — not the competitor's copy.
+EVERY piece must be FULLY ORIGINAL — no word-for-word matches with the competitor's copy. Run an originality check
+against the competitor's COPY INVENTORY before finalizing: flag and rewrite any identical or near-identical strings.
+Keep the given structure/format; return the copy + one line per piece naming the playbook principle used +
+originality confirmation.
 ```
 
 ## 10 Ad-creative agent (Phase 3, D2)
@@ -355,32 +401,41 @@ Return the full AD_COPY.md content as text.
 **Launch:** after the first build + renders. **Reference:** 10.
 ```
 <COMMON HEADER>
-Task: compare competitor vs our build section by section.
+Task: QA our build against the ADAPTATION BLUEPRINT and check DISTINCTIVENESS from the competitor.
 Inputs: competitor screenshots <page dir>\comp_*.png / sheets; our renders <scratch>\qa\ours_*.png and buy-box mock
-screenshot; SECTION_SPEC.md.
-For each section at desktop and mobile: layout, spacing, typography, colors, component states, image positions/ratios.
-Ignore harness artefacts listed in 10-qa-and-delivery.md §2.
-Return a discrepancy table: SECTION | ISSUE (measured: e.g. radius 12→18px) | SUGGESTED FIX (CSS/setting) | SEVERITY.
+screenshot; SECTION_SPEC.md, ADAPTATION_BLUEPRINT.md.
+Two checks per section at desktop and mobile:
+1. BLUEPRINT FIDELITY: does our section match the ADAPTATION BLUEPRINT's layout, components, visual pattern and
+   conversion role? Flag deviations from the blueprint.
+2. DISTINCTIVENESS: would an AI comparing our page and the competitor's see two DIFFERENT pages? Flag any section
+   that looks too similar to the competitor (same layout, same visual pattern, same component arrangement).
+Also check: conversion mechanics preserved (trigger, objection, proof, action per section), mobile behaviour,
+component states, image positions/ratios. Ignore harness artefacts listed in 10-qa-and-delivery.md §2.
+Return a table: SECTION | CHECK (blueprint/distinctiveness/conversion/mobile) | ISSUE | SUGGESTED FIX | SEVERITY.
 ```
 
 ## 13 Home-page builder (Phase 3, A4)
 **Launch:** after the gate; it can write HOME_SPEC + copy immediately and build once A3's settings and reusable
-sections exist. **Reference:** 11, 04.
+sections exist. **Model: `"opus"` (Opus 4.6) — always.** **Reference:** 11, 04.
 ```
 <COMMON HEADER>
 You MAY write: templates/index.json (or index.<slug>-v2.json if the live home has ad traffic), new
 sections/<slug>-*.liquid, blocks/<slug>-*.liquid, snippets/<slug>-*.liquid, assets/<slug>-home-*; you may extend
 existing <slug>-* sections with OPTIONAL settings only. No git commands, no theme push/pull (the master does that).
-Task: clone the competitor home <COMPETITOR_HOME> 1:1 (Mode <A/B>) following <skill>\references\11-home-page.md:
-1. Read <PRODUCT_DIR>\02_competitor\home\ (capture + screenshots); write the HOME SPEC (return it as text).
-2. Map each section: reuse <slug>-* sections → native theme sections → new <slug>-* sections.
-3. Copy: original, claims at the same strength, consistent with the product page copy and BRIEF offer; avatars (3.2)
-   and angle cards (3.1) from ALPHA_DOSSIER.md.
+Task: build an ADAPTED version of the competitor home <COMPETITOR_HOME> following <skill>\references\11-home-page.md:
+1. Read <PRODUCT_DIR>\02_competitor\home\ (capture + screenshots); write the HOME SPEC with an ADAPTATION section
+   (how our home differs: different section order, different hero approach, different layout patterns, different
+   visual identity — the test: an AI comparing both homes sees two different pages). Return it as text.
+2. Map each section: reuse <slug>-* sections → native theme sections → new <slug>-* sections. Apply the product
+   page's ADAPTATION BLUEPRINT visual identity rules for consistency across our store.
+3. Copy: FULLY ORIGINAL (no word-for-word matches with competitor), claims at the same strength, consistent with the
+   product page copy and BRIEF offer; write from the dossier data (3.5 language bank, 3.2 avatars, 3.1 angle cards)
+   and books-playbooks principles. Customers should feel listened to and understood.
 4. Images: reuse 03_product-images / 04_page-images / packshot; Kie only for essential missing visuals (budget <n>).
 5. Build index.json with a Python builder (rich text in <p>), theme check (no new offenses), local render +
-   side-by-side screenshot comparison, fix.
-Return: HOME_SPEC text, section mapping table (competitor section → our section, native/custom), files written,
-images used/credits, theme check + QA notes, operator to-dos (product links, app widgets).
+   distinctiveness comparison (NOT similarity check — confirm our home looks different from theirs), fix.
+Return: HOME_SPEC text (with adaptation section), section mapping table (competitor section → our adapted section,
+native/custom), files written, images used/credits, theme check + distinctiveness QA notes, operator to-dos.
 ```
 
 ## 14 Policies agent (optional; the master can do it in minutes)
@@ -402,7 +457,8 @@ Return: table policy | words | replacements | removals | leftovers, plus any man
 ---
 
 ## Handling returns
-- Save returned documents immediately to their target paths (Step Alpha files in `00_alpha/` per 18 §1, SECTION_SPEC.md, AD_VARIANTS.md, AD_COPY.md, copy deck).
+- Save returned documents immediately to their target paths (Step Alpha files in `00_alpha/` per 18 §1, SECTION_SPEC.md, ADAPTATION_BLUEPRINT.md, AD_VARIANTS.md, AD_COPY.md, copy deck).
 - Verify claims of success: open generated images/contact sheets yourself before reporting them as done.
+- **Originality gate:** verify that no returned copy (page deck, home deck, ad copy, image claims) contains word-for-word matches with the competitor's copy inventory. If matches are found, send the piece back to the copy chief for rewriting before saving.
 - If an agent stalls or fails, resume it with `SendMessage` (keeps its context) rather than starting a new one.
 - Update BRIEF.md progress after each return.

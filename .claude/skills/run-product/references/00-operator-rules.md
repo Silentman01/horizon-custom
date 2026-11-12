@@ -4,7 +4,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 ## Contents
 1. Claims
-2. 1:1 testing (titles, palettes, structure)
+2. Adapted framework (study what works, build our own)
 3. Brand names
 4. Product images
 5. Page media and GIFs
@@ -27,13 +27,15 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 **Why:** The operator validates claims and runs them already. I once softened claims unasked ("Cuts headlight glare at night", "Rainy nights / Sensitive eyes") and the operator said: "Never told you to do this, revert any claims adjustments you made. every claims we have are validated and running." It cost a full regeneration round.
 **Also:** don't add "keep only if true" notes, "consider compliance" remarks, or softened alternates in deliverables. If a claim needs a number (e.g. "1,300+ drivers"), mirror the competitor's pattern with our brand.
 
-## 2. 1:1 testing — reuse what already works
-**Rule:** For product tests, take the competitor's proven elements 1:1 and upgrade later only when asked:
-- **Product title:** competitor's title structure with our brand ("Plaims Polarized Headlight Glasses" → "Noxis Polarized Headlight Glasses").
-- **Color palette:** the competitor's exact hex codes and roles.
-- **Page structure:** Mode A faithful clone (same sections, order, components, spacing logic).
-**Exception — operator brand guidelines win:** if the operator supplies a brand guideline file (palette, fonts, UI rules, product name), use it instead of the competitor's palette/fonts/title (Aurea run: `aurea-brand-guidelines.md`, pine #1E3328 / honey gold #C99A3A, Cormorant Garamond + Instrument Sans + Cinzel logo, title "Aurea® Prosperity Bracelet"). Layout/structure stays a 1:1 clone.
-**Why:** "for product titles don't overthink it, just take what works already 1:1, no need to reinvent the wheel when testing a product. we upgrade later on — same for color palette."
+## 2. Adapted framework — study what works, build our own
+**Rule:** We do NOT do pixel-perfect 1:1 clones. We MAP the competitor's proven framework (section order, conversion flow, offer architecture, trust architecture, social proof placement, funnel psychology) and then BUILD OUR OWN ADAPTED VERSION that uses the same winning principles but looks distinctly different. The goal: if an AI compared our shop and the competitor's shop side by side, it would struggle to find similarities and see two completely different things.
+- **Product title:** use the competitor's title STRUCTURE and PATTERN with our brand ("Plaims Polarized Headlight Glasses" → "Noxis Polarized Headlight Glasses"). The pattern stays; the words are ours.
+- **Color palette:** start from the competitor's palette reasoning (same color roles — accent, background, trust, CTA) but adapt the palette to our brand. Same role logic, possibly different shades and combinations.
+- **Page structure:** study the competitor's section order, conversion mechanics and funnel psychology (why it converts), then ADAPT it — same conversion principles, different execution. Reorder sections where it makes sense, change layouts (2-col → stacked, grid → rail, etc.), use different visual patterns, while preserving the same funnel psychology and conversion architecture. The framework MAP documents what each section does for conversion; the ADAPTATION BLUEPRINT describes how our version achieves the same job differently.
+- **Copywriting:** no title, headline, subtitle or body text may be word-for-word identical to the competitor's. Every string is our own original version, informed by the Step Alpha dossier (verbatim customer language, pain points, dream outcomes, objection-ready phrases). The copy chief always runs the books-playbooks for all persuasive copy.
+- **Shop design:** sections, blocks, spacing, colors, imagery and typography are our own. We keep the proven conversion mechanics (what the visitor sees first, how urgency works, where trust is built, how the offer is framed) but the visual execution is ours.
+**Exception — operator brand guidelines win:** if the operator supplies a brand guideline file (palette, fonts, UI rules, product name), use it instead of the competitor-derived palette/fonts/title (Aurea run: `aurea-brand-guidelines.md`, pine #1E3328 / honey gold #C99A3A, Cormorant Garamond + Instrument Sans + Cinzel logo, title "Aurea® Prosperity Bracelet").
+**Why:** we extract the competitor's winning formula (what converts), then build our own version so we have fully original content while keeping the proven conversion mechanics. The goal is distinctiveness: an AI comparing both shops sees two completely different things.
 
 ## 3. Brand names
 **Rule:** Invented single words, 2–3 syllables, brand-like, that a customer would naturally say in the possessive: "let me get my Plaims glasses" → "let me get my **Noxis** glasses". Credible in the category, pronounceable in the market language, not derivative of the competitor's name. Present 7–10 with the top 3 starred.
@@ -84,7 +86,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - When moving assets, actually move them (a previous "move" only copied and left duplicates).
 
 ## 11. Copy style
-- Original wording; paraphrase the key parts; keep the persuasion architecture.
+- **Fully original wording — no 1:1 copies.** No title, headline, subtitle or body text may be word-for-word identical to the competitor's. Every string must be our own original version. Paraphrase the persuasion job (what each line does for conversion), not the words themselves. Use Step Alpha's customer language (verbatim pain points, dream outcomes, objection-ready phrases from 3.5) so customers feel heard — but in our own sentences.
 - Simple vocabulary, direct response, short lines; length close to the competitor's (the operator found a 1,500-word page "big and heavy to read compared to inspirations").
 - Market language and currency; native typography for the language (e.g. French non-breaking spaces).
 
@@ -163,7 +165,7 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
 - **Claims stay at full strength.** Never soften, reword, remove or caveat claims ("Reduces Nighttime Glare By 85%", "Designed for cataract patients", "doctor-recommended"). The operator validates claims.
-- **1:1 for tests.** Title = competitor's title pattern with our brand; palette = competitor's exact hex; page structure = competitor's (Mode A). Don't reinvent; upgrade later only when asked.
+- **Adapted framework, not 1:1 clones (§2).** MAP the competitor's winning formula (conversion flow, funnel psychology, offer/trust/proof architecture), then BUILD OUR OWN version: same conversion principles, different execution. Title pattern stays with our brand; palette adapted from the competitor's role logic; page structure, copy, and design are distinctly ours. No string word-for-word identical to the competitor's.
 - **Brand names:** invented, one word, 2–3 syllables, passes "let me get my ___ glasses". Never filter by domain availability.
 - **No logo on product images**; skip competitor-specific images (anti-replica notices); edit existing images when only text changes.
 - **GIFs raw**: download originals, keep them, use animated WebP in the theme.
