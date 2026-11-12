@@ -1,0 +1,942 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Contenu sponsorisé",
+        "publication_name": "Les Petits Comptes",
+        "publication_tagline": "Le magazine qui fait les comptes du quotidien",
+        "masthead_nav": "Maison | Budget | Santé au quotidien | Cuisine",
+        "category": "Chronique · Ce que ça coûte vraiment",
+        "headline": "Trois lignes de crème, serrer, compter jusqu’à 30. Trois fois par jour, pendant 12 ans. <strong>Nous avons fait le compte : 73 heures par an.</strong>",
+        "dek": "<p>Denise, 66 ans, a recollé son dentier chaque matin à 6 h 30 pendant douze ans. Temps, argent, goût, aliments interdits : voici le bilan, pourquoi la crème ne tient jamais plus de trois heures, et ce qu’elle fait à la place.</p>",
+        "author_name": "Par Hélène Marchal",
+        "author_role": "Chroniqueuse « Ce que ça coûte vraiment »",
+        "author_image_asset": "",
+        "date_text": "Publié le 12 novembre 2026",
+        "meta_text": "6 min de lecture",
+        "hero_image_asset": "oralys-adv-nat-16.webp",
+        "hero_caption": "Le lavabo de Denise, un matin ordinaire : trois tubes entamés, le gant taché, le dentier à recoller.",
+        "hero_ratio": "square",
+        "heading_font": "playfair_display_n7",
+        "body_font": "work_sans_n4",
+        "h1_size_mobile": 29,
+        "h1_size_desktop": 44,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 680,
+        "color_bg": "#FBF8F4",
+        "color_text": "#1E1D1B",
+        "color_muted": "#6A625B",
+        "color_accent": "#2D4A7A",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#F6D3DC",
+        "masthead_bg": "#1F2E4D",
+        "masthead_text": "#FFFFFF",
+        "pad_top": 0,
+        "pad_bottom": 18,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 10
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« Rincer. Sécher. Trois lignes de crème. Appuyer, serrer, compter jusqu’à trente. »</p><p>Denise Arnaud récite son rituel comme une prière. Elle a 66 ans, vit à Limoges au-dessus d’une boulangerie et, pendant douze ans, elle a recollé son dentier du haut trois fois par jour. Ancienne aide à domicile, elle a tenu toute sa vie les comptes des autres. Les siens, jamais. Nous les avons faits avec elle, poste par poste.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 1 · Le temps",
+            "text": "Douze minutes par jour",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>À 54 ans, après une parodontite, elle a perdu ses dents du haut. Le pharmacien lui a donné un échantillon avec l’appareil : « Pour les premiers jours. » Les premiers jours ont duré douze ans. Une application la première année, deux au bout d’un an, trois au bout de trois ans. Et chaque fois, dès 6 h 30, les mêmes quatre étapes :</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_4": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Rincer l’appareil, le sécher au mouchoir : mouillé, la crème n’accroche pas.\nTrois lignes de crème : au milieu, à gauche, à droite.\nAppuyer contre le palais, serrer, compter jusqu’à trente.\nVérifier du bout de la langue que ça ne déborde pas. Une fois sur trois, ça déborde.",
+            "icon": "number"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "heading_2",
+        "text_3",
+        "checklist_4"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-19.webp",
+        "alt": "Trois lignes de crème posées sur un dentier, réveil à 6 h 30",
+        "caption": "6 h 30 : trois lignes, serrer, compter jusqu’à trente. Trois fois par jour.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 10,
+        "pad_bottom": 10,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "title": "Le calcul",
+            "text": "<ul><li>4 minutes × 3 applications = <strong>12 minutes par jour</strong>.</li><li>12 minutes × 365 jours = <strong>73 heures par an</strong>.</li><li>Sur douze ans : plus de 11 000 applications, environ 780 heures. <strong>Plus d’un mois entier, jour et nuit, devant le lavabo.</strong></li></ul>",
+            "style": "tint"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 2 · Le porte-monnaie",
+            "text": "Sept euros par semaine",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un tube par mois au début, puis un toutes les deux semaines, puis un par semaine au bout de cinq ans : <strong>près de 7 € par semaine</strong>, plus de 360 € par an. Sur douze ans, près de 500 tubes, environ 3 500 €.</p><p>Et sept crèmes, car elle croyait que le problème venait de la marque : la crème rose, l’extra-forte, la « sans goût », la marque du supermarché, une allemande à 12 €… « Toutes tenaient trois heures. Pas une minute de plus. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "callout_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-18.webp",
+        "alt": "Poubelle de salle de bain remplie de tubes de crème vides",
+        "caption": "Un tube par semaine, cinquante-deux par an.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 10,
+        "pad_bottom": 10,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 3 · Le goût",
+            "text": "Un goût de crème dans chaque café",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un goût chimique, mentholé, qui finit dans le café, la soupe, le yaourt. Et on finit par mâcher de travers. Une patiente de 88 ans le lui a dit un midi : « Denise, vous faites une drôle de tête en mangeant. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 4 · La composition",
+            "text": "Ce qu’on avale",
+            "size": "large"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "À savoir",
+            "text": "<p>Une crème fixative se dissout dans la salive : c’est pour ça qu’elle lâche, et c’est pour ça qu’on en avale une partie, à chaque repas. Certaines contiennent du zinc. Quand on en met trois fois par jour depuis des années, la composition du tube mérite d’être lue.</p>",
+            "style": "warning"
+          }
+        },
+        "heading_5": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 5 · Les interdits",
+            "text": "Cinq aliments rayés de la liste",
+            "size": "large"
+          }
+        },
+        "text_6": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pas interdits par un médecin. Interdits par la crème :</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_7": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "La baguette : la croûte décolle l’appareil.\nLes pommes : l’appareil bascule vers l’avant.\nLe maïs en épi : il soulève la prothèse.\nLes caramels : ils emportent la crème, et l’appareil avec.\nLes noix : trop de pression sur le côté.",
+            "icon": "cross"
+          }
+        },
+        "text_8": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Chaque matin à 6 heures, l’odeur du pain chaud monte de la boulangerie. Sa fille Nathalie, venue de Brive, a fini par lui demander : « Maman, tu ne manges plus jamais de pain ? »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_9": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Poste n° 6 · Hors étiquette",
+            "text": "Le lavabo, le soir",
+            "size": "large"
+          }
+        },
+        "text_10": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le soir, la crème durcie se décolle à l’ongle. Et toute la journée, dans le sac : le tube et le miroir de poche.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "heading_3",
+        "callout_4",
+        "heading_5",
+        "text_6",
+        "checklist_7",
+        "text_8",
+        "heading_9",
+        "text_10"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-17.webp",
+        "alt": "Un pouce gratte la crème durcie dans un dentier",
+        "caption": "Le soir, la crème durcie à gratter. Ce poste-là, personne ne le compte.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 10,
+        "pad_bottom": 10,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "title": "Le bilan, sur douze ans",
+            "text": "<ul><li>780 heures au lavabo, environ 3 500 € de crème.</li><li>Sept crèmes, et la même tenue pour toutes : trois heures.</li><li>Cinq aliments interdits, dont le pain qu’elle sent cuire chaque matin.</li></ul>",
+            "style": "border"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La bonne question n’est donc pas « quelle crème ? ». C’est « pourquoi trois heures ? »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "L’explication",
+            "text": "Pourquoi la crème ne tient jamais plus de trois heures",
+            "size": "large"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Sans dents, l’os de la mâchoire se résorbe, année après année, et la gencive descend avec lui. Le dentier, lui, garde sa forme du premier jour. Entre les deux se creuse un <strong>vide</strong> de quelques millimètres.</p><p>Or une crème est une colle, et une colle tient deux surfaces qui se touchent. Face à un vide, elle se pose par-dessus, la salive s’infiltre et la dissout. Au bout de trois heures, il ne reste rien. En remettre repousse simplement le problème de trois heures. D’où les trois applications par jour.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "callout_1",
+        "text_2",
+        "heading_3",
+        "text_4"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma du vide entre la gencive et le dentier, rempli par le gel Oralys",
+        "caption": "La crème colle par-dessus le vide. Le gel, lui, le remplit.",
+        "ratio": "natural",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 10,
+        "pad_bottom": 10,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Maman, j’ai trouvé pourquoi ta crème ne tient pas. Et ce n’est pas la crème le problème.",
+        "name": "Nathalie, sa fille",
+        "detail": "Son message, un dimanche soir de mars",
+        "style": "rule",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26
+      }
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Une pose tous les 2 à 3 jours",
+            "text": "Ce qui remplace la crème",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le lien de Nathalie ne menait pas à une huitième crème. <strong>Oralys</strong> est un gel thermoplastique de qualité dentaire : tiédi, il devient souple, prend l’empreinte exacte de la gencive telle qu’elle est aujourd’hui, puis se raffermit. Il ne colle pas le vide, il le remplit. La salive ne le dissout pas.</p><p>Nathalie a commandé un tube : 39,95 €, environ cinq semaines. Denise l’a posé un mardi soir, seule :</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Tiédir le tube dans l’eau chaude (60 °C max), sécher le dentier.\nÉtaler une noisette de gel dans le creux de l’appareil.\nRemettre le dentier, serrer quelques secondes, rincer à l’eau froide.",
+            "icon": "number"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Une pose tient <strong>2 à 3 jours</strong>. Pour la changer : cinq minutes dans l’eau tiède, et le gel se soulève d’un seul morceau. Zéro colle, zéro zinc.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "checklist_3",
+        "text_4"
+      ]
+    },
+    "figure_5": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-pdp-peel-out.webp",
+        "alt": "Le gel Oralys retiré d’un seul morceau",
+        "caption": "Après 2 à 3 jours, le gel sort d’un seul morceau. Rien à gratter.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 10,
+        "pad_bottom": 10,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "link",
+        "heading": "",
+        "text": "",
+        "button_label": "Voir Oralys Gel",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé"
+      }
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Deux mois plus tard",
+            "text": "La journée de Denise, avant et depuis",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le mercredi, à 6 heures, elle est descendue acheter une demi-baguette tradition. Beurrée, croquée debout dans la cuisine. L’appareil n’a pas bougé. Elle a pleuré : « De colère. Douze ans à me priver de ça. » Le vendredi soir, trois jours après la pose, le gel est sorti d’un seul morceau.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "compare_1": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "Heure",
+        "col_1": "Avant : la crème",
+        "col_2": "Depuis : Oralys",
+        "highlight": "2",
+        "footnote": ""
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "6 h 30",
+            "v1": "✗ Trois lignes, serrer, compter",
+            "v2": "✓ Elle met son dentier",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "7 h",
+            "v1": "✗ Café au goût de menthe",
+            "v2": "✓ Baguette beurrée, vrai café",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "12 h",
+            "v1": "✗ La crème a lâché : on recommence",
+            "v2": "✓ Rien à remettre",
+            "v3": ""
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "19 h",
+            "v1": "✗ Troisième application",
+            "v2": "✓ Gratin, croûte comprise",
+            "v3": ""
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "22 h",
+            "v1": "✗ Gratter le palais",
+            "v2": "✓ Un rinçage",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "compare_2": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Le comparatif, poste par poste",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "",
+        "col_1": "Crème",
+        "col_2": "Oralys",
+        "highlight": "2",
+        "footnote": "Crème : un tube par semaine à environ 7 €. Oralys : pack de 4 tubes, environ 20 semaines."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Temps",
+            "v1": "✗ 73 heures par an",
+            "v2": "✓ Une pose tous les 2 à 3 jours",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Tenue",
+            "v1": "✗ Environ 3 heures",
+            "v2": "✓ 2 à 3 jours",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Goût",
+            "v1": "✗ Menthe chimique",
+            "v2": "✓ Rien ne fond",
+            "v3": ""
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Zinc",
+            "v1": "✗ Dans certaines crèmes",
+            "v2": "✓ Zéro zinc",
+            "v3": ""
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Le soir",
+            "v1": "✗ À gratter",
+            "v2": "✓ D’un seul morceau",
+            "v3": ""
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Par semaine",
+            "v1": "≈ 7 €",
+            "v2": "≈ 4 € en pack de 4",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6"
+      ]
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Courrier",
+            "text": "Le compte de nos lecteurs",
+            "size": "large"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "title": "Paulette, 71 ans, Angers · dentier du bas",
+            "text": "<p>Deux applications par jour pendant 9 ans : près de 49 heures par an. « Je pose le gel tous les trois jours, devant les informations. Et je n’y pense plus. »</p>",
+            "style": "border"
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "Jean-Claude, 74 ans, Montauban · haut et bas",
+            "text": "<p>Deux dentiers, deux rituels : 146 heures par an. « Le premier mois avec Oralys, j’ai mangé des noix devant la télé. »</p>",
+            "style": "border"
+          }
+        },
+        "checklist_4": {
+          "type": "checklist",
+          "settings": {
+            "title": "Votre compte en 30 secondes",
+            "items": "Minutes par application ? (Denise : 4)\nApplications par jour ? (Denise : 3)\nMultipliez les deux, puis par 6 : ce sont vos heures par an. (Denise : 72.)",
+            "icon": "number"
+          }
+        },
+        "heading_5": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Vos questions",
+            "text": "Vos trois objections",
+            "size": "large"
+          }
+        },
+        "callout_6": {
+          "type": "callout",
+          "settings": {
+            "title": "« J’ai tout essayé. »",
+            "text": "<p>Denise aussi : sept crèmes. Sept colles, la même tenue de trois heures. Oralys n’est pas une colle : il remplit le vide.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_7": {
+          "type": "callout",
+          "settings": {
+            "title": "« Encore un produit miracle. »",
+            "text": "<p>Le principe du rebasage, fait chez soi. Plus de 30 000 porteurs de dentier, 4,8/5. Et 90 jours pour juger.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_8": {
+          "type": "callout",
+          "settings": {
+            "title": "« Ça doit être compliqué. »",
+            "text": "<p>Trois gestes tous les 2 à 3 jours, au lieu de quatre étapes trois fois par jour. Haut, bas, complet ou partiel.</p>",
+            "style": "tint"
+          }
+        },
+        "heading_9": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Le dernier poste",
+            "text": "Et le prix ?",
+            "size": "large"
+          }
+        },
+        "text_10": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Au tube, Oralys revient à environ 8 € la semaine, un peu plus que la crème de Denise. Le pack de 4 (2 achetés = 2 offerts) dure environ vingt semaines : <strong>à peu près 4 € la semaine</strong>, au lieu de 7 €. Chez Denise, 79,90 €, c’était onze semaines de crème.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "callout_2",
+        "callout_3",
+        "checklist_4",
+        "heading_5",
+        "callout_6",
+        "callout_7",
+        "callout_8",
+        "heading_9",
+        "text_10"
+      ]
+    },
+    "compare_3": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Les trois packs Oralys",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "Pack",
+        "col_1": "Prix",
+        "col_2": "Durée",
+        "highlight": "0",
+        "footnote": "90 jours satisfait ou remboursé sur tous les packs."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "1 tube",
+            "v1": "39,95 €",
+            "v2": "≈ 5 semaines",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
+            "v1": "55,93 €",
+            "v2": "≈ 10 semaines · livraison + comprimés offerts",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
+            "v1": "79,90 €",
+            "v2": "≈ 20 semaines · 4 cadeaux",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "cta_2": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Offre lecteurs · Les Petits Comptes",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "body_8": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le mois dernier, Nathalie est revenue avec du pain de campagne. Denise a mordu dans la croûte sans y penser. Sa fille a souri : « Quand même. »</p><p>Faites votre compte. Puis essayez 90 jours : si votre dentier ne tient pas, on vous rembourse intégralement. <a href=\"/products/oralys-gel\">Voir l’offre Oralys</a>.</p><p>Hélène Marchal</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1"
+      ]
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (214)",
+        "sort_label": "Les plus utiles",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#1F2E4D",
+        "color_reply_bg": "#F3EEE8"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Ginette R.",
+            "badge": "",
+            "text": "4 minutes, 2 fois par jour, fois 6 : 48 heures. Ça fait un choc.",
+            "time": "il y a 40 min",
+            "likes": "58",
+            "is_reply": false,
+            "avatar_color": "#9C3D54"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Simone L.",
+            "badge": "",
+            "text": "Posé jeudi soir. Samedi, une pomme entière, croquée. La première depuis sept ans.",
+            "time": "il y a 4 h",
+            "likes": "93",
+            "is_reply": false,
+            "avatar_color": "#7A4E9C"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Josette P.",
+            "badge": "",
+            "text": "Et pour le retirer, ça ne colle pas comme la crème ?",
+            "time": "il y a 6 h",
+            "likes": "9",
+            "is_reply": false,
+            "avatar_color": "#B5651D"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Denise A.",
+            "badge": "Le témoignage",
+            "text": "Non Josette, cinq minutes dans l’eau tiède et il sort d’un seul morceau. Moi qui grattais tous les soirs !",
+            "time": "il y a 5 h",
+            "likes": "37",
+            "is_reply": true,
+            "avatar_color": "#2D4A7A"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Marie-France D.",
+            "badge": "",
+            "text": "Pack de 4 pour ma mère et moi. À nous deux, on finissait trois tubes de crème par semaine.",
+            "time": "hier",
+            "likes": "22",
+            "is_reply": false,
+            "avatar_color": "#0E6B50"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "Les Petits Comptes",
+        "text": "<p>Cet article est une publicité pour Oralys. Les Petits Comptes est une publication éditée par Oralys.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 Les Petits Comptes",
+        "color_bg": "#1F2E4D",
+        "color_text": "#DCE1EA"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "figure_1",
+    "body_2",
+    "figure_2",
+    "body_3",
+    "figure_3",
+    "body_4",
+    "figure_4",
+    "quote_1",
+    "body_5",
+    "figure_5",
+    "cta_1",
+    "body_6",
+    "compare_1",
+    "compare_2",
+    "body_7",
+    "compare_3",
+    "cta_2",
+    "body_8",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}

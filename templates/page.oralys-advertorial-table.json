@@ -1,0 +1,717 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Article sponsorisé",
+        "publication_name": "La Grande Tablée",
+        "publication_tagline": "Cuisine de famille, recettes et art de vivre",
+        "masthead_nav": "Recettes | Le dimanche | Grands-parents | Art de vivre | Vos histoires",
+        "category": "Art de vivre · Bien manger après 60 ans",
+        "headline": "« J’ai mordu dans une baguette pour la première fois en sept ans » : <strong>5 raisons pour lesquelles les porteurs de dentier retrouvent leur place à table</strong>",
+        "dek": "<p>« Mamie, pourquoi tu ne manges jamais le pain ? » Cette question de sa petite-fille avait fait pleurer Madeleine Renaud, 68 ans, à Libourne. Quatre mois plus tard, elle casse de nouveau la baguette au déjeuner du dimanche. Sa belle-fille, aide-soignante, nous explique pourquoi.</p>",
+        "show_byline": true,
+        "author_name": "Par Agnès Lacombe",
+        "author_role": "Rubrique Art de vivre",
+        "date_text": "Publié le 12 novembre 2026",
+        "meta_text": "6 min de lecture · 2 940 partages",
+        "hero_image_asset": "oralys-adv-nat-01.webp",
+        "hero_caption": "Le croûton appuie sur l’avant de l’appareil, et l’appareil bascule. Pendant sept ans, Madeleine a reposé le pain au moment de mordre.",
+        "hero_ratio": "square",
+        "heading_font": "playfair_display_n7",
+        "body_font": "figtree_n4",
+        "h1_size_mobile": 28,
+        "h1_size_desktop": 42,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 680,
+        "color_bg": "#FCF8F1",
+        "color_text": "#231C17",
+        "color_muted": "#6E6158",
+        "color_accent": "#8A4F1D",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#F5DDB0",
+        "masthead_bg": "#3B2A1E",
+        "masthead_text": "#F7EBDD",
+        "pad_top": 0,
+        "pad_bottom": 20,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 12
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Chez Madeleine Renaud, le déjeuner du dimanche ne se discute pas. Trente-cinq ans de vendanges avec Jean-Pierre, et chaque semaine la grande table sous le figuier : deux fils, une belle-fille, cinq petits-enfants. Le rôti, le gratin et, au milieu, la baguette tradition de chez Lefort.</p><p>Depuis son dentier complet, posé à 61 ans, Madeleine cuisinait tout cela sans presque y toucher. « Je coupais le rôti en miettes, je trempais la mie dans le jus, et je parlais beaucoup pour qu’on ne regarde pas mon assiette. » Dans un tiroir, la liste de ce qu’elle ne mangeait plus faisait seize lignes.</p><p>Puis un dimanche de novembre, devant un pot-au-feu aux os à moelle, Léa, 8 ans, a posé sa question. Madeleine a quitté la table. Sa belle-fille Sandrine, aide-soignante, l’a retrouvée en larmes dans la cuisine, et lui a expliqué ce que personne ne lui avait dit en neuf ans.</p><p>D’autres lecteurs ont vécu le même retour à table. Leurs raisons se ressemblent.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Raison n° 1 sur 5",
+            "text": "Ils comprennent enfin pourquoi le pain les trahissait",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ce n’est ni leur âge, ni leur maladresse, ni la marque de leur crème.</p><p>« Quand on perd ses dents, l’os de la mâchoire n’est plus travaillé par les racines. Il se résorbe, un peu chaque année, et plus vite en bas, explique Sandrine. Le dentier, lui, garde la forme du jour où il a été fait. Entre les deux, un vide se creuse. »</p><p>Quand on mord dans une croûte, c’est ce vide qui joue : l’avant de l’appareil s’enfonce, l’arrière se soulève, le dentier bascule.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "Pourquoi la crème lâche avant le dessert",
+            "text": "<p>La crème est une colle : elle tient deux surfaces qui se touchent. Devant un vide, elle n’a plus de prise, et la salive la dissout en quelques heures. Madeleine avait tout essayé : la crème rose, la verte extra-forte, la poudre, les coussinets. « Neuf ans à mettre de la colle sur un trou. »</p>",
+            "style": "tint"
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "heading_2",
+        "text_3",
+        "callout_4"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma du vide entre la gencive et le dentier",
+        "caption": "Le vide sous l’appareil : l’os se retire, le dentier garde sa forme. La crème se pose dessus sans le remplir.",
+        "ratio": "natural",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 4,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "On ne colle pas un vide, Madeleine. Il faut le combler.",
+        "name": "Sandrine",
+        "detail": "Aide-soignante, belle-fille de Madeleine",
+        "style": "marks",
+        "align": "left",
+        "size_mobile": 24,
+        "size_desktop": 28,
+        "pad_top": 20,
+        "pad_bottom": 20,
+        "pad_top_mobile": 16,
+        "pad_bottom_mobile": 16
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Raison n° 2 sur 5",
+            "text": "La croûte craque de nouveau sous la dent",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ce que Sandrine a conseillé, c’est <strong>Oralys</strong>, un gel thermoplastique de qualité dentaire. Tiédi dans l’eau chaude, il devient souple. Étalé dans l’appareil, il prend l’empreinte exacte de la gencive, puis se raffermit. Il ne colle pas : il remplit. Le dentier repose de nouveau sur toute la gencive, et la croûte n’a plus de vide pour le faire basculer.</p><p>Madeleine l’a posé un soir. Le lendemain, café, tartine, puis la cuisse de poulet avec la peau. Le soir, un bout de baguette pris dans la corbeille. « J’ai senti la croûte craquer. L’appareil n’a pas bougé. J’ai mangé un demi-pain toute seule, en pleurant. C’était le goût d’avant. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "Rayés de la liste des seize, en quatre mois",
+            "items": "La baguette, croûton du bout compris\nLa pomme croquée, pas coupée en lamelles\nLes côtes du barbecue, mangées avec les doigts\nLes noisettes grillées et le nougat",
+            "icon": "check"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "checklist_3"
+      ]
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-02.webp",
+        "alt": "Dentier resté dans une pomme croquée",
+        "caption": "Croquer une pomme : le palais tire, l’appareil se décolle et reste dans le fruit. La pomme a été le premier aliment rayé de la liste.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Raison n° 3 sur 5",
+            "text": "La viande se mâche au lieu de s’avaler",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Avec un appareil qui flotte, on apprend à tricher : le rôti en tout petits morceaux avalés sans mâcher, la mie trempée dans la sauce, pendant que les autres mangent l’entrecôte.</p><p>Sandrine le voit dans son service : « Quand l’appareil ne tient plus, on mange mou, puis on mange moins. On maigrit, et personne ne fait le lien. » Madeleine avait perdu huit kilos en un an.</p><p>Le gel ne fond pas : il tient pendant qu’on mâche fort et longtemps. Une seule pose tient 2 à 3 jours, du petit-déjeuner au dîner, même pour le dentier du bas. Le deuxième dimanche, Madeleine a fait un barbecue et mangé une côte entière, à la main. Léa a éclaté de rire : « Mamie, tu manges comme papa ! »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-03.webp",
+        "alt": "Assiette de purée et compote à côté d’un steak",
+        "caption": "L’assiette de Madeleine pendant des années : purée, compote, yaourt, mie sans croûte. Juste derrière, l’assiette des autres.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Raison n° 4 sur 5",
+            "text": "Ils restent assis jusqu’au dessert, et la famille le remarque",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un dentier qui bouge fait quitter la table : pour remettre de la crème entre le plat et le dessert, ou pour aller pleurer dans la cuisine. Les enfants voient la chaise vide. Guillaume, l’aîné de Madeleine, avait fini par le dire : « Maman, tu ne manges plus rien. »</p><p>Une fois le vide comblé, plus rien n’oblige à se lever. Pas de tube dans le sac, pas de détour par les toilettes du restaurant. Le premier dimanche, Madeleine a cassé la baguette et mangé le rôti comme tout le monde. « Guillaume n’a rien dit. Au dessert, il m’a pris la main sous la table. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-08.webp",
+        "alt": "Table de famille avec une chaise vide",
+        "caption": "Une chaise vide au milieu du repas. Celle de Madeleine, le jour du pot-au-feu.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "quote_2": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Quand on mange normalement, personne ne dit rien. C’est quand on ne mange plus que les gens regardent.",
+        "name": "Madeleine Renaud",
+        "detail": "68 ans, Libourne · dentier complet haut et bas depuis 9 ans",
+        "style": "rule",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26,
+        "pad_top": 20,
+        "pad_bottom": 20,
+        "pad_top_mobile": 16,
+        "pad_bottom_mobile": 16
+      }
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Raison n° 5 sur 5",
+            "text": "Le goût d’avant revient, et le soir il n’y a plus rien à gratter",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Neuf ans de crème, c’est neuf ans de goût de pâte dans le café, et un quart d’heure chaque soir à gratter ce qui a séché sur l’appareil.</p><p>Oralys ne fond pas : on n’avale rien, et rien ne se mêle au goût des plats. Zéro colle, zéro zinc. Pour le changer, au bout de 2 à 3 jours, cinq minutes dans l’eau tiède et l’ancien gel se soulève d’un seul morceau. « La gencive est propre. Et le pain de chez Lefort a retrouvé son goût », dit Madeleine.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_5": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-05.webp",
+        "alt": "Crème séchée grattée au couteau sur un dentier",
+        "caption": "Le rituel du soir, avant : la pâte séchée qu’on gratte au couteau au-dessus de l’évier. Avec le gel, il n’y a plus rien à gratter.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 10,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Vos histoires",
+            "text": "Ils ont retrouvé la table, eux aussi",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« Le gigot de Pâques. Je n’en avais plus mangé depuis quatre ans. J’en ai repris. » <strong>Arlette, 72 ans, Cognac</strong>, dentier du haut</p><p>« Au restaurant, je prenais le hachis et ma femme l’entrecôte. Dimanche, on a pris la même chose. » <strong>Roger, 76 ans, Périgueux</strong>, dentier du bas</p><p>Plus de 30 000 porteurs de dentier ont adopté Oralys, avec une note de 4,8/5.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_6": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-pp-eating-baguette-family-table.webp",
+        "alt": "Femme qui mord dans une baguette à une table de famille",
+        "caption": "Chez Arlette, à Cognac : le premier repas de famille où elle a mordu dans le pain sans y penser.",
+        "ratio": "landscape",
+        "width": "wide",
+        "radius": 10,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      }
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Avant de commander",
+            "text": "Les questions que tout le monde pose à Sandrine",
+            "size": "large"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "title": "« Mon dentier du bas ne tient plus rien. Ça marche aussi ? »",
+            "text": "<p>Oui. Haut, bas, complet ou partiel : le gel prend la forme de la gencive, quelle qu’elle soit. C’est même en bas, là où l’os se retire le plus vite, que la différence se sent le plus.</p>",
+            "style": "tint"
+          }
+        },
+        "checklist_3": {
+          "type": "checklist",
+          "settings": {
+            "title": "« C’est compliqué à poser ? » Trois gestes",
+            "items": "Plonger le tube dans l’eau chaude (60 °C maximum). Laver et bien sécher l’appareil.\nDéposer une noisette de gel et l’étaler avec les pouces dans le creux de l’appareil.\nRemettre le dentier, serrer les dents quelques secondes, rincer à l’eau froide. C’est prêt.",
+            "icon": "number"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "« Et si ça ne marche pas pour moi ? »",
+            "text": "<p>90 jours satisfait ou remboursé. Un e-mail suffit, sans vous justifier. De quoi juger sur une douzaine de dimanches.</p>",
+            "style": "tint"
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "title": "« Où le trouver ? »",
+            "text": "<p>Uniquement sur le site officiel. Des imitations circulent : elles se ressemblent, pas le gel à l’intérieur. Colis neutre, expédié sous 24 h, sans abonnement.</p>",
+            "style": "border"
+          }
+        },
+        "heading_6": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ce que coûte un retour à table",
+            "size": "medium"
+          }
+        },
+        "text_7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un tube dure environ 5 semaines. Madeleine a pris 4 tubes pour l’hiver (2 achetés, 2 offerts). La plupart des lecteurs commencent par 2 tubes, le 2e à -70 %.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "callout_2",
+        "checklist_3",
+        "callout_4",
+        "callout_5",
+        "heading_6",
+        "text_7"
+      ]
+    },
+    "compare_1": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Les trois packs Oralys",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "Pack",
+        "col_1": "Prix",
+        "col_2": "Durée",
+        "highlight": "0",
+        "footnote": "90 jours satisfait ou remboursé sur tous les packs.",
+        "color_head_bg": "#F4EADB",
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 4,
+        "pad_bottom_mobile": 4
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "1 tube",
+            "v1": "39,95 €",
+            "v2": "≈ 5 semaines",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
+            "v1": "55,93 €",
+            "v2": "≈ 10 semaines · livraison + comprimés offerts",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
+            "v1": "79,90 €",
+            "v2": "≈ 20 semaines · 4 cadeaux",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Le gel qui a ramené Madeleine à table",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "body_8": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>À Noël, ils seront douze autour de la table. Chapon, foie gras, bûche. « Je mangerai tout, avec tout le monde, sans me lever une seule fois », promet Madeleine.</p><p>Si votre assiette ressemble à la sienne il y a quatre mois, ce n’est pas vous, ni votre âge. C’est un vide que la crème ne peut pas combler. Vous avez 90 jours pour en juger à table. <a href=\"/products/oralys-gel\">Voir si l’offre de lancement est encore disponible</a>.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1"
+      ]
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (156)",
+        "sort_label": "Les plus utiles",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#3B2A1E",
+        "color_reply_bg": "#F4EADB"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Josiane P.",
+            "badge": "",
+            "text": "La question de Léa, mon petit-fils me l’a posée à Pâques. J’ai répondu comme Madeleine : « pas faim ». Commandé ce matin.",
+            "time": "il y a 18 min",
+            "likes": "34",
+            "is_reply": false,
+            "avatar_color": "#8A4F1D"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Raymond C.",
+            "badge": "",
+            "text": "Dentier du bas depuis onze ans. Dimanche, côte de bœuf avec mes fils. Ma femme n’en revenait pas.",
+            "time": "il y a 1 h",
+            "likes": "88",
+            "is_reply": false,
+            "avatar_color": "#4F5D2F"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Odette M.",
+            "badge": "",
+            "text": "Et pour le retirer, on n’abîme pas l’appareil ?",
+            "time": "il y a 2 h",
+            "likes": "6",
+            "is_reply": false,
+            "avatar_color": "#7A4E6C"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Madeleine R.",
+            "badge": "Citée dans l’article",
+            "text": "Non Odette, cinq minutes dans l’eau tiède et il vient d’un seul morceau. L’appareil est propre dessous, rien à gratter.",
+            "time": "il y a 2 h",
+            "likes": "19",
+            "is_reply": true,
+            "avatar_color": "#3B2A1E"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Christiane B.",
+            "badge": "",
+            "text": "J’étais méfiante. J’ai pris les 2 tubes à cause des 90 jours. Trois semaines après, la crème n’est pas sortie du placard.",
+            "time": "il y a 4 h",
+            "likes": "41",
+            "is_reply": false,
+            "avatar_color": "#1F4E8C"
+          }
+        },
+        "comment_6": {
+          "type": "comment",
+          "settings": {
+            "name": "Gérard L.",
+            "badge": "",
+            "text": "Mon fils m’a envoyé l’article avec juste « Papa, lis ça ». J’ai compris pourquoi en arrivant à la chaise vide.",
+            "time": "il y a 6 h",
+            "likes": "57",
+            "is_reply": false,
+            "avatar_color": "#8A4F1D"
+          }
+        },
+        "comment_7": {
+          "type": "comment",
+          "settings": {
+            "name": "Danièle F.",
+            "badge": "",
+            "text": "Pris les 4 tubes pour ma sœur et moi. Au réveillon, on reste à table jusqu’à la bûche.",
+            "time": "il y a 9 h",
+            "likes": "29",
+            "is_reply": false,
+            "avatar_color": "#7A4E6C"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5",
+        "comment_6",
+        "comment_7"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "La Grande Tablée",
+        "text": "<p>Cet article est une publicité pour Oralys. Les témoignages rapportés sont ceux de personnes ayant utilisé le produit ; les prénoms sont indiqués avec leur accord. Oralys n’est pas un médicament et ne remplace pas l’avis de votre chirurgien-dentiste.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 La Grande Tablée",
+        "color_bg": "#3B2A1E",
+        "color_text": "#E9DCCB"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "figure_1",
+    "quote_1",
+    "body_2",
+    "figure_2",
+    "body_3",
+    "figure_3",
+    "body_4",
+    "figure_4",
+    "quote_2",
+    "body_5",
+    "figure_5",
+    "body_6",
+    "figure_6",
+    "body_7",
+    "compare_1",
+    "cta_1",
+    "body_8",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}

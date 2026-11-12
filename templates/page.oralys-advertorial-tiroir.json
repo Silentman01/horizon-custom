@@ -1,0 +1,814 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Publi-rédactionnel",
+        "publication_name": "Bons Réflexes",
+        "publication_tagline": "Le magazine pratique des 60 ans et plus",
+        "masthead_nav": "Santé | Budget | Maison | Vos droits | Le grand dossier",
+        "category": "Le grand dossier · Le dentier du bas",
+        "headline": "« Mon dentier du bas est dans le tiroir depuis 3 ans. » <strong>Pourquoi le bas ne tient pas, et comment Marcel l’a remis en bouche.</strong>",
+        "dek": "<p>1 247 € de retraite, 3 000 à 5 000 € d’implants (8 000 € avec la prothèse neuve), et un dentier du bas rangé entre les médicaments et les mouchoirs. Pourquoi le bas est le plus dur à faire tenir, ce que coûte chaque solution, et ce qui a sorti celui de Marcel du tiroir.</p>",
+        "show_byline": true,
+        "author_name": "Dossier réalisé par Pascale Rigaud",
+        "author_role": "Rubrique Santé pratique · avec Marcel et sa belle-fille Sophie",
+        "author_image_asset": "",
+        "date_text": "Publié le 12 novembre 2026",
+        "meta_text": "7 min de lecture",
+        "hero_image_asset": "oralys-adv-nat-11.webp",
+        "hero_caption": "Le tiroir de la table de nuit de Marcel. Son dentier du bas y est resté trois ans.",
+        "hero_ratio": "square",
+        "heading_font": "plus_jakarta_sans_n8",
+        "body_font": "figtree_n4",
+        "h1_size_mobile": 28,
+        "h1_size_desktop": 40,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 680,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E",
+        "color_muted": "#5C6863",
+        "color_accent": "#0E6B50",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#FCE9A8",
+        "masthead_bg": "#F2C230",
+        "masthead_text": "#17221E",
+        "pad_top": 0,
+        "pad_bottom": 20,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 12
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le dentier du bas de Marcel Fourier est resté trois ans dans le tiroir de sa table de nuit. Pendant ce temps, Marcel a mangé sur la gencive nue.</p><p>Il a 74 ans. Il a conduit les bus du réseau de la ville, à Clermont-Ferrand, pendant 38 ans. Le haut, il le porte depuis ses 62 ans, et avec la crème, ça tient. Le bas, posé à 65 ans, n’a jamais tenu.</p><p>« Le haut, ça va. C’est le bas. » Nous lisons cette phrase dans presque toutes vos lettres. Voici pourquoi.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "1. Le problème",
+            "text": "Le bas n’est pas un haut à l’envers",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le dentier du haut a un allié : le palais, une large surface où il fait ventouse. Le dentier du bas n’en a pas. Et tout le reste joue contre lui.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-14.webp",
+        "alt": "Un dentier du bas posé seul au bord d’un lavabo blanc",
+        "caption": "Un dentier du bas : un fer à cheval de résine, sans palais pour s’accrocher.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "checklist_1": {
+          "type": "checklist",
+          "settings": {
+            "title": "Ce que le dentier du bas a contre lui",
+            "items": "Une crête étroite : une bande d’os d’à peine deux centimètres de large.\nUne crête qui fond plus vite : sans dents, l’os se résorbe, bien plus vite en bas.\nLa langue et les joues : à chaque mot, à chaque gorgée, elles le poussent.\nPresque pas de surface pour la crème : la salive la dissout avant la fin du repas.",
+            "icon": "cross"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "title": "Le chiffre à retenir",
+            "text": "<p>Une étude publiée en 1972, qui a suivi des porteurs de dentier pendant 25 ans, a mesuré une perte d’os environ <strong>quatre fois plus importante en bas qu’en haut</strong>.</p>",
+            "style": "tint"
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Le vrai coupable : le vide sous l’appareil",
+            "size": "medium"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Le dentier garde la forme de votre bouche le jour de la pose. La gencive, elle, continue de changer. Un vide se creuse entre les deux.</p><p>La crème est une colle : elle tient deux surfaces qui se touchent. Au-dessus d’un vide, elle n’a plus prise, et la salive la dissout en quelques heures. En bas, moins de surface, plus de vide : elle n’a aucune chance.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "checklist_1",
+        "callout_2",
+        "heading_3",
+        "text_4"
+      ]
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma du vide qui se creuse entre la gencive et le dentier",
+        "caption": "Le vide entre la gencive et l’appareil se creuse plus vite en bas. La crème ne peut pas le combler.",
+        "ratio": "natural",
+        "width": "content",
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Le haut tenait la journée avec la crème. Le bas tenait jusqu’au premier bout de pain.",
+        "name": "Marcel Fourier, 74 ans",
+        "detail": "Clermont-Ferrand · dentier complet du bas depuis ses 65 ans",
+        "style": "rule",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "2. Le tiroir",
+            "text": "Pourquoi tant de dentiers du bas finissent dans un tiroir",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>De la crème, puis plus de crème. Le dentier se soulève quand on mord, la gencive frotte, saigne. Un soir, on le retire « pour souffler ». Il ne ressort plus.</p><p>Chez Marcel, c’est un repas de trop : le dentier avait tant bougé qu’il avait les gencives en sang. Puis le dentiste lui a donné le prix des implants. Le tiroir est resté fermé.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "Trois ans sans le bas",
+            "text": "<ul><li>Soupe, purée, omelette, yaourt, banane. Tous les jours.</li><li>La viande en morceaux minuscules, le pain trempé dans le café.</li><li>Cinq kilos perdus en deux ans.</li></ul><p>« Mon médecin m’a parlé de digestion. Je ne lui ai pas dit que je ne pouvais plus mâcher. »</p>",
+            "style": "warning"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Et pendant que le dentier attend, la gencive continue de changer. Le vide grandit.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "callout_3",
+        "text_4"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-12.webp",
+        "alt": "Un bol de soupe à côté d’une assiette de viande sur une nappe à carreaux",
+        "caption": "Pendant trois ans, à table : la soupe pour Marcel, la viande et le pain pour les autres.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "3. Le budget",
+            "text": "Le piège de l’argent : crème à vie ou implants hors de prix",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Avec 1 247 € de retraite par mois, tout se compte. Le dentiste de Marcel lui a proposé deux implants pour stabiliser le bas : « Entre 3 000 et 5 000 €, sans compter la prothèse neuve. » Sur le devis écrit : <strong>8 000 € au total</strong>. Plus de six mois de retraite.</p><p>Les implants ne sont en général pas pris en charge par la Sécurité sociale, et la complémentaire de base de Marcel ne les rembourse pas.</p><p>Restait la crème. Quatre marques essayées, dont une allemande. Sur neuf ans : <strong>entre 3 000 et 3 500 €</strong>, pour un bas qui ne tenait pas un repas.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-13.webp",
+        "alt": "Un dentier posé à côté d’un devis dentaire et d’une calculatrice",
+        "caption": "Le devis : 8 000 € au total. Marcel l’a posé à côté de sa calculatrice. Puis il a rangé le dentier.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "compare_1": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Le dentier du bas : ce que coûte chaque porte de sortie",
+        "intro": "<p>Ce qu’on a proposé à Marcel, et ce qu’il en a tiré.</p>",
+        "columns": "3",
+        "corner_label": "",
+        "col_1": "Le prix",
+        "col_2": "Le bas tient ?",
+        "col_3": "Le hic",
+        "highlight": "0",
+        "footnote": "Fourchettes courantes, variables selon les cabinets."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Crème adhésive",
+            "v1": "≈ 7 € la semaine, à vie",
+            "v2": "✗ Dissoute avant la fin du repas",
+            "v3": "3 000 à 3 500 € en neuf ans"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Le tiroir",
+            "v1": "0 €",
+            "v2": "✗ Plus en bouche",
+            "v3": "Soupe, purée, 5 kilos perdus"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Rebasage au cabinet",
+            "v1": "150 à 300 € à chaque fois",
+            "v2": "✓ Un temps",
+            "v3": "À refaire quand la gencive change"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Implants",
+            "v1": "8 000 € avec la prothèse neuve",
+            "v2": "✓",
+            "v3": "Chirurgie, en général non remboursés"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Oralys Gel",
+            "v1": "≈ 4 € la semaine en pack de 4",
+            "v2": "✓ 2 à 3 jours par pose",
+            "v3": "Un geste tous les 2 à 3 jours"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "4. Le déclic",
+            "text": "Ce qui a sorti le dentier du tiroir",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ce n’est pas le dentiste. C’est Sophie, sa belle-fille, qui vient tous les dimanches avec le fils de Marcel et les enfants. Un dimanche, elle lui demande pourquoi il ne prend pas de rôti. « Je n’ai pas faim. »</p><p>Le dimanche suivant, elle arrive avec une boîte. « Je savais qu’il ne portait plus le bas, nous raconte-t-elle. J’ai cherché, et j’ai compris que le problème n’était pas la crème. C’était le vide en dessous. »</p><p>Dans la boîte : <strong>Oralys Gel</strong>. Pas une crème, un gel thermoplastique de qualité dentaire. Tiédi dans l’eau chaude, il devient souple ; étalé dans l’appareil, il prend l’empreinte exacte de la gencive telle qu’elle est aujourd’hui, puis se raffermit. La salive ne le dissout pas. Il ne colle pas au-dessus du vide : il le remplit.</p><p>C’est là que le bas change de camp. La crème a besoin de surface, et en bas il n’y en a pas. Le gel a besoin d’un creux à remplir, et en bas il y en a. « Un vide, ça ne se colle pas. Ça se comble », résume le Dr Hélène Verdier, chirurgienne-dentiste à Lyon, spécialiste de la prothèse amovible.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_5": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "image_asset": "oralys-adv-nat-20.webp",
+        "alt": "Un dentier qui trempe dans un verre sur une table de nuit",
+        "caption": "Le dimanche soir, la famille partie : le dentier sort du tiroir. Un bain nettoyant, puis le gel.",
+        "ratio": "square",
+        "width": "content",
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      }
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "checklist_1": {
+          "type": "checklist",
+          "settings": {
+            "title": "Comment Marcel l’a posé, chez lui",
+            "items": "Le tube dans un bol d’eau chaude (60 °C maximum), le dentier lavé et bien séché.\nUne noisette de gel, étalée avec les pouces dans le creux de l’appareil.\nLe dentier en bouche, on serre les dents quelques secondes, on rince à l’eau froide.",
+            "icon": "number"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pour le changer : 5 minutes dans l’eau tiède, et il se retire d’un seul morceau. Zéro zinc, rien à gratter.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "La semaine qui a suivi",
+            "size": "medium"
+          }
+        },
+        "checklist_4": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Lundi : une tartine beurrée le matin, un steak haché à midi, du cantal le soir. « L’appareil tenait. »\nMercredi : premier changement de gel, au bout de trois jours.\nDimanche : du rôti et des pommes de terre rissolées, à la table de Sophie.",
+            "icon": "check"
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Personne n’a rien dit. Sophie a souri. Deux mois plus tard, le dentier du bas n’est pas retourné dans le tiroir, et Marcel a repris du poids.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_6": {
+          "type": "heading",
+          "settings": {
+            "kicker": "5. Nos lecteurs",
+            "text": "Eux aussi ont sorti le bas du tiroir",
+            "size": "large"
+          }
+        }
+      },
+      "block_order": [
+        "checklist_1",
+        "text_2",
+        "heading_3",
+        "checklist_4",
+        "text_5",
+        "heading_6"
+      ]
+    },
+    "quote_2": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Deux ans dans une boîte à chaussures : la crème lâchait à la première bouchée. Je l’ai remis en octobre. Je croque de nouveau dans les pommes.",
+        "name": "Marthe B., 79 ans",
+        "detail": "Saint-Étienne · dentier du bas",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "quote_3": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "« En bas, c’est les implants ou rien », m’avait dit mon dentiste. J’ai pris le rien pendant dix-huit mois. Aujourd’hui, il tient du café du matin au dîner.",
+        "name": "Robert T., 81 ans",
+        "detail": "Tours · complet haut et bas",
+        "style": "card",
+        "align": "left",
+        "size_mobile": 19,
+        "size_desktop": 22,
+        "pad_top": 8,
+        "pad_bottom": 8,
+        "pad_top_mobile": 6,
+        "pad_bottom_mobile": 6
+      }
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "link",
+        "heading": "",
+        "text": "",
+        "button_label": "Voir Oralys Gel",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé"
+      }
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "6. Vos objections",
+            "text": "« Oui, mais moi… »",
+            "size": "large"
+          }
+        },
+        "callout_2": {
+          "type": "callout",
+          "settings": {
+            "title": "« Ma gencive est trop plate, plus rien ne tient. »",
+            "text": "<p>C’est là que la crème échoue et que le gel sert : plus la gencive est plate, plus le vide est grand. Le gel ne cherche pas de prise, il remplit l’espace et prend la forme exacte de votre crête.</p>",
+            "style": "border"
+          }
+        },
+        "callout_3": {
+          "type": "callout",
+          "settings": {
+            "title": "« Ça fait trois ans qu’il est dans le tiroir. »",
+            "text": "<p>Celui de Marcel aussi. Le dentier n’a pas changé, c’est la gencive. Le gel prend l’empreinte de la gencive d’aujourd’hui : ni nouvel appareil, ni rendez-vous.</p>",
+            "style": "border"
+          }
+        },
+        "callout_4": {
+          "type": "callout",
+          "settings": {
+            "title": "« Le bas, c’est sans espoir. »",
+            "text": "<p>Pour la crème, oui. Pas pour le gel. Une pose tient 2 à 3 jours, même en bas. Plus de 30 000 porteurs de dentier l’ont adopté, avec une note de 4,8/5.</p>",
+            "style": "border"
+          }
+        },
+        "callout_5": {
+          "type": "callout",
+          "settings": {
+            "title": "« Je n’ai pas les moyens. »",
+            "text": "<p>Le pack de 4 tubes, 79,90 €, dure environ 20 semaines : à peu près 4 € la semaine, quand la crème en coûte environ 7. Moins cher qu’un seul rebasage chez le dentiste.</p>",
+            "style": "border"
+          }
+        },
+        "callout_6": {
+          "type": "callout",
+          "settings": {
+            "title": "« Et si ça ne marche pas chez moi ? »",
+            "text": "<p>Vous avez 90 jours satisfait ou remboursé. Un e-mail suffit, sans avoir à vous justifier.</p>",
+            "style": "border"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "callout_2",
+        "callout_3",
+        "callout_4",
+        "callout_5",
+        "callout_6"
+      ]
+    },
+    "compare_2": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Les trois packs Oralys",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "Pack",
+        "col_1": "Prix",
+        "col_2": "Durée",
+        "highlight": "0",
+        "footnote": "90 jours satisfait ou remboursé sur tous les packs."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "1 tube",
+            "v1": "39,95 €",
+            "v2": "≈ 5 semaines",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
+            "v1": "55,93 €",
+            "v2": "≈ 10 semaines · livraison + comprimés offerts",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
+            "v1": "79,90 €",
+            "v2": "≈ 20 semaines · 4 cadeaux",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "cta_2": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Offre réservée aux lecteurs de Bons Réflexes",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "body_8": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Marcel a mis trois ans à rouvrir ce tiroir. Il n’a fallu ni implants, ni nouveau dentier : seulement comprendre que le problème n’était ni lui, ni sa crème, mais le vide sous l’appareil.</p><p>Si votre dentier du bas est rangé quelque part, ne le jetez pas. <a href=\"/products/oralys-gel\">Voir si l’offre de lancement est encore disponible</a>.</p><p><strong>P.-S.</strong> Même s’il est dans le tiroir depuis des années, votre dentier du bas peut reprendre sa place. Le gel s’adapte à votre gencive telle qu’elle est aujourd’hui, pas telle qu’elle était le jour de la pose.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1"
+      ]
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (214)",
+        "sort_label": "Les plus récents",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#17221E",
+        "color_reply_bg": "#FBF5E1"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Sophie F.",
+            "badge": "",
+            "text": "Merci d’avoir raconté l’histoire de mon beau-père. Dimanche dernier, il a repris deux fois des rissolées.",
+            "time": "il y a 40 min",
+            "likes": "63",
+            "is_reply": false,
+            "avatar_color": "#9C3D54"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Henriette L.",
+            "badge": "",
+            "text": "Le mien est dans ma boîte à bijoux depuis 2022. Je me reconnais dans chaque ligne, surtout la purée.",
+            "time": "il y a 2 h",
+            "likes": "41",
+            "is_reply": false,
+            "avatar_color": "#7A4E9C"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Bernard D.",
+            "badge": "",
+            "text": "Ancien chauffeur routier. Même devis que Marcel, même réponse : non. J’ai pris le pack de 4.",
+            "time": "il y a 5 h",
+            "likes": "27",
+            "is_reply": false,
+            "avatar_color": "#3D6E9C"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Josette M.",
+            "badge": "",
+            "text": "Ma gencive du bas est toute plate. Ça marche quand même ?",
+            "time": "hier",
+            "likes": "9",
+            "is_reply": false,
+            "avatar_color": "#B5651D"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Pascale Rigaud",
+            "badge": "Autrice",
+            "text": "C’est justement là que le gel sert, Josette : plus elle est plate, plus le vide est grand.",
+            "time": "hier",
+            "likes": "15",
+            "is_reply": true,
+            "avatar_color": "#0E6B50"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "Bons Réflexes",
+        "text": "<p>Cet article est une publicité pour Oralys. Bons Réflexes est une publication éditée par Oralys. Les témoignages sont ceux de nos lecteurs ; Oralys n’est pas un médicament et ne remplace pas l’avis de votre chirurgien-dentiste.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 Bons Réflexes",
+        "color_bg": "#17221E",
+        "color_text": "#E4E9E6"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "figure_1",
+    "body_2",
+    "figure_2",
+    "quote_1",
+    "body_3",
+    "figure_3",
+    "body_4",
+    "figure_4",
+    "compare_1",
+    "body_5",
+    "figure_5",
+    "body_6",
+    "quote_2",
+    "quote_3",
+    "cta_1",
+    "body_7",
+    "compare_2",
+    "cta_2",
+    "body_8",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}

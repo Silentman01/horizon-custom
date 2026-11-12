@@ -1,0 +1,758 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "layout": "oralys-advertorial",
+  "sections": {
+    "header_1": {
+      "type": "oralys-adv-header",
+      "settings": {
+        "show_masthead": true,
+        "ad_label": "Publicité · Article sponsorisé",
+        "publication_name": "Les Grands Jours",
+        "publication_tagline": "Le magazine des familles, des fêtes et des souvenirs",
+        "masthead_nav": "Mariages | Baptêmes | Anniversaires | Tables de fête | Vos histoires",
+        "category": "Reportage · Vos histoires",
+        "headline": "« Mon dentier s’est décroché pendant le discours au mariage de ma fille » : <strong>Georges, 71 ans, l’a rattrapé avec la langue devant 120 invités</strong>",
+        "dek": "<p>Mariages, baptêmes, noces d’or : les grands jours, on y parle, on y rit, on y est pris en photo. Pour beaucoup de porteurs de dentier, ce sont aussi les jours les plus redoutés. Georges nous a raconté le sien, et son fils nous a expliqué ce qui s’est vraiment passé ce soir-là.</p>",
+        "author_name": "Reportage d’Agnès Morvan",
+        "author_role": "Rubrique « Vos histoires »",
+        "date_text": "Publié le 12 novembre 2026",
+        "meta_text": "7 min de lecture",
+        "hero_image_asset": "oralys-adv-nat-06.webp",
+        "hero_caption": "Le discours, le champagne, et ce que personne ne devait voir. (Photo d’illustration)",
+        "hero_ratio": "square",
+        "heading_font": "playfair_display_n7",
+        "body_font": "lora_n4",
+        "h1_size_mobile": 27,
+        "h1_size_desktop": 40,
+        "body_size_mobile": 18,
+        "body_size_desktop": 19,
+        "measure": 680,
+        "color_bg": "#FBF8F3",
+        "color_text": "#1E1A17",
+        "color_muted": "#6B625B",
+        "color_accent": "#0E6B50",
+        "color_cta": "#D2382C",
+        "color_cta_text": "#FFFFFF",
+        "color_highlight": "#F2DFB0",
+        "masthead_bg": "#3A1E2A",
+        "masthead_text": "#F6EEE6",
+        "pad_top": 0,
+        "pad_bottom": 20,
+        "pad_top_mobile": 0,
+        "pad_bottom_mobile": 12
+      }
+    },
+    "body_1": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "text_1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Son témoignage a beaucoup circulé. Des lecteurs nous ont écrit : « C’est exactement ce qui me fait peur. » Nous sommes allés voir Georges Thibault à Beaune, dans la cuisine où il a écrit son discours.</p>",
+            "drop_cap": true,
+            "lead": true
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Le 14 septembre, 20 heures",
+            "text": "« Au mot “cinq”, j’ai senti le palais se décoller »",
+            "size": "large"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Salle des fêtes de Meursault, cent vingt invités. Hélène, sa fille cadette, vient de se marier. Georges, ancien viticulteur, veuf depuis deux ans, fait le discours du père de la mariée : huit minutes, réécrites pendant trois semaines sur la table de la cuisine.</p><p>« Ma petite Hélène, quand tu avais cinq ans… » Au mot « cinq », son dentier du haut bascule. « Un petit bruit de ventouse qui lâche. Personne ne l’entend, sauf vous. » Il le rattrape avec la langue et continue.</p><p>Suivent six minutes la mâchoire serrée. Il évite les mots en « s » et en « f ». Il saute sa plus belle phrase, parce qu’elle commençait par « si ». La salle applaudit, Hélène pleure. Son gendre vient lui dire : « C’était un beau discours, Georges. » Il hoche la tête, sans un mot.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "text_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "quote_1": {
+      "type": "oralys-adv-quote",
+      "settings": {
+        "quote": "Pendant six minutes, j’ai pensé à mon dentier. Pas une seconde à ma fille.",
+        "name": "Georges Thibault",
+        "detail": "71 ans, Beaune · dentier complet du haut depuis 9 ans",
+        "style": "marks",
+        "align": "left",
+        "size_mobile": 22,
+        "size_desktop": 26
+      }
+    },
+    "body_2": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "La peur qu’on n’avoue pas",
+            "text": "Les grands jours, c’est là que la bouche travaille le plus",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Au quotidien, on s’arrange : on parle peu, on coupe la viande très fin, on laisse la croûte. Les grands jours ne laissent pas ce choix. On parle pendant des heures, on rit, on trinque, on est pris en photo de près. Et tout cela arrive le soir, quand la crème du matin n’en peut plus.</p><p>Ce jour-là, Georges avait mis sa crème à 6 heures. Discours à 20 heures. Entre les deux, il en a remis trois fois, dont une aux toilettes pendant le vin d’honneur. « Le jour du mariage de ma fille, j’ai passé plus de temps devant un lavabo que devant elle. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_1": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8,
+        "image_asset": "oralys-adv-nat-04.webp",
+        "alt": "Dentier du haut posé sur le bord d’un lavabo, dans les toilettes d’une salle des fêtes",
+        "caption": "Pendant le vin d’honneur, Georges est allé remettre de la crème aux toilettes. Comme tant d’autres, à tant de fêtes.",
+        "credit": "Photo d’illustration",
+        "ratio": "square",
+        "width": "content"
+      }
+    },
+    "body_3": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "L’explication",
+            "text": "« Papa, on ne colle pas un vide »",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Philippe, le fils aîné, travaille dans l’informatique à Dijon. Ce soir-là, il a remarqué une hésitation. Le surlendemain, il a appelé : « C’est ton appareil qui t’a gêné ? » Georges a failli raccrocher. Puis il a dit oui.</p><p>Son explication relève de la physique, pas de la médecine. « Sans dents, l’os de la mâchoire ne travaille plus. Il fond, un peu chaque année. Le dentier, lui, garde la forme de la gencive du jour où il a été fait. Au bout de neuf ans, il y a un vide entre les deux. »</p><p>Or une crème colle ce qui se touche. Face à un vide, elle n’a plus rien à retenir, et la salive la dissout en trois heures environ. Ce n’était ni la marque, ni la façon de la mettre.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_2": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8,
+        "image_asset": "oralys-adv-gap-illustration.webp",
+        "alt": "Schéma : l’os se résorbe sous le dentier et un vide se creuse entre la gencive et l’appareil",
+        "caption": "L’os se résorbe, l’appareil garde sa forme : il reste un vide que la crème ne peut pas combler.",
+        "ratio": "natural",
+        "width": "content"
+      }
+    },
+    "body_4": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "callout_1": {
+          "type": "callout",
+          "settings": {
+            "title": "Pourquoi c’est en parlant que ça lâche",
+            "text": "<p>« En parlant, la langue et les lèvres poussent sur l’appareil des dizaines de fois par minute, explique Philippe. Sur le “s”, la langue appuie derrière les dents de devant. Sur le “f”, la lèvre du bas remonte contre elles. S’il y a un vide derrière, chaque poussée fait levier. L’air passe sous le palais, et la ventouse lâche. »</p><p>Voilà pourquoi tant de porteurs se taisent au moment où ils voudraient le plus parler.</p>",
+            "style": "tint"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« Il ne faut pas coller plus fort, il faut remplir le vide. » Philippe a parlé à son père d’<strong>Oralys</strong>, un gel thermoplastique de qualité dentaire. On le tiédit dans l’eau chaude, on l’étale dans l’appareil, on mord : il prend la forme exacte de la gencive d’aujourd’hui, puis se raffermit. La salive n’a aucune prise dessus. Une application tient 2 à 3 jours.</p><p>Georges a trouvé que ça ressemblait à une arnaque. « Tu as 90 jours pour te faire rembourser, papa. Essaie. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "callout_1",
+        "text_2"
+      ]
+    },
+    "body_5": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Ils nous ont écrit",
+            "text": "Leurs grands jours à eux",
+            "size": "large"
+          }
+        },
+        "heading_2": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Jean-Claude, 78 ans, Albi : ses noces d’or, la main devant la bouche",
+            "size": "small"
+          }
+        },
+        "text_3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« Quarante personnes pour nos cinquante ans de mariage. J’ai ri toute la soirée derrière ma main. Sur les photos, on dirait que je tousse. » Il utilise le gel depuis le printemps : « Au mariage de mon petit-fils, en juin, j’ai fait le discours. Sans la main. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "heading_2",
+        "text_3"
+      ]
+    },
+    "figure_3": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8,
+        "image_asset": "oralys-adv-nat-09.webp",
+        "alt": "Homme aux cheveux gris, en veste, qui cache sa bouche avec la main pendant un dîner",
+        "caption": "La main devant la bouche au moment de rire : le réflexe de tant de porteurs de dentier.",
+        "credit": "Photo d’illustration",
+        "ratio": "square",
+        "width": "content"
+      }
+    },
+    "body_6": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Ginette, 74 ans, Saint-Malo : le baptême de son arrière-petite-fille",
+            "size": "small"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« J’étais la marraine. Au repas, le dentier s’est soulevé au dessert. Je l’ai retiré discrètement et caché sous ma serviette, dans mon assiette. J’ai passé l’après-midi à surveiller cette serviette. » Elle utilise le gel depuis l’été : « Au prochain baptême, je lirai mon texte la tête haute. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "figure_4": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8,
+        "image_asset": "oralys-adv-nat-07.webp",
+        "alt": "Dentier à moitié caché sous une serviette blanche dans une assiette, lors d’un dîner de fête",
+        "caption": "Au repas du baptême, Ginette a fini le dessert sans son dentier, caché sous sa serviette.",
+        "credit": "Photo d’illustration",
+        "ratio": "square",
+        "width": "content"
+      }
+    },
+    "body_7": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "",
+            "text": "Lucienne, 69 ans, Metz : l’hommage qu’elle n’a pas lu",
+            "size": "small"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>« Pour les obsèques de ma sœur, j’avais écrit un texte. Le matin, j’ai donné la feuille à mon neveu : j’avais trop peur que mon dentier bouge au micro. C’est lui qui a fait mes adieux à ma sœur. » Elle a commandé la semaine suivante. « Ça, je ne le revivrai jamais. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "divider_3": {
+          "type": "divider",
+          "settings": {
+            "style": "dots"
+          }
+        },
+        "heading_4": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Six semaines plus tard",
+            "text": "La croûte, la côte de bœuf, les noix du jardin",
+            "size": "large"
+          }
+        },
+        "text_5": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Georges a commandé un mardi et reçu le colis le jeudi. Le soir même, il a suivi la notice : le tube dans l’eau chaude, une noisette de gel dans l’appareil, l’appareil en bouche, les dents serrées quelques secondes. « Pas le collant de la crème. L’appareil posé, simplement, comme au premier jour. »</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "checklist_6": {
+          "type": "checklist",
+          "settings": {
+            "title": "",
+            "items": "Vendredi matin : le bout de la baguette, celui qui craque. L’appareil n’a pas bougé.\nVendredi midi : une côte de bœuf, coupée en vrais morceaux.\nDimanche soir : la première application a tenu trois jours. Elle se retire d’un seul morceau.\nLa semaine suivante : les noix du jardin. « Ce bruit-là, je l’avais oublié. »\nSix semaines plus tard : plus un seul tube de crème, ni dans la salle de bains, ni dans la poche de la veste.",
+            "icon": "check"
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "divider_3",
+        "heading_4",
+        "text_5",
+        "checklist_6"
+      ]
+    },
+    "figure_5": {
+      "type": "oralys-adv-figure",
+      "settings": {
+        "radius": 12,
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8,
+        "image_asset": "oralys-pdp-peel-out.webp",
+        "alt": "Le gel Oralys se retire d’un seul morceau de l’intérieur d’un dentier",
+        "caption": "Quelques minutes dans l’eau tiède, et l’ancien gel se retire d’un seul morceau. Plus rien à gratter.",
+        "ratio": "square",
+        "width": "content"
+      }
+    },
+    "compare_1": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Le jour J, avec la crème et avec le gel",
+        "columns": "2",
+        "corner_label": "",
+        "col_1": "Avec la crème",
+        "col_2": "Avec Oralys",
+        "col_3": "",
+        "highlight": "2",
+        "footnote": "Une application tient 2 à 3 jours : posé la veille, le gel tient jusqu’au lendemain de la fête."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Quand on le pose",
+            "v1": "✗ À 6 h, puis 3 retouches",
+            "v2": "✓ Une fois, la veille au soir",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Les « s » et les « f »",
+            "v1": "✗ On les évite",
+            "v2": "✓ On parle sans y penser",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Le rire, les photos",
+            "v1": "✗ La main devant la bouche",
+            "v2": "✓ On rit bouche ouverte",
+            "v3": ""
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "À table",
+            "v1": "✗ La mie, pas la croûte",
+            "v2": "✓ La croûte, la viande, les noix",
+            "v3": ""
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Le soir",
+            "v1": "✗ La pâte à gratter",
+            "v2": "✓ Se retire d’un seul morceau",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5"
+      ]
+    },
+    "body_8": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Avant d’essayer",
+            "text": "Les questions qu’on pose à Georges",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>« Et pour le bas ? »</strong> Haut, bas, complet ou partiel : le vide se creuse sous tous les appareils.</p><p><strong>« Et si je rate la pose ? »</strong> On réchauffe, on recommence. « La première fois, j’en avais trop mis, sourit Georges. La deuxième, j’avais le geste. »</p><p><strong>« Qu’y a-t-il dedans ? »</strong> Zéro zinc, zéro colle, pas de goût. Rien qui fond et qu’on avale toute la journée.</p><p><strong>« Où l’acheter ? »</strong> Uniquement sur le site officiel. Des imitations circulent ailleurs.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        },
+        "heading_3": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Le calcul de Georges",
+            "text": "Le prix de onze semaines de crème",
+            "size": "large"
+          }
+        },
+        "text_4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Un tube dure environ cinq semaines. Le pack de 4 tubes, 2 achetés et 2 offerts, coûte 79,90 € : à peu près ce que Georges dépensait en onze semaines de crème, pour près de cinq mois de tranquillité. Philippe conseille de commencer avec 2 tubes, le pack le plus choisi : le 2e à -70 %, livraison et comprimés nettoyants offerts. Plus de 30 000 porteurs de dentier ont déjà adopté le gel, noté 4,8/5.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2",
+        "heading_3",
+        "text_4"
+      ]
+    },
+    "compare_2": {
+      "type": "oralys-adv-compare",
+      "settings": {
+        "heading": "Les trois packs Oralys",
+        "intro": "",
+        "columns": "2",
+        "corner_label": "Pack",
+        "col_1": "Prix",
+        "col_2": "Durée",
+        "highlight": "0",
+        "footnote": "90 jours satisfait ou remboursé sur tous les packs."
+      },
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "1 tube",
+            "v1": "39,95 €",
+            "v2": "≈ 5 semaines",
+            "v3": ""
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
+            "v1": "55,93 €",
+            "v2": "≈ 10 semaines · livraison + comprimés offerts",
+            "v3": ""
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
+            "v1": "79,90 €",
+            "v2": "≈ 20 semaines · 4 cadeaux",
+            "v3": ""
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ]
+    },
+    "cta_1": {
+      "type": "oralys-adv-cta",
+      "settings": {
+        "style": "card",
+        "layout": "side",
+        "eyebrow": "Le gel de Georges · offre réservée aux lecteurs",
+        "image_asset": "oralys-adv-packshot.jpg",
+        "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
+        "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
+        "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
+        "compare_price": "130,00 €",
+        "price": "55,93 € les 2 tubes",
+        "price_note": "ou 39,95 € le tube",
+        "urgency": "Offre de lancement : se termine ce soir à minuit",
+        "button_label": "Vérifier la disponibilité",
+        "fallback_link": "/products/oralys-gel",
+        "guarantee": "90 jours satisfait ou remboursé · Paiement sécurisé · Sans abonnement",
+        "color_card": "#EEF6F1",
+        "color_border": "#0E6B50"
+      }
+    },
+    "body_9": {
+      "type": "oralys-adv-body",
+      "settings": {
+        "pad_top": 12,
+        "pad_bottom": 12,
+        "pad_top_mobile": 8,
+        "pad_bottom_mobile": 8
+      },
+      "blocks": {
+        "heading_1": {
+          "type": "heading",
+          "settings": {
+            "kicker": "Et maintenant",
+            "text": "« Cette fois, je penserai à mon petit-fils »",
+            "size": "large"
+          }
+        },
+        "text_2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>La semaine dernière, son gendre l’a appelé : Hélène et lui vont faire baptiser le petit Arthur. « Georges, vous referez un discours ? » Il a dit oui. Sans compter les heures entre la crème et le micro. Sans chercher quels mots éviter.</p><p>« Ce jour-là, je parlerai en pensant à mon petit-fils. Pas à mon dentier. »</p><p>Si un grand jour approche pour vous, faites comme Georges : remplissez le vide avant d’y aller. Si votre appareil bouge encore, vous avez 90 jours pour être remboursé intégralement. <a href=\"/products/oralys-gel\">Voir si l’offre de lancement est encore disponible</a>.</p>",
+            "drop_cap": false,
+            "lead": false
+          }
+        }
+      },
+      "block_order": [
+        "heading_1",
+        "text_2"
+      ]
+    },
+    "comments_1": {
+      "type": "oralys-adv-comments",
+      "settings": {
+        "heading": "Commentaires (296)",
+        "sort_label": "Les plus utiles",
+        "like_label": "J’aime",
+        "reply_label": "Répondre",
+        "closed_note": "",
+        "color_name": "#3A1E2A",
+        "color_reply_bg": "#F4EEE8"
+      },
+      "blocks": {
+        "comment_1": {
+          "type": "comment",
+          "settings": {
+            "name": "Hélène",
+            "badge": "La fille de Georges",
+            "text": "Papa ne m’avait jamais rien dit. J’ai tout appris en lisant son témoignage. Ton discours était le plus beau de la soirée, papa. Et au baptême, je veux entendre la phrase qui commence par “si”.",
+            "time": "il y a 40 min",
+            "likes": "214",
+            "is_reply": false,
+            "avatar_color": "#8A4B5C"
+          }
+        },
+        "comment_2": {
+          "type": "comment",
+          "settings": {
+            "name": "Nadine P.",
+            "badge": "",
+            "text": "Ma petite-fille se marie en juin et je dois lire un texte à la mairie. Commandé ce matin, j’aurai le temps de m’habituer.",
+            "time": "il y a 1 h",
+            "likes": "38",
+            "is_reply": false,
+            "avatar_color": "#1F4E8C"
+          }
+        },
+        "comment_3": {
+          "type": "comment",
+          "settings": {
+            "name": "Bernard L.",
+            "badge": "",
+            "text": "Je chante à la chorale de ma paroisse. Ça tient pour chanter ?",
+            "time": "il y a 3 h",
+            "likes": "12",
+            "is_reply": false,
+            "avatar_color": "#B5651D"
+          }
+        },
+        "comment_4": {
+          "type": "comment",
+          "settings": {
+            "name": "Philippe T.",
+            "badge": "Le fils de Georges",
+            "text": "Mon père n’a pas encore essayé la chorale ! Mais chanter, c’est parler plus longtemps : une fois le vide rempli, l’appareil n’a plus de prise pour faire levier. Et il y a les 90 jours pour essayer.",
+            "time": "il y a 3 h",
+            "likes": "29",
+            "is_reply": true,
+            "avatar_color": "#3A1E2A"
+          }
+        },
+        "comment_5": {
+          "type": "comment",
+          "settings": {
+            "name": "Simone V.",
+            "badge": "",
+            "text": "Posé le vendredi soir pour le repas de famille du dimanche. Le lundi matin, il était toujours en place.",
+            "time": "il y a 5 h",
+            "likes": "44",
+            "is_reply": false,
+            "avatar_color": "#7A4E9C"
+          }
+        }
+      },
+      "block_order": [
+        "comment_1",
+        "comment_2",
+        "comment_3",
+        "comment_4",
+        "comment_5"
+      ]
+    },
+    "sticky_1": {
+      "type": "oralys-adv-sticky",
+      "settings": {
+        "image_asset": "oralys-adv-packshot.jpg",
+        "title": "Oralys Gel · -70 % sur le 2e",
+        "subtitle": "90 jours satisfait ou remboursé",
+        "button_label": "Voir l’offre",
+        "fallback_link": "/products/oralys-gel",
+        "show_after": 900,
+        "hide_desktop": false,
+        "color_bg": "#FFFFFF",
+        "color_text": "#17221E"
+      }
+    },
+    "footer_1": {
+      "type": "oralys-adv-footer",
+      "settings": {
+        "publication_name": "Les Grands Jours",
+        "text": "<p>Cet article est une publicité pour Oralys. Les témoignages rapportés sont ceux de personnes ayant utilisé le produit ; certains prénoms ont été modifiés. Les photos sont des illustrations. Oralys n’est pas un médicament et ne remplace pas l’avis de votre chirurgien-dentiste.</p>",
+        "links": "<p><a href=\"/products/oralys-gel\">Oralys Gel</a> <a href=\"/policies/privacy-policy\">Confidentialité</a> <a href=\"/policies/terms-of-service\">Conditions</a></p>",
+        "copyright": "© 2026 Les Grands Jours",
+        "color_bg": "#3A1E2A",
+        "color_text": "#E8DCD3"
+      }
+    }
+  },
+  "order": [
+    "header_1",
+    "body_1",
+    "quote_1",
+    "body_2",
+    "figure_1",
+    "body_3",
+    "figure_2",
+    "body_4",
+    "body_5",
+    "figure_3",
+    "body_6",
+    "figure_4",
+    "body_7",
+    "figure_5",
+    "compare_1",
+    "body_8",
+    "compare_2",
+    "cta_1",
+    "body_9",
+    "comments_1",
+    "sticky_1",
+    "footer_1"
+  ]
+}
