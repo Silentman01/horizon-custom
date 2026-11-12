@@ -315,7 +315,12 @@ Before GALLERY_PLAN.md, the coordinator (only the coordinator calls Brandsearch)
   - makes a contact sheet per product;
   - classifies every slide by job (§16.3 taxonomy + packshot, before-after, authority, ingredients, founder story), layout, text density, visual type, price shown y/n, and why it converts;
   - writes `_image-bank/INDEX.md` (per product, cross-bank by job, gallery sequences, steal-worthy patterns for this product) plus `_by-job/<job>.jpg` sheets.
-- **Reuse:** the bank lives outside the product folder and is extended run after run (new buckets append to SOURCES.json).
+- **Reuse:** the bank lives outside the product folder (`PRODUCTS_ROOT/_image-bank/`) and is extended run after run. New products are appended to SOURCES.json, and the scripts in `_image-bank/_scripts/` are incremental: they skip folders that already exist.
+- **Fill the bank on EVERY launch (operator 2026-11-12: "get even more from any niches so we have enough data for any futur launches … make sure workflow skill fills the bank as it wants for any futur launches"):**
+  1. **This launch's category:** add 5–8 scaling products in the direct category, plus adjacent categories, the same audience (age / market) and the same format, unless the bank already holds them. Search with `search_products`, sort `winning`, `ads_30d_min`, `audience_top_age`, quoted title words.
+  2. **Coverage top-up:** read the Coverage table in INDEX.md. Add up to 10 top products from niches with fewer than 2 brands: `search_products` sort `winning`, `est_revenue_min_usd` 100000, `ads_30d_min` 50, `niche_exclude` = the niches already covered. Take one product per niche, favouring the market's language (FR/DE/IT stores for EU launches).
+  3. **Pull and index:** the worker runs the incremental pull + classification and updates INDEX.md (coverage, per product, cross-bank by job, sequences, patterns for this launch, universal patterns).
+  - **Timing:** right after the branding gate, in parallel with A1. It costs ~20–35 Brandsearch credits per run and no generation credits. GALLERY_PLAN.md waits for INDEX.md.
 - **Use:** GALLERY_PLAN.md cites, per slide, the bank examples it mixes (`bucket/brand/NN`). We take patterns, never pixels. The distinctiveness gate (§16.5) still applies against every source.
 
 ### 16.1 Inputs
