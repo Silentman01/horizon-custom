@@ -1,6 +1,8 @@
-# Phase 3B — Product images (packshot + gallery remakes)
+# Phase 3B — Product images (packshot + our own conversion gallery)
 
-Goal: a product gallery for our brand that sells exactly like the competitor's — same images in the same order, same main idea, layout logic and claims — showing our product, with **no logo**, perfect spelling, and a clean packshot that every later image and ad reuses.
+Goal: a product gallery that is **ours**: improved over the competitor's, built for conversion (mobile horizontal swipe, direct-response sequence), with the real packaging, perfect spelling and claims at full strength, plus a packshot that every later image and ad reuses.
+
+**Default since 2026-11-12 (operator): own gallery, not 1:1 remakes.** Same principle as copy and pages (00 §2). We MAP the competitor's gallery (what job each slide does, which claims it carries), then BUILD OUR OWN gallery with §16 GALLERY FRAMEWORK: new layouts, our design system, slides chosen and ordered for CVR, every slide tied to a dossier angle card and objection. Steps 1–4 below still run (download, contact sheet, classify, claims list) because they are the framework map. Steps 6–10 (CONCEPT-REMAKE per competitor image) are the **v1 remake set**: make it only when the operator asks for an A/B against the competitor's look, and then name it `v1_remake/`.
 
 Read first: `00-operator-rules.md` §1 (claims) and §4 (product images), `tools-kie.md` (runner, pricing, prompt patterns).
 Runs after the Step Alpha gate and the branding gate (needs BRAND, palette, MARKET from BRIEF.md). Uses the competitor media downloaded in Phase 1.
@@ -23,6 +25,7 @@ Runs after the Step Alpha gate and the branding gate (needs BRAND, palette, MARK
 13. Prompt templates (ready to fill)
 14. Job JSON and builder example
 15. Noxis run — what went wrong and the corrected first-time prompts
+16. GALLERY FRAMEWORK — our own conversion gallery (default)
 
 ---
 
@@ -296,3 +299,55 @@ Fix-round job (KEEP-EDIT, uploading the moved copy):
 - **03 comparison:** "Square comparison graphic split diagonally: left half amber with three green-check white pills at the top \"Designed for LED headlights\", \"Perfect for sensitive eyes\", \"Fits over prescription glasses\", our glasses below and the bold label \"OURS\"; right half light grey labeled \"THEIRS\" showing generic flimsy yellow-lens sport glasses, with three red-cross pills \"Terrible for LED headlights\", \"Too bright for sensitive eyes\", \"Poor fit over prescriptions\". A \"VS\" circle on the diagonal. Small footer bottom-left \"30-Days Money Back Guarantee\"."
 - **04 lifestyle:** "Square lifestyle ad: top 65% a candid photo of a smiling woman in her late 50s with shoulder-length brown hair and a beige sweater driving at dusk, wearing the glasses, city lights outside. White headline on the right \"Drive Confidently At Night With Glare-Free Vision\" with \"Glare-Free\" on an amber box. Bottom 35% amber panel with three black outlined check icons and bold text \"Cataracts\", \"Astigmatism\", \"Fit Over Prescription Glasses\", the glasses at the right of the panel and a small outlined pill \"Polarized\"."
 - **05 testimonial:** "Square testimonial ad: left half the bold black quote \"I finally drive home after dark again\" with five gold stars and the glasses below. Right half a rounded-corner photo of a friendly man in his early 60s with short grey hair and stubble, navy fleece, in the driver's seat, adjusting the glasses. Bottom amber strip with bold text \"Rated 4.8/5 by 1,300+ drivers\"." (rating line = exactly the figure in our page copy, which mirrors Plaims' "Rated 4.8/5 by 1,356+ happy drivers", so page and image agree)
+
+---
+
+## 16. GALLERY FRAMEWORK — our own conversion gallery (default)
+
+**Why:** on mobile the gallery IS the first screen. Most shoppers see slide 1, swipe 2–4 slides, then scroll or leave. A 1:1 remake inherits the competitor's weak slides and its look (operator 2026-11-12: "not 1:1 from competitors but instead are improved and our fully own while helping CVR, horizontal scroll, framework, direct response").
+
+### 16.1 Inputs
+- **Framework map** = the Step 3 classification table: each competitor slide's job, claims and text structure.
+- **Dossier** (`00_alpha/ALPHA_DOSSIER.md`): 3.1 angle cards, 3.2 avatars, 1.2 ranked pains, 1.3 desires, 1.4 objections (+ GAP), 1.6 mechanism, 3.5/2.6 language bank (testimony-ready).
+- **SECTION_SPEC** ADAPTATION BLUEPRINT: the hero angle, plus the page sections the gallery must not duplicate word for word.
+- **BRANDING.md:** palette, fonts, the real packaging (Packaging section) and the packshot.
+
+### 16.2 GALLERY_PLAN.md (write it before any prompt) → `03_product-images/GALLERY_PLAN.md`
+One row per slide:
+
+| # | JOB (conversion role) | ANGLE (V/O id) | OBJECTION / PAIN killed (1.4 / 1.2 id) | HEADLINE (market language, ≤ 7 words) | SUPPORT TEXT (≤ 3 short lines) | PROOF ELEMENT | VISUAL (layout, people, product) | WHY IT BEATS THE COMPETITOR SLIDE |
+
+Headlines and support text come from the **copy chief (Opus 4.6, books-playbooks)**. The voice is the customer's, taken from the language bank. Claims stay at full strength (rule 1); the wording is ours (no string identical to the competitor's).
+
+### 16.3 Default sequence (direct-response swipe story; adapt the count to 7–10)
+
+| # | Job | What it must do |
+|---|---|---|
+| 1 | **Hero / thumb-stop** | Real packaging large + the core outcome promise (lead angle) + rating strip (same figures as the page) + 3 icon benefits + a small offer cue. Passes the 3-second test: what is it, what does it do for me, why believe it. |
+| 2 | **Problem / agitation** | The #1 felt pain (1.2 rank 1) as a scene the avatar recognises, the "before" state, in their words. |
+| 3 | **Mechanism** | The unique mechanism (1.6) as one clear visual: why the old way fails and how ours works. A diagram or cross-section beats text. |
+| 4 | **Demo / how-to** | 3 numbered steps with hands and the product. Kills the effort/complexity objection. |
+| 5 | **Outcome / identity** | The dream outcome (1.3) lived by the primary avatar (3.2): the moment they get back. |
+| 6 | **Comparison + cost anchor** | Ours vs the enemy alternatives from the angle cards (cream / relines / implants…), checks vs crosses, a price or per-week anchor. |
+| 7 | **Social proof** | UGC-style review card with a real-looking customer photo of the avatar, stars, a testimony-ready quote and a "verified" mark. |
+| 8 | **Objection buster** | The strongest remaining objection (1.4 with the biggest GAP): compatibility (upper / lower / partial), safety (ingredients), "is it real" (authenticity). |
+| 9 | **Risk reversal + what's in the box** | Guarantee, contents, delivery time, all matching the page and the policies. |
+| 10 | *(optional)* **Offer / bundle value** | The bundle ladder as an image, matching the buy box exactly. |
+
+### 16.4 Design system (one template across all slides, so the swipe reads as one brand)
+- **Shared shell:** the same top band or header style, font (BRANDING), palette roles, icon set (one stroke weight), corner radius and badge style.
+- **Rhythm:** alternate photo-led and graphic-led slides, never 3 text-heavy slides in a row.
+- **Mobile legibility:** headline cap height ≥ 6–7 % of the image height, at most ~25 words per slide, high contrast. Check the thumbnail strip at 120 px.
+- **Safe margins:** 6 % on every side. Nothing touches an edge (clipped headlines were the main defect on Oralys v1).
+- **Packaging:** always the real packaging from the packshot reference; no overlaid corner logo (00 §4).
+- **Format:** 1:1 2K unless the theme gallery is 4:5. Same ratio for every slide.
+- **People:** they match the slide's avatar card. Two slides never show the same person unless the plan says so.
+
+### 16.5 Distinctiveness gate
+No slide may reuse a competitor slide's layout + headline combination. Put both contact sheets side by side (ours vs `_competitor.jpg`). Pass test: an AI comparing them sees two different galleries doing similar jobs. The same claims are allowed; the same picture is not.
+
+### 16.6 Run and QA
+- **Run:** build the jobs from GALLERY_PLAN.md with the edit endpoint, references `[packshot (+ box), optional layout sketch]`. Name the files `<slug>-product-NN.png` in plan order.
+- **Contact sheet + thumbnail strip check:** spelling at full size, claims verbatim, nothing clipped, product = packshot, the design system held.
+- **Fixes:** KEEP-EDIT (§13.3).
+- **Wiring:** the builder (A3) uses this set as the gallery. A v1 remake set, when one exists, stays in `v1_remake/` for A/B.
