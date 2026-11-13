@@ -505,14 +505,14 @@
           "type": "heading",
           "settings": {
             "kicker": "Le calcul de Georges",
-            "text": "Le prix de onze semaines de crème",
+            "text": "Le prix de huit semaines de crème",
             "size": "large"
           }
         },
         "text_4": {
           "type": "text",
           "settings": {
-            "text": "<p>Un tube dure environ cinq semaines. Le pack de 4 tubes, 2 achetés et 2 offerts, coûte 79,90 € : à peu près ce que Georges dépensait en onze semaines de crème, pour près de cinq mois de tranquillité. Philippe conseille de commencer avec 2 tubes, le pack le plus choisi : le 2e à -70 %, livraison et comprimés nettoyants offerts. Plus de 30 000 porteurs de dentier ont déjà adopté le gel, noté 4,8/5.</p>",
+            "text": "<p>Un tube dure environ cinq semaines. Le pack de 4 tubes, 2 achetés et 2 offerts, coûte 59,80 € : à peu près ce que Georges dépensait en huit semaines de crème, pour près de cinq mois de tranquillité. Philippe conseille de commencer avec 2 tubes, le pack le plus choisi : le 2e à -70 %, livraison et comprimés nettoyants offerts. Plus de 30 000 porteurs de dentier ont déjà adopté le gel, noté 4,8/5.</p>",
             "drop_cap": false,
             "lead": false
           }
@@ -542,16 +542,16 @@
           "type": "row",
           "settings": {
             "label": "1 tube",
-            "v1": "39,95 €",
-            "v2": "≈ 5 semaines",
+            "v1": "29,90 €",
+            "v2": "≈ 5 semaines · livraison offerte",
             "v3": ""
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
-            "v1": "55,93 €",
+            "label": "2 tubes (1 acheté, 1 à -70 %) · LE PLUS CHOISI",
+            "v1": "38,87 €",
             "v2": "≈ 10 semaines · livraison + comprimés offerts",
             "v3": ""
           }
@@ -559,9 +559,9 @@
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
-            "v1": "79,90 €",
-            "v2": "≈ 20 semaines · 4 cadeaux",
+            "label": "4 tubes (2 achetés, 2 offerts) · MEILLEURE OFFRE",
+            "v1": "59,80 €",
+            "v2": "≈ 20 semaines · livraison, comprimés + étui offerts",
             "v3": ""
           }
         }
@@ -582,9 +582,9 @@
         "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
         "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
         "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
-        "compare_price": "130,00 €",
-        "price": "55,93 € les 2 tubes",
-        "price_note": "ou 39,95 € le tube",
+        "compare_price": "99,80 €",
+        "price": "38,87 € les 2 tubes",
+        "price_note": "ou 29,90 € le tube",
         "urgency": "Offre de lancement : se termine ce soir à minuit",
         "button_label": "Vérifier la disponibilité",
         "fallback_link": "/products/oralys-gel",

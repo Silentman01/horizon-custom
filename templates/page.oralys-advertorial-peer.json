@@ -345,7 +345,7 @@
             "label": "Prix",
             "v1": "≈ 250 € par an",
             "v2": "≈ 25 € par essai",
-            "v3": "Dès 39,95 € (≈ 5 semaines)"
+            "v3": "Dès 29,90 € (≈ 5 semaines)"
           }
         },
         "row_7": {
@@ -427,9 +427,9 @@
         "heading": "Oralys Gel : il remplit le vide au lieu de coller dessus",
         "text": "<p>J’ai pris le pack de 2 tubes, le plus choisi. Il y a une offre de lancement en ce moment, je vous mets le lien.</p>",
         "bullets": "Tient 2 à 3 jours, même le bas\nSe pose seul à la maison, en 3 gestes\nZéro colle, zéro zinc, se retire d’un seul morceau\n2e tube à -70 %, livraison et comprimés nettoyants offerts",
-        "compare_price": "130,00 €",
-        "price": "55,93 € les 2 tubes",
-        "price_note": "ou 39,95 € le tube",
+        "compare_price": "99,80 €",
+        "price": "38,87 € les 2 tubes",
+        "price_note": "ou 29,90 € le tube",
         "urgency": "Offre de lancement : se termine ce soir à minuit",
         "button_label": "Voir l’offre sur le site officiel",
         "fallback_link": "/products/oralys-gel",

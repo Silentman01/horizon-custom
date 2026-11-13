@@ -374,7 +374,7 @@
             "label": "Coût",
             "v1": "≈ 250 € par an",
             "v2": "150 à 300 € à chaque fois",
-            "v3": "Dès 39,95 € le tube (≈ 5 semaines)"
+            "v3": "Dès 29,90 € le tube (≈ 5 semaines)"
           }
         }
       },
@@ -452,9 +452,9 @@
         "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
         "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
         "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
-        "compare_price": "130,00 €",
-        "price": "55,93 € les 2 tubes",
-        "price_note": "ou 39,95 € le tube",
+        "compare_price": "99,80 €",
+        "price": "38,87 € les 2 tubes",
+        "price_note": "ou 29,90 € le tube",
         "urgency": "Offre de lancement : se termine ce soir à minuit",
         "button_label": "Vérifier la disponibilité",
         "fallback_link": "/products/oralys-gel",
@@ -695,4 +695,3 @@
     "footer_1"
   ]
 }
-

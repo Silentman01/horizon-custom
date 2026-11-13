@@ -351,7 +351,7 @@
           "type": "row",
           "settings": {
             "label": "Oralys Gel",
-            "v1": "≈ 4 € la semaine en pack de 4",
+            "v1": "≈ 3 € la semaine en pack de 4",
             "v2": "✓ 2 à 3 jours par pose",
             "v3": "Un geste tous les 2 à 3 jours"
           }
@@ -566,7 +566,7 @@
           "type": "callout",
           "settings": {
             "title": "« Je n’ai pas les moyens. »",
-            "text": "<p>Le pack de 4 tubes, 79,90 €, dure environ 20 semaines : à peu près 4 € la semaine, quand la crème en coûte environ 7. Moins cher qu’un seul rebasage chez le dentiste.</p>",
+            "text": "<p>Le pack de 4 tubes, 59,80 €, dure environ 20 semaines : à peu près 3 € la semaine, quand la crème en coûte environ 7. Moins cher qu’un seul rebasage chez le dentiste.</p>",
             "style": "border"
           }
         },
@@ -605,16 +605,16 @@
           "type": "row",
           "settings": {
             "label": "1 tube",
-            "v1": "39,95 €",
-            "v2": "≈ 5 semaines",
+            "v1": "29,90 €",
+            "v2": "≈ 5 semaines · livraison offerte",
             "v3": ""
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "2 tubes (2e à -70 %) · LE PLUS CHOISI",
-            "v1": "55,93 €",
+            "label": "2 tubes (1 acheté, 1 à -70 %) · LE PLUS CHOISI",
+            "v1": "38,87 €",
             "v2": "≈ 10 semaines · livraison + comprimés offerts",
             "v3": ""
           }
@@ -622,9 +622,9 @@
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "4 tubes (2 achetés = 2 offerts) · MEILLEURE OFFRE",
-            "v1": "79,90 €",
-            "v2": "≈ 20 semaines · 4 cadeaux",
+            "label": "4 tubes (2 achetés, 2 offerts) · MEILLEURE OFFRE",
+            "v1": "59,80 €",
+            "v2": "≈ 20 semaines · livraison, comprimés + étui offerts",
             "v3": ""
           }
         }
@@ -645,9 +645,9 @@
         "heading": "Oralys Gel : comble le vide que la crème ne peut pas combler",
         "text": "<p>Offre de lancement réservée aux lecteurs qui arrivent depuis cet article.</p>",
         "bullets": "Tient 2 à 3 jours, même le dentier du bas\nZéro colle, zéro zinc, se retire d’un seul morceau\nHaut, bas, complet ou partiel\n2 tubes : le 2e à -70 %, livraison et comprimés nettoyants offerts",
-        "compare_price": "130,00 €",
-        "price": "55,93 € les 2 tubes",
-        "price_note": "ou 39,95 € le tube",
+        "compare_price": "99,80 €",
+        "price": "38,87 € les 2 tubes",
+        "price_note": "ou 29,90 € le tube",
         "urgency": "Offre de lancement : se termine ce soir à minuit",
         "button_label": "Vérifier la disponibilité",
         "fallback_link": "/products/oralys-gel",
