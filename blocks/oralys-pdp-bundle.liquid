@@ -4,7 +4,7 @@
     assign product_resource = collections.all.products.first
   endif
   assign obs = block.settings
-  assign radio_off = obs.c_muted | color_modify: 'alpha', 0.45
+  assign card_border = obs.c_muted | color_modify: 'alpha', 0.7
   assign max_from = 1
   assign gift_count = 0
   if obs.gifts_enable
@@ -22,7 +22,7 @@
 -%}
 {%- unless product_resource == blank -%}
 <oralys-pdp-bundle id="oralys-pdp-offer" class="oralys-pdp-bundle"
-  style="--opb-accent:{{ obs.c_accent }};--opb-red:{{ obs.c_red }};--opb-tint:{{ obs.c_tint }};--opb-sel:{{ obs.c_selected_bg }};--opb-sel-border:{{ obs.c_selected_border }};--opb-line:{{ obs.c_line }};--opb-text:{{ obs.c_text }};--opb-muted:{{ obs.c_muted }};--opb-radio-off:{{ radio_off }};--opb-pill-bg:{{ obs.c_pill_bg }};--opb-pill-text:{{ obs.c_pill_text }};--opb-locked:{{ obs.c_locked }};--opb-r:{{ obs.radius }}px"
+  style="--opb-accent:{{ obs.c_accent }};--opb-red:{{ obs.c_red }};--opb-tint:{{ obs.c_tint }};--opb-sel:{{ obs.c_selected_bg }};--opb-sel-border:{{ obs.c_selected_border }};--opb-line:{{ obs.c_line }};--opb-text:{{ obs.c_text }};--opb-muted:{{ obs.c_muted }};--opb-card-border:{{ card_border }};--opb-pill-bg:{{ obs.c_pill_bg }};--opb-pill-text:{{ obs.c_pill_text }};--opb-locked:{{ obs.c_locked }};--opb-r:{{ obs.radius }}px"
   data-max-from="{{ max_from }}" data-gifts="{% if max_from > 1 %}some{% else %}all{% endif %}"
   {% if obs.atc_price %}data-atc{% endif %} {% if obs.hide_native_picker %}data-hide-native{% endif %} {% if obs.hide_quantity %}data-hide-qty{% endif %} {{ block.shopify_attributes }}>
   {%- if obs.heading != blank %}<p class="oralys-pdp-bundle__heading"><span>{{ obs.heading }}</span></p>{% endif -%}
@@ -33,7 +33,7 @@
   <div class="oralys-pdp-gifts">
     <p class="oralys-pdp-gifts__line" aria-live="polite">
       {%- if obs.gifts_todo != blank %}<span class="oralys-pdp-gifts__todo">{{ obs.gifts_todo }}</span>{% endif -%}
-      {%- if obs.gifts_done != blank %}<span class="oralys-pdp-gifts__done">{% render 'oralys-pdp-gift-icon', name: 'check', size: 16 %}<span>{{ obs.gifts_done }}</span></span>{% endif -%}
+      {%- if obs.gifts_done != blank %}<span class="oralys-pdp-gifts__done">{% render 'oralys-pdp-gift-icon', name: 'check', size: 18 %}<span>{{ obs.gifts_done }}</span></span>{% endif -%}
     </p>
     <ul class="oralys-pdp-gifts__row" role="list" style="--opg-n:{{ gift_count }}">
       {%- for n in (1..3) -%}
@@ -59,11 +59,11 @@
           <span class="oralys-pdp-gift__tab">{{ obs.gifts_tab }}{% if g_value != blank %} <s>{{ g_value }}</s>{% endif %}</span>
           <span class="oralys-pdp-gift__ico">
             {%- if g_image != blank -%}
-              {{ g_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', class: 'oralys-pdp-gift__img', width: 40, height: 40 }}
+              {{ g_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', class: 'oralys-pdp-gift__img', width: 48, height: 48 }}
             {%- else -%}
-              {% render 'oralys-pdp-gift-icon', name: g_icon, size: 36 %}
+              {% render 'oralys-pdp-gift-icon', name: g_icon, size: 48 %}
             {%- endif -%}
-            <span class="oralys-pdp-gift__lock">{% render 'oralys-pdp-gift-icon', name: 'lock', size: 12 %}</span>
+            <span class="oralys-pdp-gift__lock">{% render 'oralys-pdp-gift-icon', name: 'lock', size: 13 %}</span>
           </span>
           <span class="oralys-pdp-gift__name">{{ g_name }}</span>
           {%- if g_hint != blank and g_from > 1 %}<span class="oralys-pdp-gift__hint">{{ g_hint }}</span>{% endif -%}
@@ -117,22 +117,22 @@
 
 {% stylesheet %}
 .oralys-pdp-bundle{display:block;color:var(--opb-text);scroll-margin-top:24px}
-.oralys-pdp-bundle__heading{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:13px;font-weight:600;line-height:1.3;text-align:center;color:var(--opb-text)}
+.oralys-pdp-bundle__heading{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:15px;font-weight:700;line-height:1.3;text-align:center;color:var(--opb-text)}
 .oralys-pdp-bundle__heading::before,.oralys-pdp-bundle__heading::after{content:"";flex:1;height:1px;background:var(--opb-line)}
-.oralys-pdp-bundle__tiers{display:grid;gap:10px}
+.oralys-pdp-bundle__tiers{display:grid;gap:14px}
 .oralys-pdp-bundle.is-flash .oralys-pdp-bundle__tiers{animation:oralys-pdp-flash 1s ease}
 @keyframes oralys-pdp-flash{0%,100%{transform:none}30%{transform:scale(1.015)}}
 
-/* Progressive gift strip */
-.oralys-pdp-gifts{margin-top:14px}
-.oralys-pdp-gifts__line{display:flex;justify-content:center;margin:0 0 14px;font-size:13.5px;font-weight:600;line-height:1.35;text-align:center;color:var(--opb-muted)}
-.oralys-pdp-gifts__done{display:none;align-items:center;gap:5px;color:var(--opb-accent);font-weight:700}
+/* Progressive gift strip: locked = padlock + hint, never low-contrast text */
+.oralys-pdp-gifts{margin-top:18px}
+.oralys-pdp-gifts__line{display:flex;justify-content:center;margin:0 0 18px;font-size:15px;font-weight:700;line-height:1.35;text-align:center;color:var(--opb-text)}
+.oralys-pdp-gifts__done{display:none;align-items:center;gap:6px;color:var(--opb-accent);font-weight:800}
 .oralys-pdp-bundle[data-gifts="all"] .oralys-pdp-gifts__todo{display:none}
 .oralys-pdp-bundle[data-gifts="all"] .oralys-pdp-gifts__done{display:inline-flex}
 .oralys-pdp-gifts__row{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(var(--opg-n,3),minmax(0,1fr));gap:8px}
 .oralys-pdp-gift{
-  --g-bg:#fff;--g-bd:var(--opb-accent);--g-tab:var(--opb-accent);--g-ico:var(--opb-accent);--g-ico-op:1;--g-name:var(--opb-text);--g-lock-op:0;--g-lock-s:.4;--g-hint:none;
-  position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:5px;margin:0;padding:16px 6px 10px;border:1.5px solid var(--g-bd);border-radius:10px;background:var(--g-bg);text-align:center;
+  --g-bg:#fff;--g-bd:var(--opb-accent);--g-bw:2px;--g-tab:var(--opb-accent);--g-ico:var(--opb-accent);--g-lock-op:0;--g-lock-s:.4;--g-hint:none;
+  position:relative;min-width:0;display:flex;flex-direction:column;align-items:center;gap:6px;margin:0;padding:22px 6px 12px;border:var(--g-bw) solid var(--g-bd);border-radius:12px;background:var(--g-bg);text-align:center;
   transition:background-color .35s ease,border-color .35s ease}
 .oralys-pdp-bundle[data-sel="1"] .oralys-pdp-gift[data-from="2"],
 .oralys-pdp-bundle[data-sel="1"] .oralys-pdp-gift[data-from="3"],
@@ -140,28 +140,25 @@
 .oralys-pdp-bundle[data-sel="1"] .oralys-pdp-gift[data-from="4"],
 .oralys-pdp-bundle[data-sel="2"] .oralys-pdp-gift[data-from="4"],
 .oralys-pdp-bundle[data-sel="3"] .oralys-pdp-gift[data-from="4"]{
-  --g-bg:#F3F5F4;--g-bd:var(--opb-line);--g-tab:var(--opb-locked);--g-ico:var(--opb-locked);--g-ico-op:.5;--g-name:var(--opb-muted);--g-lock-op:1;--g-lock-s:1;--g-hint:block}
-.oralys-pdp-gift__tab{position:absolute;top:-9px;left:50%;transform:translateX(-50%);max-width:calc(100% - 8px);overflow:hidden;text-overflow:ellipsis;padding:1px 7px;border-radius:5px;background:var(--g-tab);color:#fff;font-size:10px;font-weight:800;letter-spacing:.05em;line-height:1.6;text-transform:uppercase;white-space:nowrap;transition:background-color .35s ease}
-.oralys-pdp-gift__tab s{font-weight:600;opacity:.85}
-.oralys-pdp-gift__ico{position:relative;display:flex;align-items:center;justify-content:center;width:40px;height:40px;color:var(--g-ico);transition:color .35s ease}
-.oralys-pdp-gift__ico>svg,.oralys-pdp-gift__img{opacity:var(--g-ico-op);transition:opacity .35s ease}
-.oralys-pdp-gift__img{width:40px;height:40px;object-fit:contain;display:block}
-.oralys-pdp-gift__lock{position:absolute;right:-5px;bottom:-3px;display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:var(--opb-text);color:#fff;opacity:var(--g-lock-op);transform:scale(var(--g-lock-s));transition:opacity .3s ease,transform .3s ease}
-.oralys-pdp-gift__name{font-size:12.5px;font-weight:700;line-height:1.25;color:var(--g-name);overflow-wrap:anywhere;transition:color .35s ease}
-.oralys-pdp-gift__hint{display:var(--g-hint);font-size:11px;font-weight:700;line-height:1.25;color:var(--opb-accent)}
+  --g-bg:#F3F5F4;--g-bd:var(--opb-card-border);--g-bw:1.5px;--g-tab:var(--opb-locked);--g-ico:var(--opb-locked);--g-lock-op:1;--g-lock-s:1;--g-hint:block}
+.oralys-pdp-gift__tab{position:absolute;top:-11px;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100% - 6px);padding:2px 7px;border-radius:6px;background:var(--g-tab);color:#fff;font-size:12px;font-weight:800;line-height:1.3;text-align:center;transition:background-color .35s ease}
+.oralys-pdp-gift__tab s{font-weight:600;white-space:nowrap}
+.oralys-pdp-gift__ico{position:relative;display:flex;align-items:center;justify-content:center;width:48px;height:48px;color:var(--g-ico);transition:color .35s ease}
+.oralys-pdp-gift__img{width:48px;height:48px;object-fit:contain;display:block}
+.oralys-pdp-gift__lock{position:absolute;right:-8px;bottom:-4px;display:flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:2px solid #fff;background:var(--opb-text);color:#fff;opacity:var(--g-lock-op);transform:scale(var(--g-lock-s));transition:opacity .3s ease,transform .3s ease}
+.oralys-pdp-gift__name{font-size:14px;font-weight:700;line-height:1.25;color:var(--opb-text);overflow-wrap:break-word}
+.oralys-pdp-gift__hint{display:var(--g-hint);font-size:13px;font-weight:700;line-height:1.25;color:var(--opb-accent)}
 .oralys-pdp-gift.is-unlocking{animation:oralys-pdp-unlock .7s ease}
 .oralys-pdp-gift.is-unlocking .oralys-pdp-gift__ico{animation:oralys-pdp-unlock-ico .7s ease}
 @keyframes oralys-pdp-unlock{0%{box-shadow:0 0 0 0 rgba(14,107,80,.35)}40%{transform:scale(1.05)}100%{transform:none;box-shadow:0 0 0 10px rgba(14,107,80,0)}}
 @keyframes oralys-pdp-unlock-ico{0%{transform:scale(.8) rotate(-8deg)}50%{transform:scale(1.15) rotate(4deg)}100%{transform:none}}
-@media (max-width:420px){
+@media (max-width:374px){
   .oralys-pdp-gifts__row{gap:6px}
-  .oralys-pdp-gift{padding:15px 4px 9px}
-  .oralys-pdp-gift__name{font-size:11.5px}
-  .oralys-pdp-gift__hint{font-size:10.5px}
-  .oralys-pdp-gift__tab{font-size:9px;padding:1px 5px}
+  .oralys-pdp-gift{padding:22px 4px 10px}
+  .oralys-pdp-gift__tab{padding:2px 5px;font-size:11.5px}
 }
 @media (prefers-reduced-motion:reduce){
-  .oralys-pdp-gift,.oralys-pdp-gift__tab,.oralys-pdp-gift__ico,.oralys-pdp-gift__ico>svg,.oralys-pdp-gift__img,.oralys-pdp-gift__lock,.oralys-pdp-gift__name{transition:none}
+  .oralys-pdp-gift,.oralys-pdp-gift__tab,.oralys-pdp-gift__ico,.oralys-pdp-gift__lock{transition:none}
   .oralys-pdp-gift.is-unlocking,.oralys-pdp-gift.is-unlocking .oralys-pdp-gift__ico,.oralys-pdp-bundle.is-flash .oralys-pdp-bundle__tiers{animation:none}
 }
 
@@ -169,14 +166,15 @@
 .product-details:has(.oralys-pdp-bundle[data-hide-native]) variant-picker{display:none}
 .product-details:has(.oralys-pdp-bundle[data-hide-qty]) .quantity-selector-wrapper{display:none}
 .product-details:has(.oralys-pdp-bundle) .accelerated-checkout-block,.product-details:has(.oralys-pdp-bundle) shopify-accelerated-checkout{display:none!important}
-.product-details:has(.oralys-pdp-bundle) .add-to-cart-button{min-height:58px;font-size:18px;font-weight:700}
+.product-details:has(.oralys-pdp-bundle) .add-to-cart-button{min-height:60px;font-size:19px;font-weight:700}
 
 /* Selected pack price inside the add-to-cart button (values set by oralysPdpSync on .product-details) */
-[data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]::before{content:var(--opb-atc-was,none);order:2;margin-inline-start:6px;font-size:.82em;font-weight:500;text-decoration:line-through;opacity:.75}
+[data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]{flex-wrap:wrap;column-gap:8px;row-gap:0}
+[data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]::before{content:var(--opb-atc-was,none);order:2;font-size:16px;font-weight:500;text-decoration:line-through}
 [data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]::after{content:var(--opb-atc-now,none);order:3}
 [data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]:disabled::before,[data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"]:disabled::after{content:none}
 @media (max-width:420px){
-  .product-details:has(.oralys-pdp-bundle) .add-to-cart-button{font-size:16.5px}
+  .product-details:has(.oralys-pdp-bundle) .add-to-cart-button{font-size:17px;padding-inline:12px}
   [data-opb-atc] [id^="BuyButtons-ProductSubmitButton-"] .add-to-cart-icon{display:none}
 }
 {% endstylesheet %}
@@ -364,7 +362,7 @@ if (!customElements.get('oralys-pdp-bundle')) {
       "type": "text",
       "id": "gift_1_hint",
       "label": "Mention si verrouillé",
-      "info": "Ex. « Dès le pack 1 + 1 »."
+      "info": "Ex. « Dès 2 tubes »."
     },
     {
       "type": "header",
@@ -412,7 +410,7 @@ if (!customElements.get('oralys-pdp-bundle')) {
       "type": "text",
       "id": "gift_2_hint",
       "label": "Mention si verrouillé",
-      "default": "Dès le pack 1 + 1"
+      "default": "Dès 2 tubes"
     },
     {
       "type": "header",
@@ -460,7 +458,7 @@ if (!customElements.get('oralys-pdp-bundle')) {
       "type": "text",
       "id": "gift_3_hint",
       "label": "Mention si verrouillé",
-      "default": "Avec le pack 2 + 2"
+      "default": "Avec 4 tubes"
     },
     {
       "type": "header",
@@ -482,13 +480,13 @@ if (!customElements.get('oralys-pdp-bundle')) {
       "type": "color",
       "id": "c_tint",
       "label": "Fond des cartes",
-      "default": "#EEF6F1"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
       "id": "c_selected_bg",
       "label": "Fond de la carte choisie",
-      "default": "#FFFFFF"
+      "default": "#EEF6F1"
     },
     {
       "type": "color",
@@ -511,8 +509,8 @@ if (!customElements.get('oralys-pdp-bundle')) {
     {
       "type": "color",
       "id": "c_locked",
-      "label": "Cadeau verrouillé",
-      "default": "#9AA6A0"
+      "label": "Cadeau verrouillé (étiquette, icône)",
+      "default": "#5C6863"
     },
     {
       "type": "color",
