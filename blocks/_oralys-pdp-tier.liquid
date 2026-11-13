@@ -23,20 +23,34 @@
     assign matched = false
     assign v = p.selected_or_first_available_variant
   endif
+
+  assign compare_txt = ''
+  assign save_txt = ''
+  assign price_cents = ''
+  assign compare_cents = ''
   if matched
     assign price_txt = v.price | money
+    assign price_key = price_txt | strip_html | remove: ' ' | remove: ' ' | remove: '&nbsp;'
+    assign fallback_key = bs.price_fallback | remove: ' ' | remove: ' '
     assign compare = v.compare_at_price | default: 0
-    assign compare_txt = ''
-    assign save_txt = ''
     if compare > v.price
       assign compare_txt = compare | money
       assign save_txt = compare | minus: v.price | money
+      assign price_cents = v.price
+      assign compare_cents = compare
+    elsif fallback_key != blank and price_key == fallback_key
+      comment
+        Variant has no compare-at price yet but its price is the planned one: use the planned compare-at/saving.
+      endcomment
+      assign compare_txt = bs.compare_fallback
+      assign save_txt = bs.save_fallback
     endif
   else
     assign price_txt = bs.price_fallback
     assign compare_txt = bs.compare_fallback
     assign save_txt = bs.save_fallback
   endif
+
   assign selected = false
   if matched and p.selected_variant and v.id == p.selected_variant.id
     assign selected = true
@@ -45,58 +59,67 @@
   elsif matched == false and bs.preselect
     assign selected = true
   endif
-  assign gift_lines = bs.gifts | newline_to_br | split: '<br />'
+
+  assign save_line = ''
+  if save_txt != blank and bs.save_label != blank
+    assign amount_token = '{' | append: 'amount' | append: '}'
+    assign save_line = bs.save_label | replace: amount_token, save_txt
+  endif
 -%}
 <label class="oralys-pdp-tier{% if selected %} is-selected{% endif %}{% if bs.badge != blank %} has-badge{% endif %}{% unless v.available %} is-unavailable{% endunless %}" {{ block.shopify_attributes }}>
-  <input class="oralys-pdp-tier__input visually-hidden" type="radio" name="oralys-pdp-tier-{{ section.id }}" value="{{ v.id }}"
-    {% if matched %}data-variant-id="{{ v.id }}"{% endif %} data-qty="{{ bs.qty }}" data-label="{{ bs.title | escape }}" data-price="{{ price_txt | escape }}"
+  <input class="oralys-pdp-tier__input" type="radio" name="oralys-pdp-tier-{{ section.id }}" value="{{ v.id }}"
+    {% if matched %}data-variant-id="{{ v.id }}"{% endif %} data-qty="{{ bs.qty }}" data-label="{{ bs.title | escape }}"
+    data-price="{{ price_txt | strip_html | escape }}" data-compare="{{ compare_txt | strip_html | escape }}"
+    {% if price_cents != blank %}data-price-cents="{{ price_cents }}" data-compare-cents="{{ compare_cents }}"{% endif %}
     {% if selected %}checked{% endif %} {% if bs.preselect %}data-preselect{% endif %} {% unless v.available %}disabled{% endunless %}>
   {%- if bs.badge != blank %}<span class="oralys-pdp-tier__badge oralys-pdp-tier__badge--{{ bs.badge_style }}">{{ bs.badge }}</span>{% endif -%}
-  <span class="oralys-pdp-tier__main">
-    <span class="oralys-pdp-tier__radio" aria-hidden="true"></span>
-    {%- if bs.image != blank or bs.asset != blank -%}<span class="oralys-pdp-tier__thumb">{% render 'oralys-pdp-media', image: bs.image, asset: bs.asset, alt: bs.title, class: 'oralys-pdp-tier__img', width: 120, height: 120 %}</span>{%- endif -%}
-    <span class="oralys-pdp-tier__txt">
+  <span class="oralys-pdp-tier__radio" aria-hidden="true"></span>
+  {%- if bs.image != blank or bs.asset != blank -%}<span class="oralys-pdp-tier__thumb">{% render 'oralys-pdp-media', image: bs.image, asset: bs.asset, alt: bs.title, class: 'oralys-pdp-tier__img', width: 96, height: 96 %}</span>{%- endif -%}
+  <span class="oralys-pdp-tier__txt">
+    <span class="oralys-pdp-tier__head">
       <span class="oralys-pdp-tier__title">{{ bs.title }}</span>
-      {%- if bs.subtitle != blank %}<span class="oralys-pdp-tier__sub">{{ bs.subtitle }}</span>{% endif -%}
-      {%- if save_txt != blank and bs.save_label != blank -%}{%- assign amount_token = '{' | append: 'amount' | append: '}' -%}{%- assign save_line = bs.save_label | replace: amount_token, save_txt -%}<span class="oralys-pdp-tier__save">{{ save_line }}</span>{%- endif -%}
+      {%- if save_line != blank %}<span class="oralys-pdp-tier__save">{{ save_line }}</span>{% endif -%}
     </span>
-    <span class="oralys-pdp-tier__prices"><span class="oralys-pdp-tier__price">{{ price_txt }}</span>{% if compare_txt != blank %}<s class="oralys-pdp-tier__was">{{ compare_txt }}</s>{% endif %}</span>
+    {%- if bs.subtitle != blank %}<span class="oralys-pdp-tier__sub">{{ bs.subtitle }}</span>{% endif -%}
   </span>
-  {%- if bs.gifts != blank -%}
-  <span class="oralys-pdp-tier__gifts">
-    {%- if bs.gifts_title != blank %}<span class="oralys-pdp-tier__gtitle">{{ bs.gifts_title }}</span>{% endif -%}
-    {%- for g in gift_lines -%}{%- assign gs = g | strip -%}{%- if gs != blank -%}<span class="oralys-pdp-tier__gift">{% render 'oralys-pdp-icon', name: 'gift', size: 16 %}<span>{{ gs }}</span></span>{%- endif -%}{%- endfor -%}
-  </span>
-  {%- endif -%}
+  <span class="oralys-pdp-tier__prices"><span class="oralys-pdp-tier__price">{{ price_txt }}</span>{% if compare_txt != blank %}<s class="oralys-pdp-tier__was">{{ compare_txt }}</s>{% endif %}</span>
 </label>
 
 {% stylesheet %}
-.oralys-pdp-tier{position:relative;display:block;padding:14px 14px 12px;border:1.5px solid var(--opb-line);border-radius:var(--opb-r);background:var(--opb-tint);cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s}
-.oralys-pdp-tier.has-badge{margin-top:6px}
-.oralys-pdp-tier.is-selected{border:2px solid var(--opb-accent);background:var(--opb-sel);box-shadow:0 0 0 3px rgb(from var(--opb-accent) r g b / .12)}
+.oralys-pdp-tier{position:relative;display:flex;align-items:center;gap:10px;padding:12px 12px 12px 12px;border:1.5px solid var(--opb-line);border-radius:var(--opb-r);background:var(--opb-tint);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .15s,background-color .15s}
+.oralys-pdp-tier.has-badge{margin-top:4px}
+.oralys-pdp-tier.is-selected{border:2.5px solid var(--opb-sel-border);background:var(--opb-sel);padding:11px}
 .oralys-pdp-tier.is-unavailable{opacity:.5;cursor:not-allowed}
+/* The real radio stays in the DOM for keyboard + forms, but never paints: Horizon's .visually-hidden un-hides on :focus/:active, which drew a 2nd circle. */
+.oralys-pdp-tier .oralys-pdp-tier__input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;opacity:0;appearance:none;-webkit-appearance:none;background:none;pointer-events:none;clip-path:inset(50%)}
+.oralys-pdp-tier .oralys-pdp-tier__input::after{content:none}
+.oralys-pdp-tier.is-focus{outline:2px solid var(--opb-text);outline-offset:2px}
 .oralys-pdp-tier:has(.oralys-pdp-tier__input:focus-visible){outline:2px solid var(--opb-text);outline-offset:2px}
-.oralys-pdp-tier__badge{position:absolute;top:-11px;right:12px;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.06em;color:#fff;line-height:1.5}
+.oralys-pdp-tier__badge{position:absolute;top:-10px;right:12px;padding:2px 9px;border-radius:5px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#fff;line-height:1.6;white-space:nowrap}
 .oralys-pdp-tier__badge--green{background:var(--opb-accent)}
 .oralys-pdp-tier__badge--red{background:var(--opb-red)}
-.oralys-pdp-tier__main{display:flex;align-items:center;gap:10px}
-.oralys-pdp-tier__radio{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:2px solid var(--opb-line);background:#fff;position:relative}
+.oralys-pdp-tier__radio{flex:0 0 20px;width:20px;height:20px;border-radius:50%;border:2px solid var(--opb-radio-off);background:#fff;position:relative;transition:border-color .15s}
+.oralys-pdp-tier__radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--opb-accent);transform:scale(0);transition:transform .15s}
 .oralys-pdp-tier.is-selected .oralys-pdp-tier__radio{border-color:var(--opb-accent)}
-.oralys-pdp-tier.is-selected .oralys-pdp-tier__radio::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--opb-accent)}
-.oralys-pdp-tier__thumb{flex:0 0 56px;width:56px;height:56px;border-radius:10px;overflow:hidden;background:#fff}
+.oralys-pdp-tier.is-selected .oralys-pdp-tier__radio::after{transform:scale(1)}
+.oralys-pdp-tier__thumb{flex:0 0 44px;width:44px;height:44px;border-radius:8px;overflow:hidden;background:#fff}
 .oralys-pdp-tier__img{width:100%;height:100%;object-fit:contain;display:block}
 .oralys-pdp-tier__txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.oralys-pdp-tier__title{font-weight:800;font-size:17px;line-height:1.25}
-.oralys-pdp-tier__sub{font-size:14px;color:var(--opb-muted);line-height:1.3}
-.oralys-pdp-tier__save{align-self:flex-start;margin-top:3px;padding:2px 8px;border-radius:6px;background:rgb(from var(--opb-red) r g b / .1);color:var(--opb-red);font-size:12.5px;font-weight:800}
-.oralys-pdp-tier__prices{display:flex;flex-direction:column;align-items:flex-end;text-align:right;white-space:nowrap}
-.oralys-pdp-tier__price{font-weight:800;font-size:19px}
-.oralys-pdp-tier__was{font-size:14px;color:var(--opb-muted)}
-.oralys-pdp-tier__gifts{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--opb-line)}
-.oralys-pdp-tier__gtitle{width:100%;font-size:13px;font-weight:800;color:var(--opb-accent);text-transform:uppercase;letter-spacing:.04em}
-.oralys-pdp-tier__gift{display:inline-flex;align-items:center;gap:5px;padding:4px 9px;border-radius:999px;background:#fff;border:1px solid var(--opb-line);color:var(--opb-accent);font-size:13px;font-weight:700;line-height:1.3}
-.oralys-pdp-tier.is-selected .oralys-pdp-tier__gift{background:var(--opb-tint);border-color:transparent}
-.oralys-pdp-tier__gift span{color:var(--opb-text)}
+.oralys-pdp-tier__head{display:flex;flex-wrap:wrap;align-items:center;column-gap:7px;row-gap:3px}
+.oralys-pdp-tier__title{font-weight:800;font-size:16px;line-height:1.25}
+.oralys-pdp-tier__save{display:inline-block;padding:2px 7px;border-radius:5px;background:var(--opb-pill-bg);color:var(--opb-pill-text);font-size:10.5px;font-weight:800;letter-spacing:.03em;line-height:1.5;text-transform:uppercase;white-space:nowrap}
+.oralys-pdp-tier__sub{font-size:13px;color:var(--opb-muted);line-height:1.3}
+.oralys-pdp-tier__prices{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;text-align:right;white-space:nowrap;line-height:1.25}
+.oralys-pdp-tier__price{font-weight:800;font-size:18px}
+.oralys-pdp-tier__was{font-size:13px;color:var(--opb-muted)}
+@media (max-width:420px){
+  .oralys-pdp-tier{gap:8px;padding:11px 10px}
+  .oralys-pdp-tier.is-selected{padding:10px 9px}
+  .oralys-pdp-tier__thumb{flex-basis:40px;width:40px;height:40px}
+  .oralys-pdp-tier__title{font-size:15px}
+  .oralys-pdp-tier__price{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){.oralys-pdp-tier,.oralys-pdp-tier__radio,.oralys-pdp-tier__radio::after{transition:none}}
 {% endstylesheet %}
 
 {% schema %}
@@ -111,13 +134,13 @@
       "type": "text",
       "id": "option_value",
       "label": "Nom exact de la variante",
-      "default": "1 tube",
-      "info": "Ex. « 2 tubes ». Prix et prix barré viennent de cette variante."
+      "default": "1 tube",
+      "info": "Ex. « 2 tubes ». Prix, prix barré et économie viennent de cette variante."
     },
     {
       "type": "range",
       "id": "variant_position",
-      "label": "Sinon : position de la variante",
+      "label": "Sinon : position de la variante",
       "min": 1,
       "max": 10,
       "step": 1,
@@ -146,13 +169,13 @@
       "type": "text",
       "id": "title",
       "label": "Titre",
-      "default": "1 tube"
+      "default": "1 acheté"
     },
     {
       "type": "text",
       "id": "subtitle",
       "label": "Sous-titre",
-      "default": "Environ 5 semaines de tenue"
+      "default": "5 semaines de tenue"
     },
     {
       "type": "text",
@@ -183,47 +206,38 @@
     {
       "type": "text",
       "id": "asset",
-      "label": "Vignette : fichier du thème",
+      "label": "Vignette : fichier du thème",
       "default": "oralys-pdp-b1.webp"
     },
     {
       "type": "text",
       "id": "save_label",
-      "label": "Économies ({amount} = montant)",
-      "default": "Économisez {amount}"
-    },
-    {
-      "type": "text",
-      "id": "gifts_title",
-      "label": "Titre des cadeaux (vide = aucun)"
-    },
-    {
-      "type": "textarea",
-      "id": "gifts",
-      "label": "Cadeaux et avantages (un par ligne)",
-      "default": "Livraison standard offerte"
+      "label": "Pastille économie",
+      "default": "Économisez {amount}",
+      "info": "{amount} = prix barré moins prix de la variante."
     },
     {
       "type": "header",
-      "content": "Prix de secours (produit sans variantes)"
+      "content": "Prix de secours",
+      "info": "Utilisés si le produit n'a pas de variantes. Le prix barré et l'économie servent aussi si la variante n'a pas encore de prix barré mais affiche exactement ce prix."
     },
     {
       "type": "text",
       "id": "price_fallback",
       "label": "Prix",
-      "default": "39,95 €"
+      "default": "29,90 €"
     },
     {
       "type": "text",
       "id": "compare_fallback",
       "label": "Prix barré",
-      "default": "65,00 €"
+      "default": "49,90 €"
     },
     {
       "type": "text",
       "id": "save_fallback",
       "label": "Montant économisé",
-      "default": "25,05 €"
+      "default": "20,00 €"
     }
   ]
 }

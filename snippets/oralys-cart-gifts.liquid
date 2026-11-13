@@ -23,7 +23,7 @@
       assign rows = cx.oralys_gifts_rows_2
     else
       assign msg = cx.oralys_gifts_msg_1
-      assign rows = ''
+      assign rows = cx.oralys_gifts_rows_1
     endif
     assign lines = rows | newline_to_br | split: '<br />'
   -%}

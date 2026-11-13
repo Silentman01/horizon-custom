@@ -41,14 +41,16 @@
     <span class="oralys-pdp-sk__info">
       <span class="oralys-pdp-sk__title">{{ p.title }}</span>
       <span class="oralys-pdp-sk__price">
-        {%- if show_compare -%}
-          <s class="oralys-pdp-sk__was">{{ v.compare_at_price | money }}</s>
-        {%- endif -%}
-        {{ v.price | money }}
-        {%- if show_compare -%}
-          {%- assign saved = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
-          <span class="oralys-pdp-sk__save">-{{ saved }}%</span>
-        {%- endif -%}
+        <span class="oralys-pdp-sk__tier" data-ops-label hidden></span>
+        <s class="oralys-pdp-sk__was" data-ops-was{% unless show_compare %} hidden{% endunless %}>{% if show_compare %}{{ v.compare_at_price | money }}{% endif %}</s>
+        <b class="oralys-pdp-sk__now" data-ops-now>{{ v.price | money }}</b>
+        {%- liquid
+          assign saved = ''
+          if show_compare
+            assign saved = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price
+          endif
+        -%}
+        <span class="oralys-pdp-sk__save" data-ops-save{% if saved == '' %} hidden{% endif %}>{% if saved != '' %}-{{ saved }} %{% endif %}</span>
       </span>
     </span>
 
@@ -92,6 +94,30 @@
       window.addEventListener('scroll', tick, { passive: true });
       window.addEventListener('resize', tick, { passive: true });
       tick();
+
+      // Mirror the selected pack (label + price) from the Oralys pack cards.
+      var elLabel = bar.querySelector('[data-ops-label]'), elWas = bar.querySelector('[data-ops-was]'),
+          elNow = bar.querySelector('[data-ops-now]'), elSave = bar.querySelector('[data-ops-save]');
+      function paint(d) {
+        if (!d || !d.price) return;
+        if (elLabel) { elLabel.textContent = d.label || ''; elLabel.hidden = !d.label; }
+        bar.classList.toggle('has-tier', !!d.label);
+        if (elNow) elNow.textContent = d.price;
+        if (elWas) { elWas.textContent = d.compare || ''; elWas.hidden = !d.compare; }
+        if (elSave) {
+          var pc = parseInt(d.priceCents, 10), cc = parseInt(d.compareCents, 10);
+          var pct = pc > 0 && cc > pc ? Math.floor((cc - pc) * 100 / cc) : 0;
+          elSave.textContent = pct ? '-' + pct + ' %' : '';
+          elSave.hidden = !pct;
+        }
+      }
+      function fromDom() {
+        var i = document.querySelector('.oralys-pdp-tier__input:checked');
+        return i ? { label: i.dataset.label, price: i.dataset.price, compare: i.dataset.compare, priceCents: i.dataset.priceCents, compareCents: i.dataset.compareCents } : null;
+      }
+      paint(fromDom());
+      document.addEventListener('oralys:tier', function (e) { paint(e.detail); });
+      window.addEventListener('pageshow', function (e) { if (e.persisted) paint(fromDom()); });
     });
   })();
 </script>
@@ -134,7 +160,14 @@
     font-weight: 700; font-size: 14px;
     display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .oralys-pdp-sk__price { font-size: 13.5px; display: flex; align-items: center; gap: 6px; }
+  .oralys-pdp-sk__price { font-size: 13.5px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; row-gap: 0; }
+  .oralys-pdp-sk__price [hidden] { display: none; }
+  .oralys-pdp-sk__tier { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+  .oralys-pdp-sk__now { font-weight: 800; }
+  @media (max-width: 749px) {
+    .oralys-pdp-sk.has-tier .oralys-pdp-sk__title { display: none; }
+    .oralys-pdp-sk.has-tier .oralys-pdp-sk__tier { flex-basis: 100%; font-weight: 700; font-size: 14px; }
+  }
   .oralys-pdp-sk__was { color: var(--ops-muted, #888); text-decoration: line-through; font-size: 12.5px; }
   .oralys-pdp-sk__save {
     font-size: 11.5px; font-weight: 700;
