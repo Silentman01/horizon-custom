@@ -9,8 +9,10 @@
  */
 {
   "current": {
-    "logo_height": 40,
-    "logo_height_mobile": 32,
+    "logo": "shopify://shop_images/oralys-logo.svg",
+    "logo_height": 50,
+    "logo_height_mobile": 50,
+    "favicon": "shopify://shop_images/oralys-favicon.png",
     "type_body_font": "figtree_n4",
     "type_subheading_font": "figtree_n7",
     "type_heading_font": "figtree_n7",
