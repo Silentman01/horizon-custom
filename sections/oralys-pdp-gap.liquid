@@ -39,13 +39,19 @@
           {%- endfor -%}
         </ol>
       </div>
+      {%- assign cmp_a = s.col_a_rows | strip -%}
+      {%- assign cmp_b = s.col_b_rows | strip -%}
+      {%- if cmp_a != blank or cmp_b != blank or s.cta != blank -%}
       <div class="oralys-pdp-gap__aside">
+        {%- if cmp_a != blank or cmp_b != blank -%}
         <div class="oralys-pdp-gap__cmp">
-          <div class="oralys-pdp-gap__col oralys-pdp-gap__col--a"><p class="oralys-pdp-gap__ch">{{ s.col_a }}</p><ul role="list">{% for r in rows_a %}{% assign rs = r | strip %}{% if rs != blank %}<li><span class="oralys-pdp-gap__x" aria-hidden="true">✕</span>{{ rs }}</li>{% endif %}{% endfor %}</ul></div>
-          <div class="oralys-pdp-gap__col oralys-pdp-gap__col--b"><p class="oralys-pdp-gap__ch">{{ s.col_b }}</p><ul role="list">{% for r in rows_b %}{% assign rs = r | strip %}{% if rs != blank %}<li><span class="oralys-pdp-gap__v" aria-hidden="true">✓</span>{{ rs }}</li>{% endif %}{% endfor %}</ul></div>
+          <div class="oralys-pdp-gap__col oralys-pdp-gap__col--a">{% if s.col_a != blank %}<p class="oralys-pdp-gap__ch">{{ s.col_a }}</p>{% endif %}<ul role="list">{% for r in rows_a %}{% assign rs = r | strip %}{% if rs != blank %}<li><span class="oralys-pdp-gap__x" aria-hidden="true">✕</span>{{ rs }}</li>{% endif %}{% endfor %}</ul></div>
+          <div class="oralys-pdp-gap__col oralys-pdp-gap__col--b">{% if s.col_b != blank %}<p class="oralys-pdp-gap__ch">{{ s.col_b }}</p>{% endif %}<ul role="list">{% for r in rows_b %}{% assign rs = r | strip %}{% if rs != blank %}<li><span class="oralys-pdp-gap__v" aria-hidden="true">✓</span>{{ rs }}</li>{% endif %}{% endfor %}</ul></div>
         </div>
+        {%- endif -%}
         {%- if s.cta != blank %}<a class="oralys-pdp-gap__link" href="#oralys-pdp-offer">{{ s.cta }}</a>{% endif -%}
       </div>
+      {%- endif -%}
     </div>
   </div>
 </div>
@@ -73,7 +79,7 @@
 .oralys-pdp-gap__small{display:flex;align-items:center;gap:12px;margin-top:12px;font-size:14px;color:var(--op-muted)}
 .oralys-pdp-gap__spic{width:88px;height:88px;object-fit:cover;border-radius:12px;flex:0 0 88px;display:block}
 .oralys-pdp-gap__story p{margin:0 0 16px}
-.oralys-pdp-gap__facts{list-style:none;margin:0 0 24px;padding:0;position:relative}
+.oralys-pdp-gap__facts{list-style:none;margin:0;padding:0;position:relative}
 .oralys-pdp-gap__fact{display:flex;gap:14px;position:relative;padding-bottom:20px}
 .oralys-pdp-gap__fact:not(:last-child)::before{content:"";position:absolute;left:17px;top:38px;bottom:4px;width:2px;background:var(--op-line)}
 .oralys-pdp-gap__num{flex:0 0 36px;height:36px;border-radius:50%;background:var(--op-accent);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px}
@@ -128,8 +134,7 @@
     {
       "type": "text",
       "id": "eyebrow",
-      "label": "Sur-titre",
-      "default": "POURQUOI ÇA BOUGE"
+      "label": "Sur-titre"
     },
     {
       "type": "text",
@@ -163,14 +168,14 @@
       "type": "text",
       "id": "asset",
       "label": "Image avant / après : fichier du thème",
-      "default": "oralys-pdp-gap-illustration.webp",
+      "default": "oralys-adv-gap-illustration.webp",
       "info": "Utilisé si aucune image n'est choisie (fichier dans assets/)."
     },
     {
       "type": "text",
       "id": "alt",
       "label": "Image avant / après : texte alternatif",
-      "default": "Avant : un vide sous le dentier. Après : le gel Oralys remplit l'espace"
+      "default": "Le vide qui se creuse entre la gencive et le dentier, et le gel Oralys qui le comble"
     },
     {
       "type": "image_picker",
@@ -259,25 +264,24 @@
       "type": "text",
       "id": "col_a",
       "label": "Colonne A : titre",
-      "default": "La crème"
+      "info": "Le mini-comparatif ne s'affiche que si les lignes de la colonne A ou B sont remplies."
     },
     {
       "type": "textarea",
       "id": "col_a_rows",
       "label": "Colonne A : lignes",
-      "default": "Se pose par-dessus le vide\nS'en va avec la salive vers midi\nLaisse une pâte à gratter le soir"
+      "info": "Une ligne par point. Lignes A et B vides = pas de mini-comparatif."
     },
     {
       "type": "text",
       "id": "col_b",
-      "label": "Colonne B : titre",
-      "default": "Oralys"
+      "label": "Colonne B : titre"
     },
     {
       "type": "textarea",
       "id": "col_b_rows",
       "label": "Colonne B : lignes",
-      "default": "Remplit le vide sous l'appareil\nTient du matin au soir\nSe retire d'un seul morceau"
+      "info": "Une ligne par point."
     },
     {
       "type": "text",

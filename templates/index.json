@@ -15,7 +15,7 @@
         "show_rating": true,
         "rating_text": "4,8/5 · Plus de 30 000 porteurs de dentier l'utilisent déjà",
         "c_stars": "#F0A830",
-        "eyebrow": "Pas une colle : l'empreinte de vos gencives",
+        "eyebrow": "",
         "heading": "Votre dentier tient du café du matin <em>jusqu'au dîner.</em>",
         "asset": "oralys-home-hero-wide.webp",
         "mobile_asset": "oralys-home-hero-mobile.webp",
@@ -112,7 +112,7 @@
     "oralys_gap": {
       "type": "oralys-home-gap",
       "settings": {
-        "eyebrow": "Ce n'est pas votre faute",
+        "eyebrow": "",
         "heading": "La crème colle. <em>Le vide, lui, reste.</em>",
         "subheading": "<p>Vous pensez ne pas avoir mis assez de crème, ou l’avoir mal posée. Non. Après les extractions, l’os fond un peu chaque mois. Un vide se creuse sous le dentier. La crème n’a jamais été faite pour le combler.</p>",
         "asset": "oralys-home-gap.svg",
@@ -171,7 +171,7 @@
     "oralys_offer": {
       "type": "oralys-home-offer",
       "settings": {
-        "eyebrow": "Livraison en France",
+        "eyebrow": "",
         "heading": "Choisissez <em>votre pack</em>",
         "subheading": "<p>Une seule pose tient plusieurs jours. Et plus vous prenez de tubes, moins la semaine vous revient cher.</p>",
         "footnote": "Paiement sécurisé · sans abonnement · 90 jours satisfait ou remboursé",
@@ -250,7 +250,7 @@
     "oralys_voices": {
       "type": "oralys-home-voices",
       "settings": {
-        "eyebrow": "Ils l'ont posé un soir",
+        "eyebrow": "",
         "heading": "Ils ont retrouvé <em>leur place à table</em>",
         "score": "4,8/5 · plus de 30 000 porteurs de dentier",
         "verified": "✓ Achat vérifié",
@@ -353,7 +353,7 @@
     "oralys_steps": {
       "type": "oralys-home-steps",
       "settings": {
-        "eyebrow": "Mode d'emploi",
+        "eyebrow": "",
         "heading": "<em>Quatre gestes</em> simples, ce soir",
         "subheading": "<p>Moins de cinq minutes devant votre lavabo, sans rendez-vous et sans outil.</p>",
         "tip": "Première fois ? Posez-le un soir, au calme. Dès la deuxième fois, le geste devient naturel.",
@@ -418,7 +418,7 @@
     "oralys_faq": {
       "type": "oralys-home-faq",
       "settings": {
-        "eyebrow": "Questions fréquentes",
+        "eyebrow": "",
         "heading": "Ce qu'on nous demande <em>le plus souvent</em>",
         "open_first": true,
         "c_bg": "#EEF6F1",
