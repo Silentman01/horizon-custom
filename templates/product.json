@@ -195,7 +195,7 @@
                 "hide_native_picker": true,
                 "hide_quantity": true,
                 "atc_price": true,
-                "gifts_enable": true,
+                "gifts_enable": false,
                 "gifts_todo": "Choisissez un pack plus grand pour débloquer vos cadeaux",
                 "gifts_done": "Tous vos cadeaux sont débloqués",
                 "gifts_tab": "Offert",
