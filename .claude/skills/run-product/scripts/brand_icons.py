@@ -49,6 +49,7 @@ def glyph(logo, n=0):
 
 def main():
     logo, white, bg, out, slug = sys.argv[1:6]
+    bg = bg if bg.startswith('#') else '#' + bg  # accept C42B21 or #C42B21
     n = int(sys.argv[sys.argv.index('--glyph') + 1]) if '--glyph' in sys.argv else 0
     os.makedirs(out, exist_ok=True)
     dark_im, white_im = Image.open(logo).convert('RGBA'), Image.open(white).convert('RGBA')

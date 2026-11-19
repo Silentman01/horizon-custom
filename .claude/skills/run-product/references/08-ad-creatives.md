@@ -58,6 +58,7 @@ Budget: top 5 at 10 each if their ratio is 1:1/9:16/16:9 (2K) or 6 each if 4:5 (
 ---
 
 ## 1b. Variants gate (before ANY generation — operator rule §7)
+**Angles (00 §22):** organise AD_VARIANTS by audience angle → sub-angle → execution (hook, emotion, story, format). Every audience angle from the dossier gets ad volume; coverage counts audiences and sub-angles, not hook themes.
 For all 25 ads (top 5 included) write `05_ads/AD_VARIANTS.md`, one row per ad:
 `ad-NN | angle card | source rank | original headline (verbatim) | our variant headline | hook (3.3 #) | original design | our design variant`.
 - **Angle card:** every variant maps to one card from 3.1, a validated `V#` or an opportunity `O#`. A remade ad keeps the card of its source ad (1.7: the ad's angle → its card). Never a variant without a card, never a card that isn't in 3.1 (killed angles stay out).

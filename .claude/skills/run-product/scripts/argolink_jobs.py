@@ -1,15 +1,17 @@
-"""Run a batch of ArgoLink GPT Image 2 jobs defined in a JSON file and save the results.
+"""Run a batch of ArgoLink GPT Image jobs (default gpt-image-2.5-sunburst) defined in a JSON file and save the results.
 
 Drop-in replacement for kie_jobs.py: it reads the same jobs.json format.
 
 Usage:
-  python -I argolink_jobs.py jobs.json OUT_DIR [--workers 6] [--quality high]
+  python -I argolink_jobs.py jobs.json OUT_DIR [--workers 6] [--quality high] [--model gpt-image-2.5-sunburst] [--cap 0.15]
   python -I argolink_jobs.py --check          # one tiny paid test call ($0.015) to verify the key
 
 jobs.json: [{"name": "...",
              "input": {"prompt": "...", "aspect_ratio": "1:1", "resolution": "2K"},   # or "size": "1024x1280"
              "upload": {"field": "input_urls", "files": ["local/ref1.png", "local/packshot.png"]}}]
-- "model" is ignored (always gpt-image-2). Jobs with reference files (upload.files or input.input_urls / image_urls)
+- --model picks the ArgoLink image model (gpt-image-2.5-sunburst default, operator 2026-11-19; gpt-image-2 and
+  gpt-image-2.6-sunburst also exist; Flare variants once printed the competitor's name on our label). The job's own
+  "model" field is ignored. --cap stops starting new jobs once the approved budget would be exceeded (00 §20). Jobs with reference files (upload.files or input.input_urls / image_urls)
   go to /v1/images/edits (up to 16 refs); jobs without go to /v1/images/generations.
 - aspect_ratio + resolution are mapped to pixel sizes (see SIZES); input.size overrides them.
 - Calls are synchronous (up to ~10 min each), so jobs run in parallel threads.
@@ -19,11 +21,13 @@ Reads ARGOLINK_API_KEY from the environment, else from D:/Ecom/Products/.secrets
 import argparse, base64, concurrent.futures as cf, json, mimetypes, os, sys, time, urllib.request, urllib.error
 
 sys.stdout.reconfigure(encoding="utf-8")
-ap = argparse.ArgumentParser(description="Batch ArgoLink GPT Image 2 jobs (kie_jobs.py-compatible job files).")
+ap = argparse.ArgumentParser(description="Batch ArgoLink GPT Image jobs (kie_jobs.py-compatible job files).")
 ap.add_argument("jobs", nargs="?", help="jobs JSON file")
 ap.add_argument("out", nargs="?", help="output directory")
 ap.add_argument("--workers", type=int, default=6, help="parallel requests (default 6)")
 ap.add_argument("--quality", default="high", choices=["auto", "low", "medium", "high"])
+ap.add_argument("--model", default="gpt-image-2.5-sunburst", help="ArgoLink image model (default gpt-image-2.5-sunburst)")
+ap.add_argument("--cap", type=float, default=None, help="approved budget in USD; no new job starts once it would be exceeded")
 ap.add_argument("--check", action="store_true", help="run one 1024x1024 low-quality test image and exit")
 args = ap.parse_args()
 
@@ -79,7 +83,7 @@ def save(res, dest):
 
 if args.check:
     t = time.time()
-    res = post("generations", {"model": "gpt-image-2", "prompt": "A plain white ceramic cup on a light grey table, studio photo",
+    res = post("generations", {"model": args.model, "prompt": "A plain white ceramic cup on a light grey table, studio photo",
                                "size": "1024x1024", "quality": "low", "n": 1, "response_format": "b64_json"})
     dest = os.path.join(os.environ.get("TEMP", "."), "argolink_check.png")
     save(res, dest)
@@ -91,11 +95,23 @@ jobs = json.load(open(args.jobs, encoding="utf8"))
 os.makedirs(args.out, exist_ok=True)
 
 
+import threading
+_lock = threading.Lock()
+_committed = [0.0]
+
+
 def run(job):
     name = job["name"]
     dest = os.path.join(args.out, name + ".png")
     if os.path.exists(dest):
         return f"{name}: exists, skipped", 0
+    inp0 = job.get("input", {})
+    size0 = inp0.get("size") or SIZES.get(inp0.get("aspect_ratio", "1:1"), SIZES["1:1"]).get(inp0.get("resolution", "1K"), "1024x1024")
+    est = 0.02 if max(int(x) for x in size0.split("x")) > 2048 else 0.015
+    with _lock:
+        if args.cap is not None and _committed[0] + est > args.cap + 1e-9:
+            return f"{name}: SKIPPED (cap ${args.cap:.3f} reached; committed ${_committed[0]:.3f})", 0
+        _committed[0] += est
     inp = job.get("input", {})
     size = inp.get("size") or SIZES.get(inp.get("aspect_ratio", "1:1"), SIZES["1:1"]).get(inp.get("resolution", "1K"), "1024x1024")
     refs = []
@@ -105,7 +121,7 @@ def run(job):
         refs += [u for u in inp.get(k, []) if isinstance(u, str)]
     if job.get("first_url"):
         refs.insert(0, job["first_url"])
-    body = {"model": "gpt-image-2", "prompt": inp["prompt"], "size": size,
+    body = {"model": args.model, "prompt": inp["prompt"], "size": size,
             "quality": inp.get("quality", args.quality), "n": 1, "response_format": "b64_json"}
     t = time.time()
     for attempt in (1, 2):
@@ -121,6 +137,8 @@ def run(job):
         except Exception as e:
             err = e
             time.sleep(5)
+    with _lock:
+        _committed[0] -= est  # failed generations are free
     return f"{name}: FAILED {err}", 0
 
 
@@ -129,4 +147,4 @@ with cf.ThreadPoolExecutor(max(1, args.workers)) as ex:
     for msg, cost in ex.map(run, jobs):
         total += cost
         print(msg, flush=True)
-print(f"done: {len(jobs)} jobs, spent ${total:.3f}")
+print(f"done: {len(jobs)} jobs, model {args.model}, spent ${total:.3f}" + (f" (cap ${args.cap:.3f})" if args.cap is not None else ""))
