@@ -77,6 +77,7 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - **Own variants, not copies (every ad, top 5 included):** before generating, take each source ad's headline and write an *almost similar* variant: same hook mechanism, rhythm, length and claim strength, but different wording ("I rolled my eyes. Then I paid off $7,349 in debt" → "I laughed at it. Then I cleared $7,349 of debt"). Same rule for the design: keep the format, layout zones, type style and color logic, but change the scene/background/props/composition enough that it is ours (≈80–90% similar, not 97%). Numbers and claims keep their strength (rule 1).
 - **Validation gate:** write all headline + design variants to `05_ads/AD_VARIANTS.md` and stop for the operator's validation. Generate only after approval, then continue the workflow without stopping again.
 - The rest: inspired by the top-30 patterns (formats × hooks), each with its variant headline/design from AD_VARIANTS.md.
+- **Only the competitor's formats (PawSorb 2026-11-19):** never invent an ad format the competitor doesn't run (e.g. designed product-forward statics next to a native-only footprint), and show the product only when the source format shows theirs. "stop making things up please. don't reinvent the wheel like that." Detail: 08 §1b.
 - Never show the competitor's brand name; no text/logo on our product frame (the packshot's temple print came out garbled).
 - Ad copy mirrors the competitor's caption framework with the same claim strength.
 
