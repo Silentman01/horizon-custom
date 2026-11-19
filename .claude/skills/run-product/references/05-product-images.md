@@ -130,6 +130,7 @@ Types and how to treat them:
 - Prompt = CONCEPT-REMAKE (§13.2) + an image-specific `DESC` that states: canvas zones (in %), background color/hex, each text line **in quotes** with its position, style and emphasis, icons (green checks, red crosses, arrows), product placement/angle/size, people (new person described precisely), insets/banners.
 - Same aspect ratio as the competitor image (almost always 1:1) at 2K; name `<slug>-product-NN` where NN = our gallery position.
 - No brand logo/wordmark on the image, no print on the product, no competitor name.
+- **Every persuasive element carries over (operator 2026-11-19, PawSorb: "a big mistake right here"):** expert names, credentials and panel line (ours: our own names + "<Brand> Advisory Panel"), stat figures ("$5,000 vet bill", "67%"), "100%" claims, "None" rows, seals and ratings. Never let a blanket prompt line ("no names", "no $ or % figures") strip them: "no prices" means OUR product price only. QA every remake side by side with its source, element by element, before calling it done.
 **Output:** `scratch/jobs_gallery.json` (via a builder, §14).
 **Done when:** every kept image has a job and every text line from Step 3 appears in quotes in its DESC (or is deliberately dropped because it is brand-only).
 **Pitfalls:** a generic STYLE/BRAND block that adds a wordmark (the Noxis builder did — rejected: "plaims don't have their logo on them and ours lose space because of logo you added"); vague DESC ("an infographic about benefits") → the model invents weaker text.
