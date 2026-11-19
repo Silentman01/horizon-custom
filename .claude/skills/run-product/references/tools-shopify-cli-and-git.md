@@ -22,6 +22,7 @@ Command reference and safety procedure for every theme write in a run. The maste
 | Rule | Why (what happened) |
 |---|---|
 | One branch per brand, created from clean `origin/main` | Another brand's branch carries its templates, settings and assets; mixing contaminates both stores. |
+| Skill changes go to `main` from a worktree of `origin/main`, never by pushing a product branch to `main`; before `git push origin HEAD:main`, `git log origin/main..HEAD --stat` must list skill files only | PawSorb 2026-11-19: skill commits made on the `pawsorb` branch were pushed to `main` and dragged the PawSorb theme commit (home, settings_data, header group) along; every later brand branch would have started from PawSorb. Reverted on `main`. |
 | **Commit before any `shopify theme pull`** | A theme pull overwrote uncommitted local work once (the `_ceriva-bundle-tier` thumbnail work was lost and had to be redone). Pull writes files straight to disk; git is the only undo. |
 | Always pull (git + live theme) before pushing | The operator and the Shopify editor change the theme too; pushing blind deletes their edits. |
 | `git pull --no-rebase`, then verify your files survived | The Shopify GitHub integration adds bot commits ("Update from Shopify for theme …") that can carry stale copies of your files. |

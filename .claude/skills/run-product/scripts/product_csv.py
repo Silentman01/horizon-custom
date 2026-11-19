@@ -52,7 +52,7 @@ def url(img):
 rows, upload, notes = [], [], []
 for p in spec["products"]:
     opts = p["options"][:3]
-    combos = list(itertools.product(*[o["values"] for o in opts])) or [("Default Title",)]
+    combos = list(itertools.product(*[o["values"] for o in opts])) if opts else [("Default Title",)]  # product() of no options is [()], not []
     if not opts:
         opts = [{"name": "Title", "values": ["Default Title"]}]
     imgs = p.get("images", [])
@@ -61,7 +61,7 @@ for p in spec["products"]:
         key = " / ".join(combo)
         r = dict.fromkeys(COLS, "")
         r.update({"Handle": p["handle"],
-                  "Variant SKU": f'{p.get("sku_prefix", p["handle"][:8].upper())}-' + "-".join(c.replace(" ", "")[:4].upper() for c in combo),
+                  "Variant SKU": p.get("sku_prefix", p["handle"][:8].upper()) + ("-" + "-".join(c.replace(" ", "")[:4].upper() for c in combo) if p["options"] else ""),
                   "Variant Grams": p.get("grams", 0), "Variant Inventory Tracker": "",
                   "Variant Inventory Policy": "continue", "Variant Fulfillment Service": "manual",
                   "Variant Price": p.get("price_overrides", {}).get(key, p["price"]),
