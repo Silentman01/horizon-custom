@@ -1,0 +1,69 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls). History series mostly null; non-null: 2026-08-20 5 advertisers 1200; 2026-09-28 6/970; 2026-10-06 6/920; 2026-10-30 6/1600; 2026-11-15 6/1500",
+ "members": [
+  {
+   "id": "artuvate.co_9108715372891",
+   "brand_id": "artuvate.co",
+   "price_usd": 89.0,
+   "total": 4342,
+   "active": 2121,
+   "first": "2025-09-27T15:50:30.903Z"
+  },
+  {
+   "id": "minakolab.com_15605232828798",
+   "brand_id": "minakolab.com",
+   "price_usd": 129.0,
+   "total": 6,
+   "active": 6,
+   "first": "2026-02-10T13:43:24.409Z"
+  },
+  {
+   "id": "medirelieve.com_15398583075198",
+   "brand_id": "medirelieve.com",
+   "price_usd": 2095.0,
+   "total": 3,
+   "active": 0,
+   "first": "2026-06-08T02:40:19.500Z"
+  },
+  {
+   "id": "medirelieve.com_15436798361982",
+   "brand_id": "medirelieve.com",
+   "price_usd": 2295.0,
+   "total": 1,
+   "active": 0,
+   "first": "2026-06-08T02:40:19.513Z"
+  },
+  {
+   "id": "minakolab.com_15619417932158",
+   "brand_id": "minakolab.com",
+   "price_usd": 121.0,
+   "total": 4,
+   "active": 0,
+   "first": "2026-07-08T08:52:39.361Z"
+  },
+  {
+   "id": "relievia.us_9986323906907",
+   "brand_id": "relievia.us",
+   "price_usd": 86.95,
+   "total": 4,
+   "active": 0,
+   "first": "2026-07-05T13:18:18.331Z"
+  },
+  {
+   "id": "shopilou.de_9497210519894",
+   "brand_id": "shopilou.de",
+   "price_usd": 85.41,
+   "total": 2,
+   "active": 0,
+   "first": "2026-03-09T02:47:59.824Z"
+  },
+  {
+   "id": "trynovis.com_10199325901084",
+   "brand_id": "trynovis.com",
+   "price_usd": 79.95,
+   "total": 12,
+   "active": 0,
+   "first": "2026-05-29T18:52:41.883Z"
+  }
+ ]
+}

@@ -1,0 +1,4 @@
+{"date":"2026-11-19","probes":[
+{"call":"search_meta_ads brand_ids=nordvera.dk,nordveranordic.se,nordvera.no,nordverashop.de,nordvera.at,nordvera.be,netoviaclean.com,belviawear.se,joumko.com,shimerlya.com adspy_platform=instagram sort_by=adspy_comments page_size=10","pagination_total":0,"result":"no Instagram-matched ads"},
+{"call":"search_meta_ads brand_ids=everstridesocks.com,onecompress.com,serenityshop.eu,buyoxalys.com,saintport.com,euzincare.gr,arlevi.com,hopzip.fr,venzipa.com,deltapicks.in adspy_platform=instagram sort_by=adspy_comments page_size=10","pagination_total":0,"result":"no Instagram-matched ads"}],
+"get_meta_ad_comments_calls":0,"comments_found":0,"credits_spent_on_comments":0}

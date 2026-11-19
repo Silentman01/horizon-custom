@@ -1,0 +1,6 @@
+{"probe_date":"2026-11-19","result":"NO Instagram-matched ads found for any seller or look-alike; zero comments retrievable; get_meta_ad_comments not called",
+"probes":[
+{"query":"search_meta_ads brand_ids=ryer.de adspy_platform=instagram sort_by=adspy_comments page_size=10","pagination_total":0},
+{"query":"search_meta_ads brand_ids=ryershop.de,aurevia-shopping.de,jet-force.fr,teppichreiniger-ryer.de,munichsunny.com,bestideasuk.co.uk,eziclean.ma adspy_platform=instagram sort_by=adspy_comments page_size=10","pagination_total":0},
+{"query":"search_meta_ads q=Nasssauger adspy_platform=instagram sort_by=adspy_comments page_size=5","pagination_total":0}],
+"comments_pulled":0}

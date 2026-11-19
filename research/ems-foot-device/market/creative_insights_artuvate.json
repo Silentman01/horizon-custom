@@ -1,0 +1,31 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls).",
+ "analysed_ads": 17,
+ "hook": {
+  "Testimonial": 23.5,
+  "Question": 17.6,
+  "Social Proof": 17.6,
+  "Scarcity": 11.8,
+  "Story": 11.8
+ },
+ "angle": {
+  "Pain": 76.5,
+  "Risk Reversal": 11.8,
+  "Founder Story": 5.9,
+  "Social Proof": 5.9
+ },
+ "funnel": {
+  "BOF": 88.2,
+  "MOF": 5.9,
+  "TOF": 5.9
+ },
+ "awareness": {
+  "Product Aware": 88.2,
+  "Problem Aware": 11.8
+ },
+ "motivation": {
+  "Relief": 76.5,
+  "Fear of Loss": 17.6,
+  "Aspiration": 5.9
+ }
+}

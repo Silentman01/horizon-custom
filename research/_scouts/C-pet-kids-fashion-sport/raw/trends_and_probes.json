@@ -1,0 +1,15 @@
+{"note":"Condensed from get_product_trend (days=90, 2026-08-22..2026-11-19) and comment probes.",
+"trends":{
+"alpensattel.de_10723407134984":"store ads 92->127, active 56->44, ads30d 39->6, est spend 5000->960 (drops Oct 11, Nov 11); market 1 advertiser, 10000/day flat",
+"softpet.es_15471612821836":"store ads 300->907, active 146->419, ads30d 145->282, spend 930->2900; market advertisers 3->5 (Sep 16); spend 3700 on Nov 9",
+"paw-guardian.com_14977703772543":"ads 3339->5587, active 1631->2001 (dip 1484 Sep 26), ads30d 805->1091, spend 1200->1800 (2600 peak Sep 5); market advertisers 2",
+"kanama.com_14999683662200":"ads 712->1144, active 622->659 (dip 386 Sep 26 then recovered), ads30d 287->229, spend 2400->2700; market advertisers 2",
+"de.korlem.com_8268986089626":"ads 167->391, active 10->183, ads30d 56->252, spend 330->2300; active 0 Sep 26-Oct 31, relaunch Nov 1, surge from Nov 12; market advertisers 3",
+"byanavrin.com_8831735758984":"ads 316->500, active 123->264, spend 800->3600; market advertisers 1->2 on Nov 10; some glitch days ads=1",
+"pelsbarn.de_8572468920584":"store ads 212->1 (gone Sep 28-Oct 4 and from Nov 17), market 1 advertiser 3200 flat"},
+"comment_probes":{
+"byanavrin ad 1072194285564866":{"adspy_ig_comments":26,"api_total":0},
+"kanama pliers ad 3675118932644764":{"adspy_ig_comments":32,"api_total":0},
+"kanama aerator ad 1563586578599666 (other product)":{"adspy_ig_comments":18,"api_total":"not probed"},
+"softpet.es, paw-guardian.com, de.korlem.com":"brand_ids + adspy_platform=instagram: 0 ads; landing_page_url searches: 0",
+"niche-wide ad search adspy_comments_min=40":"only giveaways/brand posts (werenotreallystrangers, recgen, funbed, garvalin, gibbon); unusable"}}

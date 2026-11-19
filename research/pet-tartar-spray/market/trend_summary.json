@@ -1,0 +1,25 @@
+{
+ "window": "2026-08-22..2026-11-19",
+ "start": {
+  "ads_total": 3339,
+  "active": 1631,
+  "last_30d": 805,
+  "daily_spend": 1200
+ },
+ "end": {
+  "ads_total": 5587,
+  "active": 2001,
+  "last_30d": 1091,
+  "daily_spend": 1800
+ },
+ "peak_daily_spend": {
+  "2026-09-05": 2600
+ },
+ "trough_daily_spend": {
+  "2026-09-27..2026-10-09": 1100
+ },
+ "active_ads_peak": {
+  "2026-11-18": 2127
+ },
+ "market_advertisers": 2
+}

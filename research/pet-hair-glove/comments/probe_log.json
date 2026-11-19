@@ -1,0 +1,23 @@
+{"date":"2026-11-19",
+"market":"softpet.es_15471612821836 (sellers: softpet.es, cleveria.store, formy.es, petzuno.store, cuidamascota.es; 99.2% ES audience)",
+"probes":[
+{"query":"brand_ids=softpet.es,cleveria.store,formy.es,petzuno.store,cuidamascota.es adspy_platform=instagram","result":"0 ads"},
+{"query":"same brands adspy_only=true","result":"6 ads, all softpet.es, all Facebook-matched (FB comments reported 0, IG null). Probed 1757445018914606 page_size=1: 0 comments"},
+{"query":"look-alike brands loveginsly.store,hugpupy.com,pawlyticlab.com,happierdoggo.com,comfypetsofficial.shop,v-ello.com,trypetify.com,mein-einfach-zuhause.de,fluffiq.de adspy_platform=instagram","result":"0 ads"},
+{"query":"q=pet hair remover glove, instagram, comments_min=5","result":"0 ads"},
+{"query":"q=guante quitapelos mascota, instagram","result":"0 ads"},
+{"query":"q=Tierhaarentferner, instagram","result":"0 ads"},
+{"query":"q=pet hair remover, instagram, sort adspy_comments","result":"5 ads (aurexco.in, kittinen.com x3, wheelz-tech.com); adspy IG comments 2/1/1/1/0"},
+{"ad":"1357575412786638","adspy_ig_comments":2,"api_total":2},
+{"ad":"24011679808450564","adspy_ig_comments":1,"api_total":0},
+{"ad":"1757445018914606","adspy_fb_comments":0,"api_total":0}],
+"web":[
+{"url":"https://www.trustpilot.com/review/softpet.es","status":"ok (WebFetch summarises; quotes are tool excerpts of at most 125 chars)"},
+{"url":"https://es.trustpilot.com/review/softpet.es","status":"ok"},
+{"url":"https://es.trustpilot.com/review/softpet.es?page=2","status":"ok, returned older reviews jun-aug 2026"},
+{"url":"trustpilot.com/review/ cleveria.store, formy.es, petzuno.store, cuidamascota.es","status":"404 (no page)"},
+{"url":"old.reddit.com search","status":"blocked by fetch tool"},
+{"url":"reddit via WebSearch","status":"domain blocked"},
+{"url":"chewy.com glove and ChomChom pages","status":"HTTP 429"},
+{"url":"amazon","status":"search returned no Amazon pages"}],
+"credits_spent_est":"about 45 (get_product 1, get_market 7, search_products 10, ad rows 17, comments 2)"}

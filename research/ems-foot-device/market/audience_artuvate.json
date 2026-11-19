@@ -1,0 +1,20 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls).",
+ "analysed_ads": 4255,
+ "women_pct": 40.4,
+ "men_pct": 59.7,
+ "ages": {
+  "25-34": 21.3,
+  "35-44": 34.3,
+  "45-54": 26.7,
+  "55-64": 13.2,
+  "65+": 4.6
+ },
+ "countries": {
+  "GB": 97.9,
+  "BE": 0.9,
+  "IE": 0.4,
+  "DE": 0.2,
+  "ES": 0.2
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "analysed_ads": 72,
+ "hook": {
+  "Fear": 41.7,
+  "Demonstration": 15.3,
+  "Curiosity": 12.5,
+  "Question": 9.7
+ },
+ "angle": {
+  "Pain": 58.3,
+  "New Mechanism": 13.9,
+  "Convenience": 6.9,
+  "Cost Savings": 5.6,
+  "Enemy": 5.6
+ },
+ "funnel": {
+  "BOF": 61.1,
+  "MOF": 38.9
+ },
+ "awareness": {
+  "Problem Aware": 52.8,
+  "Product Aware": 45.8
+ },
+ "motivation": {
+  "Fear of Loss": 70.8,
+  "Relief": 20.8
+ }
+}

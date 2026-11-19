@@ -1,0 +1,262 @@
+[
+ {
+  "id": "trustpilot_1",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Isabel Fernandez Calvo",
+  "stars": 5,
+  "text": "Me encantaron las manoplas quita pelos las mejores acabe con el pelo de una vez",
+  "created_at": "2026-10-18"
+ },
+ {
+  "id": "trustpilot_2",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Joel Chaves fernandez",
+  "stars": 5,
+  "text": "compre dos y tardo en llegar pero todo genial la manopla saca el pelo de mi gato",
+  "created_at": "2026-10-18"
+ },
+ {
+  "id": "trustpilot_3",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Celia",
+  "stars": 1,
+  "text": "¡Experiencia pésima, es una ESTAFA! Venden un producto de mala calidad de fabricación china",
+  "created_at": "2026-10-13"
+ },
+ {
+  "id": "trustpilot_4",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "cliente",
+  "stars": 1,
+  "text": "Llevo más de 15 días esperando el pedido. La empresa dice que lo ha enviado",
+  "created_at": "2026-10-08"
+ },
+ {
+  "id": "trustpilot_5",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Marinaor",
+  "stars": 1,
+  "text": "Es una estafa ,me siento engañada y timada NO COMPRÉIS EN ESTA TIENDA",
+  "created_at": "2026-09-27"
+ },
+ {
+  "id": "trustpilot_6",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "cliente",
+  "stars": 1,
+  "text": "Es un producto básico como el de cualquier bazar. No vale el precio que pide.",
+  "created_at": "2026-09-17"
+ },
+ {
+  "id": "trustpilot_7",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Laura Schvartz",
+  "stars": 1,
+  "text": "Estafadores. Lo compré por 19.99€ y una vez pagado",
+  "created_at": "2026-09-16"
+ },
+ {
+  "id": "trustpilot_8",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Maria Perez",
+  "stars": 1,
+  "text": "Son unos estafadores mentirosos,te dicen en la publicidad q tienes 30 días de prueba gratis",
+  "created_at": "2026-09-11"
+ },
+ {
+  "id": "trustpilot_9",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Mercedes Jiménez González",
+  "stars": 1,
+  "text": "llevo 2 meses a que me contesten por estafarme!",
+  "created_at": "2026-09-11"
+ },
+ {
+  "id": "trustpilot_10",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Ser Cam",
+  "stars": 1,
+  "text": "No doy menos porque no hay. Estafa.",
+  "created_at": "2026-09-09"
+ },
+ {
+  "id": "trustpilot_11",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Isabel",
+  "stars": 1,
+  "text": "Les pregunté por sus ofertas y promociones de 50% claramente sospechosas",
+  "created_at": "2026-09-07"
+ },
+ {
+  "id": "trustpilot_12",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Maria Pilar",
+  "stars": 1,
+  "text": "No limpia tanto como dice la publicidad.",
+  "created_at": "2026-08-30"
+ },
+ {
+  "id": "trustpilot_13",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Cristina",
+  "stars": 1,
+  "text": "Solo me han entregado una de las manoplas que pedí.",
+  "created_at": "2026-08-30"
+ },
+ {
+  "id": "trustpilot_14",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "MONTSERRAT GONZALEZ MARTINEZ",
+  "stars": 1,
+  "text": "Acabo de recibir el pedido y no se ajusta para nada a lo que pagué.",
+  "created_at": "2026-08-29"
+ },
+ {
+  "id": "trustpilot_15",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Ana Canales",
+  "stars": 1,
+  "text": "He recibido mis manoplas quitapelos y no son lo que prometen para nada",
+  "created_at": "2026-08-29"
+ },
+ {
+  "id": "trustpilot_16",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Evamaria",
+  "stars": 1,
+  "text": "La manopla Softpet NO FUNCIONA, no como dicen en su video y publicidad.",
+  "created_at": "2026-08-27"
+ },
+ {
+  "id": "trustpilot_17",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Mercè Gimeno",
+  "stars": 1,
+  "text": "Un timo y una estafa.",
+  "created_at": "2026-08-26"
+ },
+ {
+  "id": "trustpilot_18",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Hortensia Galiano Alcala",
+  "stars": 1,
+  "text": "son unos estafadores ,llevo desde el 5 de julio q hice el pedido del guante",
+  "created_at": "2026-08-19"
+ },
+ {
+  "id": "trustpilot_19",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Beatriz Martos Borrallo",
+  "stars": 1,
+  "text": "Nefasta experiencia tanto con el guante Sofpet como con la atención el cliente",
+  "created_at": "2026-08-19"
+ },
+ {
+  "id": "trustpilot_20",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "E MG",
+  "stars": 1,
+  "text": "Empiezo a pensar que es un timo.",
+  "created_at": "2026-08-15"
+ },
+ {
+  "id": "trustpilot_21",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "cliente (CL)",
+  "stars": 1,
+  "text": "Muy mala experiencia , el cepillo quitapelosfunciona muy mal y estropea el tejido",
+  "created_at": "2026-08-04"
+ },
+ {
+  "id": "trustpilot_22",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "eliscabhotmail.com",
+  "stars": 1,
+  "text": "Pésimo, perdieron el pedido y ni devuelven el importe ni lo envían de nuevo.",
+  "created_at": "2026-07-26"
+ },
+ {
+  "id": "trustpilot_23",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Núria TG",
+  "stars": 1,
+  "text": "Haces dos meses pedí un guante quitapelos, el pedido no llega por dirección incompleta",
+  "created_at": "2026-07-18"
+ },
+ {
+  "id": "trustpilot_24",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "José Moral",
+  "stars": 1,
+  "text": "Cuidado con lo que compráis aquí en Softpet, hacen publicidad engañosa",
+  "created_at": "2026-07-16"
+ },
+ {
+  "id": "trustpilot_25",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Matías CASACCIA",
+  "stars": 3,
+  "text": "El envío se tomó 10 días hábiles en arribar",
+  "created_at": "2026-07-08"
+ },
+ {
+  "id": "trustpilot_26",
+  "source": "https://es.trustpilot.com/review/softpet.es",
+  "channel": "trustpilot",
+  "brand_id": "softpet.es",
+  "author": "Geijinii Almendrini",
+  "stars": 1,
+  "text": "Es un fraude su guante (manopla) quita pelos solo lo mueve de un lado al otro",
+  "created_at": "2026-06-28"
+ }
+]

@@ -1,0 +1,116 @@
+{
+ "_note": "CONDENSED get_similar_products + search_products; fields verbatim",
+ "similar": [
+  {
+   "id": "lunarastore.es_15724936855935",
+   "price_usd": 48.59,
+   "ads": 6,
+   "active": 0,
+   "market_sellers": 4,
+   "stage": "declining"
+  },
+  {
+   "id": "aveonfr.com_9606170869973",
+   "price_usd": 64.69,
+   "ads": 15,
+   "active": 12,
+   "market_sellers": 10,
+   "market_total_ads": 7,
+   "stage": "declining",
+   "copy": "inclinaison de 27 deg ... Essayez-le 90 nuits"
+  },
+  {
+   "id": "aushomeco.com_9213823746276",
+   "price_usd": 80.0,
+   "ads": 2,
+   "stage": "emerging"
+  },
+  {
+   "id": "vistorox.com_8756818510007",
+   "price_usd": 159.0,
+   "ads": 1,
+   "stage": "emerging"
+  },
+  {
+   "id": "myvelaa.com_14952164426096",
+   "price_usd": 89.99,
+   "market_sellers": 19,
+   "market_total_ads": 255,
+   "market_active_ads": 34,
+   "new_sellers_30d": 4,
+   "stage": "declining",
+   "market_est_daily_spend_usd": 1,
+   "note": "title Moodie Intimacy Comfort Pillow but URL is a reading wedge pillow"
+  }
+ ],
+ "search_intimacy_pillow": [
+  {
+   "id": "cozycloudco.com_9684850409623",
+   "price_usd": 52.75,
+   "total_ads": 168,
+   "active": 101,
+   "ads_30d": 129,
+   "first": "2026-08-11",
+   "stage": "emerging"
+  },
+  {
+   "id": "avraofficial.co_15599128445263",
+   "price_usd": 77.95,
+   "total_ads": 442,
+   "active": 0,
+   "first": "2026-01-08",
+   "stage": "declining"
+  },
+  {
+   "id": "amoracomfort.com_8161694122031",
+   "price_usd": 51.95,
+   "market_sellers": 6,
+   "stage": "declining"
+  }
+ ],
+ "search_wedge_pillow_sleep_reflux": [
+  {
+   "id": "hiquo.co_9572650680655",
+   "title": "Anti-Snoring Wedge Pillow",
+   "price_usd": 85.99,
+   "total_ads": 1337,
+   "active": 417,
+   "first": "2025-12-23",
+   "market_sellers": 6,
+   "market_est_daily_spend_usd": 41,
+   "stage": "saturated",
+   "revenue_est": [
+    5300,
+    6900
+   ]
+  },
+  {
+   "id": "davolia.com_7631292923998",
+   "title": "RefluxGuard baby pillow",
+   "price_usd": 59.9,
+   "total_ads": 412,
+   "active": 0,
+   "stage": "declining",
+   "market_est_daily_spend_usd": 49
+  },
+  {
+   "id": "norles.com_16096223887747",
+   "title": "Anti-Reflux Baby Lounger",
+   "price_usd": 119.99,
+   "market_active_ads": 118,
+   "market_est_daily_spend_usd": 47,
+   "stage": "scaling"
+  },
+  {
+   "id": "littlejax.co.uk_7681038745854",
+   "title": "Luxury Wedge Pillow",
+   "price_usd": 79.0,
+   "total_ads": 35,
+   "stage": "emerging"
+  }
+ ],
+ "search_totals": {
+  "q wedge pillow": 251,
+  "q intimacy pillow": 102
+ }
+}

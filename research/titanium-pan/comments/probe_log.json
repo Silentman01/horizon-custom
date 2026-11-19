@@ -1,0 +1,16 @@
+{"date":"2026-11-19","market_id":"titanoxfrance.com_10812362654042","sellers_listed_by_get_market":29,
+"probes":[
+{"query":"search_meta_ads brand_ids=10 top sellers (titanoxfrance, shoptitanox, titanoxufficiale, titanoxoficial, meintitanox, ataliro, titaniumxofficial, titanox-uk, untitan, en-thingly) adspy_platform=instagram","ig_matched_ads":0},
+{"query":"search_meta_ads brand_ids=19 other sellers adspy_platform=instagram","ig_matched_ads":0},
+{"query":"search_meta_ads look-alike brands (siraatskitchen, titanskitchen, get-titancore, nordkitchen.nl, fromourplace.ca/.au, gourmetific, kobachcookware) adspy_platform=instagram","ig_matched_ads":1,"ad_id":"793290620445947","note":"siraatskitchen pizza-steel influencer video, adspy IG 3 likes/34 comments; API comments total=0"},
+{"query":"search_meta_ads q='titanium pan' adspy_platform=instagram adspy_comments_min=1","ig_matched_ads":0},
+{"query":"search_meta_ads landing_page_url=titanoxfrance product page adspy_only","ads":5,"note":"all 5 are the same creative matched to a FACEBOOK post (40 comments, 992 reactions); Facebook never returns comments; not probed"},
+{"ad_id":"793290620445947","adspy_ig_comments":34,"api_total":0}
+],
+"web":[
+{"source":"trustpilot","status":"EXCLUDED by operator instruction; nothing saved"},
+{"source":"reddit (old.reddit, www.reddit.com, WebSearch reddit.com)","status":"blocked: fetch/search refused"},
+{"source":"amazon product pages (KZAER B0F4KSH3BQ, XAWSOP B0DC69B5RL)","status":"HTTP 503"},
+{"source":"WebSearch summaries (Amazon listings, review sites, seller care pages)","status":"only paraphrased summaries or seller marketing returned, no verbatim buyer comments, so nothing saved or tagged"}
+],
+"api_comments_total":0,"web_quotes_total":0}

@@ -1,0 +1,17 @@
+{"similar_to_fitsleeps":[
+{"id":"dawnbands.com_9355703025899","market_sellers":42,"stage":"saturated","active_ads":143,"price_usd":44.99,"price_range":[34.95,349]},
+{"id":"nurveworld.com_10896348381523","sellers":10,"stage":"declining","active_ads":0},
+{"id":"pulse-sleep.fr_15288202068342","sellers":38,"stage":"declining","active_ads":0},
+{"id":"thesleepdeep.co_7885210910799","sellers":15,"stage":"emerging","active_ads":99,"price_usd":37.67,"lang":"TR"},
+{"id":"risemate.se_10512225042771","sellers":25,"stage":"declining","active_ads":4,"price_usd":549},
+{"id":"risebands.com_15142225248588","sellers":12,"stage":"scaling","active_ads":1391,"price_usd":55,"angle":"deaf/HoH"},
+{"id":"hellohura.com_10711562977544","sellers":13,"stage":"declining","active_ads":2},
+{"id":"wearvibora.com_14901602582905","sellers":14,"stage":"declining","active_ads":0}],
+"search_vibration_alarm_total":408,"search_silent_alarm_total":326,
+"other_clusters_seen":[
+{"id":"histrips.com_15585929822552","sellers":3,"active_ads":4979,"daily_spend":34000,"countries":20,"stage":"emerging"},
+{"id":"snoozlet.com_15673057345881","sellers":46,"active_ads":3,"stage":"declining","price_usd":99,"price_median":70.97},
+{"id":"ekontravel.com_9089424031969","sellers":29,"active_ads":0,"stage":"declining","countries":20},
+{"id":"getoptmzd.com_11020195791191","sellers":4,"active_ads":36,"price_usd":69.95},
+{"id":"sleeeper.se_16069039161679","sellers":12,"active_ads":0},
+{"id":"wristrise.com_10945663140173","sellers":8,"active_ads":0}]}

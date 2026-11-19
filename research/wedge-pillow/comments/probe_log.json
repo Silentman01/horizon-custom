@@ -1,0 +1,22 @@
+{
+ "_note": "Instagram-matched ads across all 20+ market brands (query q=intimacy, adspy_platform=instagram, sort adspy_comments) plus landing-page query: only 2 ads returned in total.",
+ "probes": [
+  {
+   "ad_id": "2322333648296176",
+   "brand": "comfysleepers.com",
+   "adspy_ig_comments": 2,
+   "adspy_ig_likes": 33,
+   "api_comments_total": 0,
+   "called": true
+  },
+  {
+   "ad_id": "976138665021204",
+   "brand": "comfysleepers.com",
+   "adspy_ig_comments": 0,
+   "adspy_ig_likes": 16,
+   "called": false,
+   "reason": "<5 comments"
+  }
+ ],
+ "result": "no ad with >=5 IG comments; 0 comments returned; no raw_ files saved"
+}

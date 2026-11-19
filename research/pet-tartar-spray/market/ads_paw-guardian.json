@@ -1,0 +1,97 @@
+[
+ {
+  "id": "2006543786796746",
+  "start": "2025-12-05",
+  "end": "2026-05-29",
+  "status": "inactive",
+  "format": "image",
+  "eu_reach": 16179,
+  "eu_spend_eur": 186,
+  "headline": "Black Friday: Dog Parents Are Snapping This Up Fast",
+  "lp": "product"
+ },
+ {
+  "id": "1977733896117970",
+  "start": "2025-12-05",
+  "end": "2026-05-29",
+  "status": "inactive",
+  "format": "image",
+  "eu_reach": 30607,
+  "eu_spend_eur": 351,
+  "headline": "Black Friday (same)",
+  "lp": "product"
+ },
+ {
+  "id": "1542336076815049",
+  "start": "2025-12-05",
+  "end": "2026-05-29",
+  "status": "inactive",
+  "format": "video",
+  "eu_reach": 72726,
+  "eu_spend_eur": 836,
+  "headline": "3 dog-dental hacks every pet parent should try (for under $10).",
+  "lp": "product"
+ },
+ {
+  "id": "863323466173050",
+  "start": "2025-12-05",
+  "end": "2026-05-29",
+  "status": "inactive",
+  "format": "image",
+  "eu_reach": 119693,
+  "eu_spend_eur": 1376,
+  "headline": "Black Friday (same)",
+  "lp": "product"
+ },
+ {
+  "id": "3013220405530900",
+  "start": "2025-12-05",
+  "end": "2026-05-27",
+  "status": "inactive",
+  "format": "video",
+  "eu_reach": 203638,
+  "eu_spend_eur": 2341,
+  "headline": "Brushing Might Be Making Your Dog's Teeth Worse",
+  "lp": "advertorial"
+ },
+ {
+  "id": "833701122635750",
+  "start": "2025-11-15",
+  "end": "2026-04-19",
+  "status": "inactive",
+  "format": "video",
+  "eu_reach": 326225,
+  "eu_spend_eur": 2689,
+  "headline": "Avertissement du veterinaire (FR)",
+  "lp": "advertorial paw-guardian.co"
+ },
+ {
+  "id": "825615377044187",
+  "start": "2025-11-15",
+  "end": "2026-04-16",
+  "status": "inactive",
+  "format": "video",
+  "eu_reach": 170778,
+  "eu_spend_eur": 1400,
+  "headline": "Avertissement du veterinaire (FR)",
+  "lp": "advertorial"
+ },
+ {
+  "id": "1419403263687298",
+  "start": "2026-11-13",
+  "end": "2026-11-16",
+  "status": "active",
+  "format": "video",
+  "headline": "Fresh Breath Without Brushing",
+  "lp": "product"
+ },
+ {
+  "id": "28913761758250779",
+  "start": "2026-11-13",
+  "end": "2026-11-17",
+  "status": "active",
+  "format": "video",
+  "headline": "Fresh Breath Without Brushing",
+  "lp": "product"
+ }
+]

@@ -1,0 +1,13 @@
+{
+  "_note": "search_meta_ads probes with adspy_platform=instagram (empty result = 0 credits, otherwise 1 credit per ad row) and get_meta_ad_comments. Verbatim key fields.",
+  "probes": [
+    {"target":"fitsleeps.com (landing_page_url product URL, then brand_ids)","result":"pagination.total=0 both times: no Instagram-matched ad","credits":0},
+    {"target":"myspinea.com (brand_ids)","result":"total=0","credits":0},
+    {"target":"artuvate.co (brand_ids)","result":"total=0","credits":0},
+    {"target":"physeli.com (brand_ids)","result":"total=0","credits":0},
+    {"target":"ninanude.com (brand_ids)","result":"total=6 IG-matched ads; best row id 1639776414367487 adspy IG comments=1 (0 likes, 0 views); adspy_comments_min=5 -> total 0","credits":1},
+    {"target":"flytex.fr (brand_ids)","result":"total=4 IG-matched ads. Top: ad 28082694641386936 influencer collab (code LOLA, knee sleeve V2), adspy IG 7,465 likes / 63 comments / 519,029 views. Page 2 row: ad 1292378116255831 size guide, 121 likes / 2 comments / 22,182 views","credits":2},
+    {"target":"get_meta_ad_comments ad 28082694641386936 page_size=1","result":"data=[], pagination.total=0 (API returns no comment text although adspy reports 63)","credits":0},
+    {"target":"niche=Health & Supplements, IG, adspy_comments_min=30, active, sort eu_daily_spend (generic discovery, 5 rows)","result":"yfood.com 99 comments, herboxa 42, kijimea.it 55, uk.protein.com 129, curaseptspa.it 32: all retail/influencer brands, not dropship candidates; comments not fetched","credits":5}
+  ]
+}

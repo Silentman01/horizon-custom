@@ -1,0 +1,12 @@
+{"source":"get_product_trend days=90 histrips.com_15585929822552 (condensed)","note":"from Oct 5 the store-level series flips between ~8,800 ads (5,5xx active) and 7 ads (0 active): attribution artifact. Market spend 13000 -> 34000.","rows":[
+["2026-08-22",{"total":5290,"active":2521,"last_30d":2610,"store_spend":19000,"market_spend":13000}],
+["2026-09-18",{"total":7983,"active":4979,"last_30d":3112,"store_spend":34000,"market_spend":34000}],
+["2026-09-26",{"total":8813,"active":5655,"last_30d":3351,"store_spend":35000,"market_spend":34000}],
+["2026-10-04",{"total":8808,"active":5595,"last_30d":2287,"store_spend":34000,"market_spend":34000}],
+["2026-10-05",{"total":7,"active":0,"last_30d":0}],
+["2026-10-31",{"total":8805,"active":5561,"last_30d":195,"store_spend":30000,"market_spend":34000}],
+["2026-11-13",{"total":8804,"active":5557,"last_30d":140,"store_spend":30000,"market_spend":34000}],
+["2026-11-16",{"total":8771,"active":5533,"last_30d":153,"store_spend":25000,"market_spend":34000}],
+["2026-11-19",{"total":7,"active":0,"last_30d":1,"market_spend":34000}]],
+"market":{"id":"histrips.com_15585929822552","sellers":3,"active_ads":4979,"total_ads":7983,"country_count":20,"est_daily_spend_usd":34000,"lifecycle_stage":"emerging","revenue_est_monthly_usd":[5500000,7300000],"price_usd":37.95},
+"sellers":["histrips.com 37.95 (7 ads now)","dreamlock.pl 148 (8 ads)","glidewake.com 49.95 (5 ads)"]}

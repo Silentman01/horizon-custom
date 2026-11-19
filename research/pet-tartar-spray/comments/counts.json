@@ -1,0 +1,19 @@
+{
+ "total": 3,
+ "by_channel": {
+  "blog": 3
+ },
+ "api_comments": 0,
+ "tags": {
+  "objection": 3,
+  "service_complaint": 1
+ },
+ "objections": {
+  "weak efficacy": 2,
+  "subscription/billing": 1
+ },
+ "countries_asked_shipping": {},
+ "intent_ratio": "n/a (no ad comments)",
+ "saturation_signal_count": 0,
+ "per_ad_age_split": "n/a (no API comments)"
+}

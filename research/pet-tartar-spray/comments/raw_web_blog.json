@@ -1,0 +1,32 @@
+[
+ {
+  "id": "blog_1",
+  "channel": "blog",
+  "source": "https://www.ibisik.com/?p=22977",
+  "ad_id": null,
+  "brand_id": "paw-guardian.com",
+  "text": "I noticed a slight reduction in tartar near my dog’s gum line.",
+  "like_count": 0,
+  "created_at": "2026-11-19"
+ },
+ {
+  "id": "blog_2",
+  "channel": "blog",
+  "source": "https://www.ibisik.com/?p=22977",
+  "ad_id": null,
+  "brand_id": "paw-guardian.com",
+  "text": "Results were modest rather than dramatic.",
+  "like_count": 0,
+  "created_at": "2026-11-19"
+ },
+ {
+  "id": "blog_3",
+  "channel": "blog",
+  "source": "https://www.ibisik.com/?p=22977",
+  "ad_id": null,
+  "brand_id": "paw-guardian.com",
+  "text": "Receiving four boxes when I only ordered one immediately made me worry about possible subscription charges",
+  "like_count": 0,
+  "created_at": "2026-11-19"
+ }
+]

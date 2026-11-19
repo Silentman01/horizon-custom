@@ -1,0 +1,16 @@
+{"note":"Condensed from tool output (values copied verbatim); full responses were too large to retype. Credits spent ~57 of 300.",
+"call1":"search_products niche=Pet Supplies,Baby & Kids,Toys & Games,Sports & Outdoors lifecycle=emerging,scaling,peak sellers_min=2 needs_shipping=true price_min_usd=15 sort=winning page_size=12 (total 3449)",
+"call2":"same with niche=Fashion,Jewelry,Other (total 11760)",
+"call3":"niche=Pet,Kids,Toys,Sports,Other first_advertised_from=2026-04-01 sort=daily_spend page_size=15 (total 1722)",
+"cards":[
+{"id":"pfotenmond.de_10210763931979","ads_total_active_30d_first":[1356,597,408,"2025-09-25"],"market":{"sellers":8,"spend":14000,"stage":"scaling","countries":2}},
+{"id":"sleepybelly.com.au_7017886875805","ads":[983,510,158,"2025-10-06"],"market":{"sellers":2,"spend":220,"stage":"emerging","countries":20}},
+{"id":"softpet.es_15471612821836","title":"reusable pet hair remover glove","ads":[907,419,282,"2026-01-07"],"market":{"sellers":6,"new_sellers_30d":3,"spend":2900,"stage":"scaling","countries":1,"price_usd":[20.79,26.99]},"rev":[390000,510000]},
+{"id":"paw-guardian.com_14977703772543","title":"DENTACLEAN anti-tartar spray","ads":[5587,2001,1091,"2025-12-24"],"market":{"sellers":3,"spend":1800,"stage":"scaling","countries":20,"price_usd":[49.9,55.99]},"rev":[250000,330000]},
+{"id":"furryking.com_8106927128858","title":"3-in-1 dog winter jacket","ads":[1016,802,330,"2025-11-23"],"market":{"sellers":11,"new_sellers_30d":1,"spend":6600,"stage":"scaling","countries":9,"price_usd":[24.07,30]}},
+{"id":"kanama.com_14999683662200","title":"saltwater fishing pliers","ads":[1144,659,229,"2026-01-31"],"market":{"sellers":2,"spend":2700,"stage":"scaling","countries":19,"price_usd":[40,48]},"rev":[370000,490000]},
+{"id":"de.korlem.com_8268986089626","title":"magic water coloring book","ads":[391,183,252,"2025-10-29"],"market":{"sellers":3,"spend":2300,"stage":"scaling","countries":3,"price_usd":[19.9,32.29]},"rev":[320000,420000]},
+{"id":"byanavrin.com_8831735758984","title":"Cats Crossing DIY book nook kit","ads":[500,264,93,"2026-05-05"],"market":{"sellers":2,"new_sellers_30d":1,"spend":3600,"stage":"scaling","countries":12,"price_usd":[129.99,149]},"rev":[480000,640000]},
+{"id":"alpensattel.de_10723407134984","title":"bike saddle","ads":[127,44,6,"2026-04-18"],"market":{"sellers":4,"spend":10000,"stage":"emerging","countries":2}},
+{"id":"natalieofficial.it_8025346081027","title":"couple rings","ads":[778,523,184,"2026-01-07"],"market":{"sellers":2,"spend":2800,"stage":"scaling","countries":2}},
+{"id":"pelsbarn.de_8572468920584","title":"pet cooling mat","store_ads":[1,0,0],"market":{"sellers":2,"spend":3200,"stage":"emerging","countries":3}}]}

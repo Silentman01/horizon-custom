@@ -1,0 +1,19 @@
+{"date":"2026-11-19","note":"search_meta_ads adspy_platform=instagram sort_by=adspy_comments page_size 5-8 across brand groups; empty results are free.",
+"instagram_matched_ad_searches":[
+{"brand_ids":"doctinolab.fr","result_total":0},
+{"brand_ids":"myspinea.com","result_total":0},
+{"brand_ids":"monsori.nl,cocoony-paris.com,rorilio.com,frescali.com,morieva.com,orenie.com","result_total":0},
+{"brand_ids":"azouna.com,kyrolabs.co,apaiseo.fr,nerovalab.com","result_total":0},
+{"brand_ids":"kyrolabs.co,hyperbladeusa.com,callixe.com,restvive.com,vivosleep.com,acemend.com,blisswize.com,norada.nl,swisslyn.com","result_total":4,"ads":[
+ {"ad_id":"831544826660042","brand":"callixe.com","adspy_instagram_comments":65,"api_total":0},
+ {"ad_id":"1636766000713422","brand":"callixe.com","adspy_instagram_comments":47,"api_total":0},
+ {"ad_id":"2086133588911977","brand":"callixe.com","adspy_instagram_comments":40,"api_total":0},
+ {"ad_id":"1979140742765924","brand":"hyperbladeusa.com","adspy_instagram_comments":0,"api_total":"not probed (0 comments)"}]}],
+"adspy_only_any_platform_search":{"brand_ids":"myspinea.com,doctinolab.fr,monsori.nl,cocoony-paris.com,azouna.com,nerovalab.com","top_ads":[
+ {"ad_id":"1809310289998122","brand":"azouna.com","platform":"facebook","comments":144,"note":"Facebook post: comments endpoint is Instagram-only, not probed"},
+ {"ad_id":"2135606267296424 / 989635647219024 / 1604901634497977 / 28590683963852399","brand":"monsori.nl (Lunava pillow)","platform":"facebook","comments":112,"note":"Facebook, not probed"}]},
+"get_meta_ad_comments_probes":[
+{"ad_id":"831544826660042","page_size":1,"returned":0},
+{"ad_id":"1636766000713422","page_size":1,"returned":0},
+{"ad_id":"2086133588911977","page_size":1,"returned":0}],
+"conclusion":"No comment text available for this market. No raw_<ad>_p<n>.json files saved because nothing was returned."}

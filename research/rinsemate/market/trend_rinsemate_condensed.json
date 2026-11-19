@@ -1,0 +1,13 @@
+{"_note":"CONDENSED get_product_trend days=90 (selected dates, values verbatim). Full series had 90 daily points; market advertisers = 1 on every day.",
+"points":[
+{"date":"2026-08-22","total":2241,"active":639,"last_30d":1139,"spend":1200,"market_spend":1100},
+{"date":"2026-09-05","total":2894,"active":1172,"last_30d":1773,"spend":1700,"market_spend":1100},
+{"date":"2026-09-19","total":3825,"active":1664,"last_30d":1714,"spend":1600,"market_spend":1600},
+{"date":"2026-10-05","total":4100,"active":1895,"last_30d":1257,"spend":1200,"market_spend":1600},
+{"date":"2026-10-11","total":4662,"active":2321,"last_30d":1587,"spend":1100,"market_spend":1600},
+{"date":"2026-10-20","total":4804,"active":2425,"last_30d":991,"spend":1200,"market_spend":1600},
+{"date":"2026-10-31","total":5645,"active":2870,"last_30d":1640,"spend":1200,"market_spend":1600},
+{"date":"2026-11-07","total":6834,"active":3699,"last_30d":2685,"spend":2000,"market_spend":1600},
+{"date":"2026-11-14","total":7086,"active":3916,"last_30d":2459,"spend":2700,"market_spend":1600},
+{"date":"2026-11-18","total":7158,"active":3980,"last_30d":2479,"spend":2500,"market_spend":1600},
+{"date":"2026-11-19","total":7169,"active":2972,"last_30d":2478,"spend":1800,"market_spend":1600}]}

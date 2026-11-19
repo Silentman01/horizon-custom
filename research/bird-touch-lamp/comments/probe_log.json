@@ -1,0 +1,6 @@
+{"date":"2026-11-19","probes":[
+ {"query":"search_meta_ads brand_ids=shopglowstead.com,glowstead.co.uk,birdzen-it.com,valotalo.fi,belysningshuset.se,belysningshuset.com,zomesi.com,birdzenliving.com adspy_platform=instagram adspy_comments_min=5 sort_by=adspy_comments page_size=10","result_total":0,"note":"no Instagram-matched ad with >=5 comments"},
+ {"query":"search_meta_ads 20 brand_ids (all active sellers + top old-wave stores: shopglowstead.com,glowstead.co.uk,birdzen-it.com,valotalo.fi,belysningshuset.se,zomesi.com,birdzenliving.com,boutali.com,rayon-zen.fr,lalampade.com,zenu-nova.com,armonie-home.fr,maisonhomelynofficiel.com,wove.se,jonesmarketshop.com,kabannasoficial.com,slatesage.com,vivaluce.nl,livingamsterdam.co.uk,melanocare.ch) adspy_platform=instagram sort_by=adspy_comments page_size=10","result_total":1,"ads":[{"ad_id":"1352731096290045","brand":"zomesi.com","product":"suction hooks (agarri), NOT the bird lamp","adspy_instagram_likes":1,"adspy_instagram_comments":0,"adspy_instagram_views":454,"api_comment_total":"not called (0 comments)"}]}
+],
+"get_meta_ad_comments_calls":0,
+"conclusion":"Zero bird-lamp ads are matched to an Instagram post with comments. No comment text exists to pull. Ads run as dark/unattached posts."}

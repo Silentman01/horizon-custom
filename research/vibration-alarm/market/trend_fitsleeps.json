@@ -1,0 +1,13 @@
+{"source":"get_product_trend days=90 fitsleeps.com_9604404576605 (condensed to key dates)","rows":[
+["2026-08-22",{"total":12196,"active":1434,"last_30d":1627,"spend":2700}],
+["2026-09-07",{"total":14294,"active":3481,"last_30d":2998,"spend":2600}],
+["2026-09-25",{"total":18113,"active":7298,"last_30d":6349,"spend":2600}],
+["2026-09-26",{"total":18265,"active":7114,"last_30d":6381,"spend":170}],
+["2026-10-12",{"total":20538,"active":9374,"last_30d":5800,"spend":170}],
+["2026-11-01",{"total":23666,"active":12419,"last_30d":5096,"spend":170}],
+["2026-11-12",{"total":24809,"active":13344,"last_30d":4617,"spend":180}],
+["2026-11-13",{"total":25176,"active":13672,"last_30d":4921,"spend":3100}],
+["2026-11-14",{"total":25387,"active":13882,"last_30d":5009,"spend":6200}],
+["2026-11-19",{"total":26253,"active":14736,"last_30d":5224,"spend":5500}]],
+"market_history_get_market":{"2026-08-20":2600,"2026-08-22":2700,"2026-09-26":170,"2026-10-25":170,"2026-11-08":180,"2026-11-13":3100,"2026-11-14":6200,"2026-11-19":5500,"advertisers":3},
+"read":"active ads rise every week while the spend estimate drops to 170 on Sep 26 and returns on Nov 13: a spend-estimate gap, not a real collapse"}

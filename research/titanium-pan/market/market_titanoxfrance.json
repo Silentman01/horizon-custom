@@ -1,0 +1,1939 @@
+{
+  "market_id": "titanoxfrance.com_10812362654042",
+  "members": [
+    {
+      "id": "shoptitanox.com_15642313916793",
+      "title": "100% Pure Titanium Pan — TITANOX®",
+      "url": "https://shoptitanox.com/products/100-pure-titanium-pan-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/NtD9DyHFE8TcRsOE24f1OkYI7n3WNQaZ35AlmeRNrjA/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU2NDIzMTM5MTY3OTMud2VicA",
+      "brand_id": "shoptitanox.com",
+      "vendor": "Shop Titanox",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/shoptitanox.com_15642313916793",
+      "price": {
+        "amount": 72.95,
+        "currency": "USD"
+      },
+      "price_usd": 72.95,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-07-09T10:02:39-04:00",
+      "ads": {
+        "total": 4226,
+        "active": 3108,
+        "meta": 4226,
+        "tiktok": 0,
+        "last_30d": 2908,
+        "first_advertised_at": "2026-07-13T11:04:40.573Z",
+        "last_advertised_at": "2026-11-18T03:23:27.731Z",
+        "est_daily_spend_usd": 260
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanoxufficiale.com_10662780895565",
+      "title": "Padella 100% Titanio Puro — TITANOX®",
+      "url": "https://titanoxufficiale.com/products/padella-100-titanio-puro-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/bT_HHTLigbs1h2hWBscNlQIQmgXSpj3KDYx6nL0yDd0/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTA2NjI3ODA4OTU1NjUud2VicA",
+      "brand_id": "titanoxufficiale.com",
+      "vendor": "Lumibella France",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanoxufficiale.com_10662780895565",
+      "price": {
+        "amount": 67.0,
+        "currency": "EUR"
+      },
+      "price_usd": 72.36,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-05-14T16:05:52+02:00",
+      "ads": {
+        "total": 3476,
+        "active": 2328,
+        "meta": 3476,
+        "tiktok": 0,
+        "last_30d": 2166,
+        "first_advertised_at": "2026-06-05T03:11:07.179Z",
+        "last_advertised_at": "2026-11-18T16:54:03.305Z",
+        "est_daily_spend_usd": 2000
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanoxfrance.com_10812362654042",
+      "title": "Poêle 100% Titane Pur — TITANOX®",
+      "url": "https://titanoxfrance.com/products/titanox-poele-en-titane-pur-sans-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/GhZ7TfBMpjJ7IvgUOOFmFuALFU4SD6zvbHBx9vh1d8c/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTA4MTIzNjI2NTQwNDIud2VicA",
+      "brand_id": "titanoxfrance.com",
+      "vendor": "Titanox",
+      "niche": "Home & Garden",
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanoxfrance.com_10812362654042",
+      "price": {
+        "amount": 67.0,
+        "currency": "EUR"
+      },
+      "price_usd": 72.36,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-04-04T15:23:37+02:00",
+      "ads": {
+        "total": 3191,
+        "active": 2247,
+        "meta": 3191,
+        "tiktok": 0,
+        "last_30d": 1158,
+        "first_advertised_at": "2026-04-14T06:41:34.758Z",
+        "last_advertised_at": "2026-11-18T10:38:26.930Z",
+        "est_daily_spend_usd": 2300
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 38,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanoxoficial.com_15929399509317",
+      "title": "Sartén de titanio 100 % puro — TITANOX®",
+      "url": "https://titanoxoficial.com/products/sarten-de-titanio-100-puro-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/7wFqH1S8yFtNzVodplDBLorB1xYqb6G0Gpd1_dX9MSg/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU5MjkzOTk1MDkzMTcud2VicA",
+      "brand_id": "titanoxoficial.com",
+      "vendor": "Titanox-Uk",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanoxoficial.com_15929399509317",
+      "price": {
+        "amount": 59.99,
+        "currency": "EUR"
+      },
+      "price_usd": 64.79,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-06-06T17:27:06+02:00",
+      "ads": {
+        "total": 262,
+        "active": 195,
+        "meta": 262,
+        "tiktok": 0,
+        "last_30d": 106,
+        "first_advertised_at": "2026-06-30T09:24:23.197Z",
+        "last_advertised_at": "2026-11-13T18:58:28.519Z",
+        "est_daily_spend_usd": 350
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "meintitanox.com_15747717857612",
+      "title": "Pfanne aus 100 % reinem Titan — TITANOX®",
+      "url": "https://meintitanox.com/products/pfanne-aus-100-reinem-titan-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/LXALZGStDrNWPaeWGo60mfi1b1AjO5_bLYOtrGzD4ds/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU3NDc3MTc4NTc2MTIud2VicA",
+      "brand_id": "meintitanox.com",
+      "vendor": "Titanox",
+      "niche": "Kitchen",
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/meintitanox.com_15747717857612",
+      "price": {
+        "amount": 66.0,
+        "currency": "EUR"
+      },
+      "price_usd": 71.28,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-05-08T13:30:52+02:00",
+      "ads": {
+        "total": 259,
+        "active": 97,
+        "meta": 259,
+        "tiktok": 0,
+        "last_30d": 109,
+        "first_advertised_at": "2026-05-19T10:30:48.675Z",
+        "last_advertised_at": "2026-11-14T17:15:06.399Z",
+        "est_daily_spend_usd": 14
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "ataliro.com_15876626973046",
+      "title": "100% Titanium Pan: Naturally Nonstick, Zero Toxic Coating",
+      "url": "https://ataliro.com/products/100-pure-titanium-skillet-for-toxin-free-cooking-1",
+      "image_url": "https://media2.brandsearch.co/resize/WkoVmGPLFmuW-_Op8zof2y3c8tai1gs8pf89k4HkQbc/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU4NzY2MjY5NzMwNDYud2VicA",
+      "brand_id": "ataliro.com",
+      "vendor": "Ataliro",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/ataliro.com_15876626973046",
+      "price": {
+        "amount": 69.99,
+        "currency": "USD"
+      },
+      "price_usd": 69.99,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-09-11T10:52:51-04:00",
+      "ads": {
+        "total": 83,
+        "active": 83,
+        "meta": 83,
+        "tiktok": 0,
+        "last_30d": 83,
+        "first_advertised_at": "2026-10-07T02:25:39.842Z",
+        "last_advertised_at": "2026-10-21T15:21:56.354Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 49,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titankov24.cz_15907839181140",
+      "title": "TitanKov – Titanová pánev řady PRO",
+      "url": "https://titankov24.cz/products/panev-ze-100-cisteho-titanu-pro-kuchyni-bez-toxinu",
+      "image_url": "https://media2.brandsearch.co/resize/9gJbLEepsmLZeOO5CiioZ27KhQFCsQanObwYs8frR84/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU5MDc4MzkxODExNDAud2VicA",
+      "brand_id": "titankov24.cz",
+      "vendor": "Nerel",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titankov24.cz_15907839181140",
+      "price": {
+        "amount": 1790.0,
+        "currency": "CZK"
+      },
+      "price_usd": 76.97,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-23T20:57:10+02:00",
+      "ads": {
+        "total": 62,
+        "active": 58,
+        "meta": 62,
+        "tiktok": 0,
+        "last_30d": 62,
+        "first_advertised_at": "2026-11-08T15:52:38.889Z",
+        "last_advertised_at": "2026-11-16T03:35:40.436Z",
+        "est_daily_spend_usd": 39
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 49,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "nekora.se_16682981654873",
+      "title": "Stekpanna i titan utan beläggning",
+      "url": "https://nekora.se/products/nekora-stekpanna-i-titan-utan-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/DLQs4iIu4AZRy3VRpIGUaRR-V2QsCE7VnM-9xNUP0xs/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTY2ODI5ODE2NTQ4NzMud2VicA",
+      "brand_id": "nekora.se",
+      "vendor": "Nekora",
+      "niche": null,
+      "product_type": "Stekpanna",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/nekora.se_16682981654873",
+      "price": {
+        "amount": 749.0,
+        "currency": "SEK"
+      },
+      "price_usd": 71.16,
+      "variants_count": 6,
+      "in_stock": true,
+      "created_at": "2026-10-11T19:07:09+02:00",
+      "ads": {
+        "total": 134,
+        "active": 46,
+        "meta": 134,
+        "tiktok": 0,
+        "last_30d": 134,
+        "first_advertised_at": "2026-10-25T09:43:21.712Z",
+        "last_advertised_at": "2026-11-15T14:48:47.519Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 62,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "de-munter.store_10297331679335",
+      "title": "MUNTER Titan-Pfanne | Schadstofffrei kochen mit 100 % reinem Titan",
+      "url": "https://de-munter.store/products/titan-pfanne",
+      "image_url": "https://media2.brandsearch.co/resize/GMVLwdWPYVN1Q0PmOJsPQjWRwaEUj0oyxYLjC7_-tMk/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTAyOTczMzE2NzkzMzUud2VicA",
+      "brand_id": "de-munter.store",
+      "vendor": "MUNTER",
+      "niche": null,
+      "product_type": "Küche",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/de-munter.store_10297331679335",
+      "price": {
+        "amount": 44.9,
+        "currency": "EUR"
+      },
+      "price_usd": 48.49,
+      "variants_count": 1,
+      "in_stock": true,
+      "created_at": "2026-11-04T12:10:12-06:00",
+      "ads": {
+        "total": 8,
+        "active": 8,
+        "meta": 8,
+        "tiktok": 0,
+        "last_30d": 8,
+        "first_advertised_at": "2026-11-12T00:29:49.055Z",
+        "last_advertised_at": "2026-11-12T02:40:25.024Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanoxtitanepur.com_15445539553582",
+      "title": "Poêle 100% Titane Pur — TITANOX®",
+      "url": "https://titanoxtitanepur.com/products/titanox-poele-en-titane-pur-sans-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/bqDbVmKdR0sOGa1EZiLJQz_FUVVGSWGHeypIuR9Dz-Q/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU0NDU1Mzk1NTM1ODIud2VicA",
+      "brand_id": "titanoxtitanepur.com",
+      "vendor": "Titanox",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanoxtitanepur.com_15445539553582",
+      "price": {
+        "amount": 66.0,
+        "currency": "EUR"
+      },
+      "price_usd": 71.28,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-28T08:54:42-05:00",
+      "ads": {
+        "total": 15,
+        "active": 8,
+        "meta": 15,
+        "tiktok": 0,
+        "last_30d": 15,
+        "first_advertised_at": "2026-11-11T20:44:59.843Z",
+        "last_advertised_at": "2026-11-11T20:44:59.952Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "sgw0dx-ky.myshopify.com_11249777443153",
+      "title": "100% Pure Titanium Pan For A Toxin-Free Kitchen non-stick pan",
+      "url": "https://sgw0dx-ky.myshopify.com/products/pure-titanium-skillet",
+      "image_url": "https://media2.brandsearch.co/resize/CU8l_H4x0K3jmzUvFwjNHSK3owLW53GX8Q4Tcraq66o/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTEyNDk3Nzc0NDMxNTMud2VicA",
+      "brand_id": "sgw0dx-ky.myshopify.com",
+      "vendor": "Oakhyn",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/sgw0dx-ky.myshopify.com_11249777443153",
+      "price": {
+        "amount": 29.99,
+        "currency": "USD"
+      },
+      "price_usd": 29.99,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-16T04:14:23+01:00",
+      "ads": {
+        "total": 26,
+        "active": 7,
+        "meta": 26,
+        "tiktok": 0,
+        "last_30d": 26,
+        "first_advertised_at": "2026-10-22T16:46:26.510Z",
+        "last_advertised_at": "2026-11-09T18:14:25.179Z",
+        "est_daily_spend_usd": 1
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "vorlaufclub.store_16143806890364",
+      "title": "VORLAUF Reintitan-Pfanne | 100 % Titan, ohne Beschichtung",
+      "url": "https://vorlaufclub.store/products/reintitan-pfanne",
+      "image_url": "https://media2.brandsearch.co/resize/quyh3H2Te12Gv2qae1ioWVwHY2UrytvCVFOPxDv33Zk/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTYxNDM4MDY4OTAzNjQud2VicA",
+      "brand_id": "vorlaufclub.store",
+      "vendor": "VORLAUF",
+      "niche": null,
+      "product_type": "Pfanne",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/vorlaufclub.store_16143806890364",
+      "price": {
+        "amount": 49.9,
+        "currency": "EUR"
+      },
+      "price_usd": 53.89,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-02T18:26:57+01:00",
+      "ads": {
+        "total": 8,
+        "active": 4,
+        "meta": 8,
+        "tiktok": 0,
+        "last_30d": 8,
+        "first_advertised_at": "2026-10-21T02:27:09.178Z",
+        "last_advertised_at": "2026-11-11T04:44:24.264Z",
+        "est_daily_spend_usd": 2
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanoxofficiale.com_15685761237369",
+      "title": "Padella 100% Titanio Puro",
+      "url": "https://titanoxofficiale.com/products/padella-100-titanio-puro",
+      "image_url": "https://media2.brandsearch.co/resize/7YqLGe9s8DNhi_vMOyAcV6IFIwDBIlTaDiOvWL2XaIo/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU2ODU3NjEyMzczNjkud2VicA",
+      "brand_id": "titanoxofficiale.com",
+      "vendor": "Ma boutique",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanoxofficiale.com_15685761237369",
+      "price": {
+        "amount": 59.99,
+        "currency": "EUR"
+      },
+      "price_usd": 64.79,
+      "variants_count": 3,
+      "in_stock": false,
+      "created_at": "2026-08-05T08:38:42+02:00",
+      "ads": {
+        "total": 51,
+        "active": 2,
+        "meta": 51,
+        "tiktok": 0,
+        "last_30d": 31,
+        "first_advertised_at": "2026-08-21T20:26:51.940Z",
+        "last_advertised_at": "2026-11-18T18:00:31.463Z",
+        "est_daily_spend_usd": 4
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "volora-shop.com_11006153654611",
+      "title": "TitanChef – Die Titan-Bratpfanne",
+      "url": "https://volora-shop.com/products/titanchef",
+      "image_url": "https://media2.brandsearch.co/resize/4XajzGt0ap4kBMfa-SEwq3u0JkfH33Mai54Dc1RzhJY/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTEwMDYxNTM2NTQ2MTEud2VicA",
+      "brand_id": "volora-shop.com",
+      "vendor": "Volora",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/volora-shop.com_11006153654611",
+      "price": {
+        "amount": 69.95,
+        "currency": "EUR"
+      },
+      "price_usd": 75.55,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-20T17:15:50+02:00",
+      "ads": {
+        "total": 5,
+        "active": 2,
+        "meta": 5,
+        "tiktok": 0,
+        "last_30d": 5,
+        "first_advertised_at": "2026-10-25T00:12:22.706Z",
+        "last_advertised_at": "2026-11-09T14:48:05.154Z",
+        "est_daily_spend_usd": 2
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 49,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "anarilla.com_11011912892683",
+      "title": "Poêle Anarilla™ en titane pur, sans PFAS",
+      "url": "https://anarilla.com/products/titanox-poele-en-titane-pur-sans-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/eg08WObzDllasOgq0Vr84CvQ7F1tlrLS1e-zJ5rnmV0/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTEwMTE5MTI4OTI2ODMud2VicA",
+      "brand_id": "anarilla.com",
+      "vendor": "Anarilla",
+      "niche": null,
+      "product_type": "Poêle titane",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/anarilla.com_11011912892683",
+      "price": {
+        "amount": 39.0,
+        "currency": "EUR"
+      },
+      "price_usd": 42.12,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-07-27T23:56:15+02:00",
+      "ads": {
+        "total": 2,
+        "active": 0,
+        "meta": 2,
+        "tiktok": 0,
+        "last_30d": 2,
+        "first_advertised_at": "2026-08-06T01:01:10.334Z",
+        "last_advertised_at": "2026-08-06T01:01:10.342Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "bodow-uk.com_8401656447115",
+      "title": "TP8 PRO - The Titanium Pan",
+      "url": "https://bodow-uk.com/products/tp8-pro-the-titanium-pan",
+      "image_url": "https://media2.brandsearch.co/resize/enc5wqCtqKOpwpech8eERdNY2q4n30R92nhkRfZ7RMo/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvODQwMTY1NjQ0NzExNS53ZWJw",
+      "brand_id": "bodow-uk.com",
+      "vendor": "Bodow",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/bodow-uk.com_8401656447115",
+      "price": {
+        "amount": 109.9,
+        "currency": "GBP"
+      },
+      "price_usd": 139.57,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-08-21T00:56:46+01:00",
+      "ads": {
+        "total": 2,
+        "active": 0,
+        "meta": 2,
+        "tiktok": 0,
+        "last_30d": 2,
+        "first_advertised_at": "2026-11-14T12:56:38.529Z",
+        "last_advertised_at": "2026-11-14T12:56:38.975Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "de-silbern.com_15247239938352",
+      "title": "Handgehämmerte Titanpfanne – antihaftend ohne Beschichtung",
+      "url": "https://de-silbern.com/products/handgehaemmerte-titanpfanne",
+      "image_url": "https://media2.brandsearch.co/resize/ew6FWNIE3Lp6nGFBLTo9qxWbTKLdz2rxhO4HkgpfNkg/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTUyNDcyMzk5MzgzNTIud2VicA",
+      "brand_id": "de-silbern.com",
+      "vendor": "Silbern",
+      "niche": null,
+      "product_type": "Pfannen",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/de-silbern.com_15247239938352",
+      "price": {
+        "amount": 59.9,
+        "currency": "EUR"
+      },
+      "price_usd": 64.69,
+      "variants_count": 1,
+      "in_stock": true,
+      "created_at": "2026-08-26T15:21:05-03:00",
+      "ads": {
+        "total": 11,
+        "active": 0,
+        "meta": 11,
+        "tiktok": 0,
+        "last_30d": 11,
+        "first_advertised_at": "2026-09-07T11:42:21.232Z",
+        "last_advertised_at": "2026-09-09T07:25:00.868Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "derma-lys.com_11411718701398",
+      "title": "Verox – Titan-Pfanne mit gehämmerter Oberfläche",
+      "url": "https://derma-lys.com/products/verox-titan-pfanne",
+      "image_url": "https://media2.brandsearch.co/resize/oCP3LkrFRS41htp-iWkgxgRiN45wJVz3NWdPMffRTJQ/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTE0MTE3MTg3MDEzOTgud2VicA",
+      "brand_id": "derma-lys.com",
+      "vendor": "Velora",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/derma-lys.com_11411718701398",
+      "price": {
+        "amount": 59.99,
+        "currency": "EUR"
+      },
+      "price_usd": 64.79,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-27T15:21:37+01:00",
+      "ads": {
+        "total": 12,
+        "active": 0,
+        "meta": 12,
+        "tiktok": 0,
+        "last_30d": 12,
+        "first_advertised_at": "2026-11-11T10:56:51.882Z",
+        "last_advertised_at": "2026-11-13T08:50:21.637Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "diabecase.fr_16638617289049",
+      "title": "Poêle 100% Titane Pur Pour Une Cuisine Sans Toxines",
+      "url": "https://diabecase.fr/products/poele-100-titane-pur-pour-une-cuisine-sans-toxines",
+      "image_url": "https://media2.brandsearch.co/resize/XZAdRZ4Ei_CT2jODSbeSalxaXV-UQRRNMd4sNU7NWnY/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTY2Mzg2MTcyODkwNDkud2VicA",
+      "brand_id": "diabecase.fr",
+      "vendor": "DiabeCase",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/diabecase.fr_16638617289049",
+      "price": {
+        "amount": 59.99,
+        "currency": "EUR"
+      },
+      "price_usd": 64.79,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-09-23T16:39:29+02:00",
+      "ads": {
+        "total": 3,
+        "active": 0,
+        "meta": 3,
+        "tiktok": 0,
+        "last_30d": 3,
+        "first_advertised_at": "2026-10-09T09:56:28.826Z",
+        "last_advertised_at": "2026-10-09T09:56:28.826Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "doucelya.com_11155536773458",
+      "title": "Poêle en Titane Pur",
+      "url": "https://doucelya.com/products/poele-inox",
+      "image_url": "https://media2.brandsearch.co/resize/Yyfc2NyCymuHO_Gd1Rom1Q1hIm0Fsa4-2w3NFb0s6AQ/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTExNTU1MzY3NzM0NTgud2VicA",
+      "brand_id": "doucelya.com",
+      "vendor": "Doucelya",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/doucelya.com_11155536773458",
+      "price": {
+        "amount": 54.99,
+        "currency": "EUR"
+      },
+      "price_usd": 59.39,
+      "variants_count": 3,
+      "in_stock": false,
+      "created_at": "2026-09-17T16:53:41+02:00",
+      "ads": {
+        "total": 1,
+        "active": 0,
+        "meta": 1,
+        "tiktok": 0,
+        "last_30d": 1,
+        "first_advertised_at": "2026-11-16T23:45:30.607Z",
+        "last_advertised_at": "2026-11-16T23:45:30.607Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "en-thingly.com_9152048529606",
+      "title": "Thingly 100% Pure Titanium Frying Pan, for Toxin-Free Cooking",
+      "url": "https://en-thingly.com/products/thingly-titanium-frying-pan",
+      "image_url": "https://media2.brandsearch.co/resize/l2p7Sr3OH6Htk3-hORIVS_yu0S4TSl11L68TDrOiPhY/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvOTE1MjA0ODUyOTYwNi53ZWJw",
+      "brand_id": "en-thingly.com",
+      "vendor": "Thingly",
+      "niche": null,
+      "product_type": "Frying Pan",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/en-thingly.com_9152048529606",
+      "price": {
+        "amount": 44.9,
+        "currency": "USD"
+      },
+      "price_usd": 44.9,
+      "variants_count": 1,
+      "in_stock": true,
+      "created_at": "2026-11-05T12:20:32-05:00",
+      "ads": {
+        "total": 3,
+        "active": 0,
+        "meta": 3,
+        "tiktok": 0,
+        "last_30d": 3,
+        "first_advertised_at": "2026-11-12T13:05:12.600Z",
+        "last_advertised_at": "2026-11-12T13:05:12.607Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "it-padella.com_11077576196434",
+      "title": "Padella in titanio martellata a mano – antiaderente senza rivestimento",
+      "url": "https://it-padella.com/products/padella-titanio-martellata",
+      "image_url": "https://media2.brandsearch.co/resize/enfSo99hkjVteYXiC5VFdGShnF4K5XUReTlLNFtdjqU/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTEwNzc1NzYxOTY0MzQud2VicA",
+      "brand_id": "it-padella.com",
+      "vendor": "Padella Pura",
+      "niche": null,
+      "product_type": "Padelle",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/it-padella.com_11077576196434",
+      "price": {
+        "amount": 59.9,
+        "currency": "EUR"
+      },
+      "price_usd": 64.69,
+      "variants_count": 2,
+      "in_stock": true,
+      "created_at": "2026-08-27T18:26:07+01:00",
+      "ads": {
+        "total": 17,
+        "active": 0,
+        "meta": 17,
+        "tiktok": 0,
+        "last_30d": 17,
+        "first_advertised_at": "2026-11-05T05:46:58.716Z",
+        "last_advertised_at": "2026-11-17T18:09:20.505Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "lumicold.fr_8584294269098",
+      "title": "Poêle Titanox™ en titane pur, sans PFAS",
+      "url": "https://lumicold.fr/products/titanox-poele-en-titane-pur-sans-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/hPJ_SMmaEeokaRebFrBMpGadVtY7BgAqF3YxszvUbRI/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvODU4NDI5NDI2OTA5OC53ZWJw",
+      "brand_id": "lumicold.fr",
+      "vendor": "Titanox",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/lumicold.fr_8584294269098",
+      "price": {
+        "amount": 39.0,
+        "currency": "EUR"
+      },
+      "price_usd": 42.12,
+      "variants_count": null,
+      "in_stock": true,
+      "created_at": "2026-07-29T18:21:31+02:00",
+      "ads": {
+        "total": 4,
+        "active": 0,
+        "meta": 4,
+        "tiktok": 0,
+        "last_30d": 2,
+        "first_advertised_at": "2026-08-25T15:39:36.905Z",
+        "last_advertised_at": "2026-11-11T02:14:56.768Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "mireona.com_16244902461765",
+      "title": "Pánev ze 100% čistého titanu — TIVANOX®",
+      "url": "https://mireona.com/products/tivanox-panev-z-cisteho-titanu",
+      "image_url": "https://media2.brandsearch.co/resize/tF9DRkKEUvSWSC8EeDZwAFgB76Kq9mEsSWi3o8KplgY/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTYyNDQ5MDI0NjE3NjUud2VicA",
+      "brand_id": "mireona.com",
+      "vendor": "Tivanox",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/mireona.com_16244902461765",
+      "price": {
+        "amount": 69.0,
+        "currency": "CZK"
+      },
+      "price_usd": 2.97,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-11T19:56:32+00:00",
+      "ads": {
+        "total": 4,
+        "active": 0,
+        "meta": 4,
+        "tiktok": 0,
+        "last_30d": 4,
+        "first_advertised_at": "2026-11-11T10:59:35.674Z",
+        "last_advertised_at": "2026-11-11T10:59:35.713Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "nolvariq.shop_10905252659533",
+      "title": "100% Pure Titanium Pan For AToxin-Free Kitchen",
+      "url": "https://nolvariq.shop/products/100-pure-titanium-pan-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/805oD7ndn0j1WIIWMlEB05NOALgaWkQ1yxv-Q1nRNZY/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTA5MDUyNTI2NTk1MzMud2VicA",
+      "brand_id": "nolvariq.shop",
+      "vendor": "Nolvariq",
+      "niche": null,
+      "product_type": "Frying Pan",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/nolvariq.shop_10905252659533",
+      "price": {
+        "amount": 29.99,
+        "currency": "USD"
+      },
+      "price_usd": 29.99,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-09-21T11:49:59+08:00",
+      "ads": {
+        "total": 10,
+        "active": 0,
+        "meta": 10,
+        "tiktok": 0,
+        "last_30d": 10,
+        "first_advertised_at": "2026-10-27T17:39:17.277Z",
+        "last_advertised_at": "2026-11-17T02:56:11.789Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "oraalia.com_10839681925467",
+      "title": "Padella 100% Titanio Puro per una cucina senza tossine",
+      "url": "https://oraalia.com/products/padella-titanio-puro",
+      "image_url": "https://media2.brandsearch.co/resize/r4Rg1SC69mJzUsb2EBOIgV-e2KZRgT5h6MUmpY6WQLg/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTA4Mzk2ODE5MjU0Njcud2VicA",
+      "brand_id": "oraalia.com",
+      "vendor": "Oraalia",
+      "niche": null,
+      "product_type": "Cucina",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/oraalia.com_10839681925467",
+      "price": {
+        "amount": 59.99,
+        "currency": "EUR"
+      },
+      "price_usd": 64.79,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-10-26T12:28:57+01:00",
+      "ads": {
+        "total": 5,
+        "active": 0,
+        "meta": 5,
+        "tiktok": 0,
+        "last_30d": 5,
+        "first_advertised_at": "2026-11-08T13:39:33.772Z",
+        "last_advertised_at": "2026-11-08T13:39:34.636Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 56,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titaniumxofficial.com_8207762325573",
+      "title": "100% Pure Titanium Frying Pan — TITANIUM X",
+      "url": "https://titaniumxofficial.com/products/pure-titanium-frying-pan-titanium-x",
+      "image_url": "https://media2.brandsearch.co/resize/NbLaLQgbBM208SqB_6dO7D75XnMcWwtnDedJh-B8OY0/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvODIwNzc2MjMyNTU3My53ZWJw",
+      "brand_id": "titaniumxofficial.com",
+      "vendor": "Titanium X",
+      "niche": null,
+      "product_type": null,
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titaniumxofficial.com_8207762325573",
+      "price": {
+        "amount": 61.95,
+        "currency": "USD"
+      },
+      "price_usd": 61.95,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-08-05T19:57:02+02:00",
+      "ads": {
+        "total": 46,
+        "active": 0,
+        "meta": 46,
+        "tiktok": 0,
+        "last_30d": 19,
+        "first_advertised_at": "2026-08-10T12:02:53.034Z",
+        "last_advertised_at": "2026-11-15T13:42:20.846Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "titanox-uk.com_15902619828549",
+      "title": "100% Pure Titanium Pan — TITANOX®",
+      "url": "https://titanox-uk.com/products/100-pure-titanium-pan-titanox",
+      "image_url": "https://media2.brandsearch.co/resize/Riqms-TEFmwVcxXDfrisoqneASGZOtTosF4qi-iQ0oM/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU5MDI2MTk4Mjg1NDkud2VicA",
+      "brand_id": "titanox-uk.com",
+      "vendor": "Titanox",
+      "niche": null,
+      "product_type": null,
+      "platform": null,
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/titanox-uk.com_15902619828549",
+      "price": {
+        "amount": 70.95,
+        "currency": "USD"
+      },
+      "price_usd": 70.95,
+      "variants_count": 3,
+      "in_stock": null,
+      "created_at": "2026-05-25T17:44:24+02:00",
+      "ads": {
+        "total": 19,
+        "active": 0,
+        "meta": 19,
+        "tiktok": 0,
+        "last_30d": 19,
+        "first_advertised_at": "2026-11-08T21:50:27.764Z",
+        "last_advertised_at": "2026-11-08T21:50:27.830Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    },
+    {
+      "id": "untitan.com_15739730395513",
+      "title": "Poêle en Titane — UNTITAN",
+      "url": "https://untitan.com/products/poele-titane-pur-sans-pfas",
+      "image_url": "https://media2.brandsearch.co/resize/3XB-xW8vOh1vEGEjKKfHyz38LWrJi3zfcJq6IHXivA0/skp:jpg:png:webp:heic/exp:1795362164/bG9jYWw6Ly8vcHJvZHVjdHMvMTU3Mzk3MzAzOTU1MTMud2VicA",
+      "brand_id": "untitan.com",
+      "vendor": "Untitan",
+      "niche": null,
+      "product_type": "Poêle",
+      "platform": "shopify",
+      "tiktok_shop_matched": false,
+      "dashboard_url": "https://app.brandsearch.co/product/untitan.com_15739730395513",
+      "price": {
+        "amount": 69.99,
+        "currency": "EUR"
+      },
+      "price_usd": 75.59,
+      "variants_count": 3,
+      "in_stock": true,
+      "created_at": "2026-08-27T12:48:24+02:00",
+      "ads": {
+        "total": 14,
+        "active": 0,
+        "meta": 14,
+        "tiktok": 0,
+        "last_30d": 14,
+        "first_advertised_at": "2026-11-06T18:34:07.521Z",
+        "last_advertised_at": "2026-11-06T18:34:07.671Z",
+        "est_daily_spend_usd": null
+      },
+      "market": {
+        "id": "titanoxfrance.com_10812362654042",
+        "sellers": 48,
+        "active_ads": 8193,
+        "total_ads": 11959,
+        "price_min_usd": 2.97,
+        "price_median_usd": 64.79,
+        "price_max_usd": 139.57,
+        "new_sellers_30d": 17,
+        "country_count": 2,
+        "est_daily_spend_usd": 4900,
+        "lifecycle_stage": "scaling"
+      },
+      "revenue": {
+        "est_monthly_usd_low": 670000,
+        "est_monthly_usd_high": 890000,
+        "scope": "market"
+      }
+    }
+  ],
+  "pagination": {
+    "total": 29,
+    "size": 50,
+    "has_more": false,
+    "cursor": null
+  },
+  "history": [
+    {
+      "date": "2026-08-03T16:09:56.741433+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-05T03:41:59.825125+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-06T03:41:57.559313+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-07T19:33:23.549635+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-08T14:38:16.360868+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-09T03:41:29.233208+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-10T03:41:58.843365+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-11T03:42:16.062085+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-12T03:42:21.529390+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-13T03:42:47.867782+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-14T03:43:13.262914+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-15T03:42:49.639159+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-16T03:42:35.154276+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-17T03:42:21.079788+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-18T03:42:28.835514+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-19T03:42:48.002956+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-20T14:32:47.374745+00:00",
+      "advertisers": 8,
+      "est_daily_spend_usd": 3100
+    },
+    {
+      "date": "2026-08-21T03:42:37.041761+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-23T05:42:17.137636+00:00",
+      "advertisers": 8,
+      "est_daily_spend_usd": 3400
+    },
+    {
+      "date": "2026-08-24T05:44:02.259085+00:00",
+      "advertisers": 9,
+      "est_daily_spend_usd": 3400
+    },
+    {
+      "date": "2026-08-25T03:43:12.966597+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-26T03:43:26.375088+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-27T03:43:14.461932+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-08-29T05:38:43.405228+00:00",
+      "advertisers": 9,
+      "est_daily_spend_usd": 3700
+    },
+    {
+      "date": "2026-08-30T03:42:31.250176+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-02T05:39:47.138327+00:00",
+      "advertisers": 9,
+      "est_daily_spend_usd": 3900
+    },
+    {
+      "date": "2026-09-03T03:42:37.187523+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-04T03:42:39.824065+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-07T03:42:34.737769+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-08T03:42:55.928337+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-09T05:42:43.876767+00:00",
+      "advertisers": 10,
+      "est_daily_spend_usd": 4100
+    },
+    {
+      "date": "2026-09-10T03:42:46.200680+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-11T03:42:49.894145+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-12T03:43:02.715021+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-13T05:43:03.905191+00:00",
+      "advertisers": 10,
+      "est_daily_spend_usd": 4000
+    },
+    {
+      "date": "2026-09-14T05:43:39.264849+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4300
+    },
+    {
+      "date": "2026-09-15T05:44:21.245838+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4300
+    },
+    {
+      "date": "2026-09-16T05:47:05.430581+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4500
+    },
+    {
+      "date": "2026-09-17T05:44:35.175601+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4600
+    },
+    {
+      "date": "2026-09-18T03:43:04.246650+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-19T05:42:19.768322+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5400
+    },
+    {
+      "date": "2026-09-20T05:42:32.662395+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5800
+    },
+    {
+      "date": "2026-09-22T05:43:41.633171+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5700
+    },
+    {
+      "date": "2026-09-23T05:44:43.173976+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5600
+    },
+    {
+      "date": "2026-09-24T05:44:59.223125+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5800
+    },
+    {
+      "date": "2026-09-25T05:44:32.790686+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5800
+    },
+    {
+      "date": "2026-09-26T05:45:49.277378+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 5000
+    },
+    {
+      "date": "2026-09-27T03:43:26.665149+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-09-28T05:45:27.890629+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4800
+    },
+    {
+      "date": "2026-09-29T05:45:29.358676+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4800
+    },
+    {
+      "date": "2026-09-30T03:43:16.665243+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-01T05:46:02.915643+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4700
+    },
+    {
+      "date": "2026-10-02T05:46:18.907284+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4900
+    },
+    {
+      "date": "2026-10-03T03:44:10.790740+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-04T05:52:13.294757+00:00",
+      "advertisers": 11,
+      "est_daily_spend_usd": 4800
+    },
+    {
+      "date": "2026-10-05T03:43:16.548641+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-06T05:53:37.013557+00:00",
+      "advertisers": 14,
+      "est_daily_spend_usd": 4900
+    },
+    {
+      "date": "2026-10-07T03:47:11.273649+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-08T03:48:58.643691+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-09T03:47:30.561904+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-10T03:46:34.912685+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-11T03:43:33.078124+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-12T03:43:20.167063+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-13T03:43:14.789404+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-14T03:43:28.069638+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-15T03:43:48.027840+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-16T03:43:13.727815+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-17T03:44:15.002107+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-18T03:43:29.408395+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-19T03:43:11.653960+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-20T03:43:21.484684+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-21T03:43:47.541510+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-22T03:43:30.437562+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-23T03:43:36.022981+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-24T03:43:45.603843+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-25T16:50:25.100506+00:00",
+      "advertisers": 16,
+      "est_daily_spend_usd": 3700
+    },
+    {
+      "date": "2026-10-26T03:43:28.394440+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-27T05:45:08.130231+00:00",
+      "advertisers": 16,
+      "est_daily_spend_usd": 3800
+    },
+    {
+      "date": "2026-10-28T06:06:23.450848+00:00",
+      "advertisers": 16,
+      "est_daily_spend_usd": 3700
+    },
+    {
+      "date": "2026-10-29T03:44:32.353612+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-30T03:44:06.362947+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-10-31T05:55:41.471341+00:00",
+      "advertisers": 16,
+      "est_daily_spend_usd": 4000
+    },
+    {
+      "date": "2026-11-01T05:42:23.530987+00:00",
+      "advertisers": 16,
+      "est_daily_spend_usd": 3900
+    },
+    {
+      "date": "2026-11-02T03:43:02.423881+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-11-03T05:42:00.265759+00:00",
+      "advertisers": 19,
+      "est_daily_spend_usd": 4100
+    },
+    {
+      "date": "2026-11-04T05:48:55.268176+00:00",
+      "advertisers": 19,
+      "est_daily_spend_usd": 4000
+    },
+    {
+      "date": "2026-11-05T05:45:55.225569+00:00",
+      "advertisers": 19,
+      "est_daily_spend_usd": 4600
+    },
+    {
+      "date": "2026-11-06T06:03:54.472303+00:00",
+      "advertisers": 19,
+      "est_daily_spend_usd": 4600
+    },
+    {
+      "date": "2026-11-07T03:45:53.239031+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-11-08T05:51:53.056044+00:00",
+      "advertisers": 19,
+      "est_daily_spend_usd": 4100
+    },
+    {
+      "date": "2026-11-09T05:58:15.362942+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 4500
+    },
+    {
+      "date": "2026-11-10T03:48:15.638406+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-11-11T06:28:34.456208+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 4100
+    },
+    {
+      "date": "2026-11-12T05:54:33.178872+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 4200
+    },
+    {
+      "date": "2026-11-13T05:52:50.291233+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 4500
+    },
+    {
+      "date": "2026-11-14T05:56:41.783668+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 5100
+    },
+    {
+      "date": "2026-11-15T05:46:10.393033+00:00",
+      "advertisers": 25,
+      "est_daily_spend_usd": 5000
+    },
+    {
+      "date": "2026-11-16T03:43:59.907724+00:00",
+      "advertisers": null,
+      "est_daily_spend_usd": null
+    },
+    {
+      "date": "2026-11-17T08:09:16.264116+00:00",
+      "advertisers": 29,
+      "est_daily_spend_usd": 5000
+    },
+    {
+      "date": "2026-11-18T08:17:16.656337+00:00",
+      "advertisers": 29,
+      "est_daily_spend_usd": 4900
+    },
+    {
+      "date": "2026-11-19T06:36:36.280802+00:00",
+      "advertisers": 29,
+      "est_daily_spend_usd": 4900
+    }
+  ]
+}

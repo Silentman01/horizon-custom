@@ -1,0 +1,42 @@
+{
+ "channels": {
+  "instagram_api": 2,
+  "trustpilot": 26
+ },
+ "total": 28,
+ "tags_instagram_api": {
+  "tag_friend": 1,
+  "noise": 2
+ },
+ "objections_instagram_api": {},
+ "countries_instagram_api": {},
+ "tags_trustpilot": {
+  "seeding_suspect": 1,
+  "buyer_identity": 1,
+  "service_complaint": 14,
+  "objection": 16,
+  "product_complaint": 6
+ },
+ "objections_trustpilot": {
+  "scam/trust": 11,
+  "price/quality": 1,
+  "doesn't work": 4
+ },
+ "countries_trustpilot": {},
+ "intent_comments": 0,
+ "intent_over_api_comments": 0.0,
+ "ig_engagement_pulled_ads": 5,
+ "intent_over_engagement": 0.0,
+ "intent_ratio_note": "n/a (no ad comments with text beyond a heart-emoji tag and a self link)",
+ "trustpilot_star_counts": {
+  "5": 2,
+  "1": 23,
+  "3": 1
+ },
+ "trustpilot_share_negative_tags": {
+  "objection": 16,
+  "product_complaint": 6,
+  "service_complaint": 14
+ },
+ "age_split": "n/a: reviews are not tied to an ad start date; the 2 API comments are 2026-01-30..31 (ad started 2026-01-30)"
+}

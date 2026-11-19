@@ -1,0 +1,38 @@
+{
+ "_note": "CONDENSED verbatim",
+ "belleaparis.com": [
+  {
+   "id": "1059927916884343",
+   "start": "2026-09-22",
+   "end": "2026-10-04",
+   "format": "video",
+   "headline": "Le coussin de soutien intime",
+   "copy": "FR translation of comfysleepers testimonial block",
+   "link_description": "Angle de 27 deg, housse impermeable, 30 jours satisfait ou rembourse"
+  },
+  {
+   "id": "2510595066113325",
+   "format": "video",
+   "headline": "Ravivez la flamme",
+   "copy": "FR translation of 'Bring Back The Spark', 30 jours pour l'essayer"
+  }
+ ],
+ "ripozen.com via advertiser page brilocasa.com": [
+  {
+   "id": "1032521416190160",
+   "start": "2026-07-27",
+   "end": "2026-08-13",
+   "format": "video",
+   "headline": "Il Cuscino Di Sostegno Per L'Intimita",
+   "copy": "Dai 20 Ai 60 Anni ... Inclinazione Di 27 deg ... Memory Foam Rigido ... Basta Impilare Cuscini Normali",
+   "eu_spend_eur": 3.54
+  },
+  {
+   "id": "2112065309377932",
+   "format": "image",
+   "link_description": "Benvenuto su RipoZen, la soluzione definitiva contro il russamento ... (store is an anti-snoring shop)"
+  }
+ ],
+ "cosalia-home.com": "top ads returned were an unrelated blanket (ES 'sabana-cosalia'); no pillow-ad data pulled",
+ "note": "clones run ads from rotating advertiser pages (brilocasa.com for ripozen.com), so brand_ids filters undercount"
+}

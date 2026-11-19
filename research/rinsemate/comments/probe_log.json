@@ -1,0 +1,28 @@
+[
+ {
+  "ad_id": "(rinsemate.co, adspy_platform=instagram, sort adspy_comments)",
+  "brand": "rinsemate.co",
+  "adspy_ig_comments": null,
+  "api_total": null,
+  "note": "search returned total 0 IG-matched ads"
+ },
+ {
+  "ad_id": "1490627535405048",
+  "brand": "rinsemate.co",
+  "adspy_ig_comments": null,
+  "adspy_fb_comments": 107,
+  "api_total": 0,
+  "note": "Facebook-matched post; comments endpoint returned 0"
+ },
+ {
+  "ad_id": "(look-alikes aeneti.com,purizzia.com,steeinsee.com,aurelina.us,saintport.com,qurannest.com,myfjordbox.com,royalbidet.de,afterloo.com, IG)",
+  "note": "only 1 IG-matched ad found in total"
+ },
+ {
+  "ad_id": "28793955576920365",
+  "brand": "aeneti.com",
+  "adspy_ig_comments": 31,
+  "api_total": 18,
+  "note": "comments returned; all 18 pulled"
+ }
+]

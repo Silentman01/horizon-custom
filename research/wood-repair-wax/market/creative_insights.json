@@ -1,0 +1,33 @@
+{
+ "_note": "get_product_creative_insights: only 5 AI-analysed ads (tiny sample)",
+ "hook": {
+  "Comparison": 60,
+  "Demonstration": 40
+ },
+ "angle": {
+  "Cost Savings": 80,
+  "Convenience": 20
+ },
+ "funnel_stage": {
+  "BOF": 100
+ },
+ "awareness": {
+  "Product Aware": 100
+ },
+ "pain": {
+  "Appearance": 80,
+  "Money": 20
+ },
+ "audience": {
+  "Homeowners": 100
+ },
+ "motivation": {
+  "Relief": 100
+ },
+ "tone": {
+  "Direct Response": 100
+ },
+ "strategy": {
+  "Problem/Solution": 100
+ }
+}

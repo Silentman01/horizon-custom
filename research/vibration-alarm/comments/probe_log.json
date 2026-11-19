@@ -1,0 +1,24 @@
+{
+ "date": "2026-11-19",
+ "market": "fitsleeps.com_9604404576605 (card says 45 sellers, get_market returned only 3 members: fitsleeps.com, viereve.com, volbelli.com)",
+ "ig_matched_ad_searches": [
+  {"brand_ids": "fitsleeps.com,dawnbands.com,softset.shop,try-novia.de,truesleep.fr,viereve.com,volbelli.com", "ig_matched_ads": 0},
+  {"brand_ids": "histrips.com,zzen.dk,itsnolya.com,tryawakeband.com,vibeloopbans.com", "ig_matched_ads": 2, "note": "both vibeloopbans.com"},
+  {"q": "vibration alarm", "ig_matched_ads": 1},
+  {"q": "silent alarm", "ig_matched_ads": 2},
+  {"q": "wake up band", "ig_matched_ads": 0}
+ ],
+ "comment_probes": [
+  {"ad_id": "4502253560032600", "brand": "vibeloopbans.com", "adspy_ig_comments": 0, "api_total": 0},
+  {"ad_id": "1099160025896395", "brand": "vibeloopbans.com", "adspy_ig_comments": 0, "api_total": "not called (adspy shows 0)"},
+  {"ad_id": "2269729230426966", "brand": "jskmarketplace.com", "adspy_ig_comments": 0, "api_total": "not called (adspy shows 0)"}
+ ],
+ "web": [
+  {"url": "https://www.trustpilot.com/review/fitsleeps.com", "status": "loaded, bodies paraphrased by fetch tool"},
+  {"url": "https://www.trustpilot.com/review/fitsleeps.com?stars=1&stars=2", "status": "loaded"},
+  {"url": "https://www.trustpilot.com/review/fitsleeps.com?page=2", "status": "loaded"},
+  {"search": "reddit vibrating alarm ...", "status": "no reddit results"},
+  {"search": "amazon vibrating alarm ...", "status": "no amazon results"}
+ ],
+ "credits_spent_estimate": "about 40 (get_product 1, get_market 3, search_products 8, search_meta_ads rows about 14, comment probe 0); zero comment credits"
+}

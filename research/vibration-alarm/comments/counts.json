@@ -1,0 +1,58 @@
+{
+ "instagram_api": {
+  "total": 0,
+  "tag_counts": {},
+  "objection_labels": {}
+ },
+ "trustpilot": {
+  "total": 37,
+  "tag_counts": {
+   "service_complaint": 4,
+   "objection": 24,
+   "product_complaint": 16,
+   "buyer_identity": 6,
+   "comparison": 2,
+   "seeding_suspect": 4,
+   "noise": 3,
+   "use_case_unadvertised": 1
+  },
+  "objection_labels": {
+   "vibration too weak": 7,
+   "doesn't work": 5,
+   "trust/scam": 2,
+   "doesn't wake heavy sleepers": 2,
+   "setup/no app": 2,
+   "return cost": 2,
+   "setup/usability": 1,
+   "design flaw motor side": 1,
+   "unreliable": 1,
+   "vibration feel": 1
+  },
+  "reviewer_countries": {
+   "US": 29,
+   "AU": 1,
+   "CA": 2,
+   "GB": 2,
+   "FI": 1,
+   "IE": 1,
+   "MY": 1
+  },
+  "star_counts": {
+   "1": 15,
+   "2": 5,
+   "5": 14,
+   "4": 3
+  },
+  "sample_bias": "1-2 star filter page (20) + page 2 mixed (17 new); NOT a random sample",
+  "comments_with_objection": 24
+ },
+ "ad_engagement_adspy": {
+  "ads": 3,
+  "ig_likes": 2,
+  "ig_comments": 0
+ },
+ "intent_ratio": "n/a (no ad comments)",
+ "intent_over_engagement": "n/a (no ad comments)",
+ "shipping_geo_counts": {},
+ "age_split_by_ad_life": "n/a (no ad comments)"
+}

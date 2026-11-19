@@ -1,0 +1,12 @@
+{"date":"2026-11-19","credits_spent_approx":20,
+"market":"paw-guardian.com_14977703772543 (sellers: paw-guardian.com, franceabsorkas.com, chronocalm.com)",
+"ig_matched_ads_search":[
+ {"brand_ids":"paw-guardian.com","adspy_platform":"instagram","total":0},
+ {"brand_ids":"franceabsorkas.com,chronocalm.com","adspy_platform":"instagram","total":0},
+ {"brand_ids":"littlefindsco,furaqua,derythm,denwild,bronzeease,petolive,moepuppy,vonisk,amarnis,dogbydrlisa (look-alike dental/oral spray sellers)","total":6,
+  "ads":[{"ad_id":"1108363008375073","brand":"moepuppy.com","product":"anti-tick spray (NOT dental)","ig_comments":2,"api_probe":"skipped, off-product"},
+         {"ad_id":"39563319843266213 / 1646829566783587 / 1634943408032322 / 2188884588690339 / 1541842267632886","brand":"petolive.com","product":"spray massage comb (NOT dental)","ig_comments":0}]}],
+"result":"No IG-matched ad for any dental-spray product has comment text. 0 API comments pulled; comments endpoint not called.",
+"web":{"trustpilot":"EXCLUDED by operator instruction; nothing kept",
+ "ibisik.com blog review":"fetched OK, 3 quotes kept",
+ "chewy.com":"HTTP 429","forum.chronofhorse.com":"HTTP 403","reddit (old and www)":"fetch blocked by tool","amazon":"not reachable via search results"}}

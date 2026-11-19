@@ -1,0 +1,9 @@
+{"note":"get_product_trend days=90 (Aug 22 -> Nov 19 2026). Stored are the tool's own summary lines plus notable daily points; daily series not retained after interruption.",
+"kitchik.com_15048615002452":"store ads 510 -> 800, active 357 -> 370, ads_30d 203 -> 239, est daily spend ~1,400 -> ~4,400; market advertisers 1 (unchanged), market spend 2,100 -> 2,400",
+"titanoxfrance.com_10812362654042":"store ads 879 -> 3,191, active 453 -> 2,247, ads_30d 252 -> 1,158, spend ~1,700 -> ~2,300; market advertisers 8 -> 29, market spend ~3,100 -> ~4,900",
+"home-hero.co_15749192876357":"store ads 304 -> 445, active 256 -> 277, ads_30d 115 -> 69, spend ~3,000 -> ~2,100 (dip to ~1,700 in Oct); market advertisers 1, spend ~3,300 flat",
+"cleandampf.de_10348086886739":"store ads 85 -> 434, active 25 -> 113, ads_30d 69 -> 294, spend ~36 -> ~900; market advertisers 1, spend ~1,500 -> ~1,100",
+"cocoseat.com_15986905710937":"store ads 385 -> 768, active 246 -> 564, ads_30d 147 -> 307, spend ~630 -> ~480; market advertisers 1, spend ~590 -> ~480",
+"ryer.de_9079563419992":"store ads 611 -> 1,007, active 539 -> 382 (cut to 231 on Sep 26 then rebuilt), ads_30d 127 -> 362, spend ~3,200 -> ~3,700 (dipped to ~1,400 Oct); market advertisers 2, spend ~3,500 -> ~3,700",
+"casaandbeyond.com.au_9250089697566":"store ads 175 -> 577, active 113 -> 254, ads_30d 77 -> 219, spend ~400 -> ~130 (dropped to ~28 Sep 26, recovered slowly); market advertisers 5 flat, spend ~400 flat",
+"rinsemate.co_15536790143363":"store ads 2,241 -> 7,169, active 639 -> 2,972, ads_30d 1,139 -> 2,478, spend ~1,200 -> ~1,800 (peak ~2,700 mid-Nov); market advertisers 1, spend ~1,100 -> ~1,600"}

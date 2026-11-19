@@ -1,0 +1,15 @@
+{"fetched":"2026-11-19","note":"verbatim field values extracted from ads_evercalm_pre_oct_by_spend_raw.json, ads_evercalm_since_oct1_by_spend_p2_raw.json and get_meta_ad",
+"search_meta_ads brand_ids=tryevercalm.co.uk,.de,.com ad_started_to=2026-09-30 sort=eu_total_spend (p1, total 1368)":[
+["1179680093760547","inactive","2025-12-14","2026-02-13",779650,8965.98,"/pages/evercalm-libido","Read this if you want your marriage back","same ad listed under .com, .co.uk and .de"],
+["970606472300126","inactive","2026-04-07","2026-05-29",356710,4102.16,"/pages/evercalm-libido","Read this if you want your libido back"],
+["1435982065055130","inactive","2026-09-04","2026-10-01",290550,3341.33,"/pages/evercalm-libido","Read this if you want your libido back"],
+["2113750759432575","inactive","2025-10-20","2026-02-03",290421,3339.84,"/pages/evercalm-libido","40% OFF TODAY!"],
+["2243100839532366","inactive","2025-12-03","2026-02-25",281562,3237.96,"/pages/evercalm-gift","Read this if you want your marriage back"]],
+"search_meta_ads brand_ids=tryevercalm.co.uk ad_started_from=2026-10-01 sort=eu_total_spend page 2 (ads 16-30 of 202)":{"sum_eu_spend":1325.58,"max":136.11,"min":54.52,"rows_note":"mix of joint product page, /pages/evercalm-joint-pain, /pages/evercalm-hand-pain and still-running LIBIDO ads (2508028229684175 Oct 22-28 133.47; 996936190083650 Oct 1-Nov 10 119.92; 2188667325335587 Oct 24-26 55.81)"},
+"get_meta_ad 1689289052845415":{"brand_id":"tryevercalm.de","status":"active","start_date":"2026-11-04","end_date":"2026-11-16","duplicate_count":2,"eu_total_reach":395434,"eu_total_spend":4547.49,"created_at":"2026-11-12","landing":"tryevercalm.co.uk/products/evercalm-ring-relief-for-stiff-aching-joints","vs_analyst_file":"eu_total_spend 3717.71, reach 323279, end 2026-11-15 -> +829.78 EUR / +72,155 reach over one data refresh"},
+"search_meta_ads q='Akupressur Ring' status=active eu_countries=DE,AT,CH started>=2026-09-01 (total 18, 8 read)":"all 8 = backlaxx.com Early Black Friday ads giving a 'GRATIS Akupressur-Ring' away with any order; no joint-ring seller",
+"search_meta_ads q='Ring Gelenke' status=active eu DE,AT,CH,NL,BE,FR started>=2026-09-01":"total 0",
+"search_meta_ads q='magnetic ring' status=active eu DE,AT,NL,BE,FR,DK,SE,ES,IT started>=2026-09-15 max 1/brand (216 total, 4 read)":"stilform pencil, ares-ring.com (men's energy magnetic ring, 1 ad, Sep 23), winscase phone case, deltahub mount: no joint ring",
+"search_products q='magnetic acupressure ring' active_ads>=1 last_adv>=2026-11-01":"total 0",
+"search_products q=ring niche=Health market_country=DE active>=1 last_adv>=2026-10-20 (76 total, 8 read)":"mycalmi.com Calmi Ring (advertises in DE), smart rings (RingConn, Fitorb, MYHIXEL), Oracle Ring; no German-language joint/acupressure ring",
+"search_products q=ring niche=Health active>=3 last_adv>=2026-11-01 (282 total, 15 read)":{"mycalmi.com_9835849908565":{"title":"Calmi Ring - The Natural Menopause Solution","ads_total":2774,"active":431,"first":"2025-10-21","est_daily_spend_usd":360,"market_spend":450,"lifecycle_stage":"declining","revenue":"73000-98000/mo market"}}}

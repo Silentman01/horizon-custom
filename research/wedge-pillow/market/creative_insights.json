@@ -1,0 +1,39 @@
+{
+ "_note": "verbatim, 26 AI-analysed ads",
+ "hook": {
+  "Demonstration": 38.5,
+  "Social Proof": 11.5,
+  "Testimonial": 11.5,
+  "Aspiration": 7.7,
+  "Curiosity": 7.7
+ },
+ "angle": {
+  "Convenience": 57.7,
+  "Desire": 15.4,
+  "Transformation": 11.5,
+  "Comparison": 7.7,
+  "Lifestyle": 3.8
+ },
+ "funnel": {
+  "BOF": 84.6,
+  "TOF": 11.5,
+  "MOF": 3.8
+ },
+ "pain": {
+  "Confidence": 50.0,
+  "Comfort": 23.1,
+  "Health": 19.2,
+  "Frustration": 3.8,
+  "Relationships": 3.8
+ },
+ "audience": {
+  "Couples": 50.0,
+  "Adults": 34.6,
+  "Women": 15.4
+ },
+ "strategy": {
+  "Problem/Solution": 80.8,
+  "Social Proof": 15.4,
+  "Comparison": 3.8
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "id": "paw-guardian.com_14977703772543",
+ "price_usd": 55.99,
+ "ads": {
+  "total": 5587,
+  "active": 2001,
+  "last_30d": 1091,
+  "first_advertised_at": "2025-12-24",
+  "est_daily_spend_usd": 1800
+ },
+ "market": {
+  "sellers": 3,
+  "active_ads": 2001,
+  "total_ads": 5605,
+  "price_min_usd": 49.9,
+  "price_median_usd": 52.95,
+  "price_max_usd": 55.99,
+  "country_count": 20,
+  "lifecycle_stage": "scaling"
+ },
+ "revenue_market_monthly_usd": [
+  250000,
+  330000
+ ],
+ "sourcing_available": true
+}

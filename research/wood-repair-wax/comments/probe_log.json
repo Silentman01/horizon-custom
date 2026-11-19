@@ -1,0 +1,21 @@
+{"_note":"Condensed log (hand-written from tool responses). Trustpilot excluded by operator instruction; no Trustpilot data saved or counted.",
+"fetched":"2026-11-19",
+"product_card":{"id":"kitchik.com_15048615002452","title":"FixStik - wood repair wax pens","price_usd":25.67,"ads_total":800,"ads_active":370,"est_daily_spend_usd":4400,"sellers_in_market":1,"stage":"emerging","est_revenue_monthly_usd":"530000-700000","audience_top_country":"SE 30.8%","female_share_pct":55.8,"top_age":"45-54"},
+"look_alike_sellers":[
+ {"brand":"vuxeco.com","product":"Wood Repair Wax pens","id":"vuxeco.com_9223475396839","ads":153,"active":0,"stage":"declining"},
+ {"brand":"vuxeco.com","product":"Wood Repair & Stain Remover","id":"vuxeco.com_9305659441383","ads":420,"active":102,"stage":"emerging"},
+ {"brand":"torkstoretools.com","product":"Wood Repair Wax Stick Kit (20 Colors)","id":"torkstoretools.com_8746097737816","ads":49,"active":42,"stage":"scaling","market_sellers":2,"est_daily_spend_usd":250}],
+"probes":[
+ {"query":"search_meta_ads brand_ids=kitchik.com adspy_platform=instagram sort=adspy_comments","ig_matched_ads":0},
+ {"query":"search_meta_ads brand_ids=vuxeco.com,torkstoretools.com adspy_platform=instagram","ig_matched_ads":0},
+ {"query":"search_meta_ads q='wood repair wax' adspy_platform=instagram","ig_matched_ads":0},
+ {"query":"search_meta_ads q='furniture scratch repair' adspy_platform=instagram","ig_matched_ads":0},
+ {"query":"search_meta_ads brand_ids=kitchik.com,vuxeco.com,torkstoretools.com adspy_only=true","total_adspy_matched":27,"note":"top 5 shown are vuxeco 'sanding-set' (not wax) ads matched to Facebook posts only (212-352 FB comments); Facebook comments are not retrievable via API. 0 Instagram."}],
+"api_comments_total":0,
+"web":[
+ {"url":"https://old.reddit.com/search?...","result":"blocked by fetch tool"},
+ {"url":"web search with reddit.com","result":"domain not accessible"},
+ {"url":"https://www.walmart.com/ip/...15682657846","result":"robot check page, no reviews"},
+ {"url":"https://www.amazon.com/... (3 product pages)","result":"HTTP 503"},
+ {"url":"trustpilot","result":"EXCLUDED by operator"}],
+"credits_spent_approx":"~30 (1 get_product + 8+8+6 product cards + 5 ad rows; no comments returned)"}

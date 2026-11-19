@@ -1,0 +1,5 @@
+{"_condensed":"get_product_audience + get_brand(nordvera.dk), pulled 2026-11-19",
+"audience":{"product":"netoviaclean.com_16156885451084","analysed_ads":177,"women_pct":40.7,"men_pct":59.3,"age_pct":{"18-24":0.2,"25-34":1.2,"35-44":2.9,"45-54":11.3,"55-64":29.1,"65+":55.4},"countries_reach_share_pct":{"SE":39.9,"DE":26.3,"BE":19.8,"AT":13.6,"FI":0.2,"FR":0.1}},
+"brand_nordvera.dk":{"id":"nordvera.dk","status":"active","created_at":"2026-07-31 (estimate)","country_code":"DK","currency_code":"DKK","ships_to_countries":["Denmark"],"avg_price_usd":42.36,"last_meta_active_count":116,"last_meta_total_count":260,"latest_meta_ads_start_date":"2026-10-28T07:00:00","spend_30d":11299.11,"spend_60d":22598.22,"monthly_visits":0},
+"sourcing":"get_product sourcing_available=false (no get_product_sourcing call possible)",
+"creative_insights":"not called (product not AI-analysed expected; skipped to save credits)"}

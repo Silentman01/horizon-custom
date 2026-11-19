@@ -1,0 +1,43 @@
+{
+ "_note": "CONDENSED get_market(history=true). History series is almost all null.",
+ "members": [
+  {
+   "id": "torkstoretools.com_8746097737816",
+   "price": "44.99 USD",
+   "ads_total": 49,
+   "active": 42,
+   "first_advertised_at": "2026-04-30T00:28:56.694Z",
+   "est_daily_spend_usd": 250
+  },
+  {
+   "id": "torkstoree.com.br_10408086733092",
+   "price": "199 BRL = 35.82 USD",
+   "ads_total": 54,
+   "active": 37,
+   "first_advertised_at": "2026-05-25T18:33:52.690Z",
+   "est_daily_spend_usd": null
+  }
+ ],
+ "market": {
+  "sellers": 2,
+  "active_ads": 79,
+  "total_ads": 103,
+  "price_min_usd": 35.82,
+  "price_median_usd": 40.41,
+  "price_max_usd": 44.99,
+  "stage": "scaling",
+  "revenue_band_market": "34,000-45,000 USD/mo"
+ },
+ "history_nonnull": [
+  [
+   "2026-11-13",
+   2,
+   28
+  ],
+  [
+   "2026-11-19",
+   null,
+   250
+  ]
+ ]
+}

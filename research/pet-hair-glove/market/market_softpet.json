@@ -1,0 +1,9 @@
+{"note":"condensed from get_market(softpet.es_15471612821836) 2026-11-19; fields kept: brand,url,price_usd,total,active,first,country",
+"sellers":[
+["softpet.es","https://softpet.es/products/manopla-quita-pelos-mascota",25.91,907,419,"2026-01-07",2900,"ES"],
+["softpet.es#2","https://softpet.es/products/manopla-quitapelos-reutilizable-para-mascotas",25.91,121,101,"2026-10-31",170,"ES"],
+["softpet.es#3","https://softpet.es/products/manopla-quitapelos-reutilizable-para-mascotas-copia",25.91,31,31,"2026-11-07",null,"ES"],
+["cleveria.store","https://cleveria.store/products/manopla-quita-pelos-mascota",26.99,29,0,"2026-11-06",null,"ES"],
+["cuidamascota.es","https://cuidamascota.es/products/guante-quita-pelos-de-mascota-de-doble-cara-reutilizable-y-antiestatico",21.59,15,0,"2026-11-10",null,"ES"],
+["formy.es","https://formy.es/products/manopla-quita-pelos-mascota",24.99,18,0,"2026-07-14",null,"ES"],
+["petzuno.store","https://petzuno.store/products/manopla-quita-pelos-mascota",20.79,14,0,"2026-11-01",null,"ES"]]}

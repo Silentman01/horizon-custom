@@ -1,0 +1,33 @@
+{
+  "_note": "Condensed get_product_trend results (1 credit each). Summary lines are verbatim from the tool; key daily points copied from the data array. Full daily arrays were not re-saved after the interruption.",
+  "fitsleeps.com_9604404576605": {
+    "days": 90, "window": "2026-08-22 to 2026-11-19",
+    "summary": "This store: ads 12,196 -> 26,253, active on Meta 1,434 -> 14,736, started in the last 30 days 1,627 -> 5,224, est. daily spend ~$2,700 -> ~$5,500. Market: stores advertising 3 (unchanged), est. daily spend ~$2,700 -> ~$5,500",
+    "key_points": {"2026-09-25 active":7298,"2026-09-26 est_daily_spend":170,"2026-10-25 active":11659,"2026-11-12 est_daily_spend":180,"2026-11-13 est_daily_spend":3100,"2026-11-16 est_daily_spend":5900,"last_30d_peak 2026-09-25":6349,"last_30d 2026-11-19":5224},
+    "reading": "Active ads climb nearly every day for 90 days (no plateau); launches/30d peaked ~6.6k in early Oct and sits ~4.4-5.2k. Spend series has a data gap Sep 26 - Nov 12 (170-180) then returns to 5.5k."
+  },
+  "myspinea.com_15805788914037": {
+    "days": 60, "window": "2026-09-21 to 2026-11-19",
+    "summary": "This store: ads 548 -> 1,141, active on Meta 250 -> 612, started in the last 30 days 108 -> 415, est. daily spend ~$91 -> ~$80. Market: stores advertising 3 (unchanged), est. daily spend ~$290 -> ~$80",
+    "key_points": {"active peak 2026-11-10":663,"active 2026-11-19":612,"spend peak 2026-11-04..07":160},
+    "reading": "Rising, steady creative production (~400 new ads per 30d); spend estimate flat-ish."
+  },
+  "physeli.com_15631660974411": {
+    "days": 60, "window": "2026-09-21 to 2026-11-19",
+    "summary": "This store: ads 253 -> 594, active on Meta 167 -> 349, started in the last 30 days 46 -> 254, est. daily spend ~$210 -> ~$170. Market: stores advertising 3 (unchanged), est. daily spend ~$210 -> ~$170",
+    "key_points": {"active 2026-10-11..22":143,"active 2026-11-12":192,"active 2026-11-14":326,"active 2026-11-19":349},
+    "reading": "Dipped to 143 active mid Oct, then relaunched ads Nov 13-14 (+~150 ads in 2 days). Spend flat."
+  },
+  "flytex.fr_15486398824778": {
+    "days": 60, "window": "2026-09-21 to 2026-11-19",
+    "summary": "This store: ads 201 -> 394, active on Meta 66 -> 168, started in the last 30 days 18 -> 211, est. daily spend ~$930 -> ~$1,200. Market: stores advertising 1 (unchanged), est. daily spend ~$1,000 -> ~$1,200",
+    "key_points": {"active 2026-11-05":78,"active 2026-11-07":254,"active 2026-11-11":170,"total 2026-11-05":217,"total 2026-11-07":392},
+    "reading": "Spend est. stable ~$900-1,200/day all window (steady, consistent spender); 175 ads bulk-added Nov 6-7. Only ONE store (market.advertisers=1)."
+  },
+  "ninanude.com_15717774492021": {
+    "days": 60, "window": "2026-09-21 to 2026-11-19",
+    "summary": "This store: ads 232 -> 371, active on Meta 165 -> 249, started in the last 30 days 91 -> 190, est. daily spend ~$270 -> ~$200. Market: stores advertising 1 (unchanged), est. daily spend ~$280 -> ~$190",
+    "key_points": {"spend range":"190-280 every day","active 2026-10-01":164,"active 2026-11-19":249},
+    "reading": "Slow steady growth, flat spend ~$200/day, single advertiser."
+  }
+}

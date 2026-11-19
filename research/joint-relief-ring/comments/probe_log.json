@@ -1,0 +1,8 @@
+{"date":"2026-11-19","method":"search_meta_ads adspy_platform=instagram sort_by=adspy_comments page_size=10",
+"probes":[
+{"brands":"tryevercalm.co.uk","ig_matched_ads":0},
+{"brands":"mycalmi.com","ig_matched_ads":0},
+{"brands":"sylvori.com,theserenityring.com,serenering.com,bymagnova.com,uk.aureliaring.com,butfirstbeautyshop.com","ig_matched_ads":0},
+{"brands":"tryevercalm.com,tryevercalm.de,corelo.co,mymoonasleep.com,myrelaxea.com,vitalx.uk,auvulis.com,magneva.co,raviossa.com,verdana-home.com,oluxring.com","ig_matched_total":12,"all_oluxring":"IG matched ads only from oluxring.com; max adspy IG comments 3 (ad 2258080595030784, 1083501481267204 etc., post 5 likes/3 comments) and 2 (ad 823677990820044) - below the 5 threshold"},
+{"ad_id":"2258080595030784","brand":"oluxring.com","adspy_ig_comments":3,"get_meta_ad_comments_total":0,"note":"extra probe below threshold, returned empty"}],
+"result":"NO comments obtainable. Comment evidence: none."}

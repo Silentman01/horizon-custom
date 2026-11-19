@@ -1,0 +1,51 @@
+{
+ "_note": "CONDENSED file. Verbatim figures copied from get_product_audience, get_product_sourcing, get_product_creative_insights, get_product_trend, search_meta_ads (sort longest_running, page_size 5), get_similar_products and search_products. Copy truncated.",
+ "audience": {"analysed_ads": 10784, "countries_reach_pct": {"IT": 41.7, "FR": 38.3, "ES": 9.0, "BE": 3.6, "DE": 2.1, "LU": 0.6, "GB": 0.5, "PT": 0.5, "GR": 0.5}, "country_count": 35, "female_pct": 34.4, "male_pct": 65.6, "ages_pct": {"18-24": 0.7, "25-34": 4.9, "35-44": 10.5, "45-54": 18.2, "55-64": 27.7, "65+": 37.8}},
+ "sourcing": {"supplier_url": "https://detail.1688.com/offer/1017578700990.html", "title": "Non-Coated Frying Pan, Non-Stick Pan for Home Use, Titanium-Containing Frying Pan, High-End Hammered Titanium Pan, Thickened Steak Frying Pan", "unit_cost_usd": 1.82, "moq": 1, "est_shipping_usd": 4.8, "retail_price_usd": 72.36, "gross_margin_pct": 97.5, "break_even_roas": 1.14, "break_even_cpa_usd": 63.3, "verdict": "profitable", "alternatives": [{"url": "https://detail.1688.com/offer/1055132607143.html", "unit_cost_usd": 8.37, "title": "uncoated titanium wok"}, {"url": "https://detail.1688.com/offer/1052491502671.html", "unit_cost_usd": 7.7}, {"url": "https://detail.1688.com/offer/1073009782301.html", "unit_cost_usd": 5.88, "title": "Titanium Hammer Pattern Flat Pan, 304 Stainless Steel Titanium Coated Frying Pan"}]},
+ "creative_insights_351_ads": {"hook": {"Fear": 30.2, "Scarcity": 13.1, "Shock": 10.8, "Social Proof": 7.4, "Demonstration": 6.8}, "angle": {"Scarcity": 23.9, "New Mechanism": 15.1, "Cost Savings": 11.7, "Fear": 8.8, "Enemy": 7.7}, "funnel": {"BOF": 54.4, "TOF": 43.3}, "awareness": {"Product Aware": 51.0, "Problem Aware": 41.6}, "pain": {"Health": 53.0, "Money": 37.9}, "audience": {"Homeowners": 57.0, "Parents": 20.2, "Families": 9.1, "Women": 3.4}, "strategy": {"Problem/Solution": 83.2}},
+ "trend_titanoxfrance_2026-08-22_to_2026-11-19": {"store_ads": [879, 3191], "store_active": [453, 2247], "store_last30d": [252, 1158], "store_est_daily_usd": [1700, 2300], "market_advertisers": [8, 29], "market_est_daily_usd": [3100, 4900], "note": "market daily spend peak 5800 on 2026-09-20/21/24/25; 3700 on 2026-10-25; 4900 on 2026-11-18/19. store active ads jumped 944 -> 1245 on 2026-10-18"},
+ "ads": {
+  "titanoxfrance.com (829 ads in search)": [
+   {"id": "1693866224950304", "format": "video", "start": "2026-06-17", "end": "2026-10-07", "days": 112, "eu_reach": 21433, "eu_spend_eur": 172.54, "headline": "Je n'acheterai plus jamais de poele de ma vie.", "angle": "first-person testimonial, 6 months, nothing sticks, PFAS carcinogens, pure titanium no coating, lifetime guarantee, replaced pan yearly"},
+   {"id": "3377046385786809", "format": "video", "start": "2026-06-17", "end": "2026-10-07", "days": 112, "eu_reach": 33286, "eu_spend_eur": 267.95, "angle": "enemy: industry hides PFAS classed carcinogenic; fear"},
+   {"id": "1755636118735738", "format": "image", "start": "2026-06-17", "end": "2026-10-07", "days": 112, "eu_reach": 35879, "eu_spend_eur": 288.83, "angle": "coated pans wear out; 100% pure titanium sans revetement"},
+   {"id": "1004914189164628", "format": "video", "start": "2026-06-17", "end": "2026-10-07", "days": 112, "eu_reach": 64685, "eu_spend_eur": 520.71, "angle": "grandmother cooked 35 years on PFAS for grandchildren, daughter showed documentary, threw all pans away"},
+   {"id": "1988807715084476", "format": "image", "start": "2026-06-17", "end": "2026-10-07", "days": 112, "eu_reach": 72563, "eu_spend_eur": 584.13, "angle": "offer: -50% whole range, free 5-piece stainless utensil set (79.99 EUR), lifetime guarantee, free e-book"}],
+  "titanoxufficiale.com (700 ads in search)": [
+   {"id": "1000738858991526", "format": "image", "start": "2026-06-06", "end": "2026-06-25", "eu_reach": 61060, "eu_spend_eur": 492.14, "angle": "IT: naturally non-stick thanks to hammered titanium, not chemical coating; no PFAS/PFOA; lifetime guarantee"},
+   {"id": "1001132295966270", "format": "video", "start": "2026-06-22", "end": "2026-06-30", "eu_reach": 86, "angle": "IT: ALLARME, vi state avvelenando da 40 anni (PFAS)"}],
+  "shoptitanox.com (513 ads in search)": [
+   {"id": "2163723901196371", "format": "image", "start": "2026-07-11", "end": "2026-07-13", "headline": "America's top-rated titanium pan. Now 50% off", "angle": "same copy translated to EN, lifetime warranty"},
+   {"id": "26794665713540184", "format": "image", "start": "2026-07-08", "end": "2026-07-13", "angle": "FB engagement post (child first pancake), CTA Like Page"}]},
+ "lookalikes": {
+  "similar_products": [
+   {"id": "atsumaru.store_8234876862517", "usd": 78.83, "sellers": 14, "stage": "emerging", "lang": "DE"},
+   {"id": "okibi-jp.shop_8987800371378", "usd": 82.56, "sellers": 9, "stage": "emerging", "lang": "JA"},
+   {"id": "de-munter.store_10297331974247", "usd": 48.49, "sellers": 37, "stage": "emerging"},
+   {"id": "westhoffkitchen.nl_10681219678555", "usd": 118.75, "sellers": 24, "stage": "declining", "active": 0},
+   {"id": "delmont-co.com_7828521254979", "usd": 101.6, "sellers": 10, "stage": "declining", "active": 0},
+   {"id": "waltercookware.co.uk_15251285705089", "usd": 84.0, "sellers": 46, "stage": "declining", "active": 0},
+   {"id": "veranihouse.com_15627941478782", "usd": 79.99, "sellers": 10, "stage": "declining"}],
+  "search_titanium_pan_total": 352,
+  "titanium_pan_top": [
+   {"id": "apexiqo.com_9949986423123", "usd": 276.95, "sellers": 49, "stage": "saturated", "market_active_ads": 113, "market_total_ads": 741, "first": "2025-07-05"},
+   {"id": "safepan.co_10110396334409", "usd": 79.95, "sellers": 54, "active": 0},
+   {"id": "monalura.com_15884700385663", "usd": 97, "active": 19, "stage": "emerging"},
+   {"id": "thetitanium.co_16013209731402", "usd": 149.99, "active": 9}],
+  "search_poele_titane_total": 60,
+  "poele_titane": [
+   {"id": "forneau.com_10386286051509", "usd": 119.88, "ads": 177, "active": 93, "est_daily_usd": 270, "market_est_daily_usd": 420, "rev_band": "56k-75k/mo (market)", "first": "2026-06-21"},
+   {"id": "corzen.ch_15976028733824", "usd": 197.89, "active": 52},
+   {"id": "rentitan.eu_15751615512902", "usd": 970.92, "active": 38, "lang": "SV"},
+   {"id": "plentico.fr_9702895288575", "usd": 47.52, "ads": 30, "active": 27, "est_daily": 16, "first": "2026-09-26"},
+   {"id": "foyercuisine.com_15817843540312", "usd": 150.12, "ads": 53, "active": 26, "first": "2026-09-13"}],
+  "search_titan_pfanne_total": 28,
+  "titan_pfanne": [
+   {"id": "gartenort.de_10646469378387", "usd": 64.79, "ads": 54, "active": 18, "est_daily": 27, "first": "2026-07-27", "rev_band": "2.6k-3.4k/mo"},
+   {"id": "green-kitchen.com_10267390083399", "usd": 160.92, "ads": 49, "active": 11},
+   {"id": "lurosa.ch_10646593470803", "usd": 153.45, "active": 10},
+   {"id": "weverse.ch_10190591263059", "usd": 120.89, "active": 9, "last_adv": "2026-02-18"},
+   {"id": "valtner.ch_11361080279382", "usd": 109.95, "active": 3}],
+  "search_pfas_free_pan_total": 193,
+  "pfas_top": {"id": "titanskitchen.com_6913853128833", "usd": 99.95, "ads": 657, "active": 230, "stage": "saturated", "est_daily_usd": 16, "first": "2026-01-03", "country_count": 21, "sellers": 8}}
+}

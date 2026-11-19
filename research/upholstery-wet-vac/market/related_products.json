@@ -1,0 +1,22 @@
+{"_note":"CONDENSED from search_products (q=Polsterreiniger, Nasssauger, upholstery cleaner, carpet cleaner spot cleaner wet vacuum, nettoyeur injecteur extracteur textile canape) + get_product aurevia. Field values verbatim.",
+"ryer_family":[
+{"id":"ryer.de_9079563419992","title":"RYER Plus Nasssauger","price_eur":139.99,"ads":1007,"active":382,"est_daily_spend_usd":3700,"stage":"scaling","rev_usd":[500000,670000]},
+{"id":"ryer.de_15613169762648","title":"RYER Hybrid 2 in 1 Nasssauger & Dampfreiniger mit Heißwasser","url":"https://ryer.de/products/hybrid","price_eur":179.99,"price_usd":194.39,"ads":166,"active":159,"first_advertised_at":"2026-07-18T10:15:40.319Z","est_daily_spend_usd":1900,"stage":"emerging","rev_usd":[230000,300000],"rev_scope":"seller","sourcing_available":"404 no supplier match"},
+{"id":"ryer.de_15322301595992","title":"RYER Nasssauger Compact","price_eur":99.99,"ads":8,"active":0,"market_active_ads":6,"est_daily_spend_usd":170,"rev_usd":[18000,24000]},
+{"id":"ryer.de_15384821858648","title":"RYER Nasssauger Plus (plus-c)","price_eur":139.99,"ads":3,"active":0},
+{"id":"ryer.de_15177044033880","title":"RYER Mattvätt Plus (Swedish)","price_eur":169.99,"ads":2,"active":0}],
+"copycats":[
+{"id":"aurevia-shopping.de_15759613985116","title":"Aurevia SpotFlow","price_eur":149.99,"price_usd":161.99,"ads":9,"active":0,"first_advertised_at":"2026-11-07T05:43:41.200Z","last_advertised_at":"2026-11-14T15:33:07.486Z","product_type":"Polster- und Teppichreiniger","audience":"DE 72.2%, women 31.7%, top age 25-34","stage":"declining","sourcing":"404 no supplier match"},
+{"id":"jet-force.fr_15863248159094","title":"Steam Force Shampouineuse vapeur 4-en-1 canapé et tapis","price_eur":179.99,"ads":2,"active":0,"first_advertised_at":"2026-11-07T22:25:59.655Z"},
+{"id":"eziclean.ma_10107230552376","title":"EZIclean Spot Remover W100 injecteur extracteur","price_usd":119.4,"ads":10,"active":2,"rev_usd":[400,590]},
+{"id":"eziclean.ma_8335524692280","title":"EZIclean Spot Remover W4 Hot","price_usd":349,"ads":7,"active":0},
+{"id":"issamshopping.com_9872374137080","title":"Heinrich's HTR 8870 injecteur extracteur 2 en 1","price_usd":210,"ads":1,"active":1},
+{"id":"electroprodz.com_14939480359278","title":"VALBERG SP3 nettoyeur détacheur","price_usd":220.52,"ads":1,"active":1},
+{"id":"brico-max.com_10577028251975","title":"Kärcher Shampouineuse SE 4","price_usd":89,"ads":4,"active":0}],
+"cheap_chemistry_substitutes":[
+{"id":"munichsunny.com_15396354097440","title":"No-Wash Carpet & Sofa Cleaner with Brush","price_usd":19.99,"market_sellers":10,"market_active_ads":26,"est_daily_spend_usd":290,"rev_usd":[39000,52000],"market_price_min_median_max_usd":[12.69,16.98,46.98]},
+{"id":"bestideasuk.co.uk_8645643370797","title":"Profoam Carpet & Fabric Cleaner","price_gbp":14.99,"ads":68,"active":18,"rev_usd":[28000,37000]},
+{"id":"detailrs.nl_8771184951637","title":"Fabric Carpet Cleaner","price_eur":14.39,"ads":6,"active":6,"est_daily_spend_usd":200}],
+"premium_wet_dry_floor":[
+{"id":"ca-store.tineco.com_8683215978658","title":"Tineco FLOOR ONE S7 Stretch Ultra","market_sellers":8,"market_active_ads":66,"est_daily_spend_usd":890,"stage":"saturated","price_usd":401.49},
+{"id":"it.dreametech.com_9330769756386","title":"Dreame T16 Pro Steam","price_usd":700.92,"active":59,"est_daily_spend_usd":400}]}

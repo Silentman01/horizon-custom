@@ -1,0 +1,34 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls). 177 ads across med-fit.co.uk/.store (shared ads)",
+ "ads": [
+  {
+   "id": "27726648076930495",
+   "start": "2026-06-17",
+   "end": "2026-08-02",
+   "format": "video",
+   "headline": "37% Off This Month",
+   "copy": "Our Combo 2 machine combines TENS, EMS & massage therapy. 37% OFF this month only. Dual-channel for multiple areas. Easy, at-home relief"
+  },
+  {
+   "id": "4563347130563737",
+   "start": "2026-06-30",
+   "end": "2026-07-19",
+   "format": "image",
+   "headline": "For your Legs, Ankles and Feet",
+   "copy": "Why Are So Many People Raving About This Foot Circulation Device? (Foot & Leg Circulation Machine)"
+  },
+  {
+   "id": "1802838917564636",
+   "start": "2026-09-06",
+   "end": "2026-09-06",
+   "format": "video",
+   "headline": "3-in-1 Relief Device",
+   "copy": "TENS Special! Combo 2 ... 37% OFF. 3 therapies in one. Treat 2 areas at once",
+   "adspy_ig": {
+    "likes": 0,
+    "comments": 0,
+    "views": 36
+   }
+  }
+ ]
+}

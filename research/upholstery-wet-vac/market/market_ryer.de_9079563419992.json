@@ -1,0 +1,7 @@
+{"_note":"CONDENSED (verbatim field values, history series reduced to non-null points) of get_market history=true, 2026-11-19",
+"members":[
+{"id":"ryer.de_9079563419992","brand_id":"ryer.de","url":"https://ryer.de/products/plus","price":{"amount":139.99,"currency":"EUR"},"price_usd":151.19,"ads":{"total":1007,"active":382,"last_30d":362,"first_advertised_at":"2025-12-28T03:38:15.022Z","last_advertised_at":"2026-11-15T21:49:19.365Z","est_daily_spend_usd":3700}},
+{"id":"ryershop.de_9079563419992","brand_id":"ryershop.de","url":"https://ryershop.de/products/plus","price_usd":151.19,"ads":{"total":69,"active":6,"last_30d":25,"first_advertised_at":"2026-01-29T07:19:09.302Z","est_daily_spend_usd":null}}],
+"market":{"sellers":2,"active_ads":388,"total_ads":1076,"country_count":4,"est_daily_spend_usd":3700,"lifecycle_stage":"scaling","revenue_est_monthly_usd":[500000,670000],"revenue_scope":"market"},
+"history_cols":"date,advertisers,est_daily_spend_usd",
+"history_non_null":[["2026-08-20",2,3500],["2026-08-25",2,3500],["2026-09-08",2,3600],["2026-09-12",2,3600],["2026-09-17",2,3500],["2026-09-23",2,3500],["2026-09-26",2,1500],["2026-10-03",2,1500],["2026-10-04",2,1400],["2026-10-18",2,1700],["2026-10-24",2,1700],["2026-10-25",2,2100],["2026-10-27",2,2800],["2026-10-28",2,2700],["2026-11-01",2,2400],["2026-11-02",2,2200],["2026-11-10",2,2500],["2026-11-12",2,2700],["2026-11-16",2,4000],["2026-11-17",2,3700]]}

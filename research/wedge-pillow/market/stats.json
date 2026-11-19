@@ -1,0 +1,12 @@
+{
+ "distinct_brands": 20,
+ "brands_with_active_ads": 11,
+ "total_ads": 4802,
+ "active_ads": 2568,
+ "comfysleepers_share_total_pct": 90.2,
+ "comfysleepers_share_active_pct": 95.8,
+ "price_usd_min": 35.99,
+ "price_usd_median": 50.79,
+ "price_usd_max": 124.2,
+ "non_english_sellers": 11
+}

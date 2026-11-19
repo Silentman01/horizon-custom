@@ -1,0 +1,62 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls).",
+ "audience_ems_foot": {
+  "analysed_ads": 53,
+  "women_pct": 59.1,
+  "men_pct": 40.9,
+  "ages": {
+   "45-54": 15.5,
+   "55-64": 27.4,
+   "65+": 48.1
+  },
+  "countries": {
+   "GB": 100.0
+  }
+ },
+ "trend_ems_foot_90d": {
+  "2026-08-22": {
+   "total": 31,
+   "active": 25
+  },
+  "2026-11-12": {
+   "total": 53,
+   "active": 42,
+   "est_daily_spend_usd": 23
+  },
+  "2026-11-19": {
+   "total": 17,
+   "active": 13
+  },
+  "note": "store ad counts jump between 28 and 53 repeatedly (bulk expiring/relisting); est daily spend about $8 to $23"
+ },
+ "sourcing": {
+  "unit_cost_usd": 0.69,
+  "est_shipping_usd": 6,
+  "retail_price_usd": 37.97,
+  "gross_margin_pct": 98.2,
+  "break_even_roas": 1.27,
+  "break_even_cpa_usd": 29.86,
+  "verdict": "profitable",
+  "supplier_title": "Ems Massage Foot Mat Foot Massager Pulse Smart Massage Patch Foot Therapy Machine"
+ },
+ "ads": [
+  {
+   "id": "26217293791304882",
+   "start": "2026-04-17",
+   "end": "2026-08-12",
+   "status": "active",
+   "format": "image",
+   "headline": "EMS Foot Massager | Improves blood circulation",
+   "copy": "\"I thought heavy, tired legs were just part of getting older… but I was wrong. Since I started using LegRelief Pro™, my circulation has truly improved. No more swelling in the evenings, less pain, and I can finally sleep without being woken by night cramps.\" – John, 72 ... Gently boosts circulation with soothing electrical stimulation ... Designed for seniors suffering from heavy or swollen legs ... just 20 minutes a day ... Try it risk-free for 30 days"
+  },
+  {
+   "id": "887605237723808",
+   "start": "2026-07-07",
+   "end": "2026-08-15",
+   "status": "active",
+   "format": "image",
+   "headline": "EMS Foot Massager | Improves blood circulation",
+   "copy": "same John, 72 testimonial copy as 26217293791304882"
+  }
+ ]
+}

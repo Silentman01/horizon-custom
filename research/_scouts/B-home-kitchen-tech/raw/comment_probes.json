@@ -1,0 +1,12 @@
+{"note":"search_meta_ads brand_ids=<store>, adspy_platform=instagram, sort_by=adspy_comments. Result = number of IG-matched ads for that store (pagination.total).",
+"ig_matched_ads":{"kitchik.com":0,"titanoxfrance.com":0,"home-hero.co":0,"ryer.de":0,"casaandbeyond.com.au":0,"rinsemate.co":0,"draw-my-pets.com":0,"contempee.com":0,"cleandampf.de":12,"cocoseat.com":5,"comfysleepers.com":2,"ahim6.de":4,"techavn.shop":1},
+"adspy_figures":{
+"cleandampf.de ad 1889775675596873":"IG 1 like, 0 comments, 3829 views",
+"cleandampf.de ad 1473758768151147":"IG 4 likes, 0 comments, 1399 views",
+"cocoseat.com ad 1074692718791321":"IG 158 likes, 33 comments, 7942 views",
+"cocoseat.com ad 1775379260450325":"IG 3290 likes, 26 comments, 466870 views (influencer #gifted)",
+"comfysleepers.com ad 2322333648296176":"IG 33 likes, 2 comments",
+"ahim6.de ad 1742393903539671":"IG 127 likes, 9 comments (clearance sale ad)",
+"techavn.shop ad 1083483727420224":"IG 3 likes, 0 comments"},
+"get_meta_ad_comments_results (pagination.total, all 0, no credit cost)":{"1074692718791321":0,"1775379260450325":0,"2322333648296176":0,"1742393903539671":0,"1357529639612982 (momento-akustik, adspy 186 comments)":0},
+"category_sweep":"search_meta_ads niche CSV, IG, adspy_comments_min 15, active, days_active_min 30, sort spend, max_ads_per_brand 1, page 1 (10 ads, total 20137): stonebridgeframes, shop.horl.com (453 comments, branded paid partnership), es.x-sense.com, rugeditorial.com, sonoff.tech, momento-akustik.de (186), amcfurniture.co.uk, muralconcept.fr, heimholz.store. All branded/made-to-order/retail; none a sourceable gadget; momento comments returned 0 via API."}

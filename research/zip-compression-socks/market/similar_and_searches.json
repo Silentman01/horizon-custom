@@ -1,0 +1,29 @@
+{"_condensed":"get_similar_products(limit 10) + 4 search_products queries, pulled 2026-11-19. ads = total/active.",
+"similar":[
+{"id":"kinecticlabs.com.au_8931110322418","sellers":1,"price_usd":44.99,"ads":"16/0","stage":"declining"},
+{"id":"euzincare.gr_11279122104661","sellers":1,"price_usd":19.99,"ads":"27/0","first":"2026-05-12","last":"2026-11-17","stage":"declining"},
+{"id":"kreovo.pl_16275065340236","title":"Podkolanowki uciskowe z zamkiem","sellers":1,"price_usd":32.25,"ads":"1/0","first":"2026-11-11"},
+{"id":"saintport.com_15864797102464","title":"ZipEase Knee-High","sellers":2,"price_usd":35.95,"ads":"7/1","stage":"emerging"},
+{"id":"serenityshop.eu_15798877356380","title":"Serenity Medias de Compresion (ES)","sellers":2,"price_usd":27.0,"ads":"55/4","first":"2026-10-25","stage":"emerging"},
+{"id":"hopzip.fr_16068603609419","sellers":1,"price_usd":25.92,"ads":"11/0","first":"2026-11-09"},
+{"id":"buyoxalys.com_15377782210938","title":"Oxalys graded 15-20mmHg (FR)","sellers":3,"price_usd":29.95,"ads":"453/1","first":"2026-01-04","market_active_ads":96,"market_daily_spend":82,"stage":"declining"}],
+"q=compression socks":[
+{"id":"everstridesocks.com_9503410159936","title":"Original Wide Compression Socks","sellers":34,"price_usd":29.0,"ads":"2454/158","first":"2025-10-03","market_active_ads":181,"market_total_ads":3313,"market_daily_spend":640,"stage":"declining","countries":21,"revenue_market":"100-140k/mo"},
+{"id":"everstridesocks.com_9975477371200","title":"Bamboo Wide Compression Socks","sellers":27,"price_usd":34.0,"ads":"2911/1891","first":"2026-01-09","market_active_ads":628,"market_total_ads":1524,"market_daily_spend":440,"stage":"emerging","countries":1,"revenue_seller":"130-170k/mo"},
+{"id":"onecompress.com_7592432500993","title":"Bamboo Footsleeves","sellers":38,"price_usd":49.0,"ads":"1031/570","first":"2025-11-04","market_active_ads":621,"market_daily_spend":40,"stage":"scaling","countries":15},
+{"id":"originaleverstride.com_10322490425660","sellers":36,"ads":"45/0","stage":"declining"},
+{"id":"arlevi.com_15565014729079","title":"Arlevi Zippered Compression Socks","sellers":30,"price_usd":34.95,"ads":"1/0","first":"2026-11-11"},
+{"id":"useconforty.com_8346315325612","sellers":29,"price_usd":24.95,"ads":"22/0"}],
+"q=zipper compression socks (48 results)":[
+{"id":"theiconglow.com_11498746380629","sellers":8,"ads":"3/0"},{"id":"venzipa.com_10924131516753","ads":"21/0","first":"2026-07-09","last":"2026-07-17"},{"id":"deltapicks.in_10715993702694","price_usd":14.39,"ads":"11/11","first":"2026-10-20"},{"id":"healthysteps.store_8935603241215","ads":"11/0","first":"2026-03-19","last":"2026-04-04"},{"id":"shopsable.co_7927336468549","sellers":6,"ads":"6/0"},{"id":"tavionstore.com_8015023374435","price_usd":49.99,"ads":"2/2"},{"id":"homestly.co_8661392556228","ads":"7/0"},{"id":"luxicart.com_15417843351779","ads":"17/0"}],
+"q=Kompressionsstruempfe Reissverschluss (8 results)":[
+{"id":"align-heath.com_10756072603985","sellers":3,"price_usd":28.08,"ads":"58/37","first":"2026-04-27","last":"2026-06-19","market_daily_spend":62},
+{"id":"myillorya.com_12011443486984","sellers":6,"price_usd":29.9,"ads":"65/52","first":"2026-06-17","last":"2026-07-22"},
+{"id":"trevila.co_16036308648268","sellers":32,"price_usd":64.8,"ads":"40/12","first":"2026-11-08"},
+{"id":"navella.de_15565879968084","price_usd":37.69,"ads":"7/0","first":"2026-11-10"},{"id":"lorenavia.com_10920427454791","price_usd":32.29,"ads":"10/0","first":"2026-10-28"}],
+"q=chaussettes de compression zip (395 results)":[
+{"id":"elaimei.fr_16221092217177","sellers":10,"ads":"14/0"},{"id":"forstepz.com_10256040919382","sellers":19,"ads":"10/0","first":"2026-06-18","last":"2026-06-22"},
+{"id":"compressio.fr_10622943756615","sellers":11,"ads":"249/4","first":"2026-02-01","market_daily_spend":3,"stage":"declining"},
+{"id":"aunolia.com_9190520488161","sellers":3,"ads":"400/48","first":"2025-12-26","market_daily_spend":32,"stage":"declining"}],
+"q=zip compression stockings (8 results)":[
+{"id":"roxleyofficial.com_10725210784077","sellers":6,"price_usd":35.56,"ads":"1/0"},{"id":"gr.elvante.si_9204830601458","sellers":9,"ads":"13/2","first":"2026-08-18","last":"2026-09-30"},{"id":"trynordvia.com_15495679738227","ads":"4/0"}]}

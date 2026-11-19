@@ -1,0 +1,85 @@
+{
+ "_note": "Skeptic live re-checks 2026-11-19. Field values copied verbatim from Brandsearch responses; long fields (urls, media, full copy) dropped. ~33 credits.",
+ "get_product_trend kitchik.com_15048615002452 days=90": {
+  "summary": "Ad activity, Aug 22, 2026 to Nov 19, 2026:\nThis store: ads 510 → 800, active on Meta 357 → 370, started in the last 30 days 203 → 239, est. daily spend ~$1,400 → ~$4,400\nIts market: stores advertising 1 (unchanged), est. daily spend ~$2,100 → ~$2,400",
+  "points_date_total_active_last30d_storeSpend_marketSpend": [
+   ["2026-08-22",510,357,203,1400,2100],["2026-09-04",514,361,168,2400,2100],["2026-09-11",527,371,181,2400,2400],
+   ["2026-09-12",548,385,202,1700,2400],["2026-09-13",548,385,182,3300,2400],["2026-09-25",566,403,144,3300,2400],
+   ["2026-09-26",566,252,144,3000,2400],["2026-10-03",586,270,164,2800,2400],["2026-10-10",668,305,237,3400,2400],
+   ["2026-10-24",701,334,217,3200,2400],["2026-10-26",712,344,228,3000,2400],["2026-11-06",724,356,173,3500,2400],
+   ["2026-11-11",783,353,229,3500,2400],["2026-11-14",791,361,239,4300,2400],["2026-11-15",791,361,230,4400,2400],
+   ["2026-11-16",800,370,239,4400,2400],["2026-11-19",800,370,239,4400,2400]],
+  "_skeptic_note": "identical to market/trend file; market series flat at 2400 from 2026-09-11 to 2026-11-19"
+ },
+ "get_product kitchik.com_15048615002452": {
+  "price": "279.0 NOK", "price_usd": 25.67, "variants_count": 1,
+  "ads": {"total": 800, "active": 370, "meta": 800, "tiktok": 0, "last_30d": 239, "first_advertised_at": "2026-04-03T03:31:28.677Z", "last_advertised_at": "2026-11-15T13:33:50.932Z", "est_daily_spend_usd": 4400},
+  "market": {"sellers": 1, "active_ads": 371, "total_ads": 527, "new_sellers_30d": 0, "country_count": 5, "est_daily_spend_usd": 2400, "lifecycle_stage": "emerging"},
+  "revenue": {"est_monthly_usd_low": 530000, "est_monthly_usd_high": 700000, "scope": "seller"},
+  "audience": {"top_country": "SE", "top_country_share_pct": 30.8, "top_age": "45-54", "female_share_pct": 55.8, "country_count": 14}
+ },
+ "get_product kitchik.com_15585504330068 (FixStik White)": {
+  "price": "299.0 NOK", "price_usd": 27.51,
+  "ads": {"total": 32, "active": 26, "last_30d": 6, "first_advertised_at": "2026-09-03T08:36:26.743Z", "last_advertised_at": "2026-11-14T00:40:14.351Z", "est_daily_spend_usd": 580},
+  "market": {"sellers": 1, "active_ads": 4, "total_ads": 4, "lifecycle_stage": "emerging"},
+  "revenue": {"est_monthly_usd_low": 69000, "est_monthly_usd_high": 92000, "scope": "seller"},
+  "audience": {"top_country": "DK", "top_country_share_pct": 42.1, "female_share_pct": 73.4, "country_count": 6}
+ },
+ "get_product hemmafixet.com_10418619842903 (TraFix)": {
+  "title": "TräFix — Laga repor i trä på 30 Sekunder", "price": "27.95 SEK", "price_usd": 2.66,
+  "ads": {"total": 149, "active": 0, "last_30d": 122, "first_advertised_at": "2026-01-12T06:54:37.267Z", "last_advertised_at": "2026-11-14T11:56:13.754Z", "est_daily_spend_usd": null},
+  "market": {"sellers": 1, "active_ads": 12, "total_ads": 106, "country_count": 2, "est_daily_spend_usd": 18, "lifecycle_stage": "declining"},
+  "revenue": {"est_monthly_usd_low": 1900, "est_monthly_usd_high": 2500, "scope": "market"},
+  "audience": {"top_country": "SE", "top_country_share_pct": 89.6, "top_age": "65+", "female_share_pct": 56.2}
+ },
+ "search_meta_ads brand_ids=kitchik.com status=active sort=total_active_time page_size=10": {
+  "pagination_total": 185,
+  "rows_id_status_start_end_reach_spendEUR_lp": [
+   ["1507582043646159","active","2026-06-22","2026-07-06",986,9.16,"da-dk"],
+   ["2810867049247785","active","2026-06-22","2026-07-05",2037,18.92,"da-dk"],
+   ["3176668732722732","active","2026-06-22","2026-07-06",12509,116.21,"da-dk"],
+   ["1007391075591205","active","2026-06-28","2026-07-06",null,null,"(no locale = NO)"],
+   ["1324971013159894","active","2026-06-29","2026-07-06",null,null,"(no locale = NO)"],
+   ["1514908813458503","active","2026-07-02","2026-07-06",1550,17.82,"en-gb"],
+   ["1648276732916241","active","2026-07-02","2026-07-06",3873,44.54,"en-gb"],
+   ["1017874697540265","active","2026-07-02","2026-07-06",5001,57.51,"en-gb"],
+   ["965927489837995","active","2026-07-02","2026-07-06",1575,18.11,"en-au"],
+   ["1701285414255155","active","2026-07-02","2026-07-06",null,null,"(no locale = NO)"]],
+  "copy_965927489837995": "A joiner charges $300+ to fix scratches on your floor.\nOr you fix it yourself in 30 seconds for $35.",
+  "_skeptic_note": "the 'longest running active' ads were last seen 2026-07-05/06 with EUR 9-116 spend: stale status, not proven winners"
+ },
+ "search_meta_ads brand_ids=kitchik.com ad_started_from=2026-09-20 sort=eu_total_spend page_size=10": {
+  "pagination_total": 78,
+  "rows_id_status_start_end_reach_spendEUR_lp": [
+   ["1726836085088492","inactive","2026-09-21","2026-10-02",309427,2942.65,"sv-se"],
+   ["4023392944623228","inactive","2026-09-23","2026-10-01",258002,2079.5,"it-it"],
+   ["1054403317422167","active","2026-09-21","2026-10-02",143408,1441.25,"de-de"],
+   ["1733401317951636","inactive","2026-09-21","2026-10-07",137363,1276.1,"da-dk"],
+   ["2611285379322676","active","2026-10-10","2026-10-23",110866,1090.39,"de-de"],
+   ["1629888598509863","active","2026-09-21","2026-10-02",93850,921.17,"de-de"],
+   ["1142647685093011","active","2026-09-20","2026-10-02",104063,837.71,"fr-fr"],
+   ["2615549538896852","active","2026-09-21","2026-10-02",55086,523.87,"sv-se"],
+   ["1086277647532569","active","2026-09-21","2026-10-02",59728,480.81,"fr-fr"],
+   ["4062138937419752","active","2026-09-21","2026-10-02",40654,408.57,"de-de"]],
+  "copy_1054403317422167": "Ein Handwerker verlangt über 150 € für Kratzer im Laminat.\nOder du reparierst es selbst in 30 Sekunden für 26,99 €.",
+  "copy_1733401317951636": "Tømreren vil have 1.500 kr for at reparere ridserne i dit gulv.\n\nEller du fikser det selv på 30 sekunder for 229 kr."
+ },
+ "search_meta_ads brand_ids=kitchik.com languages=de sort=start_date page_size=5": {
+  "pagination_total": 35,
+  "rows_id_status_start_end_reach_spendEUR": [
+   ["1593128499279697","active","2026-10-23","2026-10-23",179,1.75],
+   ["1827410271916611","active","2026-10-23","2026-10-23",2457,24.12],
+   ["2925090557846926","active","2026-10-22","2026-10-23",149,1.47],
+   ["1138660832050996","active","2026-10-22","2026-10-23",2119,20.86],
+   ["1048335884928150","active","2026-10-22","2026-10-23",1024,10.04]],
+  "landing_page": "https://kitchik.com/de-de/products/kitchik-wood-repair-wax-pens"
+ },
+ "search_products q='wax scratch repair' market_country=DE page_size=10": {
+  "pagination_total": 4,
+  "rows_id_ads_active_stage": [
+   ["tobuyy.com_7853797474385 (Car Scratch Repair Wax)",3,0,"declining"],
+   ["kailoshop.com_8534424256643 (Car Scratch Remover)",1,0,"declining"],
+   ["mysticxs.com_10351750578470 (NuGrain Wood Repair Kit, market sellers 3, market total_ads 16, market active_ads 1, revenue 230-340 USD/mo)",1,1,"declining"],
+   ["qlvxxplus.com_8675945611452 (Car Scratches Wax)",1,0,"declining"]]
+ }
+}

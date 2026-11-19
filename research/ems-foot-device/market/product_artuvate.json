@@ -1,0 +1,31 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls).",
+ "id": "artuvate.co_9108715372891",
+ "title": "FisioRest",
+ "url": "https://artuvate.co/products/fisiorest",
+ "price_usd": 89.0,
+ "ads": {
+  "total": 4342,
+  "active": 2121,
+  "last_30d": 1091,
+  "first_advertised_at": "2025-09-27T15:50:30.903Z",
+  "last_advertised_at": "2026-11-18T17:25:08.346Z",
+  "est_daily_spend_usd": 1500
+ },
+ "market": {
+  "sellers": 10,
+  "active_ads": 2127,
+  "total_ads": 4369,
+  "price_min_usd": 79.95,
+  "price_median_usd": 86.95,
+  "price_max_usd": 129.0,
+  "country_count": 20,
+  "lifecycle_stage": "peak"
+ },
+ "revenue_market_est_monthly_usd": [
+  240000,
+  320000
+ ],
+ "sourcing_available": true,
+ "identified_product": "3-in-1 NECK massager (supplier listing: cervical pillow, heat, vibration massage). NOT an EMS foot device. Sibling titles: 'Minako 3 in 1 Massage, Comfort and Support for the Neck and Upper Back', 'Neckrelief', 'Novis Cervora Neck Relief in 10 Minutes a Day'"
+}

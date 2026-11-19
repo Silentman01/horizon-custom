@@ -1,0 +1,55 @@
+{
+ "_note": "CONDENSED from Brandsearch MCP responses 2026-11-19; field values copied verbatim, other fields dropped (images, urls). 145 ads total for brand; the 5 longest-running seen are identical copies",
+ "ads": [
+  {
+   "id": "5208257616066686",
+   "start": "2026-05-02",
+   "end": "2026-11-08",
+   "status": "active",
+   "format": "image",
+   "headline": "Tired feet → Relaxed, recharged in minutes",
+   "copy": "Standing all day? Sore feet at night? / You don’t realize how tired your feet are… Until they finally relax. Try it once — you’ll feel it instantly.",
+   "cta": "ORDER_NOW"
+  },
+  {
+   "id": "972083385780224",
+   "start": "2026-05-02",
+   "end": "2026-11-08",
+   "status": "active",
+   "format": "image",
+   "headline": "Tired feet → Relaxed, recharged in minutes",
+   "copy": "Standing all day? Sore feet at night? / You don’t realize how tired your feet are… Until they finally relax. Try it once — you’ll feel it instantly.",
+   "cta": "ORDER_NOW"
+  },
+  {
+   "id": "947922381427401",
+   "start": "2026-05-02",
+   "end": "2026-11-08",
+   "status": "active",
+   "format": "image",
+   "headline": "Tired feet → Relaxed, recharged in minutes",
+   "copy": "Standing all day? Sore feet at night? / You don’t realize how tired your feet are… Until they finally relax. Try it once — you’ll feel it instantly.",
+   "cta": "ORDER_NOW"
+  },
+  {
+   "id": "1668933017749665",
+   "start": "2026-05-02",
+   "end": "2026-11-08",
+   "status": "active",
+   "format": "image",
+   "headline": "Tired feet → Relaxed, recharged in minutes",
+   "copy": "Standing all day? Sore feet at night? / You don’t realize how tired your feet are… Until they finally relax. Try it once — you’ll feel it instantly.",
+   "cta": "ORDER_NOW"
+  },
+  {
+   "id": "967550049095028",
+   "start": "2026-05-02",
+   "end": "2026-11-08",
+   "status": "active",
+   "format": "image",
+   "headline": "Tired feet → Relaxed, recharged in minutes",
+   "copy": "Standing all day? Sore feet at night? / You don’t realize how tired your feet are… Until they finally relax. Try it once — you’ll feel it instantly.",
+   "cta": "ORDER_NOW"
+  }
+ ]
+}
