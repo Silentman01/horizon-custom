@@ -1,0 +1,74 @@
+{%- assign ss = section.settings -%}
+<pawsorb-announce class="pawsorb-an" style="--pawsorb-an-bg: {{ ss.bg_color }}; --pawsorb-an-fg: {{ ss.text_color }};" data-speed="{{ ss.speed }}">
+  <div class="pawsorb-an__track">
+    {%- for block in section.blocks -%}
+      <p class="pawsorb-an__msg{% if forloop.first %} is-active{% endif %}" {{ block.shopify_attributes }}>
+        {%- if block.settings.link != blank -%}<a href="{{ block.settings.link }}">{{ block.settings.text }}</a>{%- else -%}{{ block.settings.text }}{%- endif -%}
+      </p>
+    {%- endfor -%}
+  </div>
+</pawsorb-announce>
+
+{% stylesheet %}
+  .pawsorb-an { display: block; background: var(--pawsorb-an-bg, #121614); color: var(--pawsorb-an-fg, #fff); }
+  .pawsorb-an__track { position: relative; max-width: 1200px; margin: 0 auto; height: 38px; padding: 0 16px; }
+  .pawsorb-an__msg { position: absolute; inset: 0; margin: 0; padding: 0 16px; display: flex; align-items: center; justify-content: center; text-align: center; font: 600 13px/1.25 var(--font-body--family); opacity: 0; transition: opacity .5s ease; }
+  .pawsorb-an__msg.is-active { opacity: 1; }
+  .pawsorb-an__msg a { color: inherit; text-decoration: none; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-an__track { height: 40px; }
+    .pawsorb-an__msg { font-size: 12.5px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('pawsorb-announce')) {
+    customElements.define('pawsorb-announce', class extends HTMLElement {
+      connectedCallback() {
+        const msgs = [...this.querySelectorAll('.pawsorb-an__msg')];
+        if (msgs.length < 2 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        let i = 0;
+        const ms = (Number(this.dataset.speed) || 5) * 1000;
+        this.t = setInterval(() => {
+          msgs[i].classList.remove('is-active');
+          i = (i + 1) % msgs.length;
+          msgs[i].classList.add('is-active');
+        }, ms);
+      }
+      disconnectedCallback() { clearInterval(this.t); }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb announcement",
+  "tag": "section",
+  "class": "pawsorb-section-announcement",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "Message",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Fast US shipping · 90-day money-back guarantee" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "range", "id": "speed", "label": "Seconds per message", "min": 3, "max": 10, "step": 1, "unit": "s", "default": 5 },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#121614" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" }
+  ],
+  "presets": [
+    {
+      "name": "PawSorb announcement",
+      "blocks": [
+        { "type": "message", "settings": { "text": "Holiday table season is here. Get your tubes in the drawer first." } },
+        { "type": "message", "settings": { "text": "Fast US shipping · 90-day money-back guarantee" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

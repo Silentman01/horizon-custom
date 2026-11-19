@@ -9,274 +9,358 @@
  */
 {
   "sections": {
-    "hero_jVaWmY": {
-      "type": "hero",
+    "pawsorb_hero": {
+      "type": "pawsorb-home-hero",
+      "settings": {
+        "heading": "Stop the poison before it reaches the blood.",
+        "subheading": "PawSorb is ER-style charcoal first aid, set by the pound and given at home in under 60 seconds.",
+        "button_label": "Get PawSorb",
+        "product_handle": "pawsorb",
+        "proof_line": "4.9 ★ from 4,554 reviews · 90-day guarantee",
+        "image_asset": "",
+        "image_alt": "Woman at the back door at night giving a golden retriever the PawSorb tube",
+        "chip_1": "1 mL per lb",
+        "chip_2": "Under 60 seconds"
+      }
+    },
+    "pawsorb_offer": {
+      "type": "pawsorb-home-offer",
       "blocks": {
-        "text_YLPk4p": {
-          "type": "text",
-          "name": "t:names.heading",
+        "tier_1": {
+          "type": "tier",
           "settings": {
-            "text": "<p>Browse our latest products</p>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "h2",
-            "font": "var(--font-body--family)",
-            "font_size": "1rem",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "{{ settings.color_palette.background }}",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {}
+            "title": "Buy 1",
+            "label": "Dogs < 30lbs",
+            "shipping": "+$4.99 shipping",
+            "free": false,
+            "badge": "",
+            "price": "$39.99",
+            "each": "",
+            "highlight": false
+          }
         },
-        "button_H9gpTf": {
-          "type": "button",
-          "name": "t:names.button",
+        "tier_2": {
+          "type": "tier",
           "settings": {
-            "label": "Shop all",
-            "link": "shopify://collections/all",
-            "open_in_new_tab": false,
-            "style_class": "button-custom",
-            "custom_button_background": "rgba(0, 0, 0, 0)",
-            "custom_button_text": "{{ settings.color_palette.background }}",
-            "custom_button_border": "{{ settings.color_palette.background }}",
-            "width": "fit-content",
-            "custom_width": 100,
-            "width_mobile": "fit-content",
-            "custom_width_mobile": 100
-          },
-          "blocks": {}
+            "title": "Buy 2",
+            "label": "Dogs 31–60lbs",
+            "shipping": "+$4.99 shipping",
+            "free": false,
+            "badge": "",
+            "price": "$59.98",
+            "each": "$29.99 each",
+            "highlight": false
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "title": "Buy 3",
+            "label": "Dogs 61–80lbs",
+            "shipping": "FREE shipping",
+            "free": true,
+            "badge": "MOST POPULAR",
+            "price": "$74.97",
+            "each": "$24.99 each",
+            "highlight": true
+          }
+        },
+        "tier_4": {
+          "type": "tier",
+          "settings": {
+            "title": "Buy 5",
+            "label": "Dogs 81–150lbs",
+            "shipping": "FREE shipping",
+            "free": true,
+            "badge": "",
+            "price": "$99.95",
+            "each": "$19.99 each",
+            "highlight": false
+          }
+        },
+        "tier_5": {
+          "type": "tier",
+          "settings": {
+            "title": "Buy 10",
+            "label": "Multiple Dogs",
+            "shipping": "FREE shipping",
+            "free": true,
+            "badge": "BEST VALUE",
+            "price": "$149.90",
+            "each": "$14.99 each",
+            "highlight": false
+          }
         }
       },
       "block_order": [
-        "text_YLPk4p",
-        "button_H9gpTf"
+        "tier_1",
+        "tier_2",
+        "tier_3",
+        "tier_4",
+        "tier_5"
       ],
-      "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
-        "media_type_2": "image",
-        "link": "",
-        "open_in_new_tab": false,
-        "content_direction": "column",
-        "vertical_on_mobile": true,
-        "horizontal_alignment": "space-between",
-        "vertical_alignment": "flex-end",
-        "align_baseline": true,
-        "horizontal_alignment_flex_direction_column": "center",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
-        "section_width": "page-width",
-        "section_height": "medium",
-        "section_height_custom": 50,
-        "toggle_overlay": true,
-        "overlay_color": "#12121266",
-        "overlay_style": "solid",
-        "gradient_direction": "to bottom",
-        "blurred_reflection": false,
-        "reflection_opacity": 75,
-        "padding-block-start": 100,
-        "padding-block-end": 72
+        "heading": "Most homes keep three.",
+        "body": "Buy 3 for $24.99 a tube with FREE shipping. Covers one dog to 80 lb, or one for the car, the kitchen and Mom's place.",
+        "badge": "MOST POPULAR",
+        "button_label": "Pick my tubes",
+        "product_handle": "pawsorb",
+        "trust_line": "90-day money-back guarantee · Fast US shipping",
+        "image_asset": "",
+        "image_alt": "Three PawSorb tubes"
       }
     },
-    "product_list_fa6P9H": {
-      "type": "product-list",
+    "pawsorb_toxins": {
+      "type": "pawsorb-home-toxins",
       "blocks": {
-        "static-header": {
-          "type": "_product-list-content",
-          "name": "t:names.header",
-          "static": true,
+        "tile_1": {
+          "type": "tile",
           "settings": {
-            "content_direction": "row",
-            "vertical_on_mobile": false,
-            "horizontal_alignment": "space-between",
-            "vertical_alignment": "flex-end",
-            "align_baseline": true,
-            "horizontal_alignment_flex_direction_column": "flex-start",
-            "vertical_alignment_flex_direction_column": "center",
-            "gap": 12,
-            "width": "fill",
-            "custom_width": 100,
-            "width_mobile": "fill",
-            "custom_width_mobile": 100,
-            "height": "fit",
-            "custom_height": 100,
-            "background_media": "none",
-            "video_position": "cover",
-            "background_image_position": "cover",
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_list_text_YFtzcL": {
-              "type": "_product-list-text",
-              "name": "t:names.collection_title",
-              "settings": {
-                "text": "<h3>{{ closest.collection.title }}</h3>",
-                "width": "fit-content",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h4",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_list_button_MWeP9V": {
-              "type": "_product-list-button",
-              "name": "t:names.product_list_button",
-              "settings": {
-                "label": "View all",
-                "open_in_new_tab": false,
-                "style_class": "button-unstyled",
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_list_text_YFtzcL",
-            "product_list_button_MWeP9V"
-          ]
+            "title": "Cane toads",
+            "icon": "toad",
+            "image_asset": ""
+          }
         },
-        "static-product-card": {
-          "type": "_product-card",
-          "name": "t:names.product_card",
-          "static": true,
+        "tile_2": {
+          "type": "tile",
           "settings": {
-            "product_card_gap": 4,
-            "border": "none",
-            "border_width": 1,
-            "border_opacity": 100,
-            "border_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
-          },
-          "blocks": {
-            "product_card_gallery_677WP3": {
-              "type": "_product-card-gallery",
-              "name": "t:names.product_card_media",
-              "settings": {
-                "image_ratio": "adapt",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_radius": 0,
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "product_title_YXxMTj": {
-              "type": "product-title",
-              "name": "t:names.product_title",
-              "settings": {
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "paragraph",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
-                "padding-block-start": 4,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            },
-            "price_JQzVV4": {
-              "type": "price",
-              "name": "t:names.product_price",
-              "settings": {
-                "show_sale_price_first": true,
-                "show_installments": false,
-                "show_tax_info": false,
-                "type_preset": "h6",
-                "width": "100%",
-                "alignment": "left",
-                "font": "var(--font-body--family)",
-                "font_size": "1rem",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "padding-block-start": 0,
-                "padding-block-end": 0,
-                "padding-inline-start": 0,
-                "padding-inline-end": 0
-              },
-              "blocks": {}
-            }
-          },
-          "block_order": [
-            "product_card_gallery_677WP3",
-            "product_title_YXxMTj",
-            "price_JQzVV4"
-          ]
+            "title": "Chocolate",
+            "icon": "chocolate",
+            "image_asset": ""
+          }
+        },
+        "tile_3": {
+          "type": "tile",
+          "settings": {
+            "title": "Grapes & raisins",
+            "icon": "grapes",
+            "image_asset": ""
+          }
+        },
+        "tile_4": {
+          "type": "tile",
+          "settings": {
+            "title": "Dropped pills",
+            "icon": "pills",
+            "image_asset": ""
+          }
+        },
+        "tile_5": {
+          "type": "tile",
+          "settings": {
+            "title": "Sago palm",
+            "icon": "plant",
+            "image_asset": ""
+          }
+        },
+        "tile_6": {
+          "type": "tile",
+          "settings": {
+            "title": "Rat bait",
+            "icon": "bait",
+            "image_asset": ""
+          }
+        },
+        "tile_7": {
+          "type": "tile",
+          "settings": {
+            "title": "Wild mushrooms",
+            "icon": "mushroom",
+            "image_asset": ""
+          }
         }
       },
-      "name": "t:names.featured_collection",
+      "block_order": [
+        "tile_1",
+        "tile_2",
+        "tile_3",
+        "tile_4",
+        "tile_5",
+        "tile_6",
+        "tile_7"
+      ],
       "settings": {
-        "collection": "all",
-        "layout_type": "grid",
-        "carousel_on_mobile": false,
-        "max_products": 8,
-        "columns": 4,
-        "mobile_columns": "2",
-        "mobile_card_size": "60cqw",
-        "columns_gap": 8,
-        "rows_gap": 24,
-        "icons_style": "arrow",
-        "icons_shape": "none",
-        "section_width": "page-width",
-        "horizontal_alignment": "flex-start",
-        "gap": 28,
-        "padding-block-start": 48,
-        "padding-block-end": 48
+        "heading": "What your dog finds, PawSorb binds.",
+        "footer_line": "Plus caffeine, THC, nicotine, onions and moldy food."
+      }
+    },
+    "pawsorb_steps": {
+      "type": "pawsorb-home-steps",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "title": "Wipe",
+            "text": "Toad? Wipe the gums with a damp cloth, front to back.",
+            "icon": "wipe",
+            "image_asset": ""
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "title": "Dial",
+            "text": "Twist until the ring shows his pounds. 1 mL per lb, done.",
+            "icon": "dial",
+            "image_asset": ""
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "title": "Squeeze",
+            "text": "Tip behind the back teeth, press. Picky eater? Smear it on a treat.",
+            "icon": "squeeze",
+            "image_asset": ""
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "title": "Call",
+            "text": "Now phone the vet or a poison line, with the help already in.",
+            "icon": "phone",
+            "image_asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "heading": "Four moves. One minute. Then the vet.",
+        "footer_line": "Anyone in your house can do it."
+      }
+    },
+    "pawsorb_proof": {
+      "type": "pawsorb-home-proof",
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "tag": "Cane toad",
+            "text": "Bought it in April after a neighbor's dog died. Used it in July. Our Lab mouthed a toad by the pool at 10 p.m. I wiped his gums, gave the tube, then drove. The ER said we did it right. He's snoring next to me.",
+            "name": "Dana R. · Tampa, FL",
+            "alt": "Black Lab on a Florida porch with a PawSorb tube",
+            "image_asset": ""
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "tag": "Christmas chocolate",
+            "text": "Christmas Eve. Our beagle ate a whole box of chocolate from under the tree. Vet closed till the 26th. Gave PawSorb, called the ER line after. No trip needed. Cheaper than one hour in that waiting room.",
+            "name": "Mike T. · Columbus, OH",
+            "alt": "Beagle next to a torn chocolate box",
+            "image_asset": ""
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "tag": "Grapes",
+            "text": "Lulu is 9 pounds. A handful of grapes rolled off the counter and she got three. I was shaking, but the dial did the math for me. Thirty seconds, start to finish. She's fine.",
+            "name": "Linda K. · Mesa, AZ",
+            "alt": "Shih Tzu in her owner's lap with a PawSorb tube",
+            "image_asset": ""
+          }
+        },
+        "review_4": {
+          "type": "review",
+          "settings": {
+            "tag": "Dropped pill",
+            "text": "My dad dropped his heart pill at Thanksgiving and the dog had it before anyone bent down. My sister read the steps off the tube while I held her. That's why I keep one in every house we visit.",
+            "name": "Sharon B. · Raleigh, NC",
+            "alt": "Dog under a holiday dinner table",
+            "image_asset": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_1",
+        "review_2",
+        "review_3",
+        "review_4"
+      ],
+      "settings": {
+        "heading": "Real scares. Dogs still here.",
+        "rating_line": "4.9 average · 4,554 reviews",
+        "verified_label": "Verified buyer",
+        "button_label": "Read more stories",
+        "product_handle": "pawsorb"
+      }
+    },
+    "pawsorb_guarantee": {
+      "type": "pawsorb-home-guarantee",
+      "settings": {
+        "heading": "If you never need it, send it back.",
+        "body": "90 days, full refund, no questions. Fast tracked US shipping.",
+        "chip_1": "90-day money-back guarantee",
+        "chip_2": "Fast US shipping",
+        "button_label": "Get PawSorb",
+        "product_handle": "pawsorb",
+        "seal_top": "MONEY-BACK",
+        "seal_bottom": "GUARANTEE",
+        "seal_number": "90",
+        "seal_unit": "DAYS",
+        "image_asset": "",
+        "image_alt": "Open shipping box with a PawSorb tube on a porch"
+      }
+    },
+    "pawsorb_faq": {
+      "type": "pawsorb-home-faq",
+      "blocks": {
+        "question_1": {
+          "type": "question",
+          "settings": {
+            "question": "What if I never use it?",
+            "answer": "<p>That's the best outcome. It's good for 2 years, and you have 90 days to return it for a full refund.</p>"
+          }
+        },
+        "question_2": {
+          "type": "question",
+          "settings": {
+            "question": "How many tubes for my dog?",
+            "answer": "<p>1 mL per pound, 30 mL per tube. Keep 1 tube under 30 lb, 2 for 31–60 lb, 3 for 61–80 lb, 5 for 81–150 lb, and 10 for a house with several dogs. Two dogs? Add their weights.</p>"
+          }
+        },
+        "question_3": {
+          "type": "question",
+          "settings": {
+            "question": "Is it safe for small dogs, puppies and cats?",
+            "answer": "<p>Yes. The dial sets the dose to the pound, so a 6 lb puppy or a cat gets 6 mL. Nothing to guess.</p>"
+          }
+        },
+        "question_4": {
+          "type": "question",
+          "settings": {
+            "question": "Should I still call the vet?",
+            "answer": "<p>Always. Give PawSorb first so you're not losing the window on hold, then phone your vet or a poison line.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "question_1",
+        "question_2",
+        "question_3",
+        "question_4"
+      ],
+      "settings": {
+        "heading": "Quick answers",
+        "open_first": true
       }
     }
   },
   "order": [
-    "hero_jVaWmY",
-    "product_list_fa6P9H"
+    "pawsorb_hero",
+    "pawsorb_offer",
+    "pawsorb_toxins",
+    "pawsorb_steps",
+    "pawsorb_proof",
+    "pawsorb_guarantee",
+    "pawsorb_faq"
   ]
 }

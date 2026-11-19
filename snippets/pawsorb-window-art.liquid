@@ -1,0 +1,44 @@
+{%- doc -%}
+  Vector "window" diagram: mouth -> stomach (bind zone) -> bloodstream, with a timeline. Fallback for pawsorb-window-diagram.
+  @param {string} [l_mouth]
+  @param {string} [l_stomach]
+  @param {string} [l_blood]
+  @param {string} [l_time]
+  @param {string} [l_toad]
+{%- enddoc -%}
+<svg class="pawsorb-window-art" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ l_stomach | escape }}">
+  <rect width="800" height="600" fill="#F1F6F3"/>
+  <circle cx="660" cy="90" r="160" fill="#12855A" opacity=".05"/>
+  {%- comment -%} dog silhouette (side profile) {%- endcomment -%}
+  <path d="M120 250c10-40 40-70 85-72l30-40c8-10 22-8 26 4l10 32c60 4 110 18 170 20 70 2 140-12 190 6 40 14 62 44 64 84 2 40-16 64-36 76l6 92c1 14-9 24-22 24s-22-9-24-22l-12-78c-60 14-150 16-230 6l-10 92c-2 13-12 22-25 21s-22-12-21-25l8-108c-40-18-66-46-80-80-34 6-66-4-84-18-14-10-20-22-15-34z" fill="#121614" opacity=".09"/>
+  {%- comment -%} path {%- endcomment -%}
+  <path d="M165 250 C 230 250, 260 300, 330 315" fill="none" stroke="#121614" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round"/>
+  <path d="M470 320 C 540 320, 580 300, 650 300" fill="none" stroke="#121614" stroke-width="5" stroke-dasharray="2 12" stroke-linecap="round" opacity=".35"/>
+  {%- comment -%} mouth {%- endcomment -%}
+  <circle cx="150" cy="250" r="34" fill="#fff" stroke="#121614" stroke-width="3"/>
+  <circle cx="142" cy="244" r="5" fill="#7a3e1d"/><circle cx="158" cy="256" r="5" fill="#5b2a8a"/><circle cx="150" cy="262" r="4" fill="#3e7d3a"/>
+  {%- comment -%} stomach bind zone {%- endcomment -%}
+  <ellipse cx="400" cy="320" rx="96" ry="72" fill="#fff" stroke="#12855A" stroke-width="4"/>
+  <ellipse cx="400" cy="320" rx="96" ry="72" fill="#12855A" opacity=".08"/>
+  <g fill="#141816"><circle cx="360" cy="300" r="9"/><circle cx="395" cy="285" r="7"/><circle cx="430" cy="305" r="10"/><circle cx="375" cy="340" r="8"/><circle cx="420" cy="345" r="9"/><circle cx="450" cy="330" r="6"/></g>
+  <g fill="#12855A"><circle cx="352" cy="294" r="4"/><circle cx="401" cy="280" r="3.5"/><circle cx="437" cy="299" r="4"/><circle cx="368" cy="345" r="4"/><circle cx="426" cy="351" r="4"/><circle cx="444" cy="325" r="3.5"/></g>
+  {%- comment -%} blocked bloodstream {%- endcomment -%}
+  <rect x="640" y="262" width="110" height="76" rx="38" fill="#fff" stroke="#121614" stroke-width="3" opacity=".9"/>
+  <path d="M668 300h54" stroke="#12855A" stroke-width="6" stroke-linecap="round" opacity=".55"/>
+  <circle cx="560" cy="306" r="26" fill="#12855A"/>
+  <path d="M549 295l22 22M571 295l-22 22" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  {%- comment -%} labels {%- endcomment -%}
+  <g font-family="DM Sans, Arial, sans-serif" font-weight="700" text-anchor="middle">
+    <text x="150" y="312" font-size="22" fill="#121614">{{ l_mouth | escape }}</text>
+    <text x="400" y="425" font-size="22" fill="#12855A">{{ l_stomach | escape }}</text>
+    <text x="695" y="370" font-size="22" fill="#121614">{{ l_blood | escape }}</text>
+  </g>
+  {%- comment -%} timeline {%- endcomment -%}
+  <rect x="80" y="480" width="640" height="16" rx="8" fill="#DCE6E0"/>
+  <rect x="80" y="480" width="640" height="16" rx="8" fill="#12855A" opacity=".22"/>
+  <rect x="80" y="480" width="200" height="16" rx="8" fill="#12855A"/>
+  <g font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="20">
+    <text x="80" y="530" fill="#141816">{{ l_time | escape }}</text>
+    <text x="80" y="465" fill="#12855A">{{ l_toad | escape }}</text>
+  </g>
+</svg>

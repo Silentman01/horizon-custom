@@ -1,0 +1,91 @@
+{%- render 'pawsorb-home-base' -%}
+{%- liquid
+  assign ps_handle = section.settings.product_handle | default: 'pawsorb'
+  assign ps_url = section.settings.button_link | default: ''
+  if ps_url == blank
+    assign ps_url = '/products/' | append: ps_handle
+  endif
+-%}
+<section class="pawsorb-h pawsorb-hp" aria-label="{{ section.settings.heading | escape }}">
+  <div class="pawsorb-h__wrap">
+    <h2 class="pawsorb-h__h2 pawsorb-h__center">{{ section.settings.heading }}</h2>
+    {%- if section.settings.rating_line != blank -%}<p class="pawsorb-hp__rating"><span aria-hidden="true">★★★★★</span> {{ section.settings.rating_line }}</p>{%- endif -%}
+    <div class="pawsorb-h__rail pawsorb-hp__list">
+      {%- for block in section.blocks -%}
+        {%- capture ps_img -%}{%- render 'pawsorb-home-media', image: block.settings.image, asset: block.settings.image_asset, alt: block.settings.alt, sizes: '(min-width: 750px) 25vw, 75vw' -%}{%- endcapture -%}
+        <figure class="pawsorb-hp__card" {{ block.shopify_attributes }}>
+          {%- if ps_img != blank -%}
+            <div class="pawsorb-h__media pawsorb-hp__media">{{ ps_img }}<span class="pawsorb-hp__tag">{{ block.settings.tag }}</span></div>
+          {%- endif -%}
+          <div class="pawsorb-hp__body">
+            {%- if ps_img == blank -%}
+              <div class="pawsorb-hp__head">
+                <span class="pawsorb-hp__avatar" aria-hidden="true">{{ block.settings.name | slice: 0 }}</span>
+                <span class="pawsorb-hp__tag pawsorb-hp__tag--inline">{{ block.settings.tag }}</span>
+              </div>
+            {%- endif -%}
+            <p class="pawsorb-hp__stars" aria-label="5 out of 5 stars">★★★★★</p>
+            <blockquote class="pawsorb-hp__quote">{{ block.settings.text }}</blockquote>
+            <figcaption class="pawsorb-hp__name">{{ block.settings.name }} <span>✓ {{ section.settings.verified_label }}</span></figcaption>
+          </div>
+        </figure>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.button_label != blank -%}
+      <div class="pawsorb-h__center pawsorb-hp__cta"><a class="pawsorb-h__btn pawsorb-h__btn--ghost" href="{{ ps_url }}">{{ section.settings.button_label }}</a></div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.pawsorb-hp__rating{text-align:center;margin:0 0 20px;font-size:15px;color:#5D6A63}
+.pawsorb-hp__rating span{color:#F5B400;letter-spacing:1px}
+.pawsorb-hp__card{width:78%;max-width:320px;margin:0;background:#fff;border:1px solid #DCE6E0;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.pawsorb-hp__media{aspect-ratio:4/5;border-radius:0}
+.pawsorb-hp__tag{position:absolute;left:10px;bottom:10px;background:#fff;color:#12855A;font-weight:700;font-size:12px;padding:5px 10px;border-radius:999px}
+.pawsorb-hp__tag--inline{position:static;background:rgba(18, 133, 90,.08)}
+.pawsorb-hp__body{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.pawsorb-hp__head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.pawsorb-hp__avatar{width:40px;height:40px;border-radius:50%;background:#121614;color:#fff;font-weight:700;display:grid;place-items:center;font-size:17px}
+.pawsorb-hp__stars{margin:0;color:#F5B400;letter-spacing:1px;font-size:15px}
+.pawsorb-hp__quote{margin:0;font-size:15px;line-height:1.5;color:#141816;flex:1}
+.pawsorb-hp__name{font-weight:700;font-size:14px}
+.pawsorb-hp__name span{display:block;font-weight:400;color:#12855A;font-size:12.5px;margin-top:2px}
+.pawsorb-hp__cta{margin-top:24px}
+@media (min-width:750px){
+  .pawsorb-h__rail.pawsorb-hp__list{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .pawsorb-hp__card{width:auto;max-width:none}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb home proof",
+  "tag": "div",
+  "class": "pawsorb-home-section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Real scares. Dogs still here." },
+    { "type": "text", "id": "rating_line", "label": "Rating line", "default": "4.9 average · 4,554 reviews" },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verified buyer" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read more stories" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Empty = /products/ + product handle" },
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "pawsorb" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Toxin tag", "default": "Cane toad" },
+        { "type": "textarea", "id": "text", "label": "Review", "default": "Bought it in April after a neighbor's dog died. Used it in July. Our Lab mouthed a toad by the pool at 10 p.m. I wiped his gums, gave the tube, then drove. The ER said we did it right. He's snoring next to me." },
+        { "type": "text", "id": "name", "label": "Name and place", "default": "Dana R. · Tampa, FL" },
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_asset", "label": "Fallback theme asset", "info": "e.g. pawsorb-review-1-toad.jpg. Empty = text card." },
+        { "type": "text", "id": "alt", "label": "Photo alt text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "PawSorb home proof", "blocks": [{ "type": "review" }] }]
+}
+{% endschema %}

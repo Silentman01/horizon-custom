@@ -1,0 +1,83 @@
+{%- render 'pawsorb-home-base' -%}
+{%- liquid
+  assign ps_handle = section.settings.product_handle | default: 'pawsorb'
+  assign ps_url = section.settings.button_link | default: ''
+  if ps_url == blank
+    assign ps_url = '/products/' | append: ps_handle
+  endif
+-%}
+<section class="pawsorb-h pawsorb-h--navy pawsorb-hh" aria-label="{{ section.settings.heading | strip_html | escape }}">
+  <div class="pawsorb-h__wrap pawsorb-hh__grid">
+    <div class="pawsorb-hh__copy">
+      <h1 class="pawsorb-hh__h1">{{ section.settings.heading }}</h1>
+      <p class="pawsorb-hh__sub">{{ section.settings.subheading }}</p>
+      <a class="pawsorb-h__btn pawsorb-hh__btn" href="{{ ps_url }}">{{ section.settings.button_label }}
+        <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <p class="pawsorb-hh__proof">{{ section.settings.proof_line }}</p>
+    </div>
+    <div class="pawsorb-hh__visual">
+      {%- capture ps_img -%}{%- render 'pawsorb-home-media', image: section.settings.image, asset: section.settings.image_asset, alt: section.settings.image_alt, loading: 'eager', sizes: '(min-width: 750px) 50vw, 100vw' -%}{%- endcapture -%}
+      {%- if ps_img != blank -%}
+        <div class="pawsorb-h__media pawsorb-hh__media">{{ ps_img }}</div>
+      {%- else -%}
+        <div class="pawsorb-hh__art" role="img" aria-label="{{ section.settings.image_alt | escape }}">
+          <svg class="pawsorb-hh__window" viewBox="0 0 320 320" aria-hidden="true">
+            <circle cx="160" cy="160" r="146" fill="none" stroke="rgba(255,255,255,.14)" stroke-width="14"/>
+            <circle cx="160" cy="160" r="146" fill="none" stroke="#12855A" stroke-width="14" stroke-linecap="round" stroke-dasharray="917" stroke-dashoffset="760" transform="rotate(-90 160 160)"/>
+          </svg>
+          {%- render 'pawsorb-home-tube', class: 'pawsorb-hh__tube' -%}
+          <span class="pawsorb-hh__chip pawsorb-hh__chip--a">{{ section.settings.chip_1 }}</span>
+          <span class="pawsorb-hh__chip pawsorb-hh__chip--b">{{ section.settings.chip_2 }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.pawsorb-hh{padding:32px 0 40px}
+.pawsorb-hh__grid{display:grid;gap:28px;align-items:center}
+.pawsorb-hh__h1{font-weight:700;font-size:34px;line-height:1.08;letter-spacing:-.02em;margin:0 0 14px;color:#fff;text-wrap:balance}
+.pawsorb-hh__sub{font-size:17px;line-height:1.5;margin:0 0 22px;color:rgba(255,255,255,.84);max-width:34em}
+.pawsorb-hh__btn{width:100%}
+.pawsorb-hh__proof{margin:14px 0 0;font-size:14px;color:rgba(255,255,255,.8);text-align:center}
+.pawsorb-hh__stars{color:#F5B400;letter-spacing:1px}
+.pawsorb-hh__media{aspect-ratio:4/5}
+.pawsorb-hh__art{position:relative;aspect-ratio:1/1;max-width:340px;margin:0 auto;width:100%;display:grid;place-items:center;border-radius:50%;background:radial-gradient(circle at 50% 50%,rgba(18, 133, 90,.28),rgba(18, 22, 20,0) 66%)}
+.pawsorb-hh__window{position:absolute;inset:0;width:100%;height:100%}
+.pawsorb-hh__tube{height:72%;width:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.35));transform:rotate(-14deg)}
+.pawsorb-hh__chip{position:absolute;background:#fff;color:#141816;font-weight:700;font-size:13px;padding:8px 12px;border-radius:999px;box-shadow:0 6px 18px rgba(0,0,0,.25);white-space:nowrap}
+.pawsorb-hh__chip--a{top:12%;left:0}
+.pawsorb-hh__chip--b{bottom:14%;right:0;background:#12855A;color:#fff}
+@media (min-width:750px){
+  .pawsorb-hh{padding:72px 0}
+  .pawsorb-hh__grid{grid-template-columns:1.05fr .95fr;gap:56px}
+  .pawsorb-hh__h1{font-size:52px}
+  .pawsorb-hh__sub{font-size:19px}
+  .pawsorb-hh__btn{width:auto;min-width:260px}
+  .pawsorb-hh__proof{text-align:left}
+  .pawsorb-hh__art{max-width:440px}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb home hero",
+  "tag": "div",
+  "class": "pawsorb-home-section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Stop the poison before it reaches the blood." },
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "PawSorb is ER-style charcoal first aid, set by the pound and given at home in under 60 seconds." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Get PawSorb" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Empty = /products/ + product handle" },
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "pawsorb" },
+    { "type": "text", "id": "proof_line", "label": "Proof line", "default": "4.9 ★ from 4,554 reviews · 90-day guarantee" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Fallback theme asset", "info": "Theme asset file used when no image is picked, e.g. pawsorb-home-hero.jpg. Empty = built-in illustration." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Woman at the back door at night giving a golden retriever the PawSorb tube" },
+    { "type": "text", "id": "chip_1", "label": "Illustration chip 1", "default": "1 mL per lb" },
+    { "type": "text", "id": "chip_2", "label": "Illustration chip 2", "default": "Under 60 seconds" }
+  ],
+  "presets": [{ "name": "PawSorb home hero" }]
+}
+{% endschema %}

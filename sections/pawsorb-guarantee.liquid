@@ -1,0 +1,85 @@
+{%- assign ss = section.settings -%}
+<div class="pawsorb-gu" style="--pawsorb-gu-pt: {{ ss.padding_top }}px; --pawsorb-gu-pb: {{ ss.padding_bottom }}px; --pawsorb-gu-bg: {{ ss.bg_color }}; --pawsorb-gu-fg: {{ ss.text_color }}; --pawsorb-gu-accent: {{ ss.accent_color }}; --pawsorb-gu-navy: {{ ss.navy_color }};">
+  <div class="pawsorb-gu__inner">
+    <div class="pawsorb-gu__card">
+      <div class="pawsorb-gu__seal">
+        {%- if ss.seal_image != blank -%}
+          {{ ss.seal_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: ss.seal_alt, class: 'pawsorb-gu__sealimg' }}
+        {%- else -%}
+          <svg class="pawsorb-gu__svg" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ ss.seal_alt | escape }}">
+            <defs><path id="pawsorbGuArc" d="M100 100 m-70 0 a70 70 0 1 1 140 0 a70 70 0 1 1 -140 0"/></defs>
+            <g fill="var(--pawsorb-gu-accent, #12855A)">
+              {%- for i in (0..23) -%}<circle cx="100" cy="8" r="9" transform="rotate({{ i | times: 15 }} 100 100)"/>{%- endfor -%}
+            </g>
+            <circle cx="100" cy="100" r="90" fill="var(--pawsorb-gu-accent, #12855A)"/>
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 4" opacity=".8"/>
+            <circle cx="100" cy="100" r="54" fill="var(--pawsorb-gu-navy, #121614)"/>
+            <text font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="11.5" letter-spacing="1.6" fill="#fff"><textPath href="#pawsorbGuArc" startOffset="0">{{ ss.seal_ring | escape }}</textPath></text>
+            <text x="100" y="104" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="40" fill="#fff">{{ ss.seal_big | escape }}</text>
+            <text x="100" y="126" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="13" letter-spacing="2" fill="#fff">{{ ss.seal_small | escape }}</text>
+          </svg>
+        {%- endif -%}
+      </div>
+      <div class="pawsorb-gu__text">
+        {%- if ss.heading != blank -%}<h2 class="pawsorb-gu__h">{{ ss.heading }}</h2>{%- endif -%}
+        {%- if ss.body != blank -%}<p class="pawsorb-gu__b">{{ ss.body }}</p>{%- endif -%}
+        <ul class="pawsorb-gu__chips">
+          {%- if ss.chip_1 != blank -%}<li>{% render 'pawsorb-icon', name: 'shield', size: 16 %}<span>{{ ss.chip_1 }}</span></li>{%- endif -%}
+          {%- if ss.chip_2 != blank -%}<li>{% render 'pawsorb-icon', name: 'truck', size: 16 %}<span>{{ ss.chip_2 }}</span></li>{%- endif -%}
+          {%- if ss.chip_3 != blank -%}<li>{% render 'pawsorb-icon', name: 'home', size: 16 %}<span>{{ ss.chip_3 }}</span></li>{%- endif -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-gu { padding: var(--pawsorb-gu-pt, 64px) 0 var(--pawsorb-gu-pb, 64px); background: var(--pawsorb-gu-bg, #F1F6F3); color: var(--pawsorb-gu-fg, #141816); }
+  .pawsorb-gu__inner { max-width: 960px; margin: 0 auto; padding: 0 16px; }
+  .pawsorb-gu__card { display: grid; grid-template-columns: 180px 1fr; gap: 36px; align-items: center; padding: 36px; border-radius: 12px; background: #fff; border: 1px solid #DCE6E0; }
+  .pawsorb-gu__seal { width: 180px; }
+  .pawsorb-gu__svg, .pawsorb-gu__sealimg { width: 100%; height: auto; display: block; }
+  .pawsorb-gu__h { margin: 0 0 10px; font: 700 32px/1.15 var(--font-heading--family); color: inherit; letter-spacing: -.01em; }
+  .pawsorb-gu__b { margin: 0 0 18px; font-size: 17px; line-height: 1.55; }
+  .pawsorb-gu__chips { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; }
+  .pawsorb-gu__chips li { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 999px; background: #F1F6F3; border: 1px solid #DCE6E0; font-size: 14px; font-weight: 700; color: var(--pawsorb-gu-navy, #121614); }
+  .pawsorb-gu__chips .pawsorb-icon { color: #12855A; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-gu { padding: calc(var(--pawsorb-gu-pt, 64px) * .75) 0 calc(var(--pawsorb-gu-pb, 64px) * .75); }
+    .pawsorb-gu__card { grid-template-columns: 1fr; gap: 16px; padding: 24px 18px; text-align: center; }
+    .pawsorb-gu__seal { width: 132px; margin: 0 auto; }
+    .pawsorb-gu__h { font-size: 26px; }
+    .pawsorb-gu__b { font-size: 16px; }
+    .pawsorb-gu__chips { justify-content: center; }
+    .pawsorb-gu__chips li { font-size: 13px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb guarantee",
+  "tag": "section",
+  "class": "pawsorb-section",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Keep it 90 days. Use it or don't." },
+    { "type": "textarea", "id": "body", "label": "Text", "default": "If PawSorb isn't for you, email us within 90 days for every cent back. Hope you never open it. Most people still keep it." },
+    { "type": "text", "id": "chip_1", "label": "Chip 1", "default": "90 days" },
+    { "type": "text", "id": "chip_2", "label": "Chip 2", "default": "Fast US shipping" },
+    { "type": "text", "id": "chip_3", "label": "Chip 3", "default": "Tracked to your door" },
+    { "type": "header", "content": "Seal" },
+    { "type": "image_picker", "id": "seal_image", "label": "Seal image (optional)", "info": "Blank = the drawn seal below." },
+    { "type": "text", "id": "seal_alt", "label": "Seal alt text", "default": "90-day money-back guarantee seal" },
+    { "type": "text", "id": "seal_ring", "label": "Seal ring text", "default": "MONEY-BACK GUARANTEE · MONEY-BACK GUARANTEE ·" },
+    { "type": "text", "id": "seal_big", "label": "Seal big text", "default": "90" },
+    { "type": "text", "id": "seal_small", "label": "Seal small text", "default": "DAYS" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F1F6F3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141816" },
+    { "type": "color", "id": "accent_color", "label": "Seal color", "default": "#12855A" },
+    { "type": "color", "id": "navy_color", "label": "Seal center", "default": "#121614" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [ { "name": "PawSorb guarantee" } ]
+}
+{% endschema %}

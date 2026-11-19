@@ -1,0 +1,100 @@
+{%- assign ss = section.settings -%}
+<div class="pawsorb-pc" style="--pawsorb-pc-pt: {{ ss.padding_top }}px; --pawsorb-pc-pb: {{ ss.padding_bottom }}px; --pawsorb-pc-bg: {{ ss.bg_color }}; --pawsorb-pc-fg: {{ ss.text_color }}; --pawsorb-pc-head: {{ ss.head_color }}; --pawsorb-pc-us: {{ ss.us_color }};">
+  <div class="pawsorb-pc__inner">
+    {%- if ss.heading != blank -%}<h2 class="pawsorb-pc__h">{{ ss.heading }}</h2>{%- endif -%}
+    <table class="pawsorb-pc__table">
+      <thead>
+        <tr>
+          <th scope="col"><span class="pawsorb-pc__vh">{{ ss.col_feature }}</span></th>
+          <th scope="col" class="pawsorb-pc__us">{{ ss.col_us }}</th>
+          <th scope="col">{{ ss.col_them }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row">{{ block.settings.label }}</th>
+            <td class="pawsorb-pc__us"><span class="pawsorb-pc__cell"><span class="pawsorb-pc__ic is-yes" aria-label="Yes">{% render 'pawsorb-icon', name: 'check', size: 14 %}</span><span>{{ block.settings.us }}</span></span></td>
+            <td><span class="pawsorb-pc__cell"><span class="pawsorb-pc__ic is-no" aria-label="No">{% render 'pawsorb-icon', name: 'cross', size: 14 %}</span><span>{{ block.settings.them }}</span></span></td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+    {%- if ss.myth_line != blank -%}<p class="pawsorb-pc__myth">{{ ss.myth_line }}</p>{%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-pc { padding: var(--pawsorb-pc-pt, 64px) 0 var(--pawsorb-pc-pb, 64px); background: var(--pawsorb-pc-bg, #F1F6F3); color: var(--pawsorb-pc-fg, #141816); }
+  .pawsorb-pc__inner { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+  .pawsorb-pc__h { margin: 0 0 24px; text-align: center; font: 700 34px/1.15 var(--font-heading--family); color: inherit; letter-spacing: -.01em; }
+  .pawsorb-pc__table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; background: #fff; border: 1px solid #DCE6E0; border-radius: 12px; overflow: hidden; }
+  .pawsorb-pc__table thead th { background: var(--pawsorb-pc-head, #121614); color: #fff; font: 700 16px/1.2 var(--font-heading--family); padding: 14px 16px; text-align: left; }
+  .pawsorb-pc__table thead th.pawsorb-pc__us { background: var(--pawsorb-pc-us, #12855A); }
+  .pawsorb-pc__table thead th:first-child { width: 26%; }
+  .pawsorb-pc__table tbody th, .pawsorb-pc__table td { padding: 14px 16px; border-top: 1px solid #DCE6E0; text-align: left; vertical-align: middle; font-size: 15px; line-height: 1.4; }
+  .pawsorb-pc__table tbody th { font: 700 15px/1.3 var(--font-heading--family); color: #121614; }
+  .pawsorb-pc__table td.pawsorb-pc__us { background: rgba(18, 133, 90, .05); font-weight: 600; }
+  .pawsorb-pc__table td:not(.pawsorb-pc__us) { color: #5D6A63; }
+  .pawsorb-pc__cell { display: flex; align-items: flex-start; gap: 8px; }
+  .pawsorb-pc__ic { flex: 0 0 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; }
+  .pawsorb-pc__ic.is-yes { background: #12855A; color: #fff; }
+  .pawsorb-pc__ic.is-no { background: #DCE6E0; color: #5D6A63; }
+  .pawsorb-pc__vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .pawsorb-pc__myth { margin: 20px 0 0; text-align: center; font: 700 17px/1.45 var(--font-heading--family); }
+  @media screen and (max-width: 749px) {
+    .pawsorb-pc { padding: calc(var(--pawsorb-pc-pt, 64px) * .75) 0 calc(var(--pawsorb-pc-pb, 64px) * .75); }
+    .pawsorb-pc__h { font-size: 26px; margin-bottom: 18px; }
+    .pawsorb-pc__table thead th { padding: 11px 8px; font-size: 14px; }
+    .pawsorb-pc__table thead th:first-child { width: 24%; }
+    .pawsorb-pc__table tbody th, .pawsorb-pc__table td { padding: 11px 8px; font-size: 13px; }
+    .pawsorb-pc__table tbody th { font-size: 13px; }
+    .pawsorb-pc__cell { flex-direction: column; gap: 5px; }
+    .pawsorb-pc__ic { flex-basis: 20px; width: 20px; height: 20px; }
+    .pawsorb-pc__myth { font-size: 16px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb comparison table",
+  "tag": "section",
+  "class": "pawsorb-section",
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Feature", "default": "Throat" },
+        { "type": "text", "id": "us", "label": "PawSorb", "default": "Gentle" },
+        { "type": "text", "id": "them", "label": "Other", "default": "Can burn it" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The internet says peroxide. Vets have moved on." },
+    { "type": "text", "id": "col_feature", "label": "Feature column (screen readers)", "default": "Feature" },
+    { "type": "text", "id": "col_us", "label": "Our column", "default": "PawSorb" },
+    { "type": "text", "id": "col_them", "label": "Other column", "default": "Peroxide" },
+    { "type": "text", "id": "myth_line", "label": "Line under the table", "default": "Throwing up can't reach what already left the stomach. Binding can." },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F1F6F3" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#141816" },
+    { "type": "color", "id": "head_color", "label": "Header row", "default": "#121614" },
+    { "type": "color", "id": "us_color", "label": "Our column header", "default": "#12855A" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [
+    {
+      "name": "PawSorb comparison table",
+      "blocks": [
+        { "type": "row", "settings": { "label": "What it does", "us": "Locks poison in, it leaves in the stool", "them": "Makes your dog throw up" } },
+        { "type": "row", "settings": { "label": "Throat", "us": "Gentle", "them": "Can burn it" } },
+        { "type": "row", "settings": { "label": "Stomach", "us": "Soothed by kaolin", "them": "Can leave ulcers" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

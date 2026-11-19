@@ -1,0 +1,13 @@
+{%- comment -%}
+  PawSorb home image slot. Params: image (image_picker), asset (theme asset filename), alt, sizes, loading.
+  Order: uploaded image -> theme asset -> nothing (caller renders its own SVG/CSS fallback when this outputs blank).
+{%- endcomment -%}
+{%- liquid
+  assign ps_load = loading | default: 'lazy'
+  assign ps_sizes = sizes | default: '(min-width: 750px) 50vw, 100vw'
+-%}
+{%- if image != blank -%}
+  {{- image | image_url: width: 1600 | image_tag: alt: alt, loading: ps_load, sizes: ps_sizes, widths: '480, 800, 1200, 1600' -}}
+{%- elsif asset != blank -%}
+  <img src="{{ asset | asset_url }}" alt="{{ alt | escape }}" loading="{{ ps_load }}" width="1200" height="1200">
+{%- endif -%}

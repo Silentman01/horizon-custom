@@ -1,0 +1,121 @@
+{%- render 'pawsorb-home-base' -%}
+{%- liquid
+  assign ps_handle = section.settings.product_handle | default: 'pawsorb'
+  assign ps_url = section.settings.button_link | default: ''
+  if ps_url == blank
+    assign ps_url = '/products/' | append: ps_handle
+  endif
+-%}
+<section class="pawsorb-h pawsorb-h--tint pawsorb-ho" aria-label="{{ section.settings.heading | escape }}">
+  <div class="pawsorb-h__wrap">
+    <div class="pawsorb-ho__card">
+      <div class="pawsorb-ho__visual">
+        {%- capture ps_img -%}{%- render 'pawsorb-home-media', image: section.settings.image, asset: section.settings.image_asset, alt: section.settings.image_alt -%}{%- endcapture -%}
+        {%- if ps_img != blank -%}
+          <div class="pawsorb-h__media pawsorb-ho__media">{{ ps_img }}</div>
+        {%- else -%}
+          <div class="pawsorb-ho__art" role="img" aria-label="{{ section.settings.image_alt | escape }}">
+            {%- render 'pawsorb-home-tube', class: 'pawsorb-ho__tube pawsorb-ho__tube--l' -%}
+            {%- render 'pawsorb-home-tube', class: 'pawsorb-ho__tube pawsorb-ho__tube--c' -%}
+            {%- render 'pawsorb-home-tube', class: 'pawsorb-ho__tube pawsorb-ho__tube--r' -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.badge != blank -%}<span class="pawsorb-ho__badge">{{ section.settings.badge }}</span>{%- endif -%}
+      </div>
+      <div class="pawsorb-ho__body">
+        <h2 class="pawsorb-h__h2">{{ section.settings.heading }}</h2>
+        <p class="pawsorb-h__lead pawsorb-ho__lead">{{ section.settings.body }}</p>
+        <ul class="pawsorb-ho__tiers" role="list">
+          {%- for block in section.blocks -%}
+            <li {{ block.shopify_attributes }}>
+              <a class="pawsorb-ho__tier{% if block.settings.highlight %} is-hot{% endif %}" href="{{ ps_url }}">
+                <span class="pawsorb-ho__dot" aria-hidden="true"></span>
+                <span class="pawsorb-ho__tname">
+                  <strong>{{ block.settings.title }}</strong>
+                  {%- if block.settings.badge != blank -%}<em class="pawsorb-ho__tbadge">{{ block.settings.badge }}</em>{%- endif -%}
+                  <small>{{ block.settings.label }}{% if block.settings.shipping != blank %} · <span class="{% if block.settings.free %}is-free{% endif %}">{{ block.settings.shipping }}</span>{% endif %}</small>
+                </span>
+                <span class="pawsorb-ho__tprice">
+                  <strong>{{ block.settings.price }}</strong>
+                  {%- if block.settings.each != blank -%}<small>{{ block.settings.each }}</small>{%- endif -%}
+                </span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+        <a class="pawsorb-h__btn pawsorb-h__btn--block" href="{{ ps_url }}">{{ section.settings.button_label }}</a>
+        {%- if section.settings.trust_line != blank -%}<p class="pawsorb-ho__trust">{{ section.settings.trust_line }}</p>{%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.pawsorb-ho__card{background:#fff;border:1px solid #DCE6E0;border-radius:12px;padding:16px;display:grid;gap:20px}
+.pawsorb-ho__visual{position:relative}
+.pawsorb-ho__media{aspect-ratio:1/1}
+.pawsorb-ho__art{aspect-ratio:4/3;border-radius:14px;background:linear-gradient(160deg,#F1F6F3,#E4EDE8);display:flex;align-items:flex-end;justify-content:center;padding-bottom:6%}
+.pawsorb-ho__tube{height:80%;width:auto;filter:drop-shadow(0 10px 14px rgba(18, 22, 20,.18))}
+.pawsorb-ho__tube--l{transform:rotate(-12deg) translateX(22%);height:68%}
+.pawsorb-ho__tube--r{transform:rotate(12deg) translateX(-22%);height:68%}
+.pawsorb-ho__tube--c{position:relative;z-index:1}
+.pawsorb-ho__badge{position:absolute;top:12px;left:12px;background:#12855A;color:#fff;font-weight:700;font-size:12px;letter-spacing:.04em;padding:6px 10px;border-radius:999px}
+.pawsorb-ho__lead{margin-bottom:16px;color:#141816}
+.pawsorb-ho__tiers{list-style:none;margin:0 0 16px;padding:0;display:grid;gap:8px}
+.pawsorb-ho__tier{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border:1.5px solid #DCE6E0;border-radius:12px;text-decoration:none;color:#141816;transition:border-color .15s}
+.pawsorb-ho__tier:hover{border-color:#141816}
+.pawsorb-ho__tier.is-hot{border:2px solid #12855A;background:rgba(18, 133, 90,.08)}
+.pawsorb-ho__dot{width:20px;height:20px;border-radius:50%;border:2px solid #C6D4CB;background:#fff}
+.pawsorb-ho__tier.is-hot .pawsorb-ho__dot{border:6px solid #12855A}
+.pawsorb-ho__tname{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-width:0}
+.pawsorb-ho__tname strong{font-size:16px}
+.pawsorb-ho__tname small{flex-basis:100%;font-size:13px;color:#5D6A63}
+.pawsorb-ho__tname .is-free{color:#12855A;font-weight:700}
+.pawsorb-ho__tbadge{font-style:normal;background:#12855A;color:#fff;font-size:10.5px;font-weight:700;letter-spacing:.04em;padding:3px 7px;border-radius:999px}
+.pawsorb-ho__tprice{text-align:right;display:grid;line-height:1.25}
+.pawsorb-ho__tprice strong{font-size:17px}
+.pawsorb-ho__tprice small{font-size:12px;color:#12855A;font-weight:700}
+.pawsorb-ho__trust{margin:12px 0 0;text-align:center;font-size:13px;color:#5D6A63}
+@media (min-width:750px){
+  .pawsorb-ho__card{grid-template-columns:1fr 1fr;padding:32px;gap:40px;align-items:center}
+  .pawsorb-ho__art{aspect-ratio:1/1}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb home offer",
+  "tag": "div",
+  "class": "pawsorb-home-section",
+  "max_blocks": 6,
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Most homes keep three." },
+    { "type": "textarea", "id": "body", "label": "Body", "default": "Buy 3 for $24.99 a tube with FREE shipping. Covers one dog to 80 lb, or one for the car, the kitchen and Mom's place." },
+    { "type": "text", "id": "badge", "label": "Image badge", "default": "MOST POPULAR" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Pick my tubes" },
+    { "type": "url", "id": "button_link", "label": "Link", "info": "Empty = /products/ + product handle" },
+    { "type": "text", "id": "product_handle", "label": "Product handle", "default": "pawsorb" },
+    { "type": "text", "id": "trust_line", "label": "Trust line", "default": "90-day money-back guarantee · Fast US shipping" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Fallback theme asset", "info": "e.g. pawsorb-home-offer.webp. Empty = built-in illustration." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Three PawSorb tubes" }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Tier",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Buy 3" },
+        { "type": "text", "id": "label", "label": "Size label", "default": "Dogs 61–80lbs" },
+        { "type": "text", "id": "shipping", "label": "Shipping", "default": "FREE shipping" },
+        { "type": "checkbox", "id": "free", "label": "Shipping is free", "default": true },
+        { "type": "text", "id": "badge", "label": "Badge" },
+        { "type": "text", "id": "price", "label": "Price", "default": "$74.97" },
+        { "type": "text", "id": "each", "label": "Per tube", "default": "$24.99 each" },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "PawSorb home offer", "blocks": [{ "type": "tier" }] }]
+}
+{% endschema %}

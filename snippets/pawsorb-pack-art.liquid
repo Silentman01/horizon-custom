@@ -1,0 +1,40 @@
+{%- doc -%}
+  Vector packshot of the PawSorb dial-a-dose tube. Fallback wherever the product photo is not available yet.
+  @param {string} [brand] - word on the label, default 'PawSorb'
+  @param {string} [tagline] - small line on the label
+  @param {number} [count] - tubes to draw (1-3), default 1
+{%- enddoc -%}
+{%- liquid
+  assign b = brand | default: 'PawSorb'
+  assign tg = tagline | default: 'FIRST AID FOR PET POISONS'
+  assign n = count | default: 1
+-%}
+<svg class="pawsorb-pack-art" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="{{ b | escape }} tube">
+  <defs>
+    <linearGradient id="psBarrel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#f1f2f4"/><stop offset="1" stop-color="#d9dce1"/></linearGradient>
+    <linearGradient id="psLabel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a302d"/><stop offset=".55" stop-color="#121614"/><stop offset="1" stop-color="#050706"/></linearGradient>
+    <pattern id="psDots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="3.5" cy="3.5" r="1.3" fill="#2BD08F"/></pattern>
+    <radialGradient id="psFade" cx=".15" cy=".5" r=".6"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#000"/></radialGradient>
+    <mask id="psDotMask"><rect x="0" y="0" width="400" height="400" fill="url(#psFade)"/></mask>
+  </defs>
+  <ellipse cx="200" cy="318" rx="150" ry="14" fill="#121614" opacity=".10"/>
+  {%- for i in (1..n) -%}
+    {%- liquid
+      assign dy = forloop.index0 | times: -46
+      assign dx = forloop.index0 | times: 18
+    -%}
+    <g transform="translate({{ dx }} {{ dy }}) rotate(-14 200 230)">
+      <rect x="38" y="214" width="44" height="34" rx="6" fill="url(#psBarrel)" stroke="#C6D4CB"/>
+      <rect x="78" y="200" width="16" height="62" rx="6" fill="#eef0f3" stroke="#C6D4CB"/>
+      <g stroke="#b9bec6" stroke-width="2"><path d="M42 214v34M49 214v34M56 214v34M63 214v34M70 214v34"/></g>
+      <rect x="94" y="206" width="200" height="50" rx="10" fill="url(#psBarrel)" stroke="#C6D4CB"/>
+      <rect x="112" y="206" width="160" height="50" fill="url(#psLabel)"/>
+      <rect x="112" y="206" width="160" height="50" fill="url(#psDots)" opacity=".55" mask="url(#psDotMask)"/>
+      <rect x="250" y="206" width="22" height="50" fill="url(#psDots)" opacity=".5"/>
+      <text x="192" y="236" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="25" fill="#fff">{{ b | escape }}</text>
+      <text x="192" y="249" text-anchor="middle" font-family="DM Sans, Arial, sans-serif" font-weight="700" font-size="7.2" letter-spacing="1" fill="#2BD08F">{{ tg | escape }}</text>
+      <path d="M294 214h14l26 9v16l-26 9h-14z" fill="#f4f5f7" stroke="#C6D4CB"/>
+      <rect x="334" y="222" width="18" height="18" rx="5" fill="#ffffff" stroke="#C6D4CB"/>
+    </g>
+  {%- endfor -%}
+</svg>
