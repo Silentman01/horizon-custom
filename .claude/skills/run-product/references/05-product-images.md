@@ -321,6 +321,7 @@ Before GALLERY_PLAN.md, the coordinator (only the coordinator calls Brandsearch)
   2. **Coverage top-up:** read the Coverage table in INDEX.md. Add up to 10 top products from niches with fewer than 2 brands: `search_products` sort `winning`, `est_revenue_min_usd` 100000, `ads_30d_min` 50, `niche_exclude` = the niches already covered. Take one product per niche, favouring the market's language (FR/DE/IT stores for EU launches).
   3. **Pull and index:** the worker runs the incremental pull + classification and updates INDEX.md (coverage, per product, cross-bank by job, sequences, patterns for this launch, universal patterns).
   - **Timing:** right after the branding gate, in parallel with A1. It costs ~20–35 Brandsearch credits per run and no generation credits. GALLERY_PLAN.md waits for INDEX.md.
+- **Scope per bucket (operator 2026-11-19):** every SOURCES.json entry carries `scope`: `launch:<brand>` when it was collected for one product (e.g. oral-denture = `launch:oralys`) or `general` for cross-niche references; INDEX.md shows it per bucket. A gallery plan cites only its own launch's buckets plus `general`, never another launch's product-specific bucket ("tryzyara and lisselab should be removed as inspiration. they were specifically for a product … that we previously launched").
 - **Use:** GALLERY_PLAN.md cites, per slide, the bank examples it mixes (`bucket/brand/NN`). We take patterns, never pixels. The distinctiveness gate (§16.5) still applies against every source.
 
 ### 16.1 Inputs
