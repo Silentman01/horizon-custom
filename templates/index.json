@@ -17,7 +17,7 @@
         "button_label": "Get PawSorb",
         "product_handle": "pawsorb",
         "proof_line": "4.9 ★ from 4,554 reviews · 90-day guarantee",
-        "image_asset": "",
+        "image_asset": "pawsorb-home-hero.jpg",
         "image_alt": "Woman at the back door at night giving a golden retriever the PawSorb tube",
         "chip_1": "1 mL per lb",
         "chip_2": "Under 60 seconds"
@@ -106,7 +106,7 @@
         "button_label": "Pick my tubes",
         "product_handle": "pawsorb",
         "trust_line": "90-day money-back guarantee · Fast US shipping",
-        "image_asset": "",
+        "image_asset": "pawsorb-home-offer.webp",
         "image_alt": "Three PawSorb tubes"
       }
     },
@@ -118,7 +118,7 @@
           "settings": {
             "title": "Cane toads",
             "icon": "toad",
-            "image_asset": ""
+            "image_asset": "pawsorb-toad-feature.jpg"
           }
         },
         "tile_2": {
@@ -126,7 +126,7 @@
           "settings": {
             "title": "Chocolate",
             "icon": "chocolate",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-chocolate.jpg"
           }
         },
         "tile_3": {
@@ -134,7 +134,7 @@
           "settings": {
             "title": "Grapes & raisins",
             "icon": "grapes",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-grapes.jpg"
           }
         },
         "tile_4": {
@@ -142,7 +142,7 @@
           "settings": {
             "title": "Dropped pills",
             "icon": "pills",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-meds.jpg"
           }
         },
         "tile_5": {
@@ -150,7 +150,7 @@
           "settings": {
             "title": "Sago palm",
             "icon": "plant",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-sago.jpg"
           }
         },
         "tile_6": {
@@ -158,7 +158,7 @@
           "settings": {
             "title": "Rat bait",
             "icon": "bait",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-rodenticide.jpg"
           }
         },
         "tile_7": {
@@ -166,7 +166,7 @@
           "settings": {
             "title": "Wild mushrooms",
             "icon": "mushroom",
-            "image_asset": ""
+            "image_asset": "pawsorb-toxin-mushrooms.jpg"
           }
         }
       },
@@ -193,7 +193,7 @@
             "title": "Wipe",
             "text": "Toad? Wipe the gums with a damp cloth, front to back.",
             "icon": "wipe",
-            "image_asset": ""
+            "image_asset": "pawsorb-step-1-wipe.jpg"
           }
         },
         "step_2": {
@@ -202,7 +202,7 @@
             "title": "Dial",
             "text": "Twist until the ring shows his pounds. 1 mL per lb, done.",
             "icon": "dial",
-            "image_asset": ""
+            "image_asset": "pawsorb-step-2-dial.jpg"
           }
         },
         "step_3": {
@@ -211,7 +211,7 @@
             "title": "Squeeze",
             "text": "Tip behind the back teeth, press. Picky eater? Smear it on a treat.",
             "icon": "squeeze",
-            "image_asset": ""
+            "image_asset": "pawsorb-step-3-squeeze.jpg"
           }
         },
         "step_4": {
@@ -220,7 +220,7 @@
             "title": "Call",
             "text": "Now phone the vet or a poison line, with the help already in.",
             "icon": "phone",
-            "image_asset": ""
+            "image_asset": "pawsorb-step-4-call.jpg"
           }
         }
       },
@@ -245,7 +245,7 @@
             "text": "Bought it in April after a neighbor's dog died. Used it in July. Our Lab mouthed a toad by the pool at 10 p.m. I wiped his gums, gave the tube, then drove. The ER said we did it right. He's snoring next to me.",
             "name": "Dana R. · Tampa, FL",
             "alt": "Black Lab on a Florida porch with a PawSorb tube",
-            "image_asset": ""
+            "image_asset": "pawsorb-review-1-toad.jpg"
           }
         },
         "review_2": {
@@ -253,9 +253,9 @@
           "settings": {
             "tag": "Christmas chocolate",
             "text": "Christmas Eve. Our beagle ate a whole box of chocolate from under the tree. Vet closed till the 26th. Gave PawSorb, called the ER line after. No trip needed. Cheaper than one hour in that waiting room.",
-            "name": "Mike T. · Columbus, OH",
+            "name": "Megan T. · Columbus, OH",
             "alt": "Beagle next to a torn chocolate box",
-            "image_asset": ""
+            "image_asset": "pawsorb-review-2-chocolate.jpg"
           }
         },
         "review_3": {
@@ -263,9 +263,9 @@
           "settings": {
             "tag": "Grapes",
             "text": "Lulu is 9 pounds. A handful of grapes rolled off the counter and she got three. I was shaking, but the dial did the math for me. Thirty seconds, start to finish. She's fine.",
-            "name": "Linda K. · Mesa, AZ",
-            "alt": "Shih Tzu in her owner's lap with a PawSorb tube",
-            "image_asset": ""
+            "name": "Rick K. · Mesa, AZ",
+            "alt": "Shih Tzu in his owner's lap with a PawSorb tube",
+            "image_asset": "pawsorb-review-3-small-dog.jpg"
           }
         },
         "review_4": {
@@ -275,7 +275,7 @@
             "text": "My dad dropped his heart pill at Thanksgiving and the dog had it before anyone bent down. My sister read the steps off the tube while I held her. That's why I keep one in every house we visit.",
             "name": "Sharon B. · Raleigh, NC",
             "alt": "Dog under a holiday dinner table",
-            "image_asset": ""
+            "image_asset": "pawsorb-review-5-holiday-pill.jpg"
           }
         }
       },
@@ -306,7 +306,7 @@
         "seal_bottom": "GUARANTEE",
         "seal_number": "90",
         "seal_unit": "DAYS",
-        "image_asset": "",
+        "image_asset": "pawsorb-home-guarantee.jpg",
         "image_alt": "Open shipping box with a PawSorb tube on a porch"
       }
     },

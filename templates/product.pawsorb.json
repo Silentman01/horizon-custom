@@ -39,7 +39,7 @@
         "trust_3": "Vet-formulated",
         "show_payment_icons": true,
         "gallery_alt": "PawSorb tube next to a cane toad and a chocolate bar",
-        "fallback_asset": "",
+        "fallback_asset": "pawsorb-packshot.webp",
         "accent_color": "#12855A",
         "navy_color": "#121614",
         "savings_color": "#12855A",
@@ -176,7 +176,7 @@
         "anim_asset": "pawsorb-anim-stomach.webp",
         "image_asset": "pawsorb-window-diagram.webp",
         "image_alt": "Diagram: PawSorb binds poison in the stomach before it reaches the bloodstream",
-        "ratio": "1 / 1",
+        "ratio": "4 / 3",
         "image_side": "left",
         "label_mouth": "Mouth",
         "label_stomach": "Stomach: PawSorb binds here",
@@ -370,7 +370,7 @@
         "review_2": {
           "type": "review",
           "settings": {
-            "name": "Mike T. · Columbus, OH",
+            "name": "Megan T. · Columbus, OH",
             "tag": "Christmas chocolate",
             "show_photo": true,
             "image_asset": "pawsorb-review-2-chocolate.jpg",
@@ -383,11 +383,11 @@
         "review_3": {
           "type": "review",
           "settings": {
-            "name": "Linda K. · Mesa, AZ",
+            "name": "Rick K. · Mesa, AZ",
             "tag": "Grapes",
             "show_photo": true,
             "image_asset": "pawsorb-review-3-small-dog.jpg",
-            "alt": "Shih Tzu in her owner's lap with a PawSorb tube",
+            "alt": "Shih Tzu in his owner's lap with a PawSorb tube",
             "icon": "grapes",
             "hidden_initially": false,
             "text": "Lulu is 9 pounds. A handful of grapes rolled off the counter and she got three. I was shaking, but the dial did the math for me. Thirty seconds, start to finish. She's fine."
@@ -396,11 +396,11 @@
         "review_4": {
           "type": "review",
           "settings": {
-            "name": "Josh M. · Knoxville, TN",
+            "name": "Jess M. · Knoxville, TN",
             "tag": "Rat bait",
             "show_photo": true,
             "image_asset": "pawsorb-review-4-trash.jpg",
-            "alt": "Golden retriever in a kitchen",
+            "alt": "Golden retriever in a raided kitchen trash can",
             "icon": "bait",
             "hidden_initially": false,
             "text": "My golden is a trash compactor. He dragged a bait block out of the garage into the kitchen. Gave the tube in the kitchen, then went to the vet. Bloodwork clean. Bought three more for my folks."
@@ -422,14 +422,14 @@
         "review_6": {
           "type": "review",
           "settings": {
-            "name": "Kayla P. · Portland, OR",
-            "tag": "Wild mushrooms",
+            "name": "Tyler P. · Portland, OR",
+            "tag": "Puppy + chocolate",
             "show_photo": true,
             "image_asset": "pawsorb-review-6-puppy.jpg",
-            "alt": "Puppy on a living room floor",
-            "icon": "mushroom",
+            "alt": "Chocolate Lab puppy next to a chewed chocolate bar wrapper",
+            "icon": "chocolate",
             "hidden_initially": false,
-            "text": "Our 12-week-old pup grabbed a mushroom on a walk. I had no idea what kind. It was in my bag, so I gave it right there on the sidewalk. Best thing on our puppy list."
+            "text": "Our 11-week-old Lab pup chewed through half a dark chocolate bar I left on the couch. Dialed his weight, gave the tube, then called the vet. He was chasing his toys again by dinner. Best thing on our puppy list."
           }
         },
         "review_7": {
@@ -667,7 +667,7 @@
             "role": "Emergency & critical care vet",
             "years": "14 yrs",
             "quote": "Most poisonings I see started at home an hour earlier. A binder given in that first hour is the best head start a dog can get.",
-            "image_asset": ""
+            "image_asset": "pawsorb-vet-1.jpg"
           }
         },
         "vet_2": {
@@ -676,7 +676,7 @@
             "role": "General practice vet, small animals",
             "years": "11 yrs",
             "quote": "Owners panic and reach for peroxide. A premixed, pre-dosed gel is the calmer, safer first move.",
-            "image_asset": ""
+            "image_asset": "pawsorb-vet-2.jpg"
           }
         },
         "vet_3": {
@@ -685,7 +685,7 @@
             "role": "Shelter medicine vet, Gulf Coast",
             "years": "9 yrs",
             "quote": "Down here, toads are a weekly case. Every dog home in Florida should have this by the back door.",
-            "image_asset": ""
+            "image_asset": "pawsorb-vet-3.jpg"
           }
         }
       },
