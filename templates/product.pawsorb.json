@@ -667,7 +667,8 @@
             "role": "Emergency & critical care vet",
             "years": "14 yrs",
             "quote": "Most poisonings I see started at home an hour earlier. A binder given in that first hour is the best head start a dog can get.",
-            "image_asset": "pawsorb-vet-1.jpg"
+            "image_asset": "pawsorb-vet-1.jpg",
+            "name": "Dr. Elena Ruiz, DVM"
           }
         },
         "vet_2": {
@@ -676,7 +677,8 @@
             "role": "General practice vet, small animals",
             "years": "11 yrs",
             "quote": "Owners panic and reach for peroxide. A premixed, pre-dosed gel is the calmer, safer first move.",
-            "image_asset": "pawsorb-vet-2.jpg"
+            "image_asset": "pawsorb-vet-2.jpg",
+            "name": "Dr. Claire Whitman, DVM"
           }
         },
         "vet_3": {
@@ -685,7 +687,8 @@
             "role": "Shelter medicine vet, Gulf Coast",
             "years": "9 yrs",
             "quote": "Down here, toads are a weekly case. Every dog home in Florida should have this by the back door.",
-            "image_asset": "pawsorb-vet-3.jpg"
+            "image_asset": "pawsorb-vet-3.jpg",
+            "name": "Dr. Mark Haller, DVM"
           }
         }
       },

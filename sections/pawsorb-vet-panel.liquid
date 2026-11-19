@@ -11,7 +11,7 @@
             {% render 'pawsorb-media', image: bs.image, asset: bs.image_asset, alt: ss.icon_alt, ratio: '1 / 1', icon: 'vet', tone: 'navy', sizes: '72px' %}
           </div>
           <figcaption class="pawsorb-vp__who">
-            <strong>{{ bs.role }}</strong>
+            {%- if bs.name != blank -%}<strong>{{ bs.name }}</strong><span>{{ bs.role }}</span>{%- else -%}<strong>{{ bs.role }}</strong>{%- endif -%}
             {%- if bs.years != blank -%}<span>{{ bs.years }}</span>{%- endif -%}
             <span class="pawsorb-vp__stars" aria-label="5 out of 5 stars">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 13 %}{%- endfor -%}</span>
           </figcaption>
@@ -73,6 +73,7 @@
       "type": "vet",
       "name": "Vet card",
       "settings": [
+        { "type": "text", "id": "name", "label": "Name", "info": "e.g. Dr. Elena Ruiz, DVM. Empty = the role is the title." },
         { "type": "text", "id": "role", "label": "Role", "default": "Emergency & critical care vet" },
         { "type": "text", "id": "years", "label": "Experience", "default": "14 yrs" },
         { "type": "textarea", "id": "quote", "label": "Quote", "default": "Most poisonings I see started at home an hour earlier. A binder given in that first hour is the best head start a dog can get." },
