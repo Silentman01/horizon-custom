@@ -237,6 +237,11 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 - **Native ads:** the hook (the lines before "See more") makes the people of that angle instantly recognize themselves in their own situation, moment and words. The whole letter then reads like a real person's post, never like an ad, until the product enters the story naturally. Operator: "people targeted by that angle should instantly recognize themself. so they can go through the whole copy and not feel at any time it's an ad while it is one."
 - Detail: 09 Step 4, 22 §8.
 
+## 24. Page design follows the competitor's documented visual system; FAQ last; plain guarantee (operator 2026-11-21)
+- Never design a page by guessing. Before building, map the competitor's page section by section: background per section (and whether it alternates), text colors, where the accent is used and where it isn't, heading weights and sizes, image types and crops, components, and content length. If a bigger competitor sells the same product, study theirs too. Then map their color roles to our palette. Operator (PawSorb, after studying savepet.co): "learn how colors are used, backgrounds, images, content, etc. never do something by guessing how it should be done."
+- **The FAQ is the last section before the footer.** No section after it.
+- **The guarantee is plain:** an icon (shield or check), a short headline, a short paragraph, a button, and optional customer photos. No circular badges with text running around a ring, and no decorative shapes ("looks ugly … that's nonsense").
+
 ## Operator rules (summary — full text in the sections above)
 
 - **Step Alpha before anything is built (§17).** Phase 1 capture (incl. every competitor ad + every video transcript) → Step Alpha dossier → ChatGPT prompt to the operator (GATE α, wait for the pasted result) → synthesis → dossier passes the quality gate (`alpha_gate.py` + read-through). Only then branding and every other step, each reading the dossier. Step Alpha is the only analysis step.
@@ -256,5 +261,6 @@ Also: "before building anything, we must run step alpha". The old Phase 3 ad ana
 - **Video ads** (on request, `references/14-video-ads.md`): ~20 candidates by `reach_rank` → operator confirms; per video, audit every clip (a clean / b overlay fixed locally / c regenerate); no lip sync; re-voice with an ElevenLabs clone of the original voice (never Kie for audio); always remake the hook, the end and one random body line; (c) clips only after operator confirmation; `generated/videos/` holds finals only.
 - **Git:** branch named after the brand from clean `main`; commit → pull → merge-check → push; never publish; never overwrite a template with live ad traffic.
 - **Step Alpha data in all persuasive copy (§23):** ads, letters, landing pages are built from the dossier's pains, objections, triggers and verbatims, with sources logged; native hooks make the audience recognize themselves and never read like an ad.
+- **Page design from the competitor's mapped visual system, never guessed (§24);** FAQ is the last section; the guarantee is a plain icon + text block.
 - **Assets live in `PRODUCT_DIR`** (shop folder), not in the theme repo.
 - **Mobile first:** build and QA at 390px first; every horizontal rail scrolls by touch *and* mouse drag (editor mobile preview has no touch).
