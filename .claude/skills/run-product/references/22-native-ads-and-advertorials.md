@@ -223,6 +223,7 @@ When the competitor's top-performing ads include native formats, they get specif
 - The adaptation principle applies doubly: native ads work because they look organic, so our version must also look organic — but different organic. A Reddit-style ad becomes a different Reddit-style ad (different subreddit name, different post title, different comments), not a carbon copy.
 - The hook mechanism is what matters: "social proof through community discussion" is the mechanism, "r/HomePestControl" is the execution.
 - Native ad text follows the same rules: from the language bank (3.5), through the copy chief, fully original.
+- **The hook is self-recognition** (00 §23): the targeted audience sees themselves in the first lines, and the letter never feels like an ad until the product enters naturally. Built on Step Alpha pains/triggers/verbatims, sources logged.
 - Pack shot placement in native ads is subtle (often the product appears in a photo within the "post" or in a "comment image"), not a hero placement.
 
 **Native ad specs (in ad builder files):** when writing the spec for a native ad, include:

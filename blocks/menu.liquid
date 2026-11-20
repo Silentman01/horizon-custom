@@ -3,6 +3,11 @@
   assign menu = block_settings.menu
   assign heading = block_settings.heading
   assign show_as_accordion = block_settings.show_as_accordion
+  # Only a heading typed in the block is shown; the menu's own name ("Footer menu", "Main menu") never appears, except as the mobile accordion label.
+  assign shown_heading = heading
+  if shown_heading == blank and show_as_accordion == true
+    assign shown_heading = menu.title
+  endif
   if show_as_accordion == true and block_settings.accordion_dividers == true
     assign dividers_enabled = true
   endif
@@ -46,10 +51,10 @@
       {% endif %}
       {{ block.shopify_attributes }}
     >
-      <summary class="menu__heading{% if heading == blank and menu.title == blank %} menu__heading--empty{% endif %} {{ block_settings.heading_preset }}">
-        <span class="menu__heading__default">{{ heading | default: menu.title }}</span>
+      <summary class="menu__heading{% if shown_heading == blank %} menu__heading--empty{% endif %} {{ block_settings.heading_preset }}">
+        <span class="menu__heading__default">{{ shown_heading }}</span>
         <span class="menu__heading__accordion">
-          {{ heading | default: menu.title }}
+          {{ shown_heading }}
           {% if block_settings.accordion_icon == 'plus' %}
             <span class="menu__heading__toggle svg-wrapper icon-plus">
               {{- 'icon-plus.svg' | inline_asset_content -}}

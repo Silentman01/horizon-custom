@@ -63,6 +63,8 @@ Also record: line length, emoji use (✔️, 👉), paragraph rhythm, reading le
 
 Then, per set: one paragraph/line group per beat, same order, same approximate length and rhythm, same emoji pattern, original wording (paraphrase), simple vocabulary, market language and spelling, our brand name where the competitor uses theirs. Read it aloud: it should feel like the same ad written by a different person, for that card's avatar.
 
+**Step Alpha grounding (00 §23, hard):** every copy set is built from the dossier's pains, desires, objections, triggers and verbatim customer language, and its sources are logged (file + quote/ID). **Native letters:** the opening lines make the angle's audience recognize themselves instantly (their situation, moment, words), and nothing in the letter reads like an ad before the product enters the story. Test each hook: would someone in that audience stop and think "that's me"?
+
 ## Step 5 — Write Version B (short) per angle card
 **Do:** 3–5 lines for testing: hook (one line from 3.3 / 3.5, often the blame-shift or the strongest claim) → mechanism/benefits in one sentence → risk reversal + crowd → CTA line with an emoji arrow if the competitor uses emojis. Same claims, same strength.
 
