@@ -113,6 +113,8 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 - **Reviews are mobile first too (operator 2026-11-21):** every visual check, screenshot sent or described, and comparison against the competitor uses the 390 px render first; desktop is a secondary pass. "most customers on ecommerce are on mobile."
 
+- **Product gallery thumbnails, always (operator 2026-11-21):** on mobile, a horizontal, swipeable thumbnail strip under the main image, like Shopify's native gallery; never hidden, never dots instead. On desktop, the thumbnail column is capped at the main image's height and scrolls, so it never runs below the image.
+
 ## 12. Working style and reporting
 - Step Alpha first (§17), then branding, then wait for validation, then build.
 - Use a master + parallel sub-agents; be efficient; don't stall waiting when other streams can run.
