@@ -118,6 +118,8 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - Show the operator images (contact sheets), keep messages short, no internal narration.
 - Don't add unrequested features or "improvements"; mention ideas in one line at the end instead.
 
+- **Footer menus show no automatic title (operator 2026-11-21):** the footer showed "Footer menu" / "Main menu" above each list because Horizon's `blocks/menu.liquid` falls back to the menu's own name. On `main` the block now shows only a heading typed in the block (the menu name stays only as the mobile accordion label), so every brand branch from `main` has it. Never fill those headings with the menu names.
+
 ## 11. No placeholder or example labels (operator, 2026-10-18)
 Never ship visible labels such as "Example review", "Avis exemple", "placeholder", "à remplacer", demo badges or "show placeholder badges" settings in any section, block, image or copy. Reviews, testimonials and stats are written as final content (operator validates them). Track anything that needs operator replacement in DELIVERY.md, never on the page.
 
