@@ -33,7 +33,7 @@
   .pawsorb-sa__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 28px; border-radius: 10px; background: var(--pawsorb-sa-accent, #12855A); color: #fff; font: 700 15px/1 var(--font-heading--family); text-decoration: none; letter-spacing: .03em; white-space: nowrap; }
   .pawsorb-sa__btn:hover { background: #0C5E40; }
   @media screen and (min-width: 750px) {
-    .pawsorb-sa { top: 0; transform: translateY(-100%); }
+    .pawsorb-sa { bottom: 0; transform: translateY(100%); box-shadow: 0 -4px 18px rgba(18, 22, 20, .14); padding-bottom: env(safe-area-inset-bottom); }
     .pawsorb-sa.is-visible { transform: translateY(0); }
     .pawsorb-sa--no-desk { display: none; }
   }
@@ -66,7 +66,9 @@
           raf = requestAnimationFrame(() => {
             const vh = window.innerHeight;
             const anyVisible = targets.some((t) => { const r = t.getBoundingClientRect(); return r.bottom > 0 && r.top < vh; });
-            const show = !anyVisible && btn.getBoundingClientRect().bottom < 0;
+            const footer = document.querySelector('.shopify-section-group-footer-group, footer');
+            const overFooter = footer ? footer.getBoundingClientRect().top < vh : false;
+            const show = !anyVisible && !overFooter && btn.getBoundingClientRect().bottom < 0;
             this.classList.toggle('is-visible', show);
             this.setAttribute('aria-hidden', show ? 'false' : 'true');
             const a = this.querySelector('.pawsorb-sa__btn');
@@ -97,7 +99,7 @@
   "settings": [
     { "type": "text", "id": "title", "label": "Title (blank = product title)", "default": "PawSorb™ First Aid for Pet Poisons" },
     { "type": "text", "id": "default_tier", "label": "Tier line before selection", "default": "Buy 3 · Dogs 61–80lbs · $74.97", "info": "Replaced by the selected tier on the page." },
-    { "type": "text", "id": "button_label", "label": "Button", "default": "Add to cart", "info": "Scrolls to the bundle picker." },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose my bundle", "info": "Scrolls to the bundle picker." },
     { "type": "checkbox", "id": "show_desktop", "label": "Show on desktop (top bar)", "default": true },
     { "type": "checkbox", "id": "show_mobile", "label": "Show on mobile (bottom bar)", "default": true },
     { "type": "image_picker", "id": "thumb_image", "label": "Thumbnail" },

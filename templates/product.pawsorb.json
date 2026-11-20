@@ -839,7 +839,7 @@
       "settings": {
         "title": "PawSorb™ First Aid for Pet Poisons",
         "default_tier": "Buy 3 · Dogs 61–80lbs · $74.97",
-        "button_label": "Add to cart",
+        "button_label": "Choose my bundle",
         "show_desktop": true,
         "show_mobile": true,
         "thumb_asset": "pawsorb-sticky-thumb.webp",
