@@ -1,0 +1,72 @@
+{%- assign ss = section.settings -%}
+<div
+  class="pawsorb-v2-tk"
+  style="--pawsorb-v2-tk-bg: {{ ss.bg_color }}; --pawsorb-v2-tk-acc: {{ ss.accent_color }}; --pawsorb-v2-tk-speed: {{ ss.speed }}s; --pawsorb-v2-tk-fs: {{ ss.font_size }}px; --pawsorb-v2-tk-fsm: {{ ss.font_size_mobile }}px; --pawsorb-v2-tk-py: {{ ss.padding_y }}px;"
+>
+  {%- if section.blocks.size > 0 -%}
+    <div class="pawsorb-v2-tk__track">
+      {%- for r in (1..2) -%}
+        <ul class="pawsorb-v2-tk__set"{% if r == 2 %} aria-hidden="true"{% endif %}>
+          {%- for n in (1..3) -%}
+            {%- for block in section.blocks -%}
+              <li class="pawsorb-v2-tk__pill" {% if r == 1 and n == 1 %}{{ block.shopify_attributes }}{% endif %}>{% render 'pawsorb-icon', name: block.settings.icon, size: 18 %}<span>{{ block.settings.text }}</span></li>
+            {%- endfor -%}
+          {%- endfor -%}
+        </ul>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-tk { position: relative; overflow: hidden; padding: var(--pawsorb-v2-tk-py, 18px) 0; background: var(--pawsorb-v2-tk-bg, #F8F5EF); border-top: 2px solid var(--pawsorb-v2-tk-acc, #12855A); border-bottom: 2px solid var(--pawsorb-v2-tk-acc, #12855A); font-family: var(--font-body--family); }
+  .pawsorb-v2-tk__track { display: flex; width: max-content; animation: pawsorb-v2-tk-run var(--pawsorb-v2-tk-speed, 40s) linear infinite; }
+  .pawsorb-v2-tk:hover .pawsorb-v2-tk__track { animation-play-state: paused; }
+  .pawsorb-v2-tk__set { display: flex; gap: 16px; margin: 0; padding: 0 16px 0 0; list-style: none; }
+  .pawsorb-v2-tk__pill { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border: 2px solid var(--pawsorb-v2-tk-acc, #12855A); border-radius: 999px; color: var(--pawsorb-v2-tk-acc, #12855A); font-size: var(--pawsorb-v2-tk-fs, 16px); line-height: 1.2; white-space: nowrap; }
+  .pawsorb-v2-tk__pill .pawsorb-icon { flex: 0 0 auto; }
+  @keyframes pawsorb-v2-tk-run { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .pawsorb-v2-tk__track { animation: none; } }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-tk__set { gap: 10px; padding-right: 10px; }
+    .pawsorb-v2-tk__pill { padding: 8px 15px; font-size: var(--pawsorb-v2-tk-fsm, 14px); }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 ticker",
+  "tag": "section",
+  "class": "pawsorb-v2-section-tk",
+  "max_blocks": 8,
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Pill",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "Made in the USA" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "flag", "options": [ { "value": "flag", "label": "Flag" }, { "value": "vet", "label": "Stethoscope" }, { "value": "leaf", "label": "Leaf" }, { "value": "flask", "label": "Flask" }, { "value": "shield", "label": "Shield" }, { "value": "check-circle", "label": "Check" }, { "value": "paw", "label": "Paw" }, { "value": "truck", "label": "Truck" } ] }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "accent_color", "label": "Accent (rules, pills, text)", "default": "#12855A" },
+    { "type": "range", "id": "speed", "label": "Seconds per loop", "min": 10, "max": 90, "step": 5, "unit": "s", "default": 40 },
+    { "type": "range", "id": "font_size", "label": "Text size (desktop)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "range", "id": "font_size_mobile", "label": "Text size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
+    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 18 }
+  ],
+  "presets": [
+    {
+      "name": "PawSorb v2 ticker",
+      "blocks": [
+        { "type": "pill", "settings": { "text": "Made in the USA", "icon": "flag" } },
+        { "type": "pill", "settings": { "text": "Vet-formulated", "icon": "vet" } },
+        { "type": "pill", "settings": { "text": "Coconut-shell charcoal + kaolin", "icon": "leaf" } },
+        { "type": "pill", "settings": { "text": "3rd-party lab tested", "icon": "flask" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

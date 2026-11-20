@@ -1,0 +1,102 @@
+{%- doc -%}
+  PawSorb v2 "how many tubes" modal. Weight slider + dogs stepper -> tubes; the button selects the matching tier.
+  Behaviour lives in the pawsorb-v2-buy-box element (sections/pawsorb-v2-main-product.liquid).
+  @param {object} block - the "calculator" block
+  @param {object} section - the section
+{%- enddoc -%}
+{%- assign cs = block.settings -%}
+<dialog class="pawsorb-v2-calc" data-v2-calc aria-labelledby="pawsorb-v2-calc-t-{{ section.id }}" data-unit-lb="{{ cs.unit_lb | escape }}" data-unit-kg="{{ cs.unit_kg | escape }}" data-tube-one="{{ cs.tube_one | escape }}" data-tube-many="{{ cs.tube_many | escape }}" data-dog-one="{{ cs.dog_one | escape }}" data-dog-many="{{ cs.dog_many | escape }}">
+  <div class="pawsorb-v2-calc__box">
+    <button type="button" class="pawsorb-v2-calc__x" data-v2-calc-close aria-label="{{ cs.close_label | escape }}">{% render 'pawsorb-icon', name: 'close', size: 22 %}</button>
+    <p class="pawsorb-v2-calc__title" id="pawsorb-v2-calc-t-{{ section.id }}">{{ cs.title }}</p>
+    {%- if cs.intro != blank -%}<p class="pawsorb-v2-calc__intro">{{ cs.intro }}</p>{%- endif -%}
+    <div class="pawsorb-v2-calc__ctrl">
+      <div class="pawsorb-v2-calc__lab">
+        <span>{{ cs.weight_label }}</span>
+        <span class="pawsorb-v2-calc__units" role="group">
+          <button type="button" class="is-active" data-v2-calc-unit="lb">{{ cs.unit_lb }}</button><button type="button" data-v2-calc-unit="kg">{{ cs.unit_kg }}</button>
+        </span>
+      </div>
+      <output class="pawsorb-v2-calc__wout" data-v2-calc-wout>{{ cs.start_weight }} {{ cs.unit_lb }}</output>
+      <input class="pawsorb-v2-calc__range" type="range" min="5" max="150" step="1" value="{{ cs.start_weight }}" data-v2-calc-weight aria-label="{{ cs.weight_label | escape }}">
+      <span class="pawsorb-v2-calc__ends"><span data-lb="5 {{ cs.unit_lb | escape }}" data-kg="2 {{ cs.unit_kg | escape }}">5 {{ cs.unit_lb }}</span><span data-lb="150+ {{ cs.unit_lb | escape }}" data-kg="68+ {{ cs.unit_kg | escape }}">150+ {{ cs.unit_lb }}</span></span>
+    </div>
+    <div class="pawsorb-v2-calc__ctrl pawsorb-v2-calc__ctrl--row">
+      <span class="pawsorb-v2-calc__lab">{{ cs.dogs_label }}</span>
+      <span class="pawsorb-v2-calc__step">
+        <button type="button" data-v2-calc-step="-1" aria-label="-1">{% render 'pawsorb-icon', name: 'minus', size: 16 %}</button>
+        <output data-v2-calc-dogs>1</output>
+        <button type="button" data-v2-calc-step="1" aria-label="+1">{% render 'pawsorb-icon', name: 'plus', size: 16 %}</button>
+      </span>
+    </div>
+    <ul class="pawsorb-v2-calc__bands">
+      {%- for i in (1..4) -%}
+        {%- assign lk = 'band_' | append: i -%}
+        {%- assign mk = lk | append: '_max' -%}
+        {%- assign tk = lk | append: '_tubes' -%}
+        {%- assign kk = lk | append: '_kg' -%}
+        {%- assign nk = lk | append: '_note' -%}
+        {%- assign kg_label = cs[kk] | default: cs[lk] -%}
+        {%- if cs[lk] != blank -%}
+          {%- assign n_t = cs[tk] -%}
+          <li data-v2-calc-row data-max="{{ cs[mk] }}" data-tubes="{{ n_t }}">
+            <span class="pawsorb-v2-calc__band"><span data-lb="{{ cs[lk] | escape }}" data-kg="{{ kg_label | escape }}">{{ cs[lk] }}</span>{% if cs[nk] != blank %}<small>{{ cs[nk] }}</small>{% endif %}</span>
+            <span>{{ n_t }} {% if n_t == 1 %}{{ cs.tube_one }}{% else %}{{ cs.tube_many }}{% endif %}</span>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if cs.band_multi != blank -%}<li data-v2-calc-multi><span>{{ cs.band_multi }}</span><span>{{ cs.band_multi_value }}</span></li>{%- endif -%}
+    </ul>
+    <div class="pawsorb-v2-calc__result">
+      <p class="pawsorb-v2-calc__rlab">{{ cs.result_label }}</p>
+      <p class="pawsorb-v2-calc__per" data-v2-calc-per data-template="{{ cs.per_dog | escape }}"></p>
+      <p class="pawsorb-v2-calc__tot"><strong data-v2-calc-total>1</strong> <span data-v2-calc-word>{{ cs.tube_one }}</span></p>
+    </div>
+    {%- if cs.note != blank -%}<p class="pawsorb-v2-calc__note">{{ cs.note }}</p>{%- endif -%}
+    <button type="button" class="pawsorb-v2-calc__go" data-v2-calc-go>{{ cs.go_label }}</button>
+  </div>
+</dialog>
+
+{% stylesheet %}
+  .pawsorb-v2-calc { width: min(704px, calc(100% - 24px)); max-height: calc(100% - 24px); padding: 0; border: 0; border-radius: 20px; background: var(--pawsorb-v2-pdp-bg, #F8F5EF); color: var(--pawsorb-v2-pdp-ink, #121614); font-family: var(--font-body--family); overflow: auto; }
+  .pawsorb-v2-calc::backdrop { background: rgba(0, 0, 0, .5); }
+  .pawsorb-v2-calc__box { position: relative; display: flex; flex-direction: column; gap: 16px; padding: 36px 36px 30px; }
+  .pawsorb-v2-calc__x { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: inherit; cursor: pointer; }
+  .pawsorb-v2-calc__title { margin: 0; padding-right: 40px; font-weight: 700; font-size: 36px; line-height: 1.1; letter-spacing: -.02em; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-calc__intro { margin: -4px 0 0; font-size: 15px; line-height: 1.5; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-calc__ctrl { display: flex; flex-direction: column; gap: 8px; padding: 16px; border-radius: 12px; background: #fff; }
+  .pawsorb-v2-calc__ctrl--row { flex-direction: row; align-items: center; justify-content: space-between; }
+  .pawsorb-v2-calc__lab { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 15px; font-weight: 600; }
+  .pawsorb-v2-calc__units { display: inline-flex; padding: 3px; border-radius: 999px; background: #EEF0EE; }
+  .pawsorb-v2-calc__units button { min-width: 44px; padding: 5px 10px; border: 0; border-radius: 999px; background: transparent; color: inherit; font: 600 13px/1 var(--font-body--family); cursor: pointer; }
+  .pawsorb-v2-calc__units button.is-active { background: var(--pawsorb-v2-pdp-deep, #0B5E3F); color: #fff; }
+  .pawsorb-v2-calc__wout { font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-calc__range { -webkit-appearance: none; appearance: none; width: 100%; height: 8px; margin: 8px 0; border-radius: 999px; background: linear-gradient(to right, var(--pawsorb-v2-pdp-deep, #0B5E3F) var(--pawsorb-v2-calc-fill, 30%), #E5E3DE var(--pawsorb-v2-calc-fill, 30%)); cursor: pointer; }
+  .pawsorb-v2-calc__range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 7px solid var(--pawsorb-v2-pdp-deep, #0B5E3F); box-sizing: border-box; }
+  .pawsorb-v2-calc__range::-moz-range-thumb { width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 7px solid var(--pawsorb-v2-pdp-deep, #0B5E3F); box-sizing: border-box; }
+  .pawsorb-v2-calc__ends { display: flex; justify-content: space-between; font-size: 12px; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-calc__band { display: flex; flex-direction: column; gap: 1px; }
+  .pawsorb-v2-calc__band small { font-size: 12px; opacity: .75; }
+  .pawsorb-v2-calc__bands li > span:last-child { font-weight: 600; white-space: nowrap; }
+  .pawsorb-v2-calc__step { display: inline-flex; align-items: center; gap: 4px; border: 1px solid #E5E3DE; border-radius: 999px; }
+  .pawsorb-v2-calc__step button { width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
+  .pawsorb-v2-calc__step output { min-width: 24px; text-align: center; font-size: 17px; font-weight: 700; }
+  .pawsorb-v2-calc__bands { list-style: none; margin: 0; padding: 0; border-radius: 12px; overflow: hidden; background: #fff; }
+  .pawsorb-v2-calc__bands li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 16px; font-size: 15px; transition: background-color .15s, color .15s; }
+  .pawsorb-v2-calc__bands li + li { border-top: 1px solid #E5E3DE; }
+  .pawsorb-v2-calc__bands li.is-active { background: var(--pawsorb-v2-pdp-deep, #0B5E3F); color: #fff; border-color: transparent; }
+  .pawsorb-v2-calc__result { padding: 20px 22px; border-radius: 16px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; text-align: center; }
+  .pawsorb-v2-calc__result p { margin: 0; }
+  .pawsorb-v2-calc__rlab { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; opacity: .85; }
+  .pawsorb-v2-calc__per { margin-top: 4px !important; font-size: 19px; }
+  .pawsorb-v2-calc__tot { display: flex; align-items: baseline; justify-content: center; gap: 12px; margin-top: 4px !important; font-size: 17px; }
+  .pawsorb-v2-calc__tot strong { font-size: 64px; line-height: 1; font-weight: 700; }
+  .pawsorb-v2-calc__note { margin: 0; font-size: 13px; line-height: 1.45; text-align: center; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-calc__go { min-height: 54px; border: 0; border-radius: 8px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font: 700 17px/1 var(--font-body--family); cursor: pointer; }
+  .pawsorb-v2-calc__go:hover { background: var(--pawsorb-v2-pdp-acc-h, #0E6B48); }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-calc__box { padding: 28px 18px 22px; gap: 12px; }
+    .pawsorb-v2-calc__title { font-size: 28px; }
+    .pawsorb-v2-calc__tot strong { font-size: 52px; }
+  }
+{% endstylesheet %}

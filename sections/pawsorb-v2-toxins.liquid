@@ -1,0 +1,157 @@
+{%- assign ss = section.settings -%}
+<div
+  class="pawsorb-v2-tx"
+  style="--pawsorb-v2-tx-bg: {{ ss.bg_color }}; --pawsorb-v2-tx-ink: {{ ss.text_color }}; --pawsorb-v2-tx-card: {{ ss.card_color }}; --pawsorb-v2-tx-cardfg: {{ ss.card_text }}; --pawsorb-v2-tx-paper: {{ ss.panel_color }}; --pawsorb-v2-tx-num: {{ ss.number_color }}; --pawsorb-v2-tx-acc: {{ ss.accent_color }}; --pawsorb-v2-tx-h: {{ ss.heading_size }}px; --pawsorb-v2-tx-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-tx-hw: {{ ss.heading_weight }}; --pawsorb-v2-tx-pt: {{ ss.padding_top }}px; --pawsorb-v2-tx-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-tx-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-tx-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-tx__grid">
+    <div class="pawsorb-v2-tx__intro">
+      {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-tx__h">{{ ss.heading }}</h2>{%- endif -%}
+      {%- if ss.sub != blank -%}<p class="pawsorb-v2-tx__sub">{{ ss.sub }}</p>{%- endif -%}
+    </div>
+    {%- if section.blocks.size > 0 -%}
+      <ul class="pawsorb-v2-tx__card">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}><span class="pawsorb-v2-tx__ck" aria-hidden="true">{% render 'pawsorb-icon', name: 'check', size: 12 %}</span>{{ block.settings.text }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+    {%- if ss.show_panel -%}
+      <div class="pawsorb-v2-tx__panel">
+        {%- if ss.hero_number != blank -%}<p class="pawsorb-v2-tx__big">{{ ss.hero_number }}</p>{%- endif -%}
+        {%- if ss.hero_claim != blank -%}<p class="pawsorb-v2-tx__claim">{{ ss.hero_claim }}</p>{%- endif -%}
+        {%- if ss.show_chart -%}
+          <div class="pawsorb-v2-tx__chart">
+            {%- if ss.chart_axis != blank -%}<span class="pawsorb-v2-tx__axis">{{ ss.chart_axis }}</span>{%- endif -%}
+            <svg viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+              <defs><linearGradient id="pawsorb-v2-tx-g-{{ section.id }}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="{{ ss.accent_color }}" stop-opacity=".85"/><stop offset="1" stop-color="{{ ss.accent_color }}" stop-opacity="0"/></linearGradient></defs>
+              {%- case ss.chart_shape -%}
+                {%- when 'falling' -%}
+                  {%- assign d = 'M0 12 C 70 14, 120 40, 180 70 S 300 120, 400 128' -%}
+                {%- when 'rising' -%}
+                  {%- assign d = 'M0 128 C 90 124, 160 100, 220 70 S 330 18, 400 12' -%}
+                {%- else -%}
+                  {%- assign d = 'M0 18 C 60 20, 110 80, 180 108 S 300 112, 400 70' -%}
+              {%- endcase -%}
+              <path d="{{ d }} L400 150 L0 150 Z" fill="url(#pawsorb-v2-tx-g-{{ section.id }})"/>
+              <path d="{{ d }}" fill="none" stroke="{{ ss.number_color }}" stroke-width="2.5" vector-effect="non-scaling-stroke"/>
+              <path d="M1 0 V149 H400" fill="none" stroke="{{ ss.text_color }}" stroke-width="1.5" vector-effect="non-scaling-stroke"/>
+            </svg>
+            {%- if ss.chart_marker != blank -%}<span class="pawsorb-v2-tx__mark" style="left: {{ ss.marker_from }}%; width: {{ ss.marker_to | minus: ss.marker_from | at_least: 4 }}%;"><span>{{ ss.chart_marker }}</span></span>{%- endif -%}
+            <div class="pawsorb-v2-tx__labels">
+              {%- for i in (1..4) -%}{%- assign k = 'chart_label_' | append: i -%}<span>{{ ss[k] }}</span>{%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+        {%- if ss.stat_1_number != blank or ss.stat_2_number != blank -%}
+          <div class="pawsorb-v2-tx__minis">
+            <div class="pawsorb-v2-tx__mini"><p class="pawsorb-v2-tx__mnum">{{ ss.stat_1_number }}</p><p class="pawsorb-v2-tx__mtxt">{{ ss.stat_1_text }}</p></div>
+            <div class="pawsorb-v2-tx__mini"><p class="pawsorb-v2-tx__mnum">{{ ss.stat_2_number }}</p><p class="pawsorb-v2-tx__mtxt">{{ ss.stat_2_text }}</p></div>
+          </div>
+        {%- endif -%}
+        {%- if ss.source != blank -%}<p class="pawsorb-v2-tx__src">{{ ss.source }}</p>{%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-tx { padding: var(--pawsorb-v2-tx-pt, 56px) 16px var(--pawsorb-v2-tx-pb, 56px); background: var(--pawsorb-v2-tx-bg, #F8F5EF); color: var(--pawsorb-v2-tx-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-tx__grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 540px); grid-template-areas: "intro panel" "card panel"; align-content: center; align-items: center; gap: 22px 56px; }
+  .pawsorb-v2-tx__intro { grid-area: intro; align-self: end; text-align: center; }
+  .pawsorb-v2-tx__h { margin: 0; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-tx-hw, 400); font-size: var(--pawsorb-v2-tx-h, 36px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-tx__sub { max-width: 520px; margin: 12px auto 0; font-size: 15px; line-height: 1.6; letter-spacing: -.2px; }
+  .pawsorb-v2-tx__card { grid-area: card; align-self: start; justify-self: center; width: 100%; max-width: 450px; margin: 0; padding: 22px 26px; list-style: none; display: grid; gap: 14px; border-radius: 20px; background: var(--pawsorb-v2-tx-card, #12855A); color: var(--pawsorb-v2-tx-cardfg, #fff); box-sizing: border-box; }
+  .pawsorb-v2-tx__card li { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 500; line-height: 1.3; }
+  .pawsorb-v2-tx__ck { flex: 0 0 20px; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; background: var(--pawsorb-v2-tx-cardfg, #fff); color: var(--pawsorb-v2-tx-card, #12855A); }
+  .pawsorb-v2-tx__ck .pawsorb-icon { stroke-width: 3; }
+  .pawsorb-v2-tx__panel { grid-area: panel; position: relative; display: flex; flex-direction: column; justify-content: center; gap: 10px; aspect-ratio: 1; padding: 34px 36px 26px; border-radius: 8px; overflow: hidden; background-color: var(--pawsorb-v2-tx-paper, #F1ECE3); background-image: radial-gradient(rgba(18, 22, 20, .045) 1.2px, transparent 1.3px); background-size: 14px 14px; box-sizing: border-box; }
+  .pawsorb-v2-tx__panel p { margin: 0; }
+  .pawsorb-v2-tx__big { font-weight: 700; font-size: 96px; line-height: .95; letter-spacing: -.035em; color: var(--pawsorb-v2-tx-num, #0B5E3F); }
+  .pawsorb-v2-tx__claim { max-width: 440px; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -.01em; }
+  .pawsorb-v2-tx__chart { position: relative; margin: 6px 0 0 18px; }
+  .pawsorb-v2-tx__chart svg { display: block; width: 100%; height: 120px; }
+  .pawsorb-v2-tx__axis { position: absolute; left: -20px; top: 50%; transform: translate(-50%, -50%) rotate(-90deg); transform-origin: center; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .pawsorb-v2-tx__mark { position: absolute; top: 0; height: 120px; border-left: 1.5px dashed var(--pawsorb-v2-tx-num, #0B5E3F); border-right: 1.5px dashed var(--pawsorb-v2-tx-num, #0B5E3F); background: rgba(255, 255, 255, .28); box-sizing: border-box; }
+  .pawsorb-v2-tx__mark span { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); padding: 2px 8px; border-radius: 999px; background: var(--pawsorb-v2-tx-num, #0B5E3F); color: #fff; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .pawsorb-v2-tx__labels { display: flex; justify-content: space-between; margin-top: 5px; font-size: 11px; font-weight: 600; }
+  .pawsorb-v2-tx__minis { display: grid; grid-template-columns: 1fr 1fr; margin-top: 10px; }
+  .pawsorb-v2-tx__mini { padding: 0 14px; text-align: center; }
+  .pawsorb-v2-tx__mini + .pawsorb-v2-tx__mini { border-left: 2px solid var(--pawsorb-v2-tx-acc, #12855A); }
+  .pawsorb-v2-tx__mnum { font-weight: 700; font-size: 48px; line-height: 1; letter-spacing: -.03em; color: var(--pawsorb-v2-tx-num, #0B5E3F); }
+  .pawsorb-v2-tx__mtxt { margin-top: 6px !important; font-size: 14px; font-weight: 600; line-height: 1.3; }
+  .pawsorb-v2-tx__src { margin-top: 8px !important; font-size: 12px; font-style: italic; line-height: 1.4; text-align: center; color: #5B625E; }
+  @media screen and (max-width: 989px) {
+    .pawsorb-v2-tx__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 22px 28px; }
+    .pawsorb-v2-tx__big { font-size: 72px; }
+  }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-tx { padding: var(--pawsorb-v2-tx-ptm, 40px) 16px var(--pawsorb-v2-tx-pbm, 40px); }
+    .pawsorb-v2-tx__grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "intro" "panel" "card"; gap: 20px; }
+    .pawsorb-v2-tx__h { font-size: var(--pawsorb-v2-tx-hm, 30px); }
+    .pawsorb-v2-tx__sub { font-size: 14px; }
+    .pawsorb-v2-tx__panel { aspect-ratio: auto; padding: 24px 20px 18px; }
+    .pawsorb-v2-tx__big { font-size: 64px; }
+    .pawsorb-v2-tx__claim { font-size: 16px; }
+    .pawsorb-v2-tx__chart svg { height: 96px; }
+    .pawsorb-v2-tx__mark { height: 96px; }
+    .pawsorb-v2-tx__mark { position: absolute; top: 0; height: 120px; border-left: 1.5px dashed var(--pawsorb-v2-tx-num, #0B5E3F); border-right: 1.5px dashed var(--pawsorb-v2-tx-num, #0B5E3F); background: rgba(255, 255, 255, .28); box-sizing: border-box; }
+  .pawsorb-v2-tx__mark span { position: absolute; top: 4px; left: 50%; transform: translateX(-50%); padding: 2px 8px; border-radius: 999px; background: var(--pawsorb-v2-tx-num, #0B5E3F); color: #fff; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .pawsorb-v2-tx__labels { font-size: 10px; }
+    .pawsorb-v2-tx__mnum { font-size: 36px; }
+    .pawsorb-v2-tx__mtxt { font-size: 12.5px; }
+    .pawsorb-v2-tx__card { padding: 20px 22px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 toxins",
+  "tag": "section",
+  "class": "pawsorb-v2-section-tx",
+  "max_blocks": 12,
+  "blocks": [
+    { "type": "item", "name": "Checklist item", "settings": [ { "type": "text", "id": "text", "label": "Text", "default": "Cane toads" } ] }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "It's not if. It's when. Will you be ready?" },
+    { "type": "textarea", "id": "sub", "label": "Sub", "default": "Charcoal works best in the first hour. Toad venom acts in 15 to 30 minutes. These are the usual suspects." },
+    { "type": "header", "content": "Infographic panel" },
+    { "type": "checkbox", "id": "show_panel", "label": "Show the panel", "default": true },
+    { "type": "text", "id": "hero_number", "label": "Big number", "default": "1,200+" },
+    { "type": "text", "id": "hero_claim", "label": "Claim line", "default": "pet poisoning calls reach US hotlines every day" },
+    { "type": "checkbox", "id": "show_chart", "label": "Show the chart", "default": true },
+    { "type": "select", "id": "chart_shape", "label": "Chart shape", "default": "wave", "options": [ { "value": "wave", "label": "High, dip, rise" }, { "value": "falling", "label": "Falling" }, { "value": "rising", "label": "Rising" } ] },
+    { "type": "text", "id": "chart_axis", "label": "Chart axis title", "default": "Toxin absorbed" },
+    { "type": "text", "id": "chart_marker", "label": "Chart band label (optional)", "default": "Toads" },
+    { "type": "range", "id": "marker_from", "label": "Band starts at", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 33 },
+    { "type": "range", "id": "marker_to", "label": "Band ends at", "min": 0, "max": 100, "step": 1, "unit": "%", "default": 66 },
+    { "type": "text", "id": "chart_label_1", "label": "Chart label 1", "default": "0 min" },
+    { "type": "text", "id": "chart_label_2", "label": "Chart label 2", "default": "30 min" },
+    { "type": "text", "id": "chart_label_3", "label": "Chart label 3", "default": "1 hr" },
+    { "type": "text", "id": "chart_label_4", "label": "Chart label 4", "default": "4 hrs" },
+    { "type": "text", "id": "stat_1_number", "label": "Mini stat 1 number", "default": "60 min" },
+    { "type": "text", "id": "stat_1_text", "label": "Mini stat 1 line", "default": "the window when charcoal binds best" },
+    { "type": "text", "id": "stat_2_number", "label": "Mini stat 2 number", "default": "$1,500+" },
+    { "type": "text", "id": "stat_2_text", "label": "Mini stat 2 line", "default": "a typical emergency vet bill" },
+    { "type": "text", "id": "source", "label": "Source line", "default": "Sources: ASPCA Animal Poison Control Center, Pet Poison Helpline" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "card_color", "label": "Checklist card", "default": "#12855A" },
+    { "type": "color", "id": "card_text", "label": "Checklist text", "default": "#FFFFFF" },
+    { "type": "color", "id": "panel_color", "label": "Panel paper", "default": "#F1ECE3" },
+    { "type": "color", "id": "number_color", "label": "Panel numbers", "default": "#0B5E3F" },
+    { "type": "color", "id": "accent_color", "label": "Panel rule and chart", "default": "#12855A" },
+    { "type": "header", "content": "Type and spacing" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 36 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 30 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 toxins", "blocks": [ { "type": "item", "settings": { "text": "Cane toads" } }, { "type": "item", "settings": { "text": "Chocolate" } }, { "type": "item", "settings": { "text": "Grapes and raisins" } }, { "type": "item", "settings": { "text": "Human meds" } } ] } ]
+}
+{% endschema %}

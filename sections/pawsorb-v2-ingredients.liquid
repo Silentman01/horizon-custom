@@ -1,0 +1,141 @@
+{%- assign ss = section.settings -%}
+<div
+  class="pawsorb-v2-in"
+  style="--pawsorb-v2-in-bg: {{ ss.bg_color }}; --pawsorb-v2-in-ink: {{ ss.text_color }}; --pawsorb-v2-in-acc: {{ ss.accent_color }}; --pawsorb-v2-in-tabfg: {{ ss.tab_text }}; --pawsorb-v2-in-h: {{ ss.heading_size }}px; --pawsorb-v2-in-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-in-hw: {{ ss.heading_weight }}; --pawsorb-v2-in-pt: {{ ss.padding_top }}px; --pawsorb-v2-in-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-in-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-in-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-in__h">{{ ss.heading }}</h2>{%- endif -%}
+  <div class="pawsorb-v2-in__grid">
+    <div class="pawsorb-v2-in__media">
+      <span class="pawsorb-v2-in__fb" aria-hidden="true">
+        <svg viewBox="0 0 200 140" width="70%" focusable="false"><ellipse cx="100" cy="122" rx="78" ry="10" fill="rgba(18,22,20,.08)"/><path d="M40 112c-8-30 8-58 40-62 30-3 46 22 40 62z" fill="#8B6A4A"/><path d="M48 108c-4-22 8-44 32-46 22-2 34 16 30 46z" fill="#F4EDE2"/><path d="M104 116l10-34 22-10 22 8 8 26-14 12-30 4z" fill="#1F2321"/><circle cx="128" cy="92" r="2.5" fill="#3A403D"/><circle cx="146" cy="100" r="2" fill="#3A403D"/><circle cx="120" cy="106" r="2" fill="#3A403D"/><path d="M150 118l6-16 14-4 10 10-2 10z" fill="#FFFFFF" stroke="#E5E3DE"/><path d="M28 118l4-12 12-2 6 8-4 6z" fill="#FFFFFF" stroke="#E5E3DE"/></svg>
+      </span>
+      {%- if ss.image != blank -%}
+        {{ ss.image | image_url: width: 1000 | image_tag: loading: 'lazy', alt: ss.image_alt, sizes: '(min-width: 750px) 400px, 100vw', widths: '400, 600, 800, 1000' }}
+      {%- elsif ss.image_asset != blank -%}
+        <img src="{{ ss.image_asset | asset_url }}" alt="{{ ss.image_alt | escape }}" width="1200" height="1200" loading="lazy" decoding="async" onerror="this.remove()">
+      {%- endif -%}
+    </div>
+    <div class="pawsorb-v2-in__content" data-v2-in-tabs>
+      {%- if section.blocks.size > 1 -%}
+        <div class="pawsorb-v2-in__tabs" role="tablist">
+          {%- for block in section.blocks -%}
+            <button type="button" role="tab" id="pawsorb-v2-in-tab-{{ block.id }}" class="pawsorb-v2-in__tab{% if forloop.first %} is-active{% endif %}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" aria-controls="pawsorb-v2-in-panel-{{ block.id }}" data-v2-in-tab="{{ forloop.index0 }}">{{ block.settings.label }}</button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <div class="pawsorb-v2-in__panel" role="tabpanel" id="pawsorb-v2-in-panel-{{ block.id }}" aria-labelledby="pawsorb-v2-in-tab-{{ block.id }}" {% unless forloop.first %}hidden{% endunless %} {{ block.shopify_attributes }}>
+          <div class="pawsorb-v2-in__copy">
+            {%- if bs.title != blank -%}<h3 class="pawsorb-v2-in__t">{{ bs.title }}</h3>{%- endif -%}
+            <div class="pawsorb-v2-in__p">{{ bs.text }}</div>
+          </div>
+          <ul class="pawsorb-v2-in__list">
+            {%- for i in (1..3) -%}
+              {%- assign k = 'bullet_' | append: i -%}
+              {%- if bs[k] != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 16 %}<span>{{ bs[k] }}</span></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-in { padding: var(--pawsorb-v2-in-pt, 60px) 16px var(--pawsorb-v2-in-pb, 60px); background: var(--pawsorb-v2-in-bg, #F8F5EF); color: var(--pawsorb-v2-in-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-in__h { max-width: 900px; margin: 0 auto 36px; text-align: center; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-in-hw, 400); font-size: var(--pawsorb-v2-in-h, 36px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-in__grid { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 400px minmax(0, 1fr); gap: 40px; align-items: start; }
+  .pawsorb-v2-in__media { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #F1ECE3; }
+  .pawsorb-v2-in__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-in__fb { position: absolute; inset: 0; display: grid; place-items: center; }
+  .pawsorb-v2-in__tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 26px; }
+  .pawsorb-v2-in__tab { min-height: 44px; padding: 8px 10px; border: 1px solid var(--pawsorb-v2-in-ink, #121614); border-radius: 0; background: transparent; color: var(--pawsorb-v2-in-ink, #121614); font: 500 14px/1.25 var(--font-body--family); cursor: pointer; }
+  .pawsorb-v2-in__tab.is-active { border-color: var(--pawsorb-v2-in-acc, #12855A); background: var(--pawsorb-v2-in-acc, #12855A); color: var(--pawsorb-v2-in-tabfg, #F8F5EF); }
+  .pawsorb-v2-in__panel { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 28px; }
+  .pawsorb-v2-in__panel[hidden] { display: none; }
+  .pawsorb-v2-in__t { margin: 0 0 10px; font-family: var(--font-body--family); font-weight: 400; font-size: 20px; line-height: 1.25; }
+  .pawsorb-v2-in__p { font-size: 17px; line-height: 1.6; letter-spacing: -.3px; }
+  .pawsorb-v2-in__p p { margin: 0; }
+  .pawsorb-v2-in__p strong { font-weight: 700; color: var(--pawsorb-v2-in-ink, #121614); }
+  .pawsorb-v2-in__list { list-style: none; margin: 0; padding: 0; align-self: start; }
+  .pawsorb-v2-in__list li { display: flex; gap: 10px; align-items: flex-start; padding: 12px 0; font-size: 16px; line-height: 1.4; }
+  .pawsorb-v2-in__list li + li { border-top: 1px solid var(--pawsorb-v2-in-ink, #121614); }
+  .pawsorb-v2-in__list .pawsorb-icon { flex: 0 0 auto; margin-top: 3px; color: var(--pawsorb-v2-in-acc, #12855A); stroke-width: 2.4; }
+  @media screen and (max-width: 989px) {
+    .pawsorb-v2-in__grid { grid-template-columns: minmax(0, 340px) minmax(0, 1fr); gap: 28px; }
+    .pawsorb-v2-in__panel { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-in { padding: var(--pawsorb-v2-in-ptm, 40px) 16px var(--pawsorb-v2-in-pbm, 40px); }
+    .pawsorb-v2-in__h { margin-bottom: 22px; font-size: var(--pawsorb-v2-in-hm, 30px); }
+    .pawsorb-v2-in__grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .pawsorb-v2-in__tabs { gap: 8px; margin-bottom: 18px; }
+    .pawsorb-v2-in__tab { font-size: 12px; min-height: 42px; }
+    .pawsorb-v2-in__t { font-size: 17px; }
+    .pawsorb-v2-in__p { font-size: 14.5px; }
+    .pawsorb-v2-in__list li { font-size: 13.5px; padding: 10px 0; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const bind = (root) => root.querySelectorAll('[data-v2-in-tabs]:not([data-v2-in-ready])').forEach((box) => {
+      box.setAttribute('data-v2-in-ready', '');
+      const tabs = [...box.querySelectorAll('[data-v2-in-tab]')];
+      const panels = [...box.querySelectorAll('.pawsorb-v2-in__panel')];
+      const show = (n) => {
+        tabs.forEach((t, i) => { t.classList.toggle('is-active', i === n); t.setAttribute('aria-selected', i === n ? 'true' : 'false'); });
+        panels.forEach((p, i) => { p.hidden = i !== n; });
+      };
+      tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+      box.addEventListener('shopify:block:select', (e) => { const i = panels.indexOf(e.target); if (i > -1) show(i); });
+    });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => bind(document)); else bind(document);
+    document.addEventListener('shopify:section:load', (e) => bind(e.target));
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 ingredients",
+  "tag": "section",
+  "class": "pawsorb-v2-section-in",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Ingredient tab",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Tab label", "default": "Activated coconut charcoal" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Poison catcher" },
+        { "type": "richtext", "id": "text", "label": "Paragraph", "default": "<p>Millions of tiny pores grab the poison <strong>in the stomach, before it reaches the blood</strong>.</p>" },
+        { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Binds a wide range of toxins" },
+        { "type": "text", "id": "bullet_2", "label": "Bullet 2", "default": "Coconut-shell source" },
+        { "type": "text", "id": "bullet_3", "label": "Bullet 3", "default": "Passes out in the stool" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "ER-grade binders, ready in your drawer" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "image_asset", "label": "Image theme file", "default": "pawsorb-v2-ingredients.webp", "info": "File in assets/. Until it exists, a drawn still life is shown." },
+    { "type": "text", "id": "image_alt", "label": "Image alt text", "default": "Coconut shell, charcoal chunks and white kaolin clay" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text, outlines, dividers", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Active tab and checks", "default": "#12855A" },
+    { "type": "color", "id": "tab_text", "label": "Active tab text", "default": "#F8F5EF" },
+    { "type": "header", "content": "Type and spacing" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 36 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 30 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 ingredients", "blocks": [ { "type": "tab" }, { "type": "tab", "settings": { "label": "White kaolin clay", "title": "The second layer" } } ] } ]
+}
+{% endschema %}

@@ -1,0 +1,120 @@
+{%- assign ss = section.settings -%}
+<div
+  class="pawsorb-v2-tl"
+  style="--pawsorb-v2-tl-bg1: {{ ss.bg_from }}; --pawsorb-v2-tl-bg2: {{ ss.bg_to }}; --pawsorb-v2-tl-ink: {{ ss.text_color }}; --pawsorb-v2-tl-acc: {{ ss.accent_color }}; --pawsorb-v2-tl-line: {{ ss.line_color }}; --pawsorb-v2-tl-h: {{ ss.heading_size }}px; --pawsorb-v2-tl-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-tl-hw: {{ ss.heading_weight }}; --pawsorb-v2-tl-pt: {{ ss.padding_top }}px; --pawsorb-v2-tl-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-tl-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-tl-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-tl__head">
+    {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-tl__h">{{ ss.heading }}</h2>{%- endif -%}
+    {%- if ss.sub != blank -%}<p class="pawsorb-v2-tl__sub">{{ ss.sub }}</p>{%- endif -%}
+  </div>
+  {%- if section.blocks.size > 0 -%}
+    <ol class="pawsorb-v2-tl__list" data-v2-tl>
+      <li class="pawsorb-v2-tl__rail" aria-hidden="true"><span class="pawsorb-v2-tl__fill" data-v2-tl-fill></span></li>
+      {%- for block in section.blocks -%}
+        {%- assign bs = block.settings -%}
+        <li class="pawsorb-v2-tl__item" {{ block.shopify_attributes }}>
+          <span class="pawsorb-v2-tl__dot" aria-hidden="true"></span>
+          {%- if bs.badge != blank -%}<span class="pawsorb-v2-tl__badge">{{ bs.badge }}</span>{%- endif -%}
+          {%- if bs.title != blank -%}<h3 class="pawsorb-v2-tl__t">{{ bs.title }}</h3>{%- endif -%}
+          <ul class="pawsorb-v2-tl__bul">
+            {%- for i in (1..3) -%}
+              {%- assign k = 'bullet_' | append: i -%}
+              {%- if bs[k] != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 15 %}<span>{{ bs[k] }}</span></li>{%- endif -%}
+            {%- endfor -%}
+          </ul>
+        </li>
+      {%- endfor -%}
+    </ol>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-tl { padding: var(--pawsorb-v2-tl-pt, 72px) 16px var(--pawsorb-v2-tl-pb, 80px); background: linear-gradient(135deg, var(--pawsorb-v2-tl-bg1, #fff), var(--pawsorb-v2-tl-bg2, #F6F6F4)); color: var(--pawsorb-v2-tl-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-tl__head { max-width: 760px; margin: 0 auto 36px; text-align: center; }
+  .pawsorb-v2-tl__h { margin: 0; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-tl-hw, 400); font-size: var(--pawsorb-v2-tl-h, 36px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-tl__sub { margin: 10px 0 0; font-size: 16px; line-height: 1.5; opacity: .8; }
+  .pawsorb-v2-tl__list { position: relative; max-width: 760px; margin: 0 auto; padding: 0; list-style: none; display: grid; gap: 34px; }
+  .pawsorb-v2-tl__rail { position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--pawsorb-v2-tl-line, #E5E3DE); }
+  .pawsorb-v2-tl__fill { position: absolute; left: 0; top: 0; width: 100%; height: var(--pawsorb-v2-tl-p, 100%); background: var(--pawsorb-v2-tl-acc, #12855A); transition: height .15s linear; }
+  .pawsorb-v2-tl__item { position: relative; padding-left: 50px; }
+  .pawsorb-v2-tl__dot { position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--pawsorb-v2-tl-acc, #12855A); box-shadow: 0 0 0 4px color-mix(in srgb, var(--pawsorb-v2-tl-acc, #12855A) 18%, transparent); }
+  .pawsorb-v2-tl__badge { display: inline-block; padding: 4px 12px; border-radius: 999px; background: var(--pawsorb-v2-tl-acc, #12855A); color: #fff; font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .pawsorb-v2-tl__t { margin: 10px 0 10px; font-family: var(--font-body--family); font-weight: 400; font-size: 20px; line-height: 1.25; }
+  .pawsorb-v2-tl__bul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .pawsorb-v2-tl__bul li { display: flex; gap: 9px; align-items: flex-start; font-size: 15px; line-height: 1.5; }
+  .pawsorb-v2-tl__bul .pawsorb-icon { flex: 0 0 auto; margin-top: 4px; color: var(--pawsorb-v2-tl-acc, #12855A); stroke-width: 2.4; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-tl { padding: var(--pawsorb-v2-tl-ptm, 40px) 24px var(--pawsorb-v2-tl-pbm, 48px) 16px; }
+    .pawsorb-v2-tl__head { margin-bottom: 26px; }
+    .pawsorb-v2-tl__h { font-size: var(--pawsorb-v2-tl-hm, 26px); }
+    .pawsorb-v2-tl__sub { font-size: 14px; }
+    .pawsorb-v2-tl__list { gap: 28px; }
+    .pawsorb-v2-tl__item { padding-left: 36px; }
+    .pawsorb-v2-tl__t { font-size: 18px; }
+    .pawsorb-v2-tl__badge { font-size: 11px; }
+    .pawsorb-v2-tl__bul li { font-size: 13.5px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const lists = () => [...document.querySelectorAll('[data-v2-tl]')];
+    let raf = 0;
+    const run = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => lists().forEach((l) => {
+        const r = l.getBoundingClientRect();
+        const vh = window.innerHeight || 800;
+        const p = Math.min(1, Math.max(0, (vh * 0.65 - r.top) / Math.max(1, r.height)));
+        l.style.setProperty('--pawsorb-v2-tl-p', (p * 100).toFixed(1) + '%');
+      }));
+    };
+    document.addEventListener('scroll', run, { capture: true, passive: true });
+    window.addEventListener('resize', run, { passive: true });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+    document.addEventListener('shopify:section:load', run);
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 timeline",
+  "tag": "section",
+  "class": "pawsorb-v2-section-tl",
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        { "type": "text", "id": "badge", "label": "Time badge", "default": "Right away" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Give it first" },
+        { "type": "text", "id": "bullet_1", "label": "Bullet 1", "default": "Set the dial to their pounds, then squeeze the gel into the cheek pouch." },
+        { "type": "text", "id": "bullet_2", "label": "Bullet 2" },
+        { "type": "text", "id": "bullet_3", "label": "Bullet 3" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The next 48 hours, step by step" },
+    { "type": "text", "id": "sub", "label": "Sub", "default": "The clock starts when they swallow." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_from", "label": "Background gradient start", "default": "#FFFFFF" },
+    { "type": "color", "id": "bg_to", "label": "Background gradient end", "default": "#F6F6F4" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Accent (line fill, dots, badges, checks)", "default": "#12855A" },
+    { "type": "color", "id": "line_color", "label": "Line", "default": "#E5E3DE" },
+    { "type": "header", "content": "Type and spacing" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 36 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 26 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 120, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [ { "name": "PawSorb v2 timeline", "blocks": [ { "type": "stage" } ] } ]
+}
+{% endschema %}

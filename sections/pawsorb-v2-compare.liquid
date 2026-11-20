@@ -1,0 +1,123 @@
+{%- assign ss = section.settings -%}
+<div
+  class="pawsorb-v2-cp"
+  style="--pawsorb-v2-cp-bg: {{ ss.bg_color }}; --pawsorb-v2-cp-ink: {{ ss.text_color }}; --pawsorb-v2-cp-acc: {{ ss.accent_color }}; --pawsorb-v2-cp-h: {{ ss.heading_size }}px; --pawsorb-v2-cp-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-cp-hw: {{ ss.heading_weight }}; --pawsorb-v2-cp-pt: {{ ss.padding_top }}px; --pawsorb-v2-cp-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-cp-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-cp-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-cp__grid">
+    {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-cp__h">{{ ss.heading }}</h2>{%- endif -%}
+    <table class="pawsorb-v2-cp__table">
+      <thead>
+        <tr>
+          <th scope="col" class="pawsorb-v2-cp__lab"><span class="visually-hidden">{{ ss.feature_label }}</span></th>
+          <th scope="col" class="pawsorb-v2-cp__us pawsorb-v2-cp__us--top">
+            <span class="pawsorb-v2-cp__shot">
+              {%- if ss.image != blank -%}
+                {{ ss.image | image_url: width: 240 | image_tag: loading: 'lazy', alt: ss.image_alt, width: 70, height: 105 }}
+              {%- elsif ss.image_asset != blank -%}
+                <img src="{{ ss.image_asset | asset_url }}" alt="{{ ss.image_alt | escape }}" width="70" height="105" loading="lazy" onerror="this.remove()">
+              {%- endif -%}
+            </span>
+            {%- if ss.us_pill != blank -%}<span class="pawsorb-v2-cp__pill">{% render 'pawsorb-icon', name: 'check-circle', size: 10 %}{{ ss.us_pill }}</span>{%- endif -%}
+          </th>
+          <th scope="col" class="pawsorb-v2-cp__them">{{ ss.them_label }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%- for block in section.blocks -%}
+          {%- assign bs = block.settings -%}
+          <tr {{ block.shopify_attributes }}>
+            <th scope="row" class="pawsorb-v2-cp__lab"><span class="pawsorb-v2-cp__labin">{% render 'pawsorb-icon', name: bs.icon, size: 20 %}<span>{{ bs.label }}</span></span></th>
+            <td class="pawsorb-v2-cp__us{% if forloop.last %} pawsorb-v2-cp__us--end{% endif %}">
+              {%- if bs.us -%}<span class="pawsorb-v2-cp__yes" role="img" aria-label="{{ ss.yes_label | escape }}">{% render 'pawsorb-icon', name: 'check', size: 12 %}</span>{%- else -%}<span class="pawsorb-v2-cp__dash" role="img" aria-label="{{ ss.no_label | escape }}">–</span>{%- endif -%}
+            </td>
+            <td class="pawsorb-v2-cp__them">
+              {%- if bs.them -%}<span class="pawsorb-v2-cp__ok" role="img" aria-label="{{ ss.yes_label | escape }}">{% render 'pawsorb-icon', name: 'check', size: 11 %}</span>{%- else -%}<span class="pawsorb-v2-cp__no" role="img" aria-label="{{ ss.no_label | escape }}">{% render 'pawsorb-icon', name: 'cross', size: 10 %}</span>{%- endif -%}
+            </td>
+          </tr>
+        {%- endfor -%}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-cp { padding: var(--pawsorb-v2-cp-pt, 56px) 16px var(--pawsorb-v2-cp-pb, 56px); background: var(--pawsorb-v2-cp-bg, #F8F5EF); color: var(--pawsorb-v2-cp-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-cp__grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 60fr) minmax(0, 40fr); gap: 32px; align-items: center; }
+  .pawsorb-v2-cp__h { margin: 0; text-align: center; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-cp-hw, 400); font-size: var(--pawsorb-v2-cp-h, 40px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-cp__table { width: 100%; max-width: 480px; justify-self: end; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
+  .pawsorb-v2-cp__table th, .pawsorb-v2-cp__table td { padding: 12px 6px; vertical-align: middle; font-weight: 400; }
+  .pawsorb-v2-cp__table col, .pawsorb-v2-cp__lab { width: 50%; }
+  .pawsorb-v2-cp__table tbody .pawsorb-v2-cp__lab, .pawsorb-v2-cp__table tbody .pawsorb-v2-cp__them { border-top: 1px solid rgba(18, 22, 20, .15); }
+  .pawsorb-v2-cp__lab { text-align: left; }
+  .pawsorb-v2-cp__labin { display: flex; align-items: center; gap: 10px; font-size: 17px; line-height: 1.25; }
+  .pawsorb-v2-cp__labin .pawsorb-icon { flex: 0 0 auto; color: var(--pawsorb-v2-cp-acc, #12855A); }
+  .pawsorb-v2-cp__us { width: 25%; text-align: center; background: var(--pawsorb-v2-cp-acc, #12855A); color: #fff; }
+  .pawsorb-v2-cp__us--top { padding-top: 14px !important; border-radius: 16px 16px 0 0; vertical-align: bottom !important; }
+  .pawsorb-v2-cp__us--end { border-radius: 0 0 16px 16px; padding-bottom: 18px !important; }
+  .pawsorb-v2-cp__shot { display: block; width: 70px; height: 105px; margin: 0 auto 8px; }
+  .pawsorb-v2-cp__shot img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .25)); }
+  .pawsorb-v2-cp__pill { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border: 1px solid rgba(255, 255, 255, .3); border-radius: 999px; background: rgba(255, 255, 255, .2); font-size: 10px; font-weight: 600; line-height: 1.4; }
+  .pawsorb-v2-cp__them { width: 25%; text-align: center; font-size: 21px; vertical-align: middle; }
+  .pawsorb-v2-cp__yes { display: inline-grid; place-items: center; width: 22px; height: 22px; border: 1.5px solid #fff; border-radius: 50%; }
+  .pawsorb-v2-cp__yes .pawsorb-icon { stroke-width: 3; }
+  .pawsorb-v2-cp__no, .pawsorb-v2-cp__ok { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: var(--pawsorb-v2-cp-ink, #121614); color: #fff; vertical-align: middle; }
+  .pawsorb-v2-cp__no .pawsorb-icon, .pawsorb-v2-cp__ok .pawsorb-icon { stroke-width: 3.4; }
+  .pawsorb-v2-cp__dash { font-size: 18px; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-cp { padding: var(--pawsorb-v2-cp-ptm, 40px) 16px var(--pawsorb-v2-cp-pbm, 40px); }
+    .pawsorb-v2-cp__grid { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+    .pawsorb-v2-cp__h { font-size: var(--pawsorb-v2-cp-hm, 30px); }
+    .pawsorb-v2-cp__table { max-width: none; justify-self: stretch; }
+    .pawsorb-v2-cp__table th, .pawsorb-v2-cp__table td { padding: 10px 4px; }
+    .pawsorb-v2-cp__lab { width: 52%; }
+    .pawsorb-v2-cp__labin { gap: 8px; font-size: 13px; }
+    .pawsorb-v2-cp__labin .pawsorb-icon { width: 17px; height: 17px; }
+    .pawsorb-v2-cp__them { font-size: 16px; }
+    .pawsorb-v2-cp__shot { width: 56px; height: 84px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 comparison",
+  "tag": "section",
+  "class": "pawsorb-v2-section-cp",
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Kaolin second layer" },
+        { "type": "select", "id": "icon", "label": "Icon", "default": "check-circle", "options": [ { "value": "check-circle", "label": "Check" }, { "value": "leaf", "label": "Leaf" }, { "value": "dial", "label": "Dial" }, { "value": "tube", "label": "Tube" }, { "value": "drop", "label": "Drop" }, { "value": "vet", "label": "Stethoscope" }, { "value": "flag", "label": "Flag" }, { "value": "clock", "label": "Clock" }, { "value": "shield", "label": "Shield" }, { "value": "flask", "label": "Flask" } ] },
+        { "type": "checkbox", "id": "us", "label": "PawSorb has it", "default": true },
+        { "type": "checkbox", "id": "them", "label": "Others have it", "default": false }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What other charcoal skips" },
+    { "type": "text", "id": "us_pill", "label": "Pill under the product", "default": "Ours" },
+    { "type": "text", "id": "them_label", "label": "Others column label", "default": "Generic" },
+    { "type": "image_picker", "id": "image", "label": "Product cutout" },
+    { "type": "text", "id": "image_asset", "label": "Product cutout theme file", "default": "pawsorb-v2-cutout.webp" },
+    { "type": "text", "id": "image_alt", "label": "Product alt text", "default": "PawSorb tube" },
+    { "type": "text", "id": "feature_label", "label": "Feature column (screen readers)", "default": "Feature" },
+    { "type": "text", "id": "yes_label", "label": "Yes (screen readers)", "default": "Yes" },
+    { "type": "text", "id": "no_label", "label": "No (screen readers)", "default": "No" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text and cross marks", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Our column and icons", "default": "#12855A" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 56, "step": 1, "unit": "px", "default": 40 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 30 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 comparison", "blocks": [ { "type": "row" }, { "type": "row", "settings": { "label": "Dosed by the pound", "icon": "dial" } } ] } ]
+}
+{% endschema %}

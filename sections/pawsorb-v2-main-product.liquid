@@ -1,0 +1,679 @@
+{%- liquid
+  assign ss = section.settings
+  assign p = product
+  if p == blank
+    assign p = closest.product
+  endif
+  if p == blank and request.visual_preview_mode
+    assign p = collections.all.products.first
+  endif
+  assign v = p.selected_or_first_available_variant
+  assign images = p.media | where: 'media_type', 'image'
+  assign title = ss.title_override | default: p.title | default: 'PawSorb™ Activated Charcoal First Aid Gel'
+  assign title_html = title | escape
+  assign fallback_list = ss.fallback_assets | split: ','
+  assign start_qty = 1
+  assign has_pre = false
+  for b in section.blocks
+    if b.type == 'tier' and b.settings.preselect
+      assign start_qty = b.settings.quantity
+      assign has_pre = true
+      break
+    endif
+  endfor
+  unless has_pre
+    for b in section.blocks
+      if b.type == 'tier'
+        assign start_qty = b.settings.quantity
+        break
+      endif
+    endfor
+  endunless
+  assign award = section.blocks | where: 'type', 'award' | first
+  assign notice = section.blocks | where: 'type', 'notice' | first
+  assign calc = section.blocks | where: 'type', 'calculator' | first
+  assign comment = section.blocks | where: 'type', 'comment' | first
+  assign benefits = section.blocks | where: 'type', 'benefit'
+  assign faqs = section.blocks | where: 'type', 'faq'
+-%}
+<script src="{{ 'pawsorb-core.js' | asset_url }}" defer></script>
+{%- if ss.chrome_enabled -%}
+  {%- comment -%} Page chrome for this template only (header line, footer colour, cart drawer canvas). Never affects other templates. {%- endcomment -%}
+  <style>
+    #header-group .header-section { border-bottom: 1px solid {{ ss.line_color }}; }
+    .shopify-section-group-footer-group .section-background { background-color: {{ ss.footer_bg }} !important; }
+    .shopify-section-group-footer-group { color: {{ ss.footer_text }}; }
+    .pawsorb-cd__panel, .pawsorb-cd__foot, .pawsorb-cd__ship { background: {{ ss.bg_color }}; }
+    .pawsorb-cd__head, .pawsorb-cd__ship, .pawsorb-cd__item, .pawsorb-cd__foot { border-color: rgba(18, 22, 20, .1); }
+    .pawsorb-cd__checkout, .pawsorb-cd__emptylink { border-radius: 32px; }
+    .pawsorb-cd__x, .pawsorb-cd__thumb, .pawsorb-cd__emptyic { background: #FFFFFF; }
+  </style>
+{%- endif -%}
+<pawsorb-v2-buy-box
+  class="pawsorb-v2-pdp"
+  style="--pawsorb-v2-pdp-bg: {{ ss.bg_color }}; --pawsorb-v2-pdp-ink: {{ ss.text_color }}; --pawsorb-v2-pdp-muted: {{ ss.muted_color }}; --pawsorb-v2-pdp-acc: {{ ss.accent_color }}; --pawsorb-v2-pdp-acc-h: {{ ss.accent_hover }}; --pawsorb-v2-pdp-deep: {{ ss.deep_color }}; --pawsorb-v2-pdp-line: {{ ss.line_color }}; --pawsorb-v2-pdp-tierline: {{ ss.tier_border }}; --pawsorb-v2-pdp-h1: {{ ss.title_size }}px; --pawsorb-v2-pdp-h1m: {{ ss.title_size_mobile }}px; --pawsorb-v2-pdp-hw: {{ ss.heading_weight }}; --pawsorb-v2-pdp-pt: {{ ss.padding_top }}px; --pawsorb-v2-pdp-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-pdp-pbm: {{ ss.padding_bottom_mobile }}px;"
+  data-section="{{ section.id }}"
+>
+  <div class="pawsorb-v2-pdp__grid">
+    <div class="pawsorb-v2-pdp__gallery">
+      <div class="pawsorb-v2-pdp__stage">
+        <div class="pawsorb-v2-pdp__track" data-pawsorb-rail data-v2-track>
+          {%- if images.size > 0 -%}
+            {%- for m in images -%}
+              <div class="pawsorb-v2-pdp__slide">
+                {%- assign ld = 'lazy' -%}{%- if forloop.first -%}{%- assign ld = 'eager' -%}{%- endif -%}
+                {%- assign m_alt = m.alt | default: ss.gallery_alt -%}
+                {{ m.preview_image | image_url: width: 1200 | image_tag: loading: ld, sizes: '(min-width: 990px) 520px, 100vw', widths: '400, 600, 800, 1000, 1200', alt: m_alt, class: 'pawsorb-v2-pdp__img' }}
+              </div>
+            {%- endfor -%}
+          {%- elsif ss.fallback_image != blank -%}
+            <div class="pawsorb-v2-pdp__slide">{{ ss.fallback_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: ss.gallery_alt, class: 'pawsorb-v2-pdp__img' }}</div>
+          {%- else -%}
+            {%- for f in fallback_list -%}
+              {%- assign fn = f | strip -%}
+              {%- if fn == blank -%}{%- continue -%}{%- endif -%}
+              <div class="pawsorb-v2-pdp__slide">
+                <img class="pawsorb-v2-pdp__img" src="{{ fn | asset_url }}" alt="{{ ss.gallery_alt | escape }}" width="1200" height="1200" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" onerror="this.parentNode.classList.add('is-missing')">
+              </div>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+        <div class="pawsorb-v2-pdp__fb" aria-hidden="true">{% render 'pawsorb-pack-art' %}</div>
+      </div>
+      {%- liquid
+        assign n_slides = images.size
+        if n_slides == 0 and ss.fallback_image == blank
+          assign n_slides = fallback_list.size
+        endif
+      -%}
+      {%- if n_slides > 1 -%}
+        <div class="pawsorb-v2-pdp__dots" aria-hidden="true">
+          {%- for i in (1..n_slides) -%}<span class="pawsorb-v2-pdp__dot{% if forloop.first %} is-active{% endif %}"></span>{%- endfor -%}
+        </div>
+        <div class="pawsorb-v2-pdp__thumbs" data-pawsorb-rail>
+          {%- if images.size > 0 -%}
+            {%- for m in images -%}
+              <button type="button" class="pawsorb-v2-pdp__thumb{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="{{ forloop.index }} / {{ images.size }}">
+                {{ m.preview_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 56, height: 56 }}
+              </button>
+            {%- endfor -%}
+          {%- else -%}
+            {%- for f in fallback_list -%}
+              {%- assign fn = f | strip -%}
+              <button type="button" class="pawsorb-v2-pdp__thumb{% if forloop.first %} is-active{% endif %}" data-index="{{ forloop.index0 }}" aria-label="{{ forloop.index }} / {{ fallback_list.size }}">
+                <img src="{{ fn | asset_url }}" alt="" width="56" height="56" loading="lazy" onerror="this.parentNode.hidden=true">
+              </button>
+            {%- endfor -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pawsorb-v2-pdp__info">
+      {%- if ss.rating_text != blank -%}
+        <p class="pawsorb-v2-pdp__rating">
+          <span class="pawsorb-v2-pdp__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 16 %}{%- endfor -%}</span>
+          <span>{{ ss.rating_text }}</span>
+        </p>
+      {%- endif -%}
+      <h1 class="pawsorb-v2-pdp__title">{{ title_html }}</h1>
+
+      {%- if award -%}
+        <p class="pawsorb-v2-pdp__award" {{ award.shopify_attributes }}>
+          <span class="pawsorb-v2-pdp__award-no">{{ award.settings.number }}</span>
+          <span class="pawsorb-v2-pdp__award-txt"><strong>{{ award.settings.line_1 }}</strong>{%- if award.settings.line_2 != blank -%}<em>{{ award.settings.line_2 }}</em>{%- endif -%}</span>
+        </p>
+      {%- endif -%}
+
+      {%- if ss.paragraph != blank -%}<div class="pawsorb-v2-pdp__desc">{{ ss.paragraph }}</div>{%- endif -%}
+
+      {%- if benefits.size > 0 -%}
+        <ul class="pawsorb-v2-pdp__benefits">
+          {%- for b in benefits -%}
+            <li {{ b.shopify_attributes }}><span class="pawsorb-v2-pdp__bic" aria-hidden="true"><span>{% render 'pawsorb-icon', name: 'check', size: 18 %}</span></span><span>{{ b.settings.label }}</span></li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if calc -%}
+        <button type="button" class="pawsorb-v2-pdp__calcbtn" data-v2-calc-open {{ calc.shopify_attributes }}>{% render 'pawsorb-icon', name: 'paw', size: 18 %}<span>{{ calc.settings.button_label }}</span></button>
+      {%- endif -%}
+
+      {%- if notice -%}
+        <div class="pawsorb-v2-pdp__notice" {{ notice.shopify_attributes }}>
+          <svg class="pawsorb-v2-pdp__notice-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>
+          <div>
+            {%- if notice.settings.title != blank -%}<p class="pawsorb-v2-pdp__notice-t">{{ notice.settings.title }}</p>{%- endif -%}
+            {%- if notice.settings.body != blank -%}<p class="pawsorb-v2-pdp__notice-b">{{ notice.settings.body }}</p>{%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {% render 'pawsorb-v2-offer', section: section, start_qty: start_qty %}
+
+      {%- if p != blank -%}
+        {%- form 'product', p, class: 'pawsorb-v2-pdp__form', data-v2-form: '' -%}
+          <input type="hidden" name="id" value="{{ v.id }}">
+          <input type="hidden" name="quantity" value="{{ start_qty }}" data-v2-qty>
+          <button type="submit" name="add" class="pawsorb-v2-pdp__atc" data-pawsorb-atc data-v2-atc {% unless v.available %}disabled{% endunless %}>
+            <span>{% if v.available %}{{ ss.button_label }}{% else %}{{ ss.soldout_label }}{% endif %}</span>
+            <span class="pawsorb-v2-pdp__spin" aria-hidden="true"></span>
+          </button>
+          <p class="pawsorb-v2-pdp__err" data-v2-err role="alert" hidden></p>
+        {%- endform -%}
+      {%- endif -%}
+
+      {%- if ss.trust_1 != blank or ss.trust_2 != blank -%}
+        <ul class="pawsorb-v2-pdp__trust">
+          {%- if ss.trust_1 != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 14 %}<span>{{ ss.trust_1 }}</span></li>{%- endif -%}
+          {%- if ss.trust_2 != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 14 %}<span>{{ ss.trust_2 }}</span></li>{%- endif -%}
+        </ul>
+      {%- endif -%}
+      {%- if ss.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+        <ul class="pawsorb-v2-pdp__pay" aria-label="{{ ss.payment_label | escape }}">
+          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- if comment -%}
+        {%- assign cs = comment.settings -%}
+        <div class="pawsorb-v2-pdp__cmt" {{ comment.shopify_attributes }}>
+          <span class="pawsorb-v2-pdp__avatar">
+            <span class="pawsorb-v2-pdp__avatar-fb" aria-hidden="true">{{ cs.name | slice: 0 }}</span>
+            {%- if cs.avatar != blank -%}
+              {{ cs.avatar | image_url: width: 96 | image_tag: loading: 'lazy', alt: '', width: 36, height: 36 }}
+            {%- elsif cs.avatar_asset != blank -%}
+              <img src="{{ cs.avatar_asset | asset_url }}" alt="" width="36" height="36" loading="lazy" onerror="this.remove()">
+            {%- endif -%}
+          </span>
+          <div class="pawsorb-v2-pdp__cmt-main">
+            <div class="pawsorb-v2-pdp__bubble">
+              <p class="pawsorb-v2-pdp__cmt-name">{{ cs.name }}</p>
+              <div class="pawsorb-v2-pdp__cmt-text">{{ cs.text }}</div>
+              {%- if cs.reactions != blank -%}
+                <span class="pawsorb-v2-pdp__react"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="{{ cs.heart_color }}"/><path fill="#fff" d="M12 17.3l-.8-.7C8.4 14.1 6.6 12.5 6.6 10.5c0-1.6 1.2-2.8 2.8-2.8.9 0 1.8.4 2.4 1.1.6-.7 1.5-1.1 2.4-1.1 1.6 0 2.8 1.2 2.8 2.8 0 2-1.8 3.6-4.6 6.1z"/></svg>{{ cs.reactions }}</span>
+              {%- endif -%}
+            </div>
+            <p class="pawsorb-v2-pdp__cmt-meta">{{ cs.meta }}</p>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if faqs.size > 0 -%}
+        <div class="pawsorb-v2-pdp__faq">
+          {%- for f in faqs -%}
+            <details class="pawsorb-v2-pdp__q" name="pawsorb-v2-q-{{ section.id }}" {{ f.shopify_attributes }}>
+              <summary><span>{{ f.settings.question }}</span><span class="pawsorb-v2-pdp__plus" aria-hidden="true">+</span></summary>
+              <div class="pawsorb-v2-pdp__a">{{ f.settings.answer }}</div>
+            </details>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {%- if calc -%}{% render 'pawsorb-v2-calculator', block: calc, section: section %}{%- endif -%}
+</pawsorb-v2-buy-box>
+
+{% stylesheet %}
+  .pawsorb-v2-pdp { display: block; padding: var(--pawsorb-v2-pdp-pt, 24px) 16px var(--pawsorb-v2-pdp-pb, 56px); background: var(--pawsorb-v2-pdp-bg, #F8F5EF); color: var(--pawsorb-v2-pdp-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-pdp__grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 576px) minmax(0, 560px); gap: 44px; align-items: start; justify-content: center; }
+  .pawsorb-v2-pdp__gallery { position: sticky; top: 16px; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 0 14px; min-width: 0; }
+  .pawsorb-v2-pdp__stage { position: relative; grid-column: 2; grid-row: 1; border-radius: 8px; overflow: hidden; aspect-ratio: 1; background: #F0ECE6; }
+  .pawsorb-v2-pdp__fb { position: absolute; inset: 0; display: grid; place-items: center; z-index: 0; }
+  .pawsorb-v2-pdp__fb .pawsorb-pack-art { width: 80%; height: auto; }
+  .pawsorb-v2-pdp__track { position: relative; z-index: 1; display: flex; height: 100%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain; }
+  .pawsorb-v2-pdp__track::-webkit-scrollbar { display: none; }
+  .pawsorb-v2-pdp__track.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+  .pawsorb-v2-pdp__slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 1; background: #F0ECE6; }
+  .pawsorb-v2-pdp__slide.is-missing { display: none; }
+  .pawsorb-v2-pdp__img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+  .pawsorb-v2-pdp__thumbs { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 8px; max-height: 100%; overflow-y: auto; scrollbar-width: none; }
+  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar { display: none; }
+  .pawsorb-v2-pdp__thumb { flex: 0 0 56px; width: 56px; height: 56px; padding: 0; border: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); border-radius: 6px; overflow: hidden; background: #F0ECE6; cursor: pointer; }
+  .pawsorb-v2-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
+  .pawsorb-v2-pdp__thumb.is-active { border: 2px solid var(--pawsorb-v2-pdp-acc, #12855A); }
+  .pawsorb-v2-pdp__dots { display: none; justify-content: center; gap: 6px; margin-top: 12px; grid-column: 1 / -1; }
+  .pawsorb-v2-pdp__dot { width: 7px; height: 7px; border-radius: 50%; background: #D9D6CF; transition: background-color .2s; }
+  .pawsorb-v2-pdp__dot.is-active { background: var(--pawsorb-v2-pdp-ink, #121614); }
+  .pawsorb-v2-pdp__info { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+  .pawsorb-v2-pdp__rating { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 14px; line-height: 1.3; }
+  .pawsorb-v2-pdp__stars { display: inline-flex; gap: 1px; color: var(--pawsorb-v2-pdp-acc, #12855A); }
+  .pawsorb-v2-pdp__title { margin: -6px 0 0; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-pdp-hw, 400); font-size: var(--pawsorb-v2-pdp-h1, 39px); line-height: 1.15; letter-spacing: -.02em; color: var(--pawsorb-v2-pdp-ink, #121614); }
+  .pawsorb-v2-pdp__award { display: inline-flex; align-self: flex-start; align-items: stretch; margin: 0; border: 1px solid var(--pawsorb-v2-pdp-acc, #12855A); border-radius: 4px; background: #fff; }
+  .pawsorb-v2-pdp__award-no { display: grid; place-items: center; padding: 0 10px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: var(--pawsorb-v2-pdp-bg, #F8F5EF); font-weight: 700; font-size: 20px; border-radius: 3px 0 0 3px; }
+  .pawsorb-v2-pdp__award-txt { display: flex; flex-direction: column; justify-content: center; padding: 4px 12px 5px 10px; }
+  .pawsorb-v2-pdp__award-txt strong { font-weight: 500; font-size: 13px; line-height: 1.25; text-transform: uppercase; letter-spacing: .01em; }
+  .pawsorb-v2-pdp__award-txt em { font-style: italic; font-size: 10px; line-height: 1.3; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-pdp__desc { font-size: 15px; line-height: 1.55; letter-spacing: -.2px; color: #2E3431; }
+  .pawsorb-v2-pdp__desc p { margin: 0; }
+  .pawsorb-v2-pdp__desc p + p { margin-top: 8px; }
+  .pawsorb-v2-pdp__benefits { list-style: none; margin: 4px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, max-content); gap: 14px 28px; }
+  .pawsorb-v2-pdp__benefits li { display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; line-height: 1.25; }
+  .pawsorb-v2-pdp__bic { flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--pawsorb-v2-pdp-acc, #12855A) 12%, transparent); }
+  .pawsorb-v2-pdp__bic > span { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; }
+  .pawsorb-v2-pdp__bic .pawsorb-icon { stroke-width: 2.6; }
+  .pawsorb-v2-pdp__calcbtn { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; min-height: 48px; padding: 0 22px; border: 2px solid var(--pawsorb-v2-pdp-deep, #0B5E3F); border-radius: 8px; background: #fff; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); font: 600 15px/1 var(--font-body--family); cursor: pointer; }
+  .pawsorb-v2-pdp__calcbtn:hover { background: color-mix(in srgb, var(--pawsorb-v2-pdp-deep, #0B5E3F) 6%, #fff); }
+  .pawsorb-v2-pdp__calcbtn .pawsorb-icon { fill: currentColor; stroke: none; }
+  .pawsorb-v2-pdp__notice { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; padding: 14px 16px; border: 1px dashed var(--pawsorb-v2-pdp-ink, #121614); border-radius: 8px; background: #F1ECE3; }
+  .pawsorb-v2-pdp__notice-ic { flex: 0 0 18px; margin-top: 1px; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-pdp__notice-t { margin: 0 0 3px; font-size: 13px; font-weight: 700; line-height: 1.3; text-transform: uppercase; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-pdp__notice-b { margin: 0; font-size: 12px; line-height: 1.45; color: #2E3431; }
+  .pawsorb-v2-pdp__form { margin: 2px 0 0; }
+  .pawsorb-v2-pdp__atc { position: relative; width: 100%; min-height: 62px; border: 0; border-radius: 32px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font: 700 19px/1 var(--font-body--family); cursor: pointer; transition: background-color .15s; }
+  .pawsorb-v2-pdp__atc:hover { background: var(--pawsorb-v2-pdp-acc-h, #0E6B48); }
+  .pawsorb-v2-pdp__atc:focus-visible { outline: 2px solid var(--pawsorb-v2-pdp-ink, #121614); outline-offset: 3px; }
+  .pawsorb-v2-pdp__atc[disabled] { opacity: .55; cursor: not-allowed; }
+  .pawsorb-v2-pdp__spin { display: none; position: absolute; right: 24px; top: 50%; width: 18px; height: 18px; margin-top: -9px; border: 2px solid rgba(255, 255, 255, .4); border-top-color: #fff; border-radius: 50%; animation: pawsorb-v2-pdp-spin .7s linear infinite; }
+  .pawsorb-v2-pdp__atc.is-loading .pawsorb-v2-pdp__spin { display: block; }
+  @keyframes pawsorb-v2-pdp-spin { to { transform: rotate(360deg); } }
+  .pawsorb-v2-pdp__err { margin: 8px 0 0; font-size: 14px; color: #B42318; }
+  .pawsorb-v2-pdp__trust { list-style: none; margin: -6px 0 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; }
+  .pawsorb-v2-pdp__trust li { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; }
+  .pawsorb-v2-pdp__trust .pawsorb-icon { color: var(--pawsorb-v2-pdp-acc, #12855A); stroke-width: 2.4; }
+  .pawsorb-v2-pdp__pay { list-style: none; margin: -4px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .pawsorb-v2-pdp__pay svg { width: 38px; height: 24px; display: block; }
+  .pawsorb-v2-pdp__cmt { display: flex; gap: 8px; align-items: flex-start; margin-top: 14px; }
+  .pawsorb-v2-pdp__avatar { position: relative; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%; overflow: hidden; background: #D9D6CF; }
+  .pawsorb-v2-pdp__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-pdp__avatar-fb { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff; background: #8A908C; }
+  .pawsorb-v2-pdp__cmt-main { min-width: 0; flex: 1; }
+  .pawsorb-v2-pdp__bubble { position: relative; padding: 8px 12px 10px; border-radius: 18px; background: #EEF0EE; }
+  .pawsorb-v2-pdp__cmt-name { margin: 0 0 2px; font-size: 12px; font-weight: 700; }
+  .pawsorb-v2-pdp__cmt-text { font-size: 15px; line-height: 1.4; }
+  .pawsorb-v2-pdp__cmt-text p { margin: 0; }
+  .pawsorb-v2-pdp__react { position: absolute; right: 10px; bottom: -11px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px 2px 3px; border-radius: 999px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .18); font-size: 12px; color: #5B625E; }
+  .pawsorb-v2-pdp__cmt-meta { margin: 6px 0 0 12px; font-size: 12px; font-weight: 600; color: #8A908C; word-spacing: 4px; }
+  .pawsorb-v2-pdp__faq { margin-top: 10px; border: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); border-radius: 16px; background: #fff; overflow: hidden; }
+  .pawsorb-v2-pdp__q + .pawsorb-v2-pdp__q { border-top: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); }
+  .pawsorb-v2-pdp__q summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 18px; font-size: 16px; line-height: 1.35; cursor: pointer; list-style: none; }
+  .pawsorb-v2-pdp__q summary::-webkit-details-marker { display: none; }
+  .pawsorb-v2-pdp__plus { flex: 0 0 auto; font-size: 18px; line-height: 1; transition: transform .2s; }
+  .pawsorb-v2-pdp__q[open] .pawsorb-v2-pdp__plus { transform: rotate(45deg); }
+  .pawsorb-v2-pdp__a { padding: 12px 18px 14px; background: var(--pawsorb-v2-pdp-bg, #F8F5EF); font-size: 14px; line-height: 1.55; color: #2E3431; }
+  .pawsorb-v2-pdp__a p { margin: 0; }
+  .pawsorb-v2-pdp__a p + p { margin-top: 6px; }
+  @media screen and (max-width: 989px) {
+    .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+  }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-pdp { padding: 0 0 var(--pawsorb-v2-pdp-pbm, 40px); }
+    .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .pawsorb-v2-pdp__gallery { position: static; display: block; }
+    .pawsorb-v2-pdp__stage { border-radius: 0; }
+    .pawsorb-v2-pdp__thumbs { display: none; }
+    .pawsorb-v2-pdp__dots { display: flex; }
+    .pawsorb-v2-pdp__info { padding: 0 16px; gap: 14px; }
+    .pawsorb-v2-pdp__title { font-size: var(--pawsorb-v2-pdp-h1m, 32px); }
+    .pawsorb-v2-pdp__desc { font-size: 15px; }
+    .pawsorb-v2-pdp__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
+    .pawsorb-v2-pdp__benefits li { font-size: 13.5px; gap: 8px; }
+    .pawsorb-v2-pdp__bic { flex-basis: 40px; width: 40px; height: 40px; }
+    .pawsorb-v2-pdp__bic > span { width: 28px; height: 28px; }
+    .pawsorb-v2-pdp__calcbtn { align-self: stretch; justify-content: center; }
+    .pawsorb-v2-pdp__atc { min-height: 58px; font-size: 18px; }
+    .pawsorb-v2-pdp__q summary { padding: 14px 16px; font-size: 15px; }
+    .pawsorb-v2-pdp__a { font-size: 13.5px; padding: 12px 16px 14px; }
+    .pawsorb-v2-pdp__cmt-text { font-size: 14.5px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('pawsorb-v2-buy-box')) {
+    customElements.define('pawsorb-v2-buy-box', class extends HTMLElement {
+      connectedCallback() {
+        this.qty = this.querySelector('[data-v2-qty]');
+        this.form = this.querySelector('[data-v2-form]');
+        this.addEventListener('change', this.onChange);
+        if (this.form) this.form.addEventListener('submit', this.onSubmit);
+        this.initGallery();
+        this.initCountdown();
+        this.initCalc();
+        const cur = this.querySelector('.pawsorb-v2-tier__input:checked');
+        if (cur) this.apply(cur);
+      }
+      onChange = (e) => {
+        const i = e.target;
+        if (i instanceof HTMLInputElement && i.classList.contains('pawsorb-v2-tier__input')) this.apply(i);
+      };
+      apply(i) {
+        this.querySelectorAll('.pawsorb-v2-tier').forEach((t) => t.classList.toggle('is-selected', t.contains(i)));
+        const q = Number(i.dataset.qty) || 1;
+        if (this.qty) this.qty.value = q;
+        this.querySelectorAll('[data-v2-gift]').forEach((g) => g.classList.toggle('is-unlocked', q >= (Number(g.dataset.unlock) || 1)));
+        const detail = { title: i.dataset.title, weight: i.dataset.weight, price: i.dataset.price, each: i.dataset.each, eachCompare: i.dataset.eachCompare, qty: q };
+        window.pawsorbTier = detail;
+        document.dispatchEvent(new CustomEvent('pawsorb:tier', { detail }));
+      }
+      selectQty(n) {
+        const inputs = [...this.querySelectorAll('.pawsorb-v2-tier__input')];
+        if (!inputs.length) return;
+        const sorted = inputs.slice().sort((a, b) => Number(a.dataset.qty) - Number(b.dataset.qty));
+        const pick = sorted.find((x) => Number(x.dataset.qty) >= n) || sorted[sorted.length - 1];
+        pick.checked = true;
+        this.apply(pick);
+      }
+      onSubmit = async (e) => {
+        e.preventDefault();
+        const btn = this.querySelector('[data-v2-atc]');
+        const err = this.querySelector('[data-v2-err]');
+        const fd = new FormData(this.form);
+        const sel = this.querySelector('.pawsorb-v2-tier__input:checked');
+        const item = { id: Number(fd.get('id')), quantity: Number(fd.get('quantity')) || 1 };
+        if (sel && sel.dataset.title) item.properties = { _Bundle: sel.dataset.title };
+        if (btn) { btn.classList.add('is-loading'); btn.disabled = true; }
+        if (err) err.hidden = true;
+        try {
+          const root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
+          const res = await fetch(root + 'cart/add.js', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify({ items: [item] }) });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.description || data.message || 'Could not add to cart');
+          document.dispatchEvent(new CustomEvent('pawsorb:cart-open', { detail: { added: true } }));
+        } catch (ex) {
+          if (location.protocol === 'file:') document.dispatchEvent(new CustomEvent('pawsorb:cart-open', { detail: { added: true, mock: item } }));
+          else if (err) { err.textContent = ex.message; err.hidden = false; }
+        } finally {
+          if (btn) { btn.classList.remove('is-loading'); btn.disabled = false; }
+        }
+      };
+      initGallery() {
+        const track = this.querySelector('[data-v2-track]');
+        if (!track) return;
+        const thumbs = [...this.querySelectorAll('.pawsorb-v2-pdp__thumb')];
+        const dots = [...this.querySelectorAll('.pawsorb-v2-pdp__dot')];
+        const slides = () => [...track.children].filter((s) => !s.classList.contains('is-missing'));
+        const setActive = (idx) => {
+          thumbs.forEach((t, n) => t.classList.toggle('is-active', n === idx));
+          dots.forEach((d, n) => d.classList.toggle('is-active', n === idx));
+        };
+        thumbs.forEach((t) => t.addEventListener('click', () => {
+          const s = track.children[Number(t.dataset.index) || 0];
+          if (s) track.scrollTo({ left: s.offsetLeft, behavior: 'smooth' });
+        }));
+        let raf = 0;
+        track.addEventListener('scroll', () => {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            const vis = slides();
+            const n = Math.round(track.scrollLeft / Math.max(1, track.clientWidth));
+            setActive([...track.children].indexOf(vis[n]));
+          });
+        }, { passive: true });
+      }
+      initCountdown() {
+        const el = this.querySelector('[data-v2-cd]');
+        if (!el) return;
+        const end = Date.parse(el.dataset.end);
+        const out = el.querySelector('[data-v2-cd-out]');
+        if (isNaN(end) || !out) return;
+        const pad = (n) => (n < 10 ? '0' : '') + n;
+        const tick = () => {
+          const s = Math.floor((end - Date.now()) / 1000);
+          if (s <= 0) { el.hidden = true; clearInterval(this.cdT); return; }
+          el.hidden = false;
+          const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+          out.textContent = (d ? d + 'd ' : '') + pad(h) + ':' + pad(m) + ':' + pad(x);
+        };
+        tick();
+        this.cdT = setInterval(tick, 1000);
+      }
+      disconnectedCallback() { clearInterval(this.cdT); }
+      initCalc() {
+        const dlg = this.querySelector('[data-v2-calc]');
+        const open = this.querySelector('[data-v2-calc-open]');
+        if (!dlg || !open) return;
+        const slider = dlg.querySelector('[data-v2-calc-weight]');
+        const wOut = dlg.querySelector('[data-v2-calc-wout]');
+        const dogsOut = dlg.querySelector('[data-v2-calc-dogs]');
+        const rows = [...dlg.querySelectorAll('[data-v2-calc-row]')];
+        const multi = dlg.querySelector('[data-v2-calc-multi]');
+        const perOut = dlg.querySelector('[data-v2-calc-per]');
+        const totOut = dlg.querySelector('[data-v2-calc-total]');
+        const totWord = dlg.querySelector('[data-v2-calc-word]');
+        const tpl = perOut ? perOut.dataset.template || '' : '';
+        const w = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+        const ds = dlg.dataset;
+        let dogs = 1, unit = 'lb';
+        const max = Number(slider.max) || 150;
+        const update = () => {
+          const lbs = Number(slider.value) || 0;
+          const pct = ((lbs - Number(slider.min)) / (max - Number(slider.min))) * 100;
+          slider.style.setProperty('--pawsorb-v2-calc-fill', pct + '%');
+          const kg = unit === 'kg';
+          const shown = kg ? Math.round(lbs * 0.4536) : lbs;
+          wOut.textContent = shown + (lbs >= max ? '+' : '') + ' ' + (kg ? ds.unitKg : ds.unitLb);
+          dlg.querySelectorAll('[data-lb]').forEach((el) => { el.textContent = kg ? el.dataset.kg : el.dataset.lb; });
+          let per = 1, hit = null;
+          for (const r of rows) { if (lbs <= Number(r.dataset.max)) { hit = r; break; } }
+          if (!hit) hit = rows[rows.length - 1];
+          if (hit) per = Number(hit.dataset.tubes) || 1;
+          rows.forEach((r) => r.classList.toggle('is-active', r === hit));
+          if (multi) multi.classList.toggle('is-active', dogs > 1);
+          dogsOut.textContent = dogs;
+          const total = per * dogs;
+          if (perOut) perOut.textContent = tpl.replace('[tubes]', w(per, ds.tubeOne, ds.tubeMany)).replace('[dogs]', w(dogs, ds.dogOne, ds.dogMany));
+          if (totOut) totOut.textContent = total;
+          if (totWord) totWord.textContent = total === 1 ? ds.tubeOne : ds.tubeMany;
+          this.calcTotal = total;
+        };
+        slider.addEventListener('input', update);
+        dlg.querySelectorAll('[data-v2-calc-step]').forEach((b) => b.addEventListener('click', () => {
+          dogs = Math.min(10, Math.max(1, dogs + Number(b.dataset.v2CalcStep)));
+          update();
+        }));
+        dlg.querySelectorAll('[data-v2-calc-unit]').forEach((b) => b.addEventListener('click', () => {
+          unit = b.dataset.v2CalcUnit;
+          dlg.querySelectorAll('[data-v2-calc-unit]').forEach((x) => x.classList.toggle('is-active', x === b));
+          update();
+        }));
+        open.addEventListener('click', () => { update(); if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', ''); });
+        dlg.querySelectorAll('[data-v2-calc-close]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+        dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+        const go = dlg.querySelector('[data-v2-calc-go]');
+        if (go) go.addEventListener('click', () => {
+          this.selectQty(this.calcTotal || 1);
+          dlg.close();
+          if (window.pawsorbScrollToPicker) window.pawsorbScrollToPicker();
+        });
+        update();
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 buy box",
+  "tag": "section",
+  "class": "pawsorb-v2-section-main",
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Bundle tier",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Tier title", "default": "Buy 3" },
+        { "type": "range", "id": "quantity", "label": "Tubes added to cart", "min": 1, "max": 20, "step": 1, "default": 3, "info": "Checkout price = variant price x this quantity minus the matching automatic discount (Discounts > Amount off products, minimum quantity = this number)." },
+        { "type": "text", "id": "weight_label", "label": "Subtitle (weight band)", "default": "Dogs 61–80 lbs" },
+        { "type": "text", "id": "price", "label": "Tier total price (text)", "default": "$74.97", "info": "Must equal the cart total after the automatic discount for this quantity. The price per tube is this total divided by the quantity." },
+        { "type": "text", "id": "compare_price", "label": "Tier compare-at total (text)", "default": "$179.97", "info": "SAVE % = 1 - price / compare-at. The struck price per tube is this total divided by the quantity." },
+        { "type": "text", "id": "each_override", "label": "Price per tube (blank = computed)", "info": "Optional text, e.g. $24.99. Leave blank to compute it." },
+        { "type": "text", "id": "save_override", "label": "SAVE pill (blank = computed %)", "info": "Optional text. Leave blank for SAVE xx%." },
+        { "type": "text", "id": "badge", "label": "Ribbon", "default": "Most Popular" },
+        { "type": "checkbox", "id": "preselect", "label": "Selected on page load", "default": false }
+      ]
+    },
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [ { "type": "text", "id": "label", "label": "Label", "default": "Binds toxins fast" } ]
+    },
+    {
+      "type": "gift",
+      "name": "Free gift tile",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title (unlocked)", "default": "Fast US shipping" },
+        { "type": "text", "id": "tab", "label": "Tab label", "default": "FREE" },
+        { "type": "text", "id": "value", "label": "Struck value", "info": "Optional, e.g. $4.99" },
+        { "type": "range", "id": "unlock_qty", "label": "Unlocks at tubes", "min": 1, "max": 20, "step": 1, "default": 3 },
+        { "type": "text", "id": "locked_label", "label": "Locked label", "default": "Locked" },
+        { "type": "select", "id": "icon", "label": "Icon (when no image)", "default": "truck", "options": [ { "value": "truck", "label": "Truck" }, { "value": "gift", "label": "Gift" }, { "value": "flask", "label": "Guide" }, { "value": "shield", "label": "Shield" }, { "value": "paw", "label": "Paw" } ] },
+        { "type": "image_picker", "id": "image", "label": "Image" }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "In-box FAQ row",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How fast should I give it?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>As soon as you know or suspect your pet swallowed something toxic. The first hour matters most.</p>" }
+      ]
+    },
+    {
+      "type": "award",
+      "name": "Award chip",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "number", "label": "Left block", "default": "#1" },
+        { "type": "text", "id": "line_1", "label": "Line 1", "default": "Vet recommended" },
+        { "type": "text", "id": "line_2", "label": "Line 2", "default": "Made in the USA · 3rd-party lab tested" }
+      ]
+    },
+    {
+      "type": "notice",
+      "name": "Authenticity notice",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Only sold here. Not on Amazon or other marketplaces." },
+        { "type": "textarea", "id": "body", "label": "Text", "default": "Copies sold elsewhere can be fakes or old stock. Buy from our site to get fresh tubes and the 90-day guarantee." }
+      ]
+    },
+    {
+      "type": "calculator",
+      "name": "Tube calculator",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "button_label", "label": "Button", "default": "How many tubes do I need?" },
+        { "type": "text", "id": "title", "label": "Modal title", "default": "Find your dose" },
+        { "type": "textarea", "id": "intro", "label": "Intro", "default": "Move the slider to your dog's weight. We'll show how many tubes to keep at home." },
+        { "type": "text", "id": "weight_label", "label": "Weight label", "default": "Your dog's weight" },
+        { "type": "text", "id": "unit_lb", "label": "Pounds unit", "default": "lb" },
+        { "type": "text", "id": "unit_kg", "label": "Kilograms unit", "default": "kg" },
+        { "type": "text", "id": "dogs_label", "label": "Dogs label", "default": "How many dogs" },
+        { "type": "range", "id": "start_weight", "label": "Starting weight (lb)", "min": 5, "max": 150, "step": 5, "default": 45 },
+        { "type": "header", "content": "Weight bands" },
+        { "type": "text", "id": "band_1", "label": "Band 1 label", "default": "Under 30 lb" },
+        { "type": "text", "id": "band_1_kg", "label": "Band 1 label in kg", "default": "Under 14 kg" },
+        { "type": "text", "id": "band_1_note", "label": "Band 1 note", "default": "Small dogs, puppies & cats" },
+        { "type": "range", "id": "band_1_max", "label": "Band 1 up to (lb)", "min": 10, "max": 150, "step": 5, "default": 30 },
+        { "type": "range", "id": "band_1_tubes", "label": "Band 1 tubes", "min": 1, "max": 10, "step": 1, "default": 1 },
+        { "type": "text", "id": "band_2", "label": "Band 2 label", "default": "31–60 lb" },
+        { "type": "text", "id": "band_2_kg", "label": "Band 2 label in kg", "default": "14–27 kg" },
+        { "type": "range", "id": "band_2_max", "label": "Band 2 up to (lb)", "min": 10, "max": 150, "step": 5, "default": 60 },
+        { "type": "range", "id": "band_2_tubes", "label": "Band 2 tubes", "min": 1, "max": 10, "step": 1, "default": 2 },
+        { "type": "text", "id": "band_3", "label": "Band 3 label", "default": "61–80 lb" },
+        { "type": "text", "id": "band_3_kg", "label": "Band 3 label in kg", "default": "28–36 kg" },
+        { "type": "range", "id": "band_3_max", "label": "Band 3 up to (lb)", "min": 10, "max": 150, "step": 5, "default": 80 },
+        { "type": "range", "id": "band_3_tubes", "label": "Band 3 tubes", "min": 1, "max": 10, "step": 1, "default": 3 },
+        { "type": "text", "id": "band_4", "label": "Band 4 label", "default": "81–150 lb" },
+        { "type": "text", "id": "band_4_kg", "label": "Band 4 label in kg", "default": "37–68 kg" },
+        { "type": "range", "id": "band_4_max", "label": "Band 4 up to (lb)", "min": 10, "max": 150, "step": 5, "default": 150 },
+        { "type": "range", "id": "band_4_tubes", "label": "Band 4 tubes", "min": 1, "max": 10, "step": 1, "default": 5 },
+        { "type": "text", "id": "band_multi", "label": "Several dogs row", "default": "Several dogs" },
+        { "type": "text", "id": "band_multi_value", "label": "Several dogs value", "default": "10 tubes" },
+        { "type": "header", "content": "Result" },
+        { "type": "text", "id": "tube_one", "label": "Tube (singular)", "default": "tube" },
+        { "type": "text", "id": "tube_many", "label": "Tubes (plural)", "default": "tubes" },
+        { "type": "text", "id": "dog_one", "label": "Dog (singular)", "default": "dog" },
+        { "type": "text", "id": "dog_many", "label": "Dogs (plural)", "default": "dogs" },
+        { "type": "text", "id": "result_label", "label": "Result label", "default": "Keep on hand" },
+        { "type": "text", "id": "per_dog", "label": "Result line", "default": "[tubes] × [dogs]", "info": "[tubes] becomes e.g. 3 tubes, [dogs] becomes e.g. 1 dog." },
+        { "type": "text", "id": "note", "label": "Note", "default": "1 mL per lb of body weight. Keep enough for every pet in the house." },
+        { "type": "text", "id": "go_label", "label": "Button", "default": "Select my bundle" },
+        { "type": "text", "id": "close_label", "label": "Close (screen readers)", "default": "Close" }
+      ]
+    },
+    {
+      "type": "comment",
+      "name": "Comment review",
+      "limit": 1,
+      "settings": [
+        { "type": "image_picker", "id": "avatar", "label": "Avatar" },
+        { "type": "text", "id": "avatar_asset", "label": "Avatar theme file", "default": "pawsorb-v2-avatar.jpg", "info": "File in assets/. Until it exists, the first letter of the name is shown." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Dana Whitfield" },
+        { "type": "richtext", "id": "text", "label": "Comment", "default": "<p>We keep two tubes in the kitchen drawer now. Worth every cent.</p>" },
+        { "type": "text", "id": "reactions", "label": "Reaction count", "default": "2,184" },
+        { "type": "color", "id": "heart_color", "label": "Heart colour", "default": "#E5484D" },
+        { "type": "text", "id": "meta", "label": "Meta line", "default": "Like · Reply · 6d" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Product info" },
+    { "type": "text", "id": "title_override", "label": "Title (blank = product title)" },
+    { "type": "text", "id": "rating_text", "label": "Rating line", "default": "115,000+ homes ready" },
+    { "type": "richtext", "id": "paragraph", "label": "Paragraph", "default": "<p>Chocolate off the counter. A toad at the water bowl at 11 p.m. Most homes have nothing on hand. PawSorb is the first move from your kitchen drawer.</p>" },
+    { "type": "header", "content": "Offer" },
+    { "type": "checkbox", "id": "cd_enabled", "label": "Sale divider with timer", "default": true },
+    { "type": "text", "id": "cd_label", "label": "Divider label", "default": "BLACK FRIDAY SALE ENDS IN" },
+    { "type": "text", "id": "cd_end", "label": "Sale end", "default": "2026-11-30T23:59:00-05:00", "info": "Date and time with offset. The divider hides itself after this moment." },
+    { "type": "text", "id": "each_word", "label": "Word after the price per tube", "default": "each" },
+    { "type": "text", "id": "save_word", "label": "SAVE pill prefix", "default": "SAVE" },
+    { "type": "checkbox", "id": "show_total", "label": "Show the tier total under the struck price", "default": false },
+    { "type": "text", "id": "total_word", "label": "Word after the tier total", "default": "total" },
+    { "type": "text", "id": "gift_title", "label": "Free-gift row title", "default": "Free gifts with your order" },
+    { "type": "header", "content": "Add to cart" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Add to Cart" },
+    { "type": "text", "id": "soldout_label", "label": "Sold out label", "default": "Sold out" },
+    { "type": "text", "id": "trust_1", "label": "Trust item 1", "default": "90-day guarantee" },
+    { "type": "text", "id": "trust_2", "label": "Trust item 2", "default": "Fast US shipping" },
+    { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "text", "id": "payment_label", "label": "Payment icons label (screen readers)", "default": "Payment methods" },
+    { "type": "header", "content": "Gallery" },
+    { "type": "text", "id": "gallery_alt", "label": "Image alt text", "default": "PawSorb activated charcoal gel" },
+    { "type": "image_picker", "id": "fallback_image", "label": "Image when the product has no media" },
+    { "type": "textarea", "id": "fallback_assets", "label": "Theme files when the product has no media", "default": "pawsorb-v2-gallery-01.webp,pawsorb-v2-gallery-02.webp,pawsorb-v2-gallery-03.webp,pawsorb-v2-gallery-04.webp,pawsorb-v2-gallery-05.webp,pawsorb-v2-gallery-06.webp,pawsorb-v2-gallery-07.webp,pawsorb-v2-gallery-08.webp,pawsorb-v2-gallery-09.webp,pawsorb-v2-gallery-10.webp,pawsorb-v2-gallery-11.webp,pawsorb-v2-gallery-12.webp", "info": "Comma-separated files in assets/. Product media always wins." },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "muted_color", "label": "Muted text", "default": "#5B625E" },
+    { "type": "color", "id": "accent_color", "label": "Accent (button, pills, stars)", "default": "#12855A" },
+    { "type": "color", "id": "accent_hover", "label": "Accent hover", "default": "#0E6B48" },
+    { "type": "color", "id": "deep_color", "label": "Deep accent (calculator)", "default": "#0B5E3F" },
+    { "type": "color", "id": "line_color", "label": "Hairlines", "default": "#E5E3DE" },
+    { "type": "color", "id": "tier_border", "label": "Unselected tier border", "default": "#B5B3AD" },
+    { "type": "header", "content": "Type and spacing" },
+    { "type": "range", "id": "title_size", "label": "Title size (desktop)", "min": 24, "max": 52, "step": 1, "unit": "px", "default": 39 },
+    { "type": "range", "id": "title_size_mobile", "label": "Title size (mobile)", "min": 20, "max": 44, "step": 1, "unit": "px", "default": 32 },
+    { "type": "select", "id": "heading_weight", "label": "Title weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "header", "content": "Page chrome on this template" },
+    { "type": "checkbox", "id": "chrome_enabled", "label": "Restyle header line, footer and cart drawer", "default": true, "info": "Applies only on pages using this template." },
+    { "type": "color", "id": "footer_bg", "label": "Footer background", "default": "#12855A" },
+    { "type": "color", "id": "footer_text", "label": "Footer text", "default": "#FFFFFF" }
+  ],
+  "presets": [
+    {
+      "name": "PawSorb v2 buy box",
+      "blocks": [
+        { "type": "award" },
+        { "type": "benefit", "settings": { "label": "Binds toxins fast" } },
+        { "type": "benefit", "settings": { "label": "No forced vomiting" } },
+        { "type": "benefit", "settings": { "label": "Dosed by the pound" } },
+        { "type": "benefit", "settings": { "label": "Dogs and cats" } },
+        { "type": "calculator" },
+        { "type": "notice" },
+        { "type": "tier", "settings": { "title": "Buy 1", "quantity": 1, "weight_label": "Dogs under 30 lbs", "price": "$39.99", "compare_price": "$59.99", "badge": "", "preselect": false } },
+        { "type": "tier", "settings": { "title": "Buy 2", "quantity": 2, "weight_label": "Dogs 31–60 lbs", "price": "$59.98", "compare_price": "$119.98", "badge": "", "preselect": false } },
+        { "type": "tier", "settings": { "title": "Buy 3", "quantity": 3, "weight_label": "Dogs 61–80 lbs", "price": "$74.97", "compare_price": "$179.97", "badge": "Most Popular", "preselect": true } },
+        { "type": "tier", "settings": { "title": "Buy 5", "quantity": 5, "weight_label": "Dogs 81–150 lbs", "price": "$99.95", "compare_price": "$299.95", "badge": "", "preselect": false } },
+        { "type": "tier", "settings": { "title": "Buy 10", "quantity": 10, "weight_label": "Multiple dogs", "price": "$149.90", "compare_price": "$599.90", "badge": "Best Value", "preselect": false } },
+        { "type": "gift", "settings": { "title": "Fast US shipping", "value": "$4.99", "unlock_qty": 3, "icon": "truck" } },
+        { "type": "comment" },
+        { "type": "faq" }
+      ]
+    }
+  ]
+}
+{% endschema %}

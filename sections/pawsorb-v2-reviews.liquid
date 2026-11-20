@@ -1,0 +1,174 @@
+{%- liquid
+  assign ss = section.settings
+  assign p = product | default: closest.product
+  assign chip_title = ss.chip_title | default: p.title
+-%}
+<script src="{{ 'pawsorb-core.js' | asset_url }}" defer></script>
+<div
+  class="pawsorb-v2-rv"
+  style="--pawsorb-v2-rv-bg: {{ ss.bg_color }}; --pawsorb-v2-rv-ink: {{ ss.text_color }}; --pawsorb-v2-rv-acc: {{ ss.accent_color }}; --pawsorb-v2-rv-line: {{ ss.line_color }}; --pawsorb-v2-rv-h: {{ ss.heading_size }}px; --pawsorb-v2-rv-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-rv-hw: {{ ss.heading_weight }}; --pawsorb-v2-rv-img: {{ ss.image_height }}px; --pawsorb-v2-rv-imgm: {{ ss.image_height_mobile }}px; --pawsorb-v2-rv-pt: {{ ss.padding_top }}px; --pawsorb-v2-rv-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-rv-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-rv-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-rv__head">
+    {%- if ss.pill_text != blank -%}
+      <p class="pawsorb-v2-rv__pill"><span class="pawsorb-v2-rv__pstars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 13 %}{%- endfor -%}</span>{{ ss.pill_text }}</p>
+    {%- endif -%}
+    {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-rv__h">{{ ss.heading }}</h2>{%- endif -%}
+  </div>
+  <div class="pawsorb-v2-rv__rail" data-pawsorb-rail data-v2-rv-rail>
+    {%- for block in section.blocks -%}
+      {%- assign bs = block.settings -%}
+      <article class="pawsorb-v2-rv__card" {{ block.shopify_attributes }}>
+        <div class="pawsorb-v2-rv__img">
+          <span class="pawsorb-v2-rv__imgfb" aria-hidden="true">{% render 'pawsorb-icon', name: 'paw', size: 40 %}</span>
+          {%- assign alt = bs.alt | default: bs.tag -%}
+          {%- assign fp = 'object-position: ' | append: bs.focal | append: ';' -%}
+          {%- if bs.image != blank -%}
+            {{ bs.image | image_url: width: 800 | image_tag: loading: 'lazy', alt: alt, sizes: '(min-width: 750px) 320px, 280px', widths: '400, 600, 800', style: fp }}
+          {%- elsif bs.image_asset != blank -%}
+            <img src="{{ bs.image_asset | asset_url }}" alt="{{ alt | escape }}" width="960" height="1200" loading="lazy" decoding="async" style="object-position: {{ bs.focal }};" onerror="this.remove()">
+          {%- endif -%}
+        </div>
+        <div class="pawsorb-v2-rv__body">
+          <div class="pawsorb-v2-rv__meta">
+            <span class="pawsorb-v2-rv__stars" aria-label="5/5">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 15 %}{%- endfor -%}</span>
+            <span class="pawsorb-v2-rv__name">{{ bs.name }}{% if ss.verified_label != blank %}<span class="pawsorb-v2-rv__ver">{% render 'pawsorb-icon', name: 'check-circle', size: 11 %}{{ ss.verified_label }}</span>{% endif %}</span>
+          </div>
+          <div class="pawsorb-v2-rv__text">{{ bs.text }}</div>
+          {%- if ss.show_chip -%}
+            <div class="pawsorb-v2-rv__chip">
+              <span class="pawsorb-v2-rv__chipimg">
+                {%- if ss.chip_image != blank -%}
+                  {{ ss.chip_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 48, height: 48 }}
+                {%- elsif ss.chip_asset != blank -%}
+                  <img src="{{ ss.chip_asset | asset_url }}" alt="" width="48" height="48" loading="lazy" onerror="this.remove()">
+                {%- endif -%}
+              </span>
+              <span class="pawsorb-v2-rv__chiptxt"><span>{{ chip_title }}</span>{% if ss.chip_price != blank %}<strong>{{ ss.chip_price }}{% if ss.chip_compare != blank %} <s>{{ ss.chip_compare }}</s>{% endif %}</strong>{% endif %}</span>
+            </div>
+          {%- endif -%}
+        </div>
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if section.blocks.size > 1 -%}
+    <div class="pawsorb-v2-rv__nav">
+      <button type="button" class="pawsorb-v2-rv__btn" data-v2-rv-dir="-1" aria-label="{{ ss.prev_label | escape }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <button type="button" class="pawsorb-v2-rv__btn pawsorb-v2-rv__btn--next" data-v2-rv-dir="1" aria-label="{{ ss.next_label | escape }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-rv { padding: var(--pawsorb-v2-rv-pt, 56px) 0 var(--pawsorb-v2-rv-pb, 56px); background: var(--pawsorb-v2-rv-bg, #F8F5EF); color: var(--pawsorb-v2-rv-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-rv__head { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 900px; margin: 0 auto 28px; padding: 0 16px; text-align: center; }
+  .pawsorb-v2-rv__pill { display: inline-flex; align-items: center; gap: 8px; margin: 0; padding: 5px 14px; border-radius: 50px; background: var(--pawsorb-v2-rv-acc, #12855A); color: #fff; font-size: 13px; line-height: 1.3; }
+  .pawsorb-v2-rv__pstars { display: inline-flex; gap: 1px; }
+  .pawsorb-v2-rv__h { margin: 0; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-rv-hw, 400); font-size: var(--pawsorb-v2-rv-h, 34px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-rv__rail { display: flex; align-items: flex-start; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: max(16px, calc((100% - 1200px) / 2)); padding: 0 max(16px, calc((100% - 1200px) / 2)) 4px; scrollbar-width: none; cursor: grab; overscroll-behavior-x: contain; }
+  .pawsorb-v2-rv__rail::-webkit-scrollbar { display: none; }
+  .pawsorb-v2-rv__rail.is-dragging { scroll-snap-type: none; cursor: grabbing; user-select: none; }
+  .pawsorb-v2-rv__card { flex: 0 0 320px; scroll-snap-align: start; border: 1px solid var(--pawsorb-v2-rv-line, #E5E3DE); border-radius: 10px; overflow: hidden; background: transparent; }
+  .pawsorb-v2-rv__img { position: relative; height: var(--pawsorb-v2-rv-img, 300px); background: #F0ECE6; }
+  .pawsorb-v2-rv__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-user-drag: none; }
+  .pawsorb-v2-rv__imgfb { position: absolute; inset: 0; display: grid; place-items: center; color: #B5B3AD; }
+  .pawsorb-v2-rv__body { display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 16px; }
+  .pawsorb-v2-rv__meta { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+  .pawsorb-v2-rv__stars { display: inline-flex; gap: 1px; color: var(--pawsorb-v2-rv-acc, #12855A); }
+  .pawsorb-v2-rv__name { display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 20px; background: var(--pawsorb-v2-rv-ink, #121614); color: var(--pawsorb-v2-rv-bg, #F8F5EF); font-size: 12px; line-height: 1.3; }
+  .pawsorb-v2-rv__ver { display: inline-flex; align-items: center; gap: 3px; font-size: 10px; opacity: .9; }
+  .pawsorb-v2-rv__text { font-size: 14px; line-height: 1.5; letter-spacing: -.2px; }
+  .pawsorb-v2-rv__text p { margin: 0; }
+  .pawsorb-v2-rv__text p + p { margin-top: 6px; }
+  .pawsorb-v2-rv__chip { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid var(--pawsorb-v2-rv-line, #E5E3DE); border-radius: 8px; background: #fff; }
+  .pawsorb-v2-rv__chipimg { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background: #F0ECE6; }
+  .pawsorb-v2-rv__chipimg img { width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-rv__chiptxt { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: 12px; line-height: 1.3; }
+  .pawsorb-v2-rv__chiptxt strong { font-weight: 500; color: var(--pawsorb-v2-rv-acc, #12855A); }
+  .pawsorb-v2-rv__chiptxt s { margin-left: 4px; font-weight: 400; color: #8A908C; }
+  .pawsorb-v2-rv__nav { display: flex; justify-content: center; gap: 10px; margin-top: 24px; }
+  .pawsorb-v2-rv__btn { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid #B5B3AD; border-radius: 4px; background: transparent; color: var(--pawsorb-v2-rv-ink, #121614); cursor: pointer; }
+  .pawsorb-v2-rv__btn--next { border-color: var(--pawsorb-v2-rv-acc, #12855A); background: var(--pawsorb-v2-rv-acc, #12855A); color: #fff; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-rv { padding: var(--pawsorb-v2-rv-ptm, 40px) 0 var(--pawsorb-v2-rv-pbm, 40px); }
+    .pawsorb-v2-rv__h { font-size: var(--pawsorb-v2-rv-hm, 30px); }
+    .pawsorb-v2-rv__head { margin-bottom: 22px; }
+    .pawsorb-v2-rv__rail { gap: 12px; }
+    .pawsorb-v2-rv__card { flex-basis: 280px; }
+    .pawsorb-v2-rv__img { height: var(--pawsorb-v2-rv-imgm, 200px); }
+    .pawsorb-v2-rv__text { font-size: 13px; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  (() => {
+    const bind = (root) => root.querySelectorAll('.pawsorb-v2-rv:not([data-v2-rv-ready])').forEach((sec) => {
+      sec.setAttribute('data-v2-rv-ready', '');
+      const rail = sec.querySelector('[data-v2-rv-rail]');
+      if (!rail) return;
+      sec.querySelectorAll('[data-v2-rv-dir]').forEach((b) => b.addEventListener('click', () => {
+        const card = rail.querySelector('.pawsorb-v2-rv__card');
+        const step = card ? card.getBoundingClientRect().width + (parseFloat(getComputedStyle(rail).columnGap) || 0) : rail.clientWidth;
+        const dir = Number(b.dataset.v2RvDir);
+        const atEnd = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4;
+        if (dir > 0 && atEnd) rail.scrollTo({ left: 0, behavior: 'smooth' });
+        else rail.scrollBy({ left: dir * step, behavior: 'smooth' });
+      }));
+    });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', () => bind(document)); else bind(document);
+    document.addEventListener('shopify:section:load', (e) => bind(e.target));
+  })();
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 reviews",
+  "tag": "section",
+  "class": "pawsorb-v2-section-rv",
+  "max_blocks": 12,
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_asset", "label": "Photo theme file", "default": "pawsorb-review-1-toad.jpg", "info": "File in assets/. Used until a photo is picked." },
+        { "type": "text", "id": "focal", "label": "Photo focal point (x y)", "default": "50% 50%", "info": "CSS object-position, e.g. 60% 40%. Keeps the tube in frame when the photo is cropped." },
+        { "type": "text", "id": "alt", "label": "Photo alt text" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Jenna R., Tampa FL" },
+        { "type": "text", "id": "tag", "label": "Toxin tag (alt text and SEO only)", "default": "Cane toad" },
+        { "type": "richtext", "id": "text", "label": "Review", "default": "<p>Our lab mouthed a toad by the pool. I wiped her gums, gave the gel and called the vet. She was fine by morning.</p>" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "pill_text", "label": "Rating pill", "default": "Rated 4.9/5 from 4,554 reviews" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "115,000+ homes ready" },
+    { "type": "text", "id": "verified_label", "label": "Verified label", "default": "Verified buyer" },
+    { "type": "text", "id": "prev_label", "label": "Previous (screen readers)", "default": "Previous review" },
+    { "type": "text", "id": "next_label", "label": "Next (screen readers)", "default": "Next review" },
+    { "type": "header", "content": "Product chip" },
+    { "type": "checkbox", "id": "show_chip", "label": "Show the product chip", "default": true },
+    { "type": "text", "id": "chip_title", "label": "Product title (blank = product)", "default": "PawSorb™ Activated Charcoal First Aid Gel" },
+    { "type": "text", "id": "chip_price", "label": "Price", "default": "$39.99" },
+    { "type": "text", "id": "chip_compare", "label": "Struck price", "default": "$59.99" },
+    { "type": "image_picker", "id": "chip_image", "label": "Thumbnail" },
+    { "type": "text", "id": "chip_asset", "label": "Thumbnail theme file", "default": "pawsorb-sticky-thumb.webp" },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Accent (pill, stars, next)", "default": "#12855A" },
+    { "type": "color", "id": "line_color", "label": "Card border", "default": "#E5E3DE" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 34 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 30 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "image_height", "label": "Photo height (desktop)", "min": 160, "max": 420, "step": 10, "unit": "px", "default": 300 },
+    { "type": "range", "id": "image_height_mobile", "label": "Photo height (mobile)", "min": 140, "max": 360, "step": 10, "unit": "px", "default": 200 },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 reviews", "blocks": [ { "type": "review" }, { "type": "review", "settings": { "image_asset": "pawsorb-review-2-chocolate.jpg", "name": "Mark D., Columbus OH", "tag": "Chocolate" } } ] } ]
+}
+{% endschema %}

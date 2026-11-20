@@ -1,0 +1,177 @@
+{%- doc -%}
+  PawSorb v2 offer block: sale divider with live timer, quantity-mode tier cards (app-free), progressive free-gift row.
+  Tiers = section blocks "tier", gifts = section blocks "gift" (disabled blocks are not rendered).
+  @param {object} section - the pawsorb-v2-main-product section
+  @param {number} start_qty - quantity of the tier selected on load
+{%- enddoc -%}
+{%- liquid
+  assign ss = section.settings
+  assign has_pre = false
+  for b in section.blocks
+    if b.type == 'tier' and b.settings.preselect
+      assign has_pre = true
+      break
+    endif
+  endfor
+  assign first_done = false
+  assign gifts = section.blocks | where: 'type', 'gift'
+-%}
+<div id="pawsorb-bundle-picker" class="pawsorb-v2-offer">
+  {%- if ss.cd_enabled and ss.cd_end != blank -%}
+    <p class="pawsorb-v2-offer__div" data-v2-cd data-end="{{ ss.cd_end | escape }}">
+      <span class="pawsorb-v2-offer__divtxt">{{ ss.cd_label }} <strong data-v2-cd-out>--:--:--</strong></span>
+    </p>
+  {%- endif -%}
+  <div class="pawsorb-v2-offer__tiers" role="radiogroup" aria-label="{{ ss.cd_label | default: 'Choose your bundle' | escape }}">
+    {%- for block in section.blocks -%}
+      {%- if block.type != 'tier' -%}{%- continue -%}{%- endif -%}
+      {%- liquid
+        assign bs = block.settings
+        assign q = bs.quantity | at_least: 1
+        assign price_c = bs.price | remove: '$' | remove: ',' | strip | times: 100 | round
+        assign comp_c = bs.compare_price | remove: '$' | remove: ',' | strip | times: 100 | round
+        assign saved = 0
+        assign pct = 0
+        if comp_c > price_c
+          assign saved = comp_c | minus: price_c
+          assign half = comp_c | divided_by: 2 | floor
+          assign pct = saved | times: 100 | plus: half | divided_by: comp_c | floor
+        endif
+        assign each_c = price_c | divided_by: q | floor
+        assign each_cmp_c = comp_c | divided_by: q | floor
+        assign each_txt = bs.each_override
+        if each_txt == blank
+          assign each_txt = each_c | money
+        endif
+        assign each_cmp_txt = each_cmp_c | money
+        assign save_txt = bs.save_override
+        if save_txt == blank and pct > 0
+          assign save_txt = ss.save_word | append: ' ' | append: pct | append: '%'
+        endif
+        assign selected = false
+        if has_pre
+          if bs.preselect
+            assign selected = true
+          endif
+        elsif first_done == false
+          assign selected = true
+        endif
+        assign first_done = true
+      -%}
+      <label class="pawsorb-v2-tier{% if selected %} is-selected{% endif %}{% if bs.badge != blank %} has-badge{% endif %}" {{ block.shopify_attributes }}>
+        <input
+          class="pawsorb-v2-tier__input"
+          type="radio"
+          name="pawsorb-v2-tier-{{ section.id }}"
+          value="{{ q }}"
+          data-qty="{{ q }}"
+          data-title="{{ bs.title | escape }}"
+          data-weight="{{ bs.weight_label | escape }}"
+          data-price="{{ bs.price | escape }}"
+          data-each="{{ each_txt | escape }}"
+          {% if comp_c > price_c %}data-each-compare="{{ each_cmp_txt | escape }}"{% endif %}
+          {% if selected %}checked{% endif %}
+        >
+        {%- if bs.badge != blank -%}<span class="pawsorb-v2-tier__ribbon">{{ bs.badge }}</span>{%- endif -%}
+        <span class="pawsorb-v2-tier__radio" aria-hidden="true"></span>
+        <span class="pawsorb-v2-tier__main">
+          <span class="pawsorb-v2-tier__row">
+            <span class="pawsorb-v2-tier__title">{{ bs.title }}</span>
+            {%- if save_txt != blank -%}<span class="pawsorb-v2-tier__pill">{{ save_txt }}</span>{%- endif -%}
+          </span>
+          {%- if bs.weight_label != blank -%}<span class="pawsorb-v2-tier__sub">{{ bs.weight_label }}</span>{%- endif -%}
+        </span>
+        <span class="pawsorb-v2-tier__prices">
+          <span class="pawsorb-v2-tier__each">{{ each_txt }}{% if ss.each_word != blank %} {{ ss.each_word }}{% endif %}</span>
+          {%- if comp_c > price_c -%}<s class="pawsorb-v2-tier__was">{{ each_cmp_txt }}</s>{%- endif -%}
+          {%- if ss.show_total -%}<span class="pawsorb-v2-tier__total">{{ bs.price }} {{ ss.total_word }}</span>{%- endif -%}
+        </span>
+      </label>
+    {%- endfor -%}
+  </div>
+
+  {%- if gifts.size > 0 -%}
+    <div class="pawsorb-v2-gifts">
+      {%- if ss.gift_title != blank -%}<p class="pawsorb-v2-gifts__title">{{ ss.gift_title }}</p>{%- endif -%}
+      <div class="pawsorb-v2-gifts__row{% if gifts.size == 1 %} is-single{% endif %}" style="--pawsorb-v2-gifts-n: {{ gifts.size }};">
+        {%- for g in gifts -%}
+          {%- assign gs = g.settings -%}
+          <div class="pawsorb-v2-gift{% if start_qty >= gs.unlock_qty %} is-unlocked{% endif %}" data-v2-gift data-unlock="{{ gs.unlock_qty }}" {{ g.shopify_attributes }}>
+            <span class="pawsorb-v2-gift__tab">{{ gs.tab }}{% if gs.value != blank %} <s>{{ gs.value }}</s>{% endif %}</span>
+            <span class="pawsorb-v2-gift__on">
+              <span class="pawsorb-v2-gift__art">
+                {%- if gs.image != blank -%}
+                  {{ gs.image | image_url: width: 160 | image_tag: loading: 'lazy', alt: '', width: 64, height: 64 }}
+                {%- else -%}
+                  {% render 'pawsorb-icon', name: gs.icon, size: 56 %}
+                {%- endif -%}
+              </span>
+              <span class="pawsorb-v2-gift__name">{{ gs.title }}</span>
+            </span>
+            <span class="pawsorb-v2-gift__off">
+              <span class="pawsorb-v2-gift__lock">{% render 'pawsorb-icon', name: 'lock', size: 40 %}</span>
+              <span class="pawsorb-v2-gift__name">{{ gs.locked_label }}</span>
+            </span>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-offer { scroll-margin-top: 24px; margin-top: 10px; border-radius: 12px; }
+  .pawsorb-v2-offer.is-flash { animation: pawsorb-v2-offer-flash 1.4s ease-out; }
+  @keyframes pawsorb-v2-offer-flash { 0%, 40% { box-shadow: 0 0 0 6px rgba(18, 133, 90, .25); } 100% { box-shadow: 0 0 0 6px rgba(18, 133, 90, 0); } }
+  .pawsorb-v2-offer__div { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 14px; font-weight: 500; line-height: 1.3; text-transform: uppercase; text-align: center; color: var(--pawsorb-v2-pdp-ink, #121614); }
+  .pawsorb-v2-offer__div[hidden] { display: none; }
+  .pawsorb-v2-offer__div::before, .pawsorb-v2-offer__div::after { content: ""; flex: 1 1 20px; height: 1px; background: #D9D6CF; }
+  .pawsorb-v2-offer__divtxt { flex: 0 1 auto; }
+  .pawsorb-v2-offer__divtxt strong { font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .pawsorb-v2-offer__tiers { display: flex; flex-direction: column; gap: 10px; }
+  .pawsorb-v2-tier { position: relative; display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 14px; min-height: 88px; padding: 14px 20px; border: 1px solid var(--pawsorb-v2-pdp-tierline, #B5B3AD); border-radius: 10px; background: transparent; cursor: pointer; transition: border-color .15s, background-color .15s; }
+  .pawsorb-v2-tier:hover { border-color: var(--pawsorb-v2-pdp-ink, #121614); }
+  .pawsorb-v2-tier.is-selected { padding: 13px 19px; border: 2px solid var(--pawsorb-v2-pdp-ink, #121614); background: #fff; }
+  .pawsorb-v2-tier__input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+  .pawsorb-v2-tier:has(.pawsorb-v2-tier__input:focus-visible) { outline: 2px solid var(--pawsorb-v2-pdp-acc, #12855A); outline-offset: 2px; }
+  .pawsorb-v2-tier__radio { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--pawsorb-v2-pdp-tierline, #B5B3AD); background: #fff; box-sizing: border-box; }
+  .pawsorb-v2-tier.is-selected .pawsorb-v2-tier__radio { border: 2px solid var(--pawsorb-v2-pdp-ink, #121614); background: var(--pawsorb-v2-pdp-ink, #121614); box-shadow: inset 0 0 0 3px #fff; }
+  .pawsorb-v2-tier__main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .pawsorb-v2-tier__row { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 10px; }
+  .pawsorb-v2-tier__title { font-size: 16px; font-weight: 400; line-height: 1.25; }
+  .pawsorb-v2-tier__pill { display: inline-block; padding: 3px 8px; border-radius: 999px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font-size: 12px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+  .pawsorb-v2-tier__sub { font-size: 13px; line-height: 1.3; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-tier__prices { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right; }
+  .pawsorb-v2-tier__each { font-size: 16px; line-height: 1.25; white-space: nowrap; }
+  .pawsorb-v2-tier__was { font-size: 12px; color: #8A908C; }
+  .pawsorb-v2-tier__total { font-size: 12px; color: var(--pawsorb-v2-pdp-muted, #5B625E); }
+  .pawsorb-v2-tier__ribbon { position: absolute; top: -10px; right: 18px; z-index: 1; padding: 3px 10px; border-radius: 2px 2px 0 0; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font-size: 12px; font-weight: 600; line-height: 1.35; white-space: nowrap; }
+  .pawsorb-v2-tier__ribbon::before, .pawsorb-v2-tier__ribbon::after { content: ""; position: absolute; top: 0; width: 0; height: 0; border-bottom: 6px solid var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-tier__ribbon::before { left: -6px; border-left: 6px solid transparent; }
+  .pawsorb-v2-tier__ribbon::after { right: -6px; border-right: 6px solid transparent; }
+  .pawsorb-v2-gifts { margin-top: 22px; }
+  .pawsorb-v2-gifts__title { margin: 0 0 18px; font-size: 20px; font-weight: 700; line-height: 1.3; text-align: center; }
+  .pawsorb-v2-gifts__row { display: grid; grid-template-columns: repeat(var(--pawsorb-v2-gifts-n, 3), minmax(0, 1fr)); gap: 12px; }
+  .pawsorb-v2-gifts__row.is-single { grid-template-columns: minmax(0, 190px); justify-content: center; }
+  .pawsorb-v2-gift { position: relative; display: grid; min-height: 150px; padding: 26px 10px 14px; border: 1px solid var(--pawsorb-v2-pdp-tierline, #B5B3AD); border-radius: 8px; background: transparent; text-align: center; }
+  .pawsorb-v2-gift.is-unlocked { padding: 25px 9px 13px; border: 2px solid var(--pawsorb-v2-pdp-ink, #121614); background: #fff; }
+  .pawsorb-v2-gift__tab { position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 4px 10px; border-radius: 6px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font-size: 12px; font-weight: 700; line-height: 1.25; white-space: nowrap; }
+  .pawsorb-v2-gift__tab s { margin-left: 3px; font-weight: 600; opacity: .9; }
+  .pawsorb-v2-gift__on, .pawsorb-v2-gift__off { grid-area: 1 / 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
+  .pawsorb-v2-gift__on { visibility: hidden; }
+  .pawsorb-v2-gift.is-unlocked .pawsorb-v2-gift__on { visibility: visible; }
+  .pawsorb-v2-gift.is-unlocked .pawsorb-v2-gift__off { visibility: hidden; }
+  .pawsorb-v2-gift__art { display: grid; place-items: center; width: 64px; height: 64px; color: var(--pawsorb-v2-pdp-acc, #12855A); }
+  .pawsorb-v2-gift__art img { width: 64px; height: 64px; object-fit: contain; }
+  .pawsorb-v2-gift__lock { color: #6B716E; }
+  .pawsorb-v2-gift__lock .pawsorb-icon { fill: currentColor; fill-opacity: .15; }
+  .pawsorb-v2-gift__name { font-size: 13px; line-height: 1.3; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-offer__div { font-size: 13px; gap: 8px; }
+    .pawsorb-v2-tier { min-height: 84px; gap: 12px; padding: 12px 14px; }
+    .pawsorb-v2-tier.is-selected { padding: 11px 13px; }
+    .pawsorb-v2-tier__row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .pawsorb-v2-tier__ribbon { right: 12px; }
+    .pawsorb-v2-gift { min-height: 140px; }
+  }
+{% endstylesheet %}

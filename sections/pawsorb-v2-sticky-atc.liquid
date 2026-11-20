@@ -1,0 +1,126 @@
+{%- liquid
+  assign ss = section.settings
+  assign p = product | default: closest.product
+  assign title = ss.title | default: p.title
+-%}
+<script src="{{ 'pawsorb-core.js' | asset_url }}" defer></script>
+<pawsorb-v2-sticky
+  class="pawsorb-v2-sa{% unless ss.show_desktop %} pawsorb-v2-sa--no-desk{% endunless %}{% unless ss.show_mobile %} pawsorb-v2-sa--no-mob{% endunless %}"
+  style="--pawsorb-v2-sa-bg: {{ ss.bg_color }}; --pawsorb-v2-sa-ink: {{ ss.text_color }}; --pawsorb-v2-sa-acc: {{ ss.accent_color }}; --pawsorb-v2-sa-acc-h: {{ ss.accent_hover }};"
+  data-each-word="{{ ss.each_word | escape }}"
+  aria-hidden="true"
+>
+  <div class="pawsorb-v2-sa__inner">
+    <div class="pawsorb-v2-sa__prod">
+      <span class="pawsorb-v2-sa__thumb">
+        {%- if ss.thumb_image != blank -%}
+          {{ ss.thumb_image | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', width: 48, height: 48 }}
+        {%- elsif ss.thumb_asset != blank -%}
+          <img src="{{ ss.thumb_asset | asset_url }}" alt="" width="48" height="48" loading="lazy" onerror="this.remove()">
+        {%- endif -%}
+      </span>
+      <span class="pawsorb-v2-sa__txt">
+        <span class="pawsorb-v2-sa__title">{{ title }}</span>
+        {%- if ss.rating_text != blank -%}<span class="pawsorb-v2-sa__rating"><span class="pawsorb-v2-sa__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 12 %}{%- endfor -%}</span>{{ ss.rating_text }}</span>{%- endif -%}
+      </span>
+    </div>
+    <p class="pawsorb-v2-sa__tier"><span data-v2-sa-tier>{{ ss.default_tier }}</span> <s data-v2-sa-was>{{ ss.default_compare }}</s></p>
+    <a class="pawsorb-v2-sa__btn" href="#pawsorb-bundle-picker" data-pawsorb-cta tabindex="-1">{{ ss.button_label }}</a>
+  </div>
+</pawsorb-v2-sticky>
+
+{% stylesheet %}
+  .pawsorb-v2-sa { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; display: block; padding-bottom: env(safe-area-inset-bottom); background: var(--pawsorb-v2-sa-bg, #fff); color: var(--pawsorb-v2-sa-ink, #121614); border-top: 1px solid #E5E3DE; box-shadow: 0 -4px 16px rgba(0, 0, 0, .06); font-family: var(--font-body--family); opacity: 0; pointer-events: none; transform: translateY(100%); transition: transform .25s ease, opacity .25s ease; }
+  .pawsorb-v2-sa.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .pawsorb-v2-sa__inner { max-width: 1100px; margin: 0 auto; padding: 10px 16px; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; gap: 22px; }
+  .pawsorb-v2-sa__prod { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .pawsorb-v2-sa__thumb { flex: 0 0 48px; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background: #F0ECE6; }
+  .pawsorb-v2-sa__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-sa__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .pawsorb-v2-sa__title { font-size: 15px; font-weight: 500; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .pawsorb-v2-sa__rating { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5B625E; }
+  .pawsorb-v2-sa__stars { display: inline-flex; color: var(--pawsorb-v2-sa-acc, #12855A); }
+  .pawsorb-v2-sa__tier { margin: 0; font-size: 15px; line-height: 1.3; white-space: nowrap; }
+  .pawsorb-v2-sa__tier s { margin-left: 4px; font-size: 13px; color: #8A908C; }
+  .pawsorb-v2-sa__tier s:empty { display: none; }
+  .pawsorb-v2-sa__btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 30px; border-radius: 32px; background: var(--pawsorb-v2-sa-acc, #12855A); color: #fff; font-size: 16px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .pawsorb-v2-sa__btn:hover { background: var(--pawsorb-v2-sa-acc-h, #0E6B48); }
+  @media screen and (min-width: 750px) { .pawsorb-v2-sa--no-desk { display: none; } }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-sa__inner { grid-template-columns: minmax(0, 1fr) auto; gap: 10px; padding: 10px 12px; }
+    .pawsorb-v2-sa__prod { display: none; }
+    .pawsorb-v2-sa__tier { font-size: 14px; white-space: normal; }
+    .pawsorb-v2-sa__btn { padding: 0 20px; font-size: 15px; }
+    .pawsorb-v2-sa--no-mob { display: none; }
+  }
+{% endstylesheet %}
+
+{% javascript %}
+  if (!customElements.get('pawsorb-v2-sticky')) {
+    customElements.define('pawsorb-v2-sticky', class extends HTMLElement {
+      connectedCallback() {
+        this.tierEl = this.querySelector('[data-v2-sa-tier]');
+        this.wasEl = this.querySelector('[data-v2-sa-was]');
+        this.onTier = (e) => this.render(e.detail);
+        document.addEventListener('pawsorb:tier', this.onTier);
+        if (window.pawsorbTier) this.render(window.pawsorbTier);
+        const targets = [document.getElementById('pawsorb-bundle-picker'), document.querySelector('[data-pawsorb-atc]')].filter(Boolean);
+        if (!targets.length) return;
+        const last = targets[targets.length - 1];
+        let raf = 0;
+        this.check = () => {
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            const vh = window.innerHeight;
+            const anyVisible = targets.some((t) => { const r = t.getBoundingClientRect(); return r.bottom > 0 && r.top < vh; });
+            const footer = document.querySelector('.shopify-section-group-footer-group, footer');
+            const overFooter = footer ? footer.getBoundingClientRect().top < vh : false;
+            const show = !anyVisible && !overFooter && last.getBoundingClientRect().bottom < 0;
+            this.classList.toggle('is-visible', show);
+            this.setAttribute('aria-hidden', show ? 'false' : 'true');
+            const a = this.querySelector('.pawsorb-v2-sa__btn');
+            if (a) a.tabIndex = show ? 0 : -1;
+          });
+        };
+        document.addEventListener('scroll', this.check, { capture: true, passive: true });
+        window.addEventListener('resize', this.check, { passive: true });
+        this.check();
+      }
+      disconnectedCallback() {
+        document.removeEventListener('pawsorb:tier', this.onTier);
+        if (this.check) { document.removeEventListener('scroll', this.check, { capture: true }); window.removeEventListener('resize', this.check); }
+      }
+      render(d) {
+        if (!d || !this.tierEl) return;
+        const each = d.each ? d.each + (this.dataset.eachWord ? ' ' + this.dataset.eachWord : '') : d.price;
+        this.tierEl.textContent = [d.title, each].filter(Boolean).join(' · ');
+        if (this.wasEl) this.wasEl.textContent = d.eachCompare || '';
+      }
+    });
+  }
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 sticky bar",
+  "tag": "section",
+  "class": "pawsorb-v2-section-sa",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Title (blank = product title)", "default": "PawSorb™ Activated Charcoal First-Aid Gel" },
+    { "type": "text", "id": "rating_text", "label": "Rating line (desktop)", "default": "4.9 · 4,554 reviews" },
+    { "type": "text", "id": "default_tier", "label": "Tier line before selection", "default": "Buy 3 · $24.99 each", "info": "Replaced live by the selected tier." },
+    { "type": "text", "id": "default_compare", "label": "Struck price before selection", "default": "$59.99" },
+    { "type": "text", "id": "each_word", "label": "Word after the price per tube", "default": "each" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Choose my bundle", "info": "Scrolls to the bundle picker. It never adds to cart." },
+    { "type": "checkbox", "id": "show_desktop", "label": "Show on desktop (bottom bar)", "default": true },
+    { "type": "checkbox", "id": "show_mobile", "label": "Show on mobile (bottom bar)", "default": true },
+    { "type": "image_picker", "id": "thumb_image", "label": "Thumbnail" },
+    { "type": "text", "id": "thumb_asset", "label": "Thumbnail theme file", "default": "pawsorb-sticky-thumb.webp" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#FFFFFF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Button and stars", "default": "#12855A" },
+    { "type": "color", "id": "accent_hover", "label": "Button hover", "default": "#0E6B48" }
+  ],
+  "presets": [ { "name": "PawSorb v2 sticky bar" } ]
+}
+{% endschema %}

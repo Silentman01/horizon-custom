@@ -1,0 +1,147 @@
+{%- liquid
+  assign ss = section.settings
+  assign pols = section.blocks | where: 'type', 'polaroid'
+-%}
+<script src="{{ 'pawsorb-core.js' | asset_url }}" defer></script>
+<div
+  class="pawsorb-v2-gt"
+  style="--pawsorb-v2-gt-bg1: {{ ss.bg_from }}; --pawsorb-v2-gt-bg2: {{ ss.bg_to }}; --pawsorb-v2-gt-ink: {{ ss.text_color }}; --pawsorb-v2-gt-muted: {{ ss.muted_color }}; --pawsorb-v2-gt-acc: {{ ss.accent_color }}; --pawsorb-v2-gt-btn: {{ ss.button_color }}; --pawsorb-v2-gt-hs: {{ ss.heading_size }}px; --pawsorb-v2-gt-hsm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-gt-pw: {{ ss.polaroid_width }}px; --pawsorb-v2-gt-pwm: {{ ss.polaroid_width_mobile }}px; --pawsorb-v2-gt-pt: {{ ss.padding_top }}px; --pawsorb-v2-gt-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-gt-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-gt-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-gt__grid">
+    {%- if pols.size > 0 -%}
+      <div class="pawsorb-v2-gt__pols">
+        {%- for block in pols -%}
+          {%- assign bs = block.settings -%}
+          {%- liquid
+            assign side = 'left'
+            if forloop.index > 2
+              assign side = 'right'
+            endif
+          -%}
+          <figure class="pawsorb-v2-gt__pol pawsorb-v2-gt__pol--{{ side }} pawsorb-v2-gt__pol--n{{ forloop.index }}" style="--pawsorb-v2-gt-rot: {{ bs.rotation }}deg; --pawsorb-v2-gt-rotm: {{ bs.rotation_mobile }}deg;" {{ block.shopify_attributes }}>
+            <span class="pawsorb-v2-gt__photo">
+              <span class="pawsorb-v2-gt__pfb" aria-hidden="true">{% render 'pawsorb-icon', name: 'paw', size: 30 %}</span>
+              {%- if bs.image != blank -%}
+                {{ bs.image | image_url: width: 600 | image_tag: loading: 'lazy', alt: bs.alt, sizes: '(min-width: 750px) 200px, 120px', widths: '240, 400, 600' }}
+              {%- elsif bs.image_asset != blank -%}
+                <img src="{{ bs.image_asset | asset_url }}" alt="{{ bs.alt | escape }}" width="900" height="1200" loading="lazy" decoding="async" onerror="this.remove()">
+              {%- endif -%}
+            </span>
+          </figure>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+    <div class="pawsorb-v2-gt__col">
+      {%- if ss.show_shield -%}
+        <svg class="pawsorb-v2-gt__shield" width="40" height="40" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="{{ ss.text_color }}" d="M12 1.8l8.6 3.4v6.2c0 5.3-3.6 9.6-8.6 11-5-1.4-8.6-5.7-8.6-11V5.2z"/><path d="M8 12.2l2.8 2.8 5.2-5.6" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      {%- endif -%}
+      {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-gt__h">{{ ss.heading }}</h2>{%- endif -%}
+      {%- if ss.text != blank -%}<div class="pawsorb-v2-gt__p">{{ ss.text }}</div>{%- endif -%}
+      {%- if ss.button_label != blank -%}<a class="pawsorb-v2-gt__btn" href="{{ ss.button_link | default: '#pawsorb-bundle-picker' }}" data-pawsorb-cta>{{ ss.button_label }}</a>{%- endif -%}
+      {%- if ss.check_1 != blank or ss.check_2 != blank or ss.check_3 != blank -%}
+        <ul class="pawsorb-v2-gt__checks">
+          {%- for i in (1..3) -%}{%- assign k = 'check_' | append: i -%}{%- if ss[k] != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 13 %}<span>{{ ss[k] }}</span></li>{%- endif -%}{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-gt { padding: var(--pawsorb-v2-gt-pt, 64px) 16px var(--pawsorb-v2-gt-pb, 64px); background: linear-gradient(90deg, var(--pawsorb-v2-gt-bg1, #F8F5EF), var(--pawsorb-v2-gt-bg2, #FBF8F2)); color: var(--pawsorb-v2-gt-ink, #121614); font-family: var(--font-body--family); overflow: hidden; }
+  .pawsorb-v2-gt__grid { position: relative; max-width: 1100px; min-height: calc(var(--pawsorb-v2-gt-pw, 200px) * 2.85 + 24px); margin: 0 auto; display: grid; place-items: center; }
+  .pawsorb-v2-gt__col { position: relative; z-index: 1; width: 100%; max-width: 430px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .pawsorb-v2-gt__shield { display: block; margin-bottom: 14px; }
+  .pawsorb-v2-gt__h { margin: 0; font-family: var(--font-body--family); font-weight: 600; font-size: var(--pawsorb-v2-gt-hs, 26px); line-height: 1.2; letter-spacing: -.01em; color: var(--pawsorb-v2-gt-acc, #12855A); }
+  .pawsorb-v2-gt__p { margin-top: 12px; font-size: 16px; line-height: 1.6; color: var(--pawsorb-v2-gt-muted, #5B625E); }
+  .pawsorb-v2-gt__p p { margin: 0; }
+  .pawsorb-v2-gt__btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 64px; margin-top: 22px; border-radius: 8px; background: var(--pawsorb-v2-gt-btn, #121614); color: #fff; font-size: 16px; font-weight: 600; text-decoration: none; }
+  .pawsorb-v2-gt__btn:hover { opacity: .9; }
+  .pawsorb-v2-gt__checks { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 14px; margin: 12px 0 0; padding: 0; }
+  .pawsorb-v2-gt__checks li { display: flex; align-items: center; gap: 4px; font-size: 13px; color: var(--pawsorb-v2-gt-muted, #5B625E); }
+  .pawsorb-v2-gt__checks .pawsorb-icon { color: var(--pawsorb-v2-gt-acc, #12855A); stroke-width: 2.6; }
+  .pawsorb-v2-gt__pols { position: absolute; inset: 0; pointer-events: none; }
+  .pawsorb-v2-gt__pol { position: absolute; width: var(--pawsorb-v2-gt-pw, 200px); margin: 0; padding: 8px 8px 10px; background: #fff; box-shadow: 0 6px 18px rgba(0, 0, 0, .12); transform: rotate(var(--pawsorb-v2-gt-rot, 0deg)); box-sizing: border-box; }
+  .pawsorb-v2-gt__pol--n1 { left: 4%; top: 0; }
+  .pawsorb-v2-gt__pol--n2 { left: 9%; bottom: 0; }
+  .pawsorb-v2-gt__pol--right { right: 5%; top: 22%; }
+  .pawsorb-v2-gt__photo { position: relative; display: block; aspect-ratio: 3 / 4; overflow: hidden; background: #F1ECE3; }
+  .pawsorb-v2-gt__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-gt__pfb { position: absolute; inset: 0; display: grid; place-items: center; color: #B5B3AD; }
+  @media screen and (max-width: 989px) {
+    .pawsorb-v2-gt__pol { width: calc(var(--pawsorb-v2-gt-pw, 200px) * .75); }
+    .pawsorb-v2-gt__grid { min-height: calc(var(--pawsorb-v2-gt-pw, 200px) * 2.2 + 24px); }
+  }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-gt { padding: var(--pawsorb-v2-gt-ptm, 40px) 16px var(--pawsorb-v2-gt-pbm, 40px); }
+    .pawsorb-v2-gt__grid { min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 22px; }
+    .pawsorb-v2-gt__pols { position: relative; inset: auto; display: flex; justify-content: center; padding: 6px 0 4px; }
+    .pawsorb-v2-gt__pol { position: relative; left: auto !important; right: auto !important; top: auto !important; bottom: auto !important; width: var(--pawsorb-v2-gt-pwm, 115px); padding: 5px 5px 7px; transform: rotate(var(--pawsorb-v2-gt-rotm, 0deg)); }
+    .pawsorb-v2-gt__pol + .pawsorb-v2-gt__pol { margin-left: -16px; }
+    .pawsorb-v2-gt__pol--n2 { z-index: 2; order: 2; transform: rotate(var(--pawsorb-v2-gt-rotm, 0deg)) translateY(-6px); }
+    .pawsorb-v2-gt__pol--n1 { order: 1; }
+    .pawsorb-v2-gt__pol--n3 { order: 3; }
+    .pawsorb-v2-gt__h { font-size: var(--pawsorb-v2-gt-hsm, 24px); }
+    .pawsorb-v2-gt__p { font-size: 15px; }
+    .pawsorb-v2-gt__btn { min-height: 56px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 guarantee",
+  "tag": "section",
+  "class": "pawsorb-v2-section-gt",
+  "max_blocks": 3,
+  "blocks": [
+    {
+      "type": "polaroid",
+      "name": "Polaroid photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Photo" },
+        { "type": "text", "id": "image_asset", "label": "Photo theme file", "default": "pawsorb-v2-polaroid-1.jpg", "info": "File in assets/. Until it exists, a paw mark is shown in the frame." },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Pet owner holding a PawSorb tube" },
+        { "type": "range", "id": "rotation", "label": "Tilt (desktop)", "min": -12, "max": 12, "step": 1, "unit": "°", "default": -4 },
+        { "type": "range", "id": "rotation_mobile", "label": "Tilt (mobile)", "min": -12, "max": 12, "step": 1, "unit": "°", "default": -6 }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "checkbox", "id": "show_shield", "label": "Show the shield icon", "default": true },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Never need it? Send it back." },
+    { "type": "richtext", "id": "text", "label": "Paragraph", "default": "<p>Keep it 90 days. If you'd rather have your money back, email us for every cent.</p>" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Stock running low" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave blank to scroll to the bundle picker." },
+    { "type": "text", "id": "check_1", "label": "Check 1", "default": "Full refund" },
+    { "type": "text", "id": "check_2", "label": "Check 2", "default": "Ships fast" },
+    { "type": "text", "id": "check_3", "label": "Check 3", "default": "Simple returns" },
+    { "type": "header", "content": "Colours" },
+    { "type": "color", "id": "bg_from", "label": "Background gradient start", "default": "#F8F5EF" },
+    { "type": "color", "id": "bg_to", "label": "Background gradient end", "default": "#FBF8F2" },
+    { "type": "color", "id": "text_color", "label": "Shield", "default": "#121614" },
+    { "type": "color", "id": "muted_color", "label": "Paragraph and checks", "default": "#5B625E" },
+    { "type": "color", "id": "accent_color", "label": "Heading and check marks", "default": "#12855A" },
+    { "type": "color", "id": "button_color", "label": "Button", "default": "#121614" },
+    { "type": "header", "content": "Type and spacing" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 26 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "polaroid_width", "label": "Polaroid width (desktop)", "min": 120, "max": 280, "step": 10, "unit": "px", "default": 190 },
+    { "type": "range", "id": "polaroid_width_mobile", "label": "Polaroid width (mobile)", "min": 80, "max": 160, "step": 5, "unit": "px", "default": 115 },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 64 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [
+    {
+      "name": "PawSorb v2 guarantee",
+      "blocks": [
+        { "type": "polaroid", "settings": { "image_asset": "pawsorb-v2-polaroid-1.jpg", "rotation": -4, "rotation_mobile": -6 } },
+        { "type": "polaroid", "settings": { "image_asset": "pawsorb-v2-polaroid-2.jpg", "rotation": 3, "rotation_mobile": 0 } },
+        { "type": "polaroid", "settings": { "image_asset": "pawsorb-v2-polaroid-3.jpg", "rotation": -4, "rotation_mobile": 6 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

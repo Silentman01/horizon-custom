@@ -1,0 +1,90 @@
+{%- assign ss = section.settings -%}
+<script src="{{ 'pawsorb-core.js' | asset_url }}" defer></script>
+<div
+  class="pawsorb-v2-vt{% if ss.image_side == 'right' %} pawsorb-v2-vt--flip{% endif %}"
+  style="--pawsorb-v2-vt-bg: {{ ss.bg_color }}; --pawsorb-v2-vt-ink: {{ ss.text_color }}; --pawsorb-v2-vt-acc: {{ ss.accent_color }}; --pawsorb-v2-vt-acc-h: {{ ss.accent_hover }}; --pawsorb-v2-vt-n: {{ ss.name_size }}px; --pawsorb-v2-vt-nm: {{ ss.name_size_mobile }}px; --pawsorb-v2-vt-pt: {{ ss.padding_top }}px; --pawsorb-v2-vt-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-vt-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-vt-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  <div class="pawsorb-v2-vt__grid">
+    <div class="pawsorb-v2-vt__media{% if ss.fade %} is-faded{% endif %}">
+      <span class="pawsorb-v2-vt__fb" aria-hidden="true">{% render 'pawsorb-icon', name: 'vet', size: 64 %}</span>
+      {%- if ss.image != blank -%}
+        {{ ss.image | image_url: width: 1100 | image_tag: loading: 'lazy', alt: ss.image_alt, sizes: '(min-width: 750px) 520px, 100vw', widths: '400, 600, 800, 1100' }}
+      {%- elsif ss.image_asset != blank -%}
+        <img src="{{ ss.image_asset | asset_url }}" alt="{{ ss.image_alt | escape }}" width="600" height="600" loading="lazy" decoding="async" onerror="this.remove()">
+      {%- endif -%}
+    </div>
+    <div class="pawsorb-v2-vt__text">
+      {%- if ss.name != blank -%}<h2 class="pawsorb-v2-vt__name">{{ ss.name }}</h2>{%- endif -%}
+      {%- if ss.credential != blank -%}<p class="pawsorb-v2-vt__cred">{{ ss.credential }}</p>{%- endif -%}
+      <span class="pawsorb-v2-vt__rule" aria-hidden="true"></span>
+      {%- if ss.quote != blank -%}<div class="pawsorb-v2-vt__quote">{{ ss.quote }}</div>{%- endif -%}
+      {%- if ss.button_label != blank -%}
+        <a class="pawsorb-v2-vt__btn" href="{{ ss.button_link | default: '#pawsorb-bundle-picker' }}" data-pawsorb-cta>{{ ss.button_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-vt { padding: var(--pawsorb-v2-vt-pt, 56px) 16px var(--pawsorb-v2-vt-pb, 56px); background: var(--pawsorb-v2-vt-bg, #F8F5EF); color: var(--pawsorb-v2-vt-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-vt__grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 520px) minmax(0, 1fr); gap: 48px; align-items: center; }
+  .pawsorb-v2-vt--flip .pawsorb-v2-vt__media { order: 2; }
+  .pawsorb-v2-vt__media { position: relative; aspect-ratio: 1; border-radius: 8px; overflow: hidden; background: #F0ECE6; }
+  .pawsorb-v2-vt__media.is-faded { -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, .5) 30%, #000 50%); mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, .5) 30%, #000 50%); }
+  .pawsorb-v2-vt--flip .pawsorb-v2-vt__media.is-faded { -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .5) 30%, #000 50%); mask-image: linear-gradient(to right, transparent 0%, rgba(0, 0, 0, .5) 30%, #000 50%); }
+  .pawsorb-v2-vt__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pawsorb-v2-vt__fb { position: absolute; inset: 0; display: grid; place-items: center; color: #B5B3AD; }
+  .pawsorb-v2-vt__text { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .pawsorb-v2-vt__name { margin: 0; font-family: var(--font-body--family); font-weight: 400; font-size: var(--pawsorb-v2-vt-n, 30px); line-height: 1.2; letter-spacing: -.02em; }
+  .pawsorb-v2-vt__cred { margin: 8px 0 0; font-size: 15px; font-weight: 600; line-height: 1.35; color: var(--pawsorb-v2-vt-acc, #12855A); }
+  .pawsorb-v2-vt__rule { display: block; width: 80%; height: 2px; margin: 18px 0; background: var(--pawsorb-v2-vt-ink, #121614); }
+  .pawsorb-v2-vt__quote { font-size: 15px; line-height: 1.6; }
+  .pawsorb-v2-vt__quote p { margin: 0; }
+  .pawsorb-v2-vt__quote strong { font-weight: 700; }
+  .pawsorb-v2-vt__btn { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 46px; margin-top: 22px; padding: 0 20px; border-radius: 6px; background: var(--pawsorb-v2-vt-acc, #12855A); color: #fff; font-size: 18px; font-weight: 500; text-decoration: none; box-sizing: border-box; }
+  .pawsorb-v2-vt__btn:hover { background: var(--pawsorb-v2-vt-acc-h, #0E6B48); }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-vt { padding: var(--pawsorb-v2-vt-ptm, 0) 0 var(--pawsorb-v2-vt-pbm, 40px); }
+    .pawsorb-v2-vt__grid { grid-template-columns: minmax(0, 1fr); gap: 4px; }
+    .pawsorb-v2-vt--flip .pawsorb-v2-vt__media { order: 0; }
+    .pawsorb-v2-vt__media { border-radius: 0; }
+    .pawsorb-v2-vt__media.is-faded, .pawsorb-v2-vt--flip .pawsorb-v2-vt__media.is-faded { -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 30%); mask-image: linear-gradient(to top, transparent 0%, #000 30%); }
+    .pawsorb-v2-vt__text { padding: 0 16px; }
+    .pawsorb-v2-vt__name { font-size: var(--pawsorb-v2-vt-nm, 26px); }
+    .pawsorb-v2-vt__quote { font-size: 14px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 vet",
+  "tag": "section",
+  "class": "pawsorb-v2-section-vt",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "name", "label": "Name", "default": "Dr. Elena Ruiz, DVM" },
+    { "type": "text", "id": "credential", "label": "Credential", "default": "Emergency & critical care vet" },
+    { "type": "richtext", "id": "quote", "label": "Quote", "default": "<p>\"Most poisonings I treat started at home, an hour <em>before</em> I saw the dog. <strong>That first hour is yours.</strong>\"</p>" },
+    { "type": "text", "id": "button_label", "label": "Button", "default": "Get ready tonight →" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave blank to scroll to the bundle picker." },
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "text", "id": "image_asset", "label": "Photo theme file", "default": "pawsorb-vet-1.jpg" },
+    { "type": "text", "id": "image_alt", "label": "Alt text", "default": "Dr. Elena Ruiz, emergency and critical care vet" },
+    { "type": "select", "id": "image_side", "label": "Photo side (desktop)", "default": "left", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "checkbox", "id": "fade", "label": "Fade the photo edge into the background", "default": true },
+    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text and divider", "default": "#121614" },
+    { "type": "color", "id": "accent_color", "label": "Credential and button", "default": "#12855A" },
+    { "type": "color", "id": "accent_hover", "label": "Button hover", "default": "#0E6B48" },
+    { "type": "range", "id": "name_size", "label": "Name size (desktop)", "min": 18, "max": 48, "step": 1, "unit": "px", "default": 30 },
+    { "type": "range", "id": "name_size_mobile", "label": "Name size (mobile)", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 26 },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 0 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 vet" } ]
+}
+{% endschema %}

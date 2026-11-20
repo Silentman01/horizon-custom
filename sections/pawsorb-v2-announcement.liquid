@@ -1,0 +1,118 @@
+{%- assign ss = section.settings -%}
+{%- if ss.hide_global_bar -%}<style>#header-group .pawsorb-section-announcement { display: none; }</style>{%- endif -%}
+<div
+  class="pawsorb-v2-an"
+  data-v2-an-end="{{ ss.cd_end | escape }}"
+  style="--pawsorb-v2-an-g1: {{ ss.grad_1 }}; --pawsorb-v2-an-g2: {{ ss.grad_2 }}; --pawsorb-v2-an-g3: {{ ss.grad_3 }}; --pawsorb-v2-an-g4: {{ ss.grad_4 }}; --pawsorb-v2-an-fg: {{ ss.text_color }}; --pawsorb-v2-an-tint: {{ ss.tint_color }}; --pawsorb-v2-an-t: {{ ss.title_size }}px; --pawsorb-v2-an-tm: {{ ss.title_size_mobile }}px;"
+>
+  <div class="pawsorb-v2-an__copy">
+    <p class="pawsorb-v2-an__title">
+      {%- if ss.title_accent != blank and ss.accent_position == 'start' -%}<span class="pawsorb-v2-an__tint">{{ ss.title_accent }}</span> {% endif -%}
+      {{ ss.title }}
+      {%- if ss.title_accent != blank and ss.accent_position == 'end' %} <span class="pawsorb-v2-an__tint">{{ ss.title_accent }}</span>{%- endif -%}
+    </p>
+    {%- if ss.sub != blank -%}<p class="pawsorb-v2-an__sub"><span class="pawsorb-v2-an__dot" aria-hidden="true"></span>{{ ss.sub }}</p>{%- endif -%}
+  </div>
+  {%- if ss.cd_end != blank -%}
+    <div class="pawsorb-v2-an__timer" data-v2-an-timer hidden>
+      <span class="pawsorb-v2-an__unit"><span class="pawsorb-v2-an__box" data-u="d">00</span><span class="pawsorb-v2-an__lab">{{ ss.label_days }}</span></span>
+      <span class="pawsorb-v2-an__sep" aria-hidden="true">:</span>
+      <span class="pawsorb-v2-an__unit"><span class="pawsorb-v2-an__box" data-u="h">00</span><span class="pawsorb-v2-an__lab">{{ ss.label_hours }}</span></span>
+      <span class="pawsorb-v2-an__sep" aria-hidden="true">:</span>
+      <span class="pawsorb-v2-an__unit"><span class="pawsorb-v2-an__box" data-u="m">00</span><span class="pawsorb-v2-an__lab">{{ ss.label_minutes }}</span></span>
+      <span class="pawsorb-v2-an__sep" aria-hidden="true">:</span>
+      <span class="pawsorb-v2-an__unit"><span class="pawsorb-v2-an__box" data-u="s">00</span><span class="pawsorb-v2-an__lab">{{ ss.label_seconds }}</span></span>
+    </div>
+  {%- endif -%}
+</div>
+<script>
+  (function () {
+    var s = document.currentScript, sec = s && s.closest('.shopify-section');
+    var hg = document.getElementById('header-group');
+    {%- if ss.move_to_top %}
+    if (sec && hg && !(window.Shopify && Shopify.designMode)) hg.insertBefore(sec, hg.firstChild);
+    {%- endif %}
+    var bar = sec ? sec.querySelector('.pawsorb-v2-an') : null;
+    var tm = bar && bar.querySelector('[data-v2-an-timer]');
+    if (!tm) return;
+    var end = Date.parse(bar.getAttribute('data-v2-an-end'));
+    if (isNaN(end)) return;
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var box = function (u) { return tm.querySelector('[data-u="' + u + '"]'); };
+    var t;
+    var tick = function () {
+      var x = Math.floor((end - Date.now()) / 1000);
+      if (x <= 0) { tm.hidden = true; clearInterval(t); return; }
+      tm.hidden = false;
+      box('d').textContent = pad(Math.floor(x / 86400));
+      box('h').textContent = pad(Math.floor(x % 86400 / 3600));
+      box('m').textContent = pad(Math.floor(x % 3600 / 60));
+      box('s').textContent = pad(x % 60);
+    };
+    tick(); t = setInterval(tick, 1000);
+  })();
+</script>
+
+{% stylesheet %}
+  .pawsorb-v2-an { display: flex; align-items: center; justify-content: center; gap: 40px; min-height: 72px; padding: 12px 16px; background: linear-gradient(90deg, var(--pawsorb-v2-an-g1, #0B0F0D) 0%, var(--pawsorb-v2-an-g2, #121614) 45%, var(--pawsorb-v2-an-g3, #0D3A28) 78%, var(--pawsorb-v2-an-g4, #0F5A3C) 100%); color: var(--pawsorb-v2-an-fg, #fff); font-family: var(--font-body--family); white-space: nowrap; }
+  .pawsorb-v2-an__copy { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; }
+  .pawsorb-v2-an__title { margin: 0; font-weight: 800; font-size: var(--pawsorb-v2-an-t, 21px); line-height: 1.1; text-transform: uppercase; letter-spacing: -.01em; }
+  .pawsorb-v2-an__tint { color: var(--pawsorb-v2-an-tint, #2BD08F); }
+  .pawsorb-v2-an__sub { display: flex; align-items: center; gap: 8px; margin: 0; font-weight: 700; font-size: 15px; line-height: 1.2; text-transform: uppercase; }
+  .pawsorb-v2-an__dot { width: 9px; height: 9px; border-radius: 50%; background: var(--pawsorb-v2-an-tint, #2BD08F); box-shadow: 0 0 0 0 color-mix(in srgb, var(--pawsorb-v2-an-tint, #2BD08F) 50%, transparent); animation: pawsorb-v2-an-pulse 1.8s infinite; }
+  @keyframes pawsorb-v2-an-pulse { 70% { box-shadow: 0 0 0 7px rgba(43, 208, 143, 0); } 100% { box-shadow: 0 0 0 0 rgba(43, 208, 143, 0); } }
+  .pawsorb-v2-an__timer { display: flex; align-items: flex-start; gap: 6px; }
+  .pawsorb-v2-an__timer[hidden] { display: none; }
+  .pawsorb-v2-an__unit { display: flex; flex-direction: column; align-items: center; gap: 3px; }
+  .pawsorb-v2-an__box { min-width: 38px; padding: 5px 6px; border: 1px solid rgba(255, 255, 255, .15); border-radius: 6px; background: rgba(255, 255, 255, .10); font-weight: 700; font-size: 19px; line-height: 1.1; text-align: center; font-variant-numeric: tabular-nums; }
+  .pawsorb-v2-an__lab { font-size: 9px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: rgba(255, 255, 255, .55); }
+  .pawsorb-v2-an__sep { padding-top: 6px; font-weight: 700; opacity: .6; }
+  @media (prefers-reduced-motion: reduce) { .pawsorb-v2-an__dot { animation: none; } }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-an { justify-content: space-between; gap: 10px; min-height: 60px; padding: 10px; }
+    .pawsorb-v2-an__copy { align-items: flex-start; }
+    .pawsorb-v2-an__title { font-size: var(--pawsorb-v2-an-tm, 14px); }
+    .pawsorb-v2-an__sub { font-size: 11px; gap: 6px; }
+    .pawsorb-v2-an__dot { width: 7px; height: 7px; }
+    .pawsorb-v2-an__timer { gap: 3px; }
+    .pawsorb-v2-an__box { min-width: 26px; padding: 4px 3px; font-size: 13px; border-radius: 5px; }
+    .pawsorb-v2-an__lab { font-size: 8px; letter-spacing: .04em; }
+    .pawsorb-v2-an__sep { padding-top: 4px; font-size: 12px; }
+  }
+  @media screen and (max-width: 360px) {
+    .pawsorb-v2-an__sep { display: none; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 sale bar",
+  "tag": "section",
+  "class": "pawsorb-v2-section-an",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Black Friday" },
+    { "type": "text", "id": "title_accent", "label": "Accent word", "default": "Stock-up" },
+    { "type": "select", "id": "accent_position", "label": "Accent word position", "default": "end", "options": [ { "value": "start", "label": "Before the title" }, { "value": "end", "label": "After the title" } ] },
+    { "type": "text", "id": "sub", "label": "Sub line", "default": "Up to 75% off + free shipping" },
+    { "type": "text", "id": "cd_end", "label": "Timer end", "default": "2026-11-30T23:59:00-05:00", "info": "Date and time with offset. The timer hides itself after this moment." },
+    { "type": "text", "id": "label_days", "label": "Days label", "default": "Days" },
+    { "type": "text", "id": "label_hours", "label": "Hours label", "default": "Hrs" },
+    { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "Min" },
+    { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "Sec" },
+    { "type": "header", "content": "Placement" },
+    { "type": "checkbox", "id": "move_to_top", "label": "Show above the header", "default": true, "info": "Moves the bar to the top of the page on the live store (it stays in place inside the editor)." },
+    { "type": "checkbox", "id": "hide_global_bar", "label": "Hide the store announcement bar on this page", "default": true },
+    { "type": "header", "content": "Colours and type" },
+    { "type": "color", "id": "grad_1", "label": "Gradient start", "default": "#0B0F0D" },
+    { "type": "color", "id": "grad_2", "label": "Gradient 45%", "default": "#121614" },
+    { "type": "color", "id": "grad_3", "label": "Gradient 78%", "default": "#0D3A28" },
+    { "type": "color", "id": "grad_4", "label": "Gradient end", "default": "#0F5A3C" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
+    { "type": "color", "id": "tint_color", "label": "Accent word and dot", "default": "#2BD08F" },
+    { "type": "range", "id": "title_size", "label": "Title size (desktop)", "min": 14, "max": 30, "step": 1, "unit": "px", "default": 21 },
+    { "type": "range", "id": "title_size_mobile", "label": "Title size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 }
+  ],
+  "presets": [ { "name": "PawSorb v2 sale bar" } ]
+}
+{% endschema %}

@@ -1,0 +1,100 @@
+{%- liquid
+  assign ss = section.settings
+  assign half = section.blocks.size | plus: 1 | divided_by: 2
+-%}
+<div
+  class="pawsorb-v2-fq"
+  style="--pawsorb-v2-fq-bg: {{ ss.bg_color }}; --pawsorb-v2-fq-ink: {{ ss.text_color }}; --pawsorb-v2-fq-line: {{ ss.line_color }}; --pawsorb-v2-fq-abg: {{ ss.answer_bg }}; --pawsorb-v2-fq-h: {{ ss.heading_size }}px; --pawsorb-v2-fq-hm: {{ ss.heading_size_mobile }}px; --pawsorb-v2-fq-hw: {{ ss.heading_weight }}; --pawsorb-v2-fq-pt: {{ ss.padding_top }}px; --pawsorb-v2-fq-pb: {{ ss.padding_bottom }}px; --pawsorb-v2-fq-ptm: {{ ss.padding_top_mobile }}px; --pawsorb-v2-fq-pbm: {{ ss.padding_bottom_mobile }}px;"
+>
+  {%- if ss.heading != blank -%}<h2 class="pawsorb-v2-fq__h">{{ ss.heading }}</h2>{%- endif -%}
+  <div class="pawsorb-v2-fq__cols{% if ss.columns == '1' or section.blocks.size < 2 %} is-single{% endif %}">
+    {%- liquid
+      assign n_cols = 1
+      if ss.columns == '2' and section.blocks.size > 1
+        assign n_cols = 2
+      endif
+    -%}
+    {%- for c in (1..n_cols) -%}
+      {%- liquid
+        assign off = 0
+        assign lim = section.blocks.size
+        if n_cols == 2
+          if c == 1
+            assign lim = half
+          else
+            assign off = half
+          endif
+        endif
+      -%}
+      <div class="pawsorb-v2-fq__box">
+        {%- for block in section.blocks offset: off limit: lim -%}
+          <details class="pawsorb-v2-fq__q" name="pawsorb-v2-fq-{{ section.id }}" {{ block.shopify_attributes }}>
+            <summary><span>{{ block.settings.question }}</span><span class="pawsorb-v2-fq__plus" aria-hidden="true">+</span></summary>
+            <div class="pawsorb-v2-fq__a">{{ block.settings.answer }}</div>
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% stylesheet %}
+  .pawsorb-v2-fq { padding: var(--pawsorb-v2-fq-pt, 60px) 16px var(--pawsorb-v2-fq-pb, 60px); background: var(--pawsorb-v2-fq-bg, #F8F5EF); color: var(--pawsorb-v2-fq-ink, #121614); font-family: var(--font-body--family); }
+  .pawsorb-v2-fq__h { max-width: 900px; margin: 0 auto 28px; text-align: center; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-fq-hw, 400); font-size: var(--pawsorb-v2-fq-h, 38px); line-height: 1.15; letter-spacing: -.02em; }
+  .pawsorb-v2-fq__cols { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .pawsorb-v2-fq__cols.is-single { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+  .pawsorb-v2-fq__box { border: 1px solid var(--pawsorb-v2-fq-line, #E5E3DE); border-radius: 12px; overflow: hidden; }
+  .pawsorb-v2-fq__q + .pawsorb-v2-fq__q { border-top: 1px solid var(--pawsorb-v2-fq-line, #E5E3DE); }
+  .pawsorb-v2-fq__q summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 18px; font-size: 16px; line-height: 1.35; cursor: pointer; list-style: none; }
+  .pawsorb-v2-fq__q summary::-webkit-details-marker { display: none; }
+  .pawsorb-v2-fq__q summary:focus-visible { outline: 2px solid var(--pawsorb-v2-fq-ink, #121614); outline-offset: -2px; }
+  .pawsorb-v2-fq__plus { flex: 0 0 auto; font-size: 18px; line-height: 1; transition: transform .2s; }
+  .pawsorb-v2-fq__q[open] .pawsorb-v2-fq__plus { transform: rotate(45deg); }
+  .pawsorb-v2-fq__a { padding: 0 18px 16px; background: var(--pawsorb-v2-fq-abg, transparent); font-size: 14px; line-height: 1.6; }
+  .pawsorb-v2-fq__a p { margin: 0; }
+  .pawsorb-v2-fq__a p + p { margin-top: 6px; }
+  @media screen and (max-width: 749px) {
+    .pawsorb-v2-fq { padding: var(--pawsorb-v2-fq-ptm, 40px) 16px var(--pawsorb-v2-fq-pbm, 40px); }
+    .pawsorb-v2-fq__h { margin-bottom: 22px; font-size: var(--pawsorb-v2-fq-hm, 32px); }
+    .pawsorb-v2-fq__cols { grid-template-columns: minmax(0, 1fr); gap: 0; border: 1px solid var(--pawsorb-v2-fq-line, #E5E3DE); border-radius: 12px; overflow: hidden; }
+    .pawsorb-v2-fq__box { border: 0; border-radius: 0; }
+    .pawsorb-v2-fq__box + .pawsorb-v2-fq__box { border-top: 1px solid var(--pawsorb-v2-fq-line, #E5E3DE); }
+    .pawsorb-v2-fq__q summary { padding: 14px 16px; font-size: 14px; }
+    .pawsorb-v2-fq__a { padding: 0 16px 14px; font-size: 13px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "PawSorb v2 FAQ",
+  "tag": "section",
+  "class": "pawsorb-v2-section-fq",
+  "max_blocks": 16,
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Do I still need to call the vet?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Always. Give it first, then call with the dose already in.</p>" }
+      ]
+    }
+  ],
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What owners ask us first" },
+    { "type": "select", "id": "columns", "label": "Columns (desktop)", "default": "2", "options": [ { "value": "1", "label": "One" }, { "value": "2", "label": "Two" } ] },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#F8F5EF" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#121614" },
+    { "type": "color", "id": "line_color", "label": "Borders", "default": "#E5E3DE" },
+    { "type": "color", "id": "answer_bg", "label": "Answer background", "default": "#F8F5EF" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 38 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 32 },
+    { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
+    { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+  ],
+  "presets": [ { "name": "PawSorb v2 FAQ", "blocks": [ { "type": "question" } ] } ]
+}
+{% endschema %}
