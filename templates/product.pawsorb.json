@@ -28,7 +28,7 @@
         "stock_label": "Selling fast this week",
         "stock_fill_text": "97% claimed",
         "stock_percent": 97,
-        "stock_micro": "Stock is low. Holiday prices end when it's gone.",
+        "stock_micro": "Stock is low this Black Friday week.",
         "picker_heading": "How much does your dog weigh?",
         "picker_helper": "Each tier is the number of tubes to keep on hand for your dog's size.",
         "savings_text": "You save [savings] today",
@@ -45,7 +45,10 @@
         "savings_color": "#12855A",
         "text_color": "#141816",
         "padding_top": 24,
-        "padding_bottom": 40
+        "padding_bottom": 40,
+        "cd_enabled": true,
+        "cd_label": "BLACK FRIDAY SALE ENDS IN",
+        "cd_end": "2026-11-30T23:59:00-05:00"
       },
       "blocks": {
         "tier_1": {

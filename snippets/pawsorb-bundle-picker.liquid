@@ -16,6 +16,30 @@
   assign first_done = false
 -%}
 <div id="pawsorb-bundle-picker" class="pawsorb-bp" style="--pawsorb-bp-accent: {{ ss.accent_color }}; --pawsorb-bp-green: {{ ss.savings_color }};">
+  {%- if ss.cd_enabled and ss.cd_end != blank -%}
+    <p class="pawsorb-bp__cd" data-pawsorb-cd data-end="{{ ss.cd_end | escape }}" hidden>{% render 'pawsorb-icon', name: 'clock', size: 16 %}<span>{{ ss.cd_label }}</span> <strong data-pawsorb-cd-out>--:--:--</strong></p>
+    <script>
+      (function () {
+        if (window.__pawsorbCd) return; window.__pawsorbCd = true;
+        function pad(n) { return (n < 10 ? '0' : '') + n; }
+        function run() {
+          document.querySelectorAll('[data-pawsorb-cd]').forEach(function (el) {
+            var end = Date.parse(el.getAttribute('data-end')); if (isNaN(end)) return;
+            var out = el.querySelector('[data-pawsorb-cd-out]'), t;
+            function tick() {
+              var s = Math.floor((end - Date.now()) / 1000);
+              if (s <= 0) { el.hidden = true; clearInterval(t); return; }
+              el.hidden = false;
+              var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60), x = s % 60;
+              out.textContent = (d ? d + 'd ' : '') + pad(h) + ':' + pad(m) + ':' + pad(x);
+            }
+            tick(); t = setInterval(tick, 1000);
+          });
+        }
+        if (document.readyState !== 'loading') run(); else document.addEventListener('DOMContentLoaded', run);
+      })();
+    </script>
+  {%- endif -%}
   {%- if ss.picker_heading != blank -%}<p class="pawsorb-bp__heading">{{ ss.picker_heading }}</p>{%- endif -%}
   {%- if ss.picker_helper != blank -%}<p class="pawsorb-bp__helper">{{ ss.picker_helper }}</p>{%- endif -%}
   <div class="pawsorb-bp__tiers" role="radiogroup" aria-label="{{ ss.picker_heading | default: 'Choose your bundle' | escape }}">
@@ -78,6 +102,9 @@
 </div>
 
 {% stylesheet %}
+  .pawsorb-bp__cd { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; padding: 9px 12px; border-radius: 10px; background: #121614; color: #fff; font: 700 14px/1.25 var(--font-heading--family); letter-spacing: .02em; text-align: center; }
+  .pawsorb-bp__cd[hidden] { display: none; }
+  .pawsorb-bp__cd strong { color: #2BD08F; font-variant-numeric: tabular-nums; }
   .pawsorb-bp { scroll-margin-top: 90px; border-radius: 14px; transition: box-shadow .4s; }
   .pawsorb-bp.is-flash { animation: pawsorb-bp-flash 1.4s ease-out; }
   @keyframes pawsorb-bp-flash { 0%, 40% { box-shadow: 0 0 0 4px rgba(18, 133, 90, .35); } 100% { box-shadow: 0 0 0 0 rgba(18, 133, 90, 0); } }
