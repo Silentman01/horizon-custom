@@ -9,57 +9,136 @@
  */
 {
   "sections": {
-    "pawsorb_main": {
-      "type": "pawsorb-main-product",
+    "pawsorb_v2_main": {
+      "type": "pawsorb-v2-main-product",
       "settings": {
-        "title_override": "",
-        "pill": "Veterinary professionals' #1 pick",
-        "rating_text": "4.9 ★ · 4,554 reviews",
-        "families_text": "Ready in 115,000+ homes",
-        "price_text": "$39.99",
-        "compare_text": "$59.99",
-        "sale_badge": "SAVE 33%",
-        "subtitle": "Bind the poison in the stomach before it hits the bloodstream. At home, in under 60 seconds.",
-        "bullet_1": "Toads, chocolate, grapes, pills, sago palm and more",
-        "bullet_2": "No peroxide. No forcing her to throw up.",
-        "bullet_3": "Premixed gel, dialed by the pound",
-        "bullet_4": "Works at 3 a.m. when your vet is closed",
-        "show_stock": true,
-        "stock_label": "Selling fast this week",
-        "stock_fill_text": "97% claimed",
-        "stock_percent": 97,
-        "stock_micro": "Stock is low this Black Friday week.",
-        "picker_heading": "How much does your dog weigh?",
-        "picker_helper": "Each tier is the number of tubes to keep on hand for your dog's size.",
-        "savings_text": "You save [savings] today",
-        "button_label": "ADD TO CART",
+        "title_override": "Help Your Pet Before the Vet Can with PawSorb™ Activated Charcoal First-Aid Gel",
+        "rating_text": "Ready in 115,000+ homes",
+        "paragraph": "<p>It's 11 p.m. The chocolate on the counter is gone, or a toad sits by the water bowl. The vet's line rings to voicemail. Nothing in the cabinet helps. With PawSorb in the drawer, the first minute is yours.</p>",
+        "cd_enabled": true,
+        "cd_label": "BLACK FRIDAY SALE ENDS IN",
+        "cd_end": "2026-11-30T23:59:00-05:00",
+        "each_word": "each",
+        "save_word": "SAVE",
+        "show_total": false,
+        "total_word": "total",
+        "gift_title": "Free with 3 or more tubes",
+        "button_label": "Add to Cart",
         "soldout_label": "Sold out",
         "trust_1": "90-day money-back guarantee",
         "trust_2": "Fast US shipping",
-        "trust_3": "Vet-formulated",
         "show_payment_icons": true,
-        "gallery_alt": "PawSorb tube next to a cane toad and a chocolate bar",
-        "fallback_asset": "pawsorb-packshot.webp",
+        "payment_label": "Payment methods",
+        "gallery_alt": "PawSorb activated charcoal first-aid gel",
+        "bg_color": "#F8F5EF",
+        "text_color": "#121614",
+        "muted_color": "#5B625E",
         "accent_color": "#12855A",
-        "navy_color": "#121614",
-        "savings_color": "#12855A",
-        "text_color": "#141816",
+        "accent_hover": "#0E6B48",
+        "deep_color": "#0B5E3F",
+        "line_color": "#E5E3DE",
+        "tier_border": "#B5B3AD",
+        "title_size": 39,
+        "title_size_mobile": 32,
+        "heading_weight": "400",
         "padding_top": 24,
-        "padding_bottom": 40,
-        "cd_enabled": true,
-        "cd_label": "BLACK FRIDAY SALE ENDS IN",
-        "cd_end": "2026-11-30T23:59:00-05:00"
+        "padding_bottom": 56,
+        "padding_bottom_mobile": 40,
+        "chrome_enabled": true,
+        "footer_bg": "#12855A",
+        "footer_text": "#FFFFFF"
       },
       "blocks": {
+        "award": {
+          "type": "award",
+          "settings": {
+            "number": "#1",
+            "line_1": "Vets' First Pick",
+            "line_2": "USA-made · Tested by an independent lab"
+          }
+        },
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "label": "Binds on contact"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "label": "No forced vomiting"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "label": "Dial-by-weight dosing"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "label": "Dogs, cats, puppies"
+          }
+        },
+        "calculator": {
+          "type": "calculator",
+          "settings": {
+            "button_label": "Which bundle fits my dog?",
+            "title": "Your Dog's Tube Count",
+            "intro": "Every pound takes 1 mL, and one tube holds 30 mL. Bigger dog or more dogs, more tubes on hand.",
+            "weight_label": "Your dog's weight",
+            "dogs_label": "Dogs in your home",
+            "unit_lb": "lb",
+            "unit_kg": "kg",
+            "start_weight": 45,
+            "band_1": "Under 30 lb",
+            "band_1_kg": "Under 14 kg",
+            "band_1_note": "Small dogs, puppies & cats",
+            "band_1_max": 30,
+            "band_1_tubes": 1,
+            "band_2": "31–60 lb",
+            "band_2_kg": "14–27 kg",
+            "band_2_max": 60,
+            "band_2_tubes": 2,
+            "band_3": "61–80 lb",
+            "band_3_kg": "28–36 kg",
+            "band_3_max": 80,
+            "band_3_tubes": 3,
+            "band_4": "81–150 lb",
+            "band_4_kg": "37–68 kg",
+            "band_4_max": 150,
+            "band_4_tubes": 5,
+            "band_multi": "Several dogs",
+            "band_multi_value": "10 tubes",
+            "tube_one": "tube",
+            "tube_many": "tubes",
+            "dog_one": "dog",
+            "dog_many": "dogs",
+            "result_label": "Keep on hand",
+            "per_dog": "[tubes] × [dogs]",
+            "note": "Over 150 lb, or a whole pack? The 10-tube bundle covers it.",
+            "go_label": "Select this bundle",
+            "close_label": "Close"
+          }
+        },
+        "notice": {
+          "type": "notice",
+          "settings": {
+            "title": "Genuine PawSorb ships only from this site, never from marketplaces",
+            "body": "Look-alike tubes turn up on marketplace listings. Ordering here means a fresh, sealed tube with the full 2-year life and our 90-day guarantee."
+          }
+        },
         "tier_1": {
           "type": "tier",
           "settings": {
             "title": "Buy 1",
             "quantity": 1,
             "weight_label": "Dogs < 30lbs",
-            "unit_line": "$39.99 each + $4.99 shipping",
             "price": "$39.99",
             "compare_price": "$59.99",
+            "each_override": "",
+            "save_override": "",
             "badge": "",
             "preselect": false
           }
@@ -70,9 +149,10 @@
             "title": "Buy 2",
             "quantity": 2,
             "weight_label": "Dogs 31–60lbs",
-            "unit_line": "$29.99 each + $4.99 shipping",
             "price": "$59.98",
             "compare_price": "$119.98",
+            "each_override": "",
+            "save_override": "",
             "badge": "",
             "preselect": false
           }
@@ -83,10 +163,11 @@
             "title": "Buy 3",
             "quantity": 3,
             "weight_label": "Dogs 61–80lbs",
-            "unit_line": "$24.99 each + FREE shipping",
             "price": "$74.97",
             "compare_price": "$179.97",
-            "badge": "MOST POPULAR",
+            "each_override": "",
+            "save_override": "",
+            "badge": "Most Popular",
             "preselect": true
           }
         },
@@ -96,9 +177,10 @@
             "title": "Buy 5",
             "quantity": 5,
             "weight_label": "Dogs 81–150lbs",
-            "unit_line": "$19.99 each + FREE shipping",
             "price": "$99.95",
             "compare_price": "$299.95",
+            "each_override": "",
+            "save_override": "",
             "badge": "",
             "preselect": false
           }
@@ -109,343 +191,255 @@
             "title": "Buy 10",
             "quantity": 10,
             "weight_label": "Multiple Dogs",
-            "unit_line": "$14.99 each + FREE shipping",
             "price": "$149.90",
             "compare_price": "$599.90",
-            "badge": "BEST VALUE",
+            "each_override": "",
+            "save_override": "",
+            "badge": "Best Value",
             "preselect": false
+          }
+        },
+        "gift_1": {
+          "type": "gift",
+          "settings": {
+            "title": "Fast US shipping",
+            "tab": "FREE",
+            "value": "$4.99",
+            "unlock_qty": 3,
+            "locked_label": "Locked",
+            "icon": "truck"
+          }
+        },
+        "gift_2": {
+          "type": "gift",
+          "disabled": true,
+          "settings": {
+            "title": "Bonus gift",
+            "tab": "FREE",
+            "value": "",
+            "unlock_qty": 5,
+            "locked_label": "Locked",
+            "icon": "gift"
+          }
+        },
+        "gift_3": {
+          "type": "gift",
+          "disabled": true,
+          "settings": {
+            "title": "Bonus gift",
+            "tab": "FREE",
+            "value": "",
+            "unlock_qty": 10,
+            "locked_label": "Locked",
+            "icon": "gift"
+          }
+        },
+        "comment": {
+          "type": "comment",
+          "settings": {
+            "avatar_asset": "pawsorb-v2-avatar.jpg",
+            "name": "Tasha Greene",
+            "text": "<p>Sunday night, I turned around to grab the pizza from the oven and the grape bowl on the coffee table was empty. Two dogs, no idea which one ate them. Pearl is 25 pounds, so one tube dialed to 25. Rocky is 70, so three tubes. Gave both right there on the rug, then called the vet. Both fine by bedtime. Learn from me: it's 1 mL per pound and a tube holds 30, so count tubes for every dog in the house, not just one.</p>",
+            "reactions": "214",
+            "heart_color": "#E5484D",
+            "meta": "Like · Reply · 6d"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "What if I'm not sure what they swallowed?",
+            "answer": "<p>Give it anyway. It's gentle enough to give on a hunch, and nothing gets forced back up. Waiting to see if symptoms show is how the first hour slips away.</p>"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "How do I give it with shaking hands?",
+            "answer": "<p>Turn the dial until it shows your pet's weight. Slip the tip into the cheek pouch, behind the back teeth, and press. No powder, no mixing, no math. Done in under 60 seconds.</p>"
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Is it okay for a 6 lb puppy or my cat?",
+            "answer": "<p>Yes. The dial doses to the pound, so a 6 lb puppy gets 6 mL and a 10 lb cat gets 10. Cats get the same dial as dogs, with nothing left to guess.</p>"
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Isn't hydrogen peroxide what you're supposed to use?",
+            "answer": "<p>That's old internet advice. Peroxide makes a dog vomit, which can burn the throat, inflame the stomach and send vomit into the lungs. PawSorb binds the poison instead, and nothing comes back up.</p>"
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "How soon do I need to give it?",
+            "answer": "<p>Right away, before any symptoms. Most poisons soak into the blood within 60 minutes, toads in 15 to 30. That's why it lives in your drawer: there's no time to order one mid-scare.</p>"
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does it keep, and where should it live?",
+            "answer": "<p>Two years, sealed, at room temperature. Keep one in the kitchen drawer, one in the car or the dog bag, and one at Grandma's if your dog stays there.</p>"
+          }
+        },
+        "faq_7": {
+          "type": "faq",
+          "settings": {
+            "question": "When will it arrive, and can I return it?",
+            "answer": "<p>It ships fast from the US with tracking. Shipping is free on 3 or more tubes, $4.99 below that. You have 90 days to send it back for a full refund.</p>"
           }
         }
       },
       "block_order": [
+        "award",
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "calculator",
+        "notice",
         "tier_1",
         "tier_2",
         "tier_3",
         "tier_4",
-        "tier_5"
+        "tier_5",
+        "gift_1",
+        "gift_2",
+        "gift_3",
+        "comment",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6",
+        "faq_7"
       ]
     },
-    "pawsorb_closed_hours": {
-      "type": "pawsorb-closed-hours",
-      "settings": {
-        "heading": "It never happens at 2 p.m. on a Tuesday.",
-        "close_line": "Give the first help yourself. Then make the call.",
-        "bg_asset": "pawsorb-closed-hours-bg.jpg",
-        "bg_color": "#121614",
-        "text_color": "#FFFFFF",
-        "accent_color": "#12855A",
-        "padding_top": 56,
-        "padding_bottom": 56
-      },
+    "pawsorb_v2_ticker": {
+      "type": "pawsorb-v2-ticker",
+      "settings": {},
       "blocks": {
-        "tile_1": {
-          "type": "tile",
+        "pill_1": {
+          "type": "pill",
           "settings": {
-            "icon": "clock",
-            "heading": "Sunday, 11 p.m.",
-            "body": "Your vet's voicemail. The ER is 40 minutes out."
+            "text": "Proudly USA-made",
+            "icon": "flag"
           }
         },
-        "tile_2": {
-          "type": "tile",
+        "pill_2": {
+          "type": "pill",
           "settings": {
-            "icon": "phone",
-            "heading": "On hold, paying by the minute",
-            "body": "$95 for a call while your dog keeps throwing up."
+            "text": "Formulated with vets",
+            "icon": "vet"
           }
         },
-        "tile_3": {
-          "type": "tile",
+        "pill_3": {
+          "type": "pill",
           "settings": {
-            "icon": "paw",
-            "heading": "1,200+ calls a day",
-            "body": "That's how often a pet swallows poison in the US. Almost nobody has a plan."
-          }
-        }
-      },
-      "block_order": [
-        "tile_1",
-        "tile_2",
-        "tile_3"
-      ]
-    },
-    "pawsorb_window": {
-      "type": "pawsorb-window",
-      "settings": {
-        "heading": "Poison gives you a window. PawSorb closes it.",
-        "body": "<p>What your dog swallows sits in the stomach first. For the next 60 minutes it seeps into the blood. With a toad, you get 15 to 30.</p><p>PawSorb catches it in the stomach, because activated charcoal grabs toxins on contact and holds them. Kaolin clay backs it up and calms the gut. It all leaves in the stool.</p><p><strong>The same charcoal ERs reach for, in your drawer.</strong></p>",
-        "chip_1": "Coconut-shell activated charcoal",
-        "chip_2": "Kaolin clay, the second layer",
-        "anim_asset": "pawsorb-anim-stomach.webp",
-        "image_asset": "pawsorb-window-diagram.webp",
-        "image_alt": "Diagram: PawSorb binds poison in the stomach before it reaches the bloodstream",
-        "ratio": "4 / 3",
-        "image_side": "left",
-        "label_mouth": "Mouth",
-        "label_stomach": "Stomach: PawSorb binds here",
-        "label_blood": "Bloodstream",
-        "label_time": "0–60 min until it reaches the blood",
-        "label_toad": "Toads: 15–30 min",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "pawsorb_toad_toxins": {
-      "type": "pawsorb-toad-and-toxins",
-      "settings": {
-        "show_feature": true,
-        "heading": "That \"big frog\" by the water bowl can kill a dog in 30 minutes.",
-        "chip_1": "FL · TX · LA · HI",
-        "chip_2": "15–30 minutes",
-        "feature_body": "Cane toads come out on wet nights, right under the porch light. One lick fills your dog's mouth with poison. Wipe the gums, give PawSorb, then drive.",
-        "feature_micro": "New to the South? Nobody tells you this when you move here.",
-        "feature_asset": "pawsorb-toad-feature.jpg",
-        "feature_alt": "Cane toad beside a dog water bowl under a porch light",
-        "rail_heading": "And the stuff already in your house:",
-        "footer_line": "Also binds caffeine, THC, nicotine, onions, moldy food, toxic plants, household chemicals and blue-green algae.",
-        "bg_color": "#F1F6F3",
-        "card_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
-      "blocks": {
-        "toxin_1": {
-          "type": "toxin",
-          "settings": {
-            "name": "Chocolate",
-            "image_asset": "pawsorb-toxin-chocolate.jpg",
-            "alt": "Dog sniffing a chocolate bar on a coffee table",
-            "icon": "chocolate"
-          }
-        },
-        "toxin_2": {
-          "type": "toxin",
-          "settings": {
-            "name": "Grapes & raisins",
-            "image_asset": "pawsorb-toxin-grapes.jpg",
-            "alt": "Grapes spilled on a kitchen floor",
-            "icon": "grapes"
-          }
-        },
-        "toxin_3": {
-          "type": "toxin",
-          "settings": {
-            "name": "Dropped pills",
-            "image_asset": "pawsorb-toxin-meds.jpg",
-            "alt": "Pills dropped under a holiday table",
-            "icon": "pill"
-          }
-        },
-        "toxin_4": {
-          "type": "toxin",
-          "settings": {
-            "name": "Sago palm",
-            "image_asset": "pawsorb-toxin-sago.jpg",
-            "alt": "Sago palm with seeds in a backyard",
+            "text": "Coconut charcoal + kaolin",
             "icon": "leaf"
           }
         },
-        "toxin_5": {
-          "type": "toxin",
+        "pill_4": {
+          "type": "pill",
           "settings": {
-            "name": "Rat bait",
-            "image_asset": "pawsorb-toxin-rodenticide.jpg",
-            "alt": "Rat bait block in a garage corner",
-            "icon": "bait"
-          }
-        },
-        "toxin_6": {
-          "type": "toxin",
-          "settings": {
-            "name": "Wild mushrooms",
-            "image_asset": "pawsorb-toxin-mushrooms.jpg",
-            "alt": "Puppy sniffing wild mushrooms in the grass",
-            "icon": "mushroom"
+            "text": "Independently lab tested",
+            "icon": "flask"
           }
         }
       },
       "block_order": [
-        "toxin_1",
-        "toxin_2",
-        "toxin_3",
-        "toxin_4",
-        "toxin_5",
-        "toxin_6"
+        "pill_1",
+        "pill_2",
+        "pill_3",
+        "pill_4"
       ]
     },
-    "pawsorb_first_60": {
-      "type": "pawsorb-first-60",
+    "pawsorb_v2_reviews": {
+      "type": "pawsorb-v2-reviews",
       "settings": {
-        "heading": "Your first 60 seconds, planned out.",
-        "old_plan": "Rinse and rush.|Peroxide.|Six Google tabs.",
-        "new_plan": "One tube, four moves.",
-        "micro_1": "Grandma, the sitter or your teenager can do it. The steps are on the tube.",
-        "micro_2": "Recap, back in the drawer. Good for 2 years.",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
-      "blocks": {
-        "step_1": {
-          "type": "step",
-          "settings": {
-            "title": "Wipe the mouth",
-            "body": "Toad? Wipe the gums with a damp cloth, front to back.",
-            "image_asset": "pawsorb-step-1-wipe.jpg",
-            "alt": "Hand wiping a dog's gums with a damp cloth",
-            "icon": "cloth"
-          }
-        },
-        "step_2": {
-          "type": "step",
-          "settings": {
-            "title": "Dial the weight",
-            "body": "Twist until the ring shows his pounds. 1 mL per lb, done.",
-            "image_asset": "pawsorb-step-2-dial.jpg",
-            "anim_asset": "pawsorb-anim-dial.webp",
-            "alt": "Hands turning the PawSorb weight dial",
-            "icon": "dial"
-          }
-        },
-        "step_3": {
-          "type": "step",
-          "settings": {
-            "title": "Squeeze into the cheek",
-            "body": "Tip behind the back teeth, press. Picky eater? Smear it on a treat.",
-            "image_asset": "pawsorb-step-3-squeeze.jpg",
-            "anim_asset": "pawsorb-anim-squeeze.webp",
-            "alt": "PawSorb tip resting behind a dog's back teeth",
-            "icon": "tube"
-          }
-        },
-        "step_4": {
-          "type": "step",
-          "settings": {
-            "title": "Call and drive",
-            "body": "Now phone the vet or a poison line, with the help already in.",
-            "image_asset": "pawsorb-step-4-call.jpg",
-            "alt": "Woman on the phone with car keys, dog on leash at the door",
-            "icon": "phone"
-          }
-        }
-      },
-      "block_order": [
-        "step_1",
-        "step_2",
-        "step_3",
-        "step_4"
-      ]
-    },
-    "pawsorb_close_calls": {
-      "type": "pawsorb-close-calls",
-      "settings": {
-        "heading": "\"Glad it was in the drawer.\"",
-        "rating_line": "★ 4.9 average · 4,554 reviews",
+        "pill_text": "4.9/5 from 4,554 reviews",
+        "heading": "On hand in 115,000+ homes",
         "verified_label": "Verified buyer",
-        "more_label": "Show more stories",
-        "bg_color": "#F1F6F3",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "prev_label": "Previous story",
+        "next_label": "Next story",
+        "show_chip": true,
+        "chip_title": "PawSorb™ Activated Charcoal First-Aid Gel",
+        "chip_price": "$39.99",
+        "chip_compare": "$59.99",
+        "chip_asset": "pawsorb-sticky-thumb.webp"
       },
       "blocks": {
         "review_1": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-1-toad.jpg",
+            "focal": "50% 45%",
+            "alt": "Woman by a Florida pool hugging her yellow Lab, holding a PawSorb tube",
             "name": "Dana R. · Tampa, FL",
             "tag": "Cane toad",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-1-toad.jpg",
-            "alt": "Black Lab on a Florida porch with a PawSorb tube",
-            "icon": "toad",
-            "hidden_initially": false,
-            "text": "Bought it in April after a neighbor's dog died. Used it in July. Our Lab mouthed a toad by the pool at 10 p.m. I wiped his gums, gave the tube, then drove. The ER said we did it right. He's snoring next to me."
+            "text": "<p>Moved to Tampa from Ohio two years ago. I honestly thought the big brown frogs around the pool were cute. Then in April our neighbor's dog licked one and was gone before they reached the ER. I ordered PawSorb that night. July, 10 p.m., I let Bo out for his last potty break and heard him gagging by the pool. Foam, pawing at his mouth, a toad sitting right there under the light. My hands were shaking. I wiped his gums with a wet rag, front to back. Bo is 78 pounds, so I gave him three tubes, squeezed into his cheek one after the other. Then I called the ER from the car. The vet said we did it right and that those first minutes mattered most. He was home by 2 a.m. and he's snoring on my feet as I type this. Keep enough for your dog's size by the back door. Please.</p>"
           }
         },
         "review_2": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-2-chocolate.jpg",
+            "focal": "50% 78%",
+            "alt": "Beagle next to a torn chocolate wrapper on the kitchen floor",
             "name": "Megan T. · Columbus, OH",
             "tag": "Christmas chocolate",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-2-chocolate.jpg",
-            "alt": "Beagle next to a torn chocolate box",
-            "icon": "chocolate",
-            "hidden_initially": false,
-            "text": "Christmas Eve. Our beagle ate a whole box of chocolate from under the tree. Vet closed till the 26th. Gave PawSorb, called the ER line after. No trip needed. Cheaper than one hour in that waiting room."
+            "text": "<p>Christmas Eve, 9 p.m. Our beagle Biscuit tore open a box of dark chocolates from under the tree. Our vet was closed till the 26th and the poison line had me on hold. So I dialed her to 22 pounds and gave the tube while I was still waiting. The ER checked her over and sent us home. We opened presents with her the next morning.</p>"
           }
         },
         "review_3": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-3-small-dog.jpg",
+            "focal": "55% 45%",
+            "alt": "Man with his Shih Tzu, holding a PawSorb tube",
             "name": "Rick K. · Mesa, AZ",
             "tag": "Grapes",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-3-small-dog.jpg",
-            "alt": "Shih Tzu in his owner's lap with a PawSorb tube",
-            "icon": "grapes",
-            "hidden_initially": false,
-            "text": "Lulu is 9 pounds. A handful of grapes rolled off the counter and she got three. I was shaking, but the dial did the math for me. Thirty seconds, start to finish. She's fine."
+            "text": "<p>Lulu is 9 pounds. Three grapes rolled off the counter and she beat me to them. I was shaking, but the dial did the math: 9 on the ring, squeeze, done. Thirty seconds. She's fine.</p>"
           }
         },
         "review_4": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-4-trash.jpg",
+            "focal": "50% 45%",
+            "alt": "Golden retriever in a raided kitchen trash can",
             "name": "Jess M. · Knoxville, TN",
             "tag": "Rat bait",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-4-trash.jpg",
-            "alt": "Golden retriever in a raided kitchen trash can",
-            "icon": "bait",
-            "hidden_initially": false,
-            "text": "My golden is a trash compactor. He dragged a bait block out of the garage into the kitchen. Gave the tube in the kitchen, then went to the vet. Bloodwork clean. Bought three more for my folks."
+            "text": "<p>My golden is a trash compactor, and this time he dragged a bait block out of the garage. Second scare this year. Gave him his tubes on the kitchen floor, then drove him in. Bloodwork came back clean. Bought three more for my parents, because he stays there every summer.</p>"
           }
         },
         "review_5": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-5-holiday-pill.jpg",
+            "focal": "50% 68%",
+            "alt": "Dog under a holiday dinner table next to a dropped pill bottle",
             "name": "Sharon B. · Raleigh, NC",
             "tag": "Dropped pill",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-5-holiday-pill.jpg",
-            "alt": "Dog under a holiday dinner table",
-            "icon": "pill",
-            "hidden_initially": false,
-            "text": "My dad dropped his heart pill at Thanksgiving and the dog had it before anyone bent down. My sister read the steps off the tube while I held her. That's why I keep one in every house we visit."
+            "text": "<p>Thanksgiving at my mom's. Dad dropped his heart pill and Penny had it before anyone reached under the table. I froze. My 15-year-old grabbed the PawSorb from my purse, read the steps printed on the tube and dialed her weight while I held her. Then we called the vet with the dose already in. Now there's a tube at Mom's, one at my sister's and one in my glovebox. Whoever is watching her can handle it.</p>"
           }
         },
         "review_6": {
           "type": "review",
           "settings": {
+            "image_asset": "pawsorb-review-6-puppy.jpg",
+            "focal": "60% 45%",
+            "alt": "Man with a chocolate Lab puppy and a chewed chocolate bar wrapper",
             "name": "Tyler P. · Portland, OR",
             "tag": "Puppy + chocolate",
-            "show_photo": true,
-            "image_asset": "pawsorb-review-6-puppy.jpg",
-            "alt": "Chocolate Lab puppy next to a chewed chocolate bar wrapper",
-            "icon": "chocolate",
-            "hidden_initially": false,
-            "text": "Our 11-week-old Lab pup chewed through half a dark chocolate bar I left on the couch. Dialed his weight, gave the tube, then called the vet. He was chasing his toys again by dinner. Best thing on our puppy list."
-          }
-        },
-        "review_7": {
-          "type": "review",
-          "settings": {
-            "name": "Ray D. · Baton Rouge, LA",
-            "tag": "Sago palm",
-            "show_photo": false,
-            "image_asset": "",
-            "alt": "",
-            "icon": "leaf",
-            "hidden_initially": true,
-            "text": "Didn't know sago palm seeds were poison until our boy chewed one. Gave PawSorb before we even found the keys. Liver numbers came back normal."
+            "text": "<p>Our 11-week-old Lab pup chewed through half a dark chocolate bar I left on the couch. He weighed 14 pounds, so I dialed 14, gave it, then called the vet. Chasing his rope toy again by dinner. Should've been on our puppy list from day one.</p>"
           }
         }
       },
@@ -455,147 +449,297 @@
         "review_3",
         "review_4",
         "review_5",
-        "review_6",
-        "review_7"
+        "review_6"
       ]
     },
-    "pawsorb_dose_dial": {
-      "type": "pawsorb-dose-dial",
+    "pawsorb_v2_toxins": {
+      "type": "pawsorb-v2-toxins",
       "settings": {
-        "heading": "How many tubes should you keep for your dog?",
-        "rule_line": "1 mL per pound. Each tube holds 30 mL. Bigger dog, more tubes on hand.",
-        "col_weight": "Your dog's weight",
-        "col_tubes": "Tubes to keep on hand",
-        "callout": "Two dogs and one empty wrapper? Add their weights together and pick the tier that covers both.",
-        "button_label": "Choose my dog's size",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "heading": "Sooner or later, they swallow something. Is your drawer ready?",
+        "sub": "It never waits for office hours. PawSorb binds best in the first hour, before poison leaves the stomach. Toads give you 15–30 minutes; chocolate, grapes and pills, about 60.",
+        "show_panel": true,
+        "hero_number": "1,200+",
+        "hero_claim": "calls a day to US pet poison lines about a swallowed toxin",
+        "show_chart": true,
+        "chart_shape": "rising",
+        "chart_axis": "Toxin absorbed",
+        "chart_marker": "Toads",
+        "marker_from": 33,
+        "marker_to": 66,
+        "chart_label_1": "Swallowed",
+        "chart_label_2": "15 min",
+        "chart_label_3": "30 min",
+        "chart_label_4": "60 min",
+        "stat_1_number": "60 min",
+        "stat_1_text": "for most poisons to reach the blood",
+        "stat_2_number": "$5,000",
+        "stat_2_text": "what one poisoning visit can cost at the ER",
+        "source": "Call volume: US pet poison control data. ER cost: US emergency vet estimates."
+      },
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Cane toads"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Chocolate"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Grapes & raisins"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Dropped pills"
+          }
+        },
+        "item_5": {
+          "type": "item",
+          "settings": {
+            "text": "Rat bait"
+          }
+        },
+        "item_6": {
+          "type": "item",
+          "settings": {
+            "text": "Sago palm"
+          }
+        },
+        "item_7": {
+          "type": "item",
+          "settings": {
+            "text": "Wild mushrooms"
+          }
+        },
+        "item_8": {
+          "type": "item",
+          "settings": {
+            "text": "THC edibles"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4",
+        "item_5",
+        "item_6",
+        "item_7",
+        "item_8"
+      ]
+    },
+    "pawsorb_v2_stats": {
+      "type": "pawsorb-v2-stats",
+      "settings": {
+        "heading": "Ready before the next scare",
+        "sub": "What owners say once a tube is on hand.",
+        "disclaimer": "* Rating from 4,554 PawSorb reviews. 115,000+ counts pet parents who ordered PawSorb."
       },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
-            "weight": "Under 30 lb",
-            "note": "small dogs, puppies & cats",
-            "tubes": "1 tube",
-            "glyphs": 1,
-            "highlight": false
+            "number": "4.9/5",
+            "title": "Average rating",
+            "line": "across 4,554 reviews from dog and cat owners"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "weight": "31–60 lb",
-            "note": "",
-            "tubes": "2 tubes",
-            "glyphs": 2,
-            "highlight": false
+            "number": "115,000+",
+            "title": "Homes ready",
+            "line": "pet parents who keep PawSorb on hand"
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "weight": "61–80 lb",
-            "note": "",
-            "tubes": "3 tubes",
-            "glyphs": 3,
-            "highlight": true
-          }
-        },
-        "row_4": {
-          "type": "row",
-          "settings": {
-            "weight": "81–150 lb",
-            "note": "",
-            "tubes": "5 tubes",
-            "glyphs": 5,
-            "highlight": false
-          }
-        },
-        "row_5": {
-          "type": "row",
-          "settings": {
-            "weight": "More than one dog",
-            "note": "",
-            "tubes": "10 tubes",
-            "glyphs": 10,
-            "highlight": false
+            "number": "<60 sec",
+            "title": "Shaky-hands simple",
+            "line": "dial the weight, squeeze into the cheek, done"
           }
         }
       },
       "block_order": [
         "row_1",
         "row_2",
-        "row_3",
-        "row_4",
-        "row_5"
+        "row_3"
       ]
     },
-    "pawsorb_peroxide": {
-      "type": "pawsorb-peroxide-compare",
+    "pawsorb_v2_ingredients": {
+      "type": "pawsorb-v2-ingredients",
       "settings": {
-        "heading": "The internet says peroxide. Vets have moved on.",
-        "col_feature": "Feature",
-        "col_us": "PawSorb",
-        "col_them": "Peroxide",
-        "myth_line": "Throwing up can't reach what already left the stomach. Binding can.",
-        "bg_color": "#F1F6F3",
-        "text_color": "#141816",
-        "head_color": "#121614",
-        "us_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "heading": "ER-grade binders, ready in your drawer",
+        "image_asset": "pawsorb-v2-ingredients.webp",
+        "image_alt": "Coconut shell, charcoal chunks and white kaolin clay"
+      },
+      "blocks": {
+        "tab_1": {
+          "type": "tab",
+          "settings": {
+            "label": "Activated coconut charcoal",
+            "title": "Poison catcher",
+            "text": "<p>Coconut shell is heated until it's riddled with <strong>millions of tiny pores</strong>. Each one grabs poison on contact and won't let go. That happens <strong>in the stomach, before it reaches the blood</strong>, so the toxin leaves your pet in the stool instead of soaking in. <strong>The same charcoal ERs reach for.</strong></p>",
+            "bullet_1": "Holds toads, chocolate, pills and more",
+            "bullet_2": "Cleaner coconut source, not coal",
+            "bullet_3": "Exits in the stool, never absorbed"
+          }
+        },
+        "tab_2": {
+          "type": "tab",
+          "settings": {
+            "label": "White kaolin clay",
+            "title": "The second layer",
+            "text": "<p>Kaolin is a soft white clay vets have used on upset stomachs for decades. It <strong>backs up the charcoal</strong>, soaking up what's left, and <strong>coats a stomach that's already in knots</strong>. Your pet gets a calmer gut and firmer stools in the hours after.</p>",
+            "bullet_1": "Calms a churning stomach",
+            "bullet_2": "Firmer stools after a scare",
+            "bullet_3": "Natural clay, no fillers"
+          }
+        }
+      },
+      "block_order": [
+        "tab_1",
+        "tab_2"
+      ]
+    },
+    "pawsorb_v2_timeline": {
+      "type": "pawsorb-v2-timeline",
+      "settings": {
+        "heading": "The next 48 hours, step by step",
+        "sub": "The clock starts when they swallow. This is how PawSorb buys you time."
+      },
+      "blocks": {
+        "stage_1": {
+          "type": "stage",
+          "settings": {
+            "badge": "Right away",
+            "title": "Give it first",
+            "bullet_1": "Toad? Wipe the gums with a damp cloth, front to back, before anything else.",
+            "bullet_2": "Set the dial to their pounds, then squeeze the gel into the cheek pouch.",
+            "bullet_3": "With the dose in, phone your vet or the ASPCA line: (888) 426-4435."
+          }
+        },
+        "stage_2": {
+          "type": "stage",
+          "settings": {
+            "badge": "Hours 1–6",
+            "title": "Buying you time",
+            "bullet_1": "PawSorb holds on to the poison as it travels the gut, hour after hour.",
+            "bullet_2": "Less reaches the blood, so your vet starts ahead instead of catching up.",
+            "bullet_3": "Watch for shaking, vomiting or a sleepy, wobbly dog, and do what your vet says."
+          }
+        },
+        "stage_3": {
+          "type": "stage",
+          "settings": {
+            "badge": "Hours 24–48",
+            "title": "Out it goes",
+            "bullet_1": "The charcoal and everything it caught leave together in the stool.",
+            "bullet_2": "Black poop is normal. It's just the charcoal, so don't panic.",
+            "bullet_3": "Keep the water bowl full and let your vet check them over."
+          }
+        }
+      },
+      "block_order": [
+        "stage_1",
+        "stage_2",
+        "stage_3"
+      ]
+    },
+    "pawsorb_v2_vet": {
+      "type": "pawsorb-v2-vet",
+      "settings": {
+        "name": "Dr. Elena Ruiz, DVM",
+        "credential": "Emergency & critical care, PawSorb Advisory Panel",
+        "quote": "<p>\"Most poisonings I treat started at home, an hour <em>before</em> I ever saw the dog. Keep enough on hand for every pet: <strong>that first hour is yours.</strong>\"</p>",
+        "button_label": "Get ready tonight →",
+        "image_asset": "pawsorb-vet-1.jpg",
+        "image_alt": "Dr. Elena Ruiz, emergency and critical care vet",
+        "image_side": "left",
+        "fade": true
+      }
+    },
+    "pawsorb_v2_compare": {
+      "type": "pawsorb-v2-compare",
+      "settings": {
+        "heading": "What other charcoal skips",
+        "us_pill": "Ours",
+        "them_label": "Generic",
+        "image_asset": "pawsorb-v2-cutout.webp",
+        "image_alt": "PawSorb tube"
       },
       "blocks": {
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "What it does",
-            "us": "Locks poison in, it leaves in the stool",
-            "them": "Makes your dog throw up"
+            "label": "Kaolin second layer",
+            "icon": "leaf",
+            "us": true,
+            "them": false
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Throat",
-            "us": "Gentle",
-            "them": "Can burn it"
+            "label": "Dosed by the pound",
+            "icon": "dial",
+            "us": true,
+            "them": false
           }
         },
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Stomach",
-            "us": "Soothed by kaolin",
-            "them": "Can leave ulcers"
+            "label": "Premixed gel, no powder",
+            "icon": "drop",
+            "us": true,
+            "them": false
           }
         },
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Lungs",
-            "us": "No choking risk",
-            "them": "Vomit can be inhaled"
+            "label": "Coconut-shell charcoal",
+            "icon": "check-circle",
+            "us": true,
+            "them": false
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Toxins covered",
-            "us": "A long list",
-            "them": "Only some, unsafe for others"
+            "label": "Formulated with vets",
+            "icon": "vet",
+            "us": true,
+            "them": false
           }
         },
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "In a panic",
-            "us": "Dial and squeeze",
-            "them": "Measure, then force it down"
+            "label": "USA-made, cGMP facility",
+            "icon": "flag",
+            "us": true,
+            "them": false
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "2-year shelf life",
+            "icon": "clock",
+            "us": true,
+            "them": false
           }
         }
       },
@@ -605,203 +749,124 @@
         "row_3",
         "row_4",
         "row_5",
-        "row_6"
+        "row_6",
+        "row_7"
       ]
     },
-    "pawsorb_er_cost": {
-      "type": "pawsorb-er-cost",
+    "pawsorb_v2_guarantee": {
+      "type": "pawsorb-v2-guarantee",
       "settings": {
-        "heading": "A poisoning visit, or a tube in the drawer?",
-        "body": "Poison soaks in within 60 minutes. The bill only grows the longer you wait. One tube, kept for 2 years, lets you act in minute one.",
-        "button_label": "Get my tubes ready",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "show_shield": true,
+        "heading": "Never need it? Send it back.",
+        "text": "<p>You can't try poison first aid until the night you need it, so lean on 4,554 reviews instead. Keep it 90 days. If you'd rather have your money back, email us for every cent.</p>",
+        "button_label": "Stock running low",
+        "check_1": "Full refund",
+        "check_2": "Ships fast",
+        "check_3": "Simple returns"
       },
       "blocks": {
-        "stat_1": {
-          "type": "stat",
+        "polaroid_1": {
+          "type": "polaroid",
           "settings": {
-            "number": "$1,500–$5,000",
-            "label": "ER bill for one poisoning",
-            "highlight": false
+            "image_asset": "pawsorb-v2-polaroid-1.jpg",
+            "alt": "Woman on her sofa, cheek to cheek with her yellow Lab, holding a PawSorb tube",
+            "rotation": -4,
+            "rotation_mobile": -6
           }
         },
-        "stat_2": {
-          "type": "stat",
+        "polaroid_2": {
+          "type": "polaroid",
           "settings": {
-            "number": "$95",
-            "label": "one call to a paid poison line",
-            "highlight": false
+            "image_asset": "pawsorb-v2-polaroid-2.jpg",
+            "alt": "Man kneeling in his kitchen beside his boxer, holding a PawSorb tube",
+            "rotation": 3,
+            "rotation_mobile": 0
           }
         },
-        "stat_3": {
-          "type": "stat",
+        "polaroid_3": {
+          "type": "polaroid",
           "settings": {
-            "number": "$24.99",
-            "label": "per tube when you buy 3",
-            "highlight": true
+            "image_asset": "pawsorb-v2-polaroid-3.jpg",
+            "alt": "Woman with a tabby cat on her lap, holding a PawSorb tube",
+            "rotation": -4,
+            "rotation_mobile": 6
           }
         }
       },
       "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
+        "polaroid_1",
+        "polaroid_2",
+        "polaroid_3"
       ]
     },
-    "pawsorb_vet_panel": {
-      "type": "pawsorb-vet-panel",
+    "pawsorb_v2_faq": {
+      "type": "pawsorb-v2-faq",
       "settings": {
-        "heading": "Checked by the vets who see these nights",
-        "credential_row": "3rd-party lab tested · Made in the USA · FDA-registered, cGMP facility",
-        "icon_alt": "Veterinarian icon",
-        "bg_color": "#F1F6F3",
-        "text_color": "#141816",
-        "padding_top": 64,
-        "padding_bottom": 64
-      },
-      "blocks": {
-        "vet_1": {
-          "type": "vet",
-          "settings": {
-            "role": "Emergency & critical care vet",
-            "years": "14 yrs",
-            "quote": "Most poisonings I see started at home an hour earlier. A binder given in that first hour is the best head start a dog can get.",
-            "image_asset": "pawsorb-vet-1.jpg",
-            "name": "Dr. Elena Ruiz, DVM"
-          }
-        },
-        "vet_2": {
-          "type": "vet",
-          "settings": {
-            "role": "General practice vet, small animals",
-            "years": "11 yrs",
-            "quote": "Owners panic and reach for peroxide. A premixed, pre-dosed gel is the calmer, safer first move.",
-            "image_asset": "pawsorb-vet-2.jpg",
-            "name": "Dr. Claire Whitman, DVM"
-          }
-        },
-        "vet_3": {
-          "type": "vet",
-          "settings": {
-            "role": "Shelter medicine vet, Gulf Coast",
-            "years": "9 yrs",
-            "quote": "Down here, toads are a weekly case. Every dog home in Florida should have this by the back door.",
-            "image_asset": "pawsorb-vet-3.jpg",
-            "name": "Dr. Mark Haller, DVM"
-          }
-        }
-      },
-      "block_order": [
-        "vet_1",
-        "vet_2",
-        "vet_3"
-      ]
-    },
-    "pawsorb_guarantee": {
-      "type": "pawsorb-guarantee",
-      "settings": {
-        "heading": "Keep it 90 days. Use it or don't.",
-        "body": "If PawSorb isn't for you, email us within 90 days for every cent back. Hope you never open it. Most people still keep it.",
-        "chip_1": "90 days",
-        "chip_2": "Fast US shipping",
-        "chip_3": "Tracked to your door",
-        "seal_alt": "90-day money-back guarantee seal",
-        "seal_ring": "MONEY-BACK GUARANTEE · MONEY-BACK GUARANTEE ·",
-        "seal_big": "90",
-        "seal_small": "DAYS",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "navy_color": "#121614",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "pawsorb_faq": {
-      "type": "pawsorb-faq",
-      "settings": {
-        "heading": "Before you add it to your cart",
-        "bg_color": "#F1F6F3",
-        "text_color": "#141816",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "heading": "What owners ask us first",
+        "columns": "2"
       },
       "blocks": {
         "q_1": {
           "type": "question",
           "settings": {
-            "question": "Will it get here before I need it?",
-            "answer": "<p>We ship fast from the US with tracking on every order. Order now and it's in the drawer before the next scare.</p>",
-            "open": true
+            "question": "What does PawSorb do inside my dog?",
+            "answer": "<p>It catches the poison while it's still in the stomach, then holds on, so it can't soak into the blood. It all leaves together in the stool.</p>"
           }
         },
         "q_2": {
           "type": "question",
           "settings": {
-            "question": "What if I never use it?",
-            "answer": "<p>That's the best outcome. It's good for 2 years, and you have 90 days to return it for a full refund.</p>",
-            "open": false
+            "question": "Does it work on toads? What won't it bind?",
+            "answer": "<p>Yes, cane toad poison is on the list, along with chocolate, grapes, pills, rat bait, sago palm, mushrooms, THC, caffeine and more. It can't hold heavy metals, alcohol, or gas and oil.</p>"
           }
         },
         "q_3": {
           "type": "question",
           "settings": {
-            "question": "How many tubes for my dog?",
-            "answer": "<p>1 mL per pound, 30 mL per tube. Keep 1 tube under 30 lb, 2 for 31–60 lb, 3 for 61–80 lb, 5 for 81–150 lb, and 10 for a house with several dogs. Two dogs? Add their weights.</p>",
-            "open": false
+            "question": "Do I still need to call the vet?",
+            "answer": "<p>Always. PawSorb is the first move, not the last. Give it, then call with the dose already in, so the window isn't spent on hold.</p>"
           }
         },
         "q_4": {
           "type": "question",
           "settings": {
-            "question": "Is it safe for small dogs, puppies and cats?",
-            "answer": "<p>Yes. The dial sets the dose to the pound, so a 6 lb puppy or a cat gets 6 mL. Nothing to guess.</p>",
-            "open": false
+            "question": "Is it okay alongside their daily meds?",
+            "answer": "<p>Tell your vet when you call. Charcoal doesn't pick and choose, so it can grab their regular medicine too, and your vet can tell you when to give the next one.</p>"
           }
         },
         "q_5": {
           "type": "question",
           "settings": {
-            "question": "Does it work on cane toads? What won't it bind?",
-            "answer": "<p>Yes, toad poison is on the list. Wipe the gums first, then give it. Heavy metals, alcohol and petroleum (gas, oil) are the exceptions charcoal can't hold.</p>",
-            "open": false
+            "question": "What if they hate the taste or fight it?",
+            "answer": "<p>Most take it without a fight. It's a smooth premixed gel, no powder cloud, nothing to mix. Picky eater? Smear it on a treat or a spoon of wet food.</p>"
           }
         },
         "q_6": {
           "type": "question",
           "settings": {
-            "question": "Should I still call the vet?",
-            "answer": "<p>Always. Give PawSorb first so you're not losing the window on hold, then phone your vet or a poison line.</p>",
-            "open": false
+            "question": "How many mL does my dog need?",
+            "answer": "<p>1 mL per pound, and one tube holds 30 mL. That's 1 tube up to 30 lb, 2 tubes to 60 lb, 3 to 80 lb, 5 to 150 lb. Between sizes? Go up.</p>"
           }
         },
         "q_7": {
           "type": "question",
           "settings": {
-            "question": "Does it go in the fridge after opening?",
-            "answer": "<p>No. Cap it and store it at room temperature. It stays good for 2 years.</p>",
-            "open": false
+            "question": "Can I reuse an opened tube?",
+            "answer": "<p>Yes. Recap it and keep it at room temperature, no fridge needed. What's left keeps until the date on the tube, waiting for the next scare.</p>"
           }
         },
         "q_8": {
           "type": "question",
           "settings": {
-            "question": "What if my dog hates the taste? Is it messy?",
-            "answer": "<p>It's a premixed gel, no powder cloud. Squeeze it into the cheek or smear it on a treat.</p>",
-            "open": false
+            "question": "What's actually inside the tube?",
+            "answer": "<p>Charcoal from coconut shells, activated to bind, plus kaolin clay, premixed into a smooth gel. No artificial colors, fillers or preservatives. Produced in a US, FDA-registered, cGMP facility.</p>"
           }
         },
         "q_9": {
           "type": "question",
           "settings": {
-            "question": "What's inside?",
-            "answer": "<p>Coconut-shell activated charcoal and kaolin clay. No artificial colors, fillers or preservatives. Made in the USA in an FDA-registered, cGMP facility.</p>",
-            "open": false
+            "question": "What if I never end up using it?",
+            "answer": "<p>Then it was the cheapest insurance you'll own: less than one $95 poison-line call, good for 2 years, ready every night until then.</p>"
           }
         }
       },
@@ -817,52 +882,33 @@
         "q_9"
       ]
     },
-    "pawsorb_final_cta": {
-      "type": "pawsorb-final-cta",
+    "pawsorb_v2_sticky": {
+      "type": "pawsorb-v2-sticky-atc",
       "settings": {
-        "heading": "Tonight, the plan is in the drawer.",
-        "line": "Whoever left it out, whatever got swallowed, you get the first minute.",
-        "button_label": "Protect my dog",
-        "micro": "90-day money-back guarantee",
-        "image_asset": "pawsorb-final-cta.jpg",
-        "anim_asset": "pawsorb-anim-spin.webp",
-        "image_alt": "PawSorb tube on a kitchen shelf with a dog resting behind it",
-        "bg_color": "#121614",
-        "text_color": "#FFFFFF",
-        "accent_color": "#12855A",
-        "padding_top": 64,
-        "padding_bottom": 64
-      }
-    },
-    "pawsorb_sticky_atc": {
-      "type": "pawsorb-sticky-atc",
-      "settings": {
-        "title": "PawSorb™ First Aid for Pet Poisons",
-        "default_tier": "Buy 3 · Dogs 61–80lbs · $74.97",
+        "title": "PawSorb™ Activated Charcoal First-Aid Gel",
+        "rating_text": "4.9 · 4,554 reviews",
+        "default_tier": "Buy 3 · $24.99 each",
+        "default_compare": "$59.99",
+        "each_word": "each",
         "button_label": "Choose my bundle",
         "show_desktop": true,
         "show_mobile": true,
-        "thumb_asset": "pawsorb-sticky-thumb.webp",
-        "bg_color": "#FFFFFF",
-        "text_color": "#141816",
-        "accent_color": "#12855A"
+        "thumb_asset": "pawsorb-sticky-thumb.webp"
       }
     }
   },
   "order": [
-    "pawsorb_main",
-    "pawsorb_closed_hours",
-    "pawsorb_window",
-    "pawsorb_toad_toxins",
-    "pawsorb_first_60",
-    "pawsorb_close_calls",
-    "pawsorb_dose_dial",
-    "pawsorb_peroxide",
-    "pawsorb_er_cost",
-    "pawsorb_vet_panel",
-    "pawsorb_guarantee",
-    "pawsorb_faq",
-    "pawsorb_final_cta",
-    "pawsorb_sticky_atc"
+    "pawsorb_v2_main",
+    "pawsorb_v2_ticker",
+    "pawsorb_v2_reviews",
+    "pawsorb_v2_toxins",
+    "pawsorb_v2_stats",
+    "pawsorb_v2_ingredients",
+    "pawsorb_v2_timeline",
+    "pawsorb_v2_vet",
+    "pawsorb_v2_compare",
+    "pawsorb_v2_guarantee",
+    "pawsorb_v2_faq",
+    "pawsorb_v2_sticky"
   ]
 }

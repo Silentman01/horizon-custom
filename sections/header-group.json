@@ -70,27 +70,19 @@
         "enable_transparent_header_collection": false
       }
     },
-    "pawsorb_announcement": {
-      "type": "pawsorb-announcement",
-      "blocks": {
-        "msg_1": {
-          "type": "message",
-          "settings": {
-            "text": "BLACK FRIDAY SALE: UP TO 75% OFF · FREE SHIPPING ON 3+ TUBES"
-          }
-        },
-        "msg_2": {
-          "type": "message",
-          "settings": {
-            "text": "Fast US shipping · 90-day money-back guarantee"
-          }
-        }
-      },
-      "block_order": [
-        "msg_1",
-        "msg_2"
-      ],
-      "settings": {}
+    "pawsorb_sale_bar": {
+      "type": "pawsorb-v2-announcement",
+      "settings": {
+        "title": "BLACK FRIDAY",
+        "title_accent": "STOCK-UP",
+        "accent_position": "end",
+        "sub": "UP TO 75% OFF + FREE SHIPPING",
+        "cd_end": "2026-11-30T23:59:00-05:00",
+        "label_days": "Days",
+        "label_hours": "Hrs",
+        "label_minutes": "Min",
+        "label_seconds": "Sec"
+      }
     },
     "pawsorb_cart_drawer": {
       "type": "pawsorb-cart-drawer",
@@ -98,7 +90,7 @@
     }
   },
   "order": [
-    "pawsorb_announcement",
+    "pawsorb_sale_bar",
     "header_section",
     "pawsorb_cart_drawer"
   ]

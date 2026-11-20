@@ -1,5 +1,4 @@
 {%- assign ss = section.settings -%}
-{%- if ss.hide_global_bar -%}<style>#header-group .pawsorb-section-announcement { display: none; }</style>{%- endif -%}
 <div
   class="pawsorb-v2-an"
   data-v2-an-end="{{ ss.cd_end | escape }}"
@@ -28,10 +27,6 @@
 <script>
   (function () {
     var s = document.currentScript, sec = s && s.closest('.shopify-section');
-    var hg = document.getElementById('header-group');
-    {%- if ss.move_to_top %}
-    if (sec && hg && !(window.Shopify && Shopify.designMode)) hg.insertBefore(sec, hg.firstChild);
-    {%- endif %}
     var bar = sec ? sec.querySelector('.pawsorb-v2-an') : null;
     var tm = bar && bar.querySelector('[data-v2-an-timer]');
     if (!tm) return;
@@ -86,7 +81,7 @@
 
 {% schema %}
 {
-  "name": "PawSorb v2 sale bar",
+  "name": "PawSorb sale bar",
   "tag": "section",
   "class": "pawsorb-v2-section-an",
   "settings": [
@@ -101,8 +96,6 @@
     { "type": "text", "id": "label_minutes", "label": "Minutes label", "default": "Min" },
     { "type": "text", "id": "label_seconds", "label": "Seconds label", "default": "Sec" },
     { "type": "header", "content": "Placement" },
-    { "type": "checkbox", "id": "move_to_top", "label": "Show above the header", "default": true, "info": "Moves the bar to the top of the page on the live store (it stays in place inside the editor)." },
-    { "type": "checkbox", "id": "hide_global_bar", "label": "Hide the store announcement bar on this page", "default": true },
     { "type": "header", "content": "Colours and type" },
     { "type": "color", "id": "grad_1", "label": "Gradient start", "default": "#0B0F0D" },
     { "type": "color", "id": "grad_2", "label": "Gradient 45%", "default": "#121614" },
@@ -113,6 +106,6 @@
     { "type": "range", "id": "title_size", "label": "Title size (desktop)", "min": 14, "max": 30, "step": 1, "unit": "px", "default": 21 },
     { "type": "range", "id": "title_size_mobile", "label": "Title size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 }
   ],
-  "presets": [ { "name": "PawSorb v2 sale bar" } ]
+  "presets": [ { "name": "PawSorb sale bar" } ]
 }
 {% endschema %}
