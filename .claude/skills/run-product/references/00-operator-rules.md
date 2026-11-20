@@ -111,6 +111,8 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 - QA includes a real drag/swipe check of every rail, not just a screenshot.
 **Why:** the operator reported "section 'What Our Drivers Say' cannot scroll on mobile" on Noxis; Ceriva's video rail had the same bug earlier.
 
+- **Reviews are mobile first too (operator 2026-11-21):** every visual check, screenshot sent or described, and comparison against the competitor uses the 390 px render first; desktop is a secondary pass. "most customers on ecommerce are on mobile."
+
 ## 12. Working style and reporting
 - Step Alpha first (§17), then branding, then wait for validation, then build.
 - Use a master + parallel sub-agents; be efficient; don't stall waiting when other streams can run.
