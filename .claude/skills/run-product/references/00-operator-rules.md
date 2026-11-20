@@ -113,7 +113,8 @@ These rules come from real corrections by the operator during the Noxis and Ceri
 
 - **Reviews are mobile first too (operator 2026-11-21):** every visual check, screenshot sent or described, and comparison against the competitor uses the 390 px render first; desktop is a secondary pass. "most customers on ecommerce are on mobile."
 
-- **Product gallery thumbnails, always (operator 2026-11-21):** on mobile, a horizontal, swipeable thumbnail strip under the main image, like Shopify's native gallery; never hidden, never dots instead. On desktop, the thumbnail column is capped at the main image's height and scrolls, so it never runs below the image.
+- **Product gallery thumbnails, always (operator 2026-11-21):** on mobile, a horizontal, swipeable thumbnail strip under the main image, like Shopify's native gallery; never hidden, never dots instead. On desktop, the thumbnail column is capped at the main image's height. Both layouts use arrows like Horizon's native thumbnails (`snippets/slideshow-controls.liquid` + `slideshow-arrow`): up above the first thumb and down below the last on desktop, left and right around the strip on mobile. The arrows switch the image and keep the active thumb in view. Never a visible browser scrollbar.
+- **Native UI first (operator 2026-11-21):** before building any control (gallery, thumbnails, arrows, sliders, drawers, accordions, sticky bars), grep the theme for its native version and copy its markup, behaviour and CSS. If the theme has none, copy the pattern big stores use; never guess one ("you shouldn't have guess how to make it, that looks ugly").
 
 ## 12. Working style and reporting
 - Step Alpha first (§17), then branding, then wait for validation, then build.
