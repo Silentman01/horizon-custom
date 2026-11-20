@@ -29,7 +29,7 @@
         "tier_1": {
           "type": "tier",
           "settings": {
-            "title": "Buy 1",
+            "title": "1 Tube",
             "label": "Dogs < 30lbs",
             "shipping": "+$4.99 shipping",
             "free": false,
@@ -42,7 +42,7 @@
         "tier_2": {
           "type": "tier",
           "settings": {
-            "title": "Buy 2",
+            "title": "Buy 1, Get 1 FREE",
             "label": "Dogs 31–60lbs",
             "shipping": "+$4.99 shipping",
             "free": false,
@@ -55,7 +55,7 @@
         "tier_3": {
           "type": "tier",
           "settings": {
-            "title": "Buy 3",
+            "title": "Buy 2, Get 1 FREE",
             "label": "Dogs 61–80lbs",
             "shipping": "FREE shipping",
             "free": true,
@@ -68,7 +68,7 @@
         "tier_4": {
           "type": "tier",
           "settings": {
-            "title": "Buy 5",
+            "title": "Buy 3, Get 2 FREE",
             "label": "Dogs 81–150lbs",
             "shipping": "FREE shipping",
             "free": true,
@@ -81,7 +81,7 @@
         "tier_5": {
           "type": "tier",
           "settings": {
-            "title": "Buy 10",
+            "title": "Buy 5, Get 5 FREE",
             "label": "Multiple Dogs",
             "shipping": "FREE shipping",
             "free": true,
@@ -101,7 +101,7 @@
       ],
       "settings": {
         "heading": "Most homes keep three.",
-        "body": "Buy 3 for $24.99 a tube with FREE shipping. Covers one dog to 80 lb, or one for the car, the kitchen and Mom's place.",
+        "body": "Buy 2, get 1 FREE: 3 tubes at $24.99 each with FREE shipping. Covers one dog to 80 lb, or one for the car, the kitchen and Mom's place.",
         "badge": "MOST POPULAR",
         "button_label": "Pick my tubes",
         "product_handle": "pawsorb",
