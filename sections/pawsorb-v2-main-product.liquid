@@ -227,8 +227,9 @@
   .pawsorb-v2-pdp__slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 1; background: #F0ECE6; }
   .pawsorb-v2-pdp__slide.is-missing { display: none; }
   .pawsorb-v2-pdp__img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
-  .pawsorb-v2-pdp__thumbs { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 8px; max-height: 100%; overflow-y: auto; scrollbar-width: none; }
-  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar { display: none; }
+  .pawsorb-v2-pdp__thumbs { position: relative; grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 8px; height: 0; min-height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #CFCAC2 transparent; padding-right: 2px; }
+  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar { width: 4px; height: 4px; }
+  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar-thumb { background: #CFCAC2; border-radius: 4px; }
   .pawsorb-v2-pdp__thumb { flex: 0 0 56px; width: 56px; height: 56px; padding: 0; border: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); border-radius: 6px; overflow: hidden; background: #F0ECE6; cursor: pointer; }
   .pawsorb-v2-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
   .pawsorb-v2-pdp__thumb.is-active { border: 2px solid var(--pawsorb-v2-pdp-acc, #12855A); }
@@ -301,8 +302,9 @@
     .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
     .pawsorb-v2-pdp__gallery { position: static; display: block; }
     .pawsorb-v2-pdp__stage { border-radius: 0; }
-    .pawsorb-v2-pdp__thumbs { display: none; }
-    .pawsorb-v2-pdp__dots { display: flex; }
+    .pawsorb-v2-pdp__thumbs { flex-direction: row; height: auto; min-height: 0; overflow-x: auto; overflow-y: hidden; gap: 8px; margin-top: 10px; padding: 0 16px 4px; scroll-padding-inline: 16px; cursor: grab; }
+    .pawsorb-v2-pdp__thumb { flex: 0 0 60px; width: 60px; height: 60px; }
+    .pawsorb-v2-pdp__dots { display: none; }
     .pawsorb-v2-pdp__info { padding: 0 16px; gap: 14px; }
     .pawsorb-v2-pdp__title { font-size: var(--pawsorb-v2-pdp-h1m, 32px); }
     .pawsorb-v2-pdp__desc { font-size: 15px; }
@@ -382,8 +384,14 @@
         const thumbs = [...this.querySelectorAll('.pawsorb-v2-pdp__thumb')];
         const dots = [...this.querySelectorAll('.pawsorb-v2-pdp__dot')];
         const slides = () => [...track.children].filter((s) => !s.classList.contains('is-missing'));
+        const box = this.querySelector('.pawsorb-v2-pdp__thumbs');
         const setActive = (idx) => {
           thumbs.forEach((t, n) => t.classList.toggle('is-active', n === idx));
+          const t = thumbs[idx];
+          if (box && t) {
+            if (box.scrollWidth > box.clientWidth + 1) box.scrollTo({ left: t.offsetLeft - (box.clientWidth - t.offsetWidth) / 2, behavior: 'smooth' });
+            else if (box.scrollHeight > box.clientHeight + 1) box.scrollTo({ top: t.offsetTop - (box.clientHeight - t.offsetHeight) / 2, behavior: 'smooth' });
+          }
           dots.forEach((d, n) => d.classList.toggle('is-active', n === idx));
         };
         thumbs.forEach((t) => t.addEventListener('click', () => {
