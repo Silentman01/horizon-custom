@@ -72,7 +72,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "label": "Dial-by-weight dosing"
+            "label": "Dosed by weight"
           }
         },
         "benefit_4": {
