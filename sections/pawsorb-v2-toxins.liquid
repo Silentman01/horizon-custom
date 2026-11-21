@@ -11,7 +11,7 @@
     {%- if section.blocks.size > 0 -%}
       <ul class="pawsorb-v2-tx__card">
         {%- for block in section.blocks -%}
-          <li {{ block.shopify_attributes }}><span class="pawsorb-v2-tx__ck" aria-hidden="true">{% render 'pawsorb-icon', name: 'check', size: 12 %}</span>{{ block.settings.text }}</li>
+          <li {{ block.shopify_attributes }}><span class="pawsorb-v2-tx__ck" aria-hidden="true">{% render 'pawsorb-icon', name: 'check', size: 14 %}</span>{{ block.settings.text }}</li>
         {%- endfor -%}
       </ul>
     {%- endif -%}
@@ -100,6 +100,12 @@
     .pawsorb-v2-tx__mnum { font-size: 36px; }
     .pawsorb-v2-tx__mtxt { font-size: 12.5px; }
     .pawsorb-v2-tx__card { padding: 20px 22px; }
+    .pawsorb-v2-tx { padding-left: 25px; padding-right: 25px; letter-spacing: -.3px; }
+    .pawsorb-v2-tx__h { line-height: 1.1; letter-spacing: -.9px; }
+    .pawsorb-v2-tx__sub { margin-top: 12px; font-size: 13px; line-height: 1.4; letter-spacing: -.3px; }
+    .pawsorb-v2-tx__card { gap: 17px; padding: 20px 20px 27px; }
+    .pawsorb-v2-tx__card li { gap: 10px; line-height: 1.1; min-height: 24px; }
+    .pawsorb-v2-tx__ck { flex-basis: 24px; width: 24px; height: 24px; }
   }
 {% endstylesheet %}
 
@@ -145,12 +151,12 @@
     { "type": "color", "id": "accent_color", "label": "Panel rule and chart", "default": "#12855A" },
     { "type": "header", "content": "Type and spacing" },
     { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 36 },
-    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 30 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 34 },
     { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
     { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 56 },
-    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
-    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 48 }
   ],
   "presets": [ { "name": "PawSorb v2 toxins", "blocks": [ { "type": "item", "settings": { "text": "Cane toads" } }, { "type": "item", "settings": { "text": "Chocolate" } }, { "type": "item", "settings": { "text": "Grapes and raisins" } }, { "type": "item", "settings": { "text": "Human meds" } } ] } ]
 }

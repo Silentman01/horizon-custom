@@ -1,7 +1,7 @@
 {%- assign ss = section.settings -%}
 <div
   class="pawsorb-v2-tk"
-  style="--pawsorb-v2-tk-bg: {{ ss.bg_color }}; --pawsorb-v2-tk-acc: {{ ss.accent_color }}; --pawsorb-v2-tk-speed: {{ ss.speed }}s; --pawsorb-v2-tk-fs: {{ ss.font_size }}px; --pawsorb-v2-tk-fsm: {{ ss.font_size_mobile }}px; --pawsorb-v2-tk-py: {{ ss.padding_y }}px;"
+  style="--pawsorb-v2-tk-bg: {{ ss.bg_color }}; --pawsorb-v2-tk-acc: {{ ss.accent_color }}; --pawsorb-v2-tk-speed: {{ ss.speed }}s; --pawsorb-v2-tk-fs: {{ ss.font_size }}px; --pawsorb-v2-tk-fsm: {{ ss.font_size_mobile }}px; --pawsorb-v2-tk-py: {{ ss.padding_y }}px; --pawsorb-v2-tk-pym: {{ ss.padding_y_mobile }}px;"
 >
   {%- if section.blocks.size > 0 -%}
     <div class="pawsorb-v2-tk__track">
@@ -30,6 +30,7 @@
   @media screen and (max-width: 749px) {
     .pawsorb-v2-tk__set { gap: 10px; padding-right: 10px; }
     .pawsorb-v2-tk__pill { padding: 8px 15px; font-size: var(--pawsorb-v2-tk-fsm, 14px); }
+    .pawsorb-v2-tk { padding: var(--pawsorb-v2-tk-pym, 25px) 0; letter-spacing: -.3px; }
   }
 {% endstylesheet %}
 
@@ -55,7 +56,8 @@
     { "type": "range", "id": "speed", "label": "Seconds per loop", "min": 10, "max": 90, "step": 5, "unit": "s", "default": 40 },
     { "type": "range", "id": "font_size", "label": "Text size (desktop)", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 16 },
     { "type": "range", "id": "font_size_mobile", "label": "Text size (mobile)", "min": 11, "max": 20, "step": 1, "unit": "px", "default": 14 },
-    { "type": "range", "id": "padding_y", "label": "Vertical padding", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 18 }
+    { "type": "range", "id": "padding_y", "label": "Vertical padding (desktop)", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 18 },
+    { "type": "range", "id": "padding_y_mobile", "label": "Vertical padding (mobile)", "min": 0, "max": 40, "step": 1, "unit": "px", "default": 25 }
   ],
   "presets": [
     {

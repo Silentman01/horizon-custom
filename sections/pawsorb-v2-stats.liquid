@@ -19,12 +19,17 @@
           {%- endfor -%}
         </ul>
       {%- endif -%}
-      {%- if ss.disclaimer != blank -%}<p class="pawsorb-v2-st__note">{{ ss.disclaimer }}</p>{%- endif -%}
+      {%- if ss.disclaimer != blank -%}<p class="pawsorb-v2-st__note"><svg class="pawsorb-v2-st__noteic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg><span>{{ ss.disclaimer }}</span></p>{%- endif -%}
     </div>
   </div>
 </div>
 
 {% stylesheet %}
+  .pawsorb-v2-st__noteic { flex: 0 0 16px; margin-top: 2px; opacity: .8; }
+  @supports (grid-template-columns: subgrid) {
+    .pawsorb-v2-st__rows { display: grid; grid-template-columns: max-content minmax(0, 1fr); }
+    .pawsorb-v2-st__row { grid-column: 1 / -1; grid-template-columns: subgrid !important; }
+  }
   .pawsorb-v2-st { padding: var(--pawsorb-v2-st-pad, 16px); background: var(--pawsorb-v2-st-strip, #fff); font-family: var(--font-body--family); }
   .pawsorb-v2-st__card { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 40px; padding: 48px 56px; border-radius: 24px; background: var(--pawsorb-v2-st-card, #12855A); color: var(--pawsorb-v2-st-fg, #fff); box-sizing: border-box; }
   .pawsorb-v2-st__intro { text-align: center; }
@@ -37,7 +42,7 @@
   .pawsorb-v2-st__txt { display: flex; flex-direction: column; gap: 3px; }
   .pawsorb-v2-st__txt strong { font-size: 22px; font-weight: 400; line-height: 1.2; }
   .pawsorb-v2-st__txt span { font-size: 16px; line-height: 1.4; opacity: .92; }
-  .pawsorb-v2-st__note { margin: 18px 0 0; padding: 14px 18px; border-radius: 8px; background: var(--pawsorb-v2-st-note, #F1F8F4); color: var(--pawsorb-v2-st-notefg, #7C8580); font-size: 14px; line-height: 1.45; }
+  .pawsorb-v2-st__note { display: flex; gap: 10px; align-items: flex-start; margin: 18px 0 0; padding: 14px 18px; border-radius: 8px; background: var(--pawsorb-v2-st-note, #F1F8F4); color: var(--pawsorb-v2-st-notefg, #7C8580); font-size: 14px; line-height: 1.45; }
   @media screen and (max-width: 749px) {
     .pawsorb-v2-st__card { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 28px 22px; border-radius: 20px; }
     .pawsorb-v2-st__h { font-size: var(--pawsorb-v2-st-hm, 36px); }
@@ -47,6 +52,15 @@
     .pawsorb-v2-st__txt strong { font-size: 18px; }
     .pawsorb-v2-st__txt span { font-size: 13px; }
     .pawsorb-v2-st__note { font-size: 13px; }
+    .pawsorb-v2-st { padding: 38px 10px; letter-spacing: -.3px; }
+    .pawsorb-v2-st__card { gap: 30px; padding: 30px 15px 20px; }
+    .pawsorb-v2-st__h { line-height: 1.1; letter-spacing: -.9px; }
+    .pawsorb-v2-st__sub { margin-top: 10px; line-height: 1.4; }
+    .pawsorb-v2-st__row { gap: 20px; padding: 15px 0; }
+    .pawsorb-v2-st__txt { gap: 5px; }
+    .pawsorb-v2-st__txt strong { line-height: 1.2; }
+    .pawsorb-v2-st__txt span { line-height: 1.5; }
+    .pawsorb-v2-st__note { margin-top: 20px; padding: 16px; font-size: 14px; line-height: 1.4; }
   }
 {% endstylesheet %}
 
@@ -78,11 +92,11 @@
     { "type": "color", "id": "text_color", "label": "Card text", "default": "#FFFFFF" },
     { "type": "color", "id": "number_from", "label": "Number gradient start", "default": "#FFFFFF" },
     { "type": "color", "id": "number_to", "label": "Number gradient end", "default": "#2BD08F" },
-    { "type": "color", "id": "note_bg", "label": "Disclaimer background", "default": "#F1F8F4" },
-    { "type": "color", "id": "note_text", "label": "Disclaimer text", "default": "#7C8580" },
+    { "type": "color", "id": "note_bg", "label": "Disclaimer background", "default": "#FDF9E8" },
+    { "type": "color", "id": "note_text", "label": "Disclaimer text", "default": "#919191" },
     { "type": "header", "content": "Type and spacing" },
     { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 24, "max": 64, "step": 1, "unit": "px", "default": 48 },
-    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 20, "max": 48, "step": 1, "unit": "px", "default": 36 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 20, "max": 48, "step": 1, "unit": "px", "default": 40 },
     { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
     { "type": "range", "id": "number_size", "label": "Number size (desktop)", "min": 28, "max": 72, "step": 1, "unit": "px", "default": 52 },
     { "type": "range", "id": "number_size_mobile", "label": "Number size (mobile)", "min": 24, "max": 60, "step": 1, "unit": "px", "default": 40 },

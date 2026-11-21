@@ -61,6 +61,10 @@
     .pawsorb-v2-fq__box + .pawsorb-v2-fq__box { border-top: 1px solid var(--pawsorb-v2-fq-line, #E5E3DE); }
     .pawsorb-v2-fq__q summary { padding: 14px 16px; font-size: 14px; }
     .pawsorb-v2-fq__a { padding: 0 16px 14px; font-size: 13px; }
+    .pawsorb-v2-fq { padding-left: 15px; padding-right: 15px; letter-spacing: -.3px; }
+    .pawsorb-v2-fq__h { margin-bottom: 15px; line-height: 1.2; letter-spacing: -.9px; }
+    .pawsorb-v2-fq__q summary { padding: 20px 14px 15px 17px; line-height: 1.3; }
+    .pawsorb-v2-fq__a { padding: 0 17px 15px; }
   }
 {% endstylesheet %}
 
@@ -88,12 +92,12 @@
     { "type": "color", "id": "line_color", "label": "Borders", "default": "#E5E3DE" },
     { "type": "color", "id": "answer_bg", "label": "Answer background", "default": "#F8F5EF" },
     { "type": "range", "id": "heading_size", "label": "Heading size (desktop)", "min": 20, "max": 52, "step": 1, "unit": "px", "default": 38 },
-    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 32 },
+    { "type": "range", "id": "heading_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 44, "step": 1, "unit": "px", "default": 38 },
     { "type": "select", "id": "heading_weight", "label": "Heading weight", "default": "400", "options": [ { "value": "400", "label": "Regular" }, { "value": "500", "label": "Medium" }, { "value": "700", "label": "Bold" } ] },
     { "type": "range", "id": "padding_top", "label": "Top padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding (desktop)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
-    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 },
-    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 40 }
+    { "type": "range", "id": "padding_top_mobile", "label": "Top padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 60 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Bottom padding (mobile)", "min": 0, "max": 100, "step": 4, "unit": "px", "default": 88 }
   ],
   "presets": [ { "name": "PawSorb v2 FAQ", "blocks": [ { "type": "question" } ] } ]
 }

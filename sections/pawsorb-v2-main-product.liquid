@@ -47,6 +47,9 @@
     .pawsorb-cd__head, .pawsorb-cd__ship, .pawsorb-cd__item, .pawsorb-cd__foot { border-color: rgba(18, 22, 20, .1); }
     .pawsorb-cd__checkout, .pawsorb-cd__emptylink { border-radius: 32px; }
     .pawsorb-cd__x, .pawsorb-cd__thumb, .pawsorb-cd__emptyic { background: #FFFFFF; }
+    @media screen and (max-width: 749px) {
+      #header-group .account-button { display: none; }
+    }
   </style>
 {%- endif -%}
 <pawsorb-v2-buy-box
@@ -90,6 +93,8 @@
         <div class="pawsorb-v2-pdp__dots" aria-hidden="true">
           {%- for i in (1..n_slides) -%}<span class="pawsorb-v2-pdp__dot{% if forloop.first %} is-active{% endif %}"></span>{%- endfor -%}
         </div>
+        <div class="pawsorb-v2-pdp__tnav">
+        <button type="button" class="pawsorb-v2-pdp__tarrow pawsorb-v2-pdp__tarrow--prev" data-v2-thumb-step="-1" aria-label="{{ 'accessibility.slideshow_previous' | t }}" disabled><span class="pawsorb-v2-pdp__tcaret">{{- 'icon-caret.svg' | inline_asset_content -}}</span></button>
         <div class="pawsorb-v2-pdp__thumbs" data-pawsorb-rail>
           {%- if images.size > 0 -%}
             {%- for m in images -%}
@@ -106,13 +111,15 @@
             {%- endfor -%}
           {%- endif -%}
         </div>
+        <button type="button" class="pawsorb-v2-pdp__tarrow pawsorb-v2-pdp__tarrow--next" data-v2-thumb-step="1" aria-label="{{ 'accessibility.slideshow_next' | t }}"><span class="pawsorb-v2-pdp__tcaret">{{- 'icon-caret.svg' | inline_asset_content -}}</span></button>
+        </div>
       {%- endif -%}
     </div>
 
     <div class="pawsorb-v2-pdp__info">
       {%- if ss.rating_text != blank -%}
         <p class="pawsorb-v2-pdp__rating">
-          <span class="pawsorb-v2-pdp__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 16 %}{%- endfor -%}</span>
+          <span class="pawsorb-v2-pdp__stars" aria-hidden="true">{%- for i in (1..5) -%}{% render 'pawsorb-icon', name: 'star', size: 17 %}{%- endfor -%}</span>
           <span>{{ ss.rating_text }}</span>
         </p>
       {%- endif -%}
@@ -141,7 +148,7 @@
 
       {%- if notice -%}
         <div class="pawsorb-v2-pdp__notice" {{ notice.shopify_attributes }}>
-          <svg class="pawsorb-v2-pdp__notice-ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6M12 7.5v.5" stroke-linecap="round"/></svg>
+          <svg class="pawsorb-v2-pdp__notice-ic" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="currentColor"/><path d="M12 10.5v7M12 6.6v.4" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
           <div>
             {%- if notice.settings.title != blank -%}<p class="pawsorb-v2-pdp__notice-t">{{ notice.settings.title }}</p>{%- endif -%}
             {%- if notice.settings.body != blank -%}<p class="pawsorb-v2-pdp__notice-b">{{ notice.settings.body }}</p>{%- endif -%}
@@ -169,10 +176,18 @@
           {%- if ss.trust_2 != blank -%}<li>{% render 'pawsorb-icon', name: 'check', size: 14 %}<span>{{ ss.trust_2 }}</span></li>{%- endif -%}
         </ul>
       {%- endif -%}
-      {%- if ss.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
-        <ul class="pawsorb-v2-pdp__pay" aria-label="{{ ss.payment_label | escape }}">
-          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
-        </ul>
+      {%- if ss.show_payment_icons -%}
+        {%- liquid
+          assign pay_types = shop.enabled_payment_types
+          if pay_types.size == 0
+            assign pay_types = ss.payment_fallback | default: 'master,american_express,apple_pay,google_pay,shopify_pay,discover,visa' | remove: ' ' | split: ','
+          endif
+        -%}
+        {%- if pay_types.size > 0 -%}
+          <ul class="pawsorb-v2-pdp__pay" aria-label="{{ ss.payment_label | escape }}">
+            {%- for type in pay_types -%}<li>{{ type | payment_type_svg_tag }}</li>{%- endfor -%}
+          </ul>
+        {%- endif -%}
       {%- endif -%}
 
       {%- if comment -%}
@@ -191,7 +206,7 @@
               <p class="pawsorb-v2-pdp__cmt-name">{{ cs.name }}</p>
               <div class="pawsorb-v2-pdp__cmt-text">{{ cs.text }}</div>
               {%- if cs.reactions != blank -%}
-                <span class="pawsorb-v2-pdp__react"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="{{ cs.heart_color }}"/><path fill="#fff" d="M12 17.3l-.8-.7C8.4 14.1 6.6 12.5 6.6 10.5c0-1.6 1.2-2.8 2.8-2.8.9 0 1.8.4 2.4 1.1.6-.7 1.5-1.1 2.4-1.1 1.6 0 2.8 1.2 2.8 2.8 0 2-1.8 3.6-4.6 6.1z"/></svg>{{ cs.reactions }}</span>
+                <span class="pawsorb-v2-pdp__react"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M7 11h2.4v6.4H7zM10.4 17.4V11l2.3-4.1c.9 0 1.5.7 1.4 1.6l-.3 1.9h2.9c.8 0 1.4.8 1.2 1.6l-1 4.4c-.2.6-.7 1-1.3 1z"/></svg><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="{{ cs.heart_color }}"/><path fill="#fff" d="M12 17.3l-.8-.7C8.4 14.1 6.6 12.5 6.6 10.5c0-1.6 1.2-2.8 2.8-2.8.9 0 1.8.4 2.4 1.1.6-.7 1.5-1.1 2.4-1.1 1.6 0 2.8 1.2 2.8 2.8 0 2-1.8 3.6-4.6 6.1z"/></svg>{{ cs.reactions }}</span>
               {%- endif -%}
             </div>
             <p class="pawsorb-v2-pdp__cmt-meta">{{ cs.meta }}</p>
@@ -227,9 +242,16 @@
   .pawsorb-v2-pdp__slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 1; background: #F0ECE6; }
   .pawsorb-v2-pdp__slide.is-missing { display: none; }
   .pawsorb-v2-pdp__img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
-  .pawsorb-v2-pdp__thumbs { position: relative; grid-column: 1; grid-row: 1; display: flex; flex-direction: column; gap: 8px; height: 0; min-height: 100%; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: #CFCAC2 transparent; padding-right: 2px; }
-  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar { width: 4px; height: 4px; }
-  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar-thumb { background: #CFCAC2; border-radius: 4px; }
+  .pawsorb-v2-pdp__tnav { grid-column: 1; grid-row: 1; display: flex; flex-direction: column; align-items: center; height: 0; min-height: 100%; min-width: 0; }
+  .pawsorb-v2-pdp__thumbs { position: relative; flex: 1 1 auto; min-height: 0; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 2px 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; scrollbar-width: none; }
+  .pawsorb-v2-pdp__thumbs::-webkit-scrollbar { display: none; }
+  .pawsorb-v2-pdp__tarrow { flex: 0 0 auto; display: grid; place-items: center; width: 100%; height: 30px; margin: 0; padding: 0; border: 0; background: none; color: rgb(18 22 20 / .3); cursor: pointer; transition: color .15s; }
+  .pawsorb-v2-pdp__tarrow:hover { color: rgb(18 22 20 / .55); }
+  .pawsorb-v2-pdp__tarrow:focus-visible { outline: 2px solid var(--pawsorb-v2-pdp-ink, #121614); outline-offset: -2px; }
+  .pawsorb-v2-pdp__tarrow[disabled] { visibility: hidden; }
+  .pawsorb-v2-pdp__tcaret { display: grid; place-items: center; width: 14px; height: 14px; --icon-stroke-width: 1.5px; }
+  .pawsorb-v2-pdp__tcaret svg { display: block; width: 14px; height: 14px; }
+  .pawsorb-v2-pdp__tarrow--prev .pawsorb-v2-pdp__tcaret { rotate: 180deg; }
   .pawsorb-v2-pdp__thumb { flex: 0 0 56px; width: 56px; height: 56px; padding: 0; border: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); border-radius: 6px; overflow: hidden; background: #F0ECE6; cursor: pointer; }
   .pawsorb-v2-pdp__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; -webkit-user-drag: none; }
   .pawsorb-v2-pdp__thumb.is-active { border: 2px solid var(--pawsorb-v2-pdp-acc, #12855A); }
@@ -238,7 +260,7 @@
   .pawsorb-v2-pdp__dot.is-active { background: var(--pawsorb-v2-pdp-ink, #121614); }
   .pawsorb-v2-pdp__info { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
   .pawsorb-v2-pdp__rating { display: flex; align-items: center; gap: 10px; margin: 0; font-size: 14px; line-height: 1.3; }
-  .pawsorb-v2-pdp__stars { display: inline-flex; gap: 1px; color: var(--pawsorb-v2-pdp-acc, #12855A); }
+  .pawsorb-v2-pdp__stars { display: inline-flex; gap: 0; color: var(--pawsorb-v2-pdp-acc, #12855A); }
   .pawsorb-v2-pdp__title { margin: -6px 0 0; font-family: var(--font-body--family); font-weight: var(--pawsorb-v2-pdp-hw, 400); font-size: var(--pawsorb-v2-pdp-h1, 39px); line-height: 1.15; letter-spacing: -.02em; color: var(--pawsorb-v2-pdp-ink, #121614); }
   .pawsorb-v2-pdp__award { display: inline-flex; align-self: flex-start; align-items: stretch; margin: 0; border: 1px solid var(--pawsorb-v2-pdp-acc, #12855A); border-radius: 4px; background: #fff; }
   .pawsorb-v2-pdp__award-no { display: grid; place-items: center; padding: 0 10px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: var(--pawsorb-v2-pdp-bg, #F8F5EF); font-weight: 700; font-size: 20px; border-radius: 3px 0 0 3px; }
@@ -256,10 +278,10 @@
   .pawsorb-v2-pdp__calcbtn { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; margin-top: 6px; min-height: 48px; padding: 0 22px; border: 2px solid var(--pawsorb-v2-pdp-deep, #0B5E3F); border-radius: 8px; background: #fff; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); font: 600 15px/1 var(--font-body--family); cursor: pointer; }
   .pawsorb-v2-pdp__calcbtn:hover { background: color-mix(in srgb, var(--pawsorb-v2-pdp-deep, #0B5E3F) 6%, #fff); }
   .pawsorb-v2-pdp__calcbtn .pawsorb-icon { fill: currentColor; stroke: none; }
-  .pawsorb-v2-pdp__notice { display: flex; gap: 10px; align-items: flex-start; margin-top: 8px; padding: 14px 16px; border: 1px dashed var(--pawsorb-v2-pdp-ink, #121614); border-radius: 8px; background: #F1ECE3; }
-  .pawsorb-v2-pdp__notice-ic { flex: 0 0 18px; margin-top: 1px; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
-  .pawsorb-v2-pdp__notice-t { margin: 0 0 3px; font-size: 13px; font-weight: 700; line-height: 1.3; text-transform: uppercase; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
-  .pawsorb-v2-pdp__notice-b { margin: 0; font-size: 12px; line-height: 1.45; color: #2E3431; }
+  .pawsorb-v2-pdp__notice { position: relative; display: block; margin-top: 8px; padding: 10px 12px 10px 44px; border: 1px dashed var(--pawsorb-v2-pdp-ink, #121614); border-radius: 8px; background: #F1ECE3; }
+  .pawsorb-v2-pdp__notice-ic { position: absolute; left: 15px; top: 11px; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-pdp__notice-t { margin: 0 0 1px; font-size: 14px; font-weight: 700; line-height: 1.4; text-transform: uppercase; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
+  .pawsorb-v2-pdp__notice-b { margin: 0; font-size: 12px; line-height: 1.4; color: var(--pawsorb-v2-pdp-deep, #0B5E3F); }
   .pawsorb-v2-pdp__form { margin: 2px 0 0; }
   .pawsorb-v2-pdp__atc { position: relative; width: 100%; min-height: 62px; border: 0; border-radius: 32px; background: var(--pawsorb-v2-pdp-acc, #12855A); color: #fff; font: 700 19px/1 var(--font-body--family); cursor: pointer; transition: background-color .15s; }
   .pawsorb-v2-pdp__atc:hover { background: var(--pawsorb-v2-pdp-acc-h, #0E6B48); }
@@ -269,54 +291,75 @@
   .pawsorb-v2-pdp__atc.is-loading .pawsorb-v2-pdp__spin { display: block; }
   @keyframes pawsorb-v2-pdp-spin { to { transform: rotate(360deg); } }
   .pawsorb-v2-pdp__err { margin: 8px 0 0; font-size: 14px; color: #B42318; }
-  .pawsorb-v2-pdp__trust { list-style: none; margin: -6px 0 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 16px; }
-  .pawsorb-v2-pdp__trust li { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 500; }
+  .pawsorb-v2-pdp__trust { list-style: none; margin: -6px 0 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 6px; }
+  .pawsorb-v2-pdp__trust li { display: flex; align-items: center; gap: 4px; font-size: 13px; font-weight: 500; line-height: 1.4; white-space: nowrap; }
   .pawsorb-v2-pdp__trust .pawsorb-icon { color: var(--pawsorb-v2-pdp-acc, #12855A); stroke-width: 2.4; }
-  .pawsorb-v2-pdp__pay { list-style: none; margin: -4px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .pawsorb-v2-pdp__pay { list-style: none; margin: -4px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 3px; }
   .pawsorb-v2-pdp__pay svg { width: 38px; height: 24px; display: block; }
   .pawsorb-v2-pdp__cmt { display: flex; gap: 8px; align-items: flex-start; margin-top: 14px; }
   .pawsorb-v2-pdp__avatar { position: relative; flex: 0 0 36px; width: 36px; height: 36px; border-radius: 50%; overflow: hidden; background: #D9D6CF; }
   .pawsorb-v2-pdp__avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .pawsorb-v2-pdp__avatar-fb { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 700; font-size: 15px; color: #fff; background: #8A908C; }
   .pawsorb-v2-pdp__cmt-main { min-width: 0; flex: 1; }
-  .pawsorb-v2-pdp__bubble { position: relative; padding: 8px 12px 10px; border-radius: 18px; background: #EEF0EE; }
-  .pawsorb-v2-pdp__cmt-name { margin: 0 0 2px; font-size: 12px; font-weight: 700; }
-  .pawsorb-v2-pdp__cmt-text { font-size: 15px; line-height: 1.4; }
+  .pawsorb-v2-pdp__bubble { position: relative; padding: 8px 12px; border-radius: 18px; background: #F0F2F5; }
+  .pawsorb-v2-pdp__cmt-name { margin: 0 0 2px; font-size: 13px; font-weight: 500; line-height: 1.34; color: #050505; }
+  .pawsorb-v2-pdp__cmt-text { font-size: 15px; line-height: 1.3; color: #050505; }
   .pawsorb-v2-pdp__cmt-text p { margin: 0; }
-  .pawsorb-v2-pdp__react { position: absolute; right: 10px; bottom: -11px; display: inline-flex; align-items: center; gap: 4px; padding: 2px 7px 2px 3px; border-radius: 999px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .18); font-size: 12px; color: #5B625E; }
-  .pawsorb-v2-pdp__cmt-meta { margin: 6px 0 0 12px; font-size: 12px; font-weight: 600; color: #8A908C; word-spacing: 4px; }
-  .pawsorb-v2-pdp__faq { margin-top: 10px; border: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); border-radius: 16px; background: #fff; overflow: hidden; }
-  .pawsorb-v2-pdp__q + .pawsorb-v2-pdp__q { border-top: 1px solid var(--pawsorb-v2-pdp-line, #E5E3DE); }
+  .pawsorb-v2-pdp__react { position: absolute; right: 12px; bottom: -13px; display: inline-flex; align-items: center; gap: 0; padding: 2px 6px 2px 2px; border: 1px solid #E4E6EA; border-radius: 12px; background: #fff; font-size: 13px; line-height: 17px; color: #65676B; }
+  .pawsorb-v2-pdp__react svg { margin-right: -2px; border: 1px solid #fff; border-radius: 50%; }
+  .pawsorb-v2-pdp__react svg + svg { margin-right: 4px; }
+  .pawsorb-v2-pdp__cmt-meta { margin: 6px 0 0 12px; font-size: 12px; font-weight: 600; line-height: 1.34; color: #65676B; word-spacing: 4px; }
+  .pawsorb-v2-pdp__faq { margin-top: 10px; border: 1px solid #E5E5E5; border-radius: 16px; background: transparent; overflow: hidden; }
+  .pawsorb-v2-pdp__q + .pawsorb-v2-pdp__q { border-top: 1px solid #E5E5E5; }
   .pawsorb-v2-pdp__q summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 15px 18px; font-size: 16px; line-height: 1.35; cursor: pointer; list-style: none; }
   .pawsorb-v2-pdp__q summary::-webkit-details-marker { display: none; }
-  .pawsorb-v2-pdp__plus { flex: 0 0 auto; font-size: 18px; line-height: 1; transition: transform .2s; }
+  .pawsorb-v2-pdp__plus { flex: 0 0 auto; font-size: 22px; font-weight: 300; line-height: 1; transition: transform .2s; }
   .pawsorb-v2-pdp__q[open] .pawsorb-v2-pdp__plus { transform: rotate(45deg); }
-  .pawsorb-v2-pdp__a { padding: 12px 18px 14px; background: var(--pawsorb-v2-pdp-bg, #F8F5EF); font-size: 14px; line-height: 1.55; color: #2E3431; }
+  .pawsorb-v2-pdp__a { padding: 12px 18px 14px; background: #FDF9E8; font-size: 14px; line-height: 1.55; color: #2E3431; }
   .pawsorb-v2-pdp__a p { margin: 0; }
   .pawsorb-v2-pdp__a p + p { margin-top: 6px; }
   @media screen and (max-width: 989px) {
     .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
   }
   @media screen and (max-width: 749px) {
-    .pawsorb-v2-pdp { padding: 0 0 var(--pawsorb-v2-pdp-pbm, 40px); }
-    .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
+    .pawsorb-v2-pdp { padding: 20px 0 var(--pawsorb-v2-pdp-pbm, 32px); letter-spacing: -.3px; }
+    .pawsorb-v2-pdp__grid { grid-template-columns: minmax(0, 1fr); gap: 8px; }
     .pawsorb-v2-pdp__gallery { position: static; display: block; }
-    .pawsorb-v2-pdp__stage { border-radius: 0; }
-    .pawsorb-v2-pdp__thumbs { flex-direction: row; height: auto; min-height: 0; overflow-x: auto; overflow-y: hidden; gap: 8px; margin-top: 10px; padding: 0 16px 4px; scroll-padding-inline: 16px; cursor: grab; }
+    .pawsorb-v2-pdp__stage { margin: 0 16px; border-radius: 0; }
+    .pawsorb-v2-pdp__tnav { flex-direction: row; height: auto; min-height: 0; margin: 10px 16px 0; gap: 2px; }
+    .pawsorb-v2-pdp__thumbs { flex-direction: row; align-items: stretch; height: auto; overflow-x: auto; overflow-y: hidden; gap: 8px; padding: 0; cursor: grab; }
     .pawsorb-v2-pdp__thumb { flex: 0 0 60px; width: 60px; height: 60px; }
+    .pawsorb-v2-pdp__tarrow { width: 24px; height: 60px; }
+    .pawsorb-v2-pdp__tarrow--prev .pawsorb-v2-pdp__tcaret { rotate: 90deg; }
+    .pawsorb-v2-pdp__tarrow--next .pawsorb-v2-pdp__tcaret { rotate: -90deg; }
     .pawsorb-v2-pdp__dots { display: none; }
-    .pawsorb-v2-pdp__info { padding: 0 16px; gap: 14px; }
-    .pawsorb-v2-pdp__title { font-size: var(--pawsorb-v2-pdp-h1m, 32px); }
-    .pawsorb-v2-pdp__desc { font-size: 15px; }
-    .pawsorb-v2-pdp__benefits { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 10px; }
-    .pawsorb-v2-pdp__benefits li { font-size: 13.5px; gap: 8px; }
-    .pawsorb-v2-pdp__bic { flex-basis: 40px; width: 40px; height: 40px; }
-    .pawsorb-v2-pdp__bic > span { width: 28px; height: 28px; }
-    .pawsorb-v2-pdp__calcbtn { align-self: stretch; justify-content: center; }
-    .pawsorb-v2-pdp__atc { min-height: 58px; font-size: 18px; }
-    .pawsorb-v2-pdp__q summary { padding: 14px 16px; font-size: 15px; }
-    .pawsorb-v2-pdp__a { font-size: 13.5px; padding: 12px 16px 14px; }
-    .pawsorb-v2-pdp__cmt-text { font-size: 14.5px; }
+    .pawsorb-v2-pdp__info { padding: 0 16px; gap: 0; }
+    .pawsorb-v2-pdp__rating { gap: 9px; }
+    .pawsorb-v2-pdp__title { margin: 2px 0 0; font-size: var(--pawsorb-v2-pdp-h1m, 33px); line-height: 1.2; letter-spacing: -.3px; }
+    .pawsorb-v2-pdp__award { margin-top: 15px; }
+    .pawsorb-v2-pdp__award-txt { padding: 3px 12px 3px 9px; }
+    .pawsorb-v2-pdp__award-txt strong { line-height: 1.2; }
+    .pawsorb-v2-pdp__award-txt em { font-size: 9px; line-height: 1.1; }
+    .pawsorb-v2-pdp__desc { margin-top: 23px; font-size: 13px; line-height: 1.4; letter-spacing: -.3px; color: #333; }
+    .pawsorb-v2-pdp__benefits { margin: 27px 0 0; padding-right: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .pawsorb-v2-pdp__benefits li { gap: 7px; font-size: 14px; font-weight: 500; line-height: 1.4; }
+    .pawsorb-v2-pdp__bic { flex-basis: 36px; width: 36px; height: 36px; }
+    .pawsorb-v2-pdp__bic > span { width: 26px; height: 26px; }
+    .pawsorb-v2-pdp__bic .pawsorb-icon { width: 16px; height: 16px; }
+    .pawsorb-v2-pdp__calcbtn { align-self: flex-start; margin-top: 37px; min-height: 48px; padding: 12px 20px; border-radius: 18px; font-size: 16px; font-weight: 400; line-height: 1.2; }
+    .pawsorb-v2-pdp__calcbtn .pawsorb-icon { width: 20px; height: 20px; }
+    .pawsorb-v2-pdp__notice { margin-top: 37px; }
+    .pawsorb-v2-offer { margin-top: 36px; }
+    .pawsorb-v2-pdp__form { margin-top: 17px; }
+    .pawsorb-v2-pdp__atc { min-height: 63px; font-size: 19px; }
+    .pawsorb-v2-pdp__trust { margin-top: 7px; flex-wrap: nowrap; }
+    .pawsorb-v2-pdp__trust .pawsorb-icon { width: 12px; height: 12px; }
+    .pawsorb-v2-pdp__pay { margin-top: 15px; }
+    .pawsorb-v2-pdp__cmt { margin-top: 34px; padding: 0 16px; gap: 8px; }
+    .pawsorb-v2-pdp__avatar { flex-basis: 32px; width: 32px; height: 32px; }
+    .pawsorb-v2-pdp__faq { margin-top: 48px; }
+    .pawsorb-v2-pdp__q summary { padding: 8px 12px; font-size: 16px; line-height: 1.3; }
+    .pawsorb-v2-pdp__a { font-size: 13px; padding: 10px 12px 12px; }
   }
 {% endstylesheet %}
 
@@ -385,7 +428,22 @@
         const dots = [...this.querySelectorAll('.pawsorb-v2-pdp__dot')];
         const slides = () => [...track.children].filter((s) => !s.classList.contains('is-missing'));
         const box = this.querySelector('.pawsorb-v2-pdp__thumbs');
+        const prev = this.querySelector('[data-v2-thumb-step="-1"]');
+        const next = this.querySelector('[data-v2-thumb-step="1"]');
+        let cur = 0;
+        const goTo = (i) => {
+          const vis = slides();
+          const n = Math.max(0, Math.min(vis.length - 1, i));
+          if (vis[n]) track.scrollTo({ left: vis[n].offsetLeft, behavior: 'smooth' });
+        };
+        [prev, next].forEach((b) => b && b.addEventListener('click', () => goTo(slides().indexOf(track.children[cur]) + Number(b.dataset.v2ThumbStep))));
         const setActive = (idx) => {
+          if (idx < 0) return;
+          cur = idx;
+          const vis = slides();
+          const pos = vis.indexOf(track.children[idx]);
+          if (prev) prev.disabled = pos <= 0;
+          if (next) next.disabled = pos >= vis.length - 1;
           thumbs.forEach((t, n) => t.classList.toggle('is-active', n === idx));
           const t = thumbs[idx];
           if (box && t) {
@@ -407,6 +465,8 @@
             setActive([...track.children].indexOf(vis[n]));
           });
         }, { passive: true });
+        const first = slides()[0];
+        if (first) setActive([...track.children].indexOf(first));
       }
       initCountdown() {
         const el = this.querySelector('[data-v2-cd]');
@@ -635,6 +695,7 @@
     { "type": "text", "id": "trust_1", "label": "Trust item 1", "default": "90-day guarantee" },
     { "type": "text", "id": "trust_2", "label": "Trust item 2", "default": "Fast US shipping" },
     { "type": "checkbox", "id": "show_payment_icons", "label": "Show payment icons", "default": true },
+    { "type": "text", "id": "payment_fallback", "label": "Payment icons shown until payments are set up", "default": "master,american_express,apple_pay,google_pay,shopify_pay,discover,visa", "info": "Comma-separated payment types. Used only while the store has no enabled payment methods." },
     { "type": "text", "id": "payment_label", "label": "Payment icons label (screen readers)", "default": "Payment methods" },
     { "type": "header", "content": "Gallery" },
     { "type": "text", "id": "gallery_alt", "label": "Image alt text", "default": "PawSorb activated charcoal gel" },
