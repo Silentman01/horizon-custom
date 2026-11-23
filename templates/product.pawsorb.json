@@ -11,43 +11,6 @@
   "sections": {
     "pawsorb_v2_main": {
       "type": "pawsorb-v2-main-product",
-      "settings": {
-        "title_override": "Help Your Pet Before the Vet Can with PawSorb™ Activated Charcoal First-Aid Gel",
-        "rating_text": "Ready in 115,000+ homes",
-        "paragraph": "<p>It's 11 p.m. The chocolate on the counter is gone, or a toad sits by the water bowl. The vet's line rings to voicemail. Nothing in the cabinet helps. With PawSorb in the drawer, the first minute is yours.</p>",
-        "cd_enabled": true,
-        "cd_label": "BLACK FRIDAY SALE ENDS IN",
-        "cd_end": "2026-11-30T23:59:00-05:00",
-        "each_word": "each",
-        "save_word": "SAVE",
-        "show_total": false,
-        "total_word": "total",
-        "gift_title": "Free with 3 or more tubes",
-        "button_label": "Add to Cart",
-        "soldout_label": "Sold out",
-        "trust_1": "90-Day Guarantee",
-        "trust_2": "Fast US Shipping",
-        "show_payment_icons": true,
-        "payment_label": "Payment methods",
-        "gallery_alt": "PawSorb activated charcoal first-aid gel",
-        "bg_color": "#F8F5EF",
-        "text_color": "#121614",
-        "muted_color": "#5B625E",
-        "accent_color": "#12855A",
-        "accent_hover": "#0E6B48",
-        "deep_color": "#0B5E3F",
-        "line_color": "#E5E3DE",
-        "tier_border": "#B5B3AD",
-        "title_size": 39,
-        "title_size_mobile": 33,
-        "heading_weight": "400",
-        "padding_top": 24,
-        "padding_bottom": 56,
-        "padding_bottom_mobile": 32,
-        "chrome_enabled": true,
-        "footer_bg": "#12855A",
-        "footer_text": "#FFFFFF"
-      },
       "blocks": {
         "award": {
           "type": "award",
@@ -88,9 +51,9 @@
             "title": "Your Dog's Tube Count",
             "intro": "Every pound takes 1 mL, and one tube holds 30 mL. Bigger dog or more dogs, more tubes on hand.",
             "weight_label": "Your dog's weight",
-            "dogs_label": "Dogs in your home",
             "unit_lb": "lb",
             "unit_kg": "kg",
+            "dogs_label": "Dogs in your home",
             "start_weight": 45,
             "band_1": "Under 30 lb",
             "band_1_kg": "Under 14 kg",
@@ -201,6 +164,7 @@
         },
         "gift_1": {
           "type": "gift",
+          "disabled": true,
           "settings": {
             "title": "Fast US shipping",
             "tab": "FREE",
@@ -241,7 +205,7 @@
             "name": "Tasha Greene",
             "text": "<p>Sunday night, I turned around to grab the pizza from the oven and the grape bowl on the coffee table was empty. Two dogs, no idea which one ate them. Pearl is 25 pounds, so one tube dialed to 25. Rocky is 70, so three tubes. Gave both right there on the rug, then called the vet. Both fine by bedtime. Learn from me: it's 1 mL per pound and a tube holds 30, so count tubes for every dog in the house, not just one.</p>",
             "reactions": "214",
-            "heart_color": "#E5484D",
+            "heart_color": "#e5484d",
             "meta": "Like · Reply · 6d"
           }
         },
@@ -319,11 +283,49 @@
         "faq_5",
         "faq_6",
         "faq_7"
-      ]
+      ],
+      "settings": {
+        "title_override": "Help Your Pet Before the Vet Can with PawSorb™ Activated Charcoal First-Aid Gel",
+        "rating_text": "Ready in 115,000+ homes",
+        "paragraph": "<p>It's 11 p.m. The chocolate on the counter is gone, or a toad sits by the water bowl. The vet's line rings to voicemail. Nothing in the cabinet helps. With PawSorb in the drawer, the first minute is yours.</p>",
+        "cd_enabled": true,
+        "cd_label": "BLACK FRIDAY SALE ENDS IN",
+        "cd_end": "2026-11-30T23:59:00-05:00",
+        "each_word": "each",
+        "save_word": "SAVE",
+        "show_total": false,
+        "total_word": "total",
+        "gift_title": "Free with 3 or more tubes",
+        "button_label": "Add to Cart",
+        "soldout_label": "Sold out",
+        "trust_1": "90-Day Guarantee",
+        "trust_2": "Fast US Shipping",
+        "show_payment_icons": true,
+        "payment_fallback": "master,american_express,apple_pay,google_pay,shopify_pay,discover,visa",
+        "payment_label": "Payment methods",
+        "gallery_alt": "PawSorb activated charcoal first-aid gel",
+        "fallback_assets": "pawsorb-v2-gallery-01.webp,pawsorb-v2-gallery-02.webp,pawsorb-v2-gallery-03.webp,pawsorb-v2-gallery-04.webp,pawsorb-v2-gallery-05.webp,pawsorb-v2-gallery-06.webp,pawsorb-v2-gallery-07.webp,pawsorb-v2-gallery-08.webp,pawsorb-v2-gallery-09.webp,pawsorb-v2-gallery-10.webp,pawsorb-v2-gallery-11.webp,pawsorb-v2-gallery-12.webp",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "muted_color": "#5b625e",
+        "accent_color": "#12855a",
+        "accent_hover": "#0e6b48",
+        "deep_color": "#0b5e3f",
+        "line_color": "#e5e3de",
+        "tier_border": "#b5b3ad",
+        "title_size": 39,
+        "title_size_mobile": 33,
+        "heading_weight": "400",
+        "padding_top": 24,
+        "padding_bottom": 56,
+        "padding_bottom_mobile": 32,
+        "chrome_enabled": true,
+        "footer_bg": "#12855a",
+        "footer_text": "#ffffff"
+      }
     },
     "pawsorb_v2_ticker": {
       "type": "pawsorb-v2-ticker",
-      "settings": {},
       "blocks": {
         "pill_1": {
           "type": "pill",
@@ -359,22 +361,19 @@
         "pill_2",
         "pill_3",
         "pill_4"
-      ]
+      ],
+      "settings": {
+        "bg_color": "#f8f5ef",
+        "accent_color": "#12855a",
+        "speed": 40,
+        "font_size": 16,
+        "font_size_mobile": 14,
+        "padding_y": 18,
+        "padding_y_mobile": 25
+      }
     },
     "pawsorb_v2_reviews": {
       "type": "pawsorb-v2-reviews",
-      "settings": {
-        "pill_text": "4.9/5 from 4,554 reviews",
-        "heading": "On hand in 115,000+ homes",
-        "verified_label": "Verified buyer",
-        "prev_label": "Previous story",
-        "next_label": "Next story",
-        "show_chip": true,
-        "chip_title": "PawSorb™ Activated Charcoal First-Aid Gel",
-        "chip_price": "$39.99",
-        "chip_compare": "$59.99",
-        "chip_asset": "pawsorb-sticky-thumb.webp"
-      },
       "blocks": {
         "review_1": {
           "type": "review",
@@ -450,32 +449,35 @@
         "review_4",
         "review_5",
         "review_6"
-      ]
+      ],
+      "settings": {
+        "pill_text": "4.9/5 from 4,554 reviews",
+        "heading": "On hand in 115,000+ homes",
+        "verified_label": "Verified buyer",
+        "prev_label": "Previous story",
+        "next_label": "Next story",
+        "show_chip": true,
+        "chip_title": "PawSorb™ Activated Charcoal First-Aid Gel",
+        "chip_price": "$39.99",
+        "chip_compare": "$59.99",
+        "chip_asset": "pawsorb-sticky-thumb.webp",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "line_color": "#e5e3de",
+        "heading_size": 34,
+        "heading_size_mobile": 34,
+        "heading_weight": "400",
+        "image_height": 300,
+        "image_height_mobile": 200,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     },
     "pawsorb_v2_toxins": {
       "type": "pawsorb-v2-toxins",
-      "settings": {
-        "heading": "Sooner or later, they swallow something. Is your drawer ready?",
-        "sub": "It never waits for office hours. PawSorb binds best in the first hour, before poison leaves the stomach. Toads give you 15–30 minutes; chocolate, grapes and pills, about 60.",
-        "show_panel": true,
-        "hero_number": "1,200+",
-        "hero_claim": "calls a day to US pet poison lines about a swallowed toxin",
-        "show_chart": true,
-        "chart_shape": "rising",
-        "chart_axis": "Toxin absorbed",
-        "chart_marker": "Toads",
-        "marker_from": 33,
-        "marker_to": 66,
-        "chart_label_1": "Swallowed",
-        "chart_label_2": "15 min",
-        "chart_label_3": "30 min",
-        "chart_label_4": "60 min",
-        "stat_1_number": "60 min",
-        "stat_1_text": "for most poisons to reach the blood",
-        "stat_2_number": "$5,000",
-        "stat_2_text": "what one poisoning visit can cost at the ER",
-        "source": "Call volume: US pet poison control data. ER cost: US emergency vet estimates."
-      },
       "blocks": {
         "item_1": {
           "type": "item",
@@ -535,15 +537,46 @@
         "item_6",
         "item_7",
         "item_8"
-      ]
+      ],
+      "settings": {
+        "heading": "Sooner or later, they swallow something. Is your drawer ready?",
+        "sub": "It never waits for office hours. PawSorb binds best in the first hour, before poison leaves the stomach. Toads give you 15–30 minutes; chocolate, grapes and pills, about 60.",
+        "show_panel": true,
+        "hero_number": "1,200+",
+        "hero_claim": "calls a day to US pet poison lines about a swallowed toxin",
+        "show_chart": true,
+        "chart_shape": "rising",
+        "chart_axis": "Toxin absorbed",
+        "chart_marker": "Toads",
+        "marker_from": 33,
+        "marker_to": 66,
+        "chart_label_1": "Swallowed",
+        "chart_label_2": "15 min",
+        "chart_label_3": "30 min",
+        "chart_label_4": "60 min",
+        "stat_1_number": "60 min",
+        "stat_1_text": "for most poisons to reach the blood",
+        "stat_2_number": "$5,000",
+        "stat_2_text": "what one poisoning visit can cost at the ER",
+        "source": "Call volume: US pet poison control data. ER cost: US emergency vet estimates.",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "card_color": "#12855a",
+        "card_text": "#ffffff",
+        "panel_color": "#f1ece3",
+        "number_color": "#0b5e3f",
+        "accent_color": "#12855a",
+        "heading_size": 36,
+        "heading_size_mobile": 34,
+        "heading_weight": "400",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
     },
     "pawsorb_v2_stats": {
       "type": "pawsorb-v2-stats",
-      "settings": {
-        "heading": "Ready before the next scare",
-        "sub": "What owners say once a tube is on hand.",
-        "disclaimer": "* Rating from 4,554 PawSorb reviews. 115,000+ counts pet parents who ordered PawSorb."
-      },
       "blocks": {
         "row_1": {
           "type": "row",
@@ -574,15 +607,28 @@
         "row_1",
         "row_2",
         "row_3"
-      ]
+      ],
+      "settings": {
+        "heading": "Ready before the next scare",
+        "sub": "What owners say once a tube is on hand.",
+        "disclaimer": "* Rating from 4,554 PawSorb reviews. 115,000+ counts pet parents who ordered PawSorb.",
+        "strip_color": "#ffffff",
+        "card_color": "#12855a",
+        "text_color": "#ffffff",
+        "number_from": "#ffffff",
+        "number_to": "#2bd08f",
+        "note_bg": "#fdf9e8",
+        "note_text": "#919191",
+        "heading_size": 48,
+        "heading_size_mobile": 40,
+        "heading_weight": "400",
+        "number_size": 52,
+        "number_size_mobile": 40,
+        "strip_padding": 16
+      }
     },
     "pawsorb_v2_ingredients": {
       "type": "pawsorb-v2-ingredients",
-      "settings": {
-        "heading": "ER-grade binders, ready in your drawer",
-        "image_asset": "pawsorb-v2-ingredients.webp",
-        "image_alt": "Coconut shell, charcoal chunks and white kaolin clay"
-      },
       "blocks": {
         "tab_1": {
           "type": "tab",
@@ -610,14 +656,26 @@
       "block_order": [
         "tab_1",
         "tab_2"
-      ]
+      ],
+      "settings": {
+        "heading": "ER-grade binders, ready in your drawer",
+        "image_asset": "pawsorb-v2-ingredients.webp",
+        "image_alt": "Coconut shell, charcoal chunks and white kaolin clay",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "tab_text": "#f8f5ef",
+        "heading_size": 36,
+        "heading_size_mobile": 36,
+        "heading_weight": "400",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     },
     "pawsorb_v2_timeline": {
       "type": "pawsorb-v2-timeline",
-      "settings": {
-        "heading": "The next 48 hours, step by step",
-        "sub": "The clock starts when they swallow. This is how PawSorb buys you time."
-      },
       "blocks": {
         "stage_1": {
           "type": "stage",
@@ -654,7 +712,23 @@
         "stage_1",
         "stage_2",
         "stage_3"
-      ]
+      ],
+      "settings": {
+        "heading": "The next 48 hours, step by step",
+        "sub": "The clock starts when they swallow. This is how PawSorb buys you time.",
+        "bg_from": "#ffffff",
+        "bg_to": "#f6f6f4",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "line_color": "#e5e3de",
+        "heading_size": 36,
+        "heading_size_mobile": 24,
+        "heading_weight": "400",
+        "padding_top": 72,
+        "padding_bottom": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 48
+      }
     },
     "pawsorb_v2_vet": {
       "type": "pawsorb-v2-vet",
@@ -663,21 +737,25 @@
         "credential": "Emergency & critical care, PawSorb Advisory Panel",
         "quote": "<p>\"Most poisonings I treat started at home, an hour <em>before</em> I ever saw the dog. Keep enough on hand for every pet: <strong>that first hour is yours.</strong>\"</p>",
         "button_label": "Get ready tonight →",
+        "button_link": "",
         "image_asset": "pawsorb-vet-1.jpg",
         "image_alt": "Dr. Elena Ruiz, emergency and critical care vet",
         "image_side": "left",
-        "fade": true
+        "fade": true,
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "accent_hover": "#0e6b48",
+        "name_size": 30,
+        "name_size_mobile": 25,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
       }
     },
     "pawsorb_v2_compare": {
       "type": "pawsorb-v2-compare",
-      "settings": {
-        "heading": "What other charcoal skips",
-        "us_pill": "Ours",
-        "them_label": "Generic",
-        "image_asset": "pawsorb-v2-cutout.webp",
-        "image_alt": "PawSorb tube"
-      },
       "blocks": {
         "row_1": {
           "type": "row",
@@ -751,19 +829,30 @@
         "row_5",
         "row_6",
         "row_7"
-      ]
+      ],
+      "settings": {
+        "heading": "What other charcoal skips",
+        "us_pill": "Ours",
+        "them_label": "Generic",
+        "image_asset": "pawsorb-v2-cutout.webp",
+        "image_alt": "PawSorb tube",
+        "feature_label": "Feature",
+        "yes_label": "Yes",
+        "no_label": "No",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "heading_size": 40,
+        "heading_size_mobile": 28,
+        "heading_weight": "400",
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     },
     "pawsorb_v2_guarantee": {
       "type": "pawsorb-v2-guarantee",
-      "settings": {
-        "show_shield": true,
-        "heading": "Never need it? Send it back.",
-        "text": "<p>You can't try poison first aid until the night you need it, so lean on 4,554 reviews instead. Keep it 90 days. If you'd rather have your money back, email us for every cent.</p>",
-        "button_label": "Stock running low",
-        "check_1": "Full refund",
-        "check_2": "Ships fast",
-        "check_3": "Simple returns"
-      },
       "blocks": {
         "polaroid_1": {
           "type": "polaroid",
@@ -797,14 +886,34 @@
         "polaroid_1",
         "polaroid_2",
         "polaroid_3"
-      ]
+      ],
+      "settings": {
+        "show_shield": false,
+        "heading": "Never need it? Send it back.",
+        "text": "<p>You can't try poison first aid until the night you need it, so lean on 4,554 reviews instead. Keep it 90 days. If you'd rather have your money back, email us for every cent.</p>",
+        "button_label": "Stock running low",
+        "button_link": "",
+        "check_1": "",
+        "check_2": "Ships fast",
+        "check_3": "Simple returns",
+        "bg_from": "#f8f5ef",
+        "bg_to": "#fbf8f2",
+        "text_color": "#121614",
+        "muted_color": "#5b625e",
+        "accent_color": "#12855a",
+        "button_color": "#121614",
+        "heading_size": 26,
+        "heading_size_mobile": 24,
+        "polaroid_width": 190,
+        "polaroid_width_mobile": 100,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
     },
     "pawsorb_v2_faq": {
       "type": "pawsorb-v2-faq",
-      "settings": {
-        "heading": "What owners ask us first",
-        "columns": "2"
-      },
       "blocks": {
         "q_1": {
           "type": "question",
@@ -880,7 +989,22 @@
         "q_7",
         "q_8",
         "q_9"
-      ]
+      ],
+      "settings": {
+        "heading": "What owners ask us first",
+        "columns": "2",
+        "bg_color": "#f8f5ef",
+        "text_color": "#121614",
+        "line_color": "#e5e3de",
+        "answer_bg": "#f8f5ef",
+        "heading_size": 38,
+        "heading_size_mobile": 38,
+        "heading_weight": "400",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 88
+      }
     },
     "pawsorb_v2_sticky": {
       "type": "pawsorb-v2-sticky-atc",
@@ -893,7 +1017,11 @@
         "button_label": "Choose my bundle",
         "show_desktop": true,
         "show_mobile": true,
-        "thumb_asset": "pawsorb-sticky-thumb.webp"
+        "thumb_asset": "pawsorb-sticky-thumb.webp",
+        "bg_color": "#ffffff",
+        "text_color": "#121614",
+        "accent_color": "#12855a",
+        "accent_hover": "#0e6b48"
       }
     }
   },
