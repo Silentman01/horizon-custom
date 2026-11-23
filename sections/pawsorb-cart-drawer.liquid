@@ -32,6 +32,8 @@
     </div>
     <footer class="pawsorb-cd__foot" data-pawsorb-cd-foot hidden>
       <p class="pawsorb-cd__saving" data-pawsorb-cd-saving hidden></p>
+      <div class="pawsorb-cd__row pawsorb-cd__row--minor" data-pawsorb-cd-discrow data-label="{{ ss.discount_label | escape }}" hidden><span data-pawsorb-cd-disclabel>{{ ss.discount_label }}</span><span class="pawsorb-cd__disc" data-pawsorb-cd-disc></span></div>
+      <div class="pawsorb-cd__row pawsorb-cd__row--minor" data-pawsorb-cd-shiprow data-free="{{ ss.shipping_free | escape }}" data-paid="{{ ss.shipping_paid | escape }}" hidden><span>{{ ss.shipping_label }}</span><span data-pawsorb-cd-shipval></span></div>
       <div class="pawsorb-cd__row"><span>{{ ss.subtotal_label }}</span><strong data-pawsorb-cd-subtotal></strong></div>
       <form action="{{ routes.cart_url }}" method="post" class="pawsorb-cd__form">
         <button type="submit" name="checkout" class="pawsorb-cd__checkout">{% render 'pawsorb-icon', name: 'lock', size: 18 %}<span>{{ ss.checkout_label }}</span></button>
@@ -89,6 +91,9 @@
   .pawsorb-cd__saving { margin: 0 0 10px; padding: 8px 12px; border-radius: 10px; background: rgba(18, 133, 90, .1); color: var(--pawsorb-cd-green, #12855A); font-weight: 700; font-size: 14px; text-align: center; }
   .pawsorb-cd__row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; font-size: 16px; }
   .pawsorb-cd__row strong { font: 700 20px/1 var(--font-heading--family); }
+  .pawsorb-cd__row--minor { margin-bottom: 8px; font-size: 15px; }
+  .pawsorb-cd__row--minor > span:last-child { font-weight: 600; }
+  .pawsorb-cd__row--minor .pawsorb-cd__free, .pawsorb-cd__row--minor .pawsorb-cd__disc { color: #12855A; font-weight: 700; }
   .pawsorb-cd__form { margin: 0; }
   .pawsorb-cd__checkout { width: 100%; min-height: 56px; display: flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 10px; background: var(--pawsorb-cd-accent, #12855A); color: #fff; font: 700 17px/1 var(--font-heading--family); letter-spacing: .03em; cursor: pointer; }
   .pawsorb-cd__checkout:hover { background: #0C5E40; }
@@ -202,6 +207,25 @@
           this.querySelector('[data-pawsorb-cd-shipbar]').style.width = Math.min(100, (count / th) * 100) + '%';
         } else ship.hidden = true;
         this.querySelector('[data-pawsorb-cd-subtotal]').textContent = this.money(cart.total_price);
+        const disc = cart.total_discount || 0;
+        const dr = this.querySelector('[data-pawsorb-cd-discrow]');
+        if (dr) {
+          dr.hidden = !(disc > 0);
+          if (disc > 0) {
+            const titles = [...new Set((cart.items || []).flatMap((i) => (i.line_level_discount_allocations || []).map((a) => a.discount_application && a.discount_application.title))
+              .concat((cart.cart_level_discount_applications || []).map((a) => a.title)).filter(Boolean))];
+            dr.querySelector('[data-pawsorb-cd-disclabel]').textContent = titles.length ? titles.join(', ') : dr.dataset.label;
+            dr.querySelector('[data-pawsorb-cd-disc]').textContent = '−' + this.money(disc);
+          }
+        }
+        const sr = this.querySelector('[data-pawsorb-cd-shiprow]');
+        if (sr) {
+          const isFree = th > 0 && count >= th;
+          const val = sr.querySelector('[data-pawsorb-cd-shipval]');
+          if (isFree && sr.dataset.free) { val.textContent = sr.dataset.free; val.className = 'pawsorb-cd__free'; sr.hidden = false; }
+          else if (!isFree && sr.dataset.paid) { val.textContent = sr.dataset.paid; val.className = ''; sr.hidden = false; }
+          else sr.hidden = true;
+        }
         const unit = this.cents(this.dataset.compareUnit);
         const saved = unit ? unit * count - cart.total_price : (cart.total_discount || 0);
         const sv = this.querySelector('[data-pawsorb-cd-saving]');
@@ -226,6 +250,10 @@
     { "type": "text", "id": "free_ship_done", "label": "Free shipping: unlocked", "default": "You've unlocked FREE shipping" },
     { "type": "text", "id": "compare_unit", "label": "Compare-at price per tube (text)", "default": "$59.99", "info": "Savings = this x tubes minus the cart total." },
     { "type": "text", "id": "saving_text", "label": "Savings line", "default": "You're saving [x]", "info": "[x] = amount saved" },
+    { "type": "text", "id": "discount_label", "label": "Discount row label", "default": "Discount", "info": "Shown when a discount applies; the discount's own name is used when Shopify sends one." },
+    { "type": "text", "id": "shipping_label", "label": "Shipping row label", "default": "Shipping" },
+    { "type": "text", "id": "shipping_free", "label": "Shipping row: free", "default": "FREE", "info": "Shown once the free-shipping tube count is reached." },
+    { "type": "text", "id": "shipping_paid", "label": "Shipping row: below free shipping", "default": "$4.99", "info": "Blank hides the row until shipping is free." },
     { "type": "text", "id": "subtotal_label", "label": "Subtotal label", "default": "Subtotal" },
     { "type": "text", "id": "checkout_label", "label": "Checkout button", "default": "Checkout" },
     { "type": "text", "id": "trust_1", "label": "Trust 1", "default": "90-day money-back guarantee" },
