@@ -1,6 +1,6 @@
 {%- assign bs = block.settings -%}
 <div class="ov2-ship" data-ov2-ship data-min="{{ bs.min_days }}" data-max="{{ bs.max_days }}" {{ block.shopify_attributes }}>
-  <p class="ov2-ship__l1"><span class="ov2-ship__dot" aria-hidden="true"></span><span data-ov2-ship-text data-tpl="{{ bs.line_1 | escape }}">{{ bs.line_1 | replace: '{d1}', bs.fallback_1 | replace: '{d2}', bs.fallback_2 }}</span></p>
+  <p class="ov2-ship__l1"><span class="ov2-ship__dot" aria-hidden="true"></span><span data-ov2-ship-text data-tpl="{{ bs.line_1 | escape }}">{{ bs.line_1 | replace: '[d1]', bs.fallback_1 | replace: '[d2]', bs.fallback_2 }}</span></p>
   {%- if bs.line_2 != blank %}<p class="ov2-ship__l2">{% render 'oralys-pdp-icon', name: 'box', size: 18 %}<span>{{ bs.line_2 }}</span></p>{% endif -%}
 </div>
 <script>
@@ -11,7 +11,7 @@
     var add = function (n) { var d = new Date(); while (n > 0) { d.setDate(d.getDate() + 1); var g = d.getDay(); if (g !== 0 && g !== 6) n--; } return d; };
     var f = function (d) { try { return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }); } catch (e) { return d.getDate() + '/' + (d.getMonth() + 1); } };
     var a = parseInt(w.getAttribute('data-min'), 10) || 3, b = parseInt(w.getAttribute('data-max'), 10) || 5;
-    el.textContent = tpl.replace('{d1}', f(add(a))).replace('{d2}', f(add(b)));
+    el.textContent = tpl.replace('[d1]', f(add(a))).replace('[d2]', f(add(b)));
   })();
 </script>
 
@@ -31,11 +31,11 @@
 {
   "name": "Oralys v2 : livraison",
   "settings": [
-    { "type": "text", "id": "line_1", "label": "Ligne 1", "default": "Commandez aujourd'hui, livré entre le {d1} et le {d2}", "info": "{d1} et {d2} = dates calculées en jours ouvrés." },
-    { "type": "range", "id": "min_days", "label": "{d1} : jours ouvrés", "min": 1, "max": 10, "step": 1, "default": 3 },
-    { "type": "range", "id": "max_days", "label": "{d2} : jours ouvrés", "min": 1, "max": 15, "step": 1, "default": 5 },
-    { "type": "text", "id": "fallback_1", "label": "{d1} avant calcul", "default": "3e jour ouvré" },
-    { "type": "text", "id": "fallback_2", "label": "{d2} avant calcul", "default": "5e jour ouvré" },
+    { "type": "text", "id": "line_1", "label": "Ligne 1", "default": "Commandez aujourd'hui, livré entre le [d1] et le [d2]", "info": "[d1] et [d2] = dates calculées en jours ouvrés." },
+    { "type": "range", "id": "min_days", "label": "[d1] : jours ouvrés", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "range", "id": "max_days", "label": "[d2] : jours ouvrés", "min": 1, "max": 15, "step": 1, "default": 5 },
+    { "type": "text", "id": "fallback_1", "label": "[d1] avant calcul", "default": "3e jour ouvré" },
+    { "type": "text", "id": "fallback_2", "label": "[d2] avant calcul", "default": "5e jour ouvré" },
     { "type": "text", "id": "line_2", "label": "Ligne 2", "default": "Colis neutre, sans nom de produit · expédié sous 24 h" }
   ],
   "presets": [{ "name": "Oralys v2 : livraison" }]

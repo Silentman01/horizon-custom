@@ -360,7 +360,7 @@
             "oralys_shipline": {
               "type": "oralys-v2-shipline",
               "settings": {
-                "line_1": "Commandez aujourd'hui, livré entre le {d1} et le {d2}",
+                "line_1": "Commandez aujourd'hui, livré entre le [d1] et le [d2]",
                 "min_days": 3,
                 "max_days": 5,
                 "fallback_1": "3e jour ouvré",
