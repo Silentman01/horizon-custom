@@ -154,7 +154,7 @@
             "oralys_urgency": {
               "type": "oralys-v2-urgency",
               "settings": {
-                "text": "Offre de Noël : cadeaux offerts jusqu'à minuit",
+                "text": "Offre de Noël : jusqu'à -70 % jusqu'à minuit",
                 "countdown": true
               },
               "blocks": {}
@@ -169,22 +169,22 @@
                 "note": "90 jours satisfait ou remboursé, sur tous les packs",
                 "gifts_compact": true,
                 "gifts_enable": true,
-                "gifts_todo": "Choisissez un pack plus grand pour débloquer vos cadeaux",
-                "gifts_done": "Tous vos cadeaux sont débloqués",
+                "gifts_todo": "",
+                "gifts_done": "",
                 "gifts_tab": "Offert",
                 "gift_1_name": "Livraison offerte",
                 "gift_1_from": 1,
                 "gift_1_icon": "truck",
-                "gift_2_name": "Comprimés offerts dès 2 tubes",
-                "gift_2_value": "14,99 €",
+                "gift_2_name": "",
+                "gift_2_value": "",
                 "gift_2_from": 2,
                 "gift_2_icon": "tablets",
-                "gift_2_hint": "Dès 2 tubes",
-                "gift_3_name": "Étui offert avec 4 tubes",
-                "gift_3_value": "24,99 €",
+                "gift_2_hint": "",
+                "gift_3_name": "",
+                "gift_3_value": "",
                 "gift_3_from": 3,
                 "gift_3_icon": "case",
-                "gift_3_hint": "Avec 4 tubes",
+                "gift_3_hint": "",
                 "c_accent": "#0e6b50",
                 "c_red": "#d2382c",
                 "c_tint": "#ffffff",
@@ -219,7 +219,7 @@
                     "save_fallback": "20,00 €",
                     "per_tube_label": "soit {amount} le tube",
                     "per_tube_fallback": "29,90 €",
-                    "gifts": "+ Livraison offerte"
+                    "gifts": ""
                   },
                   "blocks": {}
                 },
@@ -241,7 +241,7 @@
                     "save_fallback": "60,93 €",
                     "per_tube_label": "soit {amount} le tube",
                     "per_tube_fallback": "19,44 €",
-                    "gifts": "+ Livraison offerte\n+ Comprimés nettoyants offerts (14,99 €)"
+                    "gifts": ""
                   },
                   "blocks": {}
                 },
@@ -263,7 +263,7 @@
                     "save_fallback": "139,80 €",
                     "per_tube_label": "soit {amount} le tube",
                     "per_tube_fallback": "14,95 €",
-                    "gifts": "+ Livraison offerte\n+ Comprimés offerts (14,99 €)\n+ Étui à dentier offert (24,99 €)"
+                    "gifts": ""
                   },
                   "blocks": {}
                 }
@@ -431,7 +431,7 @@
                 "heading_1": "Pourquoi ça tient quand la crème lâche",
                 "body_1": "Après les extractions, l'os de la mâchoire se rétracte, année après année. Un vide se forme entre la gencive et le dentier. La crème colle deux surfaces qui se touchent : elle ne remplit pas un vide, et la salive la fait fondre en quelques heures. Oralys, lui, épouse la forme exacte de ce vide et reste en place 2 à 3 jours.",
                 "heading_2": "Ce que vous recevez",
-                "body_2": "Un tube de gel Oralys de 20 g, soit environ 5 semaines de tenue, avec son mode d'emploi illustré. À partir de 2 tubes : comprimés nettoyants offerts. Avec 4 tubes : l'étui à dentier en plus. Livraison offerte.",
+                "body_2": "Un tube de gel Oralys de 20 g, soit environ 5 semaines de tenue, avec son mode d'emploi illustré. Livraison offerte.",
                 "heading_3": "Comment le poser",
                 "body_3": "1. Faites ramollir le gel dans un bol d'eau chaude, 60 °C maximum.\n2. Étalez-le dans l'intrados du dentier propre et sec.\n3. Mettez le dentier en bouche et serrez doucement une minute.\nLe gel prend la forme de votre gencive. Pour le retirer, il se décolle d'un seul morceau.",
                 "heading_4": "Pourquoi plus cher qu'une crème ?",
