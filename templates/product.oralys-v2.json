@@ -154,7 +154,7 @@
             "oralys_urgency": {
               "type": "oralys-v2-urgency",
               "settings": {
-                "text": "Offre du jour : cadeaux offerts jusqu'à minuit",
+                "text": "Offre de Noël : cadeaux offerts jusqu'à minuit",
                 "countdown": true
               },
               "blocks": {}
@@ -532,7 +532,7 @@
         "featured_who": "Jacqueline, 72 ans · Tours · Achat vérifié",
         "featured_tag": "Bas · 3 mois d'utilisation",
         "cards": "Il ne se soulève plus quand je parle | Bas | « Au conseil municipal, je mangeais mes mots et je sentais le bas bouger à chaque phrase. **Maintenant je parle une heure sans y penser.** » | Bernard, 70 ans · Annecy\nLe restaurant, sans passer aux toilettes | Haut et bas | « Avant, je repartais aux toilettes entre deux plats pour remettre de la crème. **Samedi, j'ai coupé et mâché une entrecôte entière.** Mon mari n'en revenait pas. » | Martine, 67 ans · Bordeaux\nJ'avais tout essayé, vraiment tout | Haut et bas | « Des crèmes, de la poudre, un gel effet ventouse, une résine à poser soi-même. Rien ne tenait un repas. **Avec Oralys, je n'ai plus rien rajouté de la journée.** » | Daniel, 75 ans · Rouen\nCommandé pour ma mère de 84 ans | Bas | « Elle n'osait plus manger devant nous. Je lui ai posé le gel la première fois, ensuite elle l'a fait seule. **Elle a redemandé du pain au déjeuner.** » | Isabelle, 55 ans · pour sa mère · Nancy\nJe ris sans la main devant la bouche | Haut | « Je mettais toujours la main devant ma bouche, de peur que le haut tombe. **Sur les photos du mariage de ma petite-fille, je ris à pleines dents.** » | Odile, 69 ans · Perpignan\nMoins cher qu'un rebasage | Bas | « Mon dentiste me proposait un rebasage à 380 €, avec des semaines d'attente. **Pour le prix d'un pack, mon bas tient de nouveau.** Je garde l'argent pour autre chose. » | Michel, 73 ans · Clermont-Ferrand\nPlus de tube dans mon sac | Haut et bas | « Je partais toujours avec ma crème dans le sac à main, au cas où. **Ce matin, je l'ai jetée.** Une pose et je suis tranquille jusqu'au surlendemain. » | Colette, 66 ans · Lille\nUn dentier à 47 ans, sans honte | Haut | « À mon âge, j'avais tellement honte que je n'en parlais à personne, même au travail. **Plus personne ne remarque rien, même quand je ris en réunion.** » | Nathalie, 47 ans · Lyon\nMon partiel ne joue plus | Partiel | « Mon appareil partiel avait du jeu et j'avais l'impression d'avoir de la ferraille dans la bouche. **Le gel a comblé le jeu, il ne bouge plus.** » | Alain, 64 ans · Metz\nLes pommes, de nouveau | Bas | « J'enviais mon mari quand il croquait dans une pomme. **Hier, j'en ai croqué une au jardin, sans la couper en morceaux.** Ça a l'air de rien, mais pour moi c'est tout. » | Simone, 71 ans · Nantes",
-        "visible": 6,
+        "visible": 3,
         "verified": "Achat vérifié",
         "more": "Voir plus d'avis",
         "c_bg": "#F7FAF8"
@@ -611,7 +611,7 @@
         "heading": "Remangez de tout, sans y penser",
         "ticks": "Tient 2 à 3 jours\nHaut, bas et partiels\nZéro zinc, zéro colle",
         "guarantee": "Essayez Oralys pendant 90 jours, au petit-déjeuner, au déjeuner du dimanche, au restaurant. S'il ne tient pas votre dentier, nous vous remboursons intégralement. C'est tout.",
-        "price_line": "Dès 29,90 € le tube · livraison offerte",
+        "price_line": "Dès 14,95 € le tube (pack 2 + 2) · livraison offerte",
         "cta": "Je choisis mon pack",
         "under": "90 jours satisfait ou remboursé · colis neutre",
         "c_bg": "#0E3D30"
