@@ -1,0 +1,389 @@
+{%- liquid
+  assign s = section.settings
+  assign h = s.heading
+  if s.accent != blank
+    assign acc = '<em>' | append: s.accent | append: '</em>'
+    assign h = h | replace: s.accent, acc
+  endif
+-%}
+<div class="oralys-pdp-faq" style="--op-bg:{{ s.c_bg }};--op-text:{{ s.c_text }};--op-accent:{{ s.c_accent }};--op-muted:{{ s.c_muted }};--op-card:{{ s.c_card }};--op-line:{{ s.c_line }};--op-cta:{{ s.c_cta }};--op-cta-text:{{ s.c_cta_text }};--op-h-m:{{ s.h_m }}px;--op-h-d:{{ s.h_d }}px;--op-body:{{ s.body_size }}px;--op-align:{{ s.align }};--op-pt-m:{{ s.pt_m }}px;--op-pb-m:{{ s.pb_m }}px;--op-pt-d:{{ s.pt_d }}px;--op-pb-d:{{ s.pb_d }}px">
+  <div class="oralys-pdp-faq__inner">
+    <div class="oralys-pdp-faq__head">{% if s.eyebrow != blank %}<p class="oralys-pdp-faq__eyebrow">{{ s.eyebrow }}</p>{% endif %}{% if h != blank %}<h2 class="oralys-pdp-faq__h">{{ h }}</h2>{% endif %}</div>
+    {%- assign first = true -%}
+    <div class="oralys-pdp-faq__list">
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'group' -%}
+        <p class="oralys-pdp-faq__group" {{ block.shopify_attributes }}>{{ block.settings.label }}</p>
+      {%- else -%}
+        <details class="oralys-pdp-faq__item" name="oralys-pdp-faq-{{ section.id }}"{% if first and s.open_first %} open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="oralys-pdp-faq__q">{{ block.settings.question }}<span class="oralys-pdp-faq__ic" aria-hidden="true"></span></summary>
+          <div class="oralys-pdp-faq__a">{{ block.settings.answer }}</div>
+        </details>
+        {%- assign first = false -%}
+      {%- endif -%}
+    {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% stylesheet %}
+.oralys-pdp-faq{background:var(--op-bg);color:var(--op-text);padding:var(--op-pt-m) 16px var(--op-pb-m);font-family:var(--font-body--family);font-size:var(--op-body);line-height:1.55}
+.oralys-pdp-faq *{box-sizing:border-box}
+@media (min-width:750px){.oralys-pdp-faq{padding:var(--op-pt-d) 32px var(--op-pb-d)}}
+.oralys-pdp-faq__inner{max-width:820px;margin:0 auto}
+.oralys-pdp-faq__head{text-align:var(--op-align);margin:0 0 24px}
+.oralys-pdp-faq__eyebrow{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--op-accent);margin:0 0 10px}
+.oralys-pdp-faq__h{font-family:var(--font-heading--family);font-weight:700;font-size:var(--op-h-m);line-height:1.22;margin:0;color:var(--op-text);text-wrap:balance}
+.oralys-pdp-faq__h em{font-style:normal;color:var(--op-accent)}
+@media (min-width:750px){.oralys-pdp-faq__h{font-size:var(--op-h-d)}}
+.oralys-pdp-faq__btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;padding:0 32px;border-radius:40px;background:var(--op-cta);color:var(--op-cta-text);font-weight:700;font-size:18px;text-decoration:none;border:0;width:100%;transition:transform .15s}
+.oralys-pdp-faq__btn:hover{transform:translateY(-1px)}
+@media (min-width:750px){.oralys-pdp-faq__btn{display:inline-flex;width:auto;min-width:320px}}
+
+.oralys-pdp-faq__list{display:grid;gap:10px}
+.oralys-pdp-faq__group{margin:18px 0 2px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--op-accent)}
+.oralys-pdp-faq__group:first-child{margin-top:0}
+.oralys-pdp-faq__item{background:var(--op-card);border:1px solid var(--op-line);border-radius:12px}
+.oralys-pdp-faq__item[open]{border-color:var(--op-accent)}
+.oralys-pdp-faq__q{list-style:none;cursor:pointer;padding:16px 52px 16px 18px;font-weight:700;font-size:17px;position:relative;line-height:1.35;min-height:44px}
+.oralys-pdp-faq__q::-webkit-details-marker{display:none}
+.oralys-pdp-faq__ic{position:absolute;right:16px;top:50%;width:24px;height:24px;margin-top:-12px;border-radius:50%;background:var(--op-accent)}
+.oralys-pdp-faq__ic::before,.oralys-pdp-faq__ic::after{content:"";position:absolute;left:6px;right:6px;top:11px;height:2px;background:#fff}
+.oralys-pdp-faq__ic::after{transform:rotate(90deg);transition:transform .2s}
+.oralys-pdp-faq__item[open] .oralys-pdp-faq__ic::after{transform:rotate(0)}
+.oralys-pdp-faq__a{padding:0 18px 16px;color:var(--op-muted)}
+.oralys-pdp-faq__a p{margin:0 0 8px}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys : FAQ groupée",
+  "tag": "section",
+  "class": "oralys-pdp-faq-wrap",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Titre"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Sur-titre"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Titre",
+      "default": "Vos questions, nos réponses franches"
+    },
+    {
+      "type": "text",
+      "id": "accent",
+      "label": "Mot du titre en couleur accent",
+      "default": "questions"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Ouvrir la première question",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Couleurs"
+    },
+    {
+      "type": "color",
+      "id": "c_bg",
+      "label": "Fond",
+      "default": "#EEF6F1"
+    },
+    {
+      "type": "color",
+      "id": "c_text",
+      "label": "Texte",
+      "default": "#17221E"
+    },
+    {
+      "type": "color",
+      "id": "c_accent",
+      "label": "Accent (mot du titre, icônes)",
+      "default": "#0E6B50"
+    },
+    {
+      "type": "color",
+      "id": "c_muted",
+      "label": "Texte secondaire",
+      "default": "#5C6863"
+    },
+    {
+      "type": "color",
+      "id": "c_card",
+      "label": "Fond des cartes",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "c_line",
+      "label": "Bordures",
+      "default": "#DCE5E0"
+    },
+    {
+      "type": "color",
+      "id": "c_cta",
+      "label": "Bouton : fond",
+      "default": "#D2382C"
+    },
+    {
+      "type": "color",
+      "id": "c_cta_text",
+      "label": "Bouton : texte",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typo et espacements"
+    },
+    {
+      "type": "range",
+      "id": "h_m",
+      "label": "Titre : taille mobile",
+      "min": 18,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "h_d",
+      "label": "Titre : taille ordinateur",
+      "min": 20,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Texte : taille",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17
+    },
+    {
+      "type": "select",
+      "id": "align",
+      "label": "Alignement des titres",
+      "default": "left",
+      "options": [
+        {
+          "value": "left",
+          "label": "Gauche"
+        },
+        {
+          "value": "center",
+          "label": "Centre"
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "pt_m",
+      "label": "Marge haute mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pb_m",
+      "label": "Marge basse mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "pt_d",
+      "label": "Marge haute ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "pb_d",
+      "label": "Marge basse ordinateur",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "default": 72
+    }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Groupe",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Libellé",
+          "default": "Groupe"
+        }
+      ]
+    },
+    {
+      "type": "qa",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Réponse",
+          "default": "<p></p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys : FAQ groupée",
+      "blocks": [
+        {
+          "type": "group",
+          "settings": {
+            "label": "Commande"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "C'est un abonnement ?",
+            "answer": "<p>Non. Chaque commande est un achat unique. Aucun prélèvement ne suivra, jamais.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Le colis est-il discret ?",
+            "answer": "<p>Oui. Carton neutre, aucun nom de produit à l'extérieur. Personne ne sait ce qu'il contient.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Quand vais-je le recevoir ?",
+            "answer": "<p>Votre commande part sous 24 h ouvrées. Comptez 3 à 5 jours ouvrés en France métropolitaine. La livraison est offerte.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Et si ça ne marche pas pour moi ?",
+            "answer": "<p>Vous avez 90 jours satisfait ou remboursé. Si votre dentier ne tient pas comme promis, écrivez-nous : on vous rembourse intégralement, sans discuter.</p>"
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "label": "Utilisation"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Ça marche avec un appareil partiel, ou un dentier provisoire ?",
+            "answer": "<p>Oui. Haut, bas, complet ou partiel, et même un provisoire en attendant le définitif : le gel épouse la forme de votre gencive, quelle qu'elle soit.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Je peux enlever mon dentier pour le nettoyer ?",
+            "answer": "<p>Bien sûr. Retirez-le, nettoyez-le comme d'habitude et remettez-le : il garde son ajustement. Une application tient 2 à 3 jours : on renouvelle le gel tous les 2 à 3 jours, et un tube dure environ 5 semaines.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "S'il tient si bien, comment je l'enlève ?",
+            "answer": "<p>Soulevez-le par le bord, comme toujours : l'air rompt l'effet ventouse. En mâchant, c'est l'inverse : vous appuyez l'appareil contre la gencive et il tient encore mieux. Même une pomme ne le décroche pas.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Ça a un goût ? Ça gêne en bouche ?",
+            "answer": "<p>Aucun goût, aucune sensation pâteuse, rien qui donne des haut-le-cœur. Une fois posé, on l'oublie.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Combien de temps dure un tube ?",
+            "answer": "<p>Environ 5 semaines en usage quotidien, car une fine couche suffit. Une crème, elle, se vide en une dizaine de jours.</p>"
+          }
+        },
+        {
+          "type": "group",
+          "settings": {
+            "label": "Efficacité"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Quelle différence avec Fixodent ou Corega ?",
+            "answer": "<p>Les crèmes collent en surface, sur un vide qu'elles ne peuvent pas combler : voilà pourquoi elles lâchent avant midi. Oralys remplit l'espace entre la gencive et l'appareil et le dentier tient toute la journée.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "J'ai déjà essayé un gel de rebasage en pharmacie, sans résultat.",
+            "answer": "<p>Ces gels « ventouse » se posent à froid, comme une crème. Oralys est un thermoplastique : on le tiédit, il se moule exactement à votre gencive, puis il se raffermit. C'est cette forme qui tient, pas un effet collant.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Pourquoi mon dentiste ne m'en a jamais parlé ?",
+            "answer": "<p>Parce qu'au cabinet, le réflexe reste la crème ou le rebasage payant. De plus en plus de praticiens en Europe conseillent pourtant un gel qui remplit le vide, comme le Dr Verdier plus haut.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "C'est sans danger tous les jours ?",
+            "answer": "<p>Oui, 100 % sûr. Oralys a été mis au point avec des experts dentaires, sans zinc ni ingrédient nocif, et testé en usage quotidien sans irritation.</p>"
+          }
+        },
+        {
+          "type": "qa",
+          "settings": {
+            "question": "Au bout de combien de temps verrai-je un résultat ?",
+            "answer": "<p>Dès la première pose. Le jour même où vous recevez Oralys, vous mangez, parlez et riez sans y penser.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
