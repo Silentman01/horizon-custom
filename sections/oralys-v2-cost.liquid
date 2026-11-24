@@ -1,0 +1,50 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign s = section.settings -%}
+<section class="ov2 ov2-sec ov2-cost" style="--ov2-bg:{{ s.c_bg }}">
+  <div class="ov2-in ov2-cost__in">
+    <h2 class="ov2-h2 ov2-center">{{ s.heading }}</h2>
+    <ul class="ov2-cost__bars" role="list">
+      {%- assign rows = s.bars | newline_to_br | split: '<br />' -%}
+      {%- for r in rows -%}
+        {%- assign p = r | split: '|' -%}
+        {%- assign lab = p[0] | strip -%}
+        {%- if lab == blank %}{% continue %}{% endif -%}
+        {%- assign w = p[2] | strip | plus: 0 -%}
+        {%- assign us = false -%}{%- if forloop.last %}{% assign us = true %}{% endif -%}
+        <li class="ov2-cost__item{% if us %} is-us{% endif %}">
+          <span class="ov2-cost__lab">{{ lab }}</span>
+          <span class="ov2-cost__track"><span class="ov2-cost__bar" style="width:{{ w | at_least: 30 | at_most: 100 }}%"><span>{{ p[1] | strip }}</span></span></span>
+        </li>
+      {%- endfor -%}
+    </ul>
+    {%- if s.line != blank %}<p class="ov2-cost__line">{{ s.line }}</p>{% endif -%}
+    {%- if s.link != blank %}<p class="ov2-center"><a class="ov2-link" href="#oralys-pdp-offer" data-ov2-packs>{{ s.link }}</a></p>{% endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.ov2-cost__in{max-width:720px}
+.ov2-cost__bars{list-style:none;margin:0 0 20px;padding:0;display:flex;flex-direction:column;gap:14px}
+.ov2-cost__item{display:flex;flex-direction:column;gap:6px}
+.ov2-cost__lab{font-size:16px;font-weight:700}
+.ov2-cost__track{display:block;width:100%}
+.ov2-cost__bar{display:flex;align-items:center;min-height:44px;padding:8px 12px;border-radius:8px;background:#DCE5E0;color:#17221E;font-size:15px;font-weight:700;line-height:1.25}
+.ov2-cost__item.is-us .ov2-cost__bar{background:#0E6B50;color:#fff}
+.ov2-cost__item.is-us .ov2-cost__lab{color:#0E6B50}
+.ov2-cost__line{margin:0 0 6px!important;font-size:17px;line-height:1.5;text-align:center;font-weight:600}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : coût",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Pourquoi Oralys revient moins cher qu'une crème" },
+    { "type": "textarea", "id": "bars", "label": "Barres", "info": "Une ligne : libellé | valeur | longueur en %. La dernière ligne est Oralys (barre verte).", "default": "Crème adhésive | jusqu'à 300 € par an | 100\nRebasage au cabinet | 280 à 400 € à chaque fois | 92\nOralys, pack 2 + 2 | environ 155 € par an | 52" },
+    { "type": "textarea", "id": "line", "label": "Phrase", "default": "Soit environ 0,43 € par jour pour un dentier qui tient. Moins qu'une baguette, et sans rendez-vous chez le dentiste." },
+    { "type": "text", "id": "link", "label": "Lien vers les packs", "default": "Voir les packs →" },
+    { "type": "color", "id": "c_bg", "label": "Fond", "default": "#FFFFFF" }
+  ],
+  "presets": [{ "name": "Oralys v2 : coût" }]
+}
+{% endschema %}

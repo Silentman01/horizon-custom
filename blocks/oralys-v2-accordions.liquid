@@ -1,0 +1,50 @@
+{%- assign bs = block.settings -%}
+<div class="ov2-acc" {{ block.shopify_attributes }}>
+  {%- for n in (1..6) -%}
+    {%- liquid
+      assign kh = 'heading_' | append: n
+      assign kb = 'body_' | append: n
+      if bs[kh] == blank or bs[kb] == blank
+        continue
+      endif
+    -%}
+    <details class="ov2-acc__row">
+      <summary class="ov2-acc__sum"><span>{{ bs[kh] }}</span><span class="ov2-acc__pm" aria-hidden="true"></span></summary>
+      <div class="ov2-acc__body">{{ bs[kb] | newline_to_br }}</div>
+    </details>
+  {%- endfor -%}
+</div>
+
+{% stylesheet %}
+.ov2-acc{border-top:1px solid #DCE5E0;color:#17221E}
+.ov2-acc__row{border-bottom:1px solid #DCE5E0}
+.ov2-acc__sum{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:10px 0;font-size:17px;font-weight:700;line-height:1.3;cursor:pointer;list-style:none}
+.ov2-acc__sum::-webkit-details-marker{display:none}
+.ov2-acc__sum::marker{content:""}
+.ov2-acc__pm{position:relative;flex:0 0 18px;width:18px;height:18px}
+.ov2-acc__pm::before,.ov2-acc__pm::after{content:"";position:absolute;left:0;top:8px;width:18px;height:2.5px;border-radius:2px;background:#0E6B50;transition:transform .2s}
+.ov2-acc__pm::after{transform:rotate(90deg)}
+.ov2-acc__row[open] .ov2-acc__pm::after{transform:rotate(0)}
+.ov2-acc__body{padding:0 0 16px;font-size:16px;line-height:1.55;color:#17221E}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : accordéons",
+  "settings": [
+    { "type": "text", "id": "heading_1", "label": "Ligne 1 : titre", "default": "Pourquoi ça tient quand la crème lâche" },
+    { "type": "textarea", "id": "body_1", "label": "Ligne 1 : texte", "default": "Après les extractions, l'os de la mâchoire se rétracte, année après année. Un vide se forme entre la gencive et le dentier. La crème colle deux surfaces qui se touchent : elle ne remplit pas un vide, et la salive la fait fondre en quelques heures. Oralys, lui, épouse la forme exacte de ce vide et reste en place 2 à 3 jours." },
+    { "type": "text", "id": "heading_2", "label": "Ligne 2 : titre", "default": "Ce que vous recevez" },
+    { "type": "textarea", "id": "body_2", "label": "Ligne 2 : texte", "default": "Un tube de gel Oralys de 20 g, soit environ 5 semaines de tenue, avec son mode d'emploi illustré. À partir de 2 tubes : comprimés nettoyants offerts. Avec 4 tubes : l'étui à dentier en plus. Livraison offerte." },
+    { "type": "text", "id": "heading_3", "label": "Ligne 3 : titre", "default": "Comment le poser" },
+    { "type": "textarea", "id": "body_3", "label": "Ligne 3 : texte", "default": "1. Faites ramollir le gel dans un bol d'eau chaude, 60 °C maximum.\n2. Étalez-le dans l'intrados du dentier propre et sec.\n3. Mettez le dentier en bouche et serrez doucement une minute.\nLe gel prend la forme de votre gencive. Pour le retirer, il se décolle d'un seul morceau." },
+    { "type": "text", "id": "heading_4", "label": "Ligne 4 : titre", "default": "Pourquoi plus cher qu'une crème ?" },
+    { "type": "textarea", "id": "body_4", "label": "Ligne 4 : texte", "default": "Un tube de crème se vide en quelques semaines, parce qu'il faut en remettre après chaque repas. Un tube d'Oralys fait 5 semaines, et une pose tient 2 à 3 jours. Avec le pack 2 achetés, 2 offerts, vous payez environ 0,43 € par jour. Un rebasage chez le dentiste coûte entre 280 et 400 €." },
+    { "type": "text", "id": "heading_5", "label": "Ligne 5 : titre", "default": "Livraison et garantie" },
+    { "type": "textarea", "id": "body_5", "label": "Ligne 5 : texte", "default": "Expédié sous 24 h, en colis neutre, sans nom de produit à l'extérieur. Livré en 3 à 5 jours ouvrés partout en France, livraison offerte. Pas d'abonnement : vous payez une fois. Vous avez 90 jours pour essayer : si ça ne tient pas, nous vous remboursons." },
+    { "type": "text", "id": "heading_6", "label": "Ligne 6 : titre" },
+    { "type": "textarea", "id": "body_6", "label": "Ligne 6 : texte" }
+  ],
+  "presets": [{ "name": "Oralys v2 : accordéons" }]
+}
+{% endschema %}

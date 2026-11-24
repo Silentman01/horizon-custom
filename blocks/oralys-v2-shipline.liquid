@@ -1,0 +1,43 @@
+{%- assign bs = block.settings -%}
+<div class="ov2-ship" data-ov2-ship data-min="{{ bs.min_days }}" data-max="{{ bs.max_days }}" {{ block.shopify_attributes }}>
+  <p class="ov2-ship__l1"><span class="ov2-ship__dot" aria-hidden="true"></span><span data-ov2-ship-text data-tpl="{{ bs.line_1 | escape }}">{{ bs.line_1 | replace: '{d1}', bs.fallback_1 | replace: '{d2}', bs.fallback_2 }}</span></p>
+  {%- if bs.line_2 != blank %}<p class="ov2-ship__l2">{% render 'oralys-pdp-icon', name: 'box', size: 18 %}<span>{{ bs.line_2 }}</span></p>{% endif -%}
+</div>
+<script>
+  (function () {
+    var s = document.currentScript, w = s && s.previousElementSibling;
+    if (!w || !w.hasAttribute('data-ov2-ship')) return;
+    var el = w.querySelector('[data-ov2-ship-text]'), tpl = el.getAttribute('data-tpl');
+    var add = function (n) { var d = new Date(); while (n > 0) { d.setDate(d.getDate() + 1); var g = d.getDay(); if (g !== 0 && g !== 6) n--; } return d; };
+    var f = function (d) { try { return d.toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' }); } catch (e) { return d.getDate() + '/' + (d.getMonth() + 1); } };
+    var a = parseInt(w.getAttribute('data-min'), 10) || 3, b = parseInt(w.getAttribute('data-max'), 10) || 5;
+    el.textContent = tpl.replace('{d1}', f(add(a))).replace('{d2}', f(add(b)));
+  })();
+</script>
+
+{% stylesheet %}
+.ov2-ship{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;color:#17221E}
+.ov2-ship p{display:flex;align-items:center;justify-content:center;gap:8px;margin:0;font-size:15px;line-height:1.4}
+.ov2-ship__l1{font-weight:700}
+.ov2-ship__l2{color:#5C6863}
+.ov2-ship__l2 svg{color:#0E6B50;flex:0 0 18px}
+.ov2-ship__dot{position:relative;flex:0 0 10px;width:10px;height:10px;border-radius:50%;background:#D2382C}
+.ov2-ship__dot::after{content:"";position:absolute;inset:-4px;border-radius:50%;background:#D2382C;opacity:.3;animation:ov2-pulse 1.8s ease-out infinite}
+@keyframes ov2-pulse{0%{transform:scale(.6);opacity:.45}100%{transform:scale(1.6);opacity:0}}
+@media (prefers-reduced-motion:reduce){.ov2-ship__dot::after{animation:none}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : livraison",
+  "settings": [
+    { "type": "text", "id": "line_1", "label": "Ligne 1", "default": "Commandez aujourd'hui, livré entre le {d1} et le {d2}", "info": "{d1} et {d2} = dates calculées en jours ouvrés." },
+    { "type": "range", "id": "min_days", "label": "{d1} : jours ouvrés", "min": 1, "max": 10, "step": 1, "default": 3 },
+    { "type": "range", "id": "max_days", "label": "{d2} : jours ouvrés", "min": 1, "max": 15, "step": 1, "default": 5 },
+    { "type": "text", "id": "fallback_1", "label": "{d1} avant calcul", "default": "3e jour ouvré" },
+    { "type": "text", "id": "fallback_2", "label": "{d2} avant calcul", "default": "5e jour ouvré" },
+    { "type": "text", "id": "line_2", "label": "Ligne 2", "default": "Colis neutre, sans nom de produit · expédié sous 24 h" }
+  ],
+  "presets": [{ "name": "Oralys v2 : livraison" }]
+}
+{% endschema %}

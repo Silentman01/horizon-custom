@@ -1,0 +1,2 @@
+{%- comment -%} Five filled stars. Params: size (px, default 18) {%- endcomment -%}
+<span class="ov2-stars" role="img" aria-label="5/5">{% for i in (1..5) %}<svg viewBox="0 0 24 24" aria-hidden="true" style="width:{{ size | default: 18 }}px;height:{{ size | default: 18 }}px"><path d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg>{% endfor %}</span>

@@ -1,0 +1,62 @@
+{%- comment -%}
+  Oralys v2 product page: shared tokens, section shell, headings, links and the "scroll to the packs" handler.
+  Rendered once by every oralys-v2-* section (no output except the stylesheet/javascript bundles).
+{%- endcomment -%}
+
+{% stylesheet %}
+.ov2{--ov2-cta:#D2382C;--ov2-brand:#0E6B50;--ov2-deep:#0E3D30;--ov2-text:#17221E;--ov2-muted:#5C6863;--ov2-tint:#EEF6F1;--ov2-soft:#F7FAF8;--ov2-line:#DCE5E0;--ov2-star:#F0A830;--ov2-hl:#FFF1C2;--ov2-urg:#FDF0EE;
+  color:var(--ov2-text);font-size:17px;line-height:1.5;background:var(--ov2-bg,#fff)}
+.ov2 *,.ov2 *::before,.ov2 *::after{box-sizing:border-box}
+.ov2-sec{padding:48px 16px}
+.ov2-in{max-width:1200px;margin:0 auto}
+.ov2-h2{margin:0 0 20px;font-family:var(--font-heading--family);font-weight:700;font-size:26px;line-height:1.2;letter-spacing:-.01em;color:inherit;text-wrap:balance}
+.ov2-h2 em{font-style:normal;color:var(--ov2-brand)}
+.ov2-center{text-align:center}
+.ov2 p{margin:0}
+.ov2-link{display:inline-flex;align-items:center;min-height:44px;color:var(--ov2-brand);font-weight:700;font-size:17px;text-decoration:underline;text-underline-offset:3px}
+.ov2-btn{display:flex;align-items:center;justify-content:center;width:100%;max-width:440px;min-height:56px;margin:0 auto;padding:12px 24px;border:0;border-radius:40px;background:var(--ov2-cta);color:#fff;font-size:18px;font-weight:700;line-height:1.2;text-decoration:none;cursor:pointer;box-shadow:0 4px 14px rgba(210,56,44,.28)}
+.ov2-btn:hover{filter:brightness(1.05)}
+.ov2-stars{display:inline-flex;gap:1px;color:var(--ov2-star);vertical-align:middle}
+.ov2-stars svg{width:18px;height:18px;fill:currentColor}
+.ov2-rail{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch;cursor:grab;overscroll-behavior-x:contain}
+.ov2-rail::-webkit-scrollbar{display:none}
+.ov2-rail.is-drag{cursor:grabbing;scroll-snap-type:none}
+.ov2-rail.is-drag *{pointer-events:none;user-select:none}
+.ov2 mark{background:var(--ov2-hl);color:inherit;padding:0 2px;border-radius:3px}
+@media (min-width:750px){
+  .ov2-sec{padding:80px 24px}
+  .ov2-h2{font-size:36px;margin-bottom:28px}
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  if (window.__oralysV2Base) return; window.__oralysV2Base = true;
+  const reduce = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Every "Je choisis mon pack" / "Voir les packs" link scrolls to the pack cards. It never adds to the panier.
+  window.oralysV2ToPacks = () => {
+    const t = document.querySelector('.oralys-pdp-bundle') || document.querySelector('.buy-buttons-block');
+    if (!t) return false;
+    const hdr = document.querySelector('#header-component, .header-wrapper, header');
+    const off = (hdr ? Math.min(hdr.getBoundingClientRect().height, 120) : 0) + 16;
+    window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - off, behavior: reduce() ? 'auto' : 'smooth' });
+    t.classList.add('is-flash'); setTimeout(() => t.classList.remove('is-flash'), 1200);
+    return true;
+  };
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest && e.target.closest('[data-ov2-packs]');
+    if (!a) return;
+    if (window.oralysV2ToPacks()) { e.preventDefault(); e.stopImmediatePropagation(); }
+  }, true);
+  // Rails: mouse drag (touch scrolls natively).
+  document.addEventListener('pointerdown', (e) => {
+    if (e.pointerType !== 'mouse' || e.button !== 0) return;
+    const r = e.target.closest && e.target.closest('.ov2-rail');
+    if (!r) return;
+    const x0 = e.clientX, s0 = r.scrollLeft; let moved = false;
+    const mv = (ev) => { const dx = ev.clientX - x0; if (Math.abs(dx) > 4) { moved = true; r.classList.add('is-drag'); } r.scrollLeft = s0 - dx; };
+    const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); setTimeout(() => r.classList.remove('is-drag'), 0); if (moved) { const c = r.firstElementChild; const w = c ? c.getBoundingClientRect().width + 12 : 1; r.scrollTo({ left: Math.round(r.scrollLeft / w) * w, behavior: 'smooth' }); } };
+    window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+  });
+})();
+{% endjavascript %}

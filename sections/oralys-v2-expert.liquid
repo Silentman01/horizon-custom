@@ -1,0 +1,61 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign s = section.settings -%}
+<section class="ov2 ov2-sec ov2-exp" style="--ov2-bg:{{ s.c_bg }}">
+  <div class="ov2-in ov2-exp__in">
+    <h2 class="ov2-h2 ov2-center">{{ s.heading }}</h2>
+    <div class="ov2-exp__card">
+      <div class="ov2-exp__id">
+        <span class="ov2-exp__ph">{% render 'oralys-pdp-media', image: s.image, asset: s.asset, alt: s.name, class: 'ov2-exp__img', width: 200, height: 200 %}</span>
+        <div><p class="ov2-exp__name">{{ s.name }}</p><p class="ov2-exp__role">{{ s.role }}</p></div>
+      </div>
+      <dl class="ov2-exp__facts">
+        {%- assign rows = s.facts | newline_to_br | split: '<br />' -%}
+        {%- for r in rows -%}{%- assign p = r | split: '|' -%}{%- assign k = p[0] | strip -%}{%- if k == blank %}{% continue %}{% endif -%}
+          <div><dt>{{ k }}</dt><dd>{{ p[1] | strip }}</dd></div>
+        {%- endfor -%}
+      </dl>
+      <blockquote class="ov2-exp__q">{{ s.quote }}</blockquote>
+      <ul class="ov2-exp__chips" role="list">
+        {%- assign chips = s.chips | newline_to_br | split: '<br />' -%}
+        {%- for c in chips -%}{%- assign cc = c | strip -%}{%- if cc != blank -%}<li>{{ cc }}</li>{%- endif -%}{%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.ov2-exp__in{max-width:820px}
+.ov2-exp__card{padding:20px;border-radius:12px;background:#F7FAF8;border:1px solid #DCE5E0}
+.ov2-exp__id{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+.ov2-exp__ph{flex:0 0 96px;width:96px;height:96px;border-radius:50%;overflow:hidden;background:#EEF6F1;border:2px solid #0E6B50}
+.ov2-exp__img{width:100%;height:100%;object-fit:cover;display:block}
+.ov2-exp__name{font-size:18px!important;font-weight:700;line-height:1.3}
+.ov2-exp__role{font-size:15px!important;color:#5C6863;line-height:1.4;margin-top:2px!important}
+.ov2-exp__facts{margin:0 0 16px;border-top:1px solid #DCE5E0}
+.ov2-exp__facts div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid #DCE5E0;font-size:16px}
+.ov2-exp__facts dt{color:#5C6863}
+.ov2-exp__facts dd{margin:0;font-weight:700;text-align:right}
+.ov2-exp__q{margin:0 0 16px;padding:0;font-size:17px;line-height:1.55;font-style:normal}
+.ov2-exp__chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.ov2-exp__chips li{padding:6px 10px;border-radius:8px;background:#EEF6F1;color:#0E3D30;font-size:13px;line-height:1.4}
+@media (min-width:750px){.ov2-exp__card{padding:32px}.ov2-exp__q{font-size:19px}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : experte",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Une chirurgienne-dentiste explique pourquoi la crème ne suffit plus" },
+    { "type": "image_picker", "id": "image", "label": "Portrait" },
+    { "type": "text", "id": "asset", "label": "Portrait : fichier du thème", "default": "oralys-pdp-expert-verdier.webp", "info": "Même personne que l'image 08 de la galerie." },
+    { "type": "text", "id": "name", "label": "Nom", "default": "Dr Hélène Verdier" },
+    { "type": "text", "id": "role", "label": "Fonction", "default": "Chirurgienne-dentiste · Lyon · 26 ans d'exercice" },
+    { "type": "textarea", "id": "facts", "label": "Fiche", "info": "Une ligne : libellé | valeur.", "default": "Spécialité | Prothèse amovible\nAnnées | 26 ans\nVille | Lyon" },
+    { "type": "textarea", "id": "quote", "label": "Citation", "default": "« Je vois chaque semaine des patients qui pensent mal s'y prendre avec leur crème. Ils n'y sont pour rien. Après les extractions, la crête osseuse se résorbe : le dentier finit par reposer sur du vide. La crème a été conçue pour unir deux surfaces en contact, pas pour combler un espace. Remplir ce vide, c'est exactement ce que fait un rebasage au cabinet. Oralys le permet chez vous. »" },
+    { "type": "textarea", "id": "chips", "label": "Références", "info": "Une par ligne.", "default": "Résorption de la crête osseuse : un processus continu après l'extraction\nNotice d'une crème : « ne pas utiliser en excès si la prothèse est mal ajustée »" },
+    { "type": "color", "id": "c_bg", "label": "Fond", "default": "#FFFFFF" }
+  ],
+  "presets": [{ "name": "Oralys v2 : experte" }]
+}
+{% endschema %}

@@ -1,0 +1,38 @@
+{%- assign bs = block.settings -%}
+<p class="ov2-urg" {{ block.shopify_attributes }}>
+  {% render 'oralys-pdp-icon', name: 'clock', size: 20 %}
+  <span class="ov2-urg__t">{{ bs.text }}</span>
+  {%- if bs.countdown %}<span class="ov2-urg__cd" data-ov2-midnight aria-label="Temps restant">--:--:--</span>{% endif -%}
+</p>
+<script>
+  (function () {
+    var s = document.currentScript, p = s && s.previousElementSibling;
+    var el = p && p.querySelector('[data-ov2-midnight]');
+    if (!el) return;
+    var pad = function (n) { return (n < 10 ? '0' : '') + n; };
+    var tick = function () {
+      var now = new Date(), end = new Date(now); end.setHours(24, 0, 0, 0);
+      var t = Math.max(0, Math.floor((end - now) / 1000));
+      el.textContent = pad(Math.floor(t / 3600)) + ':' + pad(Math.floor(t % 3600 / 60)) + ':' + pad(t % 60);
+    };
+    tick(); setInterval(tick, 1000);
+  })();
+</script>
+
+{% stylesheet %}
+.ov2-urg{display:flex;align-items:center;gap:10px;margin:0;padding:10px 12px;border-radius:12px;background:#FDF0EE;color:#D2382C;font-weight:700;font-size:15px;line-height:1.3;text-align:left}
+.ov2-urg>svg{flex:0 0 20px}
+.ov2-urg__t{flex:1;min-width:0}
+.ov2-urg__cd{flex:0 0 auto;display:inline-block;min-width:76px;padding:3px 9px;border-radius:20px;background:#D2382C;color:#fff;font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;letter-spacing:.02em}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : urgence",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Texte", "default": "Offre du jour : cadeaux offerts jusqu'à minuit", "info": "En décembre : « Offre de Noël : cadeaux offerts jusqu'à minuit »." },
+    { "type": "checkbox", "id": "countdown", "label": "Compte à rebours jusqu'à minuit", "default": true }
+  ],
+  "presets": [{ "name": "Oralys v2 : urgence" }]
+}
+{% endschema %}

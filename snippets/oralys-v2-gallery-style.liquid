@@ -1,0 +1,117 @@
+{%- comment -%}
+  Oralys v2: styles Horizon's native product gallery (_product-media-gallery + slideshow-controls thumbnails).
+  Desktop: thumbnail column, height = main image, up/down carets. Mobile: thumbnail strip, left/right carets.
+  The carets reuse the native slideshow-control button classes and icon-caret.svg; they only scroll the thumbnails.
+  Scope: the section that contains .oralys-v2-galhook (the oralys-v2-gallery block).
+{%- endcomment -%}
+<template id="oralys-v2-tarrow-tpl"><button type="button" class="slideshow-control button button-unstyled oralys-v2-tarrow"><span class="svg-wrapper icon-caret">{{- 'icon-caret.svg' | inline_asset_content -}}</span></button></template>
+
+{% stylesheet %}
+.shopify-section:has(.oralys-v2-galhook) .product-information__media,
+.shopify-section:has(.oralys-v2-galhook) media-gallery{align-self:start}
+.shopify-section:has(.oralys-v2-galhook) .product-details h1{font-size:26px;font-weight:700;line-height:1.2;color:#17221E}
+.shopify-section:has(.oralys-v2-galhook) .oralys-pdp-trust__item{font-size:15px}
+.shopify-section:has(.oralys-v2-galhook) .product-details .add-to-cart-button{min-height:56px;border-radius:40px;background:#D2382C;color:#fff;font-size:18px}
+@media (min-width:750px){.shopify-section:has(.oralys-v2-galhook) .product-details{max-width:520px}}
+/* Thumbnails: 64 x 64, 1 px line, active = 2 px brand border. */
+.shopify-section:has(.oralys-v2-galhook) slideshow-controls[thumbnails]{display:flex;align-items:center;gap:6px;min-height:0}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails-container{scrollbar-width:none;-ms-overflow-style:none;scroll-behavior:smooth}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails-container::-webkit-scrollbar{display:none}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails{gap:8px;padding:4px 2px;margin-inline:0}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails .slideshow-control{flex:0 0 64px;width:64px;height:64px;aspect-ratio:1;padding:0;border:1px solid #DCE5E0;border-radius:8px;outline:none;overflow:hidden;background:#fff}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails .slideshow-control img{width:100%;height:100%;object-fit:cover;border-radius:6px}
+.shopify-section:has(.oralys-v2-galhook) .slideshow-controls__thumbnails .slideshow-control[aria-selected="true"]{border:2px solid #0E6B50;outline:none}
+/* Caret buttons (thumbnail scroll) */
+.oralys-v2-tarrow{position:relative;flex:0 0 32px;display:flex;align-items:center;justify-content:center;width:32px!important;height:32px!important;min-height:0;padding:0!important;border:1px solid #DCE5E0!important;border-radius:50%!important;background:#fff!important;color:#17221E!important;opacity:1}
+.oralys-v2-tarrow::before{content:"";position:absolute;inset:-6px}
+.oralys-v2-tarrow .svg-wrapper,.oralys-v2-tarrow svg{width:14px;height:14px}
+.oralys-v2-tarrow .icon-caret{rotate:90deg}
+.oralys-v2-tarrow--prev .icon-caret{rotate:-90deg}
+.oralys-v2-tarrow[disabled]{opacity:.35;cursor:default}
+/* Main-image arrows: 40 px white circles, both sizes */
+.shopify-section:has(.oralys-v2-galhook) slideshow-arrows{mix-blend-mode:normal}
+.shopify-section:has(.oralys-v2-galhook) slideshow-arrows .slideshow-control{width:40px;height:40px;padding:0;margin:0 10px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;color:#17221E;box-shadow:0 2px 8px rgba(0,0,0,.15);mix-blend-mode:normal;opacity:1}
+.shopify-section:has(.oralys-v2-galhook) slideshow-arrows .slideshow-control svg{width:18px;height:18px}
+@media screen and (max-width:749px){
+  .shopify-section:has(.oralys-v2-galhook) slideshow-arrows.mobile\:hidden{display:flex!important}
+  .shopify-section:has(.oralys-v2-galhook) .product-information__media,
+  .shopify-section:has(.oralys-v2-galhook) media-gallery{padding-inline:16px}
+  .shopify-section:has(.oralys-v2-galhook) slideshow-container,
+  .shopify-section:has(.oralys-v2-galhook) .product-media-container{border-radius:14px;overflow:hidden}
+  .shopify-section:has(.oralys-v2-galhook) .media-gallery__mobile-controls{padding:10px 0 0;width:100%}
+  .shopify-section:has(.oralys-v2-galhook) .media-gallery__mobile-controls .slideshow-controls__thumbnails-container{flex:1 1 auto;min-width:0;overflow-x:auto;overflow-y:hidden}
+  .oralys-v2-tarrow .icon-caret{rotate:0deg}
+  .oralys-v2-tarrow--prev .icon-caret{rotate:180deg}
+}
+@media screen and (min-width:750px){
+  .shopify-section:has(.oralys-v2-galhook) slideshow-controls[thumbnails]:is([pagination-position="left"],[pagination-position="right"]){flex-direction:column;gap:6px}
+  .shopify-section:has(.oralys-v2-galhook) slideshow-controls[thumbnails]:is([pagination-position="left"],[pagination-position="right"]) .slideshow-controls__thumbnails-container{flex:1 1 auto;min-height:0;position:static;overflow:hidden auto}
+  .shopify-section:has(.oralys-v2-galhook) slideshow-controls[thumbnails]:is([pagination-position="left"],[pagination-position="right"]) .slideshow-controls__thumbnails{flex-direction:column;padding:2px 4px}
+}
+{% endstylesheet %}
+
+{% javascript %}
+(() => {
+  if (window.__oralysV2Gal) return; window.__oralysV2Gal = true;
+  const STEP = 72; // one 64 px thumb + 8 px gap
+  function vertical(ctrl) {
+    const p = ctrl.getAttribute('pagination-position');
+    return (p === 'left' || p === 'right') && window.matchMedia('(min-width: 750px)').matches;
+  }
+  function wire(ctrl) {
+    if (ctrl.__ov2) return; ctrl.__ov2 = true;
+    const box = ctrl.querySelector('.slideshow-controls__thumbnails-container');
+    const tpl = document.getElementById('oralys-v2-tarrow-tpl');
+    if (!box || !tpl) return;
+    const mk = (dir) => {
+      const b = tpl.content.firstElementChild.cloneNode(true);
+      b.classList.add('oralys-v2-tarrow--' + dir);
+      b.setAttribute('aria-label', dir === 'prev' ? 'Miniatures précédentes' : 'Miniatures suivantes');
+      b.addEventListener('click', (e) => {
+        e.preventDefault(); e.stopPropagation();
+        const s = dir === 'prev' ? -STEP : STEP;
+        if (vertical(ctrl)) box.scrollBy({ top: s, behavior: 'smooth' }); else box.scrollBy({ left: s, behavior: 'smooth' });
+      });
+      return b;
+    };
+    const prev = mk('prev'), next = mk('next');
+    box.before(prev); box.after(next);
+    const upd = () => {
+      const v = vertical(ctrl);
+      const pos = v ? box.scrollTop : box.scrollLeft;
+      const max = v ? box.scrollHeight - box.clientHeight : box.scrollWidth - box.clientWidth;
+      prev.disabled = pos <= 2; next.disabled = pos >= max - 2;
+      const none = max <= 2; prev.hidden = none; next.hidden = none;
+    };
+    box.addEventListener('scroll', upd, { passive: true });
+    window.addEventListener('resize', upd);
+    if ('ResizeObserver' in window) new ResizeObserver(upd).observe(box);
+    // Keep the active thumb in view when the main slide is swiped (scrolls the strip only, never the page).
+    const follow = () => {
+      const a = box.querySelector('[aria-selected="true"]'); if (!a) return;
+      const v = vertical(ctrl);
+      if (v) { const t = a.offsetTop, b = t + a.offsetHeight; if (t < box.scrollTop) box.scrollTo({ top: t - 4 }); else if (b > box.scrollTop + box.clientHeight) box.scrollTo({ top: b - box.clientHeight + 4 }); }
+      else { const l = a.offsetLeft, r = l + a.offsetWidth; if (l < box.scrollLeft) box.scrollTo({ left: l - 4 }); else if (r > box.scrollLeft + box.clientWidth) box.scrollTo({ left: r - box.clientWidth + 4 }); }
+      upd();
+    };
+    new MutationObserver(follow).observe(box, { subtree: true, attributes: true, attributeFilter: ['aria-selected'] });
+    // Mouse drag on the strip (touch scrolls natively).
+    box.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      const v = vertical(ctrl), c0 = v ? e.clientY : e.clientX, s0 = v ? box.scrollTop : box.scrollLeft; let moved = false;
+      const mv = (ev) => { const d = (v ? ev.clientY : ev.clientX) - c0; if (Math.abs(d) > 4) moved = true; box.style.scrollBehavior = 'auto'; if (v) box.scrollTop = s0 - d; else box.scrollLeft = s0 - d; };
+      const up = () => { window.removeEventListener('pointermove', mv); window.removeEventListener('pointerup', up); box.style.scrollBehavior = ''; if (moved) box.addEventListener('click', (ev) => { ev.stopPropagation(); ev.preventDefault(); }, { capture: true, once: true }); };
+      window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
+    });
+    upd(); setTimeout(upd, 400);
+  }
+  function run() {
+    document.querySelectorAll('.shopify-section').forEach((sec) => {
+      if (!sec.querySelector('.oralys-v2-galhook')) return;
+      sec.querySelectorAll('slideshow-controls[thumbnails]').forEach(wire);
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  document.addEventListener('shopify:section:load', run);
+})();
+{% endjavascript %}

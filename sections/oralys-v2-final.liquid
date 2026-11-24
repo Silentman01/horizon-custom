@@ -1,0 +1,54 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign s = section.settings -%}
+<section class="ov2 ov2-sec ov2-fin" style="--ov2-bg:{{ s.c_bg }}">
+  <div class="ov2-in ov2-fin__in">
+    <span class="ov2-fin__pack">{% render 'oralys-pdp-media', image: s.image, asset: s.asset, alt: 'Gel Oralys', class: 'ov2-fin__img', width: 400, height: 400 %}</span>
+    {%- if s.seal != blank %}<span class="ov2-fin__seal">{% render 'oralys-pdp-icon', name: 'shield', size: 18 %}{{ s.seal }}</span>{% endif -%}
+    <h2 class="ov2-h2">{{ s.heading }}</h2>
+    <ul class="ov2-fin__ticks" role="list">
+      {%- assign t = s.ticks | newline_to_br | split: '<br />' -%}
+      {%- for l in t -%}{%- assign x = l | strip | remove_first: '✓' | strip -%}{%- if x != blank -%}
+        <li><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>{{ x }}</li>
+      {%- endif -%}{%- endfor -%}
+    </ul>
+    {%- if s.guarantee != blank %}<p class="ov2-fin__g">{{ s.guarantee }}</p>{% endif -%}
+    {%- if s.price_line != blank %}<p class="ov2-fin__price">{{ s.price_line }}</p>{% endif -%}
+    <a class="ov2-btn" href="#oralys-pdp-offer" data-ov2-packs>{{ s.cta }}</a>
+    {%- if s.under != blank %}<p class="ov2-fin__under">{{ s.under }}</p>{% endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+.ov2-fin{color:#fff}
+.ov2-fin__in{max-width:640px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px}
+.ov2-fin__pack{width:140px;height:140px;border-radius:50%;overflow:hidden;background:#fff;border:4px solid rgba(255,255,255,.2)}
+.ov2-fin__img{width:100%;height:100%;object-fit:cover;display:block}
+.ov2-fin__seal{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:30px;background:rgba(255,255,255,.12);color:#fff;font-size:14px;font-weight:700}
+.ov2-fin .ov2-h2{font-size:28px;margin:4px 0 0;color:#fff}
+.ov2-fin__ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ov2-fin__ticks li{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:600}
+.ov2-fin__g{font-size:16px;line-height:1.55;color:#E3EFE9}
+.ov2-fin__price{font-size:17px;font-weight:700}
+.ov2-fin__under{font-size:14px;color:#CFE3DA}
+@media (min-width:750px){.ov2-fin .ov2-h2{font-size:36px}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : final",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Visuel" },
+    { "type": "text", "id": "asset", "label": "Visuel : fichier du thème", "default": "oralys-pdp-packshot.webp" },
+    { "type": "text", "id": "seal", "label": "Pastille", "default": "90 jours satisfait ou remboursé" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Remangez de tout, sans y penser" },
+    { "type": "textarea", "id": "ticks", "label": "Points", "info": "Un par ligne.", "default": "Tient 2 à 3 jours\nHaut, bas et partiels\nZéro zinc, zéro colle" },
+    { "type": "textarea", "id": "guarantee", "label": "Garantie", "default": "Essayez Oralys pendant 90 jours, au petit-déjeuner, au déjeuner du dimanche, au restaurant. S'il ne tient pas votre dentier, nous vous remboursons intégralement. C'est tout." },
+    { "type": "text", "id": "price_line", "label": "Prix", "default": "Dès 29,90 € le tube · livraison offerte" },
+    { "type": "text", "id": "cta", "label": "Bouton", "default": "Je choisis mon pack", "info": "Fait défiler jusqu'aux packs. N'ajoute jamais au panier." },
+    { "type": "text", "id": "under", "label": "Sous le bouton", "default": "90 jours satisfait ou remboursé · colis neutre" },
+    { "type": "color", "id": "c_bg", "label": "Fond", "default": "#0E3D30" }
+  ],
+  "presets": [{ "name": "Oralys v2 : final" }]
+}
+{% endschema %}

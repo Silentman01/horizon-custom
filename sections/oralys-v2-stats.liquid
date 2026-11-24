@@ -1,0 +1,44 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign s = section.settings -%}
+<section class="ov2 ov2-stats" style="--ov2-bg:{{ s.c_bg }}">
+  <div class="ov2-in">
+    <ul class="ov2-stats__grid" role="list">
+      {%- assign rows = s.items | newline_to_br | split: '<br />' -%}
+      {%- for r in rows -%}
+        {%- assign parts = r | split: '|' -%}
+        {%- assign num = parts[0] | strip -%}
+        {%- if num == blank %}{% continue %}{% endif -%}
+        <li class="ov2-stats__cell"><span class="ov2-stats__num">{{ num }}</span><span class="ov2-stats__lab">{{ parts[1] | strip }}</span></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+</section>
+
+{% stylesheet %}
+.ov2-stats{padding:28px 16px;color:#fff}
+.ov2-stats__grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr}
+.ov2-stats__cell{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:18px 8px;text-align:center}
+.ov2-stats__cell:nth-child(odd){border-right:1px solid rgba(255,255,255,.15)}
+.ov2-stats__cell:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.15)}
+.ov2-stats__num{font-family:var(--font-heading--family);font-weight:700;font-size:30px;line-height:1.1;color:#fff}
+.ov2-stats__lab{font-size:15px;line-height:1.35;color:#CFE3DA}
+@media (min-width:750px){
+  .ov2-stats{padding:40px 24px}
+  .ov2-stats__grid{grid-template-columns:repeat(4,1fr)}
+  .ov2-stats__cell{border:0!important;border-right:1px solid rgba(255,255,255,.15)!important}
+  .ov2-stats__cell:last-child{border-right:0!important}
+  .ov2-stats__num{font-size:36px}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : chiffres",
+  "tag": "div",
+  "settings": [
+    { "type": "textarea", "id": "items", "label": "Chiffres", "info": "Une ligne par chiffre : chiffre | libellé.", "default": "4,8/5 | Plus de 5 400 avis\n2 à 3 jours | par pose, sans retouche\n90 jours | pour essayer, ou remboursé\nZéro zinc | et zéro colle" },
+    { "type": "color", "id": "c_bg", "label": "Fond", "default": "#0E3D30" }
+  ],
+  "presets": [{ "name": "Oralys v2 : chiffres" }]
+}
+{% endschema %}

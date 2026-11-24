@@ -1,0 +1,46 @@
+{%- assign bs = block.settings -%}
+<div class="ov2-promise" {{ block.shopify_attributes }}>
+  {%- if bs.promise != blank %}<p class="ov2-promise__lead">{{ bs.promise }}</p>{% endif -%}
+  <ul class="ov2-promise__ticks" role="list">
+    {%- assign lines = bs.ticks | newline_to_br | split: '<br />' -%}
+    {%- for l in lines -%}
+      {%- assign t = l | strip -%}
+      {%- if t == blank %}{% continue %}{% endif -%}
+      <li><span class="ov2-promise__tick" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>{{ t }}</span></li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+.ov2-promise{display:flex;flex-direction:column;gap:14px;color:#17221E}
+.ov2-promise__lead{margin:0;font-size:17px;line-height:1.5;color:#5C6863}
+.ov2-promise__ticks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ov2-promise__ticks li{display:flex;align-items:center;gap:10px;font-size:17px;line-height:1.35;font-weight:600}
+.ov2-promise__tick{flex:0 0 22px;width:22px;height:22px;border-radius:50%;background:#0E6B50;display:flex;align-items:center;justify-content:center}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : promesse",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "promise",
+      "label": "Promesse",
+      "default": "Votre dentier ne bouge pas faute de colle : il bouge parce qu'un vide s'est creusé. Oralys le comble, du matin au soir."
+    },
+    {
+      "type": "textarea",
+      "id": "ticks",
+      "label": "Points cochés",
+      "info": "Un point par ligne.",
+      "default": "Pour le haut, le bas et les partiels\nUne pose tient 2 à 3 jours\nCroquer à nouveau la baguette\nZéro zinc, zéro colle"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Oralys v2 : promesse"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,61 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign s = section.settings -%}
+<section class="ov2 ov2-sec ov2-wk" style="--ov2-bg:{{ s.c_bg }}">
+  <div class="ov2-in ov2-wk__grid">
+    <div class="ov2-wk__media">{% render 'oralys-pdp-media', image: s.image, asset: s.asset, alt: s.image_alt, class: 'ov2-wk__img', width: 1200, height: 900 %}</div>
+    <div class="ov2-wk__txt">
+      <h2 class="ov2-h2">{{ s.heading }}</h2>
+      {%- if s.intro != blank %}<p class="ov2-wk__intro">{{ s.intro }}</p>{% endif -%}
+      <ol class="ov2-wk__tl" role="list">
+        {%- assign stages = s.timeline | split: '##' -%}
+        {%- for st in stages -%}
+          {%- assign lines = st | strip | newline_to_br | split: '<br />' -%}
+          {%- assign head = lines[0] | strip -%}
+          {%- if head == blank %}{% continue %}{% endif -%}
+          <li class="ov2-wk__st">
+            <span class="ov2-wk__chip">{{ head }}</span>
+            <ul role="list">
+              {%- for l in lines offset: 1 -%}{%- assign t = l | strip | remove_first: '✓' | strip -%}{%- if t != blank -%}
+                <li><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="#0E6B50" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg><span>{{ t }}</span></li>
+              {%- endif -%}{%- endfor -%}
+            </ul>
+          </li>
+        {%- endfor -%}
+      </ol>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+.ov2-wk__grid{display:flex;flex-direction:column;gap:22px}
+.ov2-wk__media{aspect-ratio:4/3;border-radius:14px;overflow:hidden;background:#fff}
+.ov2-wk__img{width:100%;height:100%;object-fit:cover;display:block}
+.ov2-wk__txt .ov2-h2{margin-bottom:8px}
+.ov2-wk__intro{font-size:17px;line-height:1.5;margin-bottom:20px!important}
+.ov2-wk__tl{list-style:none;margin:0;padding:0 0 0 26px;position:relative;display:flex;flex-direction:column;gap:22px}
+.ov2-wk__tl::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:#0E6B50}
+.ov2-wk__st{position:relative}
+.ov2-wk__st::before{content:"";position:absolute;left:-26px;top:7px;width:14px;height:14px;border-radius:50%;background:#0E6B50;border:3px solid var(--ov2-bg,#EEF6F1);box-sizing:content-box;margin-left:-3px;margin-top:-3px}
+.ov2-wk__chip{display:inline-block;margin-bottom:8px;padding:4px 12px;border-radius:20px;background:#0E6B50;color:#fff;font-size:15px;font-weight:700;line-height:1.4}
+.ov2-wk__st ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ov2-wk__st ul li{display:flex;gap:8px;align-items:flex-start;font-size:16px;line-height:1.45}
+.ov2-wk__st ul svg{flex:0 0 18px;margin-top:3px}
+@media (min-width:750px){.ov2-wk__grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.ov2-wk__media{position:sticky;top:90px}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : semaines",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "asset", "label": "Image : fichier du thème", "default": "oralys-adv-c4-mother-eating-again.webp" },
+    { "type": "text", "id": "image_alt", "label": "Texte alternatif", "default": "Une mère croque dans sa tartine au petit-déjeuner, sa fille rit à côté d'elle" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Vos premières semaines avec Oralys" },
+    { "type": "textarea", "id": "intro", "label": "Introduction", "default": "Pas besoin d'être doué de vos mains. Voici, jour après jour, ce que vivent la plupart de nos clients." },
+    { "type": "textarea", "id": "timeline", "label": "Étapes", "info": "Chaque étape commence par ## puis son titre ; une ligne par point.", "default": "## Jour 1 · Première pose\n✓ Dix minutes au calme, la notice sous les yeux\n✓ Le dentier se pose : il ne bascule plus\n✓ Premier repas sans crème depuis longtemps" },
+    { "type": "color", "id": "c_bg", "label": "Fond", "default": "#EEF6F1" }
+  ],
+  "presets": [{ "name": "Oralys v2 : semaines" }]
+}
+{% endschema %}

@@ -1,0 +1,11 @@
+{%- comment -%} Prints text with **key sentence** turned into a highlight. Param: text {%- endcomment -%}
+{%- liquid
+  assign o = text
+  for i in (1..3)
+    unless o contains '**'
+      break
+    endunless
+    assign o = o | replace_first: '**', '<mark>' | replace_first: '**', '</mark>'
+  endfor
+  echo o
+-%}

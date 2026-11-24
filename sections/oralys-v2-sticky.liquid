@@ -1,0 +1,95 @@
+{%- render 'oralys-v2-base' -%}
+{%- liquid
+  assign s = section.settings
+  assign p = product
+  if p == blank and request.visual_preview_mode
+    assign p = collections.all.products.first
+  endif
+  assign v = p.selected_or_first_available_variant
+  assign img = v.featured_image | default: p.featured_image
+-%}
+<div class="ov2-sk{% if request.design_mode %} is-on{% endif %}" data-ov2-sticky>
+  <div class="ov2-sk__in">
+    <span class="ov2-sk__thumb">
+      {%- if img != blank -%}
+        {{ img | image_url: width: 120 | image_tag: loading: 'lazy', alt: '', class: 'ov2-sk__img', srcset: null, sizes: null }}
+      {%- else -%}
+        <img src="{{ s.asset | asset_url }}" alt="" class="ov2-sk__img" width="56" height="56" loading="lazy">
+      {%- endif -%}
+    </span>
+    <span class="ov2-sk__info">
+      <span class="ov2-sk__desk"><b>{{ s.title }}</b> · <span class="ov2-sk__rate">★★★★★</span> {{ s.rating }}</span>
+      <span class="ov2-sk__tier"><span data-ov2-sk-label>{{ s.label_fallback }}</span> <s data-ov2-sk-was>{{ s.compare_fallback }}</s> <b data-ov2-sk-now>{{ s.price_fallback }}</b></span>
+    </span>
+    <a href="#oralys-pdp-offer" class="ov2-sk__btn" data-ov2-packs>{{ s.btn_label }}</a>
+  </div>
+</div>
+<script>
+  (function () {
+    var bar = document.querySelector('[data-ov2-sticky]');
+    if (!bar || bar._b) return; bar._b = true;
+    var set = function (d) {
+      if (!d) return;
+      var q = function (sel, val) { var e = bar.querySelector(sel); if (e && val != null) e.textContent = val; };
+      q('[data-ov2-sk-label]', d.label); q('[data-ov2-sk-now]', d.price); q('[data-ov2-sk-was]', d.compare || '');
+    };
+    document.addEventListener('oralys:tier', function (e) { set(e.detail); });
+    var c = document.querySelector('.oralys-pdp-tier__input:checked');
+    if (c) set({ label: c.dataset.label, price: c.dataset.price, compare: c.dataset.compare });
+    var atc = function () { return document.querySelector('.buy-buttons-block') || document.querySelector('.oralys-pdp-bundle'); };
+    var foot = function () { return document.querySelector('footer, .shopify-section-group-footer-group'); };
+    var tick = function () {
+      var a = atc(), f = foot(), vh = window.innerHeight, show;
+      if (a) { show = a.getBoundingClientRect().bottom < 0; } else { show = window.scrollY > 700; }
+      if (show && f && f.getBoundingClientRect().top < vh - 40) show = false;
+      bar.classList.toggle('is-on', !!show);
+      document.documentElement.classList.toggle('ov2-sk-open', !!show);
+    };
+    var raf = 0;
+    window.addEventListener('scroll', function () { if (!raf) raf = requestAnimationFrame(function () { raf = 0; tick(); }); }, { passive: true });
+    window.addEventListener('resize', tick);
+    tick();
+  })();
+</script>
+
+{% stylesheet %}
+.ov2-sk{position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;border-top:1px solid #DCE5E0;box-shadow:0 -4px 16px rgba(0,0,0,.08);transform:translateY(110%);transition:transform .25s ease;padding-bottom:env(safe-area-inset-bottom)}
+.ov2-sk.is-on{transform:none}
+.ov2-sk__in{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px;color:#17221E}
+.ov2-sk__thumb{display:none;flex:0 0 52px;width:52px;height:52px;border-radius:8px;overflow:hidden;background:#EEF6F1}
+.ov2-sk__img{width:100%;height:100%;object-fit:cover;display:block}
+.ov2-sk__info{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.ov2-sk__desk{display:none;font-size:15px;color:#5C6863}
+.ov2-sk__desk b{color:#17221E}
+.ov2-sk__rate{color:#F0A830;letter-spacing:1px}
+.ov2-sk__tier{font-size:14px;font-weight:700;line-height:1.3}
+.ov2-sk__tier s{color:#5C6863;font-weight:500;margin-left:4px}
+.ov2-sk__tier b{font-size:16px;color:#17221E}
+.ov2-sk__btn{flex:0 0 auto;display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border-radius:40px;background:#D2382C;color:#fff;font-size:16px;font-weight:700;text-decoration:none;white-space:nowrap}
+@media (max-width:360px){.ov2-sk__btn{padding:0 14px;font-size:15px}}
+@media (min-width:750px){
+  .ov2-sk__thumb{display:block}
+  .ov2-sk__desk{display:block}
+  .ov2-sk__tier{font-size:15px}
+  .ov2-sk__btn{min-height:52px;padding:0 32px;font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){.ov2-sk{transition:none}}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : barre",
+  "tag": "div",
+  "settings": [
+    { "type": "paragraph", "content": "Barre en bas de l'écran. Le bouton fait défiler jusqu'aux packs ; il n'ajoute jamais au panier. Elle apparaît quand le bouton d'achat sort de l'écran et se cache au-dessus du pied de page." },
+    { "type": "text", "id": "btn_label", "label": "Bouton", "default": "Je choisis mon pack" },
+    { "type": "text", "id": "title", "label": "Nom (ordinateur)", "default": "Gel Oralys" },
+    { "type": "text", "id": "rating", "label": "Note (ordinateur)", "default": "4,8/5 · Plus de 5 400 avis" },
+    { "type": "text", "id": "asset", "label": "Vignette de secours : fichier du thème", "default": "oralys-pdp-packshot-tube.webp" },
+    { "type": "text", "id": "label_fallback", "label": "Pack avant chargement", "default": "1 acheté, 1 à -70 %" },
+    { "type": "text", "id": "price_fallback", "label": "Prix avant chargement", "default": "38,87 €" },
+    { "type": "text", "id": "compare_fallback", "label": "Prix barré avant chargement", "default": "99,80 €" }
+  ],
+  "presets": [{ "name": "Oralys v2 : barre" }]
+}
+{% endschema %}

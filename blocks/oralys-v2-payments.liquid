@@ -1,0 +1,34 @@
+{%- liquid
+  assign types = shop.enabled_payment_types
+  if types == blank or types.size == 0
+    assign types = block.settings.fallback | split: ','
+  endif
+-%}
+<div class="ov2-pay" {{ block.shopify_attributes }}>
+  {%- if block.settings.label != blank %}<span class="ov2-pay__l">{{ block.settings.label }}</span>{% endif -%}
+  <ul class="ov2-pay__list" role="list">
+    {%- for t in types limit: 6 -%}
+      {%- assign tt = t | strip -%}
+      <li>{{ tt | payment_type_svg_tag: class: 'ov2-pay__icon' }}</li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% stylesheet %}
+.ov2-pay{display:flex;flex-direction:column;align-items:center;gap:6px}
+.ov2-pay__l{font-size:14px;color:#5C6863}
+.ov2-pay__list{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin:0;padding:0}
+.ov2-pay__list li{display:flex}
+.ov2-pay__icon{width:42px;height:27px}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : paiements",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Texte", "default": "Paiement 100 % sécurisé" },
+    { "type": "text", "id": "fallback", "label": "Moyens affichés si la boutique n'en déclare aucun", "default": "visa,master,paypal,apple_pay" }
+  ],
+  "presets": [{ "name": "Oralys v2 : paiements" }]
+}
+{% endschema %}

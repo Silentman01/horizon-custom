@@ -1,0 +1,63 @@
+{%- render 'oralys-v2-base' -%}
+{%- assign bs = block.settings -%}
+<div class="ov2-rr" {{ block.shopify_attributes }}>
+  <div class="ov2-rail ov2-rr__rail" tabindex="0" aria-label="Avis clients">
+    {%- for n in (1..4) -%}
+      {%- liquid
+        assign kt = 'title_' | append: n
+        assign kq = 'quote_' | append: n
+        assign kw = 'who_' | append: n
+        if bs[kq] == blank
+          continue
+        endif
+      -%}
+      <article class="ov2-rr__card">
+        {% render 'oralys-v2-stars', size: 16 %}
+        {%- if bs[kt] != blank %}<h3 class="ov2-rr__t">{{ bs[kt] }}</h3>{% endif -%}
+        <p class="ov2-rr__q">{% render 'oralys-v2-hl', text: bs[kq] %}</p>
+        <p class="ov2-rr__who">{{ bs[kw] }}</p>
+      </article>
+    {%- endfor -%}
+  </div>
+  {%- if bs.hint != blank %}<p class="ov2-rr__hint">{{ bs.hint }}</p>{% endif -%}
+</div>
+
+{% stylesheet %}
+.ov2-rr{min-width:0;color:#17221E}
+.ov2-rr__rail{margin:0 -16px;padding:2px 16px;scroll-padding-inline:16px}
+.ov2-rr__card{flex:0 0 82%;scroll-snap-align:start;display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid #DCE5E0;border-radius:12px;background:#fff}
+.ov2-rr__card .ov2-stars{color:#F0A830;display:inline-flex;gap:1px}
+.ov2-rr__card .ov2-stars svg{fill:currentColor}
+.ov2-rr__t{margin:0;font-size:16px;font-weight:700;line-height:1.3}
+.ov2-rr__q{margin:0;font-size:16px;line-height:1.5}
+.ov2-rr__q mark{background:#FFF1C2;color:inherit;padding:0 2px;border-radius:3px}
+.ov2-rr__who{margin:auto 0 0;font-size:14px;font-weight:700;color:#5C6863}
+.ov2-rr__hint{margin:8px 0 0;font-size:14px;color:#5C6863;text-align:right}
+@media (min-width:750px){
+  .ov2-rr__rail{margin:0;padding:2px 0}
+  .ov2-rr__card{flex-basis:calc(50% - 6px)}
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Oralys v2 : avis rail",
+  "settings": [
+    { "type": "paragraph", "content": "Entourez la phrase clé de ** pour la surligner." },
+    { "type": "text", "id": "title_1", "label": "Avis 1 : titre", "default": "Le midi, enfin tranquille" },
+    { "type": "textarea", "id": "quote_1", "label": "Avis 1 : texte", "default": "« Le bas partait dès que je mâchais, alors je ne déjeunais plus avec mes collègues de la chorale. **Maintenant il ne bouge plus de tout le repas.** J'ai repris le poulet-frites. »" },
+    { "type": "text", "id": "who_1", "label": "Avis 1 : signature", "default": "Gérard, 68 ans · Saint-Étienne · Bas" },
+    { "type": "text", "id": "title_2", "label": "Avis 2 : titre", "default": "J'avais tout essayé" },
+    { "type": "textarea", "id": "quote_2", "label": "Avis 2 : texte", "default": "« Quatre crèmes, de la poudre, des coussinets, un kit trouvé sur internet. Je n'y croyais plus. **Oralys tient depuis trois jours sans que j'y touche.** »" },
+    { "type": "text", "id": "who_2", "label": "Avis 2 : signature", "default": "Françoise, 74 ans · Limoges · Haut et bas" },
+    { "type": "text", "id": "title_3", "label": "Avis 3 : titre", "default": "Je l'ai pris pour ma mère" },
+    { "type": "textarea", "id": "quote_3", "label": "Avis 3 : texte", "default": "« Maman ne mangeait plus que de la purée. J'ai commandé pour elle et je l'ai aidée la première fois. **Au repas de dimanche, elle a repris de la viande.** »" },
+    { "type": "text", "id": "who_3", "label": "Avis 3 : signature", "default": "Sandrine, 49 ans · pour sa mère, 82 ans · Bas" },
+    { "type": "text", "id": "title_4", "label": "Avis 4 : titre" },
+    { "type": "textarea", "id": "quote_4", "label": "Avis 4 : texte" },
+    { "type": "text", "id": "who_4", "label": "Avis 4 : signature" },
+    { "type": "text", "id": "hint", "label": "Indication sous les avis", "default": "Faites glisser →" }
+  ],
+  "presets": [{ "name": "Oralys v2 : avis rail" }]
+}
+{% endschema %}
