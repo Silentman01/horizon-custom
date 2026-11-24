@@ -13,7 +13,7 @@
       "type": "oralys-home-hero",
       "settings": {
         "show_rating": true,
-        "rating_text": "4,8/5 · Plus de 30 000 porteurs de dentier l'utilisent déjà",
+        "rating_text": "4,8/5 · plus de 5 400 avis",
         "c_stars": "#F0A830",
         "eyebrow": "",
         "heading": "Votre dentier tient du café du matin <em>jusqu'au dîner.</em>",
@@ -252,7 +252,7 @@
       "settings": {
         "eyebrow": "",
         "heading": "Ils ont retrouvé <em>leur place à table</em>",
-        "score": "4,8/5 · plus de 30 000 porteurs de dentier",
+        "score": "4,8/5 · plus de 5 400 avis",
         "verified": "✓ Achat vérifié",
         "rail_label": "Avis clients",
         "c_stars": "#F0A830",
